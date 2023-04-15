@@ -477,7 +477,164 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ]
                       )
                     )
-                  ],              
+                ], 
+
+                Container(margin: EdgeInsets.only(bottom: 50.0), child: 
+                  Column(mainAxisSize: MainAxisSize.min, 
+                    children: [Container(padding: const EdgeInsets.only(bottom: 12.0),
+                      child:Text('OUR PRODUCTS', textScaleFactor: 2.5, style: GoogleFonts.raleway(textStyle: const TextStyle(fontWeight: FontWeight.bold)))),
+                        Text('We package the products with best services to make you a happy customer.', textScaleFactor: 1.7, style: GoogleFonts.raleway(textStyle: const TextStyle(color: Colors.grey))),
+                          Container( height:27.0, width:82.0, padding: const EdgeInsets.only(top:22.0),
+                            child: Image.asset('assets/images/img2.jpg', fit:BoxFit.cover)
+                        ),
+                      ],
+                    ),
+                  ),
+
+                if (MediaQuery.of(context).size.width>1000)...[
+                Row( children: [
+                  Spacer(flex: 3),
+                  Container( width: 237.5, height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color: Color(0xf3f3f3ff), padding: EdgeInsets.all(22), 
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ), 
+                  Spacer(flex: 1), 
+                  Container( width: 237.5, height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color:Color(0xf3f3f3ff), padding: EdgeInsets.all(22),
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ), 
+                  Spacer(flex: 1),
+                  Container( width: 237.5, height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color:Color(0xf3f3f3ff), padding: EdgeInsets.all(22),
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ), 
+                  Spacer(flex: 1),
+                  Container( width: 237.5, height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color: Color(0xf3f3f3ff), padding: EdgeInsets.all(22),
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ),  
+                  Spacer(flex: 3),
+                ]),  
+              ],
+              if (MediaQuery.of(context).size.width<1000)...[
+                if (MediaQuery.of(context).size.width>550)...[
+
+                  Column(children: [
+                    Row(children: [
+                      Spacer(flex: 3),
+                      Container( height: 327.5,
+                        child: Column(
+                          children: [
+                            Container( color: Color(0xf3f3f3ff), padding: EdgeInsets.all(22),
+                              child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                            Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          ]
+                        )
+                      ), 
+                      Spacer(flex: 1),
+                      Container( height: 327.5,
+                        child: Column(
+                          children: [
+                            Container( color: Color(0xf3f3f3ff), padding: EdgeInsets.all(22),
+                              child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                            Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          ]
+                        )
+                      ),  
+                      Spacer(flex: 3),
+                    ]),
+
+                    Row(children: [
+                      Spacer(flex: 3),
+                      Container( height: 327.5,
+                        child: Column(
+                          children: [
+                            Container( color: Color(0xf3f3f3ff), padding: EdgeInsets.all(22),
+                              child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                            Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          ]
+                        )
+                      ), 
+                      Spacer(flex: 1),
+                      Container( height: 327.5,
+                        child: Column(
+                          children: [
+                            Container( color: Color(0xf3f3f3ff), padding: EdgeInsets.all(22),
+                              child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                            Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                          ]
+                        )
+                      ),  
+                      Spacer(flex: 3),
+                    ])
+                  ])
+                ]
+              ],
+              if (MediaQuery.of(context).size.width<550)...[
+                Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+
+                  Container( height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color: Colors.grey, padding: EdgeInsets.all(22), 
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ), 
+
+                  Container( height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color: Colors.grey, padding: EdgeInsets.all(22),
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ), 
+
+                  Container( height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color: Colors.grey, padding: EdgeInsets.all(22),
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ), 
+
+                  Container( height: 327.5,
+                    child: Column(
+                      children: [
+                        Container( color: Colors.grey, padding: EdgeInsets.all(22),
+                          child: Image.asset('assets/images/prod.jpg', width: 207.5, height: 207.5)),
+                        Text('Title', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ]
+                    )
+                  ),  
+                ],
+              )],
+
               if (swidth>1200)...[Row(children: [
                  Container(height: 900, width: swidth*0.33,
                     child: Image.asset('assets/images/img2.jpg', fit:BoxFit.cover)
@@ -734,7 +891,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child: const Image(image: AssetImage('assets/images/remne.jpeg'), fit: BoxFit.scaleDown)),
               Container(width: 12, height: 100),
               Container(height: 120, width: swidth*0.161, decoration: BoxDecoration(border: Border.all(width: 6, color: const Color.fromARGB(255, 231, 228, 228))),
-                ),
+                child: const Image(image: AssetImage('assets/images/gilfe.jpg'), fit: BoxFit.contain)),
               Container(width: 12, height: 100),
               Container(height: 120, width: swidth*0.161, decoration: BoxDecoration(border: Border.all(width: 6, color: const Color.fromARGB(255, 231, 228, 228))),
                 ),
@@ -852,7 +1009,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(height: 100, width: swidth*0.9, decoration: BoxDecoration(border: Border.all(width: 6, color: const Color.fromARGB(255, 231, 228, 228))),
                   child: const Image(image: AssetImage('assets/images/remne.jpeg'), fit: BoxFit.cover)),
                 Container(width: 12, height: 12),
-                Container(height: 100, width: swidth*0.9, decoration: BoxDecoration(border: Border.all(width: 6, color: const Color.fromARGB(255, 231, 228, 228)))),
+                Container(height: 100, width: swidth*0.9, decoration: BoxDecoration(border: Border.all(width: 6, color: const Color.fromARGB(255, 231, 228, 228))),
+                  child: const Image(image: AssetImage('assets/images/gilfe.jpg'), fit: BoxFit.cover)),
                 Container(width: 12, height: 12),
                 Container(height: 100, width: swidth*0.9, decoration: BoxDecoration(border: Border.all(width: 6, color: const Color.fromARGB(255, 231, 228, 228))),
 ),

@@ -76,6 +76,8 @@ flutter:
     - assets/images/ufrn.jpg
     - assets/images/imd.png
     - assets/images/remne.jpeg
+    - assets/images/gilfe.jpg
+    - assets/images/prod.jpg
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
