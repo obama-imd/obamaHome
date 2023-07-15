@@ -155,13 +155,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   _ajustarVisualizacao(double larguraTela) {
-
     int colunas = 2;
-    if (larguraTela <= 600 ){
+    if (larguraTela <= 600) {
       colunas = 2;
-    }else if (larguraTela <= 960){
+    } else if (larguraTela <= 960) {
       colunas = 4;
-    }else {
+    } else {
       colunas = 4;
     }
     return colunas;
@@ -655,19 +654,29 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                 ]),
               ),
-              Padding(
-          padding: EdgeInsets.all(16.00),
-          child: GridView.count(
-            crossAxisCount: _ajustarVisualizacao(swidth),    //chama metodo para captar quantidade de colunas de acordo com tamanho da tela
-            crossAxisSpacing: 8,  // espaçamento entre itens
-            children: [
-              ItemProduto("Data Recovery",  "nononon nono nonon non !", "i1.png"),
-              ItemProduto("Computer repair","nono nononon nononon no !", "i2.png"),
-              ItemProduto("Mobile service", "nonon nonono nononon !", "i3.png"),
-              ItemProduto("Data Recovery",  "nonononon nonon onon !", "i4.png"),
-            ],
-          ),
-        ),
+              Container(
+                  height: 500,
+                  padding: EdgeInsets.all(16.00),
+                  child: ScrollConfiguration(
+                      behavior: ScrollConfiguration.of(context)
+                          .copyWith(scrollbars: false),
+                      child: Expanded(
+                        child: GridView.count(
+                          crossAxisCount: _ajustarVisualizacao(
+                              swidth), //chama metodo para captar quantidade de colunas de acordo com tamanho da tela
+                          crossAxisSpacing: 8, // espaçamento entre itens
+                          children: [
+                            ItemProduto("Data Recovery",
+                                "nononon nono nonon non !", "i1.png"),
+                            ItemProduto("Computer repair",
+                                "nono nononon nononon no !", "i2.png"),
+                            ItemProduto("Mobile service",
+                                "nonon nonono nononon !", "i3.png"),
+                            ItemProduto("Data Recovery",
+                                "nonononon nonon onon !", "i4.png"),
+                          ],
+                        ),
+                      ))),
               if (swidth > 1200) ...[
                 Row(children: [
                   Container(
@@ -1603,7 +1612,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               Row(children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 45),
+                  padding: const EdgeInsets.only(top: 20, left: 45),
                   child: SizedBox(
                       height: 5.0,
                       width: 82.0,
@@ -1611,9 +1620,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           fit: BoxFit.cover)),
                 ),
               ]),
-              Container(
+              if (datas != [])...{
+                Container(
                   margin: EdgeInsets.only(top: 50, left: 45, right: 45),
                   child: BlogData(context)),
+              },
               if (swidth > 1300) ...[
                 Container(
                     height: 875,
