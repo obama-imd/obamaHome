@@ -44,6 +44,8 @@ dependencies:
   google_fonts: ^4.0.3
   image_network: ^2.5.4+1
   html: ^0.15.4
+  intl: ^0.18.1
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:

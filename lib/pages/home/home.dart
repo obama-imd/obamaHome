@@ -12,8 +12,10 @@ import 'package:intl/intl.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'components/firstSectionHome.dart';
-import 'components/menu.dart';
+import '../../components/drawer.dart';
+import '../../components/firstSectionHome.dart';
+import '../../components/iconspanel.dart';
+import '../../components/menu.dart';
 
 class UserModel {
   String title;
@@ -56,7 +58,6 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  bool _customTileExpanded = true;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   List<dynamic> datas = [];
 
@@ -79,6 +80,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             .reversed
             .toList()
             .sublist(0, 3);
+      });
+    } else {
+      setState(() {
+        datas = [''];
+        print(datas);
       });
     }
   }
@@ -123,7 +129,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         DateTime dateTime = DateTime.parse(pubDate);
         String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
 
-        String sumValue = extractSummaryPath(item['summary']);
+        // String sumValue = extractSummaryPath(item['summary']);
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,189 +177,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     double swidth = MediaQuery.of(context).size.width;
     return Scaffold(
         key: scaffoldKey,
-        drawer: Drawer(
-            width: swidth * 0.3,
-            child: ListView(
-              children: [
-                ExpansionTile(
-                    trailing: const Icon(FontAwesomeIcons.plus, size: 13),
-                    title: ListView(shrinkWrap: true, children: [
-                      Container(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: const Text("Home"))
-                    ]),
-                    children: [
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 1",
-                                      style: TextStyle(color: Colors.black))))),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 2",
-                                      style: TextStyle(color: Colors.black)))))
-                    ]),
-                ExpansionTile(
-                    trailing: const SizedBox.shrink(),
-                    title: ListView(shrinkWrap: true, children: [
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/aboutus');
-                          },
-                          child: const Align(
-                              alignment: Alignment.centerLeft,
-                              child: Text("SOBRE NÓS")))
-                    ])),
-                ExpansionTile(
-                    trailing: const Icon(FontAwesomeIcons.plus, size: 13),
-                    title: ListView(shrinkWrap: true, children: [
-                      Container(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: const Text("SERVICES"))
-                    ]),
-                    children: [
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 1",
-                                      style: TextStyle(color: Colors.black))))),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 2",
-                                      style: TextStyle(color: Colors.black)))))
-                    ]),
-                ExpansionTile(
-                    trailing: const Icon(FontAwesomeIcons.plus, size: 13),
-                    title: ListView(shrinkWrap: true, children: [
-                      Container(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: const Text("PUBLICAÇÕES"))
-                    ]),
-                    children: [
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/blog');
-                              },
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 1",
-                                      style: TextStyle(color: Colors.black))))),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/blog');
-                              },
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 2",
-                                      style: TextStyle(color: Colors.black)))))
-                    ]),
-                ExpansionTile(
-                    trailing: const Icon(FontAwesomeIcons.plus, size: 13),
-                    title: ListView(shrinkWrap: true, children: [
-                      Container(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: const Text("PAGES"))
-                    ]),
-                    children: [
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 1",
-                                      style: TextStyle(color: Colors.black))))),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 2",
-                                      style: TextStyle(color: Colors.black)))))
-                    ]),
-                ExpansionTile(
-                    trailing: const Icon(FontAwesomeIcons.plus, size: 13),
-                    title: ListView(shrinkWrap: true, children: [
-                      Container(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: const Text("SHOP"))
-                    ]),
-                    children: [
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 1",
-                                      style: TextStyle(color: Colors.black))))),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 2",
-                                      style: TextStyle(color: Colors.black)))))
-                    ]),
-                ExpansionTile(
-                    trailing: const Icon(FontAwesomeIcons.plus, size: 13),
-                    title: ListView(shrinkWrap: true, children: [
-                      Container(
-                          padding: const EdgeInsets.only(left: 8),
-                          child: const Text("CONTACT"))
-                    ]),
-                    children: [
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 1",
-                                      style: TextStyle(color: Colors.black))))),
-                      Align(
-                          alignment: Alignment.centerLeft,
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Container(
-                                  width: swidth * 0.3,
-                                  padding: const EdgeInsets.only(left: 16),
-                                  child: const Text("Item 2",
-                                      style: TextStyle(color: Colors.black)))))
-                    ])
-              ],
-            )),
+        drawer: drawermenu(),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Container(
@@ -1331,158 +1155,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         fit: BoxFit.cover)),
                               ]),
                             ),
-                            ScrollConfiguration(
-                                behavior: ScrollConfiguration.of(context)
-                                    .copyWith(scrollbars: false),
-                                child: Expanded(
-                                    child: GridView.count(
-                                        crossAxisCount: 2,
-                                        padding: const EdgeInsets.only(top: 60),
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        children: [
-                                      Container(
-                                          width: 200,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                  child: const Icon(
-                                                      FontAwesomeIcons
-                                                          .faceSmile,
-                                                      size: 60.0,
-                                                      color: Colors.blue),
-                                                ),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
-                                                    child: const Text('OAs',
-                                                        textAlign:
-                                                            TextAlign.end,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20))),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
-                                                    child: const Text('Número',
-                                                        textAlign:
-                                                            TextAlign.end,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.grey)))
-                                              ])),
-                                      Container(
-                                        width: 200,
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              Container(
-                                                padding: const EdgeInsets.only(
-                                                    right: 16),
-                                                child: const Icon(
-                                                    FontAwesomeIcons.laptop,
-                                                    size: 60.0,
-                                                    color: Colors.blue),
-                                              ),
-                                              Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                  child: const Text(
-                                                      'OAs autorais',
-                                                      textAlign: TextAlign.end,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 20))),
-                                              Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                  child: const Text('Número',
-                                                      textAlign: TextAlign.end,
-                                                      style: TextStyle(
-                                                          color: Colors.grey)))
-                                            ]),
-                                      ),
-                                      Container(
-                                          width: 200,
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 10),
-                                                  child: const Icon(
-                                                      FontAwesomeIcons.desktop,
-                                                      size: 65.0,
-                                                      color: Colors.blue),
-                                                ),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
-                                                    child: const Text(
-                                                        'Planos de Aula',
-                                                        textAlign:
-                                                            TextAlign.end,
-                                                        style: TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20))),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
-                                                    child: const Text('Número',
-                                                        textAlign:
-                                                            TextAlign.end,
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.grey)))
-                                              ])),
-                                      Container(
-                                        width: 200,
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.end,
-                                            children: [
-                                              const Icon(
-                                                  FontAwesomeIcons.windows,
-                                                  size: 65.0,
-                                                  color: Colors.blue),
-                                              Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                  child: const Text('Trilhas',
-                                                      textAlign: TextAlign.end,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 20))),
-                                              Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                  child: const Text('Número',
-                                                      textAlign: TextAlign.end,
-                                                      style: TextStyle(
-                                                          color: Colors.grey)))
-                                            ]),
-                                      ),
-                                      const Spacer(flex: 1),
-                                    ])))
-                          ]))
-                ])
+                            iconspanel(),
+                ]))])
               ] else ...[
                 Container(
                     color: const Color.fromARGB(255, 241, 238, 238),
@@ -1620,7 +1294,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           fit: BoxFit.cover)),
                 ),
               ]),
-              if (datas != [])...{
+              if (datas != '')...{
                 Container(
                   margin: EdgeInsets.only(top: 50, left: 45, right: 45),
                   child: BlogData(context)),
