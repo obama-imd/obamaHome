@@ -10,6 +10,7 @@ class ItemProduto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double swidth = MediaQuery.of(context).size.width;
     return Container(
       padding: EdgeInsets.all(16.00),
       alignment: Alignment.center,
@@ -17,7 +18,8 @@ class ItemProduto extends StatelessWidget {
         children: [
           Expanded(
               flex: 8,
-              child: Image.asset("images/${this.imagem}",
+              child: Image.asset("assets/images/${this.imagem}",
+              width: swidth*.2,
               fit:  BoxFit.contain,
               ),
           ),
