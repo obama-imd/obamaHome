@@ -1,11 +1,13 @@
 
+// ignore_for_file: non_constant_identifier_names, unrelated_type_equality_checks
+
 import 'package:flutter/material.dart';
 
 List<DropdownMenuItem<String>> get dropdownItems{
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" HOME "),value: "HOME"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "HOME", child: Text(" HOME ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
@@ -13,9 +15,9 @@ List<DropdownMenuItem<String>> get dropdownItems{
 List<DropdownMenuItem<String>> get dropdownItems1{
   List<DropdownMenuItem<String>> menuItems = [
     if (selValue == "ABOUT US")...{
-      DropdownMenuItem(child: Text(" SOBRE NÓS ", style: TextStyle(color: Colors.blue)),value: "ABOUT US"),
+      const DropdownMenuItem(value: "ABOUT US", child: Text(" SOBRE NÓS ", style: TextStyle(color: Colors.blue))),
     } else...{
-      DropdownMenuItem(child: Text(" SOBRE NÓS "), value: "ABOUT US"),
+      const DropdownMenuItem(value: "ABOUT US", child: Text(" SOBRE NÓS ")),
     }
   ];
   return menuItems;
@@ -23,9 +25,9 @@ List<DropdownMenuItem<String>> get dropdownItems1{
 
 List<DropdownMenuItem<String>> get dropdownItems2{
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" SERVICES "),value: "SERVICES"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "SERVICES", child: Text(" SERVICES ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
@@ -33,13 +35,13 @@ List<DropdownMenuItem<String>> get dropdownItems2{
 List<DropdownMenuItem<String>> get dropdownItems3{
   List<DropdownMenuItem<String>> menuItems = [
     if (selValue == "BLOG")...{
-      DropdownMenuItem(child: Text(" PUBLICAÇÕES ", style: TextStyle(color: Colors.blue)),value: "BLOG"),
-      DropdownMenuItem(child: TextButton(child: Text("Item 1"), onPressed: () {}),value: "Item 1"),
-      DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+      const DropdownMenuItem(value: "BLOG", child: Text(" PUBLICAÇÕES ", style: TextStyle(color: Colors.blue))),
+      DropdownMenuItem(value: "Item 1", child: TextButton(child: const Text("Item 1"), onPressed: () {})),
+      const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
     } else...{
-      DropdownMenuItem(child: Text(" PUBLICAÇÕES "),value: "BLOG"),
-      DropdownMenuItem(child: TextButton(child: Text("Item 1"), onPressed: () {}),value: "Item 1"),
-      DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+      const DropdownMenuItem(value: "BLOG", child: Text(" PUBLICAÇÕES ")),
+      DropdownMenuItem(value: "Item 1", child: TextButton(child: const Text("Item 1"), onPressed: () {})),
+      const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
     }
   ];
   return menuItems;
@@ -47,34 +49,34 @@ List<DropdownMenuItem<String>> get dropdownItems3{
 
 List<DropdownMenuItem<String>> get dropdownItems4{
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" PAGES "),value: "PAGES"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "PAGES", child: Text(" PAGES ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
 List<DropdownMenuItem<String>> get dropdownItems5{
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" SHOP "),value: "SHOP"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "SHOP", child: Text(" SHOP ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
 List<DropdownMenuItem<String>> get dropdownItems6{
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" CONTACT "),value: "CONTACT"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "CONTACT", child: Text(" CONTACT ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
 List<DropdownMenuItem<String>> get dropdownItems7{
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Icon(Icons.search),value: "SRC"),
+    const DropdownMenuItem(value: "SRC", child: Icon(Icons.search)),
   ];
   return menuItems;
 }
@@ -85,8 +87,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar0(BuildContext context) {
     return DropdownButton(
         value: selValue[0],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[0] = newValue!;
@@ -100,8 +102,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar1(BuildContext context) {
     return DropdownButton(
         value: selValue[1],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[1] = newValue!;
@@ -115,8 +117,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar2(BuildContext context) {
     return DropdownButton(
         value: selValue[2],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[2] = newValue!;
@@ -130,8 +132,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar3(BuildContext context) {
     return DropdownButton(
         value: selValue[3],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[3] = newValue!;
@@ -145,8 +147,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar4(BuildContext context) {
     return DropdownButton(
         value: selValue[4],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[4] = newValue!;
@@ -160,8 +162,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar5(BuildContext context) {
     return DropdownButton(
         value: selValue[5],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[5] = newValue!;
@@ -175,8 +177,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar6(BuildContext context) {
     return DropdownButton(
         value: selValue[6],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[6] = newValue!;
@@ -190,8 +192,8 @@ List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP
   Widget MenuBar7(BuildContext context) {
     return DropdownButton(
         value: selValue[7],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
+        icon: const SizedBox.shrink(),  
+        underline: const SizedBox(),
         onChanged: (String? newValue){
         (() {
           selValue[7] = newValue!;

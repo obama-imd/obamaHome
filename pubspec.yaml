@@ -76,9 +76,12 @@ flutter:
     - assets/images/ufrn.jpg
     - assets/images/imd.png
     - assets/images/remne.jpeg
-    - assets/images/gilfe.jpg
+    - assets/images/gilfe.png
     - assets/images/prod.jpg
-
+    - assets/images/i1.png
+    - assets/images/i2.png
+    - assets/images/i3.png
+    - assets/images/i4.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
