@@ -10,27 +10,23 @@ class ItemProduto extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double swidth = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.all(16.00),
       alignment: Alignment.center,
       child: Column(
         children: [
-          Expanded(
-              flex: 8,
-              child: Image.asset("assets/images/${this.imagem}",
-              width: swidth*.2,
-              fit:  BoxFit.contain,
-              ),
+          Image.asset("assets/images/$imagem",
+          width: 100,
+          fit:  BoxFit.contain,
           ),
-          Expanded(
-           flex: 1,
-           child: Text('${this.titulo}'),
+          Padding(
+            padding: const EdgeInsets.only(top: 30, bottom: 20),
+            child: Text(titulo,
+             style: TextStyle( fontSize: 18, fontWeight: FontWeight.w600),
+            ),
           ),
-          Expanded(
-            flex: 1,
-            child: Text('${this.descricao}'),
-          ),
+          Text(descricao,
+          style: TextStyle( fontSize: 15, color: Color(0xFF707070),
+           )),
         ],
       ),
     );

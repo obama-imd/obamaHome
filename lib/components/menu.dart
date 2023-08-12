@@ -1,202 +1,278 @@
-
 import 'package:flutter/material.dart';
+import 'package:obamahome/pages/blog/blog.dart';
 
-List<DropdownMenuItem<String>> get dropdownItems{
+import '../pages/home/home.dart';
+
+List<DropdownMenuItem<String>> get dropdownItems {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" HOME "),value: "HOME"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "HOME", child: Text(" HOME ")),
+    DropdownMenuItem(
+        value: "Item 1",
+        child: TextButton(
+            child: const Text("Item 1"),
+            onPressed: () {
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(
+              //     builder: (context) => const HomePage(),
+              //   ),
+              // );
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(builder: (context) => const HomePage()),
+              // );
+            })),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
-List<DropdownMenuItem<String>> get dropdownItems1{
+List<DropdownMenuItem<String>> get dropdownItems1 {
   List<DropdownMenuItem<String>> menuItems = [
-    if (selValue == "ABOUT US")...{
-      DropdownMenuItem(child: Text(" SOBRE NÓS ", style: TextStyle(color: Colors.blue)),value: "ABOUT US"),
-    } else...{
-      DropdownMenuItem(child: Text(" SOBRE NÓS "), value: "ABOUT US"),
+    if (selValue == "ABOUT US") ...{
+      const DropdownMenuItem(
+          value: "ABOUT US",
+          child: Text(" SOBRE NÓS ", style: TextStyle(color: Colors.blue))),
+    } else ...{
+      const DropdownMenuItem(value: "ABOUT US", child: Text(" SOBRE NÓS ")),
     }
   ];
   return menuItems;
 }
 
-List<DropdownMenuItem<String>> get dropdownItems2{
+List<DropdownMenuItem<String>> get dropdownItems2 {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" SERVICES "),value: "SERVICES"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "SERVICES", child: Text(" SERVICES ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
-List<DropdownMenuItem<String>> get dropdownItems3{
+List<DropdownMenuItem<String>> get dropdownItems3 {
   List<DropdownMenuItem<String>> menuItems = [
-    if (selValue == "BLOG")...{
-      DropdownMenuItem(child: Text(" PUBLICAÇÕES ", style: TextStyle(color: Colors.blue)),value: "BLOG"),
-      DropdownMenuItem(child: TextButton(child: Text("Item 1"), onPressed: () {}),value: "Item 1"),
-      DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
-    } else...{
-      DropdownMenuItem(child: Text(" PUBLICAÇÕES "),value: "BLOG"),
-      DropdownMenuItem(child: TextButton(child: Text("Item 1"), onPressed: () {}),value: "Item 1"),
-      DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    if (selValue == "BLOG") ...{
+      const DropdownMenuItem(
+          value: "BLOG",
+          child: Text(" PUBLICAÇÕES ", style: TextStyle(color: Colors.blue))),
+      DropdownMenuItem(
+          value: "Item 1",
+          child: TextButton(child: const Text("Item 1"), onPressed: () {})),
+      const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
+    } else ...{
+      const DropdownMenuItem(value: "BLOG", child: Text(" PUBLICAÇÕES ")),
+      DropdownMenuItem(
+          value: "Item 1",
+          child: TextButton(child: const Text("Item 1"), onPressed: () {})),
+      const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
     }
   ];
   return menuItems;
 }
 
-List<DropdownMenuItem<String>> get dropdownItems4{
+List<DropdownMenuItem<String>> get dropdownItems4 {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" PAGES "),value: "PAGES"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "PAGES", child: Text(" PAGES ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
-List<DropdownMenuItem<String>> get dropdownItems5{
+List<DropdownMenuItem<String>> get dropdownItems5 {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" SHOP "),value: "SHOP"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "SHOP", child: Text(" SHOP ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
-List<DropdownMenuItem<String>> get dropdownItems6{
+List<DropdownMenuItem<String>> get dropdownItems6 {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Text(" CONTACT "),value: "CONTACT"),
-    DropdownMenuItem(child: Text("Item 1"),value: "Item 1"),
-    DropdownMenuItem(child: Text("Item 2"),value: "Item 2"),
+    const DropdownMenuItem(value: "CONTACT", child: Text(" CONTACT ")),
+    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
+    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];
   return menuItems;
 }
 
-List<DropdownMenuItem<String>> get dropdownItems7{
+List<DropdownMenuItem<String>> get dropdownItems7 {
   List<DropdownMenuItem<String>> menuItems = [
-    DropdownMenuItem(child: Icon(Icons.search),value: "SRC"),
+    const DropdownMenuItem(value: "SRC", child: Icon(Icons.search)),
   ];
   return menuItems;
 }
 
-List <String> selValue = ["HOME", "ABOUT US", "SERVICES", "BLOG", "PAGES", "SHOP", "CONTACT", "SRC"];
+List<String> selValue = [
+  "HOME",
+  "ABOUT US",
+  "SERVICES",
+  "BLOG",
+  "PAGES",
+  "SHOP",
+  "CONTACT",
+  "SRC"
+];
 
-  @override
-  Widget MenuBar0(BuildContext context) {
-    return DropdownButton(
-        value: selValue[0],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget NavBarMenu(BuildContext context) {
+  return Expanded(child: GridView.builder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 500,
+          childAspectRatio: 10 / 9,
+          crossAxisSpacing: 0,
+          mainAxisSpacing: 0),
+      itemCount: 3,
+      itemBuilder: (BuildContext context, int index) {
+        return MenuBar0(context, selValue[index], selValue, index);
+      }));
+}
+
+@override
+Widget MenuBar0(BuildContext context, title, subItems, index) {
+
+  return DropdownButton(
+      value: subItems[0],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (newValue) {
         (() {
-          selValue[0] = newValue!;
+          subItems[index] = newValue!;
         });
       },
-        items: dropdownItems
-    );
+      items: [
+        DropdownMenuItem(value: title, child: Text(title)),
+        DropdownMenuItem(
+            value: subItems[index],
+            child: TextButton(
+                child: Text(subItems[index]),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const HomePage(),
+                    ),
+                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => const HomePage()),
+                  // );
+                })),
+        const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
+      ]);
 }
 
-  @override
-  Widget MenuBar1(BuildContext context) {
-    return DropdownButton(
-        value: selValue[1],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget MenuBar1(BuildContext context) {
+  return DropdownButton(
+      value: selValue[1],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (String? newValue) {
         (() {
           selValue[1] = newValue!;
         });
       },
-        items: dropdownItems1
-    );
+      items: dropdownItems1);
 }
 
-  @override
-  Widget MenuBar2(BuildContext context) {
-    return DropdownButton(
-        value: selValue[2],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget MenuBar2(BuildContext context) {
+  return DropdownButton(
+      value: selValue[2],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (String? newValue) {
         (() {
           selValue[2] = newValue!;
         });
       },
-        items: dropdownItems2
-    );
+      items: dropdownItems2);
 }
 
-  @override
-  Widget MenuBar3(BuildContext context) {
-    return DropdownButton(
-        value: selValue[3],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget MenuBar3(BuildContext context) {
+  return DropdownButton(
+      value: selValue[3],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (String? newValue) {
         (() {
           selValue[3] = newValue!;
         });
       },
-        items: dropdownItems3
-    );
+      items: [
+        const DropdownMenuItem(
+            value: "BLOG",
+            child: Text(" PUBLICAÇÕES ", style: TextStyle(color: Colors.blue))),
+        DropdownMenuItem(
+            value: "Item 1",
+            child: TextButton(
+                child: const Text("Item 1"),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const BlogPage(),
+                    ),
+                  );
+                })),
+        const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
+      ]);
 }
 
-  @override
-  Widget MenuBar4(BuildContext context) {
-    return DropdownButton(
-        value: selValue[4],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget MenuBar4(BuildContext context) {
+  return DropdownButton(
+      value: selValue[4],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (String? newValue) {
         (() {
           selValue[4] = newValue!;
         });
       },
-        items: dropdownItems4
-    );
+      items: dropdownItems4);
 }
 
-  @override
-  Widget MenuBar5(BuildContext context) {
-    return DropdownButton(
-        value: selValue[5],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget MenuBar5(BuildContext context) {
+  return DropdownButton(
+      value: selValue[5],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (String? newValue) {
         (() {
           selValue[5] = newValue!;
         });
       },
-        items: dropdownItems5
-    );
+      items: dropdownItems5);
 }
 
-  @override
-  Widget MenuBar6(BuildContext context) {
-    return DropdownButton(
-        value: selValue[6],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget MenuBar6(BuildContext context) {
+  return DropdownButton(
+      value: selValue[6],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (String? newValue) {
         (() {
           selValue[6] = newValue!;
         });
       },
-        items: dropdownItems6
-    );
+      items: dropdownItems6);
 }
 
-  @override
-  Widget MenuBar7(BuildContext context) {
-    return DropdownButton(
-        value: selValue[7],
-        icon: SizedBox.shrink(),  
-        underline: SizedBox(),
-        onChanged: (String? newValue){
+@override
+Widget MenuBar7(BuildContext context) {
+  return DropdownButton(
+      value: selValue[7],
+      icon: const SizedBox.shrink(),
+      underline: const SizedBox(),
+      onChanged: (String? newValue) {
         (() {
           selValue[7] = newValue!;
         });
       },
-        items: dropdownItems7
-    );
+      items: dropdownItems7);
 }
