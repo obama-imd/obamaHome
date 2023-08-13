@@ -1,278 +1,206 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/pages/blog/blog.dart';
 
+import '../pages/about-us/aboutUs.dart';
 import '../pages/home/home.dart';
-
-List<DropdownMenuItem<String>> get dropdownItems {
-  List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "HOME", child: Text(" HOME ")),
-    DropdownMenuItem(
-        value: "Item 1",
-        child: TextButton(
-            child: const Text("Item 1"),
-            onPressed: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => const HomePage(),
-              //   ),
-              // );
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(builder: (context) => const HomePage()),
-              // );
-            })),
-    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-  ];
-  return menuItems;
-}
-
-List<DropdownMenuItem<String>> get dropdownItems1 {
-  List<DropdownMenuItem<String>> menuItems = [
-    if (selValue == "ABOUT US") ...{
-      const DropdownMenuItem(
-          value: "ABOUT US",
-          child: Text(" SOBRE NÓS ", style: TextStyle(color: Colors.blue))),
-    } else ...{
-      const DropdownMenuItem(value: "ABOUT US", child: Text(" SOBRE NÓS ")),
-    }
-  ];
-  return menuItems;
-}
-
-List<DropdownMenuItem<String>> get dropdownItems2 {
-  List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "SERVICES", child: Text(" SERVICES ")),
-    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
-    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-  ];
-  return menuItems;
-}
-
-List<DropdownMenuItem<String>> get dropdownItems3 {
-  List<DropdownMenuItem<String>> menuItems = [
-    if (selValue == "BLOG") ...{
-      const DropdownMenuItem(
-          value: "BLOG",
-          child: Text(" PUBLICAÇÕES ", style: TextStyle(color: Colors.blue))),
-      DropdownMenuItem(
-          value: "Item 1",
-          child: TextButton(child: const Text("Item 1"), onPressed: () {})),
-      const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-    } else ...{
-      const DropdownMenuItem(value: "BLOG", child: Text(" PUBLICAÇÕES ")),
-      DropdownMenuItem(
-          value: "Item 1",
-          child: TextButton(child: const Text("Item 1"), onPressed: () {})),
-      const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-    }
-  ];
-  return menuItems;
-}
-
-List<DropdownMenuItem<String>> get dropdownItems4 {
-  List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "PAGES", child: Text(" PAGES ")),
-    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
-    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-  ];
-  return menuItems;
-}
-
-List<DropdownMenuItem<String>> get dropdownItems5 {
-  List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "SHOP", child: Text(" SHOP ")),
-    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
-    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-  ];
-  return menuItems;
-}
-
-List<DropdownMenuItem<String>> get dropdownItems6 {
-  List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "CONTACT", child: Text(" CONTACT ")),
-    const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
-    const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-  ];
-  return menuItems;
-}
-
-List<DropdownMenuItem<String>> get dropdownItems7 {
-  List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "SRC", child: Icon(Icons.search)),
-  ];
-  return menuItems;
-}
 
 List<String> selValue = [
   "HOME",
-  "ABOUT US",
-  "SERVICES",
-  "BLOG",
+  "SOBRE",
+  "SERVIÇOS",
+  "PUBLICAÇÕES",
   "PAGES",
-  "SHOP",
-  "CONTACT",
+  "PLANOS DE AULA",
   "SRC"
 ];
 
-@override
-Widget NavBarMenu(BuildContext context) {
-  return Expanded(child: GridView.builder(
-      shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 500,
-          childAspectRatio: 10 / 9,
-          crossAxisSpacing: 0,
-          mainAxisSpacing: 0),
-      itemCount: 3,
-      itemBuilder: (BuildContext context, int index) {
-        return MenuBar0(context, selValue[index], selValue, index);
-      }));
+List<dynamic> selValueContent = [
+  Text("HOME"),
+  Text("SOBRE"),
+  Text("SERVIÇOS"),
+  Text("PUBLICAÇÕES"),
+  Text("PAGES"),
+  Text("PLANOS DE AULA"),
+  Icon(Icons.search)
+];
+
+// List<itemValue> itemKeys = [
+//     'itemsHome',
+//     'itemsBoutUs',
+//     'itemsServices',
+//     'itemsBlog',
+//     'itemsPages',
+//     'itemsShop',
+//     'itemsContact',
+// ];
+
+class itemValue {
+  final List<String>? itemsHome;
+  final List<String>? itemsBoutUs;
+  final List<String>? itemsServices;
+  final List<String>? itemsBlog;
+  final List<String>? itemsPages;
+  final List<String>? itemsShop;
+  // final List<String>? itemsSearch;
+
+  itemValue({
+    this.itemsHome,
+    this.itemsBoutUs,
+    this.itemsServices,
+    this.itemsBlog,
+    this.itemsPages,
+    this.itemsShop,
+    // this.itemsSearch,
+  });
 }
 
-@override
-Widget MenuBar0(BuildContext context, title, subItems, index) {
+final List<itemValue> itemValues = [
+  itemValue(
+    itemsHome: ["Item 1", "Item 2"],
+    itemsBoutUs: ["Sobre"],
+    itemsServices: ["Item 1", "Item 2"],
+    itemsBlog: ["Item 1", "Item 2"],
+    itemsPages: ["Item 1", "Item 2"],
+    itemsShop: ["Item 1", "Item 2"],
+    // itemsSearch: ["Item 1", "Item 2"],
+  )
+];
 
-  return DropdownButton(
-      value: subItems[0],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (newValue) {
-        (() {
-          subItems[index] = newValue!;
-        });
-      },
-      items: [
-        DropdownMenuItem(value: title, child: Text(title)),
+List<dynamic> navigateTo = [
+  const HomePage(),
+  const AboutUsPage(),
+  ServicesPage(),
+  const BlogPage(),
+  PagesPage(),
+  ShopPage(),
+  SearchPage(),
+];
+
+List<DropdownMenuItem<String>> getDropdownItems(
+  BuildContext context,
+  String label,
+  int index,
+  dynamic content,
+) {
+  List<DropdownMenuItem<String>> menuItems = [
+    DropdownMenuItem(value: label, child: content),
+    if (index == 0) ...{
+      for (int j = 0; j < itemValues[0].itemsHome!.length; j++) ...{
         DropdownMenuItem(
-            value: subItems[index],
-            child: TextButton(
-                child: Text(subItems[index]),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => const HomePage()),
-                  // );
-                })),
-        const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-      ]);
-}
-
-@override
-Widget MenuBar1(BuildContext context) {
-  return DropdownButton(
-      value: selValue[1],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (String? newValue) {
-        (() {
-          selValue[1] = newValue!;
-        });
-      },
-      items: dropdownItems1);
-}
-
-@override
-Widget MenuBar2(BuildContext context) {
-  return DropdownButton(
-      value: selValue[2],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (String? newValue) {
-        (() {
-          selValue[2] = newValue!;
-        });
-      },
-      items: dropdownItems2);
-}
-
-@override
-Widget MenuBar3(BuildContext context) {
-  return DropdownButton(
-      value: selValue[3],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (String? newValue) {
-        (() {
-          selValue[3] = newValue!;
-        });
-      },
-      items: [
-        const DropdownMenuItem(
-            value: "BLOG",
-            child: Text(" PUBLICAÇÕES ", style: TextStyle(color: Colors.blue))),
+            value: itemValues[0].itemsHome![j],
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => navigateTo[index]));
+                },
+                child: Text(itemValues[0].itemsHome![j]))),
+      }
+    } else if (index == 1) ...{
+      for (int j = 0; j < itemValues[0].itemsBoutUs!.length; j++) ...{
         DropdownMenuItem(
-            value: "Item 1",
-            child: TextButton(
-                child: const Text("Item 1"),
-                onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const BlogPage(),
-                    ),
-                  );
-                })),
-        const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
-      ]);
+            value: itemValues[0].itemsBoutUs![j],
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => navigateTo[index]));
+                },
+                child: Text(itemValues[0].itemsBoutUs![j].toUpperCase())))
+      }
+    } else if (index == 2) ...{
+      for (int j = 0; j < itemValues[0].itemsServices!.length; j++) ...{
+        DropdownMenuItem(
+            value: itemValues[0].itemsServices![j],
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => navigateTo[index]));
+                },
+                child: Text(itemValues[0].itemsServices![j])))
+      }
+    } else if (index == 3) ...{
+      for (int j = 0; j < itemValues[0].itemsBlog!.length; j++) ...{
+        DropdownMenuItem(
+            value: itemValues[0].itemsBlog![j],
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => navigateTo[index]));
+                },
+                child: Text(itemValues[0].itemsBlog![j])))
+      }
+    } else if (index == 4) ...{
+      for (int j = 0; j < itemValues[0].itemsPages!.length; j++) ...{
+        DropdownMenuItem(
+            value: itemValues[0].itemsPages![j],
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => navigateTo[index]));
+                },
+                child: Text(itemValues[0].itemsPages![j])))
+      }
+    } else if (index == 5) ...{
+      for (int j = 0; j < itemValues[0].itemsShop!.length; j++) ...{
+        DropdownMenuItem(
+            value: itemValues[0].itemsShop![j],
+            child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => navigateTo[index]));
+                },
+                child: Text(itemValues[0].itemsShop![j])))
+      }
+    }
+  ];
+  return menuItems;
+}
+
+Widget MenuBar0(BuildContext context, int index, String label, dynamic content) {
+  return DropdownButton(
+    value: label,
+    icon: const SizedBox.shrink(),
+    underline: const SizedBox(),
+    onChanged: (String? newValue) {
+      () {
+        label = newValue!;
+      };
+    },
+    items: getDropdownItems(context, label, index, content),
+  );
 }
 
 @override
-Widget MenuBar4(BuildContext context) {
-  return DropdownButton(
-      value: selValue[4],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (String? newValue) {
-        (() {
-          selValue[4] = newValue!;
-        });
-      },
-      items: dropdownItems4);
+Widget navBarMenu(BuildContext context, double swidth) {
+  return Container(
+    width: swidth * 0.45,
+    child: Row(children: [
+      for (int i = 0; i < selValue.length; i++) ...{
+        Container(
+            padding: const EdgeInsets.all(9.2),
+            child: MenuBar0(context, i, selValue[i], selValueContent[i])),
+      }
+    ]),
+  );
 }
 
-@override
-Widget MenuBar5(BuildContext context) {
-  return DropdownButton(
-      value: selValue[5],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (String? newValue) {
-        (() {
-          selValue[5] = newValue!;
-        });
-      },
-      items: dropdownItems5);
-}
+class SearchPage {}
 
-@override
-Widget MenuBar6(BuildContext context) {
-  return DropdownButton(
-      value: selValue[6],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (String? newValue) {
-        (() {
-          selValue[6] = newValue!;
-        });
-      },
-      items: dropdownItems6);
-}
+class ContactPage {}
 
-@override
-Widget MenuBar7(BuildContext context) {
-  return DropdownButton(
-      value: selValue[7],
-      icon: const SizedBox.shrink(),
-      underline: const SizedBox(),
-      onChanged: (String? newValue) {
-        (() {
-          selValue[7] = newValue!;
-        });
-      },
-      items: dropdownItems7);
-}
+class ShopPage {}
+
+class PagesPage {}
+
+class ServicesPage {}
