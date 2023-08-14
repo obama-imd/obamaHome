@@ -54,7 +54,7 @@ class TopBar extends StatelessWidget {
                         SocialMedia(Colors.white),
                         Container(
                             margin: EdgeInsets.only(
-                                left: 50.0, right: swidth * 0.068),
+                                left: 15.0, right: swidth * 0.068),
                             height: 45,
                             width: 160,
                             child: Container(
@@ -85,53 +85,53 @@ class TopBar extends StatelessWidget {
                     //       style:
                     //           TextStyle(color: Colors.white, fontSize: 20.0)),
                     // ),
-                    Row(children: [
-                      Container(width: swidth * 0.07),
-                      Container(
-                          width: 40,
-                          padding: const EdgeInsets.only(top: 10),
-                          child: SocialMedia(Colors.white)),
-                      Container(width: swidth * 0.65),
-                      Container(
-                          height: 55,
-                          width: 160,
-                          padding: const EdgeInsets.only(top: 10),
-                          child: Container(
-                              color: Colors.white,
-                              height: 55,
-                              child: TextButton(
-                                  onPressed: () {},
-                                  child: const Text('Acesse',
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 16.0))))),
-                      Container(width: swidth * 0.04),
-                    ])
+                    Padding(
+                      padding: EdgeInsets.only(left: swidth * 0.04, right: swidth * 0.04),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                        Container(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: SocialMedia(Colors.white)),
+                        Container(
+                            height: 55,
+                            width: 160,
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Container(
+                                color: Colors.white,
+                                height: 55,
+                                child: TextButton(
+                                    onPressed: () {},
+                                    child: const Text('Acesse',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 16.0))))),
+                      ]),
+                    )
                   ])),
         ],
       ],
       if (swidth < 900) ...[
         Container(
           color: Colors.blue,
-          height: 120.0,
           width: swidth,
-          padding: const EdgeInsets.only(top: 10),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
             // Container(
             //   child: const Text('HOME',
             //       style: TextStyle(color: Colors.white, fontSize: 20.0)),
             // ),
-            Container(
-                width: 90,
-                padding: const EdgeInsets.only(top: 15),
-                child: Column(children: [
-                  SocialMedia(Colors.white),
-                ])),
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SocialMedia(Colors.white),
+              ],
+            ),
             Container(
                 height: 45,
                 width: 210,
-                padding: const EdgeInsets.only(top: 15),
+                padding: const EdgeInsets.only(bottom: 10),
                 child: Container(
                     color: Colors.white,
                     height: 45,

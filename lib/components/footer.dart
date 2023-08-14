@@ -21,7 +21,7 @@ class Footer extends StatelessWidget {
               height: 700,
               width: swidth * 0.3,
               color: Colors.grey,
-              padding: const EdgeInsets.all(5),
+              // padding: const EdgeInsets.all(5),
               child: FlutterMap(
                 options: MapOptions(
                   center: LatLng(-5.832006, -35.205471),

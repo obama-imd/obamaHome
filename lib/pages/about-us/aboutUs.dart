@@ -8,6 +8,7 @@ import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
 import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
+import '../../components/staff.dart';
 import '../../components/topbar.dart';
 
 class AboutUsPage extends StatelessWidget {
@@ -547,9 +548,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ],
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Container(
-                  height: 320,
                   width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(left: 90, top: 120.0, bottom: 65.0),
+                  padding: EdgeInsets.only(
+                      left: swidth * 0.07, top: 120.0, bottom: 65.0),
                   child: SectionTitle(
                       'EXPERIENCED STAFF',
                       'Our experts have been featured in press numerous times.',
@@ -557,65 +558,66 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
                 if (MediaQuery.of(context).size.width > 1300) ...[
                   Container(
+                      padding: EdgeInsets.symmetric(horizontal: swidth * 0.07),
                       child: Row(children: [
-                    Container(width: 90),
-                    Mediabox(context),
-                    Container(width: 20),
-                    Mediabox1(context),
-                    Container(width: 20),
-                    Mediabox2(context),
-                    Container(width: 20),
-                    Mediabox3(context),
-                  ]))
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                        Container(width: swidth*0.02),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                        Container(width: swidth*0.02),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                        Container(width: swidth*0.02),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                      ]))
                 ],
                 /*Segunda condição*/
                 if (MediaQuery.of(context).size.width < 1300) ...[
-                  if (MediaQuery.of(context).size.width > 930) ...[
+                  if (MediaQuery.of(context).size.width > 995) ...[
                     Column(children: [
                       Row(children: [
-                        Container(width: 45),
-                        Mediabox(context),
-                        Container(width: 20),
-                        Mediabox1(context),
-                        Container(width: 20),
-                        Mediabox2(context),
+                        Container(width: swidth*0.045),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                        Container(width: swidth*0.02),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                        Container(width: swidth*0.02),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
                       ]),
                       Container(
                           width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.only(left: 45),
+                          padding: EdgeInsets.only(left: swidth*0.045),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Mediabox3(context),
+                                StaffCard(
+                                    "Dean Michael", "assets/images/img3.jpg", swidth),
                               ]))
                     ])
                   ]
                 ],
-                if (MediaQuery.of(context).size.width < 930) ...[
-                  if (MediaQuery.of(context).size.width > 650) ...[
+                if (MediaQuery.of(context).size.width < 995) ...[
+                  if (MediaQuery.of(context).size.width > 670) ...[
                     Column(children: [
                       Row(children: [
-                        Container(width: 45),
-                        Mediabox(context),
-                        Container(width: 20),
-                        Mediabox1(context),
+                        Container(width: swidth*0.045),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                        Container(width: swidth*0.02),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
                       ]),
                       Row(children: [
-                        Container(width: 45),
-                        Mediabox2(context),
-                        Container(width: 20),
-                        Mediabox3(context),
+                        Container(width: swidth*0.045),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg",swidth),
+                        Container(width: swidth*0.045),
+                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
                       ])
                     ])
                   ]
                 ],
-                if (MediaQuery.of(context).size.width < 650) ...[
+                if (MediaQuery.of(context).size.width < 670) ...[
                   Center(
                       child: Column(children: [
-                    Mediabox(context),
-                    Mediabox1(context),
-                    Mediabox2(context),
-                    Mediabox3(context),
+                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
+                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
                   ]))
                 ]
               ]),
