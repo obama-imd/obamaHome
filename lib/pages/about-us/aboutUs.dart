@@ -27,6 +27,29 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // List<String> staffNames = [
+  //   "Dean Michael",
+  //   "Dean Michael",
+  //   "Dean Michael",
+  //   "Dean Michael",
+  //   "Dean Michael",
+  //   "Dean Michael",
+  //   "Dean Michael",
+  //   "Dean Michael",
+  // ];
+
+  // List<String> staffImgs = [
+  //   "assets/images/img3.jpg",
+  //   "assets/images/img3.jpg",
+  //   "assets/images/img3.jpg",
+  //   "assets/images/img3.jpg",
+  //   "assets/images/img3.jpg",
+  //   "assets/images/img3.jpg",
+  //   "assets/images/img3.jpg",
+  //   "assets/images/img3.jpg",
+  // ];
+
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
@@ -293,17 +316,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       width: MediaQuery.of(context).size.width * 0.67,
                       padding: EdgeInsets.only(top: 110, left: 90),
                       child: ListView(children: [
-                        Container(
-                          height: 320,
-                          width: MediaQuery.of(context).size.width,
-                          child: SectionTitle(
-                              'ABOUT SERVICE',
-                              'Easy and effective way to get your device repaired.',
-                              CrossAxisAlignment.start),
-                        ),
+                        SectionTitle(
+                            'ABOUT SERVICE',
+                            'Easy and effective way to get your device repaired.',
+                            CrossAxisAlignment.start),
                         Container(
                             height: 300,
-                            padding: EdgeInsets.only(top: 60),
+                            padding: EdgeInsets.only(top: 65),
                             child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

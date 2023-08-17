@@ -20,8 +20,8 @@ class StaffCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Container(
-        width: 270,
-        height: 270,
+          width: 270,
+          height: 270,
           decoration: BoxDecoration(
               border: Border.all(color: Color.fromARGB(255, 231, 228, 228))),
           child: Image.asset(staffImg, fit: BoxFit.cover)),
@@ -38,8 +38,7 @@ class StaffCard extends StatelessWidget {
                 children: [
                   for (int i = 0; i < SocialMediaLinks.length; i++) ...{
                     Container(
-                        height: 30,
-                        width: 30,
+                        width: 40,
                         child: TextButton(
                             onPressed: () {},
                             child: Icon(SocialMediaLinks[i],

@@ -236,7 +236,7 @@ class Carousel extends StatelessWidget {
           //       PartnersLogos( 'assets/images/ufrn.jpg'),
           //       PartnersLogos( 'assets/images/imd.png'),
           //       PartnersLogos( 'assets/images/remne.jpeg'),
-          //       PartnersLogos( 'assets/images/gilfe.jpg'),
+          //       PartnersLogos( 'assets/images/gilfe.png'),
           //       PartnersLogos( 'assets/images/ufrn.jpg'),
           //     ],
           //   ),
@@ -286,7 +286,7 @@ class Carousel extends StatelessWidget {
                           width: 6,
                           color: const Color.fromARGB(255, 231, 228, 228))),
                   child: const Image(
-                      image: AssetImage('assets/images/gilfe.jpg'),
+                      image: AssetImage('assets/images/gilfe.png'),
                       fit: BoxFit.contain)),
               Container(width: 10, height: 100),
               Container(
@@ -548,7 +548,7 @@ class Carousel extends StatelessWidget {
                             width: 6,
                             color: const Color.fromARGB(255, 231, 228, 228))),
                     child: const Image(
-                        image: AssetImage('assets/images/gilfe.jpg'),
+                        image: AssetImage('assets/images/gilfe.png'),
                         fit: BoxFit.cover)),
                 Container(width: 12, height: 12),
                 Container(
