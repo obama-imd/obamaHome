@@ -7,7 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class TopBar extends StatelessWidget {
   double swidth;
 
-  TopBar(this.swidth);
+  TopBar(this.swidth, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +27,8 @@ class TopBar extends StatelessWidget {
                         Container(
                             child: Row(children: [
                           Container(
-                              padding: EdgeInsets.only(right: 10),
-                              child: Icon(FontAwesomeIcons.house,
+                              padding: const EdgeInsets.only(right: 10),
+                              child: const Icon(FontAwesomeIcons.house,
                                   color: Colors.white, size: 13)),
                           const Text(
                               'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
@@ -36,7 +36,7 @@ class TopBar extends StatelessWidget {
                                   color: Colors.white, fontSize: 13.0)),
                         ])),
                         Container(
-                            margin: EdgeInsets.only(left: 20),
+                            margin: const EdgeInsets.only(left: 20),
                             child: TextButton(
                               style: ButtonStyle(
                                 backgroundColor:
@@ -47,8 +47,8 @@ class TopBar extends StatelessWidget {
                               },
                               child: Row(children: [
                                 Container(
-                                    padding: EdgeInsets.only(right: 10),
-                                    child: Icon(FontAwesomeIcons.envelope,
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: const Icon(FontAwesomeIcons.envelope,
                                         color: Colors.white, size: 16)),
                                 const Text('obama@imd.ufrn.br',
                                     style: TextStyle(
@@ -73,10 +73,10 @@ class TopBar extends StatelessWidget {
                                   width: swidth * 0.154,
                                   color: Colors.white,
                                   height: 45,
-                                  child: Column(
+                                  child: const Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Text('Acesse',
+                                      Text('Acesse',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               color: Colors.black,
@@ -120,11 +120,11 @@ class TopBar extends StatelessWidget {
                                     child: Container(
                                       color: Colors.white,
                                       height: 55,
-                                      child: Column(
+                                      child: const Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          const Text('Acesse',
+                                          Text('Acesse',
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
                                                   color: Colors.black,
@@ -163,10 +163,10 @@ class TopBar extends StatelessWidget {
                     child: Container(
                       color: Colors.white,
                       height: 45,
-                      child: Column(
+                      child: const Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('Acesse',
+                          Text('Acesse',
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   color: Colors.black, fontSize: 16.0)),

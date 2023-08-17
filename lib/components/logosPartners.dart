@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class PartnersLogos extends StatelessWidget {
   String imagem;
 
-  PartnersLogos(this.imagem);
+  PartnersLogos(this.imagem, {super.key});
 
   @override
   Widget build(BuildContext context) {

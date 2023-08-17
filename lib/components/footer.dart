@@ -9,7 +9,7 @@ import '../components/launchSocialMedia.dart';
 class Footer extends StatelessWidget {
   double swidth;
 
-  Footer(this.swidth);
+  Footer(this.swidth, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +83,9 @@ class Footer extends StatelessWidget {
                                     decoration:
                                         BoxDecoration(color: Colors.blue))),
                             Container(height: 20),
-                            Container(
+                            const SizedBox(
                                 height: 100,
-                                child: const Text('Texto',
+                                child: Text('Texto',
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 14))),
                             Container(height: 20),
@@ -197,18 +197,18 @@ class Footer extends StatelessWidget {
                                     decoration:
                                         BoxDecoration(color: Colors.blue))),
                             Container(height: 20),
-                            Container(
+                            const SizedBox(
                                 height: 60,
                                 width: 300,
-                                child: const Text(
+                                child: Text(
                                     'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
                                     style: TextStyle(
                                         color: Colors.grey, fontSize: 14))),
                             Container(height: 20),
-                            Container(
+                            const SizedBox(
                                 height: 40,
                                 width: 300,
-                                child: const TextField(
+                                child: TextField(
                                     decoration: InputDecoration(
                                         border: OutlineInputBorder(
                                             borderSide: BorderSide.none),
@@ -296,9 +296,9 @@ class Footer extends StatelessWidget {
                   child: DecoratedBox(
                       decoration: BoxDecoration(color: Colors.blue))),
               Container(height: 20),
-              Container(
+              const SizedBox(
                   height: 100,
-                  child: const Text('Texto',
+                  child: Text('Texto',
                       style: TextStyle(color: Colors.grey, fontSize: 14))),
               Container(height: 20),
               SocialMedia(Colors.grey),
@@ -389,16 +389,16 @@ class Footer extends StatelessWidget {
                   child: DecoratedBox(
                       decoration: BoxDecoration(color: Colors.blue))),
               Container(height: 20),
-              Container(
+              const SizedBox(
                   height: 60,
                   width: 300,
-                  child: const Text(
+                  child: Text(
                       'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
                       style: TextStyle(color: Colors.grey, fontSize: 14))),
               Container(height: 20),
               Row(
                 children: [
-                  Container(
+                  SizedBox(
                       height: 40,
                       width: swidth - 120,
                       child: const TextField(

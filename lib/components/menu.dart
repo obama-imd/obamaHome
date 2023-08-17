@@ -15,13 +15,13 @@ List<String> selValue = [
 ];
 
 List<dynamic> selValueContent = [
-  Text("HOME"),
-  Text("SOBRE"),
-  Text("SERVIÇOS"),
-  Text("PUBLICAÇÕES"),
-  Text("PAGES"),
-  Text("PLANOS DE AULA"),
-  Icon(Icons.search)
+  const Text("HOME"),
+  const Text("SOBRE"),
+  const Text("SERVIÇOS"),
+  const Text("PUBLICAÇÕES"),
+  const Text("PAGES"),
+  const Text("PLANOS DE AULA"),
+  const Icon(Icons.search)
 ];
 
 // List<itemValue> itemKeys = [
@@ -183,7 +183,7 @@ Widget MenuBar0(BuildContext context, int index, String label, dynamic content) 
 
 @override
 Widget navBarMenu(BuildContext context, double swidth) {
-  return Container(
+  return SizedBox(
     width: swidth * 0.45,
     child: Row(children: [
       for (int i = 0; i < selValue.length; i++) ...{

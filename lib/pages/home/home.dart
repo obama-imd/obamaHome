@@ -15,6 +15,7 @@ import '../../components/footer.dart';
 import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
+import '../../widgets/our_product_item.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   Future<void> fetchData() async {
     final response =
-        await http.get(Uri.parse('http://192.168.1.72:3000/dados'));
+        await http.get(Uri.parse('http://localhost:3000/dados'));
 
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body);
@@ -76,8 +77,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     double swid = MediaQuery.of(context).size.width;
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
           maxCrossAxisExtent: 500,
           childAspectRatio: 10 / 9,
           crossAxisSpacing: 0,
@@ -122,17 +123,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               // Text(imagePath),
               Row(
                 children: [
-                  Icon(Icons.access_time, size: 16),
-                  Text(formattedDate, style: TextStyle(fontSize: 14)),
+                  const Icon(Icons.access_time, size: 16),
+                  Text(formattedDate, style: const TextStyle(fontSize: 14)),
                 ],
               ),
               Container(
-                margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(item['title'],
                     style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                        const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
               ),
-              Text(item['text'], style: TextStyle(fontSize: 15), maxLines: 4),
+              Text(item['text'], style: const TextStyle(fontSize: 15), maxLines: 4),
               // Text(sumValue),
             ],
           ),
@@ -168,7 +169,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     double swidth = MediaQuery.of(context).size.width;
     return Scaffold(
         key: scaffoldKey,
-        drawer: drawermenu(),
+        drawer: const drawermenu(),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Container(
@@ -182,14 +183,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                      Container(
+                      SizedBox(
                           width: 250,
                           child: Image.asset('assets/images/logo.png',
                               fit: BoxFit.fitHeight)),
                       navBarMenu(context, swidth),
                     ])),
               ] else ...[
-                Container(
+                SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 125,
                     child: Row(
@@ -228,11 +229,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               Container(
                   height: _ajustarAltura(swidth),
-                  margin: EdgeInsets.symmetric(horizontal: 74),
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  margin: const EdgeInsets.symmetric(horizontal: 74),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: Expanded(
                     child: GridView.count(
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       crossAxisCount: _ajustarVisualizacao(
                           swidth), //chama metodo para captar quantidade de colunas de acordo com tamanho da tela
                       crossAxisSpacing: 8, // espaçamento entre itens
@@ -256,13 +257,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         top: 60,
                         left: MediaQuery.of(context).size.width * 0.07),
                     child: Row(children: [
-                      Dropdowns(),
+                      const Dropdowns(),
                       Container(
                           padding: const EdgeInsets.only(left: 30, top: 17.5),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                     height: 50,
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
@@ -270,7 +271,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.w500))),
-                                Container(
+                                SizedBox(
                                     height: 120,
                                     width:
                                         MediaQuery.of(context).size.width * 0.3,
@@ -297,7 +298,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600,
                                                   color: Colors.white)))),
-                                  Container(
+                                  SizedBox(
                                       height: 50,
                                       width: MediaQuery.of(context).size.width *
                                           0.15)
@@ -311,20 +312,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     width: MediaQuery.of(context).size.width,
                     padding: const EdgeInsets.only(top: 60),
                     child: Column(children: [
-                      Dropdowns(),
+                      const Dropdowns(),
                       Container(
                           padding: const EdgeInsets.only(left: 40, top: 50),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                     height: 50,
                                     width: MediaQuery.of(context).size.width,
                                     child: const Text('Need file recovery?',
                                         style: TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.w500))),
-                                Container(
+                                SizedBox(
                                     height: 120,
                                     width: MediaQuery.of(context).size.width,
                                     child: const Text('Texto',
@@ -350,7 +351,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600,
                                                   color: Colors.white)))),
-                                  Container(
+                                  SizedBox(
                                       height: 30,
                                       width: MediaQuery.of(context).size.width *
                                           0.15)
@@ -411,7 +412,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                     style: TextStyle(
                                                         color: Colors.grey)))
                                           ]),
-                                      Container(height: 250, width: 270),
+                                      const SizedBox(height: 250, width: 270),
                                       Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -445,7 +446,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         color: Colors.grey)))
                                           ]),
                                     ])),
-                            Container(
+                            SizedBox(
                                 height: 250,
                                 child: Row(
                                     crossAxisAlignment:
@@ -483,7 +484,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                     style: TextStyle(
                                                         color: Colors.grey)))
                                           ]),
-                                      Container(height: 250, width: 300),
+                                      const SizedBox(height: 250, width: 300),
                                       Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -518,7 +519,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           ])
                                     ]))
                           ])),
-                  Container(
+                  SizedBox(
                       height: 900,
                       width: MediaQuery.of(context).size.width * 0.33,
                       child: Image.asset('assets/images/img2.jpg',
@@ -628,136 +629,87 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ]))
               ],
               Container(
-                margin: EdgeInsets.only(top: 120, bottom: 65.0),
+                margin: const EdgeInsets.only(top: 120, bottom: 65.0),
                 child: SectionTitle(
                     'OUR PRODUCTS',
                     'We package the products with best services to make you a happy customer.',
                     CrossAxisAlignment.center),
               ),
               if (MediaQuery.of(context).size.width > 1000) ...[
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 115),
-                  child: Row(children: [
-                    Spacer(flex: 3),
-                    Container(
-                        width: 237.5,
-                        height: 327.5,
-                        child: Column(children: [
-                          Container(
-                              color: Color(0xf3f3f3ff),
-                              padding: EdgeInsets.all(22),
-                              child: Image.asset('assets/images/prod.jpg',
-                                  width: 207.5, height: 207.5)),
-                          Text('Title',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
-                        ])),
-                    Spacer(flex: 1),
-                    Container(
-                        width: 237.5,
-                        height: 327.5,
-                        child: Column(children: [
-                          Container(
-                              color: Color(0xf3f3f3ff),
-                              padding: EdgeInsets.all(22),
-                              child: Image.asset('assets/images/prod.jpg',
-                                  width: 207.5, height: 207.5)),
-                          Text('Title',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
-                        ])),
-                    Spacer(flex: 1),
-                    Container(
-                        width: 237.5,
-                        height: 327.5,
-                        child: Column(children: [
-                          Container(
-                              color: Color(0xf3f3f3ff),
-                              padding: EdgeInsets.all(22),
-                              child: Image.asset('assets/images/prod.jpg',
-                                  width: 207.5, height: 207.5)),
-                          Text('Title',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
-                        ])),
-                    Spacer(flex: 1),
-                    Container(
-                        width: 237.5,
-                        height: 327.5,
-                        child: Column(children: [
-                          Container(
-                              color: Color(0xf3f3f3ff),
-                              padding: EdgeInsets.all(22),
-                              child: Image.asset('assets/images/prod.jpg',
-                                  width: 207.5, height: 207.5)),
-                          Text('Title',
-                              style: TextStyle(
-                                  fontSize: 18, fontWeight: FontWeight.bold)),
-                        ])),
-                    Spacer(flex: 3),
-                  ]),
+                const Padding(
+                  padding: EdgeInsets.only(bottom: 115),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                    
+                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
+                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
+                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
+                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
+                  
+                  ],),
                 ),
               ],
               if (MediaQuery.of(context).size.width < 1000) ...[
                 if (MediaQuery.of(context).size.width > 550) ...[
                   Column(children: [
                     Row(children: [
-                      Spacer(flex: 3),
-                      Container(
+                      const Spacer(flex: 3),
+                      SizedBox(
                           height: 327.5,
                           child: Column(children: [
                             Container(
-                                color: Color(0xf3f3f3ff),
-                                padding: EdgeInsets.all(22),
+                                color: const Color(0xf3f3f3ff),
+                                padding: const EdgeInsets.all(22),
                                 child: Image.asset('assets/images/prod.jpg',
                                     width: 207.5, height: 207.5)),
-                            Text('Title',
+                            const Text('Title',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                           ])),
-                      Spacer(flex: 1),
-                      Container(
+                      const Spacer(flex: 1),
+                      SizedBox(
                           height: 327.5,
                           child: Column(children: [
                             Container(
-                                color: Color(0xf3f3f3ff),
-                                padding: EdgeInsets.all(22),
+                                color: const Color(0xf3f3f3ff),
+                                padding: const EdgeInsets.all(22),
                                 child: Image.asset('assets/images/prod.jpg',
                                     width: 207.5, height: 207.5)),
-                            Text('Title',
+                            const Text('Title',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                           ])),
-                      Spacer(flex: 3),
+                      const Spacer(flex: 3),
                     ]),
                     Row(children: [
-                      Spacer(flex: 3),
-                      Container(
+                      const Spacer(flex: 3),
+                      SizedBox(
                           height: 327.5,
                           child: Column(children: [
                             Container(
-                                color: Color(0xf3f3f3ff),
-                                padding: EdgeInsets.all(22),
+                                color: const Color(0xf3f3f3ff),
+                                padding: const EdgeInsets.all(22),
                                 child: Image.asset('assets/images/prod.jpg',
                                     width: 207.5, height: 207.5)),
-                            Text('Title',
+                            const Text('Title',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                           ])),
-                      Spacer(flex: 1),
-                      Container(
+                      const Spacer(flex: 1),
+                      SizedBox(
                           height: 327.5,
                           child: Column(children: [
                             Container(
-                                color: Color(0xf3f3f3ff),
-                                padding: EdgeInsets.all(22),
+                                color: const Color(0xf3f3f3ff),
+                                padding: const EdgeInsets.all(22),
                                 child: Image.asset('assets/images/prod.jpg',
                                     width: 207.5, height: 207.5)),
-                            Text('Title',
+                            const Text('Title',
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
                           ])),
-                      Spacer(flex: 3),
+                      const Spacer(flex: 3),
                     ])
                   ])
                 ]
@@ -766,51 +718,51 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
+                    SizedBox(
                         height: 327.5,
                         child: Column(children: [
                           Container(
                               color: Colors.grey,
-                              padding: EdgeInsets.all(22),
+                              padding: const EdgeInsets.all(22),
                               child: Image.asset('assets/images/prod.jpg',
                                   width: 207.5, height: 207.5)),
-                          Text('Title',
+                          const Text('Title',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold)),
                         ])),
-                    Container(
+                    SizedBox(
                         height: 327.5,
                         child: Column(children: [
                           Container(
                               color: Colors.grey,
-                              padding: EdgeInsets.all(22),
+                              padding: const EdgeInsets.all(22),
                               child: Image.asset('assets/images/prod.jpg',
                                   width: 207.5, height: 207.5)),
-                          Text('Title',
+                          const Text('Title',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold)),
                         ])),
-                    Container(
+                    SizedBox(
                         height: 327.5,
                         child: Column(children: [
                           Container(
                               color: Colors.grey,
-                              padding: EdgeInsets.all(22),
+                              padding: const EdgeInsets.all(22),
                               child: Image.asset('assets/images/prod.jpg',
                                   width: 207.5, height: 207.5)),
-                          Text('Title',
+                          const Text('Title',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold)),
                         ])),
-                    Container(
+                    SizedBox(
                         height: 327.5,
                         child: Column(children: [
                           Container(
                               color: Colors.grey,
-                              padding: EdgeInsets.all(22),
+                              padding: const EdgeInsets.all(22),
                               child: Image.asset('assets/images/prod.jpg',
                                   width: 207.5, height: 207.5)),
-                          Text('Title',
+                          const Text('Title',
                               style: TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.bold)),
                         ])),
@@ -819,7 +771,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ],
               if (swidth > 1200) ...[
                 Row(children: [
-                  Container(
+                  SizedBox(
                       height: 900,
                       width: swidth * 0.33,
                       child: Image.asset('assets/images/img2.jpg',
@@ -844,9 +796,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     child: GridView.count(
                                         crossAxisCount: 2,
                                         padding: const EdgeInsets.only(top: 60),
-                                        physics: NeverScrollableScrollPhysics(),
+                                        physics: const NeverScrollableScrollPhysics(),
                                         children: [
-                                      Container(
+                                      SizedBox(
                                           width: 200,
                                           child: Column(
                                               crossAxisAlignment:
@@ -881,7 +833,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                             color:
                                                                 Colors.grey)))
                                               ])),
-                                      Container(
+                                      SizedBox(
                                         width: 200,
                                         child: Column(
                                             crossAxisAlignment:
@@ -916,7 +868,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                           color: Colors.grey)))
                                             ]),
                                       ),
-                                      Container(
+                                      SizedBox(
                                           width: 200,
                                           child: Column(
                                               crossAxisAlignment:
@@ -954,7 +906,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                             color:
                                                                 Colors.grey)))
                                               ])),
-                                      Container(
+                                      SizedBox(
                                         width: 200,
                                         child: Column(
                                             crossAxisAlignment:

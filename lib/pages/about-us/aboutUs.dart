@@ -15,7 +15,7 @@ class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: MyStatefulWidget());
+    return const Scaffold(body: MyStatefulWidget());
   }
 }
 
@@ -55,9 +55,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     double swidth = MediaQuery.of(context).size.width;
     return Scaffold(
         key: scaffoldKey,
-        drawer: drawermenu(),
+        drawer: const drawermenu(),
         body: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
+            physics: const BouncingScrollPhysics(),
             child: Container(
                 child: Column(children: <Widget>[
               TopBar(swidth),
@@ -70,26 +70,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
+                          SizedBox(
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                           navBarMenu(context, swidth),
                         ])),
               ] else ...[
-                Container(
+                SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 125,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                              child: Icon(Icons.menu, color: Colors.black),
+                              child: const Icon(Icons.menu, color: Colors.black),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
                               width: 280,
-                              padding: EdgeInsets.only(right: 30, left: 30),
+                              padding: const EdgeInsets.only(right: 30, left: 30),
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                           TextButton(
@@ -103,7 +103,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: 250,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/images/img.jpg'),
                           fit: BoxFit.cover),
@@ -111,9 +111,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     width: MediaQuery.of(context).size.width,
                     height: 250,
-                    padding: EdgeInsets.only(top: 85.0, left: 92.0),
+                    padding: const EdgeInsets.only(top: 85.0, left: 92.0),
                     child: ListView(children: [
-                      Text(
+                      const Text(
                         'Sobre Nós',
                         textScaleFactor: 3.1,
                         style: TextStyle(
@@ -123,17 +123,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: Row(children: [
                         TextButton(
                             onPressed: () {},
-                            child: Text(
+                            child: const Text(
                               'Home',
                               textScaleFactor: 1.11,
                               style: TextStyle(color: Colors.blue),
                             )),
-                        Text(
+                        const Text(
                           '>  ',
                           textScaleFactor: 1.11,
                           style: TextStyle(color: Colors.grey),
                         ),
-                        Text(
+                        const Text(
                           'Sobre Nós',
                           textScaleFactor: 1.11,
                           style: TextStyle(color: Colors.white),
@@ -154,22 +154,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     height: 343,
                     width: MediaQuery.of(context).size.width * 0.9,
-                    color: Color.fromARGB(255, 224, 220, 220),
+                    color: const Color.fromARGB(255, 224, 220, 220),
                     child: Row(children: [
                       Container(
                           height: 343,
                           width: MediaQuery.of(context).size.width * 0.45,
-                          padding: EdgeInsets.only(left: 40.0, top: 30.0),
+                          padding: const EdgeInsets.only(left: 40.0, top: 30.0),
                           child: ListView(children: [
-                            Text('What we do',
+                            const Text('What we do',
                                 textScaleFactor: 2.0,
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Container(height: 15),
-                            Text('Texto',
+                            const Text('Texto',
                                 textScaleFactor: 1.1,
                                 style: TextStyle(color: Colors.grey))
                           ])),
-                      Container(
+                      SizedBox(
                           height: 343,
                           width: MediaQuery.of(context).size.width * 0.45,
                           child: CustomVideo())
@@ -178,24 +178,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     height: 640,
                     width: MediaQuery.of(context).size.width - 20,
-                    color: Color.fromARGB(255, 224, 220, 220),
+                    color: const Color.fromARGB(255, 224, 220, 220),
                     child: Column(children: [
                       Container(
                           height: 340,
                           width: MediaQuery.of(context).size.width - 20,
-                          padding: EdgeInsets.only(top: 30.0, left: 30),
+                          padding: const EdgeInsets.only(top: 30.0, left: 30),
                           child: ListView(children: [
-                            Text('What we do',
+                            const Text('What we do',
                                 textScaleFactor: 2.0,
                                 style: TextStyle(fontWeight: FontWeight.bold)),
                             Container(height: 15),
-                            Text('Texto',
+                            const Text('Texto',
                                 textScaleFactor: 1.1,
                                 style: TextStyle(color: Colors.grey))
                           ])),
-                      Container(
+                      SizedBox(
                           width: MediaQuery.of(context).size.width - 20,
-                          child: Container(height: 300, child: CustomVideo()))
+                          child: SizedBox(height: 300, child: CustomVideo()))
                     ])),
               ],
               if (MediaQuery.of(context).size.width > 1200) ...[
@@ -206,25 +206,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         top: 60,
                         left: MediaQuery.of(context).size.width * 0.07),
                     child: Row(children: [
-                      Dropdowns(),
+                      const Dropdowns(),
                       Container(
-                          padding: EdgeInsets.only(left: 30, top: 17.5),
+                          padding: const EdgeInsets.only(left: 30, top: 17.5),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                     height: 50,
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
-                                    child: Text('Need file recovery?',
+                                    child: const Text('Need file recovery?',
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.w500))),
-                                Container(
+                                SizedBox(
                                     height: 120,
                                     width:
                                         MediaQuery.of(context).size.width * 0.3,
-                                    child: Text('Texto',
+                                    child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
                                 Container(
                                     child: Row(children: [
@@ -237,7 +237,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           color: Colors.blue),
                                       child: TextButton(
                                           onPressed: () {},
-                                          child: Text('READ MORE',
+                                          child: const Text('READ MORE',
                                               style: TextStyle(
                                                   shadows: [
                                                     Shadow(
@@ -247,7 +247,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600,
                                                   color: Colors.white)))),
-                                  Container(
+                                  SizedBox(
                                       height: 50,
                                       width: MediaQuery.of(context).size.width *
                                           0.15)
@@ -259,25 +259,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     height: 640,
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.only(top: 60),
+                    padding: const EdgeInsets.only(top: 60),
                     child: Column(children: [
-                      Dropdowns(),
+                      const Dropdowns(),
                       Container(
-                          padding: EdgeInsets.only(left: 40, top: 50),
+                          padding: const EdgeInsets.only(left: 40, top: 50),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Container(
+                                SizedBox(
                                     height: 50,
                                     width: MediaQuery.of(context).size.width,
-                                    child: Text('Need file recovery?',
+                                    child: const Text('Need file recovery?',
                                         style: TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.w500))),
-                                Container(
+                                SizedBox(
                                     height: 120,
                                     width: MediaQuery.of(context).size.width,
-                                    child: Text('Texto',
+                                    child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
                                 Container(
                                     child: Row(children: [
@@ -290,7 +290,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           color: Colors.blue),
                                       child: TextButton(
                                           onPressed: () {},
-                                          child: Text('READ MORE',
+                                          child: const Text('READ MORE',
                                               style: TextStyle(
                                                   shadows: [
                                                     Shadow(
@@ -300,7 +300,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600,
                                                   color: Colors.white)))),
-                                  Container(
+                                  SizedBox(
                                       height: 30,
                                       width: MediaQuery.of(context).size.width *
                                           0.15)
@@ -311,10 +311,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               if (swidth > 1200) ...[
                 Row(children: [
                   Container(
-                      color: Color.fromARGB(255, 241, 238, 238),
+                      color: const Color.fromARGB(255, 241, 238, 238),
                       height: 900,
                       width: MediaQuery.of(context).size.width * 0.67,
-                      padding: EdgeInsets.only(top: 110, left: 90),
+                      padding: const EdgeInsets.only(top: 110, left: 90),
                       child: ListView(children: [
                         SectionTitle(
                             'ABOUT SERVICE',
@@ -322,7 +322,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             CrossAxisAlignment.start),
                         Container(
                             height: 300,
-                            padding: EdgeInsets.only(top: 65),
+                            padding: const EdgeInsets.only(top: 65),
                             child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -337,22 +337,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 color: Colors.blue,
                                                 borderRadius:
                                                     BorderRadius.circular(100)),
-                                            child: Icon(FontAwesomeIcons.wrench,
+                                            child: const Icon(FontAwesomeIcons.wrench,
                                                 size: 38.0,
                                                 color: Colors.white)),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Honest Services',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Honest Services',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20))),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Texto',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Texto',
                                                 style: TextStyle(
                                                     color: Colors.grey)))
                                       ]),
-                                  Container(height: 250, width: 270),
+                                  const SizedBox(height: 250, width: 270),
                                   Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -364,23 +364,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 color: Colors.blue,
                                                 borderRadius:
                                                     BorderRadius.circular(100)),
-                                            child: Icon(Icons.settings,
+                                            child: const Icon(Icons.settings,
                                                 size: 44.0,
                                                 color: Colors.white)),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Secure Payments',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Secure Payments',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20))),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Texto',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Texto',
                                                 style: TextStyle(
                                                     color: Colors.grey)))
                                       ]),
                                 ])),
-                        Container(
+                        SizedBox(
                             height: 250,
                             child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,24 +396,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 color: Colors.blue,
                                                 borderRadius:
                                                     BorderRadius.circular(100)),
-                                            child: Icon(
+                                            child: const Icon(
                                                 Icons
                                                     .settings_backup_restore_rounded,
                                                 size: 46.0,
                                                 color: Colors.white)),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Expert Team',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Expert Team',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20))),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Texto',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Texto',
                                                 style: TextStyle(
                                                     color: Colors.grey)))
                                       ]),
-                                  Container(height: 250, width: 300),
+                                  const SizedBox(height: 250, width: 300),
                                   Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -425,24 +425,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 color: Colors.blue,
                                                 borderRadius:
                                                     BorderRadius.circular(100)),
-                                            child: Icon(FontAwesomeIcons.heart,
+                                            child: const Icon(FontAwesomeIcons.heart,
                                                 size: 39.0,
                                                 color: Colors.white)),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Affordable Services',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Affordable Services',
                                                 style: TextStyle(
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 20))),
                                         Container(
-                                            padding: EdgeInsets.only(top: 20),
-                                            child: Text('Texto',
+                                            padding: const EdgeInsets.only(top: 20),
+                                            child: const Text('Texto',
                                                 style: TextStyle(
                                                     color: Colors.grey)))
                                       ])
                                 ]))
                       ])),
-                  Container(
+                  SizedBox(
                       height: 900,
                       width: MediaQuery.of(context).size.width * 0.33,
                       child: Image.asset('assets/images/img2.jpg',
@@ -450,18 +450,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ])
               ] else ...[
                 Container(
-                    color: Color.fromARGB(255, 241, 238, 238),
+                    color: const Color.fromARGB(255, 241, 238, 238),
                     height: 1300,
                     width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.only(top: 100, left: 50),
+                    padding: const EdgeInsets.only(top: 100, left: 50),
                     child: ListView(children: [
                       Container(
-                          child: Text('ABOUT SERVICE',
+                          child: const Text('ABOUT SERVICE',
                               style: TextStyle(
                                   fontSize: 36, fontWeight: FontWeight.bold))),
                       Container(
-                          padding: EdgeInsets.only(top: 15),
-                          child: Text(
+                          padding: const EdgeInsets.only(top: 15),
+                          child: const Text(
                               'Easy and effective way to get your device repaired.',
                               style:
                                   TextStyle(fontSize: 22, color: Colors.grey))),
@@ -476,7 +476,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       Container(
                           height: 1200,
                           width: 500,
-                          padding: EdgeInsets.only(top: 50),
+                          padding: const EdgeInsets.only(top: 50),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -487,19 +487,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         color: Colors.blue,
                                         borderRadius:
                                             BorderRadius.circular(100)),
-                                    child: Icon(FontAwesomeIcons.wrench,
+                                    child: const Icon(FontAwesomeIcons.wrench,
                                         size: 38.0, color: Colors.white)),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Honest Services',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Honest Services',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20))),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Texto',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
-                                Container(height: 60, width: 100),
+                                const SizedBox(height: 60, width: 100),
                                 Container(
                                     height: 100,
                                     width: 100,
@@ -507,19 +507,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         color: Colors.blue,
                                         borderRadius:
                                             BorderRadius.circular(100)),
-                                    child: Icon(Icons.settings,
+                                    child: const Icon(Icons.settings,
                                         size: 44.0, color: Colors.white)),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Secure Payments',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Secure Payments',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20))),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Texto',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
-                                Container(height: 60, width: 100),
+                                const SizedBox(height: 60, width: 100),
                                 Container(
                                     height: 100,
                                     width: 100,
@@ -527,21 +527,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         color: Colors.blue,
                                         borderRadius:
                                             BorderRadius.circular(100)),
-                                    child: Icon(
+                                    child: const Icon(
                                         Icons.settings_backup_restore_rounded,
                                         size: 46.0,
                                         color: Colors.white)),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Expert Team',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Expert Team',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20))),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Texto',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
-                                Container(height: 60, width: 100),
+                                const SizedBox(height: 60, width: 100),
                                 Container(
                                     height: 100,
                                     width: 100,
@@ -549,19 +549,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         color: Colors.blue,
                                         borderRadius:
                                             BorderRadius.circular(100)),
-                                    child: Icon(FontAwesomeIcons.heart,
+                                    child: const Icon(FontAwesomeIcons.heart,
                                         size: 39.0, color: Colors.white)),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Affordable Services',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Affordable Services',
                                         style: TextStyle(
                                             fontWeight: FontWeight.bold,
                                             fontSize: 20))),
                                 Container(
-                                    padding: EdgeInsets.only(top: 20),
-                                    child: Text('Texto',
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
-                                Container(height: 60, width: 100),
+                                const SizedBox(height: 60, width: 100),
                               ]))
                     ]))
               ],
@@ -647,12 +647,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 }
 
 class CustomVideo extends StatelessWidget {
-  YoutubePlayerController _controller = YoutubePlayerController(
+  final YoutubePlayerController _controller = YoutubePlayerController(
       initialVideoId: 'oH3omNV9UUU',
-      params: YoutubePlayerParams(
+      params: const YoutubePlayerParams(
         autoPlay: true,
         mute: false,
       ));
+
+  CustomVideo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -670,7 +672,7 @@ Widget Mediabox(BuildContext context) {
       height: 381,
       width: 280,
       decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 231, 228, 228))),
+          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
       child: Column(children: [
         SizedBox(
             height: 280,
@@ -678,10 +680,10 @@ Widget Mediabox(BuildContext context) {
             child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
         Container(
             height: 99,
-            color: Color.fromARGB(255, 231, 228, 228),
+            color: const Color.fromARGB(255, 231, 228, 228),
             child: Column(children: [
               Container(height: 28),
-              Text('Dean Michael',
+              const Text('Dean Michael',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
@@ -691,35 +693,35 @@ Widget Mediabox(BuildContext context) {
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.facebook,
+                          child: const Icon(FontAwesomeIcons.facebook,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.googlePlus,
+                          child: const Icon(FontAwesomeIcons.googlePlus,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.twitter,
+                          child: const Icon(FontAwesomeIcons.twitter,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.linkedin,
+                          child: const Icon(FontAwesomeIcons.linkedin,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.instagram,
+                          child: const Icon(FontAwesomeIcons.instagram,
                               size: 16.0, color: Colors.black)))
                 ]))
               ])
@@ -732,7 +734,7 @@ Widget Mediabox1(BuildContext context) {
       height: 381,
       width: 280,
       decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 231, 228, 228))),
+          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
       child: Column(children: [
         SizedBox(
             height: 280,
@@ -740,10 +742,10 @@ Widget Mediabox1(BuildContext context) {
             child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
         Container(
             height: 99,
-            color: Color.fromARGB(255, 231, 228, 228),
+            color: const Color.fromARGB(255, 231, 228, 228),
             child: Column(children: [
               Container(height: 28),
-              Text('Dean Michael',
+              const Text('Dean Michael',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
@@ -753,35 +755,35 @@ Widget Mediabox1(BuildContext context) {
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.facebook,
+                          child: const Icon(FontAwesomeIcons.facebook,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.googlePlus,
+                          child: const Icon(FontAwesomeIcons.googlePlus,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.twitter,
+                          child: const Icon(FontAwesomeIcons.twitter,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.linkedin,
+                          child: const Icon(FontAwesomeIcons.linkedin,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.instagram,
+                          child: const Icon(FontAwesomeIcons.instagram,
                               size: 16.0, color: Colors.black)))
                 ]))
               ])
@@ -794,7 +796,7 @@ Widget Mediabox2(BuildContext context) {
       height: 381,
       width: 280,
       decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 231, 228, 228))),
+          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
       child: Column(children: [
         SizedBox(
             height: 280,
@@ -802,10 +804,10 @@ Widget Mediabox2(BuildContext context) {
             child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
         Container(
             height: 99,
-            color: Color.fromARGB(255, 231, 228, 228),
+            color: const Color.fromARGB(255, 231, 228, 228),
             child: Column(children: [
               Container(height: 28),
-              Text('Dean Michael',
+              const Text('Dean Michael',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
@@ -815,35 +817,35 @@ Widget Mediabox2(BuildContext context) {
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.facebook,
+                          child: const Icon(FontAwesomeIcons.facebook,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.googlePlus,
+                          child: const Icon(FontAwesomeIcons.googlePlus,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.twitter,
+                          child: const Icon(FontAwesomeIcons.twitter,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.linkedin,
+                          child: const Icon(FontAwesomeIcons.linkedin,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.instagram,
+                          child: const Icon(FontAwesomeIcons.instagram,
                               size: 16.0, color: Colors.black)))
                 ]))
               ])
@@ -856,7 +858,7 @@ Widget Mediabox3(BuildContext context) {
       height: 381,
       width: 280,
       decoration: BoxDecoration(
-          border: Border.all(color: Color.fromARGB(255, 231, 228, 228))),
+          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
       child: Column(children: [
         SizedBox(
             height: 280,
@@ -864,10 +866,10 @@ Widget Mediabox3(BuildContext context) {
             child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
         Container(
             height: 99,
-            color: Color.fromARGB(255, 231, 228, 228),
+            color: const Color.fromARGB(255, 231, 228, 228),
             child: Column(children: [
               Container(height: 28),
-              Text('Dean Michael',
+              const Text('Dean Michael',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
@@ -877,35 +879,35 @@ Widget Mediabox3(BuildContext context) {
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.facebook,
+                          child: const Icon(FontAwesomeIcons.facebook,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.googlePlus,
+                          child: const Icon(FontAwesomeIcons.googlePlus,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.twitter,
+                          child: const Icon(FontAwesomeIcons.twitter,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.linkedin,
+                          child: const Icon(FontAwesomeIcons.linkedin,
                               size: 16.0, color: Colors.black))),
                   SizedBox(
                       height: 35,
                       width: 30,
                       child: TextButton(
                           onPressed: () {},
-                          child: Icon(FontAwesomeIcons.instagram,
+                          child: const Icon(FontAwesomeIcons.instagram,
                               size: 16.0, color: Colors.black)))
                 ]))
               ])

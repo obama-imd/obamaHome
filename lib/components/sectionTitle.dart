@@ -7,7 +7,7 @@ class SectionTitle extends StatelessWidget {
   String subtitle;
   CrossAxisAlignment crossAlignment;
 
-  SectionTitle(this.title, this.subtitle, this.crossAlignment);
+  SectionTitle(this.title, this.subtitle, this.crossAlignment, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class SectionTitle extends StatelessWidget {
       crossAxisAlignment: crossAlignment,
       children: [
         Container(
-            padding: EdgeInsets.only(bottom: 12.0),
+            padding: const EdgeInsets.only(bottom: 12.0),
             child: Text(title.toUpperCase(),
                 style: GoogleFonts.raleway(
                     textStyle: const TextStyle(
@@ -29,7 +29,7 @@ class SectionTitle extends StatelessWidget {
         Container(
             height: 27.0,
             width: 82.0,
-            padding: EdgeInsets.only(top: 22.0),
+            padding: const EdgeInsets.only(top: 22.0),
             child: Image.asset('assets/images/img2.jpg', fit: BoxFit.cover)),
       ],
     );

@@ -6,7 +6,7 @@ class ItemProduto extends StatelessWidget {
   String descricao;
   String imagem;
 
-  ItemProduto(this.titulo, this.descricao, this.imagem);
+  ItemProduto(this.titulo, this.descricao, this.imagem, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,11 @@ class ItemProduto extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 30, bottom: 20),
             child: Text(titulo,
-             style: TextStyle( fontSize: 18, fontWeight: FontWeight.w600),
+             style: const TextStyle( fontSize: 18, fontWeight: FontWeight.w600),
             ),
           ),
           Text(descricao,
-          style: TextStyle( fontSize: 15, color: Color(0xFF707070),
+          style: const TextStyle( fontSize: 15, color: Color(0xFF707070),
            )),
         ],
       ),

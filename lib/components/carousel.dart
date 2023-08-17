@@ -4,19 +4,19 @@ import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 class Carousel extends StatelessWidget {
   double swidth;
 
-  Carousel(this.swidth);
+  Carousel(this.swidth, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         if (swidth > 1300) ...[
-          Container(
+          SizedBox(
               height: 875,
               width: swidth,
               child: Stack(children: <Widget>[
                 Column(children: [
-                  Container(height: 100, width: swidth),
+                  SizedBox(height: 100, width: swidth),
                   Container(
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.only(top: 50),
@@ -54,13 +54,18 @@ class Carousel extends StatelessWidget {
                             child: Image.asset('assets/images/img2.jpg',
                                 fit: BoxFit.cover)),
                       ]),
-                      Container(height: 40, width: swidth),
+                      SizedBox(height: 40, width: swidth),
                       ImageSlideshow(
                         width: 760,
                         height: 240,
                         initialPage: 0,
                         indicatorColor: Colors.blue,
                         indicatorBackgroundColor: Colors.grey,
+                        onPageChanged: (value) {
+                          print('Page changed: $value');
+                        },
+                        autoPlayInterval: 3500,
+                        isLoop: true,
                         children: [
                           Row(children: [
                             Container(width: 90),
@@ -159,13 +164,8 @@ class Carousel extends StatelessWidget {
                                 ]))
                           ])
                         ],
-                        onPageChanged: (value) {
-                          print('Page changed: $value');
-                        },
-                        autoPlayInterval: 3500,
-                        isLoop: true,
                       ),
-                      Container(width: swidth * 0.8, height: 80),
+                      SizedBox(width: swidth * 0.8, height: 80),
                       Center(
                           child: Container(
                               color: Colors.blue,
@@ -173,15 +173,15 @@ class Carousel extends StatelessWidget {
                               width: swidth * 0.9 + 40,
                               child: Row(children: [
                                 Container(width: 30),
-                                Container(
+                                const SizedBox(
                                     width: 100,
                                     height: 100,
-                                    child: const Icon(
+                                    child: Icon(
                                       Icons.phone,
                                       size: 70,
                                       color: Colors.white,
                                     )),
-                                Container(
+                                const SizedBox(
                                     width: 500,
                                     height: 100,
                                     child: Column(
@@ -255,7 +255,7 @@ class Carousel extends StatelessWidget {
                   child: const Image(
                       image: AssetImage('assets/images/ufrn.jpg'),
                       fit: BoxFit.scaleDown)),
-              Container(width: 10, height: 100),
+              const SizedBox(width: 10, height: 100),
               Container(
                   height: 120,
                   width: swidth * 0.18,
@@ -266,7 +266,7 @@ class Carousel extends StatelessWidget {
                   child: const Image(
                       image: AssetImage('assets/images/imd.png'),
                       fit: BoxFit.scaleDown)),
-              Container(width: 10, height: 100),
+              const SizedBox(width: 10, height: 100),
               Container(
                   height: 120,
                   width: swidth * 0.18,
@@ -277,7 +277,7 @@ class Carousel extends StatelessWidget {
                   child: const Image(
                       image: AssetImage('assets/images/remne.jpeg'),
                       fit: BoxFit.scaleDown)),
-              Container(width: 10, height: 100),
+              const SizedBox(width: 10, height: 100),
               Container(
                   height: 120,
                   width: swidth * 0.18,
@@ -288,7 +288,7 @@ class Carousel extends StatelessWidget {
                   child: const Image(
                       image: AssetImage('assets/images/gilfe.png'),
                       fit: BoxFit.contain)),
-              Container(width: 10, height: 100),
+              const SizedBox(width: 10, height: 100),
               Container(
                 height: 120,
                 width: swidth * 0.18,
@@ -300,8 +300,8 @@ class Carousel extends StatelessWidget {
             ]),
           )
         ] else ...[
-          Container(height: 100, width: swidth),
-          Container(
+          SizedBox(height: 100, width: swidth),
+          SizedBox(
               height: 550,
               width: swidth,
               child: Stack(children: <Widget>[
@@ -340,13 +340,18 @@ class Carousel extends StatelessWidget {
                         child: Image.asset('assets/images/img2.jpg',
                             fit: BoxFit.cover)),
                   ]),
-                  Container(height: 40, width: swidth),
+                  SizedBox(height: 40, width: swidth),
                   ImageSlideshow(
                     width: swidth,
                     height: 240,
                     initialPage: 0,
                     indicatorColor: Colors.blue,
                     indicatorBackgroundColor: Colors.grey,
+                    onPageChanged: (value) {
+                      print('Page changed: $value');
+                    },
+                    autoPlayInterval: 3500,
+                    isLoop: true,
                     children: [
                       Row(children: [
                         Container(
@@ -442,15 +447,10 @@ class Carousel extends StatelessWidget {
                             ]))
                       ])
                     ],
-                    onPageChanged: (value) {
-                      print('Page changed: $value');
-                    },
-                    autoPlayInterval: 3500,
-                    isLoop: true,
                   )
                 ])
               ])),
-          Container(width: swidth * 0.8, height: 20),
+          SizedBox(width: swidth * 0.8, height: 20),
           Center(
               child: Container(
                   color: Colors.blue,
@@ -460,18 +460,18 @@ class Carousel extends StatelessWidget {
                     Container(width: 30),
                     Row(children: [
                       Container(width: 15),
-                      Container(
+                      const SizedBox(
                           width: 50,
                           height: 100,
-                          child: const Icon(
+                          child: Icon(
                             Icons.phone,
                             size: 40,
                             color: Colors.white,
                           )),
-                      Container(
+                      SizedBox(
                           width: swidth * 0.7,
                           height: 100,
-                          child: Column(
+                          child: const Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -502,8 +502,8 @@ class Carousel extends StatelessWidget {
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white)))),
                   ]))),
-          Container(width: swidth * 0.9, height: 40),
-          Container(
+          SizedBox(width: swidth * 0.9, height: 40),
+          SizedBox(
               width: swidth * 0.8,
               child: Center(
                   child: Column(children: [
@@ -517,7 +517,7 @@ class Carousel extends StatelessWidget {
                     child: const Image(
                         image: AssetImage('assets/images/ufrn.jpg'),
                         fit: BoxFit.cover)),
-                Container(width: 12, height: 12),
+                const SizedBox(width: 12, height: 12),
                 Container(
                     height: 100,
                     width: swidth * 0.8,
@@ -528,7 +528,7 @@ class Carousel extends StatelessWidget {
                     child: const Image(
                         image: AssetImage('assets/images/imd.png'),
                         fit: BoxFit.cover)),
-                Container(width: 12, height: 12),
+                const SizedBox(width: 12, height: 12),
                 Container(
                     height: 100,
                     width: swidth * 0.8,
@@ -539,7 +539,7 @@ class Carousel extends StatelessWidget {
                     child: const Image(
                         image: AssetImage('assets/images/remne.jpeg'),
                         fit: BoxFit.cover)),
-                Container(width: 12, height: 12),
+                const SizedBox(width: 12, height: 12),
                 Container(
                     height: 100,
                     width: swidth * 0.8,
@@ -550,7 +550,7 @@ class Carousel extends StatelessWidget {
                     child: const Image(
                         image: AssetImage('assets/images/gilfe.png'),
                         fit: BoxFit.cover)),
-                Container(width: 12, height: 12),
+                const SizedBox(width: 12, height: 12),
                 Container(
                   height: 100,
                   width: swidth * 0.8,

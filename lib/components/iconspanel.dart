@@ -40,8 +40,8 @@ class iconspanel extends StatelessWidget {
     return GridView.builder(
         shrinkWrap: true,
         itemCount: contentItems.length,
-        physics: NeverScrollableScrollPhysics(),
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2),
         itemBuilder: (BuildContext context, int index) {
           final item = contentItems[index];
@@ -59,14 +59,14 @@ class iconspanel extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(item.texto![index],
                             textAlign: TextAlign.end,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 20))),
                     Container(
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(item.subtexto![index],
                             textAlign: TextAlign.end,
-                            style: TextStyle(color: Colors.grey)))
+                            style: const TextStyle(color: Colors.grey)))
                   ]));
         });
   }

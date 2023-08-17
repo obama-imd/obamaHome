@@ -25,7 +25,7 @@ _launchURL1() async {
 class SocialMedia extends StatelessWidget {
   Color colorValue;
 
-  SocialMedia(this.colorValue);
+  SocialMedia(this.colorValue, {super.key});
 
   @override
   Widget build(BuildContext context) {
