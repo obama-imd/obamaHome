@@ -67,23 +67,25 @@ class TopBar extends StatelessWidget {
                                 left: 15.0, right: swidth * 0.068),
                             height: 45,
                             width: 160,
-                            child: TextButton(
-                                onPressed: () {},
-                                child: Container(
-                                  width: swidth * 0.154,
-                                  color: Colors.white,
-                                  height: 45,
-                                  child: const Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text('Acesse',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 16.0)),
-                                    ],
-                                  ),
-                                )))
+                            child: Material(
+                              color: Colors.white,
+                              textStyle: TextStyle(
+                                  color: Colors.black, fontSize: 16.0),
+                              child: InkWell(
+                                  onTap: () {},
+                                  child: Container(
+                                    width: swidth * 0.154,
+                                    height: 45,
+                                    child: const Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text('Acesse',
+                                            textAlign: TextAlign.center)
+                                      ],
+                                    ),
+                                  )),
+                            ))
                       ]))
                 ]))
       ],
@@ -189,8 +191,8 @@ String? encodeQueryParameters(Map<String, String> params) {
 
 final Uri emailLaunchUri = Uri(
   scheme: 'mailto',
-  path: 'smith@example.com',
+  path: 'obama@imd.ufrn.br',
   query: encodeQueryParameters(<String, String>{
-    'subject': 'Example Subject & Symbols are allowed!',
+    'subject': '',
   }),
 );

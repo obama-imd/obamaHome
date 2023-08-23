@@ -402,6 +402,11 @@ class Footer extends StatelessWidget {
                       height: 40,
                       width: swidth - 120,
                       child: const TextField(
+                          // onChanged: () {
+                          //   setState(
+                          //     String emailContent = ""
+                          //   )
+                          // },
                           decoration: InputDecoration(
                               border: OutlineInputBorder(
                                   borderSide: BorderSide.none),

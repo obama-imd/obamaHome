@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:html/parser.dart';
+import 'package:image_network/image_network.dart';
+import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
 
 import '../../components/carousel.dart';
 import '../../components/footer.dart';
 import '../../components/menu.dart';
 import '../../components/topbar.dart';
+import '../../services/api_blog.dart';
 
 class BlogPage extends StatelessWidget {
   const BlogPage({Key? key}) : super(key: key);
@@ -23,9 +27,39 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
+  bool dataAvailable = true;
+
+  List<dynamic> datas = [];
+
+  List<IconData> shareMedia = [
+    FontAwesomeIcons.facebook,
+    FontAwesomeIcons.twitter,
+    FontAwesomeIcons.googlePlus,
+    FontAwesomeIcons.pinterest,
+  ];
+
+  Future<void> fetchContent() async {
+    final fetchedData = await fetchData();
+    setState(() {
+      // if (fetchedData.isNotEmpty) {
+      dataAvailable = false;
+      datas = fetchedData;
+      // } else {
+      //   dataAvailable = true;
+      // }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchContent();
+  }
+
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
@@ -38,16 +72,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     width: swidth,
                     height: 125,
-                    margin: EdgeInsets.only(left: swidth * 0.068, right: swidth * 0.06),
+                    margin: EdgeInsets.only(
+                        left: swidth * 0.068, right: swidth * 0.06),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                      SizedBox(
-                          width: 250,
-                          child: Image.asset('assets/images/logo.png',
-                              fit: BoxFit.fitHeight)),
-                      navBarMenu(context, swidth),
-                    ])),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                              width: 250,
+                              child: Image.asset('assets/images/logo.png',
+                                  fit: BoxFit.fitHeight)),
+                          navBarMenu(context, swidth),
+                        ])),
               ] else ...[
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -56,12 +91,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                              child: const Icon(Icons.menu, color: Colors.black),
+                              child:
+                                  const Icon(Icons.menu, color: Colors.black),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
                               width: 280,
-                              margin: const EdgeInsets.only(right: 15, left: 15),
+                              margin:
+                                  const EdgeInsets.only(right: 15, left: 15),
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                           TextButton(
@@ -115,98 +152,163 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ])),
               Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Container(
-                    padding: const EdgeInsets.only(
-                        top: 100, left: 90, right: 60, bottom: 100),
-                    width: swidth * 0.67,
-                    child: Column(children: [
-                      Container(
-                          alignment: Alignment.centerLeft,
-                          margin: const EdgeInsets.only(bottom: 20),
-                          child: const Text('Post Title',
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold))),
-                      Row(children: [
-                        const Icon(Icons.person, color: Colors.blue, size: 16),
-                        Container(width: 2),
-                        const Text('Marketing', style: TextStyle(color: Colors.blue)),
-                        Container(width: 13),
-                        const Icon(FontAwesomeIcons.comment,
-                            color: Colors.blue, size: 16),
-                        Container(width: 3),
-                        const Text('0', style: TextStyle(color: Colors.blue)),
-                        Container(width: 13),
-                        const Icon(FontAwesomeIcons.calendarDays,
-                            color: Colors.blue, size: 16),
-                        Container(width: 3),
-                        const Text('22/08/2022',
-                            style: TextStyle(color: Colors.blue)),
-                      ]),
-                      Container(
-                          width: swidth * 0.6,
-                          height: 100,
-                          margin: const EdgeInsets.only(top: 20, bottom: 30),
-                          child: const Text('Texto', style: TextStyle(fontSize: 16))),
-                      Row(children: [
-                        TextButton(
-                            onPressed: () {},
-                            child: Container(
+                  padding: const EdgeInsets.only(top: 100, left: 90, right: 60),
+                  width: swidth * 0.67,
+                  height: 850 * (datas.length).toDouble(),
+                  child: ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: datas.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final item = datas[index];
+
+                      String extractImagePath(String content) {
+                        final document = parse(content);
+                        final imgElement =
+                            document.getElementsByTagName('img').last;
+                        final result = imgElement.attributes['src'];
+                        return result!;
+                      }
+
+                      String imagePath = extractImagePath(item['content']);
+
+                      String extractSummaryPath(String summary) {
+                        final document = parse(summary);
+                        final sumElement =
+                            document.getElementsByTagName('p').last;
+                        final sumValue = sumElement.text;
+                        return sumValue;
+                      }
+
+                      String pubDate = item['published_date'];
+                      DateTime dateTime = DateTime.parse(pubDate);
+                      String formattedDate =
+                          DateFormat('dd/MM/yyyy').format(dateTime);
+
+                      return Container(
+                        height: 800,
+                        width: swidth * .6,
+                        child: Column(children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 30),
+                            decoration: const BoxDecoration(
+                                border: Border(
+                                    bottom: BorderSide(
                               color: Colors.blue,
-                              width: 150,
-                              height: 50,
-                              alignment: Alignment.center,
-                              child: const Text('READ MORE >',
-                                  style: TextStyle(color: Colors.white)),
-                            )),
-                        const Spacer(),
-                        Container(
-                            padding: const EdgeInsets.only(right: 13),
-                            child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
+                              width: 8,
+                            ))),
+                            child: ImageNetwork(
+                                image: imagePath,
+                                width: swidth * .6,
+                                height: 400,
+                                fitAndroidIos: BoxFit.cover,
+                                fitWeb: BoxFitWeb.cover),
+                          ),
+                          Container(
+                              alignment: Alignment.centerLeft,
+                              margin: const EdgeInsets.only(bottom: 20),
+                              child: Text(item['title'],
+                                  style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold))),
+                          Row(children: [
+                            const Icon(Icons.person,
+                                color: Colors.blue, size: 16),
+                            Container(width: 2),
+                            const Text('Marketing',
+                                style: TextStyle(color: Colors.blue)),
+                            Container(width: 13),
+                            const Icon(FontAwesomeIcons.comment,
+                                color: Colors.blue, size: 16),
+                            Container(width: 3),
+                            const Text('0',
+                                style: TextStyle(color: Colors.blue)),
+                            Container(width: 13),
+                            const Icon(FontAwesomeIcons.calendarDays,
+                                color: Colors.blue, size: 16),
+                            Container(width: 3),
+                            Text(formattedDate,
+                                style: const TextStyle(color: Colors.blue)),
+                          ]),
+                          Container(
+                              width: swidth * 0.6,
+                              margin:
+                                  const EdgeInsets.only(top: 20, bottom: 30),
+                              child: Text(item['text'],
+                                  maxLines: 5,
+                                  style: const TextStyle(fontSize: 16))),
+                          Row(children: [
+                            Material(
+                              color: Colors.blue,
+                              child: InkWell(
+                                  onTap: () {},
+                                  overlayColor:
+                                      MaterialStatePropertyAll(Colors.black),
+                                  child: Container(
+                                    width: 170,
+                                    height: 50,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        const Text('READ MORE >',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              shadows: [
+                                                Shadow(
+                                                  offset: Offset(1, 1),
+                                                  color: Color.fromRGBO(
+                                                      0, 0, 0, 0.5),
+                                                ),
+                                              ],
+                                            )),
+                                      ],
+                                    ),
+                                  )),
+                            ),
+                            const Spacer(),
+                            Container(
+                                child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
                                   const Text('Share:',
                                       style: TextStyle(fontSize: 16)),
                                   Container(width: 5),
-                                  SizedBox(
-                                      width: 15,
-                                      height: 15,
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          child: const Icon(FontAwesomeIcons.facebook,
-                                              size: 15, color: Colors.black))),
-                                  Container(width: 13),
-                                  SizedBox(
-                                      width: 15,
-                                      height: 15,
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          child: const Icon(FontAwesomeIcons.twitter,
-                                              size: 15, color: Colors.black))),
-                                  Container(width: 13),
-                                  SizedBox(
-                                      width: 15,
-                                      height: 15,
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          child: const Icon(
-                                              FontAwesomeIcons.googlePlus,
-                                              size: 15,
-                                              color: Colors.black))),
-                                  Container(width: 13),
-                                  SizedBox(
-                                      width: 15,
-                                      height: 15,
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          child: const Icon(
-                                              FontAwesomeIcons.pinterest,
-                                              size: 15,
-                                              color: Colors.black)))
+                                  Container(
+                                    width: 120,
+                                    height: 30,
+                                    child: GridView.builder(
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 4),
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return InkWell(
+                                              overlayColor:
+                                                  MaterialStatePropertyAll(
+                                                      Colors.transparent),
+                                              onTap: () {},
+                                              child: Container(
+                                                width: 15,
+                                                height: 15,
+                                                child: Icon(shareMedia[index],
+                                                    size: 15,
+                                                    color: Colors.black),
+                                              ));
+                                        }),
+                                  )
                                 ])),
-                      ]),
-                    ])),
+                          ]),
+                        ]),
+                      );
+                    },
+                  ),
+                ),
                 Container(
-                    padding: const EdgeInsets.only(top: 100, right: 80, bottom: 100),
+                    padding:
+                        const EdgeInsets.only(top: 100, right: 80, bottom: 100),
                     width: swidth * 0.33,
                     child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -229,10 +331,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           borderRadius:
                                               BorderRadius.circular(100)),
                                       hintText: 'E-mail',
-                                      contentPadding: const EdgeInsets.all(15.0),
+                                      contentPadding:
+                                          const EdgeInsets.all(15.0),
                                       filled: true,
-                                      fillColor:
-                                          const Color.fromARGB(255, 218, 216, 216),
+                                      fillColor: const Color.fromARGB(
+                                          255, 218, 216, 216),
                                       suffixIcon: const Icon(Icons.search)))),
                           Container(
                               alignment: Alignment.centerLeft,
@@ -244,8 +347,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           Container(
                               alignment: Alignment.centerLeft,
                               margin: const EdgeInsets.only(bottom: 100),
-                              child:
-                                  const Text('Texto', style: TextStyle(fontSize: 18))),
+                              child: const Text('Texto',
+                                  style: TextStyle(fontSize: 18))),
                           Container(
                               alignment: Alignment.centerLeft,
                               margin: const EdgeInsets.only(bottom: 20),
@@ -253,53 +356,44 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600))),
-                          SizedBox(
-                              width: swidth * 0.29,
-                              height: 210,
-                              child: Column(children: [
-                                SizedBox(
+                          Container(
+                            height: 80*datas.length.toDouble(),
+                            child: ListView.builder(
+                              itemCount: datas.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                final item = datas[index];
+                          
+                                String pubDate = item['published_date'];
+                                DateTime dateTime = DateTime.parse(pubDate);
+                                String formattedDate =
+                                    DateFormat('dd/MM/yyyy').format(dateTime);
+                                return SizedBox(
                                     width: swidth * 0.29,
-                                    height: 20,
-                                    child: const Text('Post 1',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600))),
-                                Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 10, bottom: 20),
-                                    child: const Row(children: [
-                                      Icon(FontAwesomeIcons.calendarDays,
-                                          color: Colors.black, size: 15),
-                                      Text('22/08/2022')
-                                    ])),
-                                SizedBox(
-                                    width: swidth * 0.29,
-                                    height: 20,
-                                    child: const Text('Post 2',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600))),
-                                Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 10, bottom: 20),
-                                    child: const Row(children: [
-                                      Icon(FontAwesomeIcons.calendarDays,
-                                          color: Colors.black, size: 15),
-                                      Text('22/08/2022')
-                                    ])),
-                                SizedBox(
-                                    width: swidth * 0.29,
-                                    height: 20,
-                                    child: const Text('Post 3',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600))),
-                                Container(
-                                    margin:
-                                        const EdgeInsets.only(top: 10, bottom: 20),
-                                    child: const Row(children: [
-                                      Icon(FontAwesomeIcons.calendarDays,
-                                          color: Colors.black, size: 15),
-                                      Text('22/08/2022')
-                                    ])),
-                              ])),
+                                    height: 80,
+                                    child: Column(children: [
+                                      SizedBox(
+                                          width: swidth * 0.29,
+                                          height: 20,
+                                          child: Text(item['title'],
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w600))),
+                                      Container(
+                                          width: swidth * 0.29,
+                                          height: 20,
+                                          margin: const EdgeInsets.only(
+                                              top: 10, bottom: 20),
+                                          child: Row(children: [
+                                            Icon(FontAwesomeIcons.calendarDays,
+                                                color: Colors.black, size: 15),
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 2, top: 1.5),
+                                              child: Text(formattedDate),
+                                            )
+                                          ])),
+                                    ]));
+                              },
+                            ),
+                          ),
                           Container(
                               alignment: Alignment.centerLeft,
                               margin: EdgeInsets.only(
@@ -445,7 +539,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 padding: const EdgeInsets.all(15),
                                 height: 50,
                                 width: 120,
-                                margin: const EdgeInsets.only(top: 30, bottom: 60),
+                                margin:
+                                    const EdgeInsets.only(top: 30, bottom: 60),
                                 decoration: BoxDecoration(
                                     border: Border.all(
                                         color: Colors.grey, width: .5),

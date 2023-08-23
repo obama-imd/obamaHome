@@ -1,9 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
 import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
@@ -37,41 +34,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   List<dynamic> datas = [];
 
-  Future<void> fetchData() async {
-    final response =
-        await http.get(Uri.parse('http://localhost:3000/dados'));
+  // Future<void> fetchDataAndUpdateState() async {
+  //   final fetchedData = await fetchData();
+  //   setState(() {
+  //     if (fetchedData.isNotEmpty) {
+  //       dataAvailable = false;
+  //       datas = fetchedData;
+  //     } else {
+  //       dataAvailable = true;
+  //     }
+  //   });
+  // }
 
-    if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
-      setState(() {
-        dataAvailable = false;
-        datas = jsonData
-            .map((item) => {
-                  'title': item['title'],
-                  'text': item['text'],
-                  'summary': item['summary'],
-                  'content': item['content'],
-                  'published_date': item['published_date'],
-                })
-            .toList()
-            .reversed
-            .toList()
-            .sublist(0, 3);
-      });
-    } else {
-      setState(() {
-        dataAvailable = true;
-        // datas = [''];
-        // print(datas);
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchData();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchDataAndUpdateState();
+  // }
 
   Widget BlogData(BuildContext context) {
     double swid = MediaQuery.of(context).size.width;
@@ -118,8 +97,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   image: imagePath,
                   width: swid * .3,
                   height: 185,
-                  fitAndroidIos: BoxFit.contain,
-                  fitWeb: BoxFitWeb.contain),
+                  fitAndroidIos: BoxFit.cover,
+                  fitWeb: BoxFitWeb.cover),
               // Text(imagePath),
               Row(
                 children: [
@@ -130,10 +109,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Container(
                 margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                 child: Text(item['title'],
-                    style:
-                        const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.bold, fontSize: 18)),
               ),
-              Text(item['text'], style: const TextStyle(fontSize: 15), maxLines: 4),
+              Text(item['text'],
+                  style: const TextStyle(fontSize: 15), maxLines: 4),
               // Text(sumValue),
             ],
           ),
@@ -179,16 +159,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     width: swidth,
                     height: 125,
-                    margin: EdgeInsets.only(left: swidth * 0.068, right: swidth * 0.06),
+                    margin: EdgeInsets.only(
+                        left: swidth * 0.068, right: swidth * 0.06),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                      SizedBox(
-                          width: 250,
-                          child: Image.asset('assets/images/logo.png',
-                              fit: BoxFit.fitHeight)),
-                      navBarMenu(context, swidth),
-                    ])),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                              width: 250,
+                              child: Image.asset('assets/images/logo.png',
+                                  fit: BoxFit.fitHeight)),
+                          navBarMenu(context, swidth),
+                        ])),
               ] else ...[
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
@@ -215,9 +196,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ],
               Container(
                   width: swidth,
-                  height: 500,
-                  color: Colors.grey,
-                  child: const Text('Blank')),
+                  height: 660,
+                  // color: Colors.grey,
+                  child: Image.asset("assets/images/animate.gif",
+                      fit: BoxFit.cover)),
               Container(
                 height: 320,
                 width: MediaQuery.of(context).size.width,
@@ -641,13 +623,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                    
-                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
-                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
-                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
-                    OurProductItem(title: "PRODUCT", image:'assets/images/prod.jpg',),
-                  
-                  ],),
+                      OurProductItem(
+                        title: "PRODUCT",
+                        image: 'assets/images/prod.jpg',
+                      ),
+                      OurProductItem(
+                        title: "PRODUCT",
+                        image: 'assets/images/prod.jpg',
+                      ),
+                      OurProductItem(
+                        title: "PRODUCT",
+                        image: 'assets/images/prod.jpg',
+                      ),
+                      OurProductItem(
+                        title: "PRODUCT",
+                        image: 'assets/images/prod.jpg',
+                      ),
+                    ],
+                  ),
                 ),
               ],
               if (MediaQuery.of(context).size.width < 1000) ...[
@@ -796,7 +789,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     child: GridView.count(
                                         crossAxisCount: 2,
                                         padding: const EdgeInsets.only(top: 60),
-                                        physics: const NeverScrollableScrollPhysics(),
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         children: [
                                       SizedBox(
                                           width: 200,
@@ -1098,4 +1092,3 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ]))));
   }
 }
-
