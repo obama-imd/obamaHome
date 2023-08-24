@@ -46,6 +46,7 @@ dependencies:
   html: ^0.15.4
   image_network: ^2.5.4+1
   intl: ^0.18.1
+  responsive_grid: ^2.4.2
 
 dev_dependencies:
   flutter_test:
@@ -77,9 +78,9 @@ flutter:
     - assets/images/img3.jpg
     - assets/images/test.png
     - assets/images/client.jpg
-    - assets/images/ufrn.jpg
+    - assets/images/ufrn.png
     - assets/images/imd.png
-    - assets/images/remne.jpeg
+    - assets/images/remne.jpg
     - assets/images/prod.jpg
     - assets/images/i1.png
     - assets/images/i2.png
@@ -87,6 +88,7 @@ flutter:
     - assets/images/i4.png
     - assets/images/gilfe.png
     - assets/images/animate.gif
+    - assets/images/ppgite.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

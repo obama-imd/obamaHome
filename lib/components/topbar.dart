@@ -69,11 +69,11 @@ class TopBar extends StatelessWidget {
                             width: 160,
                             child: Material(
                               color: Colors.white,
-                              textStyle: TextStyle(
+                              textStyle: const TextStyle(
                                   color: Colors.black, fontSize: 16.0),
                               child: InkWell(
                                   onTap: () {},
-                                  child: Container(
+                                  child: SizedBox(
                                     width: swidth * 0.154,
                                     height: 45,
                                     child: const Column(
@@ -93,11 +93,11 @@ class TopBar extends StatelessWidget {
         if (swidth > 900) ...[
           Container(
               color: Colors.blue,
-              height: 90.0,
+              height: 80.0,
               width: swidth,
-              padding: const EdgeInsets.only(top: 10),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     // Container(
                     //   child: const Text('HOME',
@@ -109,31 +109,31 @@ class TopBar extends StatelessWidget {
                           left: swidth * 0.04, right: swidth * 0.04),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                                padding: const EdgeInsets.only(top: 10),
-                                child: SocialMedia(Colors.white)),
-                            Container(
-                                height: 55,
+                            Container(child: SocialMedia(Colors.white)),
+                            SizedBox(
+                                height: 45,
                                 width: 160,
-                                padding: const EdgeInsets.only(top: 10),
-                                child: TextButton(
-                                    onPressed: () {},
-                                    child: Container(
-                                      color: Colors.white,
-                                      height: 55,
-                                      child: const Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text('Acesse',
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 16.0)),
-                                        ],
-                                      ),
-                                    ))),
+                                child: Material(
+                                  color: Colors.white,
+                                  textStyle: const TextStyle(
+                                      color: Colors.black, fontSize: 16.0),
+                                  child: InkWell(
+                                      onTap: () {},
+                                      child: SizedBox(
+                                        width: swidth * 0.154,
+                                        height: 45,
+                                        child: const Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text('Acesse',
+                                                textAlign: TextAlign.center)
+                                          ],
+                                        ),
+                                      )),
+                                ))
                           ]),
                     )
                   ])),
@@ -143,8 +143,12 @@ class TopBar extends StatelessWidget {
         Container(
           color: Colors.blue,
           width: swidth,
+          height: 110,
           child:
-              Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center, 
+                children: [
             // Container(
             //   child: const Text('HOME',
             //       style: TextStyle(color: Colors.white, fontSize: 20.0)),
@@ -156,25 +160,26 @@ class TopBar extends StatelessWidget {
                 SocialMedia(Colors.white),
               ],
             ),
-            Container(
-                height: 45,
+            SizedBox(
+                height: 35,
                 width: 210,
-                padding: const EdgeInsets.only(bottom: 10),
-                child: TextButton(
-                    onPressed: () {},
-                    child: Container(
-                      color: Colors.white,
-                      height: 45,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Acesse',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                  color: Colors.black, fontSize: 16.0)),
-                        ],
-                      ),
-                    )))
+                child: Material(
+                  color: Colors.white,
+                  textStyle:
+                      const TextStyle(color: Colors.black, fontSize: 16.0),
+                  child: InkWell(
+                      onTap: () {},
+                      child: SizedBox(
+                        width: swidth * 0.154,
+                        height: 45,
+                        child: const Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Acesse', textAlign: TextAlign.center)
+                          ],
+                        ),
+                      )),
+                ))
           ]),
         )
       ],

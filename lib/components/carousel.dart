@@ -6,6 +6,40 @@ class Carousel extends StatelessWidget {
 
   Carousel(this.swidth, {super.key});
 
+  List<String> imageCarousel = [
+    'assets/images/client.jpg',
+    'assets/images/client.jpg',
+    'assets/images/client.jpg',
+  ];
+
+  List<String> titleCarousel = [
+    'Example Title',
+    'Example Title',
+    'Example Title',
+  ];
+
+  List<String> nameCarousel = [
+    'Example Name',
+    'Example Name',
+    'Example Name',
+  ];
+
+  List<String> summaryCarousel = [
+    'Example Summary',
+    'Example Summary',
+    'Example Summary',
+  ];
+
+  List<String> partnersLogo = [
+    'assets/images/ufrn.png',
+    'assets/images/imd.png',
+    'assets/images/remne.jpg',
+    'assets/images/gilfe.png',
+    'assets/images/ppgite.png',
+  ];
+
+  List<double> partnersPadding = [24, 25, 0, 25, 0];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -67,102 +101,39 @@ class Carousel extends StatelessWidget {
                         autoPlayInterval: 3500,
                         isLoop: true,
                         children: [
-                          Row(children: [
-                            Container(width: 90),
-                            Container(
-                                height: 150,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/client.jpg'),
-                                        fit: BoxFit.cover))),
-                            Container(width: 20),
-                            Container(
-                                padding: const EdgeInsets.only(left: 10),
-                                height: 150,
-                                width: 500,
-                                child: ListView(children: [
-                                  const Text('Texto',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18)),
-                                  Container(height: 35),
-                                  const Text('Maria Anderson',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold)),
-                                  Container(height: 20),
-                                  const Text('CFO, Tech NY',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18))
-                                ])),
-                          ]),
-                          Row(children: [
-                            Container(width: 90),
-                            Container(
-                                height: 150,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/client.jpg'),
-                                        fit: BoxFit.cover))),
-                            Container(width: 20),
-                            Container(
-                                padding: const EdgeInsets.only(left: 10),
-                                height: 150,
-                                width: 500,
-                                child: ListView(children: [
-                                  const Text('Texto',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18)),
-                                  Container(height: 35),
-                                  const Text('Maria Anderson',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold)),
-                                  Container(height: 20),
-                                  const Text('CFO, Tech NY',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18))
-                                ])),
-                          ]),
-                          Row(children: [
-                            Container(width: 90),
-                            Container(
-                                height: 150,
-                                width: 150,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100),
-                                    image: const DecorationImage(
-                                        image: AssetImage(
-                                            'assets/images/client.jpg'),
-                                        fit: BoxFit.cover))),
-                            Container(width: 20),
-                            Container(
-                                padding: const EdgeInsets.only(left: 10),
-                                height: 150,
-                                width: 500,
-                                child: ListView(children: [
-                                  const Text('Texto',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18)),
-                                  Container(height: 35),
-                                  const Text('Maria Anderson',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold)),
-                                  Container(height: 20),
-                                  const Text('CFO, Tech NY',
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 18))
-                                ]))
-                          ])
+                          for (int i = 0; i < titleCarousel.length; i++) ...{
+                            Row(children: [
+                              Container(width: 90),
+                              Container(
+                                  height: 150,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100),
+                                      image: DecorationImage(
+                                          image: AssetImage(imageCarousel[i]),
+                                          fit: BoxFit.cover))),
+                              Container(width: 20),
+                              Container(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  height: 150,
+                                  width: 500,
+                                  child: ListView(children: [
+                                    Text(titleCarousel[i],
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 18)),
+                                    Container(height: 35),
+                                    Text(nameCarousel[i],
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold)),
+                                    Container(height: 20),
+                                    Text(summaryCarousel[i],
+                                        style: const TextStyle(
+                                            color: Colors.white, fontSize: 18))
+                                  ])),
+                            ]),
+                          },
                         ],
                       ),
                       SizedBox(width: swidth * 0.8, height: 80),
@@ -233,71 +204,35 @@ class Carousel extends StatelessWidget {
           //         swidth),
           //     crossAxisSpacing: 10, // espaçamento entre itens
           //     children: [
-          //       PartnersLogos( 'assets/images/ufrn.jpg'),
+          //       PartnersLogos( 'assets/images/ufrn.png'),
           //       PartnersLogos( 'assets/images/imd.png'),
-          //       PartnersLogos( 'assets/images/remne.jpeg'),
+          //       PartnersLogos( 'assets/images/remne.jpg'),
           //       PartnersLogos( 'assets/images/gilfe.png'),
-          //       PartnersLogos( 'assets/images/ufrn.jpg'),
+          //       PartnersLogos( 'assets/images/ufrn.png'),
           //     ],
           //   ),
-
           Padding(
             padding: EdgeInsets.only(
-                top: 50, left: swidth * .05 - 20, right: swidth * .05 - 20),
-            child: Row(children: [
-              Container(
-                  height: 120,
-                  width: swidth * 0.18,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 6,
-                          color: const Color.fromARGB(255, 231, 228, 228))),
-                  child: const Image(
-                      image: AssetImage('assets/images/ufrn.jpg'),
-                      fit: BoxFit.scaleDown)),
-              const SizedBox(width: 10, height: 100),
-              Container(
-                  height: 120,
-                  width: swidth * 0.18,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 6,
-                          color: const Color.fromARGB(255, 231, 228, 228))),
-                  child: const Image(
-                      image: AssetImage('assets/images/imd.png'),
-                      fit: BoxFit.scaleDown)),
-              const SizedBox(width: 10, height: 100),
-              Container(
-                  height: 120,
-                  width: swidth * 0.18,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 6,
-                          color: const Color.fromARGB(255, 231, 228, 228))),
-                  child: const Image(
-                      image: AssetImage('assets/images/remne.jpeg'),
-                      fit: BoxFit.scaleDown)),
-              const SizedBox(width: 10, height: 100),
-              Container(
-                  height: 120,
-                  width: swidth * 0.18,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 6,
-                          color: const Color.fromARGB(255, 231, 228, 228))),
-                  child: const Image(
-                      image: AssetImage('assets/images/gilfe.png'),
-                      fit: BoxFit.contain)),
-              const SizedBox(width: 10, height: 100),
-              Container(
-                height: 120,
-                width: swidth * 0.18,
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 6,
-                        color: const Color.fromARGB(255, 231, 228, 228))),
-              ),
-            ]),
+                top: 50, left: swidth * .05 - 25, right: swidth * .05 - 25),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  for (int i = 0; i < partnersLogo.length; i++) ...{
+                    Container(
+                        height: 120,
+                        width: swidth * 0.18,
+                        padding:
+                            EdgeInsets.symmetric(vertical: partnersPadding[i]),
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                width: 6,
+                                color:
+                                    const Color.fromARGB(255, 231, 228, 228))),
+                        child: Image(
+                            image: AssetImage(partnersLogo[i]),
+                            fit: BoxFit.contain)),
+                  },
+                ]),
           )
         ] else ...[
           SizedBox(height: 100, width: swidth),
@@ -353,99 +288,38 @@ class Carousel extends StatelessWidget {
                     autoPlayInterval: 3500,
                     isLoop: true,
                     children: [
-                      Row(children: [
-                        Container(
-                            margin: const EdgeInsets.only(left: 40),
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                image: const DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/client.jpg'),
-                                    fit: BoxFit.cover))),
-                        Container(
-                            padding: const EdgeInsets.only(left: 30),
-                            height: 100,
-                            width: swidth - 160,
-                            child: ListView(children: [
-                              const Text('Texto',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 16)),
-                              Container(height: 35),
-                              const Text('Maria Anderson',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold)),
-                              Container(height: 20),
-                              const Text('CFO, Tech NY',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 16))
-                            ])),
-                      ]),
-                      Row(children: [
-                        Container(
-                            margin: const EdgeInsets.only(left: 40),
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                image: const DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/client.jpg'),
-                                    fit: BoxFit.cover))),
-                        Container(
-                            padding: const EdgeInsets.only(left: 30),
-                            height: 100,
-                            width: swidth - 160,
-                            child: ListView(children: [
-                              const Text('Texto',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 16)),
-                              Container(height: 35),
-                              const Text('Maria Anderson',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold)),
-                              Container(height: 20),
-                              const Text('CFO, Tech NY',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 16))
-                            ])),
-                      ]),
-                      Row(children: [
-                        Container(
-                            margin: const EdgeInsets.only(left: 40),
-                            height: 120,
-                            width: 120,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                image: const DecorationImage(
-                                    image:
-                                        AssetImage('assets/images/client.jpg'),
-                                    fit: BoxFit.cover))),
-                        Container(
-                            padding: const EdgeInsets.only(left: 30),
-                            height: 100,
-                            width: swidth - 160,
-                            child: ListView(children: [
-                              const Text('Texto',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 16)),
-                              Container(height: 35),
-                              const Text('Maria Anderson',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold)),
-                              Container(height: 20),
-                              const Text('CFO, Tech NY',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 16))
-                            ]))
-                      ])
+                      for (int i = 0; i < titleCarousel.length; i++) ...{
+                        Row(children: [
+                          Container(
+                              margin: const EdgeInsets.only(left: 40),
+                              height: 120,
+                              width: 120,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(100),
+                                  image: DecorationImage(
+                                      image: AssetImage(imageCarousel[i]),
+                                      fit: BoxFit.cover))),
+                          Container(
+                              padding: const EdgeInsets.only(left: 30),
+                              height: 100,
+                              width: swidth - 160,
+                              child: ListView(children: [
+                                Text(titleCarousel[i],
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 16)),
+                                Container(height: 35),
+                                Text(nameCarousel[i],
+                                    style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold)),
+                                Container(height: 20),
+                                Text(summaryCarousel[i],
+                                    style: const TextStyle(
+                                        color: Colors.white, fontSize: 16))
+                              ])),
+                        ]),
+                      },
                     ],
                   )
                 ])
@@ -507,58 +381,20 @@ class Carousel extends StatelessWidget {
               width: swidth * 0.8,
               child: Center(
                   child: Column(children: [
-                Container(
-                    height: 100,
-                    width: swidth * 0.8,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 6,
-                            color: const Color.fromARGB(255, 231, 228, 228))),
-                    child: const Image(
-                        image: AssetImage('assets/images/ufrn.jpg'),
-                        fit: BoxFit.cover)),
-                const SizedBox(width: 12, height: 12),
-                Container(
-                    height: 100,
-                    width: swidth * 0.8,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 6,
-                            color: const Color.fromARGB(255, 231, 228, 228))),
-                    child: const Image(
-                        image: AssetImage('assets/images/imd.png'),
-                        fit: BoxFit.cover)),
-                const SizedBox(width: 12, height: 12),
-                Container(
-                    height: 100,
-                    width: swidth * 0.8,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 6,
-                            color: const Color.fromARGB(255, 231, 228, 228))),
-                    child: const Image(
-                        image: AssetImage('assets/images/remne.jpeg'),
-                        fit: BoxFit.cover)),
-                const SizedBox(width: 12, height: 12),
-                Container(
-                    height: 100,
-                    width: swidth * 0.8,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 6,
-                            color: const Color.fromARGB(255, 231, 228, 228))),
-                    child: const Image(
-                        image: AssetImage('assets/images/gilfe.png'),
-                        fit: BoxFit.cover)),
-                const SizedBox(width: 12, height: 12),
-                Container(
-                  height: 100,
-                  width: swidth * 0.8,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 6,
-                          color: const Color.fromARGB(255, 231, 228, 228))),
-                ),
+                for (int i = 0; i < partnersLogo.length; i++) ...{
+                  Container(
+                      height: 150,
+                      width: 350,
+                      margin: const EdgeInsets.only(bottom: 12),
+                      padding: EdgeInsets.all(partnersPadding[i]),
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 6,
+                              color: const Color.fromARGB(255, 231, 228, 228))),
+                      child: Image(
+                          image: AssetImage(partnersLogo[i]),
+                          fit: BoxFit.contain)),
+                }
               ])))
         ],
         Container(height: 60),

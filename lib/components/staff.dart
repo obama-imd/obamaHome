@@ -23,29 +23,40 @@ class StaffCard extends StatelessWidget {
           width: 270,
           height: 270,
           decoration: BoxDecoration(
-              border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
+              border:
+                  Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
           child: Image.asset(staffImg, fit: BoxFit.cover)),
-      Container(
-          width: 272,
-          padding: const EdgeInsets.only(top: 30, bottom: 25),
-          color: const Color.fromARGB(255, 231, 228, 228),
-          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-            Text(staffName,
-                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  for (int i = 0; i < SocialMediaLinks.length; i++) ...{
-                    SizedBox(
-                        width: 40,
-                        child: TextButton(
-                            onPressed: () {},
-                            child: Icon(SocialMediaLinks[i],
-                                size: 16.0, color: Colors.black))),
-                  }
-                ])
-          ]))
+      Material(
+        color: const Color.fromARGB(255, 231, 228, 228),
+        child: InkWell(
+          onTap: () {},
+          mouseCursor: SystemMouseCursors.basic,
+          overlayColor: const MaterialStatePropertyAll(Colors.blue),
+          child: Container(
+            width: 270,
+            padding: const EdgeInsets.only(top: 30, bottom: 25),
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Text(staffName,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w600, fontSize: 20)),
+              Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    for (int i = 0; i < SocialMediaLinks.length; i++) ...{
+                      SizedBox(
+                          width: 40,
+                          child: TextButton(
+                              onPressed: () {},
+                              child: Icon(SocialMediaLinks[i],
+                                  size: 16.0, color: Colors.black))),
+                    }
+                  ])
+            ]),
+          ),
+        ),
+      )
     ]);
   }
 }

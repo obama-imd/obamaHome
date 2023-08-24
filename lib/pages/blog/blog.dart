@@ -184,7 +184,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       String formattedDate =
                           DateFormat('dd/MM/yyyy').format(dateTime);
 
-                      return Container(
+                      return SizedBox(
                         height: 800,
                         width: swidth * .6,
                         child: Column(children: [
@@ -242,8 +242,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               child: InkWell(
                                   onTap: () {},
                                   overlayColor:
-                                      MaterialStatePropertyAll(Colors.black),
-                                  child: Container(
+                                      const MaterialStatePropertyAll(Colors.black),
+                                  child: const SizedBox(
                                     width: 170,
                                     height: 50,
                                     child: Row(
@@ -252,7 +252,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        const Text('READ MORE >',
+                                        Text('READ MORE >',
                                             style: TextStyle(
                                               color: Colors.white,
                                               shadows: [
@@ -276,21 +276,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   const Text('Share:',
                                       style: TextStyle(fontSize: 16)),
                                   Container(width: 5),
-                                  Container(
+                                  SizedBox(
                                     width: 120,
                                     height: 30,
                                     child: GridView.builder(
                                         gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 4),
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return InkWell(
                                               overlayColor:
-                                                  MaterialStatePropertyAll(
+                                                  const MaterialStatePropertyAll(
                                                       Colors.transparent),
                                               onTap: () {},
-                                              child: Container(
+                                              child: SizedBox(
                                                 width: 15,
                                                 height: 15,
                                                 child: Icon(shareMedia[index],
@@ -356,7 +356,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   style: TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.w600))),
-                          Container(
+                          SizedBox(
                             height: 80*datas.length.toDouble(),
                             child: ListView.builder(
                               itemCount: datas.length,
@@ -375,7 +375,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           width: swidth * 0.29,
                                           height: 20,
                                           child: Text(item['title'],
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontWeight: FontWeight.w600))),
                                       Container(
                                           width: swidth * 0.29,
@@ -383,7 +383,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           margin: const EdgeInsets.only(
                                               top: 10, bottom: 20),
                                           child: Row(children: [
-                                            Icon(FontAwesomeIcons.calendarDays,
+                                            const Icon(FontAwesomeIcons.calendarDays,
                                                 color: Colors.black, size: 15),
                                             Padding(
                                               padding: const EdgeInsets.only(left: 2, top: 1.5),

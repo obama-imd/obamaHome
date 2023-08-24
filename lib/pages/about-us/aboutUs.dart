@@ -230,13 +230,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     child: Row(children: [
                                   Container(
                                       height: 50,
-                                      width: 150,
+                                      width: 170,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: Colors.blue),
+                                              BorderRadius.circular(100)),
                                       child: TextButton(
                                           onPressed: () {},
+                                          style: const ButtonStyle(
+                                            backgroundColor: MaterialStatePropertyAll(Colors.blue),
+                                            overlayColor: MaterialStatePropertyAll(Colors.lightBlue),
+                                          ),
                                           child: const Text('READ MORE',
                                               style: TextStyle(
                                                   shadows: [
