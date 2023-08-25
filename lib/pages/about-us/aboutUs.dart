@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../components/carousel.dart';
@@ -28,27 +29,52 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // List<String> staffNames = [
-  //   "Dean Michael",
-  //   "Dean Michael",
-  //   "Dean Michael",
-  //   "Dean Michael",
-  //   "Dean Michael",
-  //   "Dean Michael",
-  //   "Dean Michael",
-  //   "Dean Michael",
-  // ];
+  List<String> staffNames = [
+    "Dean Michael",
+    "Dean Michael",
+    "Dean Michael",
+    "Dean Michael",
+    "Dean Michael",
+    "Dean Michael",
+    "Dean Michael",
+    "Dean Michael",
+  ];
 
-  // List<String> staffImgs = [
-  //   "assets/images/img3.jpg",
-  //   "assets/images/img3.jpg",
-  //   "assets/images/img3.jpg",
-  //   "assets/images/img3.jpg",
-  //   "assets/images/img3.jpg",
-  //   "assets/images/img3.jpg",
-  //   "assets/images/img3.jpg",
-  //   "assets/images/img3.jpg",
-  // ];
+  List<String> staffImgs = [
+    "assets/images/img3.jpg",
+    "assets/images/img3.jpg",
+    "assets/images/img3.jpg",
+    "assets/images/img3.jpg",
+    "assets/images/img3.jpg",
+    "assets/images/img3.jpg",
+    "assets/images/img3.jpg",
+    "assets/images/img3.jpg",
+  ];
+
+    // First Grid Block
+
+  List<String> grid1Title = [
+    "Data Recovery",
+    "Computer repair",
+    "Mobile service",
+    "Data Recovery",
+  ];
+
+  List<IconData> grid1Icon = [
+    FontAwesomeIcons.wrench,
+    Icons.settings,
+    Icons.settings_backup_restore_rounded,
+    FontAwesomeIcons.heart,
+  ];
+
+  List<double> iconSize = [38, 44, 46, 39];
+
+  List<String> grid1Content = [
+    "nononon nono nonon non !",
+    "nononon nono nonon non !",
+    "nononon nono nonon non !",
+    "nononon nono nonon non !",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +110,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                              child: const Icon(Icons.menu, color: Colors.black),
+                              child:
+                                  const Icon(Icons.menu, color: Colors.black),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
                               width: 280,
-                              padding: const EdgeInsets.only(right: 30, left: 30),
+                              padding:
+                                  const EdgeInsets.only(right: 30, left: 30),
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                           TextButton(
@@ -150,80 +178,61 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     'Objetos de Aprendizagem para Matemática',
                     CrossAxisAlignment.center),
               ),
-              if (MediaQuery.of(context).size.width > 1200) ...[
-                Container(
-                    height: 343,
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    color: const Color.fromARGB(255, 224, 220, 220),
-                    child: Row(children: [
-                      Container(
-                          height: 343,
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          padding: const EdgeInsets.only(left: 40.0, top: 30.0),
-                          child: ListView(children: [
-                            const Text('What we do',
-                                textScaleFactor: 2.0,
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Container(height: 15),
-                            const Text('Texto',
-                                textScaleFactor: 1.1,
-                                style: TextStyle(color: Colors.grey))
-                          ])),
-                      SizedBox(
-                          height: 343,
-                          width: MediaQuery.of(context).size.width * 0.45,
-                          child: CustomVideo())
-                    ])),
-              ] else ...[
-                Container(
-                    height: 640,
-                    width: MediaQuery.of(context).size.width - 20,
-                    color: const Color.fromARGB(255, 224, 220, 220),
-                    child: Column(children: [
-                      Container(
-                          height: 340,
-                          width: MediaQuery.of(context).size.width - 20,
-                          padding: const EdgeInsets.only(top: 30.0, left: 30),
-                          child: ListView(children: [
-                            const Text('What we do',
-                                textScaleFactor: 2.0,
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Container(height: 15),
-                            const Text('Texto',
-                                textScaleFactor: 1.1,
-                                style: TextStyle(color: Colors.grey))
-                          ])),
-                      SizedBox(
-                          width: MediaQuery.of(context).size.width - 20,
-                          child: SizedBox(height: 300, child: CustomVideo()))
-                    ])),
-              ],
-              if (MediaQuery.of(context).size.width > 1200) ...[
-                Container(
-                    height: 440,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.only(
-                        top: 60,
-                        left: MediaQuery.of(context).size.width * 0.07),
-                    child: Row(children: [
-                      const Dropdowns(),
-                      Container(
-                          padding: const EdgeInsets.only(left: 30, top: 17.5),
+              // if (MediaQuery.of(context).size.width > 1200) ...[
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 72),
+                child: ResponsiveGridRow(children: [
+                  ResponsiveGridCol(
+                    lg: 6,
+                    sm: 12,
+                    child: Container(
+                        height: 343,
+                        color: const Color.fromARGB(255, 224, 220, 220),
+                        padding: const EdgeInsets.only(left: 40.0, top: 30.0),
+                        child: ListView(children: [
+                          const Text('What we do',
+                              textScaleFactor: 2.0,
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          Container(height: 15),
+                          const Text('Texto',
+                              textScaleFactor: 1.1,
+                              style: TextStyle(color: Colors.grey))
+                        ])),
+                  ),
+                  ResponsiveGridCol(
+                    lg: 6,
+                    sm: 12,
+                    child: Container(
+                        color: const Color.fromARGB(255, 224, 220, 220),
+                        height: 343,
+                        child: CustomVideo()),
+                  )
+                ]),
+              ),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(top: 100, left: 70, right: 70),
+                  child: ResponsiveGridRow(children: [
+                    ResponsiveGridCol(lg: 8, sm: 12, child: Padding(
+                      padding: const EdgeInsets.only(bottom: 35),
+                      child: const Dropdowns(),
+                    )),
+                    ResponsiveGridCol(
+                      lg: 4,
+                      sm: 12,
+                      child: Container(
+                          padding: const EdgeInsets.only(top: 17.5),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
                                     height: 50,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
                                     child: const Text('Need file recovery?',
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.w500))),
                                 SizedBox(
                                     height: 120,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.3,
                                     child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
                                 Container(
@@ -237,8 +246,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       child: TextButton(
                                           onPressed: () {},
                                           style: const ButtonStyle(
-                                            backgroundColor: MaterialStatePropertyAll(Colors.blue),
-                                            overlayColor: MaterialStatePropertyAll(Colors.lightBlue),
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.blue),
+                                            overlayColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.lightBlue),
                                           ),
                                           child: const Text('READ MORE',
                                               style: TextStyle(
@@ -250,324 +263,92 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600,
                                                   color: Colors.white)))),
-                                  SizedBox(
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15)
                                 ])),
                                 Container(height: 140),
-                              ]))
-                    ])),
-              ] else ...[
-                Container(
-                    height: 640,
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Column(children: [
-                      const Dropdowns(),
-                      Container(
-                          padding: const EdgeInsets.only(left: 40, top: 50),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                    height: 50,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: const Text('Need file recovery?',
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w500))),
-                                SizedBox(
-                                    height: 120,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: const Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                Container(
-                                    child: Row(children: [
-                                  Container(
-                                      height: 50,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: Colors.blue),
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          child: const Text('READ MORE',
-                                              style: TextStyle(
-                                                  shadows: [
-                                                    Shadow(
-                                                        offset:
-                                                            Offset(1.1, 1.1))
-                                                  ],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white)))),
-                                  SizedBox(
-                                      height: 30,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15)
-                                ])),
-                              ]))
-                    ]))
-              ],
-              if (swidth > 1200) ...[
-                Row(children: [
-                  Container(
+                              ])),
+                    )
+                  ])),
+             ResponsiveGridRow(children: [
+                ResponsiveGridCol(
+                  lg: 8,
+                  sm: 12,
+                  child: Container(
                       color: const Color.fromARGB(255, 241, 238, 238),
-                      height: 900,
-                      width: MediaQuery.of(context).size.width * 0.67,
                       padding: const EdgeInsets.only(top: 110, left: 90),
-                      child: ListView(children: [
-                        SectionTitle(
-                            'ABOUT SERVICE',
-                            'Easy and effective way to get your device repaired.',
-                            CrossAxisAlignment.start),
-                        Container(
-                            height: 300,
-                            padding: const EdgeInsets.only(top: 65),
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 100,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                color: Colors.blue,
-                                                borderRadius:
-                                                    BorderRadius.circular(100)),
-                                            child: const Icon(FontAwesomeIcons.wrench,
-                                                size: 38.0,
-                                                color: Colors.white)),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Honest Services',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Texto',
-                                                style: TextStyle(
-                                                    color: Colors.grey)))
-                                      ]),
-                                  const SizedBox(height: 250, width: 270),
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 100,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                color: Colors.blue,
-                                                borderRadius:
-                                                    BorderRadius.circular(100)),
-                                            child: const Icon(Icons.settings,
-                                                size: 44.0,
-                                                color: Colors.white)),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Secure Payments',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Texto',
-                                                style: TextStyle(
-                                                    color: Colors.grey)))
-                                      ]),
-                                ])),
-                        SizedBox(
-                            height: 250,
-                            child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 100,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                color: Colors.blue,
-                                                borderRadius:
-                                                    BorderRadius.circular(100)),
-                                            child: const Icon(
-                                                Icons
-                                                    .settings_backup_restore_rounded,
-                                                size: 46.0,
-                                                color: Colors.white)),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Expert Team',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Texto',
-                                                style: TextStyle(
-                                                    color: Colors.grey)))
-                                      ]),
-                                  const SizedBox(height: 250, width: 300),
-                                  Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                            height: 100,
-                                            width: 100,
-                                            decoration: BoxDecoration(
-                                                color: Colors.blue,
-                                                borderRadius:
-                                                    BorderRadius.circular(100)),
-                                            child: const Icon(FontAwesomeIcons.heart,
-                                                size: 39.0,
-                                                color: Colors.white)),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Affordable Services',
-                                                style: TextStyle(
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 20))),
-                                        Container(
-                                            padding: const EdgeInsets.only(top: 20),
-                                            child: const Text('Texto',
-                                                style: TextStyle(
-                                                    color: Colors.grey)))
-                                      ])
-                                ]))
-                      ])),
-                  SizedBox(
-                      height: 900,
-                      width: MediaQuery.of(context).size.width * 0.33,
-                      child: Image.asset('assets/images/img2.jpg',
-                          fit: BoxFit.cover))
-                ])
-              ] else ...[
-                Container(
-                    color: const Color.fromARGB(255, 241, 238, 238),
-                    height: 1300,
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(top: 100, left: 50),
-                    child: ListView(children: [
-                      Container(
-                          child: const Text('ABOUT SERVICE',
-                              style: TextStyle(
-                                  fontSize: 36, fontWeight: FontWeight.bold))),
-                      Container(
-                          padding: const EdgeInsets.only(top: 15),
-                          child: const Text(
-                              'Easy and effective way to get your device repaired.',
-                              style:
-                                  TextStyle(fontSize: 22, color: Colors.grey))),
-                      Container(height: 20),
-                      Row(children: [
-                        SizedBox(
-                            height: 5.0,
-                            width: 82.0,
-                            child: Image.asset('assets/images/img2.jpg',
-                                fit: BoxFit.cover)),
-                      ]),
-                      Container(
-                          height: 1200,
-                          width: 500,
-                          padding: const EdgeInsets.only(top: 50),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    child: const Icon(FontAwesomeIcons.wrench,
-                                        size: 38.0, color: Colors.white)),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Honest Services',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20))),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                const SizedBox(height: 60, width: 100),
-                                Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    child: const Icon(Icons.settings,
-                                        size: 44.0, color: Colors.white)),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Secure Payments',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20))),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                const SizedBox(height: 60, width: 100),
-                                Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    child: const Icon(
-                                        Icons.settings_backup_restore_rounded,
-                                        size: 46.0,
-                                        color: Colors.white)),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Expert Team',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20))),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                const SizedBox(height: 60, width: 100),
-                                Container(
-                                    height: 100,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                        color: Colors.blue,
-                                        borderRadius:
-                                            BorderRadius.circular(100)),
-                                    child: const Icon(FontAwesomeIcons.heart,
-                                        size: 39.0, color: Colors.white)),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Affordable Services',
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 20))),
-                                Container(
-                                    padding: const EdgeInsets.only(top: 20),
-                                    child: const Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                const SizedBox(height: 60, width: 100),
-                              ]))
-                    ]))
-              ],
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SectionTitle(
+                                'ABOUT SERVICE',
+                                'Easy and effective way to get your device repaired.',
+                                CrossAxisAlignment.start),
+                            Container(
+                                padding: const EdgeInsets.only(top: 60),
+                                child: ResponsiveGridRow(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      for (int i = 0;
+                                          i < grid1Title.length;
+                                          i++) ...{
+                                        ResponsiveGridCol(
+                                          lg: 6,
+                                          sm: 12,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                bottom: 100),
+                                            child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      height: 100,
+                                                      width: 100,
+                                                      decoration: BoxDecoration(
+                                                          color: Colors.blue,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100)),
+                                                      child: Icon(grid1Icon[i],
+                                                          size: iconSize[i],
+                                                          color: Colors.white)),
+                                                  Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20),
+                                                      child: Text(grid1Title[i],
+                                                          style: TextStyle(
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 20))),
+                                                  Container(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 20),
+                                                      child: Text(
+                                                          grid1Content[i],
+                                                          style: TextStyle(
+                                                              color:
+                                                                  Colors.grey)))
+                                                ]),
+                                          ),
+                                        ),
+                                      },
+                                    ]))
+                          ])),
+                ),
+                if (swidth > 992) ...{
+                  ResponsiveGridCol(
+                    lg: 4,
+                    child: SizedBox(
+                        height: 865,
+                        child: Image.asset('assets/images/img2.jpg',
+                            fit: BoxFit.cover)),
+                  ),
+                }
+              ]),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
@@ -578,70 +359,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       'Our experts have been featured in press numerous times.',
                       CrossAxisAlignment.start),
                 ),
-                if (MediaQuery.of(context).size.width > 1300) ...[
-                  Container(
-                      padding: EdgeInsets.symmetric(horizontal: swidth * 0.07),
-                      child: Row(children: [
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                        Container(width: swidth*0.02),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                        Container(width: swidth*0.02),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                        Container(width: swidth*0.02),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                      ]))
-                ],
-                /*Segunda condição*/
-                if (MediaQuery.of(context).size.width < 1300) ...[
-                  if (MediaQuery.of(context).size.width > 995) ...[
-                    Column(children: [
-                      Row(children: [
-                        Container(width: swidth*0.045),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                        Container(width: swidth*0.02),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                        Container(width: swidth*0.02),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                      ]),
-                      Container(
-                          width: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.only(left: swidth*0.045),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                StaffCard(
-                                    "Dean Michael", "assets/images/img3.jpg", swidth),
-                              ]))
-                    ])
-                  ]
-                ],
-                if (MediaQuery.of(context).size.width < 995) ...[
-                  if (MediaQuery.of(context).size.width > 670) ...[
-                    Column(children: [
-                      Row(children: [
-                        Container(width: swidth*0.045),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                        Container(width: swidth*0.02),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                      ]),
-                      Row(children: [
-                        Container(width: swidth*0.045),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg",swidth),
-                        Container(width: swidth*0.045),
-                        StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                      ])
-                    ])
-                  ]
-                ],
-                if (MediaQuery.of(context).size.width < 670) ...[
-                  Center(
-                      child: Column(children: [
-                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                    StaffCard("Dean Michael", "assets/images/img3.jpg", swidth),
-                  ]))
-                ]
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
+                  child: ResponsiveGridRow(children: [
+                    for (int i = 0; i < 4; i++) ...{
+                      ResponsiveGridCol(
+                          lg: 3,
+                          md: 6,
+                          xs: 12,
+                          child: Padding(
+                            padding: const EdgeInsets.only(bottom: 30, left: 10, right: 10),
+                            child: StaffCard(staffNames[i], staffImgs[i], swidth),
+                          ))
+                    }
+                  ]),
+                ),
               ]),
               Carousel(swidth),
               Footer(swidth),

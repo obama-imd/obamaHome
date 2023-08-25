@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html/parser.dart';
-import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:responsive_grid/responsive_grid.dart';
@@ -109,6 +108,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     "nononon nono nonon non !",
   ];
 
+  //Products List
+
+  List<String> productName = [
+    "PRODUCT",
+    "PRODUCT",
+    "PRODUCT",
+    "PRODUCT",
+  ];
+
+  List<String> productImg = [
+    'assets/images/prod.jpg',
+    'assets/images/prod.jpg',
+    'assets/images/prod.jpg',
+    'assets/images/prod.jpg',
+  ];
+
   Future<void> fetchDataAndUpdateState() async {
     final fetchedData = await fetchData();
     setState(() {
@@ -128,7 +143,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   Widget BlogData(BuildContext context, index) {
-    double swid = MediaQuery.of(context).size.width;
+    double swidth = MediaQuery.of(context).size.width;
+    double imageWidth;
+    double imageHeight;
+
+    if (swidth < 768) {
+      imageWidth = swidth * .85;
+      imageHeight = 300;
+    } else if (swidth < 992) {
+      imageWidth = swidth * .45;
+      imageHeight = 185;
+    } else {
+      imageWidth = swidth * .3;
+      imageHeight = 185;
+    }
 
     final item = datas[index];
 
@@ -159,12 +187,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          ImageNetwork(
-              image: imagePath,
-              width: swid * .3,
-              height: 185,
-              fitAndroidIos: BoxFit.cover,
-              fitWeb: BoxFitWeb.cover),
+          Image.network(imagePath,
+              height: imageHeight, width: imageWidth, fit: BoxFit.cover),
           // Text(imagePath),
           Row(
             children: [
@@ -175,11 +199,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           Container(
             margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: Text(item['title'],
-                style: const TextStyle(
-                    fontWeight: FontWeight.bold, fontSize: 18)),
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           ),
-          Text(item['text'],
-              style: const TextStyle(fontSize: 15), maxLines: 4),
+          Text(item['text'], style: const TextStyle(fontSize: 15), maxLines: 4),
           // Text(sumValue),
         ],
       ),
@@ -201,12 +224,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
-    final double paddingCard;
+    double paddingCard;
 
-    if (swidth > 992) {
-      paddingCard = 10;
+    if (swidth < 768) {
+      paddingCard = swidth * .3;
+    } else if (swidth < 992) {
+      paddingCard = swidth * .0835;
     } else {
-      paddingCard = 120;
+      paddingCard = swidth * .025;
     }
 
     return Scaffold(
@@ -272,11 +297,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     CrossAxisAlignment.center),
               ),
               Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 74),
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  margin: EdgeInsets.symmetric(horizontal: swidth * .05),
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Expanded(
                     child: ResponsiveGridRow(
-                      // espaçamento entre itens
                       children: [
                         for (int i = 0; i < sectionTitle.length; i++) ...{
                           ResponsiveGridCol(
@@ -284,7 +308,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             md: 6,
                             xs: 12,
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
+                              padding: const EdgeInsets.only(bottom: 30),
                               child: ItemProduto("Data Recovery",
                                   "nononon nono nonon non !", "i1.png"),
                             ),
@@ -293,45 +317,47 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ],
                     ),
                   )),
-              if (MediaQuery.of(context).size.width > 1200) ...[
-                Container(
-                    height: 490,
-                    width: MediaQuery.of(context).size.width,
-                    padding: EdgeInsets.only(
-                        top: 60,
-                        left: MediaQuery.of(context).size.width * 0.07),
-                    child: Row(children: [
-                      const Dropdowns(),
-                      Container(
-                          padding: const EdgeInsets.only(left: 30, top: 17.5),
+              Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(top: 100),
+                  child: ResponsiveGridRow(children: [
+                    ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
+                    ResponsiveGridCol(
+                      lg: 4,
+                      sm: 12,
+                      child: Container(
+                          padding: const EdgeInsets.only(top: 17.5),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 SizedBox(
                                     height: 50,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
                                     child: const Text('Need file recovery?',
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.w500))),
                                 SizedBox(
                                     height: 120,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.3,
                                     child: const Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
                                 Container(
                                     child: Row(children: [
                                   Container(
                                       height: 50,
-                                      width: 150,
+                                      width: 170,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: Colors.blue),
+                                              BorderRadius.circular(100)),
                                       child: TextButton(
                                           onPressed: () {},
+                                          style: const ButtonStyle(
+                                            backgroundColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.blue),
+                                            overlayColor:
+                                                MaterialStatePropertyAll(
+                                                    Colors.lightBlue),
+                                          ),
                                           child: const Text('READ MORE',
                                               style: TextStyle(
                                                   shadows: [
@@ -342,67 +368,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600,
                                                   color: Colors.white)))),
-                                  SizedBox(
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15)
                                 ])),
                                 Container(height: 140),
-                              ]))
-                    ])),
-              ] else ...[
-                Container(
-                    height: 640,
-                    width: MediaQuery.of(context).size.width,
-                    padding: const EdgeInsets.only(top: 60),
-                    child: Column(children: [
-                      const Dropdowns(),
-                      Container(
-                          padding: const EdgeInsets.only(left: 40, top: 50),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                SizedBox(
-                                    height: 50,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: const Text('Need file recovery?',
-                                        style: TextStyle(
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w500))),
-                                SizedBox(
-                                    height: 120,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: const Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                Container(
-                                    child: Row(children: [
-                                  Container(
-                                      height: 50,
-                                      width: 150,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          color: Colors.blue),
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          child: const Text('READ MORE',
-                                              style: TextStyle(
-                                                  shadows: [
-                                                    Shadow(
-                                                        offset:
-                                                            Offset(1.1, 1.1))
-                                                  ],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white)))),
-                                  SizedBox(
-                                      height: 30,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.15)
-                                ])),
-                              ]))
-                    ]))
-              ],
+                              ])),
+                    )
+                  ])),
               ResponsiveGridRow(children: [
                 ResponsiveGridCol(
                   lg: 8,
@@ -428,7 +398,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           i++) ...{
                                         ResponsiveGridCol(
                                           lg: 6,
-                                          md: 12,
+                                          sm: 12,
                                           child: Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 100),
@@ -493,62 +463,26 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               // if (MediaQuery.of(context).size.width > 1000) ...[
               Padding(
-                padding: EdgeInsets.only(left: 50, right: 50, bottom: 100),
+                padding: EdgeInsets.only(
+                    left: swidth * .05, right: swidth * .05, bottom: 100),
                 child: ResponsiveGridRow(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    ResponsiveGridCol(
-                      lg: 3,
-                      md: 6,
-                      xs: 12,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: paddingCard, vertical: 15),
-                        child: OurProductItem(
-                          title: "PRODUCT",
-                          image: 'assets/images/prod.jpg',
+                    for (int i = 0; i < 4; i++) ...{
+                      ResponsiveGridCol(
+                        lg: 3,
+                        md: 6,
+                        xs: 12,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: paddingCard, vertical: 15),
+                          child: OurProductItem(
+                            title: "PRODUCT",
+                            image: 'assets/images/prod.jpg',
+                          ),
                         ),
                       ),
-                    ),
-                    ResponsiveGridCol(
-                      lg: 3,
-                      md: 6,
-                      xs: 12,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: paddingCard, vertical: 15),
-                        child: OurProductItem(
-                          title: "PRODUCT",
-                          image: 'assets/images/prod.jpg',
-                        ),
-                      ),
-                    ),
-                    ResponsiveGridCol(
-                      lg: 3,
-                      md: 6,
-                      xs: 12,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: paddingCard, vertical: 15),
-                        child: OurProductItem(
-                          title: "PRODUCT",
-                          image: 'assets/images/prod.jpg',
-                        ),
-                      ),
-                    ),
-                    ResponsiveGridCol(
-                      lg: 3,
-                      md: 6,
-                      xs: 12,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: paddingCard, vertical: 15),
-                        child: OurProductItem(
-                          title: "PRODUCT",
-                          image: 'assets/images/prod.jpg',
-                        ),
-                      ),
-                    ),
+                    }
                   ],
                 ),
               ),
@@ -576,8 +510,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 'Easy and effective way to get your device repaired.',
                                 CrossAxisAlignment.end),
                             Container(
-                                padding:
-                                    const EdgeInsets.only(top: 60, right: 90),
+                                padding: const EdgeInsets.only(top: 60),
                                 child: ResponsiveGridRow(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -587,7 +520,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           i++) ...{
                                         ResponsiveGridCol(
                                           lg: 6,
-                                          md: 12,
+                                          sm: 12,
                                           child: Padding(
                                             padding: const EdgeInsets.only(
                                                 bottom: 100),
@@ -655,10 +588,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           children: [
                             for (int i = 0; i < datas.length; i++) ...{
                               ResponsiveGridCol(
-                              lg: 4,
-                              md: 6,
-                              xs: 12,
-                              child: BlogData(context, i)),
+                                  lg: 4,
+                                  md: 6,
+                                  xs: 12,
+                                  child: BlogData(context, i)),
                             }
                           ],
                         ),
