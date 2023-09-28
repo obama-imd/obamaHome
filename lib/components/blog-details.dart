@@ -12,8 +12,8 @@ import '../../components/menu.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
 
-class BlogPage extends StatelessWidget {
-  const BlogPage({Key? key}) : super(key: key);
+class BlogDetails extends StatelessWidget {
+  const BlogDetails({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return const Scaffold(body: MyStatefulWidget());
@@ -29,6 +29,14 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool dataAvailable = true;
+
+  final PageController _pageController = PageController();
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
 
   List<dynamic> datas = [];
 
@@ -155,8 +163,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                   padding: const EdgeInsets.only(top: 100, left: 90, right: 60),
                   width: swidth * 0.67,
-                  height: 850 * (datas.length).toDouble(),
-                  child: ListView.builder(
+                  height: 1400,
+                  child: PageView.builder(
+                    controller: _pageController,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: datas.length,
                     itemBuilder: (BuildContext context, int index) {
@@ -170,6 +179,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         return result!;
                       }
 
+                      ;
+
                       String imagePath = extractImagePath(item['content']);
 
                       String extractSummaryPath(String summary) {
@@ -180,13 +191,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         return sumValue;
                       }
 
+                      ;
+
                       String pubDate = item['published_date'];
                       DateTime dateTime = DateTime.parse(pubDate);
                       String formattedDate =
                           DateFormat('dd/MM/yyyy').format(dateTime);
 
                       return SizedBox(
-                        height: 800,
+                        height: 1400,
                         width: swidth * .6,
                         child: Column(children: [
                           Container(
@@ -235,40 +248,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               margin:
                                   const EdgeInsets.only(top: 20, bottom: 30),
                               child: Text(item['text'],
-                                  maxLines: 5,
                                   style: const TextStyle(fontSize: 16))),
                           Row(children: [
-                            Material(
-                              color: Colors.blue,
-                              child: InkWell(
-                                  onTap: () {},
-                                  overlayColor: const MaterialStatePropertyAll(
-                                      Colors.black),
-                                  child: const SizedBox(
-                                    width: 170,
-                                    height: 50,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Text('READ MORE >',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              shadows: [
-                                                Shadow(
-                                                  offset: Offset(1, 1),
-                                                  color: Color.fromRGBO(
-                                                      0, 0, 0, 0.5),
-                                                ),
-                                              ],
-                                            )),
-                                      ],
-                                    ),
-                                  )),
-                            ),
-                            const Spacer(),
+                            Container(),
                             Container(
                                 child: Row(
                                     mainAxisAlignment:
@@ -281,6 +263,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     width: 120,
                                     height: 30,
                                     child: GridView.builder(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
                                         gridDelegate:
                                             const SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 4),
@@ -302,6 +286,58 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   )
                                 ])),
                           ]),
+                          Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                if (index > 0) ...{
+                                  Column(
+                                    children: [
+                                      ImageNetwork(
+                                          image: imagePath[index - 1],
+                                          width: 200,
+                                          height: 150),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          if (_pageController.hasClients) {
+                                            _pageController.animateToPage(
+                                              index - 1,
+                                              duration: const Duration(
+                                                  milliseconds: 400),
+                                              curve: Curves.easeInOut,
+                                            );
+                                          }
+                                        },
+                                        child: const Text('Anterior'),
+                                      ),
+                                      Container(),
+                                    ],
+                                  ),
+                                },
+                                if (index < datas.length - 1) ...{
+                                  Container(),
+                                  Column(
+                                    children: [
+                                      ImageNetwork(
+                                          image: imagePath[index + 1],
+                                          width: 200,
+                                          height: 150),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          if (_pageController.hasClients) {
+                                            _pageController.animateToPage(
+                                              index + 1,
+                                              duration: const Duration(
+                                                  milliseconds: 400),
+                                              curve: Curves.easeInOut,
+                                            );
+                                          }
+                                        },
+                                        child: const Text('Próximo'),
+                                      ),
+                                    ],
+                                  ),
+                                }
+                              ]),
                         ]),
                       );
                     },

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/components/blog-details.dart';
 import 'package:obamahome/pages/blog/blog.dart';
 
 import '../pages/about-us/aboutUs.dart';
@@ -129,10 +130,17 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsBlog![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
+                  if (j == 0) {
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => navigateTo[index]));
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => BlogDetails()));
+                  }
                 },
                 child: Text(itemValues[0].itemsBlog![j])))
       }

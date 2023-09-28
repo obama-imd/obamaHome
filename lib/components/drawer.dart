@@ -99,7 +99,7 @@ class drawermenu extends StatelessWidget {
                       alignment: Alignment.centerLeft,
                       child: TextButton(
                           onPressed: () {
-                            Navigator.pushNamed(context, '/blog');
+                            Navigator.pushNamed(context, '/blog-details');
                           },
                           child: Container(
                               width: swidth * 0.3,

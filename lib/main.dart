@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/components/blog-details.dart';
 
 import 'pages/about-us/aboutUs.dart';
 import 'pages/blog/blog.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/aboutus' : (context) => const AboutUsPage(),
         '/blog' : (context) => const BlogPage(),
+        '/blog-details' : (context) => const BlogDetails(),
       }
     );
   }

@@ -211,11 +211,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(top: 100, left: 70, right: 70),
+                  padding: const EdgeInsets.only(top: 100, left: 70, right: 70),
                   child: ResponsiveGridRow(children: [
-                    ResponsiveGridCol(lg: 8, sm: 12, child: Padding(
-                      padding: const EdgeInsets.only(bottom: 35),
-                      child: const Dropdowns(),
+                    ResponsiveGridCol(lg: 8, sm: 12, child: const Padding(
+                      padding: EdgeInsets.only(bottom: 35),
+                      child: Dropdowns(),
                     )),
                     ResponsiveGridCol(
                       lg: 4,
@@ -225,15 +225,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
+                                const SizedBox(
                                     height: 50,
-                                    child: const Text('Need file recovery?',
+                                    child: Text('Need file recovery?',
                                         style: TextStyle(
                                             fontSize: 28,
                                             fontWeight: FontWeight.w500))),
-                                SizedBox(
+                                const SizedBox(
                                     height: 120,
-                                    child: const Text('Texto',
+                                    child: Text('Texto',
                                         style: TextStyle(color: Colors.grey))),
                                 Container(
                                     child: Row(children: [
@@ -318,7 +318,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                           const EdgeInsets.only(
                                                               top: 20),
                                                       child: Text(grid1Title[i],
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               fontWeight:
                                                                   FontWeight
                                                                       .bold,
@@ -329,7 +329,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                               top: 20),
                                                       child: Text(
                                                           grid1Content[i],
-                                                          style: TextStyle(
+                                                          style: const TextStyle(
                                                               color:
                                                                   Colors.grey)))
                                                 ]),
