@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:responsive_grid/responsive_grid.dart';
-import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../components/carousel.dart';
@@ -40,52 +39,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     "Dean Michael",
     "Dean Michael",
   ];
-  List<String> staffNames = [
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-  ];
 
-  List<String> staffImgs = [
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-  ];
-
-    // First Grid Block
-
-  List<String> grid1Title = [
-    "Data Recovery",
-    "Computer repair",
-    "Mobile service",
-    "Data Recovery",
-  ];
-
-  List<IconData> grid1Icon = [
-    FontAwesomeIcons.wrench,
-    Icons.settings,
-    Icons.settings_backup_restore_rounded,
-    FontAwesomeIcons.heart,
-  ];
-
-  List<double> iconSize = [38, 44, 46, 39];
-
-  List<String> grid1Content = [
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-  ];
   List<String> staffImgs = [
     "assets/images/img3.jpg",
     "assets/images/img3.jpg",
@@ -158,14 +112,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           TextButton(
                               child:
                                   const Icon(Icons.menu, color: Colors.black),
-                              child:
-                                  const Icon(Icons.menu, color: Colors.black),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
                               width: 280,
-                              padding:
-                                  const EdgeInsets.only(right: 30, left: 30),
                               padding:
                                   const EdgeInsets.only(right: 30, left: 30),
                               child: Image.asset('assets/images/logo.png',
@@ -302,12 +252,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                             overlayColor:
                                                 MaterialStatePropertyAll(
                                                     Colors.lightBlue),
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.blue),
-                                            overlayColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.lightBlue),
                                           ),
                                           child: const Text('READ MORE',
                                               style: TextStyle(
@@ -321,14 +265,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   color: Colors.white)))),
                                 ])),
                                 Container(height: 140),
-                              ])),
-                    )
-                  ])),
-             ResponsiveGridRow(children: [
-                ResponsiveGridCol(
-                  lg: 8,
-                  sm: 12,
-                  child: Container(
                               ])),
                     )
                   ])),
