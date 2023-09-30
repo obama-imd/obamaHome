@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/components/blog-details.dart';
-import 'package:obamahome/pages/blog/blog.dart';
-
-import '../pages/about-us/aboutUs.dart';
-import '../pages/home/home.dart';
+import 'package:obamahome/pages/blog/blog-details.dart';
 
 List<String> selValue = [
   "HOME",
@@ -24,16 +20,6 @@ List<dynamic> selValueContent = [
   const Text("PLANOS DE AULA"),
   const Icon(Icons.search)
 ];
-
-// List<itemValue> itemKeys = [
-//     'itemsHome',
-//     'itemsBoutUs',
-//     'itemsServices',
-//     'itemsBlog',
-//     'itemsPages',
-//     'itemsShop',
-//     'itemsContact',
-// ];
 
 class itemValue {
   final List<String>? itemsHome;
@@ -67,14 +53,13 @@ final List<itemValue> itemValues = [
   )
 ];
 
-List<dynamic> navigateTo = [
-  const HomePage(),
-  const AboutUsPage(),
-  ServicesPage(),
-  const BlogPage(),
-  PagesPage(),
-  ShopPage(),
-  SearchPage(),
+List<String> navigateTo = [
+  '/',
+  '/aboutus',
+  '/servicos',
+  '/blog',
+  '/paginas',
+  '/loja',
 ];
 
 List<DropdownMenuItem<String>> getDropdownItems(
@@ -91,10 +76,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsHome![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => navigateTo[index]));
+                  Navigator.pushNamed(context, navigateTo[j]);
                 },
                 child: Text(itemValues[0].itemsHome![j]))),
       }
@@ -104,10 +86,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsBoutUs![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => navigateTo[index]));
+                  Navigator.pushNamed(context, navigateTo[j]);
                 },
                 child: Text(itemValues[0].itemsBoutUs![j].toUpperCase())))
       }
@@ -117,10 +96,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsServices![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => navigateTo[index]));
+                  Navigator.pushNamed(context, navigateTo[j]);
                 },
                 child: Text(itemValues[0].itemsServices![j])))
       }
@@ -131,15 +107,10 @@ List<DropdownMenuItem<String>> getDropdownItems(
             child: InkWell(
                 onTap: () {
                   if (j == 0) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => navigateTo[index]));
+                   Navigator.pushNamed(context, navigateTo[j]);
                   } else {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => BlogDetails()));
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => BlogDetails()));
                   }
                 },
                 child: Text(itemValues[0].itemsBlog![j])))
@@ -150,10 +121,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsPages![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => navigateTo[index]));
+                  Navigator.pushNamed(context, navigateTo[j]);
                 },
                 child: Text(itemValues[0].itemsPages![j])))
       }
@@ -163,10 +131,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsShop![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => navigateTo[index]));
+                  Navigator.pushNamed(context, navigateTo[j]);
                 },
                 child: Text(itemValues[0].itemsShop![j])))
       }
@@ -175,7 +140,8 @@ List<DropdownMenuItem<String>> getDropdownItems(
   return menuItems;
 }
 
-Widget MenuBar0(BuildContext context, int index, String label, dynamic content) {
+Widget MenuBar0(
+    BuildContext context, int index, String label, dynamic content) {
   return DropdownButton(
     value: label,
     icon: const SizedBox.shrink(),
@@ -202,13 +168,3 @@ Widget navBarMenu(BuildContext context, double swidth) {
     ]),
   );
 }
-
-class SearchPage {}
-
-class ContactPage {}
-
-class ShopPage {}
-
-class PagesPage {}
-
-class ServicesPage {}

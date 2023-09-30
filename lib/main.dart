@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/components/blog-details.dart';
+import 'package:obamahome/pages/blog/blog-details.dart';
 
 import 'pages/about-us/aboutUs.dart';
 import 'pages/blog/blog.dart';

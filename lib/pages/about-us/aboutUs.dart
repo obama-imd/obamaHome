@@ -9,8 +9,8 @@ import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
 import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
-import '../../components/staff.dart';
 import '../../components/topbar.dart';
+import 'staff.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);

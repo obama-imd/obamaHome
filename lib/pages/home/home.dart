@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../components/carousel.dart';
 import '../../components/dropdowns.dart';
-import '../../components/firstSectionHome.dart';
 import '../../components/footer.dart';
 import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
 import '../../widgets/our_product_item.dart';
+import 'firstSectionHome.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -160,21 +159,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     final item = datas[index];
 
-    String extractImagePath(String content) {
-      final document = parse(content);
-      final imgElement = document.getElementsByTagName('img').last;
-      final result = imgElement.attributes['src'];
-      return result!;
-    }
-
     String imagePath = extractImagePath(item['content']);
-
-    String extractSummaryPath(String summary) {
-      final document = parse(summary);
-      final sumElement = document.getElementsByTagName('p').last;
-      final sumValue = sumElement.text;
-      return sumValue;
-    }
 
     String pubDate = item['published_date'];
     DateTime dateTime = DateTime.parse(pubDate);

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 Future<List<dynamic>> fetchData() async {
@@ -24,4 +25,18 @@ Future<List<dynamic>> fetchData() async {
     // Handle the error here if needed.
     return [];
   }
+}
+
+String extractImagePath(String content) {
+  final document = parse(content);
+  final imgElement = document.getElementsByTagName('img').last;
+  final result = imgElement.attributes['src'];
+  return result!;
+}
+
+String extractSummaryPath(String summary) {
+  final document = parse(summary);
+  final sumElement = document.getElementsByTagName('p').last;
+  final sumValue = sumElement.text;
+  return sumValue;
 }
