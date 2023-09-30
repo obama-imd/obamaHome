@@ -164,135 +164,135 @@ Widget blogFilters(
                         color: Colors.black))
               ]))),
     ]),
-    Container(
-        alignment: Alignment.centerLeft,
-        margin: EdgeInsets.only(top: 60, right: swidth * 0.015),
-        child: const Text('TAG',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
-    Row(children: [
-      Container(
-          padding: const EdgeInsets.all(15),
-          height: 50,
-          width: 114,
-          margin: const EdgeInsets.only(right: 5, top: 30, bottom: 60),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: .5),
-              borderRadius: BorderRadius.circular(100)),
-          child: TextButton(
-              onPressed: () {},
-              child: const Text('Bootstrap',
-                  style: TextStyle(fontSize: 15, color: Colors.black)))),
-      Container(
-          padding: const EdgeInsets.all(15),
-          height: 50,
-          width: 104,
-          margin: const EdgeInsets.only(right: 5, top: 30, bottom: 60),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: .5),
-              borderRadius: BorderRadius.circular(100)),
-          child: TextButton(
-              onPressed: () {},
-              child: const Text('HTML5',
-                  style: TextStyle(fontSize: 15, color: Colors.black)))),
-      Container(
-          padding: const EdgeInsets.all(15),
-          height: 50,
-          width: 120,
-          margin: const EdgeInsets.only(top: 30, bottom: 60),
-          decoration: BoxDecoration(
-              border: Border.all(color: Colors.grey, width: .5),
-              borderRadius: BorderRadius.circular(100)),
-          child: TextButton(
-              onPressed: () {},
-              child: const Text('Wordpress',
-                  style: TextStyle(fontSize: 15, color: Colors.black)))),
-    ]),
-    Container(
-        alignment: Alignment.centerLeft,
-        margin: EdgeInsets.only(top: 10, bottom: 20, right: swidth * 0.07),
-        child: const Text('CATEGORIES',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
-    Column(children: [
-      Container(
-          color: const Color.fromARGB(255, 235, 235, 235),
-          width: swidth * 0.3,
-          height: 40,
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
-          child: TextButton(
-              onPressed: () {},
-              child: const Row(children: [
-                Icon(Icons.arrow_right, color: Colors.black),
-                Text('Text 1',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
-              ]))),
-      Container(
-          color: const Color.fromARGB(255, 235, 235, 235),
-          width: swidth * 0.3,
-          height: 40,
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
-          child: TextButton(
-              onPressed: () {},
-              child: const Row(children: [
-                Icon(Icons.arrow_right, color: Colors.black),
-                Text('Text 2',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
-              ]))),
-      Container(
-          color: const Color.fromARGB(255, 235, 235, 235),
-          width: swidth * 0.3,
-          height: 40,
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
-          child: TextButton(
-              onPressed: () {},
-              child: const Row(children: [
-                Icon(Icons.arrow_right, color: Colors.black),
-                Text('Text 3',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
-              ]))),
-      Container(
-          color: const Color.fromARGB(255, 235, 235, 235),
-          width: swidth * 0.3,
-          height: 40,
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
-          child: TextButton(
-              onPressed: () {},
-              child: const Row(children: [
-                Icon(Icons.arrow_right, color: Colors.black),
-                Text('Text 4',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
-              ]))),
-      Container(
-          color: const Color.fromARGB(255, 235, 235, 235),
-          width: swidth * 0.3,
-          height: 40,
-          alignment: Alignment.centerLeft,
-          margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
-          child: TextButton(
-              onPressed: () {},
-              child: const Row(children: [
-                Icon(Icons.arrow_right, color: Colors.black),
-                Text('Text 5',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
-              ])))
-    ])
+    // Container(
+    //     alignment: Alignment.centerLeft,
+    //     margin: EdgeInsets.only(top: 60, right: swidth * 0.015),
+    //     child: const Text('TAG',
+    //         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+    // Row(children: [
+    //   Container(
+    //       padding: const EdgeInsets.all(15),
+    //       height: 50,
+    //       width: 114,
+    //       margin: const EdgeInsets.only(right: 5, top: 30, bottom: 60),
+    //       decoration: BoxDecoration(
+    //           border: Border.all(color: Colors.grey, width: .5),
+    //           borderRadius: BorderRadius.circular(100)),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Text('Bootstrap',
+    //               style: TextStyle(fontSize: 15, color: Colors.black)))),
+    //   Container(
+    //       padding: const EdgeInsets.all(15),
+    //       height: 50,
+    //       width: 104,
+    //       margin: const EdgeInsets.only(right: 5, top: 30, bottom: 60),
+    //       decoration: BoxDecoration(
+    //           border: Border.all(color: Colors.grey, width: .5),
+    //           borderRadius: BorderRadius.circular(100)),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Text('HTML5',
+    //               style: TextStyle(fontSize: 15, color: Colors.black)))),
+    //   Container(
+    //       padding: const EdgeInsets.all(15),
+    //       height: 50,
+    //       width: 120,
+    //       margin: const EdgeInsets.only(top: 30, bottom: 60),
+    //       decoration: BoxDecoration(
+    //           border: Border.all(color: Colors.grey, width: .5),
+    //           borderRadius: BorderRadius.circular(100)),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Text('Wordpress',
+    //               style: TextStyle(fontSize: 15, color: Colors.black)))),
+    // ]),
+    // Container(
+    //     alignment: Alignment.centerLeft,
+    //     margin: EdgeInsets.only(top: 10, bottom: 20, right: swidth * 0.07),
+    //     child: const Text('CATEGORIES',
+    //         style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+    // Column(children: [
+    //   Container(
+    //       color: const Color.fromARGB(255, 235, 235, 235),
+    //       width: swidth * 0.3,
+    //       height: 40,
+    //       alignment: Alignment.centerLeft,
+    //       margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Row(children: [
+    //             Icon(Icons.arrow_right, color: Colors.black),
+    //             Text('Text 1',
+    //                 style: TextStyle(
+    //                     fontSize: 15,
+    //                     fontWeight: FontWeight.w500,
+    //                     color: Colors.black))
+    //           ]))),
+    //   Container(
+    //       color: const Color.fromARGB(255, 235, 235, 235),
+    //       width: swidth * 0.3,
+    //       height: 40,
+    //       alignment: Alignment.centerLeft,
+    //       margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Row(children: [
+    //             Icon(Icons.arrow_right, color: Colors.black),
+    //             Text('Text 2',
+    //                 style: TextStyle(
+    //                     fontSize: 15,
+    //                     fontWeight: FontWeight.w500,
+    //                     color: Colors.black))
+    //           ]))),
+    //   Container(
+    //       color: const Color.fromARGB(255, 235, 235, 235),
+    //       width: swidth * 0.3,
+    //       height: 40,
+    //       alignment: Alignment.centerLeft,
+    //       margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Row(children: [
+    //             Icon(Icons.arrow_right, color: Colors.black),
+    //             Text('Text 3',
+    //                 style: TextStyle(
+    //                     fontSize: 15,
+    //                     fontWeight: FontWeight.w500,
+    //                     color: Colors.black))
+    //           ]))),
+    //   Container(
+    //       color: const Color.fromARGB(255, 235, 235, 235),
+    //       width: swidth * 0.3,
+    //       height: 40,
+    //       alignment: Alignment.centerLeft,
+    //       margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Row(children: [
+    //             Icon(Icons.arrow_right, color: Colors.black),
+    //             Text('Text 4',
+    //                 style: TextStyle(
+    //                     fontSize: 15,
+    //                     fontWeight: FontWeight.w500,
+    //                     color: Colors.black))
+    //           ]))),
+    //   Container(
+    //       color: const Color.fromARGB(255, 235, 235, 235),
+    //       width: swidth * 0.3,
+    //       height: 40,
+    //       alignment: Alignment.centerLeft,
+    //       margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
+    //       child: TextButton(
+    //           onPressed: () {},
+    //           child: const Row(children: [
+    //             Icon(Icons.arrow_right, color: Colors.black),
+    //             Text('Text 5',
+    //                 style: TextStyle(
+    //                     fontSize: 15,
+    //                     fontWeight: FontWeight.w500,
+    //                     color: Colors.black))
+    //           ])))
+    // ])
   ]);
 }

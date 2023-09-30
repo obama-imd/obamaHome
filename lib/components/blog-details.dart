@@ -183,6 +183,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
                       String imagePath = extractImagePath(item['content']);
 
+                      final prevItem = index > 0 ? datas[index - 1] : null;
+                      final nextItem =
+                          index < datas.length - 1 ? datas[index + 1] : null;
+
+                      String previmagePath =
+                          prevItem != null ? extractImagePath(prevItem['content']) : "";
+                      String nextimagePath =
+                          nextItem != null ? extractImagePath(nextItem['content']) : "";
+
                       String extractSummaryPath(String summary) {
                         final document = parse(summary);
                         final sumElement =
@@ -289,13 +298,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                if (index > 0) ...{
+                                if (index > 0 && previmagePath != "") ...{
                                   Column(
                                     children: [
                                       ImageNetwork(
-                                          image: imagePath[index - 1],
-                                          width: 200,
-                                          height: 150),
+                                          image: previmagePath,
+                                          width: 150,
+                                          height: 100),
                                       ElevatedButton(
                                         onPressed: () {
                                           if (_pageController.hasClients) {
@@ -313,14 +322,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     ],
                                   ),
                                 },
-                                if (index < datas.length - 1) ...{
+                                if (index < datas.length - 1 && nextimagePath != "") ...{
                                   Container(),
                                   Column(
                                     children: [
                                       ImageNetwork(
-                                          image: imagePath[index + 1],
-                                          width: 200,
-                                          height: 150),
+                                          image: nextimagePath,
+                                          width: 150,
+                                          height: 100),
                                       ElevatedButton(
                                         onPressed: () {
                                           if (_pageController.hasClients) {
@@ -333,7 +342,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           }
                                         },
                                         child: const Text('Próximo'),
-                                      ),
+                                      )
                                     ],
                                   ),
                                 }
