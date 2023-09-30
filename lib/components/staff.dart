@@ -20,15 +20,15 @@ class StaffCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Material(
-        color: const Color.fromARGB(255, 231, 228, 228),
+        color: Color.fromARGB(255, 231, 228, 228),
         child: InkWell(
           onTap: () {},
           mouseCursor: SystemMouseCursors.basic,
-          overlayColor: const MaterialStatePropertyAll(Colors.blue),
+          overlayColor: MaterialStatePropertyAll(Colors.blue),
           child: Column(
             children: [
               Container(
-                  padding: const EdgeInsets.all(1),
+                  padding: EdgeInsets.all(1),
                   width: 271,
                   height: 271,
                   child: Image.asset(staffImg, fit: BoxFit.cover)),
