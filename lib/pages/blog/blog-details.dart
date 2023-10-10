@@ -291,12 +291,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 children: [
                                   if (index > 0 && previmagePath != "") ...{
                                     Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
                                         ImageNetwork(
                                             image: previmagePath,
                                             width: 150,
                                             height: 100),
-                                        ElevatedButton(
+                                        TextButton(
                                           onPressed: () {
                                             if (_pageController.hasClients) {
                                               _pageController.animateToPage(
@@ -317,12 +318,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       nextimagePath != "") ...{
                                     Container(),
                                     Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
                                       children: [
                                         ImageNetwork(
                                             image: nextimagePath,
                                             width: 150,
                                             height: 100),
-                                        ElevatedButton(
+                                        TextButton(
                                           onPressed: () {
                                             if (_pageController.hasClients) {
                                               _pageController.animateToPage(
@@ -333,7 +335,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                               );
                                             }
                                           },
-                                          child: const Text('Próximo >'),
+                                          child: const Text('Próximo >', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
                                         )
                                       ],
                                     ),

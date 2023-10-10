@@ -12,13 +12,13 @@ List<String> selValue = [
 ];
 
 List<dynamic> selValueContent = [
-  const Text("HOME"),
-  const Text("SOBRE"),
-  const Text("SERVIÇOS"),
-  const Text("PUBLICAÇÕES"),
-  const Text("PAGES"),
-  const Text("PLANOS DE AULA"),
-  const Icon(Icons.search)
+  menuItem(const Text("HOME")),
+  menuItem(const Text("SOBRE")),
+  menuItem(const Text("SERVIÇOS")),
+  menuItem(const Text("PUBLICAÇÕES")),
+  menuItem(const Text("PAGES")),
+  menuItem(const Text("PLANOS DE AULA")),
+  menuItem(const Icon(Icons.search))
 ];
 
 class itemValue {
@@ -46,7 +46,7 @@ final List<itemValue> itemValues = [
     itemsHome: ["Item 1", "Item 2"],
     itemsBoutUs: ["Sobre"],
     itemsServices: ["Item 1", "Item 2"],
-    itemsBlog: ["Item 1", "Item 2"],
+    itemsBlog: ["Lista de Posts", "Último post"],
     itemsPages: ["Item 1", "Item 2"],
     itemsShop: ["Item 1", "Item 2"],
     // itemsSearch: ["Item 1", "Item 2"],
@@ -76,7 +76,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsHome![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, navigateTo[j]);
+                  Navigator.pushNamed(context, navigateTo[index]);
                 },
                 child: Text(itemValues[0].itemsHome![j]))),
       }
@@ -86,7 +86,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsBoutUs![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, navigateTo[j]);
+                  Navigator.pushNamed(context, navigateTo[index]);
                 },
                 child: Text(itemValues[0].itemsBoutUs![j].toUpperCase())))
       }
@@ -96,7 +96,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsServices![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, navigateTo[j]);
+                  Navigator.pushNamed(context, navigateTo[index]);
                 },
                 child: Text(itemValues[0].itemsServices![j])))
       }
@@ -107,10 +107,12 @@ List<DropdownMenuItem<String>> getDropdownItems(
             child: InkWell(
                 onTap: () {
                   if (j == 0) {
-                   Navigator.pushNamed(context, navigateTo[j]);
+                    Navigator.pushNamed(context, navigateTo[index]);
                   } else {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => BlogDetails()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const BlogDetails()));
                   }
                 },
                 child: Text(itemValues[0].itemsBlog![j])))
@@ -121,7 +123,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsPages![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, navigateTo[j]);
+                  Navigator.pushNamed(context, navigateTo[index]);
                 },
                 child: Text(itemValues[0].itemsPages![j])))
       }
@@ -131,7 +133,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
             value: itemValues[0].itemsShop![j],
             child: InkWell(
                 onTap: () {
-                  Navigator.pushNamed(context, navigateTo[j]);
+                  Navigator.pushNamed(context, navigateTo[index]);
                 },
                 child: Text(itemValues[0].itemsShop![j])))
       }
@@ -156,13 +158,24 @@ Widget MenuBar0(
 }
 
 @override
+Widget menuItem(dynamic menuTitle) {
+  return InkWell(
+    mouseCursor: SystemMouseCursors.click,
+    child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: menuTitle,
+    ),
+  );
+}
+
+@override
 Widget navBarMenu(BuildContext context, double swidth) {
   return SizedBox(
-    width: swidth * 0.45,
+    width: swidth * 0.47,
     child: Row(children: [
       for (int i = 0; i < selValue.length; i++) ...{
-        Container(
-            padding: const EdgeInsets.all(9.2),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.5),
             child: MenuBar0(context, i, selValue[i], selValueContent[i])),
       }
     ]),
