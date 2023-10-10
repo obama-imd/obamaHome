@@ -307,7 +307,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                               );
                                             }
                                           },
-                                          child: const Text('Anterior'),
+                                          child: const Text('< Anterior', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
                                         ),
                                         Container(),
                                       ],
@@ -333,7 +333,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                               );
                                             }
                                           },
-                                          child: const Text('Próximo'),
+                                          child: const Text('Próximo >'),
                                         )
                                       ],
                                     ),
