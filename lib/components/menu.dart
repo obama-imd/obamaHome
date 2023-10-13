@@ -1,5 +1,8 @@
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:obamahome/pages/blog/blog-details.dart';
+
+final TextEditingController _searchController = TextEditingController();
 
 List<String> selValue = [
   "HOME",
@@ -12,16 +15,36 @@ List<String> selValue = [
 ];
 
 List<dynamic> selValueContent = [
-  menuItem(const Text("HOME")),
-  menuItem(const Text("SOBRE")),
-  menuItem(const Text("SERVIÇOS")),
-  menuItem(const Text("PUBLICAÇÕES")),
-  menuItem(const Text("PAGES")),
-  menuItem(const Text("PLANOS DE AULA")),
-  menuItem(const Icon(Icons.search))
+  const Text("HOME"),
+  const Text("SOBRE"),
+  const Text("SERVIÇOS"),
+  const Text("PUBLICAÇÕES"),
+  const Text("PAGES"),
+  const Text("PLANOS DE AULA"),
+        AnimSearchBar(
+          autoFocus: true,
+          width: 400,
+          textController: _searchController,
+          onSuffixTap: () {
+            _searchController.clear();
+          },
+          onSubmitted: (String value) {
+            debugPrint('onFieldSubmitted value $value');
+          },
+        ),
 ];
 
-class itemValue {
+// List<itemValue> itemKeys = [
+//     'itemsHome',
+//     'itemsBoutUs',
+//     'itemsServices',
+//     'itemsBlog',
+//     'itemsPages',
+//     'itemsShop',
+//     'itemsContact',
+// ];
+
+class ItemValue {
   final List<String>? itemsHome;
   final List<String>? itemsBoutUs;
   final List<String>? itemsServices;
@@ -30,7 +53,7 @@ class itemValue {
   final List<String>? itemsShop;
   // final List<String>? itemsSearch;
 
-  itemValue({
+  ItemValue({
     this.itemsHome,
     this.itemsBoutUs,
     this.itemsServices,
@@ -41,8 +64,8 @@ class itemValue {
   });
 }
 
-final List<itemValue> itemValues = [
-  itemValue(
+final List<ItemValue> itemValues = [
+  ItemValue(
     itemsHome: ["Item 1", "Item 2"],
     itemsBoutUs: ["Sobre"],
     itemsServices: ["Item 1", "Item 2"],
@@ -170,6 +193,8 @@ Widget menuItem(dynamic menuTitle) {
 
 @override
 Widget navBarMenu(BuildContext context, double swidth) {
+
+
   return SizedBox(
     width: swidth * 0.47,
     child: Row(children: [
