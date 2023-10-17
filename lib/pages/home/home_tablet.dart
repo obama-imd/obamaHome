@@ -1,10 +1,11 @@
-import 'package:flutter/material.dart';
 import 'package:anim_search_bar/anim_search_bar.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
+import 'package:obamahome/components/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+
 import '../../components/carousel.dart';
 import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
@@ -13,7 +14,7 @@ import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
 import '../../widgets/our_product_item.dart';
-import 'package:obamahome/components/firstSectionHome.dart';
+import 'constants.dart';
 
 class HomeTablet extends StatelessWidget {
 
@@ -48,95 +49,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   List<dynamic> datas = [];
 
-  // First Component Section
-
-  List<String> sectionTitle = [
-    "Data Recovery",
-    "Computer repair",
-    "Mobile service",
-    "Data Recovery",
-  ];
-
-  List<String> sectionImage = [
-    "i1.png",
-    "i2.png",
-    "i3.png",
-    "i4.png",
-  ];
-
-  List<String> sectionContent = [
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-  ];
-
-  // First Grid Block
-
-  List<String> grid1Title = [
-    "Data Recovery",
-    "Computer repair",
-    "Mobile service",
-    "Data Recovery",
-  ];
-
-  List<IconData> grid1Icon = [
-    FontAwesomeIcons.wrench,
-    Icons.settings,
-    Icons.settings_backup_restore_rounded,
-    FontAwesomeIcons.heart,
-  ];
-
-  List<double> iconSize = [38, 44, 46, 39];
-
-  List<String> grid1Content = [
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-  ];
-
-  // Second Grid Block
-
-  List<String> grid2Title = [
-    "OAs",
-    "OAs Autorais",
-    "Planos de Aula",
-    "Trilhas",
-  ];
-
-  List<IconData> grid2Icon = [
-    FontAwesomeIcons.faceSmile,
-    FontAwesomeIcons.laptop,
-    FontAwesomeIcons.desktop,
-    FontAwesomeIcons.windows,
-  ];
-
-  List<double> iconSize2 = [60, 60, 65, 65];
-
-  List<String> grid2Content = [
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-  ];
-
-  //Products List
-
-  List<String> productName = [
-    "PRODUCT",
-    "PRODUCT",
-    "PRODUCT",
-    "PRODUCT",
-  ];
-
-  List<String> productImg = [
-    'assets/images/prod.jpg',
-    'assets/images/prod.jpg',
-    'assets/images/prod.jpg',
-    'assets/images/prod.jpg',
-  ];
-
   Future<void> fetchDataAndUpdateState() async {
     final fetchedData = await fetchData();
     setState(() {
@@ -159,8 +71,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
     double imageWidth = MediaQuery.of(context).size.width *.45;
     double imageHeight = 185;
-
-
 
     final item = datas[index];
 

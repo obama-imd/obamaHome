@@ -40,7 +40,6 @@ class Responsivo extends StatelessWidget {
             return mobile;
           }
         }
-
     );
   }
 }
