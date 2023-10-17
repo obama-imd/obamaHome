@@ -4,6 +4,7 @@ import 'package:obamahome/pages/home/home_Mobile.dart';
 import 'package:obamahome/pages/home/home_tablet.dart';
 import 'package:obamahome/pages/home/home_desktop.dart';
 
+
 class HomePage1 extends StatefulWidget {
   const HomePage1({super.key});
 
@@ -20,6 +21,8 @@ class _HomePage1State extends State<HomePage1> {
     _scrollController.dispose();
     super.dispose();
   }
+
+  
 
   @override
   Widget build(BuildContext context) {

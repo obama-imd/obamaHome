@@ -1,9 +1,10 @@
+
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
-import 'package:obamahome/components/firstSectionHome.dart';
+import 'package:obamahome/pages/home/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../components/carousel.dart';
@@ -61,6 +62,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     });
   }
 
+
+  
+  
   @override
   void initState() {
     super.initState();
@@ -176,6 +180,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             textController: _searchController,
                             onSuffixTap: () {
                               setState(() {
+
+
                                 _searchController.clear();
                               });
                             },

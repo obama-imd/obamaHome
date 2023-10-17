@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/pages/blog/blog-details.dart';
 import 'package:obamahome/pages/home/home1.dart';
-
 import 'pages/about-us/aboutUs.dart';
 import 'pages/blog/blog.dart';
 
@@ -18,6 +17,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Home',
       home: const HomePage1(),
+
       initialRoute: '/',
       routes: {
         '/aboutus' : (context) => const AboutUsPage(),

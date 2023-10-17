@@ -2,35 +2,35 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 class Carousel extends StatelessWidget {
-  double swidth;
+  final double swidth;
 
   Carousel(this.swidth, {super.key});
 
-  List<String> imageCarousel = [
+  final List<String> imageCarousel = [
     'assets/images/client.jpg',
     'assets/images/client.jpg',
     'assets/images/client.jpg',
   ];
 
-  List<String> titleCarousel = [
+  final List<String> titleCarousel = [
     'Example Title',
     'Example Title',
     'Example Title',
   ];
 
-  List<String> nameCarousel = [
+  final List<String> nameCarousel = [
     'Example Name',
     'Example Name',
     'Example Name',
   ];
 
-  List<String> summaryCarousel = [
+  final  List<String> summaryCarousel = [
     'Example Summary',
     'Example Summary',
     'Example Summary',
   ];
 
-  List<String> partnersLogo = [
+  final List<String> partnersLogo = [
     'assets/images/ufrn.png',
     'assets/images/imd.png',
     'assets/images/remne.jpg',
@@ -38,7 +38,7 @@ class Carousel extends StatelessWidget {
     'assets/images/ppgite.png',
   ];
 
-  List<double> partnersPadding = [24, 25, 0, 25, 0];
+  final List<double> partnersPadding = [24, 25, 0, 25, 0];
 
   @override
   Widget build(BuildContext context) {

@@ -132,7 +132,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             child: Column(children: <Widget>[
               TopBar(swidth),
 
-              if (MediaQuery.of(context).size.width > 1360) ...[
+              if (MediaQuery.of(context).size.width > 1450) ...[
 
                 Container(
                     width: swidth,

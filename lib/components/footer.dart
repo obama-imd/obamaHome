@@ -278,7 +278,7 @@ class Footer extends StatelessWidget {
                 ],
               )),
           Container(
-            height: 1100,
+            height: 1350,
             width: swidth,
             color: Colors.black,
             padding: const EdgeInsets.only(left: 40, top: 60),
@@ -339,6 +339,9 @@ class Footer extends StatelessWidget {
                   onPressed: () {},
                   child: const Text('> Technical support',
                       style: TextStyle(color: Colors.grey, fontSize: 14))),
+
+
+
               Container(height: 40),
               const Text('ADDITIONAL LINKS',
                   style: TextStyle(
