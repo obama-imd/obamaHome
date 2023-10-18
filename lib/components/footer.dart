@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:obamahome/components/cores_personalizadas.dart';
 
 import '../components/launchSocialMedia.dart';
 
@@ -81,7 +82,7 @@ class Footer extends StatelessWidget {
                                 width: 35,
                                 child: DecoratedBox(
                                     decoration:
-                                        BoxDecoration(color: Colors.blue))),
+                                        BoxDecoration(color: CoresPersonalizadas.azulObama))),
                             Container(height: 20),
                             const SizedBox(
                                 height: 100,
@@ -102,7 +103,7 @@ class Footer extends StatelessWidget {
                                 width: 35,
                                 child: DecoratedBox(
                                     decoration:
-                                        BoxDecoration(color: Colors.blue))),
+                                        BoxDecoration(color: CoresPersonalizadas.azulObama))),
                             Container(height: 20),
                             TextButton(
                                 onPressed: () {},
@@ -152,7 +153,7 @@ class Footer extends StatelessWidget {
                                 width: 35,
                                 child: DecoratedBox(
                                     decoration:
-                                        BoxDecoration(color: Colors.blue))),
+                                        BoxDecoration(color: CoresPersonalizadas.azulObama))),
                             Container(height: 20),
                             TextButton(
                                 onPressed: () {},
@@ -195,7 +196,7 @@ class Footer extends StatelessWidget {
                                 width: 35,
                                 child: DecoratedBox(
                                     decoration:
-                                        BoxDecoration(color: Colors.blue))),
+                                        BoxDecoration(color:CoresPersonalizadas.azulObama))),
                             Container(height: 20),
                             const SizedBox(
                                 height: 60,
@@ -219,7 +220,7 @@ class Footer extends StatelessWidget {
                             Container(
                                 height: 40,
                                 width: 40,
-                                color: Colors.blue,
+                                color: CoresPersonalizadas.azulObama,
                                 child: TextButton(
                                     onPressed: () {},
                                     child: const Icon(Icons.mail,
@@ -229,7 +230,7 @@ class Footer extends StatelessWidget {
             Container(
                 height: 50,
                 width: swidth * 0.7,
-                color: Colors.blue,
+                color: CoresPersonalizadas.azulObama,
                 child: const Center(
                     child: Text('Obama © Copyright 2022',
                         style: TextStyle(color: Colors.white))))
@@ -294,7 +295,7 @@ class Footer extends StatelessWidget {
                   height: 4,
                   width: 35,
                   child: DecoratedBox(
-                      decoration: BoxDecoration(color: Colors.blue))),
+                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
               Container(height: 20),
               const SizedBox(
                   height: 100,
@@ -313,7 +314,7 @@ class Footer extends StatelessWidget {
                   height: 4,
                   width: 35,
                   child: DecoratedBox(
-                      decoration: BoxDecoration(color: Colors.blue))),
+                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
               Container(height: 20),
               TextButton(
                   onPressed: () {},
@@ -353,7 +354,7 @@ class Footer extends StatelessWidget {
                   height: 4,
                   width: 35,
                   child: DecoratedBox(
-                      decoration: BoxDecoration(color: Colors.blue))),
+                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
               Container(height: 20),
               TextButton(
                   onPressed: () {},
@@ -390,7 +391,7 @@ class Footer extends StatelessWidget {
                   height: 4,
                   width: 35,
                   child: DecoratedBox(
-                      decoration: BoxDecoration(color: Colors.blue))),
+                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
               Container(height: 20),
               const SizedBox(
                   height: 60,
@@ -420,7 +421,7 @@ class Footer extends StatelessWidget {
                   Container(
                       height: 40,
                       width: 40,
-                      color: Colors.blue,
+                      color: CoresPersonalizadas.azulObama,
                       child: TextButton(
                           onPressed: () {},
                           child: const Icon(Icons.mail,
@@ -432,7 +433,7 @@ class Footer extends StatelessWidget {
           Container(
               height: 50,
               width: swidth,
-              color: Colors.blue,
+              color: CoresPersonalizadas.azulObama,
               child: const Center(
                   child: Text('Obama © Copyright 2022',
                       style: TextStyle(color: Colors.white))))

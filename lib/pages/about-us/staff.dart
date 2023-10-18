@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'cores_personalizadas.dart';
+
 List<IconData> SocialMediaLinks = [
   (FontAwesomeIcons.facebook),
   (FontAwesomeIcons.googlePlus),
@@ -10,9 +12,9 @@ List<IconData> SocialMediaLinks = [
 ];
 
 class StaffCard extends StatelessWidget {
-  String staffName;
-  String staffImg;
-  double swidth;
+  final String staffName;
+  final String staffImg;
+  final double swidth;
 
   StaffCard(this.staffName, this.staffImg, this.swidth, {super.key});
 
@@ -24,7 +26,7 @@ class StaffCard extends StatelessWidget {
         child: InkWell(
           onTap: () {},
           mouseCursor: SystemMouseCursors.basic,
-          overlayColor: const MaterialStatePropertyAll(Colors.blue),
+          overlayColor: const MaterialStatePropertyAll(CoresPersonalizadas.azulObama),
           child: Column(
             children: [
               Container(

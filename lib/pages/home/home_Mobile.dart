@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
+import 'package:obamahome/components/cores_personalizadas.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:obamahome/pages/home/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
@@ -28,7 +29,7 @@ class HomeMobile extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: CurvedNavigationBar(
         backgroundColor: Colors.white,
-        color: Colors.lightBlue,
+        color: CoresPersonalizadas.azulObama,
         animationDuration: Duration(milliseconds: 300),
         onTap: (index) {
           print(index);
@@ -36,19 +37,13 @@ class HomeMobile extends StatelessWidget {
         items: [
           Icon(Icons.menu),
           Icon(Icons.home),
-          Icon(
-            FontAwesomeIcons.faceSmile,
-          ), //"OAs"
-           //"OAs Autorais"
-          Icon(
-            FontAwesomeIcons.desktop,
-          ), //"Planos de Aula"
-          Icon(
-            FontAwesomeIcons.windows,
-          ), //"Trilhas"
+          Icon(FontAwesomeIcons.faceSmile,), //"OAs"
+          Icon(FontAwesomeIcons.desktop,), //"Planos de Aula"
+          Icon(FontAwesomeIcons.windows,), //"Trilhas"
           Icon(Icons.search),
         ],
       ),
+      drawer: drawermenu(),
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(120),
         child: AppBar(
@@ -161,7 +156,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             TopBar(swidth),
 
             if (MediaQuery.of(context).size.width != 1200) ...[
-
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: 125,
@@ -172,7 +166,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       onPressed: () => scaffoldKey.currentState?.openDrawer()),
                 ]),
               ),
-              // barra de pesquisa
 
             ],
 
@@ -250,7 +243,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         style: const ButtonStyle(
                                           backgroundColor:
                                               MaterialStatePropertyAll(
-                                                  Colors.blue),
+                                                  CoresPersonalizadas.azulObama),
                                           overlayColor:
                                               MaterialStatePropertyAll(
                                                   Colors.lightBlue),
@@ -305,7 +298,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                     height: 100,
                                                     width: 100,
                                                     decoration: BoxDecoration(
-                                                        color: Colors.blue,
+                                                        color: CoresPersonalizadas.azulObama,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100)),
@@ -423,7 +416,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                     height: 100,
                                                     width: 100,
                                                     decoration: BoxDecoration(
-                                                        color: Colors.blue,
+                                                        color: CoresPersonalizadas.azulObama,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100)),

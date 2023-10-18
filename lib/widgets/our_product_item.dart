@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "../components/cores_personalizadas.dart";
+
 class OurProductItem extends StatefulWidget {
   const OurProductItem(
       {super.key,
@@ -43,7 +45,7 @@ class _OurProductItemState extends State<OurProductItem> {
           boxShadow: houver ? shadowHouver : shadowNoHouver,
           border: Border(
             bottom: houver ? const BorderSide(
-              color: Colors.blue,
+              color: CoresPersonalizadas.azulObama,
               width: 5.0,
             ) : BorderSide.none,
           ),

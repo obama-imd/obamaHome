@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'cores_personalizadas.dart';
+
 class contentItem {
   final List<String>? texto;
   final List<String>? subtexto;
@@ -53,7 +55,7 @@ class iconspanel extends StatelessWidget {
                   children: [
                     Container(
                       child: Icon(item.icone![index],
-                          size: 60.0, color: Colors.blue),
+                          size: 60.0, color: CoresPersonalizadas.azulObama),
                     ),
                     Container(
                         padding: const EdgeInsets.only(top: 20),

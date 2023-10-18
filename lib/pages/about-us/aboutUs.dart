@@ -4,6 +4,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../components/carousel.dart';
+import '../../components/cores_personalizadas.dart';
 import '../../components/drawer.dart';
 import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
@@ -154,7 +155,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             child: const Text(
                               'Home',
                               textScaleFactor: 1.11,
-                              style: TextStyle(color: Colors.blue),
+                              style: TextStyle(color: CoresPersonalizadas.azulObama),
                             )),
                         const Text(
                           '>  ',
@@ -248,7 +249,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Colors.blue),
+                                                    CoresPersonalizadas.azulObama),
                                             overlayColor:
                                                 MaterialStatePropertyAll(
                                                     Colors.lightBlue),
@@ -305,7 +306,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color: Colors.blue,
+                                                          color: CoresPersonalizadas.azulObama,
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(

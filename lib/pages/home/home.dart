@@ -5,6 +5,7 @@ import 'package:obamahome/components/drawer.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../components/carousel.dart';
+import '../../components/cores_personalizadas.dart';
 import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
 import '../../components/menu.dart';
@@ -338,7 +339,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           style: const ButtonStyle(
                                             backgroundColor:
                                                 MaterialStatePropertyAll(
-                                                    Colors.blue),
+                                                    CoresPersonalizadas.azulObama),
                                             overlayColor:
                                                 MaterialStatePropertyAll(
                                                     Colors.lightBlue),
@@ -395,7 +396,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color: Colors.blue,
+                                                          color: CoresPersonalizadas.azulObama,
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(
@@ -517,7 +518,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color: Colors.blue,
+                                                          color: CoresPersonalizadas.azulObama,
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(

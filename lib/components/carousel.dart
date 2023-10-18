@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
+import 'cores_personalizadas.dart';
+
 class Carousel extends StatelessWidget {
   final double swidth;
 
@@ -93,7 +95,7 @@ class Carousel extends StatelessWidget {
                         width: 760,
                         height: 240,
                         initialPage: 0,
-                        indicatorColor: Colors.blue,
+                        indicatorColor: CoresPersonalizadas.azulObama,
                         indicatorBackgroundColor: Colors.grey,
                         onPageChanged: (value) {
                           print('Page changed: $value');
@@ -139,7 +141,7 @@ class Carousel extends StatelessWidget {
                       SizedBox(width: swidth * 0.8, height: 80),
                       Center(
                           child: Container(
-                              color: Colors.blue,
+                              color: CoresPersonalizadas.azulObama,
                               height: 150,
                               width: swidth * 0.9 + 40,
                               child: Row(children: [
@@ -280,7 +282,7 @@ class Carousel extends StatelessWidget {
                     width: swidth,
                     height: 240,
                     initialPage: 0,
-                    indicatorColor: Colors.blue,
+                    indicatorColor: CoresPersonalizadas.azulObama,
                     indicatorBackgroundColor: Colors.grey,
                     onPageChanged: (value) {
                       print('Page changed: $value');
@@ -327,7 +329,7 @@ class Carousel extends StatelessWidget {
           SizedBox(width: swidth * 0.8, height: 20),
           Center(
               child: Container(
-                  color: Colors.blue,
+                  color: CoresPersonalizadas.azulObama,
                   height: 180,
                   width: swidth * 0.95,
                   child: Column(children: [

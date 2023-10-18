@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'cores_personalizadas.dart';
+
 // ignore: must_be_immutable
 class TopBar extends StatelessWidget {
   double swidth;
@@ -14,7 +16,7 @@ class TopBar extends StatelessWidget {
     return Column(children: [
       if (swidth > 1150) ...[
         Container(
-            color: Colors.blue,
+            color:CoresPersonalizadas.azulObama,
             height: 45.0,
             width: swidth,
             child: Row(
@@ -40,7 +42,7 @@ class TopBar extends StatelessWidget {
                             child: TextButton(
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all(Colors.blue),
+                                    MaterialStateProperty.all(CoresPersonalizadas.azulObama),
                               ),
                               onPressed: () {
                                 launchUrl(emailLaunchUri);
@@ -92,7 +94,7 @@ class TopBar extends StatelessWidget {
       if (swidth < 1150) ...[
         if (swidth > 900) ...[
           Container(
-              color: Colors.blue,
+              color:CoresPersonalizadas.azulObama,
               height: 80.0,
               width: swidth,
               child: Column(
@@ -141,7 +143,7 @@ class TopBar extends StatelessWidget {
       ],
       if (swidth < 900) ...[
         Container(
-          color: Colors.blue,
+          color: CoresPersonalizadas.azulObama,
           width: swidth,
           height: 110,
           child:

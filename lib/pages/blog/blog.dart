@@ -6,6 +6,7 @@ import 'package:obamahome/components/drawer.dart';
 import 'package:obamahome/pages/blog/blog-filters.dart';
 
 import '../../components/carousel.dart';
+import '../../components/cores_personalizadas.dart';
 import '../../components/footer.dart';
 import '../../components/menu.dart';
 import '../../components/topbar.dart';
@@ -135,7 +136,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             child: const Text(
                               'Home',
                               textScaleFactor: 1.11,
-                              style: TextStyle(color: Colors.blue),
+                              style: TextStyle(color: CoresPersonalizadas.azulObama),
                             )),
                         const Text(
                           '>  ',
