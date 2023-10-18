@@ -53,7 +53,7 @@ class HomeMobile extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
               child: SizedBox(
                 height: 70,
-                child: Image.asset('assets/images/logo1.png',
+                child: Image.asset('assets/images/logo.png',
                     fit: BoxFit.fitHeight),
               ),
             ),
