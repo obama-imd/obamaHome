@@ -12,6 +12,22 @@ class Footer extends StatelessWidget {
 
   Footer(this.swidth, {super.key});
 
+  List<String> serviceCategories = [
+    "> Data recovery",
+    "> Computer repair",
+    "> Mobile service",
+    "> Network solutions",
+    "> Technical support",
+  ];
+
+  List<String> additionalCategories = [
+    "> About us",
+    "> Terms and conditions",
+    "> Privacy policy",
+    "> News",
+    "> Contact us",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Column(children: [
@@ -19,45 +35,7 @@ class Footer extends StatelessWidget {
         Container(
             child: Row(children: [
           Container(
-              height: 700,
-              width: swidth * 0.3,
-              color: Colors.grey,
-              // padding: const EdgeInsets.all(5),
-              child: FlutterMap(
-                options: MapOptions(
-                  center: LatLng(-5.832006, -35.205471),
-                  zoom: 17,
-                  maxZoom: 18,
-                  enableScrollWheel: false,
-                  pinchZoomThreshold: 0.5,
-                ),
-                layers: [
-                  TileLayerOptions(
-                    urlTemplate:
-                        "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    userAgentPackageName: 'com.example.app',
-                  ),
-                  MarkerLayerOptions(
-                    markers: [
-                      Marker(
-                        point: LatLng(-5.832006, -35.205471),
-                        width: 50,
-                        height: 50,
-                        builder: (context) => const Icon(
-                            FontAwesomeIcons.locationDot,
-                            size: 30,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ],
-                nonRotatedChildren: [
-                  AttributionWidget.defaultWidget(
-                    source: 'OpenStreetMap contributors',
-                    onSourceTapped: null,
-                  ),
-                ],
-              )),
+              height: 700, width: swidth * 0.3, child: flutterMapArea(context)),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
                 height: 650,
@@ -77,12 +55,7 @@ class Footer extends StatelessWidget {
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold)),
                             Container(height: 15),
-                            const SizedBox(
-                                height: 4,
-                                width: 35,
-                                child: DecoratedBox(
-                                    decoration:
-                                        BoxDecoration(color: CoresPersonalizadas.azulObama))),
+                            Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
                             const SizedBox(
                                 height: 100,
@@ -98,42 +71,30 @@ class Footer extends StatelessWidget {
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold)),
                             Container(height: 15),
-                            const SizedBox(
-                                height: 4,
-                                width: 35,
-                                child: DecoratedBox(
-                                    decoration:
-                                        BoxDecoration(color: CoresPersonalizadas.azulObama))),
+                            Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Data revovery',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Computer repair',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Mobile service',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Network solutions',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Technical support',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
+                            for (int i = 0;
+                                i < serviceCategories.length;
+                                i++) ...{
+                              Container(
+                                  height: 7.5 *
+                                      (serviceCategories.length).toDouble(),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Text(
+                                          serviceCategories[i],
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 14),
+                                        ),
+                                      ),
+                                      Container(height: 5),
+                                    ],
+                                  )),
+                            }
                           ])),
                   Container(
                       height: 600,
@@ -148,55 +109,38 @@ class Footer extends StatelessWidget {
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold)),
                             Container(height: 15),
-                            const SizedBox(
-                                height: 4,
-                                width: 35,
-                                child: DecoratedBox(
-                                    decoration:
-                                        BoxDecoration(color: CoresPersonalizadas.azulObama))),
+                            Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> About us',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Terms and conditions',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Privacy policy',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> News',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 5),
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text('> Contact us',
-                                    style: TextStyle(
-                                        color: Colors.grey, fontSize: 14))),
-                            Container(height: 40),
+                            for (int i = 0;
+                                i < additionalCategories.length;
+                                i++) ...{
+                              Container(
+                                  height: 7.5 *
+                                      (serviceCategories.length).toDouble(),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Text(
+                                          additionalCategories[i],
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 14),
+                                        ),
+                                      ),
+                                      Container(height: 5),
+                                    ],
+                                  )),
+                            },
+                            Container(height: 35),
                             const Text('CONTACT US',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 14,
                                     fontWeight: FontWeight.bold)),
                             Container(height: 15),
-                            const SizedBox(
-                                height: 4,
-                                width: 35,
-                                child: DecoratedBox(
-                                    decoration:
-                                        BoxDecoration(color:CoresPersonalizadas.azulObama))),
+                            Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
                             const SizedBox(
                                 height: 60,
@@ -238,46 +182,7 @@ class Footer extends StatelessWidget {
         ]))
       ] else ...[
         Column(children: [
-          Container(
-              height: 200,
-              width: swidth,
-              color: Colors.grey,
-              padding: const EdgeInsets.all(5),
-              child: FlutterMap(
-                options: MapOptions(
-                  center: LatLng(-5.832006, -35.205471),
-                  zoom: 17,
-                  maxZoom: 18,
-                  enableScrollWheel: false,
-                  pinchZoomThreshold: 0.5,
-                ),
-                layers: [
-                  TileLayerOptions(
-                    urlTemplate:
-                        "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
-                    userAgentPackageName: 'com.example.app',
-                  ),
-                  MarkerLayerOptions(
-                    markers: [
-                      Marker(
-                        point: LatLng(-5.832006, -35.205471),
-                        width: 50,
-                        height: 50,
-                        builder: (context) => const Icon(
-                            FontAwesomeIcons.locationDot,
-                            size: 30,
-                            color: Colors.black),
-                      ),
-                    ],
-                  ),
-                ],
-                nonRotatedChildren: [
-                  AttributionWidget.defaultWidget(
-                    source: 'OpenStreetMap contributors',
-                    onSourceTapped: null,
-                  ),
-                ],
-              )),
+          Container(height: 200, width: swidth, child: flutterMapArea(context)),
           Container(
             height: 1350,
             width: swidth,
@@ -291,11 +196,7 @@ class Footer extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
               Container(height: 15),
-              const SizedBox(
-                  height: 4,
-                  width: 35,
-                  child: DecoratedBox(
-                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
+              Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
               const SizedBox(
                   height: 100,
@@ -310,88 +211,57 @@ class Footer extends StatelessWidget {
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
               Container(height: 15),
-              const SizedBox(
-                  height: 4,
-                  width: 35,
-                  child: DecoratedBox(
-                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
+              Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Data revovery',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Computer repair',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Mobile service',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Network solutions',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Technical support',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-
-
-
-              Container(height: 40),
+              for (int i = 0; i < serviceCategories.length; i++) ...{
+                Container(
+                    height: 7.5 * (serviceCategories.length).toDouble(),
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            serviceCategories[i],
+                            style: TextStyle(color: Colors.grey, fontSize: 14),
+                          ),
+                        ),
+                        Container(height: 5),
+                      ],
+                    )),
+              },
+              Container(height: 35),
               const Text('ADDITIONAL LINKS',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
               Container(height: 15),
-              const SizedBox(
-                  height: 4,
-                  width: 35,
-                  child: DecoratedBox(
-                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
+              Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> About us',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Terms and conditions',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Privacy policy',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> News',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 5),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text('> Contact us',
-                      style: TextStyle(color: Colors.grey, fontSize: 14))),
-              Container(height: 40),
+              for (int i = 0; i < additionalCategories.length; i++) ...{
+                Container(
+                    height: 7.5 * (serviceCategories.length).toDouble(),
+                    child: Column(
+                      children: [
+                        InkWell(
+                          onTap: () {},
+                          child: Text(
+                            additionalCategories[i],
+                            style: TextStyle(color: Colors.grey, fontSize: 14),
+                          ),
+                        ),
+                        Container(height: 5),
+                      ],
+                    )),
+              },
+              Container(height: 35),
               const Text('CONTACT US',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 14,
                       fontWeight: FontWeight.bold)),
               Container(height: 15),
-              const SizedBox(
-                  height: 4,
-                  width: 35,
-                  child: DecoratedBox(
-                      decoration: BoxDecoration(color: CoresPersonalizadas.azulObama))),
+              Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
               const SizedBox(
                   height: 60,
@@ -441,4 +311,40 @@ class Footer extends StatelessWidget {
       ]
     ]);
   }
+}
+
+@override
+Widget flutterMapArea(BuildContext context) {
+  return FlutterMap(
+    options: MapOptions(
+      center: LatLng(-5.832006, -35.205471),
+      zoom: 17,
+      maxZoom: 18,
+      enableScrollWheel: false,
+      pinchZoomThreshold: 0.5,
+    ),
+    layers: [
+      TileLayerOptions(
+        urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+        userAgentPackageName: 'com.example.app',
+      ),
+      MarkerLayerOptions(
+        markers: [
+          Marker(
+            point: LatLng(-5.832006, -35.205471),
+            width: 50,
+            height: 50,
+            builder: (context) => const Icon(FontAwesomeIcons.locationDot,
+                size: 30, color: Colors.black),
+          ),
+        ],
+      ),
+    ],
+    nonRotatedChildren: [
+      AttributionWidget.defaultWidget(
+        source: 'OpenStreetMap contributors',
+        onSourceTapped: null,
+      ),
+    ],
+  );
 }
