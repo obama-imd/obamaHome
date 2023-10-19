@@ -15,12 +15,12 @@ List<String> selValue = [
 ];
 
 List<dynamic> selValueContent = [
-  const Text("HOME"),
-  const Text("SOBRE"),
-  const Text("SERVIÇOS"),
-  const Text("PUBLICAÇÕES"),
-  const Text("PAGES"),
-  const Text("PLANOS DE AULA"),
+  menuItem(const Text("HOME")),
+  menuItem(const Text("SOBRE")),
+  menuItem(const Text("SERVIÇOS")),
+  menuItem(const Text("PUBLICAÇÕES")),
+  menuItem(const Text("PAGES")),
+  menuItem(const Text("PLANOS DE AULA")),
         AnimSearchBar(
           autoFocus: true,
           width: 400,
@@ -181,20 +181,7 @@ Widget MenuBar0(
 }
 
 @override
-Widget menuItem(dynamic menuTitle) {
-  return InkWell(
-    mouseCursor: SystemMouseCursors.click,
-    child: Padding(
-      padding: const EdgeInsets.all(8),
-      child: menuTitle,
-    ),
-  );
-}
-
-@override
 Widget navBarMenu(BuildContext context, double swidth) {
-
-
   return SizedBox(
     width: swidth * 0.47,
     child: Row(children: [
@@ -206,3 +193,24 @@ Widget navBarMenu(BuildContext context, double swidth) {
     ]),
   );
 }
+
+@override
+Widget menuItem(dynamic menuTitle) {
+  return InkWell(
+    mouseCursor: SystemMouseCursors.click,
+    child: Padding(
+      padding: const EdgeInsets.all(8),
+      child: menuTitle,
+    ),
+  );
+}
+
+class SearchPage {}
+
+class ContactPage {}
+
+class ShopPage {}
+
+class PagesPage {}
+
+class ServicesPage {}

@@ -73,8 +73,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     double imageWidth = MediaQuery.of(context).size.width *.3;
     double imageHeight = 185;
 
-
-
     final item = datas[index];
 
     String extractImagePath(String content) {
