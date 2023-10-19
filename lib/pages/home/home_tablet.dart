@@ -15,8 +15,8 @@ import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
-import '../../widgets/our_product_item.dart';
 import 'constants.dart';
+import 'our_product_item.dart';
 
 class HomeTablet extends StatelessWidget {
 

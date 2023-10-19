@@ -14,8 +14,8 @@ import '../../components/footer.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
-import '../../widgets/our_product_item.dart';
 import 'constants.dart';
+import 'our_product_item.dart';
 
 class HomeMobile extends StatelessWidget {
   final TrackingScrollController scrollController;

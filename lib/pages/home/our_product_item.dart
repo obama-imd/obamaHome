@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "../components/cores_personalizadas.dart";
+import '../../components/cores_personalizadas.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(

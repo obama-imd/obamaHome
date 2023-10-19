@@ -14,8 +14,8 @@ import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
-import '../../widgets/our_product_item.dart';
 import 'constants.dart';
+import 'our_product_item.dart';
 
 class HomeDesktop extends StatelessWidget {
 
@@ -121,7 +121,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double paddingCard = MediaQuery.of(context).size.width *.25;
+    double paddingCard = MediaQuery.of(context).size.width *.025;
     double swidth = MediaQuery.of(context).size.width;
 
 
@@ -133,7 +133,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             child: Column(children: <Widget>[
               TopBar(swidth),
 
-              if (MediaQuery.of(context).size.width > 1450) ...[
+              if (swidth < 1450) ...[
 
                 Container(
                     width: swidth,

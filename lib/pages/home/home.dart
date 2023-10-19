@@ -12,8 +12,8 @@ import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
-import '../../widgets/our_product_item.dart';
 import 'firstSectionHome.dart';
+import 'our_product_item.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
