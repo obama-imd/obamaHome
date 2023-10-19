@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
-import 'package:obamahome/components/firstSectionHome.dart';
+import 'package:obamahome/pages/home/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../components/carousel.dart';
