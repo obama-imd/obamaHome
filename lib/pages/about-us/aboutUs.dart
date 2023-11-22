@@ -12,6 +12,7 @@ import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import 'staff.dart';
+import 'o_que_fazemos.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -55,10 +56,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     // First Grid Block
 
   List<String> grid1Title = [
-    "Data Recovery",
-    "Computer repair",
-    "Mobile service",
-    "Data Recovery",
+    "Objetos de Aprendizagem",
+    "Planos de Aula",
+    "Publicações",
+    "Formações",
   ];
 
   List<IconData> grid1Icon = [
@@ -191,13 +192,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         color: const Color.fromARGB(255, 224, 220, 220),
                         padding: const EdgeInsets.only(left: 40.0, top: 30.0),
                         child: ListView(children: [
-                          const Text('What we do',
+                          const Text('O que nós Fazemos',
                               textScaleFactor: 2.0,
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           Container(height: 15),
-                          const Text('Texto',
-                              textScaleFactor: 1.1,
-                              style: TextStyle(color: Colors.grey))
+                          const OqueFazemos()
                         ])),
                   ),
                   ResponsiveGridCol(
@@ -280,7 +279,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SectionTitle(
-                                'ABOUT SERVICE',
+                                'Serviços Oferecidos',
                                 'Easy and effective way to get your device repaired.',
                                 CrossAxisAlignment.start),
                             Container(
@@ -356,7 +355,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   padding: EdgeInsets.only(
                       left: swidth * 0.07, top: 120.0, bottom: 65.0),
                   child: SectionTitle(
-                      'EXPERIENCED STAFF',
+                      'Nossa Equipe',
                       'Our experts have been featured in press numerous times.',
                       CrossAxisAlignment.start),
                 ),

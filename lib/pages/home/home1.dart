@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/pages/home/responsivo.dart';
 import 'package:obamahome/pages/home/home_Mobile.dart';
-import 'package:obamahome/pages/home/home_tablet.dart';
 import 'package:obamahome/pages/home/home_desktop.dart';
+import 'package:obamahome/pages/home/home_tablet.dart';
+import 'package:obamahome/pages/home/responsivo.dart';
 
 
 class HomePage1 extends StatefulWidget {

@@ -15,23 +15,27 @@ List<String> selValue = [
 ];
 
 List<dynamic> selValueContent = [
+
+
   menuItem(const Text("HOME")),
   menuItem(const Text("SOBRE")),
   menuItem(const Text("SERVIÇOS")),
   menuItem(const Text("PUBLICAÇÕES")),
   menuItem(const Text("PAGES")),
   menuItem(const Text("PLANOS DE AULA")),
-        AnimSearchBar(
-          autoFocus: true,
-          width: 400,
-          textController: _searchController,
-          onSuffixTap: () {
-            _searchController.clear();
-          },
-          onSubmitted: (String value) {
-            debugPrint('onFieldSubmitted value $value');
-          },
-        ),
+  AnimSearchBar(
+    rtl: true,
+    autoFocus: true,
+    width: 300,
+    textController: _searchController,
+    onSuffixTap: () {
+      _searchController.clear();
+    },
+    onSubmitted: (String value) {
+      debugPrint('onFieldSubmitted value $value');
+    },
+  ),
+
 ];
 
 // List<itemValue> itemKeys = [
