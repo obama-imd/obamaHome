@@ -51,6 +51,17 @@ class drawermenu extends StatelessWidget {
                           child: Text("SOBRE NÓS")))
                 ])),
             ExpansionTile(
+                trailing: const SizedBox.shrink(),
+                title: ListView(shrinkWrap: true, children: [
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, 'formacoes');
+                      },
+                      child: const Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text("FORMAÇÕES")))
+                ])),
+            ExpansionTile(
                 trailing: const Icon(FontAwesomeIcons.plus, size: 13),
                 title: ListView(shrinkWrap: true, children: [
                   Container(
@@ -113,7 +124,7 @@ class drawermenu extends StatelessWidget {
                 title: ListView(shrinkWrap: true, children: [
                   Container(
                       padding: const EdgeInsets.only(left: 8),
-                      child: const Text("PAGES"))
+                      child: const Text("Objetos de Aprendizagem"))
                 ]),
                 children: [
                   Align(
@@ -140,7 +151,7 @@ class drawermenu extends StatelessWidget {
                 title: ListView(shrinkWrap: true, children: [
                   Container(
                       padding: const EdgeInsets.only(left: 8),
-                      child: const Text("SHOP"))
+                      child: const Text("Planos de Aula"))
                 ]),
                 children: [
                   Align(
@@ -162,33 +173,7 @@ class drawermenu extends StatelessWidget {
                               child: const Text("Item 2",
                                   style: TextStyle(color: Colors.black)))))
                 ]),
-            ExpansionTile(
-                trailing: const Icon(FontAwesomeIcons.plus, size: 13),
-                title: ListView(shrinkWrap: true, children: [
-                  Container(
-                      padding: const EdgeInsets.only(left: 8),
-                      child: const Text("CONTACT"))
-                ]),
-                children: [
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Container(
-                              width: swidth * 0.3,
-                              padding: const EdgeInsets.only(left: 16),
-                              child: const Text("Item 1",
-                                  style: TextStyle(color: Colors.black))))),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Container(
-                              width: swidth * 0.3,
-                              padding: const EdgeInsets.only(left: 16),
-                              child: const Text("Item 2",
-                                  style: TextStyle(color: Colors.black)))))
-                ])
+
           ],
         ));
   }

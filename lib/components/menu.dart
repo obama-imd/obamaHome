@@ -21,7 +21,7 @@ List<dynamic> selValueContent = [
   menuItem(const Text("SOBRE")),
   menuItem(const Text("SERVIÇOS")),
   menuItem(const Text("PUBLICAÇÕES")),
-  menuItem(const Text("PAGES")),
+  menuItem(const Text("FORMAÇÕES")),
   menuItem(const Text("PLANOS DE AULA")),
   AnimSearchBar(
     rtl: true,

@@ -1,6 +1,10 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/pages/formacoes.dart';
+import 'package:obamahome/pages/home/home_Mobile.dart';
+import 'package:obamahome/pages/mobile_pages/mobile_pages_export.dart';
+
+import '../about-us/aboutUs.dart';
 
 class HomeMobile1 extends StatefulWidget {
   const HomeMobile1({super.key});
@@ -9,35 +13,72 @@ class HomeMobile1 extends StatefulWidget {
   State<HomeMobile1> createState() => _HomeMobile1State();
 }
 
+final TrackingScrollController _scrollController = TrackingScrollController();
+ int _indiceAbaSelecionada = 0;
+
 final List<Widget> _telas = [
-  Scaffold(backgroundColor: Colors.lightBlue),
-  Scaffold(backgroundColor: Colors.green),
+  HomeMobile(scrollController: _scrollController),
+  AboutUsPage(),
   Scaffold(backgroundColor: Colors.yellow),
-  Scaffold(backgroundColor: Colors.pink),
+  Formacoes(),
+  Scaffold(backgroundColor: Colors.amberAccent),
+  Scaffold(backgroundColor: Colors.purple),
 ];
+
+final List<Icon> _icones = [
+  Icon(Icons.home, color: Colors.black, size: 30,),
+  Icon(FontAwesomeIcons.faceSmile,size: 30,color: Colors.black,),//sobre nos
+  Icon(FontAwesomeIcons.desktop,size: 30, color: Colors.black,), //"Planos de Aula"
+  Icon(FontAwesomeIcons.book,color: Colors.black,size: 30, ), //"Trilhas"
+  Icon(Icons.menu, color: Colors.black,size: 30, ),
+  Icon(Icons.search, color: Colors.black,size: 30, ),
+];
+
+
 
 class _HomeMobile1State extends State<HomeMobile1> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length:_telas.length,
+      length: _telas.length,
       child: Scaffold(
+        body: TabBarView(
+        children: _telas
 
-       bottomNavigationBar: CurvedNavigationBar(
-         index: 0,
-         items: [
-           Icon(Icons.menu),
-           Icon(Icons.home),
-           Icon(FontAwesomeIcons.faceSmile,), //"OAs"
-           Icon(FontAwesomeIcons.desktop,), //"Planos de Aula"
-           Icon(FontAwesomeIcons.windows,), //"Trilhas"
-           Icon(Icons.search),
-         ],
+    ),
+        bottomNavigationBar: NavegacaoEntrePaginasMobile(
+          indiceAbaSelecionada: _indiceAbaSelecionada,
+          icones: _icones,
+          onTap: (indice){
+            setState(() {
+              _indiceAbaSelecionada = indice;
+            });
+          },
+        ),
 
 
-         onTap: (indice){},
-         animationDuration: Duration(milliseconds: 300),
-       ),
+         // CurvedNavigationBar(
+         //   color: CoresPersonalizadas.azulObama,
+         //   buttonBackgroundColor: CoresPersonalizadas.azulObama,
+         //   backgroundColor: Colors.white,
+         //   animationDuration: Duration(milliseconds:250),
+         //
+         //     items: _icones,
+         //     index: 0,
+         //     onTap: (indice){
+         //     setState(() {
+         //        _indiceAbaSelecionada = indice;
+         //
+         //        Navigator.pushNamed(context, )
+         //     });
+         //   }
+         //
+         // )
+
+
+
+
+
       ),
     );
   }

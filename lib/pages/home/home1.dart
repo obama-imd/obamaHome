@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/pages/home/home_Mobile.dart';
 import 'package:obamahome/pages/home/home_desktop.dart';
 import 'package:obamahome/pages/home/home_tablet.dart';
 import 'package:obamahome/pages/home/responsivo.dart';
-
+import 'package:obamahome/pages/mobile_pages/home_mobile1.dart';
 
 class HomePage1 extends StatefulWidget {
   const HomePage1({super.key});
@@ -30,7 +29,8 @@ class _HomePage1State extends State<HomePage1> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         body: Responsivo(
-          mobile: HomeMobile( scrollController: _scrollController,),
+          mobile: HomeMobile1(),
+          //mobile: HomeMobile( scrollController: _scrollController,),
           tablet: HomeTablet(scrollController: _scrollController,),
           desktop: HomeDesktop(scrollController: _scrollController,),
         ),

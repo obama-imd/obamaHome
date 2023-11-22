@@ -22,45 +22,51 @@ class HomeMobile extends StatelessWidget {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+
   HomeMobile({required this.scrollController, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.white,
-        color: CoresPersonalizadas.azulObama,
-        animationDuration: Duration(milliseconds: 300),
-        onTap: (index) {
-          print(index);
-        },
-        items: [
-          Icon(Icons.menu),
-          Icon(Icons.home),
-          Icon(FontAwesomeIcons.faceSmile,), //"OAs"
-          Icon(FontAwesomeIcons.desktop,), //"Planos de Aula"
-          Icon(FontAwesomeIcons.windows,), //"Trilhas"
-          Icon(Icons.search),
-        ],
-      ),
-      drawer: drawermenu(),
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(120),
-        child: AppBar(
-          backgroundColor: Colors.white,
-          flexibleSpace: Column(children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
-              child: SizedBox(
-                height: 70,
-                child: Image.asset('assets/images/logo.png',
-                    fit: BoxFit.fitHeight),
+    return DefaultTabController(
+      length: 5,
+      child: Scaffold(
+        // bottomNavigationBar: CurvedNavigationBar(
+        //   backgroundColor: Colors.white,
+        //   color: CoresPersonalizadas.azulObama,
+        //   animationDuration: Duration(milliseconds: 300),
+        //   onTap: (index) {
+        //     print(index);
+        //   },
+        //   items: [
+        //     Icon(Icons.home),
+        //     Icon(Icons.menu),
+        //     Icon(FontAwesomeIcons.faceSmile,), //"OAs"
+        //     Icon(FontAwesomeIcons.desktop,), //"Planos de Aula"
+        //     Icon(FontAwesomeIcons.windows,), //"Trilhas"
+        //     Icon(Icons.search),
+        //   ],
+        //   ),
+        drawer: drawermenu(),
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(120),
+          child: AppBar(
+            backgroundColor: Colors.white,
+            flexibleSpace: Column(children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
+                child: SizedBox(
+                  height: 70,
+                  child: Image.asset('assets/images/logo.png',
+                      fit: BoxFit.fitHeight),
+                ),
               ),
-            ),
-          ]),
+            ]),
+          ),
         ),
+        body: TabBarView(
+            children:[const MyStatefulWidget()
+            ]),
       ),
-      body: const MyStatefulWidget(),
     );
   }
 }
@@ -153,6 +159,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(children: <Widget>[
+
             TopBar(swidth),
 
             if (MediaQuery.of(context).size.width != 1200) ...[
