@@ -1,6 +1,4 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/cores_personalizadas.dart';
@@ -30,22 +28,6 @@ class HomeMobile extends StatelessWidget {
     return DefaultTabController(
       length: 5,
       child: Scaffold(
-        // bottomNavigationBar: CurvedNavigationBar(
-        //   backgroundColor: Colors.white,
-        //   color: CoresPersonalizadas.azulObama,
-        //   animationDuration: Duration(milliseconds: 300),
-        //   onTap: (index) {
-        //     print(index);
-        //   },
-        //   items: [
-        //     Icon(Icons.home),
-        //     Icon(Icons.menu),
-        //     Icon(FontAwesomeIcons.faceSmile,), //"OAs"
-        //     Icon(FontAwesomeIcons.desktop,), //"Planos de Aula"
-        //     Icon(FontAwesomeIcons.windows,), //"Trilhas"
-        //     Icon(Icons.search),
-        //   ],
-        //   ),
         drawer: drawermenu(),
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(120),
