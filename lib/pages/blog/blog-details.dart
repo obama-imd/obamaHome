@@ -3,11 +3,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
+import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/pages/blog/blog-filters.dart';
 
 import '../../../components/carousel.dart';
 import '../../../components/footer.dart';
-import '../../../components/menu.dart';
 import '../../../components/topbar.dart';
 import '../../../services/api_blog.dart';
 
@@ -89,7 +89,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          navBarMenu(context, swidth),
+                          NavMenu(swidth: swidth, eixoLista: Axis.horizontal, heightBtn: 50),
                         ])),
               ] else ...[
                 SizedBox(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
+import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/pages/home/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -11,7 +12,6 @@ import '../../components/carousel.dart';
 import '../../components/cores_personalizadas.dart';
 import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
-import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
@@ -126,7 +126,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     double paddingCard = MediaQuery.of(context).size.width *.25;
     double swidth = MediaQuery.of(context).size.width;
 
-
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
@@ -149,12 +148,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          navBarMenu(context, swidth),
+                          NavMenu(swidth: swidth, eixoLista: Axis.horizontal, heightBtn: 50),
                         ])),
-
-
               ] else ...[
-
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 125,

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/pages/blog/blog-details.dart';
+import 'package:obamahome/pages/formacoes.dart';
 import 'package:obamahome/pages/home/home1.dart';
+
+import 'components/cores_personalizadas.dart';
 import 'pages/about-us/aboutUs.dart';
 import 'pages/blog/blog.dart';
-import 'components/cores_personalizadas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/aboutus' : (context) => const AboutUsPage(),
         '/blog' : (context) => const BlogPage(),
         '/blog-details' : (context) => const BlogDetails(),
+        '/formacoes': (context) => const Formacoes(),
       }
     );
   }

@@ -1,93 +1,9 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/pages/blog/blog-details.dart';
+import 'package:riverpod/riverpod.dart';
 
 final TextEditingController _searchController = TextEditingController();
-
-List<String> selValue = [
-  "HOME",
-  "SOBRE",
-  "SERVIÇOS",
-  "PUBLICAÇÕES",
-  "PAGES",
-  "PLANOS DE AULA",
-  "SRC"
-];
-
-List<dynamic> selValueContent = [
-
-
-  menuItem(const Text("HOME")),
-  menuItem(const Text("SOBRE")),
-  menuItem(const Text("SERVIÇOS")),
-  menuItem(const Text("PUBLICAÇÕES")),
-  menuItem(const Text("FORMAÇÕES")),
-  menuItem(const Text("PLANOS DE AULA")),
-  AnimSearchBar(
-    rtl: true,
-    autoFocus: true,
-    width: 300,
-    textController: _searchController,
-    onSuffixTap: () {
-      _searchController.clear();
-    },
-    onSubmitted: (String value) {
-      debugPrint('onFieldSubmitted value $value');
-    },
-  ),
-
-];
-
-// List<itemValue> itemKeys = [
-//     'itemsHome',
-//     'itemsBoutUs',
-//     'itemsServices',
-//     'itemsBlog',
-//     'itemsPages',
-//     'itemsShop',
-//     'itemsContact',
-// ];
-
-class ItemValue {
-  final List<String>? itemsHome;
-  final List<String>? itemsBoutUs;
-  final List<String>? itemsServices;
-  final List<String>? itemsBlog;
-  final List<String>? itemsPages;
-  final List<String>? itemsShop;
-  // final List<String>? itemsSearch;
-
-  ItemValue({
-    this.itemsHome,
-    this.itemsBoutUs,
-    this.itemsServices,
-    this.itemsBlog,
-    this.itemsPages,
-    this.itemsShop,
-    // this.itemsSearch,
-  });
-}
-
-final List<ItemValue> itemValues = [
-  ItemValue(
-    itemsHome: ["Item 1", "Item 2"],
-    itemsBoutUs: ["Sobre"],
-    itemsServices: ["Item 1", "Item 2"],
-    itemsBlog: ["Lista de Posts", "Último post"],
-    itemsPages: ["Item 1", "Item 2"],
-    itemsShop: ["Item 1", "Item 2"],
-    // itemsSearch: ["Item 1", "Item 2"],
-  )
-];
-
-List<String> navigateTo = [
-  '/',
-  '/aboutus',
-  '/servicos',
-  '/blog',
-  '/paginas',
-  '/loja',
-];
 
 List<DropdownMenuItem<String>> getDropdownItems(
   BuildContext context,
@@ -183,20 +99,54 @@ Widget MenuBar0(
     items: getDropdownItems(context, label, index, content),
   );
 }
+// @override
+// Widget NavMenu(
+//     BuildContext context, double swidth, Axis eixoLista, double heightBtn) {
+//   double sizedBoxWidth;
+//   bool showSearchBtn = true;
 
-@override
-Widget navBarMenu(BuildContext context, double swidth) {
-  return SizedBox(
-    width: swidth * 0.47,
-    child: Row(children: [
-      for (int i = 0; i < selValue.length; i++) ...{
-        Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2.5),
-            child: MenuBar0(context, i, selValue[i], selValueContent[i])),
-      }
-    ]),
-  );
-}
+//   //Condição para aparecer o eixo vertical no drawer
+//   if (eixoLista == Axis.vertical) {
+//     sizedBoxWidth = swidth*.3;
+//     showSearchBtn = false;
+//   } else {
+//     sizedBoxWidth = swidth*0.68;
+//   }
+//   return Row(
+//     children: [
+//       SizedBox(
+//         child: Expanded(
+//           child: SizedBox(
+//             width: sizedBoxWidth,
+//             height: heightBtn,
+//             child: ListView(scrollDirection: eixoLista, children: [
+//               for (int i = 0; i < selValue.length; i++) ...{
+//                 Padding(
+//                     padding: const EdgeInsets.symmetric(horizontal: 2.5),
+//                     child:
+//                         MenuBar0(context, i, selValue[i], selValueContent[i])),
+//               },
+//               if (showSearchBtn == true) ...{
+//                 AnimSearchBar(
+//                   rtl: true,
+//                   autoFocus: true,
+//                   width: 300,
+//                   textController: _searchController,
+//                   onSuffixTap: () {
+//                     _searchController.clear();
+//                   },
+//                   onSubmitted: (String value) {
+//                     debugPrint('onFieldSubmitted value $value');
+//                   },
+//                 ),
+//               }
+//             ]),
+//           ),
+//         ),
+//       ),
+//     ],
+//   );
+// }
 
 @override
 Widget menuItem(dynamic menuTitle) {
@@ -218,3 +168,5 @@ class ShopPage {}
 class PagesPage {}
 
 class ServicesPage {}
+
+final showSearchBtnProvider = Provider<bool>((ref) => false);

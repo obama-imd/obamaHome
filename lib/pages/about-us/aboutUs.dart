@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/components/navMenu.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
@@ -8,11 +9,10 @@ import '../../components/cores_personalizadas.dart';
 import '../../components/drawer.dart';
 import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
-import '../../components/menu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
-import 'staff.dart';
 import 'o_que_fazemos.dart';
+import 'staff.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);
@@ -102,7 +102,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          navBarMenu(context, swidth),
+                          NavMenu(swidth: swidth, eixoLista: Axis.horizontal, heightBtn: 50),
                         ])),
               ] else ...[
                 SizedBox(

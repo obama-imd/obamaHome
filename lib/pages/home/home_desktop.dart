@@ -10,7 +10,7 @@ import '../../components/carousel.dart';
 import '../../components/cores_personalizadas.dart';
 import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
-import '../../components/menu.dart';
+import '../../components/navMenu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
@@ -18,16 +18,20 @@ import 'constants.dart';
 import 'our_product_item.dart';
 
 class HomeDesktop extends StatelessWidget {
+
   final TrackingScrollController scrollController;
 
-  const HomeDesktop({required this.scrollController, super.key});
+  const HomeDesktop({
+
+    required this.scrollController,
+    super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return   Scaffold(
+
         appBar: AppBar(
-          title: const Text("desktop"),
-        ),
+          title: const Text("desktop"),),
         body: const MyStatefulWidget());
   }
 }
@@ -39,6 +43,7 @@ class MyStatefulWidget extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+
   bool dataAvailable = true;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _searchController = TextEditingController();
@@ -64,7 +69,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   }
 
   Widget blogData(BuildContext context, index) {
-    double imageWidth = MediaQuery.of(context).size.width * .3;
+
+    double imageWidth = MediaQuery.of(context).size.width *.3;
     double imageHeight = 185;
 
     final item = datas[index];
@@ -102,7 +108,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: Text(item['title'],
                 style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
           ),
           Text(item['text'], style: const TextStyle(fontSize: 15), maxLines: 4),
           // Text(sumValue),
@@ -113,8 +119,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double paddingCard = MediaQuery.of(context).size.width * .025;
+    double paddingCard = MediaQuery.of(context).size.width *.025;
     double swidth = MediaQuery.of(context).size.width;
+
 
     return Scaffold(
         key: scaffoldKey,
@@ -122,32 +129,27 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(children: <Widget>[
-              //barra de cima
               TopBar(swidth),
 
-              if (swidth > 1400) ...[
+              if (swidth < 1450) ...[
+
                 Container(
                     width: swidth,
                     height: 125,
                     margin: EdgeInsets.only(
-                        left: swidth * 0.068, right: swidth * 0.06),
+                        left: swidth * 0.068, right: swidth * 0.068),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
                               width: 250,
-                              child: Image.asset(
-                                'assets/images/logo.png',
-                                fit: BoxFit.fitHeight,
-                              )),
-                          SizedBox(
-                            width: 100,
-                          ),
-                          Expanded(
-                            child: navBarMenu(context, swidth),
-                          ),
+                              child: Image.asset('assets/images/logo.png',
+                                  fit: BoxFit.fitHeight)),
+                          NavMenu(swidth: swidth, eixoLista: Axis.horizontal, heightBtn: 50),
                         ])),
+
               ] else ...[
+
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 125,
@@ -156,13 +158,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: Colors.black),
+                              const Icon(Icons.menu, color: Colors.black),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
                               width: 280,
                               padding:
-                                  const EdgeInsets.only(right: 30, left: 30),
+                              const EdgeInsets.only(right: 30, left: 30),
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
 
@@ -251,24 +253,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       width: 170,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(100)),
+                                          BorderRadius.circular(100)),
                                       child: TextButton(
                                           onPressed: () {},
                                           style: const ButtonStyle(
                                             backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    CoresPersonalizadas
-                                                        .azulObama),
+                                            MaterialStatePropertyAll(
+                                                CoresPersonalizadas.azulObama),
                                             overlayColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.lightBlue),
+                                            MaterialStatePropertyAll(
+                                                Colors.lightBlue),
                                           ),
                                           child: const Text('READ MORE',
                                               style: TextStyle(
                                                   shadows: [
                                                     Shadow(
                                                         offset:
-                                                            Offset(1.1, 1.1))
+                                                        Offset(1.1, 1.1))
                                                   ],
                                                   fontSize: 15,
                                                   fontWeight: FontWeight.w600,
@@ -296,11 +297,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 padding: const EdgeInsets.only(top: 60),
                                 child: ResponsiveGridRow(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       for (int i = 0;
-                                          i < grid1Title.length;
-                                          i++) ...{
+                                      i < grid1Title.length;
+                                      i++) ...{
                                         ResponsiveGridCol(
                                           lg: 6,
                                           sm: 12,
@@ -309,44 +310,42 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 bottom: 100),
                                             child: Column(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                                 children: [
                                                   Container(
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color:
-                                                              CoresPersonalizadas
-                                                                  .azulObama,
+                                                          color: CoresPersonalizadas.azulObama,
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100)),
+                                                          BorderRadius
+                                                              .circular(
+                                                              100)),
                                                       child: Icon(grid1Icon[i],
                                                           size: iconSize2[i],
                                                           color: Colors.white)),
                                                   Container(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              top: 20),
+                                                      const EdgeInsets.only(
+                                                          top: 20),
                                                       child: Text(grid1Title[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize:
-                                                                      20))),
+                                                          const TextStyle(
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                              fontSize:
+                                                              20))),
                                                   Container(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              top: 20),
+                                                      const EdgeInsets.only(
+                                                          top: 20),
                                                       child: Text(
                                                           grid1Content[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .grey)))
+                                                          const TextStyle(
+                                                              color: Colors
+                                                                  .grey)))
                                                 ]),
                                           ),
                                         ),
@@ -396,7 +395,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ],
                 ),
               ),
-
               ResponsiveGridRow(children: [
                 if (swidth > 992) ...{
                   ResponsiveGridCol(
@@ -424,11 +422,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 padding: const EdgeInsets.only(top: 60),
                                 child: ResponsiveGridRow(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    CrossAxisAlignment.start,
                                     children: [
                                       for (int i = 0;
-                                          i < grid2Title.length;
-                                          i++) ...{
+                                      i < grid2Title.length;
+                                      i++) ...{
                                         ResponsiveGridCol(
                                           lg: 6,
                                           sm: 12,
@@ -437,44 +435,42 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 bottom: 100),
                                             child: Column(
                                                 crossAxisAlignment:
-                                                    CrossAxisAlignment.end,
+                                                CrossAxisAlignment.end,
                                                 children: [
                                                   Container(
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color:
-                                                              CoresPersonalizadas
-                                                                  .azulObama,
+                                                          color: CoresPersonalizadas.azulObama,
                                                           borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      100)),
+                                                          BorderRadius
+                                                              .circular(
+                                                              100)),
                                                       child: Icon(grid2Icon[i],
                                                           size: iconSize2[i],
                                                           color: Colors.white)),
                                                   Container(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              top: 20),
+                                                      const EdgeInsets.only(
+                                                          top: 20),
                                                       child: Text(grid2Title[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize:
-                                                                      20))),
+                                                          const TextStyle(
+                                                              fontWeight:
+                                                              FontWeight
+                                                                  .bold,
+                                                              fontSize:
+                                                              20))),
                                                   Container(
                                                       padding:
-                                                          const EdgeInsets.only(
-                                                              top: 20),
+                                                      const EdgeInsets.only(
+                                                          top: 20),
                                                       child: Text(
                                                           grid2Content[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .grey)))
+                                                          const TextStyle(
+                                                              color: Colors
+                                                                  .grey)))
                                                 ]),
                                           ),
                                         ),
