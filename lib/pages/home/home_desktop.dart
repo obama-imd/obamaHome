@@ -131,7 +131,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             child: Column(children: <Widget>[
               TopBar(swidth),
 
-              if (swidth < 1450) ...[
+              if (swidth >= 1450) ...[
 
                 Container(
                     width: swidth,
