@@ -1,4 +1,3 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:obamahome/components/menu.dart';
 
@@ -89,17 +88,58 @@ class NavMenu extends StatefulWidget {
 }
 
 class _NavMenuState extends State<NavMenu> {
+  String searchText = '';
+  final TextEditingController _controller = TextEditingController(text: '');
+
   @override
   Widget build(BuildContext context) {
-    bool displaySearchBtn = true;
-    bool showBtn = true;
+    // bool displaySearchBtn = true;
+    // double btnWidth = 50;
+    bool showBtn = false;
     double sizedBoxWidth;
+    double sheight = MediaQuery.of(context).size.height;
 
     if (widget.eixoLista == Axis.vertical) {
-      sizedBoxWidth = widget.swidth * .3;
+      sizedBoxWidth = widget.swidth * .8;
       showBtn = false;
     } else {
-      sizedBoxWidth = widget.swidth * 0.5;
+      sizedBoxWidth = widget.swidth * 0.505;
+    }
+
+    // Future<void> _showSearch() async {
+    //   return showDialog<void>(
+    //     context: context,
+    //     barrierDismissible: false, // user must tap button!
+    //     builder: (BuildContext context) {
+    //       return AlertDialog(
+    //         title: const Text('AlertDialog Title'),
+    //         content: const SingleChildScrollView(
+    //           child: ListBody(
+    //             children: <Widget>[
+    //               Text('This is a demo alert dialog.'),
+    //               Text('Would you like to approve of this message?'),
+    //             ],
+    //           ),
+    //         ),
+    //         actions: <Widget>[
+    //           TextButton(
+    //             child: const Text('Approve'),
+    //             onPressed: () {
+    //               Navigator.of(context).pop();
+    //             },
+    //           ),
+    //         ],
+    //       );
+    //     },
+    //   );
+    // }
+
+    void initState() {
+      super.initState();
+
+      // setState(() {
+      //   btnWidth = 50;
+      // });
     }
 
     return Row(
@@ -114,20 +154,57 @@ class _NavMenuState extends State<NavMenu> {
                   padding: const EdgeInsets.symmetric(horizontal: 2.5),
                   child: MenuBar0(context, i, selValue[i], selValueContent[i])),
             },
-            if (showBtn == true) ...{
-              AnimSearchBar(
-                rtl: true,
-                autoFocus: true,
-                width: 300,
-                textController: _searchController,
-                onSuffixTap: () {
-                  _searchController.clear();
-                },
-                onSubmitted: (String value) {
-                  debugPrint('onFieldSubmitted value $value');
-                },
-              ),
-            }
+            IconButton(
+              iconSize: 20,
+                icon: Icon(Icons.search),
+                onPressed: () => showDialog<String>(
+                      barrierColor: Color.fromARGB(222, 33, 149, 243),
+                      context: context,
+                      builder: (BuildContext context) => AlertDialog(
+                        // backgroundColor: Color.fromARGB(209, 33, 149, 243),
+                        contentPadding: EdgeInsets.all(0),
+                        content: Container(
+                          width: 400,
+                          height: 50,
+                          child: SearchBar(
+                              backgroundColor:
+                                  MaterialStatePropertyAll(Colors.white),
+                              overlayColor:
+                                  MaterialStatePropertyAll(Colors.white),
+                              onChanged: (value) => setState(() {
+                                    searchText = value;
+                                  }),
+                              onSubmitted: (value) {
+                                debugPrint('value on Field Submitted');
+                                setState(() {
+                                  searchText = value;
+                                });
+                              }),
+                        ),
+                        // actions: <Widget>[
+                        //   TextButton(
+                        //     onPressed: () => Navigator.pop(context, 'Cancel'),
+                        //     child: const Text('Cancel'),
+                        //   ),
+                        //   TextButton(
+                        //     onPressed: () => Navigator.pop(context, 'OK'),
+                        //     child: const Text('OK'),
+                        //   ),
+                        // ],
+                      ),
+                    )),
+            // AnimSearchBar(
+            //   rtl: true,
+            //   autoFocus: true,
+            //   width: 300,
+            //   textController: _searchController,
+            //   onSuffixTap: () {
+            //     _searchController.clear();
+            //   },
+            //   onSubmitted: (String value) {
+            //     debugPrint('onFieldSubmitted value $value');
+            //   },
+            // ),
           ]),
         ),
       ],

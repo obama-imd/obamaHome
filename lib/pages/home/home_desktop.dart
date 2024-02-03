@@ -1,4 +1,3 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
@@ -131,7 +130,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             child: Column(children: <Widget>[
               TopBar(swidth),
 
-              if (swidth >= 1450) ...[
+              if (swidth >= 1360) ...[
 
                 Container(
                     width: swidth,
@@ -169,19 +168,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   fit: BoxFit.fitHeight)),
 
                           // barra de pesquisa
-                          AnimSearchBar(
-                            autoFocus: true,
-                            width: 400,
-                            textController: _searchController,
-                            onSuffixTap: () {
-                              setState(() {
-                                _searchController.clear();
-                              });
-                            },
-                            onSubmitted: (String value) {
-                              debugPrint('onFieldSubmitted value $value');
-                            },
-                          ),
+                          // AnimSearchBar(
+                          //   autoFocus: true,
+                          //   width: 400,
+                          //   textController: _searchController,
+                          //   onSuffixTap: () {
+                          //     setState(() {
+                          //       _searchController.clear();
+                          //     });
+                          //   },
+                          //   onSubmitted: (String value) {
+                          //     debugPrint('onFieldSubmitted value $value');
+                          //   },
+                          // ),
                         ]))
               ],
 
