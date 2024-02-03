@@ -29,6 +29,7 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool dataAvailable = true;
+  Key key = UniqueKey();
 
   List<dynamic> postsList = [];
   List<dynamic> datas = [];
@@ -51,27 +52,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
         dataAvailable = true;
       }
     });
-    // updateImage();
   }
 
   void updateData(newData) {
     setState(() {
       datas = newData;
+      key = UniqueKey();
     });
-    // updateImage();
   }
-
-  // void updateImage() {
-  //   List<String> addImages = [];
-  //   for (var i = 0; i < datas.length; i++) {
-  //       final content = datas[i];
-  //       String imagePath = extractImagePath(content['content']);
-  //       addImages.add(imagePath);
-  //   }
-  //   setState(() {
-  //     imagesPath = addImages;
-  //   });
-  // }
 
   @override
   void initState() {
@@ -192,8 +180,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       itemBuilder: (BuildContext context, int index) {
                         final item = datas[index];
 
-                        // String imagePath = imagesPath[index];
-
                         String imagePath = extractImagePath(item['content']);
 
                         String pubDate = item['published_date'];
@@ -206,6 +192,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           width: swidth * .6,
                           child: Column(children: [
                             Container(
+                              child: Text(imagePath),
+                            ),
+                            Container(
                               margin: const EdgeInsets.only(bottom: 30),
                               decoration: const BoxDecoration(
                                   border: Border(
@@ -214,6 +203,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 width: 8,
                               ))),
                               child: ImageNetwork(
+                                  key: key,
                                   image: imagePath,
                                   width: swidth * .6,
                                   height: 400,
