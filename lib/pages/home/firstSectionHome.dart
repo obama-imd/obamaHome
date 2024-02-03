@@ -21,12 +21,12 @@ class ItemProduto extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 30, bottom: 20),
             child: Text(titulo,
-             style: const TextStyle( fontSize: 18, fontWeight: FontWeight.w600),
+             style: Theme.of(context).textTheme.titleSmall,
             ),
           ),
           Text(descricao,
-          style: const TextStyle( fontSize: 15, color: Color(0xFF707070),
-           )),
+          style: Theme.of(context).textTheme.displayMedium,
+           ),
         ],
       ),
     );

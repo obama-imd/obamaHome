@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class SectionTitle extends StatelessWidget {
@@ -17,14 +16,10 @@ class SectionTitle extends StatelessWidget {
         Container(
             padding: const EdgeInsets.only(bottom: 12.0),
             child: Text(title.toUpperCase(),
-                style: GoogleFonts.raleway(
-                    textStyle: const TextStyle(
-                        fontSize: 35, fontWeight: FontWeight.bold)))),
+                style: Theme.of(context).textTheme.titleLarge!)),
         if (subtitle != '') ...{
           Text(subtitle,
-              style: GoogleFonts.raleway(
-                  textStyle:
-                      const TextStyle(color: Colors.grey, fontSize: 20))),
+              style: Theme.of(context).textTheme.titleMedium!),
         },
         Container(
             height: 27.0,

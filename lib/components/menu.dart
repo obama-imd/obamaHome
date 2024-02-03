@@ -73,7 +73,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
     } else if (index == 5) ...{
       for (int j = 0; j < itemValues[0].itemsShop!.length; j++) ...{
         DropdownMenuItem(
-            value: itemValues[0].itemsShop![j],
+            value: (itemValues[0].itemsShop![j]),
             child: InkWell(
                 onTap: () {
                   Navigator.pushNamed(context, navigateTo[index]);
@@ -89,6 +89,7 @@ Widget MenuBar0(
     BuildContext context, int index, String label, dynamic content) {
   return DropdownButton(
     value: label,
+    style: Theme.of(context).textTheme.headlineMedium!,
     icon: const SizedBox.shrink(),
     underline: const SizedBox(),
     onChanged: (String? newValue) {

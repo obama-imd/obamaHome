@@ -6,7 +6,6 @@ import 'package:obamahome/pages/home/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../components/carousel.dart';
-import '../../components/cores_personalizadas.dart';
 import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
 import '../../components/navMenu.dart';
@@ -106,10 +105,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
           Container(
             margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
             child: Text(item['title'],
-                style:
-                const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
+                style: Theme.of(context).textTheme.titleSmall!),
           ),
-          Text(item['text'], style: const TextStyle(fontSize: 15), maxLines: 4),
+          Text(item['text'], style: Theme.of(context).textTheme.displaySmall!, maxLines: 4),
           // Text(sumValue),
         ],
       ),
@@ -255,10 +253,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                           BorderRadius.circular(100)),
                                       child: TextButton(
                                           onPressed: () {},
-                                          style: const ButtonStyle(
+                                          style: ButtonStyle(
                                             backgroundColor:
                                             MaterialStatePropertyAll(
-                                                CoresPersonalizadas.azulObama),
+                                                Theme.of(context).primaryColor),
                                             overlayColor:
                                             MaterialStatePropertyAll(
                                                 Colors.lightBlue),
@@ -315,7 +313,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color: CoresPersonalizadas.azulObama,
+                                                          color: Theme.of(context).primaryColor,
                                                           borderRadius:
                                                           BorderRadius
                                                               .circular(
@@ -329,12 +327,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                           top: 20),
                                                       child: Text(grid1Title[i],
                                                           style:
-                                                          const TextStyle(
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .bold,
-                                                              fontSize:
-                                                              20))),
+                                                          Theme.of(context).textTheme.titleSmall!)),
                                                   Container(
                                                       padding:
                                                       const EdgeInsets.only(
@@ -342,9 +335,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       child: Text(
                                                           grid1Content[i],
                                                           style:
-                                                          const TextStyle(
-                                                              color: Colors
-                                                                  .grey)))
+                                                          Theme.of(context).textTheme.displayMedium!))
                                                 ]),
                                           ),
                                         ),
@@ -440,7 +431,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color: CoresPersonalizadas.azulObama,
+                                                          color: Theme.of(context).primaryColor,
                                                           borderRadius:
                                                           BorderRadius
                                                               .circular(
@@ -454,12 +445,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                           top: 20),
                                                       child: Text(grid2Title[i],
                                                           style:
-                                                          const TextStyle(
-                                                              fontWeight:
-                                                              FontWeight
-                                                                  .bold,
-                                                              fontSize:
-                                                              20))),
+                                                          Theme.of(context).textTheme.titleSmall!)),
                                                   Container(
                                                       padding:
                                                       const EdgeInsets.only(
@@ -467,9 +453,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       child: Text(
                                                           grid2Content[i],
                                                           style:
-                                                          const TextStyle(
-                                                              color: Colors
-                                                                  .grey)))
+                                                          Theme.of(context).textTheme.displayMedium!))
                                                 ]),
                                           ),
                                         ),
