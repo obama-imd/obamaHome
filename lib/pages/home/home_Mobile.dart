@@ -66,11 +66,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   List<dynamic> datas = [];
 
   Future<void> fetchDataAndUpdateState() async {
-    final fetchedData = await fetchData();
+    final fetchedData = await fetchData('');
     setState(() {
       if (fetchedData.isNotEmpty) {
         dataAvailable = false;
-        datas = fetchedData;
+        datas = fetchedData.sublist(0, 3);
       } else {
         dataAvailable = true;
       }

@@ -40,7 +40,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   ];
 
   Future<void> fetchContent() async {
-    final fetchedData = await fetchData();
+    final fetchedData = await fetchData('');
     setState(() {
       if (fetchedData.isNotEmpty) {
         dataAvailable = false;
@@ -48,6 +48,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       } else {
         dataAvailable = true;
       }
+    });
+  }
+
+  void updateData(newData) {
+    setState(() {
+      datas = newData;
     });
   }
 
@@ -304,7 +310,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     padding: const EdgeInsets.only(top: 85.0),
                     width: swidth * .23,
-                    child: blogFilters(context, swidth, datas)),
+                    child: blogFilters(context, swidth, datas, dataAvailable, updateData)),
               ]),
               Carousel(swidth),
               Footer(swidth),

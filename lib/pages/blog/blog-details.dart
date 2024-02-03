@@ -47,7 +47,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   ];
 
   Future<void> fetchContent() async {
-    final fetchedData = await fetchData();
+    final fetchedData = await fetchData('');
     setState(() {
       if (fetchedData.isNotEmpty) {
         dataAvailable = false;
@@ -55,6 +55,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       } else {
         dataAvailable = true;
       }
+    });
+  }
+
+  void updateData(List<dynamic> newData) {
+    setState(() {
+      datas = newData;
     });
   }
 
@@ -89,7 +95,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, eixoLista: Axis.horizontal, heightBtn: 50),
+                          NavMenu(
+                              swidth: swidth,
+                              eixoLista: Axis.horizontal,
+                              heightBtn: 50),
                         ])),
               ] else ...[
                 SizedBox(
@@ -291,7 +300,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 children: [
                                   if (index > 0 && previmagePath != "") ...{
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         ImageNetwork(
                                             image: previmagePath,
@@ -308,7 +318,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                               );
                                             }
                                           },
-                                          child: const Text('< Anterior', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
+                                          child: const Text('< Anterior',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w600)),
                                         ),
                                         Container(),
                                       ],
@@ -318,7 +331,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       nextimagePath != "") ...{
                                     Container(),
                                     Column(
-                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.end,
                                       children: [
                                         ImageNetwork(
                                             image: nextimagePath,
@@ -335,7 +349,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                               );
                                             }
                                           },
-                                          child: const Text('Próximo >', style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600)),
+                                          child: const Text('Próximo >',
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontWeight: FontWeight.w600)),
                                         )
                                       ],
                                     ),
@@ -350,7 +367,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     padding: const EdgeInsets.only(top: 85.0),
                     width: swidth * .23,
-                    child: blogFilters(context, swidth, datas)),
+                    child: blogFilters(
+                        context, swidth, datas, dataAvailable, updateData)),
               ]),
               Carousel(swidth),
               Footer(swidth),

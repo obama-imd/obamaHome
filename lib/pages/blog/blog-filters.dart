@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:obamahome/services/api_blog.dart';
 
 @override
 Widget blogFilters(
   BuildContext context,
   double swidth,
   List<dynamic> datas,
+  bool dataAvailable,
+  Function(List<dynamic>) updateData,
 ) {
   return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
     Container(
@@ -19,11 +22,16 @@ Widget blogFilters(
         width: swidth * 0.25,
         margin: const EdgeInsets.only(bottom: 50),
         child: TextField(
+            onSubmitted: (value) async {
+              final postsFiltrados = await fetchData(value);
+              print(postsFiltrados);
+              updateData(postsFiltrados);
+            },
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(100)),
-                hintText: 'E-mail',
+                hintText: 'Buscar',
                 contentPadding: const EdgeInsets.all(15.0),
                 filled: true,
                 fillColor: const Color.fromARGB(255, 218, 216, 216),
