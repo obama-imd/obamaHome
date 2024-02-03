@@ -30,6 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool dataAvailable = true;
 
+  List<dynamic> postsList = [];
   List<dynamic> datas = [];
 
   List<IconData> shareMedia = [
@@ -45,17 +46,32 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       if (fetchedData.isNotEmpty) {
         dataAvailable = false;
         datas = fetchedData;
+        postsList = fetchedData;
       } else {
         dataAvailable = true;
       }
     });
+    // updateImage();
   }
 
   void updateData(newData) {
     setState(() {
       datas = newData;
     });
+    // updateImage();
   }
+
+  // void updateImage() {
+  //   List<String> addImages = [];
+  //   for (var i = 0; i < datas.length; i++) {
+  //       final content = datas[i];
+  //       String imagePath = extractImagePath(content['content']);
+  //       addImages.add(imagePath);
+  //   }
+  //   setState(() {
+  //     imagesPath = addImages;
+  //   });
+  // }
 
   @override
   void initState() {
@@ -176,6 +192,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       itemBuilder: (BuildContext context, int index) {
                         final item = datas[index];
 
+                        // String imagePath = imagesPath[index];
+
                         String imagePath = extractImagePath(item['content']);
 
                         String pubDate = item['published_date'];
@@ -214,12 +232,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   color: Colors.blue, size: 16),
                               Container(width: 2),
                               const Text('Marketing',
-                                  style: TextStyle(color: Colors.blue)),
-                              Container(width: 13),
-                              const Icon(FontAwesomeIcons.comment,
-                                  color: Colors.blue, size: 16),
-                              Container(width: 3),
-                              const Text('0',
                                   style: TextStyle(color: Colors.blue)),
                               Container(width: 13),
                               const Icon(FontAwesomeIcons.calendarDays,
@@ -310,7 +322,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     padding: const EdgeInsets.only(top: 85.0),
                     width: swidth * .23,
-                    child: blogFilters(context, swidth, datas, dataAvailable, updateData)),
+                    child: blogFilters(context, swidth, postsList, dataAvailable, updateData)),
               ]),
               Carousel(swidth),
               Footer(swidth),
