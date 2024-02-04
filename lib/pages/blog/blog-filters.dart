@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:obamahome/pages/blog/blog-details.dart';
 import 'package:obamahome/services/api_blog.dart';
 
 @override
@@ -60,28 +61,40 @@ Widget blogFilters(
           String pubDate = item['published_date'];
           DateTime dateTime = DateTime.parse(pubDate);
           String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-          return SizedBox(
-              width: swidth * 0.29,
-              height: 80,
-              child: Column(children: [
-                SizedBox(
-                    width: swidth * 0.29,
-                    height: 20,
-                    child: Text(item['title'],
-                        style: const TextStyle(fontWeight: FontWeight.w600))),
-                Container(
-                    width: swidth * 0.29,
-                    height: 20,
-                    margin: const EdgeInsets.only(top: 10, bottom: 20),
-                    child: Row(children: [
-                      const Icon(FontAwesomeIcons.calendarDays,
-                          color: Colors.black, size: 15),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 2, top: 1.5),
-                        child: Text(formattedDate),
-                      )
-                    ])),
-              ]));
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          BlogDetails(initialPageIndex: index)));
+            },
+            child: SizedBox(
+                width: swidth * 0.29,
+                height: 70,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(children: [
+                    SizedBox(
+                        width: swidth * 0.29,
+                        height: 20,
+                        child: Text(item['title'],
+                            style: const TextStyle(fontWeight: FontWeight.w600))),
+                    Container(
+                        width: swidth * 0.29,
+                        height: 20,
+                        margin: const EdgeInsets.only(top: 10),
+                        child: Row(children: [
+                          const Icon(FontAwesomeIcons.calendarDays,
+                              color: Colors.black, size: 15),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 2, top: 1.5),
+                            child: Text(formattedDate),
+                          )
+                        ])),
+                  ]),
+                )),
+          );
         },
       ),
     ),

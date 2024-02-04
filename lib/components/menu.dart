@@ -55,7 +55,7 @@ List<DropdownMenuItem<String>> getDropdownItems(
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const BlogDetails()));
+                            builder: (context) => BlogDetails(initialPageIndex: 0)));
                   }
                 },
                 child: Text(itemValues[0].itemsBlog![j])))

@@ -4,6 +4,7 @@ import 'package:obamahome/components/navMenu.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
+import '../../components/bannerSuperior.dart';
 import '../../components/carousel.dart';
 import '../../components/cores_personalizadas.dart';
 import '../../components/drawer.dart';
@@ -128,49 +129,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   color: Colors.black, size: 25))
                         ]))
               ],
-              Container(
-                  child: Stack(children: <Widget>[
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/img.jpg'),
-                          fit: BoxFit.cover),
-                    )),
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    padding: const EdgeInsets.only(top: 85.0, left: 92.0),
-                    child: ListView(children: [
-                      const Text(
-                        'Sobre Nós',
-                        textScaleFactor: 3.1,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      Container(
-                          child: Row(children: [
-                        TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Home',
-                              textScaleFactor: 1.11,
-                              style: TextStyle(color: CoresPersonalizadas.azulObama),
-                            )),
-                        const Text(
-                          '>  ',
-                          textScaleFactor: 1.11,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        const Text(
-                          'Sobre Nós',
-                          textScaleFactor: 1.11,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ]))
-                    ]))
-              ])),
+              BannerSuperior(context, 'Sobre Nós'),
               Container(
                 height: 320,
                 width: MediaQuery.of(context).size.width,

@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/aboutus': (context) => const AboutUsPage(),
           '/blog': (context) => const BlogPage(),
-          '/blog-details': (context) => const BlogDetails(),
+          '/blog-details': (context) => BlogDetails(initialPageIndex: 0),
           '/formacoes': (context) => const Formacoes(),
         });
   }

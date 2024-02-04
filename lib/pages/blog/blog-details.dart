@@ -10,26 +10,36 @@ import '../../../components/carousel.dart';
 import '../../../components/footer.dart';
 import '../../../components/topbar.dart';
 import '../../../services/api_blog.dart';
+import '../../components/bannerSuperior.dart';
 
 class BlogDetails extends StatelessWidget {
-  const BlogDetails({Key? key}) : super(key: key);
+  final int initialPageIndex;
+  BlogDetails({Key? key, required this.initialPageIndex}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: MyStatefulWidget());
+    return Scaffold(body: MyStatefulWidget(initialPageIndex: initialPageIndex));
   }
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+  final int initialPageIndex;
+
+  const MyStatefulWidget({Key? key, required this.initialPageIndex})
+      : super(key: key);
+
   @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
+  State<MyStatefulWidget> createState() =>
+      _MyStatefulWidgetState(pageIndex: initialPageIndex);
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+  int pageIndex;
+  _MyStatefulWidgetState({required this.pageIndex});
+
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool dataAvailable = true;
 
-  final PageController _pageController = PageController();
+  late PageController _pageController;
 
   @override
   void dispose() {
@@ -37,6 +47,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     super.dispose();
   }
 
+  List<dynamic> postsList = [];
   List<dynamic> datas = [];
 
   List<IconData> shareMedia = [
@@ -52,6 +63,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       if (fetchedData.isNotEmpty) {
         dataAvailable = false;
         datas = fetchedData;
+        postsList = fetchedData;
       } else {
         dataAvailable = true;
       }
@@ -67,6 +79,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   void initState() {
     super.initState();
+    _pageController = PageController(initialPage: widget.initialPageIndex);
     fetchContent();
   }
 
@@ -124,49 +137,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   color: Colors.black, size: 25))
                         ]))
               ],
-              Container(
-                  child: Stack(children: <Widget>[
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/img.jpg'),
-                          fit: BoxFit.cover),
-                    )),
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    padding: const EdgeInsets.only(top: 85.0, left: 92.0),
-                    child: ListView(children: [
-                      const Text(
-                        'Publicações',
-                        textScaleFactor: 3.1,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      Container(
-                          child: Row(children: [
-                        TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Home',
-                              textScaleFactor: 1.11,
-                              style: TextStyle(color: Colors.blue),
-                            )),
-                        const Text(
-                          '>  ',
-                          textScaleFactor: 1.11,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        const Text(
-                          'Publicações',
-                          textScaleFactor: 1.11,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ]))
-                    ]))
-              ])),
+              BannerSuperior(context, 'Publicações'),
               Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 if (dataAvailable == true) ...{
                   Container(
@@ -237,12 +208,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   color: Colors.blue, size: 16),
                               Container(width: 2),
                               const Text('Marketing',
-                                  style: TextStyle(color: Colors.blue)),
-                              Container(width: 13),
-                              const Icon(FontAwesomeIcons.comment,
-                                  color: Colors.blue, size: 16),
-                              Container(width: 3),
-                              const Text('0',
                                   style: TextStyle(color: Colors.blue)),
                               Container(width: 13),
                               const Icon(FontAwesomeIcons.calendarDays,
@@ -368,7 +333,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     padding: const EdgeInsets.only(top: 85.0),
                     width: swidth * .23,
                     child: blogFilters(
-                        context, swidth, datas, dataAvailable, updateData)),
+                        context, swidth, postsList, dataAvailable, updateData)),
               ]),
               Carousel(swidth),
               Footer(swidth),

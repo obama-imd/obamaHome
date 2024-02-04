@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_network/image_network.dart';
 import 'package:intl/intl.dart';
+import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:obamahome/pages/blog/blog-filters.dart';
 
 import '../../components/carousel.dart';
-import '../../components/cores_personalizadas.dart';
 import '../../components/footer.dart';
 import '../../components/navMenu.dart';
 import '../../components/topbar.dart';
 import '../../services/api_blog.dart';
+import 'blog-details.dart';
 
 class BlogPage extends StatelessWidget {
   const BlogPage({Key? key}) : super(key: key);
@@ -92,7 +93,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, eixoLista: Axis.horizontal, heightBtn: 50),
+                          NavMenu(
+                              swidth: swidth,
+                              eixoLista: Axis.horizontal,
+                              heightBtn: 50),
                         ])),
               ] else ...[
                 SizedBox(
@@ -118,56 +122,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   color: Colors.black, size: 25))
                         ]))
               ],
-              Container(
-                  child: Stack(children: <Widget>[
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/img.jpg'),
-                          fit: BoxFit.cover),
-                    )),
-                Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 250,
-                    padding: const EdgeInsets.only(top: 85.0, left: 92.0),
-                    child: ListView(children: [
-                      const Text(
-                        'Publicações',
-                        textScaleFactor: 3.1,
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
-                      Container(
-                          child: Row(children: [
-                        TextButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'Home',
-                              textScaleFactor: 1.11,
-                              style: TextStyle(color: CoresPersonalizadas.azulObama),
-                            )),
-                        const Text(
-                          '>  ',
-                          textScaleFactor: 1.11,
-                          style: TextStyle(color: Colors.grey),
-                        ),
-                        const Text(
-                          'Publicações',
-                          textScaleFactor: 1.11,
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ]))
-                    ]))
-              ])),
+              BannerSuperior(context, 'Publicações'),
               Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 if (dataAvailable == true) ...{
                   Container(
                       padding:
                           const EdgeInsets.only(top: 100, left: 90, right: 60),
                       width: swidth * 0.67,
-                      child: const Text("Perdão, não há nenhum post a ser exibido no momento.")),
+                      child: const Text(
+                          "Perdão, não há nenhum post a ser exibido no momento.")),
                 } else ...{
                   Container(
                     padding:
@@ -191,9 +154,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           height: 800,
                           width: swidth * .6,
                           child: Column(children: [
-                            Container(
-                              child: Text(imagePath),
-                            ),
                             Container(
                               margin: const EdgeInsets.only(bottom: 30),
                               decoration: const BoxDecoration(
@@ -241,7 +201,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               Material(
                                 color: Colors.blue,
                                 child: InkWell(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => BlogDetails(
+                                                  initialPageIndex: index)));
+                                    },
                                     overlayColor:
                                         const MaterialStatePropertyAll(
                                             Colors.black),
@@ -312,7 +278,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Container(
                     padding: const EdgeInsets.only(top: 85.0),
                     width: swidth * .23,
-                    child: blogFilters(context, swidth, postsList, dataAvailable, updateData)),
+                    child: blogFilters(
+                        context, swidth, postsList, dataAvailable, updateData)),
               ]),
               Carousel(swidth),
               Footer(swidth),
