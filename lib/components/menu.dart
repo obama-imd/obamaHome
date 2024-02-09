@@ -166,7 +166,7 @@ class ContactPage {}
 
 class ShopPage {}
 
-class PagesPage {}
+// class PagesPage {}
 
 class ServicesPage {}
 

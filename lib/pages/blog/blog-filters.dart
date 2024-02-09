@@ -25,7 +25,7 @@ Widget blogFilters(
         child: TextField(
             onSubmitted: (value) async {
               final postsFiltrados = await fetchData(value);
-              print(postsFiltrados);
+              // print(postsFiltrados);
               updateData(postsFiltrados);
             },
             decoration: InputDecoration(

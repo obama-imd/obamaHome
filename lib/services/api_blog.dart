@@ -3,37 +3,13 @@ import 'dart:convert';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-// Future<List<dynamic>> fetchData() async {
-//   final response = await http.get(Uri.parse('http://localhost:3000/dados'));
-
-//   if (response.statusCode == 200) {
-//     final jsonData = jsonDecode(response.body);
-//     final datas = jsonData
-//         .map((item) => {
-//               'title': item['title'],
-//               'text': item['text'],
-//               'summary': item['summary'],
-//               'content': item['content'],
-//               'published_date': item['published_date'],
-//             })
-//         .toList()
-//         .reversed
-//         .toList()
-//         .sublist(0, 3);
-//     return datas;
-//   } else {
-//     // Handle the error here if needed.
-//     return [];
-//   }
-// }
-
 Future<List<dynamic>> fetchData(String searchTerm) async {
   final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(response.body);
-    final dadosFiltrados = filtrarDados(jsonData, searchTerm);
-    final datas = dadosFiltrados
+    final postsFiltrados = filtrarPosts(jsonData, searchTerm);
+    final posts = postsFiltrados
         .map((item) => {
               'title': item['title'],
               'text': item['text'],
@@ -44,13 +20,13 @@ Future<List<dynamic>> fetchData(String searchTerm) async {
         .toList()
         .reversed
         .toList();
-    return datas;
+    return posts;
   } else {
     return [];
   }
 }
 
-List<dynamic> filtrarDados(List<dynamic> jsonData, String searchTerm) {
+List<dynamic> filtrarPosts(List<dynamic> jsonData, String searchTerm) {
   if (searchTerm.isEmpty) {
     return jsonData;
   }
@@ -67,7 +43,6 @@ List<dynamic> filtrarDados(List<dynamic> jsonData, String searchTerm) {
         content.contains(searchTerm.toLowerCase());
   }).toList();
 }
-
 
 String extractImagePath(String content) {
   final document = parse(content);

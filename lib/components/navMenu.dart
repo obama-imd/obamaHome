@@ -68,7 +68,7 @@ List<String> navigateTo = [
   '/aboutus',
   '/servicos',
   '/blog',
-  '/paginas',
+  '/formacoes',
   '/loja',
 ];
 
