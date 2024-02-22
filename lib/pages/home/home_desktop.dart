@@ -6,7 +6,6 @@ import 'package:obamahome/pages/home/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../components/carousel.dart';
-import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
 import '../../components/navMenu.dart';
 import '../../components/sectionTitle.dart';
@@ -163,21 +162,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               const EdgeInsets.only(right: 30, left: 30),
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-
-                          // barra de pesquisa
-                          // AnimSearchBar(
-                          //   autoFocus: true,
-                          //   width: 400,
-                          //   textController: _searchController,
-                          //   onSuffixTap: () {
-                          //     setState(() {
-                          //       _searchController.clear();
-                          //     });
-                          //   },
-                          //   onSubmitted: (String value) {
-                          //     debugPrint('onFieldSubmitted value $value');
-                          //   },
-                          // ),
                         ]))
               ],
 
@@ -220,138 +204,141 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ],
                     ),
                   )),
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(top: 100),
-                  child: ResponsiveGridRow(children: [
-                    ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
+              // Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     padding: const EdgeInsets.only(top: 100),
+              //     child: ResponsiveGridRow(children: [
+              //       ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
+              //       ResponsiveGridCol(
+              //         lg: 4,
+              //         sm: 12,
+              //         child: Container(
+              //             padding: const EdgeInsets.only(top: 17.5),
+              //             child: Column(
+              //                 crossAxisAlignment: CrossAxisAlignment.start,
+              //                 children: [
+              //                   const SizedBox(
+              //                       height: 50,
+              //                       child: Text('Need file recovery?',
+              //                           style: TextStyle(
+              //                               fontSize: 28,
+              //                               fontWeight: FontWeight.w500))),
+              //                   const SizedBox(
+              //                       height: 120,
+              //                       child: Text('Texto',
+              //                           style: TextStyle(color: Colors.grey))),
+              //                   Row(children: [
+              //                     Container(
+              //                         height: 50,
+              //                         width: 170,
+              //                         decoration: BoxDecoration(
+              //                             borderRadius:
+              //                             BorderRadius.circular(100)),
+              //                         child: TextButton(
+              //                             onPressed: () {},
+              //                             style: ButtonStyle(
+              //                               backgroundColor:
+              //                               MaterialStatePropertyAll(
+              //                                   Theme.of(context).primaryColor),
+              //                               overlayColor:
+              //                               MaterialStatePropertyAll(
+              //                                   Colors.lightBlue),
+              //                             ),
+              //                             child: const Text('READ MORE',
+              //                                 style: TextStyle(
+              //                                     shadows: [
+              //                                       Shadow(
+              //                                           offset:
+              //                                           Offset(1.1, 1.1))
+              //                                     ],
+              //                                     fontSize: 15,
+              //                                     fontWeight: FontWeight.w600,
+              //                                     color: Colors.white)))),
+              //                   ]),
+              //                   Container(height: 140),
+              //                 ])),
+              //       )
+              //     ])),
+              Padding(
+                padding: const EdgeInsets.only(top: 100),
+                child: ResponsiveGridRow(children: [
+                  ResponsiveGridCol(
+                    lg: 8,
+                    sm: 12,
+                    child: Container(
+                        color: const Color.fromARGB(255, 241, 238, 238),
+                        padding: const EdgeInsets.only(top: 110, left: 90),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SectionTitle(
+                                  'ABOUT SERVICE',
+                                  'Easy and effective way to get your device repaired.',
+                                  CrossAxisAlignment.start),
+                              Container(
+                                  padding: const EdgeInsets.only(top: 60),
+                                  child: ResponsiveGridRow(
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      children: [
+                                        for (int i = 0;
+                                        i < grid1Title.length;
+                                        i++) ...{
+                                          ResponsiveGridCol(
+                                            lg: 6,
+                                            sm: 12,
+                                            child: Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 100),
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                                  children: [
+                                                    Container(
+                                                        height: 100,
+                                                        width: 100,
+                                                        decoration: BoxDecoration(
+                                                            color: Theme.of(context).primaryColor,
+                                                            borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                100)),
+                                                        child: Icon(grid1Icon[i],
+                                                            size: iconSize2[i],
+                                                            color: Colors.white)),
+                                                    Container(
+                                                        padding:
+                                                        const EdgeInsets.only(
+                                                            top: 20),
+                                                        child: Text(grid1Title[i],
+                                                            style:
+                                                            Theme.of(context).textTheme.titleSmall!)),
+                                                    Container(
+                                                        padding:
+                                                        const EdgeInsets.only(
+                                                            top: 20),
+                                                        child: Text(
+                                                            grid1Content[i],
+                                                            style:
+                                                            Theme.of(context).textTheme.displayMedium!))
+                                                  ]),
+                                            ),
+                                          ),
+                                        },
+                                      ]))
+                            ])),
+                  ),
+                  if (swidth > 992) ...{
                     ResponsiveGridCol(
                       lg: 4,
-                      sm: 12,
-                      child: Container(
-                          padding: const EdgeInsets.only(top: 17.5),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                    height: 50,
-                                    child: Text('Need file recovery?',
-                                        style: TextStyle(
-                                            fontSize: 28,
-                                            fontWeight: FontWeight.w500))),
-                                const SizedBox(
-                                    height: 120,
-                                    child: Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                Row(children: [
-                                  Container(
-                                      height: 50,
-                                      width: 170,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                          BorderRadius.circular(100)),
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                            MaterialStatePropertyAll(
-                                                Theme.of(context).primaryColor),
-                                            overlayColor:
-                                            MaterialStatePropertyAll(
-                                                Colors.lightBlue),
-                                          ),
-                                          child: const Text('READ MORE',
-                                              style: TextStyle(
-                                                  shadows: [
-                                                    Shadow(
-                                                        offset:
-                                                        Offset(1.1, 1.1))
-                                                  ],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white)))),
-                                ]),
-                                Container(height: 140),
-                              ])),
-                    )
-                  ])),
-              ResponsiveGridRow(children: [
-                ResponsiveGridCol(
-                  lg: 8,
-                  sm: 12,
-                  child: Container(
-                      color: const Color.fromARGB(255, 241, 238, 238),
-                      padding: const EdgeInsets.only(top: 110, left: 90),
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SectionTitle(
-                                'ABOUT SERVICE',
-                                'Easy and effective way to get your device repaired.',
-                                CrossAxisAlignment.start),
-                            Container(
-                                padding: const EdgeInsets.only(top: 60),
-                                child: ResponsiveGridRow(
-                                    crossAxisAlignment:
-                                    CrossAxisAlignment.start,
-                                    children: [
-                                      for (int i = 0;
-                                      i < grid1Title.length;
-                                      i++) ...{
-                                        ResponsiveGridCol(
-                                          lg: 6,
-                                          sm: 12,
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                bottom: 100),
-                                            child: Column(
-                                                crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                children: [
-                                                  Container(
-                                                      height: 100,
-                                                      width: 100,
-                                                      decoration: BoxDecoration(
-                                                          color: Theme.of(context).primaryColor,
-                                                          borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              100)),
-                                                      child: Icon(grid1Icon[i],
-                                                          size: iconSize2[i],
-                                                          color: Colors.white)),
-                                                  Container(
-                                                      padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                      child: Text(grid1Title[i],
-                                                          style:
-                                                          Theme.of(context).textTheme.titleSmall!)),
-                                                  Container(
-                                                      padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                      child: Text(
-                                                          grid1Content[i],
-                                                          style:
-                                                          Theme.of(context).textTheme.displayMedium!))
-                                                ]),
-                                          ),
-                                        ),
-                                      },
-                                    ]))
-                          ])),
-                ),
-                if (swidth > 992) ...{
-                  ResponsiveGridCol(
-                    lg: 4,
-                    child: SizedBox(
-                        height: 865,
-                        child: Image.asset('assets/images/img2.jpg',
-                            fit: BoxFit.cover)),
-                  ),
-                }
-              ]),
+                      child: SizedBox(
+                          height: 865,
+                          child: Image.asset('assets/images/img2.jpg',
+                              fit: BoxFit.cover)),
+                    ),
+                  }
+                ]),
+              ),
               Container(
                 margin: const EdgeInsets.only(top: 120, bottom: 65.0),
                 child: SectionTitle(

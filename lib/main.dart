@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/pages/blog/blog-details.dart';
-import 'package:obamahome/pages/formacoes.dart';
+import 'package:obamahome/pages/formations/formacoes.dart';
 import 'package:obamahome/pages/home/home1.dart';
 
 import 'components/cores_personalizadas.dart';
