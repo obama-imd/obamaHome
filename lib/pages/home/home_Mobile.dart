@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart';
-import 'package:intl/intl.dart';
 import 'package:obamahome/components/cores_personalizadas.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:obamahome/pages/home/components/firstSectionHome.dart';
@@ -10,125 +8,53 @@ import '../../components/carousel.dart';
 import '../../components/footer.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
-import '../../services/api_blog.dart';
 import '../formations/dropdowns_formations.dart';
 import 'components/our_product_item.dart';
 import 'constants.dart';
+import 'home1.dart';
 
 class HomeMobile extends StatelessWidget {
   final TrackingScrollController scrollController;
+  final bool dataAvailable;
+  final List<dynamic> datas;
 
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-
-
-  HomeMobile({required this.scrollController, super.key});
+  const HomeMobile({
+    required this.scrollController,
+    required this.dataAvailable,
+    required this.datas,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 5,
-      child: Scaffold(
-        drawer: drawermenu(),
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(120),
-          child: AppBar(
-            backgroundColor: Colors.white,
-            flexibleSpace: Column(children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 45, 0, 0),
-                child: SizedBox(
-                  height: 70,
-                  child: Image.asset('assets/images/logo.png',
-                      fit: BoxFit.fitHeight),
-                ),
-              ),
-            ]),
-          ),
-        ),
-        body: TabBarView(
-            children:[const MyStatefulWidget()
-            ]),
+    return Scaffold(
+      body: MyStatefulWidget(
+        scrollController: scrollController,
+        dataAvailable: dataAvailable,
+        datas: datas,
       ),
     );
   }
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+  final TrackingScrollController scrollController;
+  final bool dataAvailable;
+  final List<dynamic> datas;
+
+  const MyStatefulWidget({
+    required this.scrollController,
+    required this.dataAvailable,
+    required this.datas,
+    Key? key,
+  }) : super(key: key);
+
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-  bool dataAvailable = true;
   var scaffoldKey = GlobalKey<ScaffoldState>();
-
-  List<dynamic> datas = [];
-
-  Future<void> fetchDataAndUpdateState() async {
-    final fetchedData = await fetchData('');
-    setState(() {
-      if (fetchedData.isNotEmpty) {
-        dataAvailable = false;
-        datas = fetchedData.sublist(0, 3);
-      } else {
-        dataAvailable = true;
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchDataAndUpdateState();
-  }
-
-  Widget blogData(BuildContext context, index) {
-    double imageWidth = MediaQuery.of(context).size.width * .85;
-    double imageHeight = 300;
-
-    final item = datas[index];
-    String extractImagePath(String content) {
-      final document = parse(content);
-      final imgElement = document.getElementsByTagName('img').last;
-      final result = imgElement.attributes['src'];
-      return result!;
-    }
-
-    String imagePath = extractImagePath(item['content']);
-
-    String pubDate = item['published_date'];
-    DateTime dateTime = DateTime.parse(pubDate);
-    String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-
-    // String sumValue = extractSummaryPath(item['summary']);
-
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(imagePath,
-              height: imageHeight, width: imageWidth, fit: BoxFit.cover),
-          // Text(imagePath),
-          Row(
-            children: [
-              const Icon(Icons.access_time, size: 16),
-              Text(formattedDate, style: const TextStyle(fontSize: 14)),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-            child: Text(item['title'],
-                style:
-                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
-          ),
-          Text(item['text'], style: const TextStyle(fontSize: 15), maxLines: 4),
-          // Text(sumValue),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -437,7 +363,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ])),
               ),
             ]),
-            if (dataAvailable == false) ...{
+            if (widget.dataAvailable == false) ...{
               Padding(
                 padding: const EdgeInsets.only(top: 120, left: 74, right: 74),
                 child: Column(
@@ -456,12 +382,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       padding: const EdgeInsets.only(top: 60),
                       child: ResponsiveGridRow(
                         children: [
-                          for (int i = 0; i < datas.length; i++) ...{
+                          for (int i = 0; i < widget.datas.length; i++) ...{
                             ResponsiveGridCol(
                                 lg: 4,
                                 md: 6,
                                 xs: 12,
-                                child: blogData(context, i)),
+                                child: blogData(context, i, widget.datas)),
                           }
                         ],
                       ),
