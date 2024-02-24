@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/components/cores_personalizadas.dart';
 
-import '../about-us/nossa_historia.dart';
+// import '../about-us/nossa_historia.dart';
 import '../home/home_Mobile.dart';
 
 class HomeMobile1 extends StatefulWidget {
@@ -31,7 +31,7 @@ class _HomeMobile1State extends State<HomeMobile1> {
 
      final List<Widget> telas = [
        HomeMobile( scrollController: _scrollController,),
-       NossaHistoria(),
+      //  NossaHistoria(),
        Scaffold(backgroundColor: Colors.amber,),
        Scaffold(backgroundColor: Colors.purple,),
        Scaffold(backgroundColor: Colors.blue,),

@@ -5,11 +5,11 @@ import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import '../../components/bannerSuperior.dart';
 import '../../components/carousel.dart';
 import '../../components/drawer.dart';
-import '../../components/dropdowns.dart';
 import '../../components/footer.dart';
 import '../../components/navMenu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
+import 'dropdowns_formations.dart';
 
 class Formacoes extends StatelessWidget {
   const Formacoes({super.key});

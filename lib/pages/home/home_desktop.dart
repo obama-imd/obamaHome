@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart';
-import 'package:intl/intl.dart';
 import 'package:obamahome/components/drawer.dart';
-import 'package:obamahome/pages/home/firstSectionHome.dart';
+import 'package:obamahome/pages/home/components/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../components/carousel.dart';
@@ -10,113 +8,58 @@ import '../../components/footer.dart';
 import '../../components/navMenu.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
-import '../../services/api_blog.dart';
+import 'components/our_product_item.dart';
 import 'constants.dart';
-import 'our_product_item.dart';
+import 'home1.dart';
 
 class HomeDesktop extends StatelessWidget {
-
   final TrackingScrollController scrollController;
+  final bool dataAvailable;
+  final List<dynamic> datas;
 
   const HomeDesktop({
-
     required this.scrollController,
-    super.key});
+    required this.dataAvailable,
+    required this.datas,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return   Scaffold(
-        appBar: AppBar(
-          title: const Text("desktop"),),
-        body: const MyStatefulWidget());
+    return Scaffold(
+      body: MyStatefulWidget(
+        scrollController: scrollController,
+        dataAvailable: dataAvailable,
+        datas: datas,
+      ),
+    );
   }
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  const MyStatefulWidget({Key? key}) : super(key: key);
+  final TrackingScrollController scrollController;
+  final bool dataAvailable;
+  final List<dynamic> datas;
+
+  const MyStatefulWidget({
+    required this.scrollController,
+    required this.dataAvailable,
+    required this.datas,
+    Key? key,
+  }) : super(key: key);
+
   @override
   State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
-
-  bool dataAvailable = true;
   var scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _searchController = TextEditingController();
 
-  List<dynamic> datas = [];
-
-  Future<void> fetchDataAndUpdateState() async {
-    final fetchedData = await fetchData('');
-    setState(() {
-      if (fetchedData.isNotEmpty) {
-        dataAvailable = false;
-        datas = fetchedData.sublist(0, 3);
-      } else {
-        dataAvailable = true;
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    fetchDataAndUpdateState();
-  }
-
-  Widget blogData(BuildContext context, index) {
-
-    double imageWidth = MediaQuery.of(context).size.width *.3;
-    double imageHeight = 185;
-
-    final item = datas[index];
-
-    String extractImagePath(String content) {
-      final document = parse(content);
-      final imgElement = document.getElementsByTagName('img').last;
-      final result = imgElement.attributes['src'];
-      return result!;
-    }
-
-    String imagePath = extractImagePath(item['content']);
-
-    String pubDate = item['published_date'];
-    DateTime dateTime = DateTime.parse(pubDate);
-    String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-
-    // String sumValue = extractSummaryPath(item['summary']);
-
-    return Padding(
-      padding: const EdgeInsets.all(15),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.network(imagePath,
-              height: imageHeight, width: imageWidth, fit: BoxFit.cover),
-          // Text(imagePath),
-          Row(
-            children: [
-              const Icon(Icons.access_time, size: 16),
-              Text(formattedDate, style: const TextStyle(fontSize: 14)),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-            child: Text(item['title'],
-                style: Theme.of(context).textTheme.titleSmall!),
-          ),
-          Text(item['text'], style: Theme.of(context).textTheme.displaySmall!, maxLines: 4),
-          // Text(sumValue),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    double paddingCard = MediaQuery.of(context).size.width *.025;
+    double paddingCard = MediaQuery.of(context).size.width * .025;
     double swidth = MediaQuery.of(context).size.width;
-
 
     return Scaffold(
         key: scaffoldKey,
@@ -127,7 +70,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               TopBar(swidth),
 
               if (swidth >= 1360) ...[
-
                 Container(
                     width: swidth,
                     height: 125,
@@ -140,11 +82,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, eixoLista: Axis.horizontal, heightBtn: 50),
+                          NavMenu(
+                              swidth: swidth,
+                              eixoLista: Axis.horizontal,
+                              heightBtn: 50),
                         ])),
-
               ] else ...[
-
                 SizedBox(
                     width: MediaQuery.of(context).size.width,
                     height: 125,
@@ -153,13 +96,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                              const Icon(Icons.menu, color: Colors.black),
+                                  const Icon(Icons.menu, color: Colors.black),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
                               width: 280,
                               padding:
-                              const EdgeInsets.only(right: 30, left: 30),
+                                  const EdgeInsets.only(right: 30, left: 30),
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                         ]))
@@ -204,61 +147,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ],
                     ),
                   )),
-              // Container(
-              //     width: MediaQuery.of(context).size.width,
-              //     padding: const EdgeInsets.only(top: 100),
-              //     child: ResponsiveGridRow(children: [
-              //       ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
-              //       ResponsiveGridCol(
-              //         lg: 4,
-              //         sm: 12,
-              //         child: Container(
-              //             padding: const EdgeInsets.only(top: 17.5),
-              //             child: Column(
-              //                 crossAxisAlignment: CrossAxisAlignment.start,
-              //                 children: [
-              //                   const SizedBox(
-              //                       height: 50,
-              //                       child: Text('Need file recovery?',
-              //                           style: TextStyle(
-              //                               fontSize: 28,
-              //                               fontWeight: FontWeight.w500))),
-              //                   const SizedBox(
-              //                       height: 120,
-              //                       child: Text('Texto',
-              //                           style: TextStyle(color: Colors.grey))),
-              //                   Row(children: [
-              //                     Container(
-              //                         height: 50,
-              //                         width: 170,
-              //                         decoration: BoxDecoration(
-              //                             borderRadius:
-              //                             BorderRadius.circular(100)),
-              //                         child: TextButton(
-              //                             onPressed: () {},
-              //                             style: ButtonStyle(
-              //                               backgroundColor:
-              //                               MaterialStatePropertyAll(
-              //                                   Theme.of(context).primaryColor),
-              //                               overlayColor:
-              //                               MaterialStatePropertyAll(
-              //                                   Colors.lightBlue),
-              //                             ),
-              //                             child: const Text('READ MORE',
-              //                                 style: TextStyle(
-              //                                     shadows: [
-              //                                       Shadow(
-              //                                           offset:
-              //                                           Offset(1.1, 1.1))
-              //                                     ],
-              //                                     fontSize: 15,
-              //                                     fontWeight: FontWeight.w600,
-              //                                     color: Colors.white)))),
-              //                   ]),
-              //                   Container(height: 140),
-              //                 ])),
-              //       )
-              //     ])),
               Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: ResponsiveGridRow(children: [
@@ -279,11 +167,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   padding: const EdgeInsets.only(top: 60),
                                   child: ResponsiveGridRow(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       children: [
                                         for (int i = 0;
-                                        i < grid1Title.length;
-                                        i++) ...{
+                                            i < grid1Title.length;
+                                            i++) ...{
                                           ResponsiveGridCol(
                                             lg: 6,
                                             sm: 12,
@@ -292,35 +180,44 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   bottom: 100),
                                               child: Column(
                                                   crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     Container(
                                                         height: 100,
                                                         width: 100,
                                                         decoration: BoxDecoration(
-                                                            color: Theme.of(context).primaryColor,
+                                                            color: Theme.of(
+                                                                    context)
+                                                                .primaryColor,
                                                             borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                100)),
-                                                        child: Icon(grid1Icon[i],
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100)),
+                                                        child: Icon(
+                                                            grid1Icon[i],
                                                             size: iconSize2[i],
-                                                            color: Colors.white)),
+                                                            color:
+                                                                Colors.white)),
                                                     Container(
                                                         padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
-                                                        child: Text(grid1Title[i],
-                                                            style:
-                                                            Theme.of(context).textTheme.titleSmall!)),
+                                                            const EdgeInsets
+                                                                .only(top: 20),
+                                                        child: Text(
+                                                            grid1Title[i],
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .titleSmall!)),
                                                     Container(
                                                         padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
+                                                            const EdgeInsets
+                                                                .only(top: 20),
                                                         child: Text(
                                                             grid1Content[i],
-                                                            style:
-                                                            Theme.of(context).textTheme.displayMedium!))
+                                                            style: Theme.of(
+                                                                    context)
+                                                                .textTheme
+                                                                .displayMedium!))
                                                   ]),
                                             ),
                                           ),
@@ -398,11 +295,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 padding: const EdgeInsets.only(top: 60),
                                 child: ResponsiveGridRow(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     children: [
                                       for (int i = 0;
-                                      i < grid2Title.length;
-                                      i++) ...{
+                                          i < grid2Title.length;
+                                          i++) ...{
                                         ResponsiveGridCol(
                                           lg: 6,
                                           sm: 12,
@@ -411,35 +308,41 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                 bottom: 100),
                                             child: Column(
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.end,
+                                                    CrossAxisAlignment.end,
                                                 children: [
                                                   Container(
                                                       height: 100,
                                                       width: 100,
                                                       decoration: BoxDecoration(
-                                                          color: Theme.of(context).primaryColor,
+                                                          color:
+                                                              Theme.of(context)
+                                                                  .primaryColor,
                                                           borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                              100)),
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100)),
                                                       child: Icon(grid2Icon[i],
                                                           size: iconSize2[i],
                                                           color: Colors.white)),
                                                   Container(
                                                       padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
+                                                          const EdgeInsets.only(
+                                                              top: 20),
                                                       child: Text(grid2Title[i],
-                                                          style:
-                                                          Theme.of(context).textTheme.titleSmall!)),
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .titleSmall!)),
                                                   Container(
                                                       padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
+                                                          const EdgeInsets.only(
+                                                              top: 20),
                                                       child: Text(
                                                           grid2Content[i],
-                                                          style:
-                                                          Theme.of(context).textTheme.displayMedium!))
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .displayMedium!))
                                                 ]),
                                           ),
                                         ),
@@ -448,7 +351,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           ])),
                 ),
               ]),
-              if (dataAvailable == false) ...{
+              if (widget.dataAvailable == false) ...{
                 Padding(
                   padding: const EdgeInsets.only(top: 120, left: 74, right: 74),
                   child: Column(
@@ -467,12 +370,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         padding: const EdgeInsets.only(top: 60),
                         child: ResponsiveGridRow(
                           children: [
-                            for (int i = 0; i < datas.length; i++) ...{
+                            for (int i = 0; i < widget.datas.length; i++) ...{
                               ResponsiveGridCol(
                                   lg: 4,
                                   md: 6,
                                   xs: 12,
-                                  child: blogData(context, i)),
+                                  child: blogData(context, i, widget.datas)),
                             }
                           ],
                         ),
