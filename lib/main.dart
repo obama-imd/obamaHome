@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/pages/blog/blog-details.dart';
 import 'package:obamahome/pages/formations/formacoes.dart';
 import 'package:obamahome/pages/home/home1.dart';
+import 'package:obamahome/pages/search/searchOA.dart';
 
 import 'components/cores_personalizadas.dart';
 import 'pages/about-us/aboutUs.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           '/blog': (context) => const BlogPage(),
           '/blog-details': (context) => BlogDetails(initialPageIndex: 0),
           '/formacoes': (context) => const Formacoes(),
+          '/servicos': (context) => SearchDesktop(datas: []),
         });
   }
 }

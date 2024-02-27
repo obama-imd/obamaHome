@@ -7,13 +7,31 @@ import 'package:obamahome/components/cores_personalizadas.dart';
 import '../home/home_Mobile.dart';
 
 class HomeMobile1 extends StatefulWidget {
-  const HomeMobile1({super.key});
+  final bool dataAvailable;
+  final List<dynamic> datas;
+
+  const HomeMobile1({
+    required this.dataAvailable,
+    required this.datas,
+    Key? key,
+  }) : super(key: key);
 
   @override
-  State<HomeMobile1> createState() => _HomeMobile1State();
+  State<HomeMobile1> createState() => _HomeMobile1State(
+    dataAvailable: dataAvailable,
+    datas: datas
+  );
 }
 
 class _HomeMobile1State extends State<HomeMobile1> {
+  final bool dataAvailable;
+  final List<dynamic> datas;
+
+  _HomeMobile1State({
+    required this.dataAvailable,
+    required this.datas,
+  });
+
   final TrackingScrollController _scrollController = TrackingScrollController();
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
   int index = 0;
@@ -30,7 +48,10 @@ class _HomeMobile1State extends State<HomeMobile1> {
      ];
 
      final List<Widget> telas = [
-       HomeMobile( scrollController: _scrollController,),
+       HomeMobile( 
+        scrollController: _scrollController, 
+        dataAvailable: dataAvailable,
+        datas: datas),
       //  NossaHistoria(),
        Scaffold(backgroundColor: Colors.amber,),
        Scaffold(backgroundColor: Colors.purple,),

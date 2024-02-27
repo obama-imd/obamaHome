@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/components/menu.dart';
+import 'package:obamahome/pages/search/searchOA.dart';
+
+import '../services/api_OA.dart';
 
 final TextEditingController _searchController = TextEditingController();
 
@@ -93,8 +96,12 @@ class _NavMenuState extends State<NavMenu> {
 
   @override
   Widget build(BuildContext context) {
-    // bool displaySearchBtn = true;
-    // double btnWidth = 50;
+    bool dataAvailable = true;
+    Key key = UniqueKey();
+
+    List<dynamic> postsList = [];
+    List<dynamic> datas = [];
+
     bool showBtn = false;
     double sizedBoxWidth;
     double sheight = MediaQuery.of(context).size.height;
@@ -106,40 +113,15 @@ class _NavMenuState extends State<NavMenu> {
       sizedBoxWidth = widget.swidth * 0.505;
     }
 
-    // Future<void> _showSearch() async {
-    //   return showDialog<void>(
-    //     context: context,
-    //     barrierDismissible: false, // user must tap button!
-    //     builder: (BuildContext context) {
-    //       return AlertDialog(
-    //         title: const Text('AlertDialog Title'),
-    //         content: const SingleChildScrollView(
-    //           child: ListBody(
-    //             children: <Widget>[
-    //               Text('This is a demo alert dialog.'),
-    //               Text('Would you like to approve of this message?'),
-    //             ],
-    //           ),
-    //         ),
-    //         actions: <Widget>[
-    //           TextButton(
-    //             child: const Text('Approve'),
-    //             onPressed: () {
-    //               Navigator.of(context).pop();
-    //             },
-    //           ),
-    //         ],
-    //       );
-    //     },
-    //   );
-    // }
-
     void initState() {
       super.initState();
+    }
 
-      // setState(() {
-      //   btnWidth = 50;
-      // });
+    void updateData(newData) {
+      setState(() {
+        datas = newData;
+        key = UniqueKey();
+      });
     }
 
     return Row(
@@ -155,7 +137,7 @@ class _NavMenuState extends State<NavMenu> {
                   child: MenuBar0(context, i, selValue[i], selValueContent[i])),
             },
             IconButton(
-              iconSize: 20,
+                iconSize: 20,
                 icon: Icon(Icons.search),
                 onPressed: () => showDialog<String>(
                       barrierColor: Color.fromARGB(222, 33, 149, 243),
@@ -174,11 +156,14 @@ class _NavMenuState extends State<NavMenu> {
                               onChanged: (value) => setState(() {
                                     searchText = value;
                                   }),
-                              onSubmitted: (value) {
-                                debugPrint('value on Field Submitted');
-                                setState(() {
-                                  searchText = value;
-                                });
+                              onSubmitted: (value) async {
+                                List<dynamic> filteredData = await fetchData(value);
+                                print(filteredData);
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            SearchDesktop(datas: filteredData)));
                               }),
                         ),
                         // actions: <Widget>[

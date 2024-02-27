@@ -58,7 +58,7 @@ List<DropdownMenuItem<String>> get dropdownItems4{
 
 List<DropdownMenuItem<String>> get dropdownItems5{
   List<DropdownMenuItem<String>> menuItems = [
-    const DropdownMenuItem(value: "SHOP", child: Text(" SHOP ")),
+    const DropdownMenuItem(value: "SHOP", child: Text(" OA ")),
     const DropdownMenuItem(value: "Item 1", child: Text("Item 1")),
     const DropdownMenuItem(value: "Item 2", child: Text("Item 2")),
   ];

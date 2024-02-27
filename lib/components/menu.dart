@@ -160,7 +160,7 @@ Widget menuItem(dynamic menuTitle) {
   );
 }
 
-class SearchPage {}
+// class SearchPage {}
 
 class ContactPage {}
 

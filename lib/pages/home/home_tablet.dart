@@ -10,7 +10,6 @@ import '../../components/cores_personalizadas.dart';
 import '../../components/footer.dart';
 import '../../components/sectionTitle.dart';
 import '../../components/topbar.dart';
-import '../formations/dropdowns_formations.dart';
 import 'components/our_product_item.dart';
 import 'constants.dart';
 import 'home1.dart';
@@ -165,62 +164,62 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ],
                     ),
                   )),
-              Container(
-                  width: MediaQuery.of(context).size.width,
-                  padding: const EdgeInsets.only(top: 100),
-                  child: ResponsiveGridRow(children: [
-                    ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
-                    ResponsiveGridCol(
-                      lg: 4,
-                      sm: 12,
-                      child: Container(
-                          padding: const EdgeInsets.only(top: 17.5),
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const SizedBox(
-                                    height: 50,
-                                    child: Text('Need file recovery?',
-                                        style: TextStyle(
-                                            fontSize: 28,
-                                            fontWeight: FontWeight.w500))),
-                                const SizedBox(
-                                    height: 120,
-                                    child: Text('Texto',
-                                        style: TextStyle(color: Colors.grey))),
-                                Row(children: [
-                                  Container(
-                                      height: 50,
-                                      width: 170,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(100)),
-                                      child: TextButton(
-                                          onPressed: () {},
-                                          style: const ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStatePropertyAll(
-                                                    CoresPersonalizadas
-                                                        .azulObama),
-                                            overlayColor:
-                                                MaterialStatePropertyAll(
-                                                    Colors.lightBlue),
-                                          ),
-                                          child: const Text('READ MORE',
-                                              style: TextStyle(
-                                                  shadows: [
-                                                    Shadow(
-                                                        offset:
-                                                            Offset(1.1, 1.1))
-                                                  ],
-                                                  fontSize: 15,
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.white)))),
-                                ]),
-                                Container(height: 140),
-                              ])),
-                    )
-                  ])),
+              // Container(
+              //     width: MediaQuery.of(context).size.width,
+              //     padding: const EdgeInsets.only(top: 100),
+              //     child: ResponsiveGridRow(children: [
+              //       ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
+              //       ResponsiveGridCol(
+              //         lg: 4,
+              //         sm: 12,
+              //         child: Container(
+              //             padding: const EdgeInsets.only(top: 17.5),
+              //             child: Column(
+              //                 crossAxisAlignment: CrossAxisAlignment.start,
+              //                 children: [
+              //                   const SizedBox(
+              //                       height: 50,
+              //                       child: Text('Need file recovery?',
+              //                           style: TextStyle(
+              //                               fontSize: 28,
+              //                               fontWeight: FontWeight.w500))),
+              //                   const SizedBox(
+              //                       height: 120,
+              //                       child: Text('Texto',
+              //                           style: TextStyle(color: Colors.grey))),
+              //                   Row(children: [
+              //                     Container(
+              //                         height: 50,
+              //                         width: 170,
+              //                         decoration: BoxDecoration(
+              //                             borderRadius:
+              //                                 BorderRadius.circular(100)),
+              //                         child: TextButton(
+              //                             onPressed: () {},
+              //                             style: const ButtonStyle(
+              //                               backgroundColor:
+              //                                   MaterialStatePropertyAll(
+              //                                       CoresPersonalizadas
+              //                                           .azulObama),
+              //                               overlayColor:
+              //                                   MaterialStatePropertyAll(
+              //                                       Colors.lightBlue),
+              //                             ),
+              //                             child: const Text('READ MORE',
+              //                                 style: TextStyle(
+              //                                     shadows: [
+              //                                       Shadow(
+              //                                           offset:
+              //                                               Offset(1.1, 1.1))
+              //                                     ],
+              //                                     fontSize: 15,
+              //                                     fontWeight: FontWeight.w600,
+              //                                     color: Colors.white)))),
+              //                   ]),
+              //                   Container(height: 140),
+              //                 ])),
+              //       )
+              //     ])),
               ResponsiveGridRow(children: [
                 ResponsiveGridCol(
                   lg: 8,

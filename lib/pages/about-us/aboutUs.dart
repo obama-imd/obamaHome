@@ -173,7 +173,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 100),
-                child: Dropdowns(),
+                child: ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 100),

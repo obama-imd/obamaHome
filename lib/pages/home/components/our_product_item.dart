@@ -74,7 +74,7 @@ class _OurProductItemState extends State<OurProductItem> {
                           width: 20.0,
                         ),
                 ),
-                child: Image.asset(
+                child: Image.network(
                   widget.image,
                   fit: BoxFit.contain,
                 ),

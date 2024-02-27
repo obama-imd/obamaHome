@@ -99,7 +99,9 @@ class _HomePage1State extends State<HomePage1> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           body: Responsivo(
-              mobile: HomeMobile1(),
+              mobile: HomeMobile1(
+                dataAvailable: dataAvailable,
+                datas: datas),
               //mobile: HomeMobile( scrollController: _scrollController,),
               tablet: HomeTablet(
                 scrollController: _scrollController,
