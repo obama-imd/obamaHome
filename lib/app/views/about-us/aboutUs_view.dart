@@ -4,16 +4,16 @@ import 'package:obamahome/components/navMenu.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../../components/bannerSuperior.dart';
-import '../../components/carousel.dart';
-import '../../components/cores_personalizadas.dart';
-import '../../components/drawer.dart';
-import '../../components/footer.dart';
-import '../../components/sectionTitle.dart';
-import '../../components/topbar.dart';
+import '../../../components/bannerSuperior.dart';
+import '../../../components/carousel.dart';
+import '../../../components/cores_personalizadas.dart';
+import '../../../components/drawer.dart';
+import '../../../components/footer.dart';
+import '../../../components/sectionTitle.dart';
+import '../../../components/topbar.dart';
 import 'components/dropdowns_boutUs.dart';
-import 'o_que_fazemos.dart';
-import 'staff.dart';
+import 'components/o_que_fazemos.dart';
+import 'components/staff.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({Key? key}) : super(key: key);

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/controllers/search_controller.dart';
+import 'package:obamahome/app/views/search/components/advancedSearchOA.dart';
 import 'package:obamahome/components/drawer.dart';
-import 'package:obamahome/pages/search/advancedSearchOA.dart';
-import 'package:obamahome/services/api_OA.dart';
-// import 'package:obamahome/pages/search/constants.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../components/bannerSuperior.dart';
-import '../../components/carousel.dart';
-import '../../components/footer.dart';
-import '../../components/navMenu.dart';
-import '../../components/topbar.dart';
+import '../../../components/bannerSuperior.dart';
+import '../../../components/carousel.dart';
+import '../../../components/footer.dart';
+import '../../../components/navMenu.dart';
+import '../../../components/topbar.dart';
 import '../home/components/our_product_item.dart';
 
 class SearchDesktop extends StatelessWidget {
@@ -132,13 +131,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               BannerSuperior(context, 'Objetos de Aprendizagem'),
               // if (MediaQuery.of(context).size.width > 1000) ...[
               Padding(
-                padding: EdgeInsets.only(top: 100, left: swidth * .08, right: swidth * .08),
+                padding: EdgeInsets.only(
+                    top: 100, left: swidth * .08, right: swidth * .08),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: swidth*.6,
+                      width: swidth * .6,
                       child: ResponsiveGridRow(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -166,8 +166,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ),
                     SizedBox(
                       width: swidth * .2,
-                      child: OAFilters(context, swidth, searchResult,
-                          dataAvailable, updateData),
+                      child: OAFilters(
+                          swidth: swidth,
+                          datas: searchResult,
+                          dataAvailable: dataAvailable,
+                          updateData: updateData),
                     ),
                   ],
                 ),

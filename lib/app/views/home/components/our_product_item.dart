@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import '../../../components/cores_personalizadas.dart';
+import '../../../../components/cores_personalizadas.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(
@@ -18,12 +18,21 @@ class OurProductItem extends StatefulWidget {
   @override
   State<OurProductItem> createState() => _OurProductItemState();
 }
+
 final shadowHouver = [
-              BoxShadow(color: Colors.black.withOpacity(0.1), spreadRadius: 4.0, blurRadius: 4.0,),
-            ];
+  BoxShadow(
+    color: Colors.black.withOpacity(0.1),
+    spreadRadius: 4.0,
+    blurRadius: 4.0,
+  ),
+];
 final shadowNoHouver = [
-              const BoxShadow(color: Colors.transparent, spreadRadius: 4.0,blurRadius: 4.0,),
-            ];
+  const BoxShadow(
+    color: Colors.transparent,
+    spreadRadius: 4.0,
+    blurRadius: 4.0,
+  ),
+];
 
 class _OurProductItemState extends State<OurProductItem> {
   bool houver = false;
@@ -44,10 +53,12 @@ class _OurProductItemState extends State<OurProductItem> {
           color: Colors.white,
           boxShadow: houver ? shadowHouver : shadowNoHouver,
           border: Border(
-            bottom: houver ? const BorderSide(
-              color: CoresPersonalizadas.azulObama,
-              width: 5.0,
-            ) : BorderSide.none,
+            bottom: houver
+                ? const BorderSide(
+                    color: CoresPersonalizadas.azulObama,
+                    width: 5.0,
+                  )
+                : BorderSide.none,
           ),
         ),
         child: Column(
@@ -77,6 +88,10 @@ class _OurProductItemState extends State<OurProductItem> {
                 child: Image.network(
                   widget.image,
                   fit: BoxFit.contain,
+                  errorBuilder: (BuildContext context, Object exception,
+                      StackTrace? stackTrace) {
+                    return Image.asset('assets/images/nopic.jpg');
+                  },
                 ),
               ),
             ),
@@ -84,8 +99,10 @@ class _OurProductItemState extends State<OurProductItem> {
               flex: 1,
               child: Container(
                 alignment: Alignment.center,
-                decoration: const BoxDecoration(color: Colors.white,),
-                child: Text(widget.title),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                ),
+                child: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
           ],

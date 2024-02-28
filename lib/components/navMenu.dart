@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/components/menu.dart';
-import 'package:obamahome/pages/search/searchOA.dart';
 
-import '../services/api_OA.dart';
+import '../app/controllers/search_controller.dart';
 
 final TextEditingController _searchController = TextEditingController();
 

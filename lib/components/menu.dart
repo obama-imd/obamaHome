@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/views/blog/components/blog-details.dart';
 import 'package:obamahome/components/navMenu.dart';
-import 'package:obamahome/pages/blog/blog-details.dart';
 import 'package:riverpod/riverpod.dart';
 
 final TextEditingController _searchController = TextEditingController();

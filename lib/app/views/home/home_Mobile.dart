@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/views/home/components/firstSectionHome.dart';
 import 'package:obamahome/components/cores_personalizadas.dart';
 import 'package:obamahome/components/drawer.dart';
-import 'package:obamahome/pages/home/components/firstSectionHome.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../components/carousel.dart';
-import '../../components/footer.dart';
-import '../../components/sectionTitle.dart';
-import '../../components/topbar.dart';
+import '../../../components/carousel.dart';
+import '../../../components/footer.dart';
+import '../../../components/sectionTitle.dart';
+import '../../../components/topbar.dart';
 import 'components/our_product_item.dart';
 import 'constants.dart';
-import 'home1.dart';
+import 'home_view.dart';
 
 class HomeMobile extends StatelessWidget {
   final TrackingScrollController scrollController;
-  final bool dataAvailable;
-  final List<dynamic> datas;
+  final bool postAvailable;
+  final bool objectAvailable;
+  final List<dynamic> posts;
+  final List<dynamic> objects;
 
   const HomeMobile({
     required this.scrollController,
-    required this.dataAvailable,
-    required this.datas,
+    required this.postAvailable,
+    required this.objectAvailable,
+    required this.posts,
+    required this.objects,
     Key? key,
   }) : super(key: key);
 
@@ -29,8 +33,10 @@ class HomeMobile extends StatelessWidget {
     return Scaffold(
       body: MyStatefulWidget(
         scrollController: scrollController,
-        dataAvailable: dataAvailable,
-        datas: datas,
+        postAvailable: postAvailable,
+        objectAvailable: objectAvailable,
+        posts: posts,
+        objects: objects
       ),
     );
   }
@@ -38,13 +44,17 @@ class HomeMobile extends StatelessWidget {
 
 class MyStatefulWidget extends StatefulWidget {
   final TrackingScrollController scrollController;
-  final bool dataAvailable;
-  final List<dynamic> datas;
+  final bool postAvailable;
+  final bool objectAvailable;
+  final List<dynamic> posts;
+  final List<dynamic> objects;
 
   const MyStatefulWidget({
     required this.scrollController,
-    required this.dataAvailable,
-    required this.datas,
+    required this.postAvailable,
+    required this.objectAvailable,
+    required this.posts,
+    required this.objects,
     Key? key,
   }) : super(key: key);
 
@@ -362,7 +372,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ])),
               ),
             ]),
-            if (widget.dataAvailable == false) ...{
+            if (widget.postAvailable == false) ...{
               Padding(
                 padding: const EdgeInsets.only(top: 120, left: 74, right: 74),
                 child: Column(
@@ -381,12 +391,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       padding: const EdgeInsets.only(top: 60),
                       child: ResponsiveGridRow(
                         children: [
-                          for (int i = 0; i < widget.datas.length; i++) ...{
+                          for (int i = 0; i < widget.posts.length; i++) ...{
                             ResponsiveGridCol(
                                 lg: 4,
                                 md: 6,
                                 xs: 12,
-                                child: blogData(context, i, widget.datas)),
+                                child: blogData(context, i, widget.posts)),
                           }
                         ],
                       ),

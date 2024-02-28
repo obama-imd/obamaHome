@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
-import 'package:obamahome/pages/home/home_desktop.dart';
-import 'package:obamahome/pages/home/home_tablet.dart';
-import 'package:obamahome/pages/home/responsivo.dart';
-import 'package:obamahome/pages/mobile_pages/home_mobile1.dart';
+import 'package:obamahome/app/views/home/home_desktop.dart';
+import 'package:obamahome/app/views/home/home_mobile1.dart';
+import 'package:obamahome/app/views/home/home_tablet.dart';
+import 'package:obamahome/app/views/home/responsivo.dart';
 
-import '../../services/api_blog.dart';
+import '../../controllers/home_controllers.dart';
+
+
 
 Widget blogData(BuildContext context, index, datas) {
   double imageWidth = MediaQuery.of(context).size.width * .3;
@@ -55,27 +57,36 @@ Widget blogData(BuildContext context, index, datas) {
   );
 }
 
-class HomePage1 extends StatefulWidget {
-  const HomePage1({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   @override
-  State<HomePage1> createState() => _HomePage1State();
+  State<HomeView> createState() => _HomePage1State();
 }
 
-class _HomePage1State extends State<HomePage1> {
+class _HomePage1State extends State<HomeView> {
   final TrackingScrollController _scrollController = TrackingScrollController();
 
-  List<dynamic> datas = [];
-  bool dataAvailable = true;
+  List<dynamic> posts = [];
+  List<dynamic> objects = [];
+  bool postAvailable = true;
+  bool objectAvailable = true;
 
   Future<void> fetchDataAndUpdateState() async {
-    final fetchedData = await fetchData('');
+    final fetchedPosts = await fetchPosts('');
+    final fetchedObjects = await fetchObjects('');
     setState(() {
-      if (fetchedData.isNotEmpty) {
-        dataAvailable = false;
-        datas = fetchedData.sublist(0, 3);
+      if (fetchedPosts.isNotEmpty) {
+        postAvailable = false;
+        posts = fetchedPosts;
       } else {
-        dataAvailable = true;
+        postAvailable = true;
+      }
+      if (fetchedObjects.isNotEmpty) {
+        objectAvailable = false;
+        objects = fetchedObjects;
+      } else {
+        objectAvailable = true;
       }
     });
   }
@@ -100,18 +111,24 @@ class _HomePage1State extends State<HomePage1> {
         child: Scaffold(
           body: Responsivo(
               mobile: HomeMobile1(
-                dataAvailable: dataAvailable,
-                datas: datas),
+                postAvailable: postAvailable,
+                objectAvailable: objectAvailable,
+                posts: posts,
+                objects: objects),
               //mobile: HomeMobile( scrollController: _scrollController,),
               tablet: HomeTablet(
                 scrollController: _scrollController,
-                dataAvailable: dataAvailable,
-                datas: datas,
+                postAvailable: postAvailable,
+                objectAvailable: objectAvailable,
+                posts: posts,
+                objects: objects
               ),
               desktop: HomeDesktop(
                 scrollController: _scrollController,
-                dataAvailable: dataAvailable,
-                datas: datas,
+                postAvailable: postAvailable,
+                objectAvailable: objectAvailable,
+                posts: posts,
+                objects: objects
               )),
         ));
   }

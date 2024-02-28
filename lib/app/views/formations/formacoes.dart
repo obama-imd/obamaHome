@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../../components/bannerSuperior.dart';
-import '../../components/carousel.dart';
-import '../../components/drawer.dart';
-import '../../components/footer.dart';
-import '../../components/navMenu.dart';
-import '../../components/sectionTitle.dart';
-import '../../components/topbar.dart';
-import 'dropdowns_formations.dart';
+import '../../../components/bannerSuperior.dart';
+import '../../../components/carousel.dart';
+import '../../../components/drawer.dart';
+import '../../../components/footer.dart';
+import '../../../components/navMenu.dart';
+import '../../../components/sectionTitle.dart';
+import '../../../components/topbar.dart';
+import 'components/dropdowns_formations.dart';
 
 class Formacoes extends StatelessWidget {
   const Formacoes({super.key});

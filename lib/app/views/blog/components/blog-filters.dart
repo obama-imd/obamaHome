@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:obamahome/pages/blog/blog-details.dart';
-import 'package:obamahome/services/api_blog.dart';
+import 'package:obamahome/app/controllers/blog_controller.dart';
+import 'package:obamahome/app/views/blog/components/blog-details.dart';
 
 @override
 Widget blogFilters(

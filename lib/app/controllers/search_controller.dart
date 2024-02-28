@@ -63,11 +63,7 @@ Future<List<dynamic>> fetchData(String searchTerm) async {
         .map((item) => {
               'id': item['id'],
               'nome': item['nome'],
-              if (item['url'] != "")...{
-                'url': item['url'],
-              } else...{
-                'url': "https://higipratic.com.br/site/wp-content/uploads/2017/12/indisponivel.jpg",
-              }
+              'url': item['url'],
             })
         .toList()
         .reversed
