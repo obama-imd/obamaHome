@@ -98,7 +98,6 @@ flutter:
     - assets/images/icone.png
     - assets/images/img.jpg
     - assets/images/img2.jpg
-    - assets/images/img3.jpg
     - assets/images/test.png
     - assets/images/client.jpg
     - assets/images/ufrn.png
@@ -113,6 +112,18 @@ flutter:
     - assets/images/animate.gif
     - assets/images/ppgite.png
     - assets/images/nopic.jpg
+    - assets/images/AnaCarolina.jpg
+    - assets/images/AmandaMaria.jpg
+    - assets/images/DenisSilva.jpg
+    - assets/images/DennysLeite.png
+    - assets/images/FláviaViana.jpg
+    - assets/images/GabrielBarreto.png
+    - assets/images/GiluizaCatarina.jpeg
+    - assets/images/IgorRauan.jpg
+    - assets/images/LucasToshio.jpg
+    - assets/images/MayaraCabral.jpg
+    - assets/images/nelson.jpg
+    - assets/images/SaraSilva.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

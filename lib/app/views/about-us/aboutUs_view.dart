@@ -32,29 +32,41 @@ class MyStatefulWidget extends StatefulWidget {
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
+  List<String> LeaderNames = [
+    "Dennys Leite Maia",
+    "Nelson Ion de Oliveira",
+  ];
+
+  List<String> LeaderImgs = [
+    "assets/images/DennysLeite.png",
+    "assets/images/nelson.jpg",
+  ];
+
   List<String> staffNames = [
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
-    "Dean Michael",
+    "Amanda Maria",
+    "Ana Carolina",
+    "Dênis Silva",
+    "Flávia Viana",
+    "Gabriel Barreto",
+    "Giluiza Borges",
+    "Igor Rauan",
+    "Lucas Toshio",
+    "Mayara Cabral",
+    "Sara Rocha",
   ];
 
   List<String> staffImgs = [
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
-    "assets/images/img3.jpg",
+    "assets/images/AmandaMaria.jpg",
+    "assets/images/AnaCarolina.jpg",
+    "assets/images/DenisSilva.jpg",
+    "assets/images/FláviaViana.jpg",
+    "assets/images/GabrielBarreto.png",
+    "assets/images/GiluizaCatarina.jpeg",
+    "assets/images/IgorRauan.jpg",
+    "assets/images/LucasToshio.jpg",
+    "assets/images/MayaraCabral.jpg",
+    "assets/images/SaraSilva.png"
   ];
-
-  // First Grid Block
 
   List<String> grid1Title = [
     "Objetos de Aprendizagem",
@@ -173,7 +185,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 100),
-                child: ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
+                child:
+                    ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 100),
@@ -269,15 +282,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.only(
                       left: swidth * 0.07, top: 120.0, bottom: 65.0),
-                  child: SectionTitle(
-                      'Nossa Equipe',
-                      'Our experts have been featured in press numerous times.',
+                  child: SectionTitle('Nossa Equipe', 'Coordenadores',
                       CrossAxisAlignment.start),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
                   child: ResponsiveGridRow(children: [
-                    for (int i = 0; i < 4; i++) ...{
+                    for (int i = 0; i < LeaderNames.length; i++) ...{
                       ResponsiveGridCol(
                           lg: 3,
                           md: 6,
@@ -285,16 +296,25 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
-                            child:
-                                StaffCard(staffNames[i], staffImgs[i], swidth),
+                            child: Center(
+                              child: StaffCard(
+                                  LeaderNames[i], LeaderImgs[i], swidth),
+                            ),
                           ))
                     }
                   ]),
                 ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  padding: EdgeInsets.only(
+                      left: swidth * 0.07, bottom: 65.0),
+                  child: SectionTitle('', 'Colaboradores',
+                      CrossAxisAlignment.start),
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
                   child: ResponsiveGridRow(children: [
-                    for (int i = 0; i < 4; i++) ...{
+                    for (int i = 0; i < staffNames.length; i++) ...{
                       ResponsiveGridCol(
                           lg: 3,
                           md: 6,
@@ -334,252 +354,4 @@ class CustomVideo extends StatelessWidget {
       aspectRatio: 16 / 9,
     )));
   }
-}
-
-Widget Mediabox(BuildContext context) {
-  return Container(
-      height: 381,
-      width: 280,
-      decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
-      child: Column(children: [
-        SizedBox(
-            height: 280,
-            width: 280,
-            child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
-        Container(
-            height: 99,
-            color: const Color.fromARGB(255, 231, 228, 228),
-            child: Column(children: [
-              Container(height: 28),
-              const Text('Dean Michael',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    child: Row(children: [
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.facebook,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.googlePlus,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.twitter,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.linkedin,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.instagram,
-                              size: 16.0, color: Colors.black)))
-                ]))
-              ])
-            ]))
-      ]));
-}
-
-Widget Mediabox1(BuildContext context) {
-  return Container(
-      height: 381,
-      width: 280,
-      decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
-      child: Column(children: [
-        SizedBox(
-            height: 280,
-            width: 280,
-            child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
-        Container(
-            height: 99,
-            color: const Color.fromARGB(255, 231, 228, 228),
-            child: Column(children: [
-              Container(height: 28),
-              const Text('Dean Michael',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    child: Row(children: [
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.facebook,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.googlePlus,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.twitter,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.linkedin,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.instagram,
-                              size: 16.0, color: Colors.black)))
-                ]))
-              ])
-            ]))
-      ]));
-}
-
-Widget Mediabox2(BuildContext context) {
-  return Container(
-      height: 381,
-      width: 280,
-      decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
-      child: Column(children: [
-        SizedBox(
-            height: 280,
-            width: 280,
-            child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
-        Container(
-            height: 99,
-            color: const Color.fromARGB(255, 231, 228, 228),
-            child: Column(children: [
-              Container(height: 28),
-              const Text('Dean Michael',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    child: Row(children: [
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.facebook,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.googlePlus,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.twitter,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.linkedin,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.instagram,
-                              size: 16.0, color: Colors.black)))
-                ]))
-              ])
-            ]))
-      ]));
-}
-
-Widget Mediabox3(BuildContext context) {
-  return Container(
-      height: 381,
-      width: 280,
-      decoration: BoxDecoration(
-          border: Border.all(color: const Color.fromARGB(255, 231, 228, 228))),
-      child: Column(children: [
-        SizedBox(
-            height: 280,
-            width: 280,
-            child: Image.asset('assets/images/img3.jpg', fit: BoxFit.cover)),
-        Container(
-            height: 99,
-            color: const Color.fromARGB(255, 231, 228, 228),
-            child: Column(children: [
-              Container(height: 28),
-              const Text('Dean Michael',
-                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 20)),
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    child: Row(children: [
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.facebook,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.googlePlus,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.twitter,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.linkedin,
-                              size: 16.0, color: Colors.black))),
-                  SizedBox(
-                      height: 35,
-                      width: 30,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: const Icon(FontAwesomeIcons.instagram,
-                              size: 16.0, color: Colors.black)))
-                ]))
-              ])
-            ]))
-      ]));
 }
