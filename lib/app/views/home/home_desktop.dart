@@ -32,12 +32,11 @@ class HomeDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MyStatefulWidget(
-        scrollController: scrollController,
-        postAvailable: postAvailable,
-        objectAvailable: objectAvailable,
-        posts: posts,
-        objects: objects
-      ),
+          scrollController: scrollController,
+          postAvailable: postAvailable,
+          objectAvailable: objectAvailable,
+          posts: posts,
+          objects: objects),
     );
   }
 }
@@ -158,7 +157,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ),
                   )),
               Padding(
-                padding: const EdgeInsets.only(top: 100),
+                padding: const EdgeInsets.only(top: 100, bottom:  120),
                 child: ResponsiveGridRow(children: [
                   ResponsiveGridCol(
                     lg: 8,
@@ -239,51 +238,51 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ResponsiveGridCol(
                       lg: 4,
                       child: SizedBox(
-                          height: 865,
+                          height: 853,
                           child: Image.asset('assets/images/img2.jpg',
                               fit: BoxFit.cover)),
                     ),
                   }
                 ]),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 120, bottom: 65.0),
-                child: SectionTitle(
-                    'OBJETOS DE APRENDIZAGEM',
-                    '',
-                    CrossAxisAlignment.center),
-              ),
-              // if (MediaQuery.of(context).size.width > 1000) ...[
-              Padding(
-                padding: EdgeInsets.only(
-                    left: swidth * .05, right: swidth * .05, bottom: 100),
-                child: ResponsiveGridRow(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    for (var lista in widget.objects) ...{
-                      ResponsiveGridCol(
-                        lg: 3,
-                        md: 6,
-                        xs: 12,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: paddingCard, vertical: 15),
-                          child: OurProductItem(
-                            title: lista['nome'],
-                            image: lista['url'],
+              if (widget.objectAvailable == false) ...{
+                Container(
+                  margin: const EdgeInsets.only(bottom: 65.0),
+                  child: SectionTitle(
+                      'OBJETOS DE APRENDIZAGEM', 'Mais populares', CrossAxisAlignment.center),
+                ),
+                // if (MediaQuery.of(context).size.width > 1000) ...[
+                Padding(
+                  padding: EdgeInsets.only(
+                      left: swidth * .05, right: swidth * .05, bottom: 120),
+                  child: ResponsiveGridRow(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      for (var lista in widget.objects) ...{
+                        ResponsiveGridCol(
+                          lg: 3,
+                          md: 6,
+                          xs: 12,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: paddingCard, vertical: 15),
+                            child: OurProductItem(
+                              title: lista['nome'],
+                              image: lista['url'],
+                            ),
                           ),
                         ),
-                      ),
-                    }
-                  ],
+                      }
+                    ],
+                  ),
                 ),
-              ),
+              },
               ResponsiveGridRow(children: [
                 if (swidth > 992) ...{
                   ResponsiveGridCol(
                     lg: 4,
                     child: SizedBox(
-                        height: 865,
+                        height: 853,
                         child: Image.asset('assets/images/img2.jpg',
                             fit: BoxFit.cover)),
                   ),

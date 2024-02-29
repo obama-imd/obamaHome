@@ -87,7 +87,7 @@ class _OurProductItemState extends State<OurProductItem> {
                 ),
                 child: Image.network(
                   widget.image,
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
                     return Image.asset('assets/images/nopic.jpg');

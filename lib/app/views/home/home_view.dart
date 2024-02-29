@@ -8,8 +8,6 @@ import 'package:obamahome/app/views/home/responsivo.dart';
 
 import '../../controllers/home_controllers.dart';
 
-
-
 Widget blogData(BuildContext context, index, datas) {
   double imageWidth = MediaQuery.of(context).size.width * .3;
   double imageHeight = 185;
@@ -72,9 +70,27 @@ class _HomePage1State extends State<HomeView> {
   bool postAvailable = true;
   bool objectAvailable = true;
 
-  Future<void> fetchDataAndUpdateState() async {
+  // Future<void> fetchDataAndUpdateState() async {
+  //   final fetchedPosts = await fetchPosts('');
+  //   final fetchedObjects = await fetchObjects('');
+  //   setState(() {
+  //     if (fetchedPosts.isNotEmpty) {
+  //       postAvailable = false;
+  //       posts = fetchedPosts;
+  //     } else {
+  //       postAvailable = true;
+  //     }
+  //     if (fetchedObjects.isNotEmpty) {
+  //       objectAvailable = false;
+  //       objects = fetchedObjects;
+  //     } else {
+  //       objectAvailable = true;
+  //     }
+  //   });
+  // }
+
+  Future<void> fetchandUpdatePosts() async {
     final fetchedPosts = await fetchPosts('');
-    final fetchedObjects = await fetchObjects('');
     setState(() {
       if (fetchedPosts.isNotEmpty) {
         postAvailable = false;
@@ -82,6 +98,12 @@ class _HomePage1State extends State<HomeView> {
       } else {
         postAvailable = true;
       }
+    });
+  }
+
+  Future<void> fetchandUpdateObjects() async {
+    final fetchedObjects = await fetchObjects('');
+    setState(() {
       if (fetchedObjects.isNotEmpty) {
         objectAvailable = false;
         objects = fetchedObjects;
@@ -94,7 +116,9 @@ class _HomePage1State extends State<HomeView> {
   @override
   void initState() {
     super.initState();
-    fetchDataAndUpdateState();
+    // fetchDataAndUpdateState();
+    fetchandUpdatePosts();
+    fetchandUpdateObjects();
   }
 
   @override
@@ -111,25 +135,23 @@ class _HomePage1State extends State<HomeView> {
         child: Scaffold(
           body: Responsivo(
               mobile: HomeMobile1(
-                postAvailable: postAvailable,
-                objectAvailable: objectAvailable,
-                posts: posts,
-                objects: objects),
+                  postAvailable: postAvailable,
+                  objectAvailable: objectAvailable,
+                  posts: posts,
+                  objects: objects),
               //mobile: HomeMobile( scrollController: _scrollController,),
               tablet: HomeTablet(
-                scrollController: _scrollController,
-                postAvailable: postAvailable,
-                objectAvailable: objectAvailable,
-                posts: posts,
-                objects: objects
-              ),
+                  scrollController: _scrollController,
+                  postAvailable: postAvailable,
+                  objectAvailable: objectAvailable,
+                  posts: posts,
+                  objects: objects),
               desktop: HomeDesktop(
-                scrollController: _scrollController,
-                postAvailable: postAvailable,
-                objectAvailable: objectAvailable,
-                posts: posts,
-                objects: objects
-              )),
+                  scrollController: _scrollController,
+                  postAvailable: postAvailable,
+                  objectAvailable: objectAvailable,
+                  posts: posts,
+                  objects: objects)),
         ));
   }
 }

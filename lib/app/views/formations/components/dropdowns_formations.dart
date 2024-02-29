@@ -16,6 +16,9 @@ class Dropdowns extends StatelessWidget {
       child: Column(children: [
         for (var lista in accordionContent) ...{
           ExpansionTile(
+              shape: Border.all(color: Color.fromRGBO(0xe4, 0xe4, 0xe4, 1.0)),
+              collapsedShape:
+                  Border.all(color: Color.fromRGBO(0xe4, 0xe4, 0xe4, 1.0)),
               title: Row(children: [
                 SizedBox(height: 30, width: 2),
                 Icon(FontAwesomeIcons.chartColumn, size: 19),
@@ -25,7 +28,8 @@ class Dropdowns extends StatelessWidget {
               ]),
               children: [
                 ListTile(
-                  title: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Container(
                         padding: EdgeInsets.all(20),
@@ -37,7 +41,8 @@ class Dropdowns extends StatelessWidget {
                               padding: const EdgeInsets.only(bottom: 10.0),
                               child: Text(lista.sectionTitle,
                                   style: TextStyle(
-                                      height: 1.4, fontWeight: FontWeight.bold)),
+                                      height: 1.4,
+                                      fontWeight: FontWeight.bold)),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10.0),
@@ -55,14 +60,21 @@ class Dropdowns extends StatelessWidget {
                                 children: [
                                   Text("Duração da Formação: ",
                                       style: TextStyle(
-                                          height: 1.4, fontWeight: FontWeight.bold)),
-                                  Text(lista.duration, style: TextStyle(height: 1.4)),
+                                          height: 1.4,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(lista.duration,
+                                      style: TextStyle(height: 1.4)),
                                 ],
                               ),
                             ),
                             Container(
                               padding: EdgeInsets.only(left: 15),
-                              decoration: BoxDecoration(border: Border(left: BorderSide(width: 5, color: CoresPersonalizadas.azulObama))),
+                              decoration: BoxDecoration(
+                                  border: Border(
+                                      left: BorderSide(
+                                          width: 5,
+                                          color:
+                                              CoresPersonalizadas.azulObama))),
                               child: Text(lista.thirdParagraph,
                                   style: TextStyle(height: 1.4)),
                             ),
@@ -71,19 +83,22 @@ class Dropdowns extends StatelessWidget {
                       ),
                       Container(
                         padding: EdgeInsets.symmetric(vertical: 20),
-                        width: MediaQuery.of(context).size.width *.4,
+                        width: MediaQuery.of(context).size.width * .4,
                         height: 450,
                         child: Column(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(bottom: 10.0),
                               child: Text('Vídeo de apresentação',
-                                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold)),
                             ),
                             SizedBox(
                                 height: 300,
                                 child: Container(
-                                    child: CustomVideo(urlVideo: lista.urlVideo)))
+                                    child:
+                                        CustomVideo(urlVideo: lista.urlVideo)))
                           ],
                         ),
                       ),

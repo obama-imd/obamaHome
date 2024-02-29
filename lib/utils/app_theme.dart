@@ -7,9 +7,10 @@ const Color secondary = Colors.white;
 const Color onSecondary = Colors.white;
 const Color error = Colors.red;
 const Color onError = Colors.redAccent;
-const Color background = Color.fromARGB(255, 240, 240, 240);
+const Color background = Colors.white;
 const Color onBackground = Colors.white;
 const Color surface = Color.fromRGBO(23, 160, 242, 1);
+const Color modalBackground = Color.fromRGBO(23, 160, 242, .9);
 const Color onSurface = Colors.black;
 
 const LinearGradient gradientColor = LinearGradient(begin: Alignment.topLeft,colors: [Colors.white,Colors.blue]);

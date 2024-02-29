@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:obamahome/components/navMenu.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
@@ -31,65 +31,6 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-
-  List<String> LeaderNames = [
-    "Dennys Leite Maia",
-    "Nelson Ion de Oliveira",
-  ];
-
-  List<String> LeaderImgs = [
-    "assets/images/DennysLeite.png",
-    "assets/images/nelson.jpg",
-  ];
-
-  List<String> staffNames = [
-    "Amanda Maria",
-    "Ana Carolina",
-    "Dênis Silva",
-    "Flávia Viana",
-    "Gabriel Barreto",
-    "Giluiza Borges",
-    "Igor Rauan",
-    "Lucas Toshio",
-    "Mayara Cabral",
-    "Sara Rocha",
-  ];
-
-  List<String> staffImgs = [
-    "assets/images/AmandaMaria.jpg",
-    "assets/images/AnaCarolina.jpg",
-    "assets/images/DenisSilva.jpg",
-    "assets/images/FláviaViana.jpg",
-    "assets/images/GabrielBarreto.png",
-    "assets/images/GiluizaCatarina.jpeg",
-    "assets/images/IgorRauan.jpg",
-    "assets/images/LucasToshio.jpg",
-    "assets/images/MayaraCabral.jpg",
-    "assets/images/SaraSilva.png"
-  ];
-
-  List<String> grid1Title = [
-    "Objetos de Aprendizagem",
-    "Planos de Aula",
-    "Publicações",
-    "Formações",
-  ];
-
-  List<IconData> grid1Icon = [
-    FontAwesomeIcons.wrench,
-    Icons.settings,
-    Icons.settings_backup_restore_rounded,
-    FontAwesomeIcons.heart,
-  ];
-
-  List<double> iconSize = [38, 44, 46, 39];
-
-  List<String> grid1Content = [
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-    "nononon nono nonon non !",
-  ];
 
   @override
   Widget build(BuildContext context) {

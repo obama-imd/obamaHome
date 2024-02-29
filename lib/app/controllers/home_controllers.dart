@@ -41,7 +41,7 @@ Future<List<dynamic>> fetchPosts(String searchTerm) async {
 Future<List<dynamic>> fetchObjects(String searchTerm) async {
   // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
-  final response = {
+  final result = {
     "content": [
       {
         "id": 560,
@@ -132,9 +132,9 @@ Future<List<dynamic>> fetchObjects(String searchTerm) async {
   };
 
   // if (response.statusCode == 200) {
-  if (response != null) {
+  if (result != null) {
     // final jsonData = jsonDecode(response.body);
-    List<dynamic> jsonData = response['content'] as List<dynamic>;
+    List<dynamic> jsonData = result['content'] as List<dynamic>;
     final posts = jsonData
         .map((item) => {
               'id': item['id'],

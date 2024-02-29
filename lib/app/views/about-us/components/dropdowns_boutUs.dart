@@ -14,6 +14,9 @@ class Dropdowns extends StatelessWidget {
       child: Column(children: [
         for (var lista in accordionContent) ...{
           ExpansionTile(
+              shape: Border.all(color: Color.fromRGBO(0xe4, 0xe4, 0xe4, 1.0)),
+              collapsedShape:
+                  Border.all(color: Color.fromRGBO(0xe4, 0xe4, 0xe4, 1.0)),
               title: Row(children: [
                 SizedBox(height: 30, width: 2),
                 Icon(FontAwesomeIcons.chartColumn, size: 19),

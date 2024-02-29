@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/blog/components/blog-details.dart';
-import 'package:obamahome/app/views/formations/formacoes.dart';
+import 'package:obamahome/app/views/formations/formacoes_view.dart';
 import 'package:obamahome/app/views/home/home_view.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 

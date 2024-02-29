@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
 class AccordionItem {
   final String accordionTitle;
   final String accordionContent;
@@ -33,3 +36,62 @@ List<AccordionItem> accordionContent = [
     "Hoje fazem parte do projeto professores do IMD e estudantes do curso técnico e de bacharelado em Tecnologia da Informação e dos cursos de Licenciatura em Matemática e Pedagogia.\n\n\n\n\n",
   ),
 ];
+
+  List<String> LeaderNames = [
+    "Dennys Leite Maia",
+    "Nelson Ion de Oliveira",
+  ];
+
+  List<String> LeaderImgs = [
+    "assets/images/DennysLeite.png",
+    "assets/images/nelson.jpg",
+  ];
+
+  List<String> staffNames = [
+    "Amanda Maria",
+    "Ana Carolina",
+    "Dênis Silva",
+    "Flávia Viana",
+    "Gabriel Barreto",
+    "Giluiza Borges",
+    "Igor Rauan",
+    "Lucas Toshio",
+    "Mayara Cabral",
+    "Sara Rocha",
+  ];
+
+  List<String> staffImgs = [
+    "assets/images/AmandaMaria.jpg",
+    "assets/images/AnaCarolina.jpg",
+    "assets/images/DenisSilva.jpg",
+    "assets/images/FláviaViana.jpg",
+    "assets/images/GabrielBarreto.png",
+    "assets/images/GiluizaCatarina.jpeg",
+    "assets/images/IgorRauan.jpg",
+    "assets/images/LucasToshio.jpg",
+    "assets/images/MayaraCabral.jpg",
+    "assets/images/SaraSilva.png"
+  ];
+
+  List<String> grid1Title = [
+    "Objetos de Aprendizagem",
+    "Planos de Aula",
+    "Publicações",
+    "Formações",
+  ];
+
+  List<IconData> grid1Icon = [
+    FontAwesomeIcons.wrench,
+    Icons.settings,
+    Icons.settings_backup_restore_rounded,
+    FontAwesomeIcons.heart,
+  ];
+
+  List<double> iconSize = [38, 44, 46, 39];
+
+  List<String> grid1Content = [
+    "nononon nono nonon non !",
+    "nononon nono nonon non !",
+    "nononon nono nonon non !",
+    "nononon nono nonon non !",
+  ];

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/components/menu.dart';
+import 'package:obamahome/utils/app_theme.dart';
 
 import '../app/controllers/search_controller.dart';
 
@@ -124,6 +125,14 @@ class _NavMenuState extends State<NavMenu> {
       });
     }
 
+    Future searchObject() async {
+      List<dynamic> filteredData = await fetchData(searchText);
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => SearchDesktop(datas: filteredData)));
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
@@ -140,42 +149,45 @@ class _NavMenuState extends State<NavMenu> {
                 iconSize: 20,
                 icon: Icon(Icons.search),
                 onPressed: () => showDialog<String>(
-                      barrierColor: Color.fromARGB(222, 33, 149, 243),
+                      barrierColor: modalBackground,
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
                         // backgroundColor: Color.fromARGB(209, 33, 149, 243),
                         contentPadding: EdgeInsets.all(0),
                         content: Container(
-                          width: 400,
-                          height: 50,
-                          child: SearchBar(
-                              backgroundColor:
-                                  MaterialStatePropertyAll(Colors.white),
-                              overlayColor:
-                                  MaterialStatePropertyAll(Colors.white),
-                              onChanged: (value) => setState(() {
-                                    searchText = value;
-                                  }),
-                              onSubmitted: (value) async {
-                                List<dynamic> filteredData = await fetchData(value);
-                                print(filteredData);
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            SearchDesktop(datas: filteredData)));
-                              }),
+                          color: surface,
+                          width: 500,
+                          height: 100,
+                          padding: EdgeInsets.only(left: 20),
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 420,
+                                child: TextField(
+                                    style: TextStyle(color: secondary),
+                                    decoration: InputDecoration(
+                                        hintText: "Busca de OA",
+                                        hintStyle: TextStyle(color: secondary),
+                                        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondary))),
+                                    onChanged: (value) => setState(() {
+                                          searchText = value;
+                                        }),
+                                    onSubmitted: (value) {
+                                      searchObject();
+                                    }),
+                              ),
+                              Container(
+                                padding: EdgeInsets.only(left: 10),
+                                child: IconButton(
+                                  icon: Icon(Icons.search, color: secondary),
+                                  onPressed: () {
+                                    searchObject();
+                                  },
+                                ),
+                              )
+                            ],
+                          ),
                         ),
-                        // actions: <Widget>[
-                        //   TextButton(
-                        //     onPressed: () => Navigator.pop(context, 'Cancel'),
-                        //     child: const Text('Cancel'),
-                        //   ),
-                        //   TextButton(
-                        //     onPressed: () => Navigator.pop(context, 'OK'),
-                        //     child: const Text('OK'),
-                        //   ),
-                        // ],
                       ),
                     )),
             // AnimSearchBar(
