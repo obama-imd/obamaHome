@@ -132,20 +132,16 @@ Future<List<dynamic>> fetchObjects(String searchTerm) async {
   };
 
   // if (response.statusCode == 200) {
-  if (result != null) {
-    // final jsonData = jsonDecode(response.body);
-    List<dynamic> jsonData = result['content'] as List<dynamic>;
-    final posts = jsonData
-        .map((item) => {
-              'id': item['id'],
-              'nome': item['nome'],
-              'url': item['url'],
-            })
-        .toList()
-        .reversed
-        .toList();
-    return posts.sublist(0, 4);
-  } else {
-    return [];
-  }
+  // final jsonData = jsonDecode(response.body);
+  List<dynamic> jsonData = result['content'] as List<dynamic>;
+  final posts = jsonData
+      .map((item) => {
+            'id': item['id'],
+            'nome': item['nome'],
+            'url': item['url'],
+          })
+      .toList()
+      .reversed
+      .toList();
+  return posts.sublist(0, 4);
 }

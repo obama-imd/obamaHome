@@ -316,35 +316,58 @@ class Footer extends StatelessWidget {
 @override
 Widget flutterMapArea(BuildContext context) {
   return FlutterMap(
+    mapController: MapController(),
     options: MapOptions(
-      center: LatLng(-5.832006, -35.205471),
-      zoom: 17,
+      initialCenter: LatLng(-5.832006, -35.205471),
+      initialZoom: 17,
       maxZoom: 18,
-      enableScrollWheel: false,
-      pinchZoomThreshold: 0.5,
     ),
-    layers: [
-      TileLayerOptions(
+    children: [
+      TileLayer(
         urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
         userAgentPackageName: 'com.example.app',
       ),
-      MarkerLayerOptions(
+      MarkerLayer(
         markers: [
           Marker(
             point: LatLng(-5.832006, -35.205471),
             width: 50,
             height: 50,
-            builder: (context) => const Icon(FontAwesomeIcons.locationDot,
+            child: const Icon(FontAwesomeIcons.locationDot,
                 size: 30, color: Colors.black),
           ),
         ],
       ),
     ],
-    nonRotatedChildren: [
-      AttributionWidget.defaultWidget(
-        source: 'OpenStreetMap contributors',
-        onSourceTapped: null,
-      ),
-    ],
   );
+  // return FlutterMap(
+  //   options: MapOptions(
+  //     initialCenter: LatLng(-5.832006, -35.205471),
+  //     initialZoom: 17,
+  //     maxZoom: 18,
+  //   ),
+  //   layers: [
+  //     TileLayerOptions(
+  //       urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+  //       userAgentPackageName: 'com.example.app',
+  //     ),
+  //     MarkerLayerOptions(
+  //       markers: [
+  //         Marker(
+  //           point: LatLng(-5.832006, -35.205471),
+  //           width: 50,
+  //           height: 50,
+  //           builder: (context) => const Icon(FontAwesomeIcons.locationDot,
+  //               size: 30, color: Colors.black),
+  //         ),
+  //       ],
+  //     ),
+  //   ],
+  //   nonRotatedChildren: [
+  //     AttributionWidget.defaultWidget(
+  //       source: 'OpenStreetMap contributors',
+  //       onSourceTapped: null,
+  //     ),
+  //   ],
+  // );
 }

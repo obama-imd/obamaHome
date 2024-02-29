@@ -105,22 +105,34 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 }
 
 class CustomVideo extends StatelessWidget {
-  final YoutubePlayerController _controller = YoutubePlayerController(
-      initialVideoId: 'oH3omNV9UUU',
-      params: const YoutubePlayerParams(
-        autoPlay: true,
-        mute: false,
-      ));
+  // final YoutubePlayerController _controller = YoutubePlayerController(
+  //     initialVideoId: 'oH3omNV9UUU',
+  //     params: const YoutubePlayerParams(
+  //       autoPlay: true,
+  //       mute: false,
+  //     ));
+
+  final _controller = YoutubePlayerController.fromVideoId(
+    videoId: 'oH3omNV9UUU',
+    autoPlay: false,
+    params: const YoutubePlayerParams(showFullscreenButton: true),
+  );
 
   CustomVideo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: YoutubePlayerIFrame(
+    return YoutubePlayerScaffold(
       controller: _controller,
       aspectRatio: 16 / 9,
-    )));
+      builder: (context, player) {
+        return Column(
+          children: [
+            player,
+            Text('Youtube Player'),
+          ],
+        );
+      },
+    );
   }
 }

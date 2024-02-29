@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/utils/app_theme.dart';
+import 'package:obamahome/components/mainButton.dart';
 
 import '../../../controllers/search_controller.dart';
 
@@ -51,7 +51,6 @@ class _HomePage1State extends State<OAFilters> {
     required this.datas,
     required this.dataAvailable,
     required this.updateData,
-    Key? key,
   });
 
   @override
@@ -165,25 +164,7 @@ class _HomePage1State extends State<OAFilters> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                    margin: EdgeInsets.only(top: 50),
-                    height: 50,
-                    width: 170,
-                    decoration:
-                        BoxDecoration(borderRadius: BorderRadius.circular(100)),
-                    child: TextButton(
-                        onPressed: () {},
-                        style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(primary),
-                          overlayColor:
-                              MaterialStatePropertyAll(Colors.lightBlue),
-                        ),
-                        child: Text('Busca Avançada',
-                            style: TextStyle(
-                                shadows: [Shadow(offset: Offset(1.1, 1.1))],
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white)))),
+                mainButton(context, 'Busca Avançada'),
               ],
             ),
           ],

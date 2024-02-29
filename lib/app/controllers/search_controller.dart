@@ -54,24 +54,20 @@ Future<List<dynamic>> fetchData(String searchTerm) async {
   };
 
   // if (response.statusCode == 200) {
-  if (response != null) {
-    // final jsonData = jsonDecode(response.body);
-    List<dynamic> jsonData = response['content'] as List<dynamic>;
+  // final jsonData = jsonDecode(response.body);
+  List<dynamic> jsonData = response['content'] as List<dynamic>;
 
-    final postsFiltrados = filtrarOA(jsonData, searchTerm);
-    final posts = postsFiltrados
-        .map((item) => {
-              'id': item['id'],
-              'nome': item['nome'],
-              'url': item['url'],
-            })
-        .toList()
-        .reversed
-        .toList();
-    return posts;
-  } else {
-    return [];
-  }
+  final postsFiltrados = filtrarOA(jsonData, searchTerm);
+  final posts = postsFiltrados
+      .map((item) => {
+            'id': item['id'],
+            'nome': item['nome'],
+            'url': item['url'],
+          })
+      .toList()
+      .reversed
+      .toList();
+  return posts;
 }
 
 List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {

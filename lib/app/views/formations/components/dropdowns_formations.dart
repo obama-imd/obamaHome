@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/components/cores_personalizadas.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
+import '../../../../components/youtubePlayer.dart';
 import '../constants.dart';
 
 class Dropdowns extends StatelessWidget {
@@ -109,32 +109,6 @@ class Dropdowns extends StatelessWidget {
           SizedBox(height: 20, width: 10),
         },
       ]),
-    );
-  }
-}
-
-class CustomVideo extends StatelessWidget {
-  final String urlVideo;
-
-  CustomVideo({Key? key, required this.urlVideo}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final YoutubePlayerController _controller = YoutubePlayerController(
-      initialVideoId: urlVideo,
-      params: const YoutubePlayerParams(
-        autoPlay: true,
-        mute: false,
-      ),
-    );
-
-    return Scaffold(
-      body: Center(
-        child: YoutubePlayerIFrame(
-          controller: _controller,
-          aspectRatio: 16 / 9,
-        ),
-      ),
     );
   }
 }

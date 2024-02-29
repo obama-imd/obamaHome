@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:obamahome/components/navMenu.dart';
 import 'package:responsive_grid/responsive_grid.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
@@ -11,6 +10,7 @@ import '../../../components/drawer.dart';
 import '../../../components/footer.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
+import '../../../components/youtubePlayer.dart';
 import 'components/dropdowns_boutUs.dart';
 import 'components/o_que_fazemos.dart';
 import 'components/staff.dart';
@@ -108,7 +108,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         padding: const EdgeInsets.only(left: 40.0, top: 30.0),
                         child: ListView(children: [
                           const Text('O que nós Fazemos',
-                              textScaleFactor: 2.0,
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           Container(height: 15),
                           const OqueFazemos()
@@ -119,8 +118,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     sm: 12,
                     child: Container(
                         color: const Color.fromARGB(255, 224, 220, 220),
-                        height: 343,
-                        child: CustomVideo()),
+                        child: CustomVideo(urlVideo: 'oH3omNV9UUU')),
                   )
                 ]),
               ),
@@ -247,10 +245,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(
-                      left: swidth * 0.07, bottom: 65.0),
-                  child: SectionTitle('', 'Colaboradores',
-                      CrossAxisAlignment.start),
+                  padding: EdgeInsets.only(left: swidth * 0.07, bottom: 65.0),
+                  child: SectionTitle(
+                      '', 'Colaboradores', CrossAxisAlignment.start),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
@@ -273,26 +270,5 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Carousel(swidth),
               Footer(swidth),
             ]))));
-  }
-}
-
-class CustomVideo extends StatelessWidget {
-  final YoutubePlayerController _controller = YoutubePlayerController(
-      initialVideoId: 'oH3omNV9UUU',
-      params: const YoutubePlayerParams(
-        autoPlay: true,
-        mute: false,
-      ));
-
-  CustomVideo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-            child: YoutubePlayerIFrame(
-      controller: _controller,
-      aspectRatio: 16 / 9,
-    )));
   }
 }
