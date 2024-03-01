@@ -12,7 +12,6 @@ import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
 import '../../../components/youtubePlayer.dart';
 import 'components/dropdowns_boutUs.dart';
-import 'components/o_que_fazemos.dart';
 import 'components/staff.dart';
 
 class AboutUsPage extends StatelessWidget {
@@ -86,9 +85,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ]))
               ],
               BannerSuperior(context, 'Sobre Nós'),
-              Container(
-                height: 320,
-                width: MediaQuery.of(context).size.width,
+              Padding(
                 padding: const EdgeInsets.only(top: 120.0, bottom: 65.0),
                 child: SectionTitle(
                     'Plataforma OBAMA',
@@ -99,25 +96,32 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 72),
                 child: ResponsiveGridRow(children: [
+                  // ResponsiveGridCol(
+                  //   lg: 6,
+                  //   sm: 12,
+                  //   child: Container(
+                  //       height: 343,
+                  //       color: const Color.fromARGB(255, 224, 220, 220),
+                  //       padding: const EdgeInsets.only(left: 40.0, top: 30.0),
+                  //       child: ListView(children: [
+                  //         const Text('O que nós Fazemos',
+                  //             style: TextStyle(fontWeight: FontWeight.bold)),
+                  //         Container(height: 15),
+                  //         const OqueFazemos()
+                  //       ])),
+                  // ),
                   ResponsiveGridCol(
-                    lg: 6,
+                    lg: 12,
                     sm: 12,
                     child: Container(
-                        height: 343,
-                        color: const Color.fromARGB(255, 224, 220, 220),
-                        padding: const EdgeInsets.only(left: 40.0, top: 30.0),
-                        child: ListView(children: [
-                          const Text('O que nós Fazemos',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          Container(height: 15),
-                          const OqueFazemos()
-                        ])),
-                  ),
-                  ResponsiveGridCol(
-                    lg: 6,
-                    sm: 12,
-                    child: Container(
-                        color: const Color.fromARGB(255, 224, 220, 220),
+                        decoration: const BoxDecoration(
+                            color: const Color.fromARGB(255, 224, 220, 220),
+                            border: Border(
+                                bottom: BorderSide(
+                          color: Colors.blue,
+                          width: 8,
+                        ))),
+                        padding: EdgeInsets.all(swidth * .02),
                         child: CustomVideo(urlVideo: 'oH3omNV9UUU')),
                   )
                 ]),
@@ -219,35 +223,33 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(
-                      left: swidth * 0.07, top: 120.0, bottom: 65.0),
-                  child: SectionTitle('Nossa Equipe', 'Coordenadores',
-                      CrossAxisAlignment.start),
+                  padding: EdgeInsets.only(top: 120.0, bottom: 65.0),
+                  child: SectionTitle(
+                      'Coordenadores', '', CrossAxisAlignment.center),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
                   child: ResponsiveGridRow(children: [
+                    ResponsiveGridCol(lg: 3, child: Spacer()),
                     for (int i = 0; i < LeaderNames.length; i++) ...{
                       ResponsiveGridCol(
                           lg: 3,
-                          md: 6,
                           xs: 12,
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
-                            child: Center(
-                              child: StaffCard(
-                                  LeaderNames[i], LeaderImgs[i], swidth),
-                            ),
+                            child: StaffCard(
+                                LeaderNames[i], LeaderImgs[i], swidth),
                           ))
-                    }
+                    },
+                    ResponsiveGridCol(lg: 3, child: Spacer()),
                   ]),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left: swidth * 0.07, bottom: 65.0),
+                  padding: EdgeInsets.only(top: 65, bottom: 65.0),
                   child: SectionTitle(
-                      '', 'Colaboradores', CrossAxisAlignment.start),
+                      'Colaboradores', '', CrossAxisAlignment.center),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),

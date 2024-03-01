@@ -80,7 +80,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double paddingCard = MediaQuery.of(context).size.width * .025;
+    double paddingCard = MediaQuery.of(context).size.width * .02;
     double swidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
@@ -132,13 +132,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               // if (MediaQuery.of(context).size.width > 1000) ...[
               Padding(
                 padding: EdgeInsets.only(
-                    top: 100, left: swidth * .08, right: swidth * .08),
+                    top: 100, left: swidth * .048, right: swidth * .068),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      width: swidth * .6,
+                      width: swidth * .65,
                       child: ResponsiveGridRow(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
@@ -149,7 +149,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               md: 6,
                               xs: 12,
                               child: SizedBox(
-                                width: swidth * .8,
                                 child: Padding(
                                   padding: EdgeInsets.symmetric(
                                       horizontal: paddingCard, vertical: 15),

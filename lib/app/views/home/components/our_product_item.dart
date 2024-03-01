@@ -90,7 +90,7 @@ class _OurProductItemState extends State<OurProductItem> {
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
-                    return Image.asset('assets/images/nopic.jpg');
+                    return Image.asset('assets/images/nopic.jpg', fit: BoxFit.cover);
                   },
                 ),
               ),

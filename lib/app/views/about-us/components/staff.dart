@@ -26,14 +26,15 @@ class StaffCard extends StatelessWidget {
         child: InkWell(
           onTap: () {},
           mouseCursor: SystemMouseCursors.basic,
-          overlayColor: const MaterialStatePropertyAll(CoresPersonalizadas.azulObama),
+          overlayColor:
+              const MaterialStatePropertyAll(CoresPersonalizadas.azulObama),
           child: Column(
             children: [
               Container(
                   padding: const EdgeInsets.all(1),
                   width: 271,
                   height: 271,
-                  child: Image.asset(staffImg, fit: BoxFit.cover)),
+                  child: Image.asset(staffImg, fit: BoxFit.cover, alignment: Alignment.topCenter)),
               Container(
                 width: 271,
                 padding: const EdgeInsets.only(top: 30, bottom: 25),

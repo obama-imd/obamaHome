@@ -5,7 +5,7 @@ class AccordionItem {
   final String secondParagraph;
   final String duration;
   final String thirdParagraph;
-  final String urlVideo;
+  final String idVideo;
 
   AccordionItem({
     required this.accordionTitle,
@@ -14,7 +14,7 @@ class AccordionItem {
     required this.secondParagraph,
     required this.duration,
     required this.thirdParagraph,
-    required this.urlVideo,
+    required this.idVideo,
   });
 }
 
@@ -29,7 +29,8 @@ List<AccordionItem> accordionContent = [
     duration: "4 Horas",
     thirdParagraph:
         "Para escolas da rede pública localizadas próximas ao campus central da UFRN ou que não gerem custos elevados de transporte, diária e/ou necessidade de refeição para a equipe de formadores (nesses casos cabe aos interessados na formação viabilizar transporte, diária e/ou refeição para os formadores). No caso das instituições privadas será cobrada uma taxa de R\$ 500,00.",
-    urlVideo: "FbkEJp004ko",
+    idVideo: "FbkEJp004ko",
+
   ),
   AccordionItem(
     accordionTitle: "Desenvolvimento de Praticas Inovadoras em Matemática",
@@ -41,7 +42,7 @@ List<AccordionItem> accordionContent = [
     duration: "4 Horas",
     thirdParagraph:
         "Para escolas da rede pública localizadas próximas ao campus central da UFRN ou que não gerem custos elevados de transporte, diária e/ou necessidade de refeição para a equipe de formadores (nesses casos cabe aos interessados na formação viabilizar transporte, diária e/ou refeição para os formadores). No caso das instituições privadas será cobrada uma taxa de R\$ 500,00.",
-    urlVideo: "H9h5qv6rgJo",
+    idVideo: "H9h5qv6rgJo",
   ),
   AccordionItem(
     accordionTitle: "Uso Pedagogico do Smartphone nas Aulas de Matemática",
@@ -53,11 +54,11 @@ List<AccordionItem> accordionContent = [
     duration: "4 Horas",
     thirdParagraph:
         "Para escolas da rede pública localizadas próximas ao campus central da UFRN ou que não gerem custos elevados de transporte, diária e/ou necessidade de refeição para a equipe de formadores (nesses casos cabe aos interessados na formação viabilizar transporte, diária e/ou refeição para os formadores). No caso das instituições privadas será cobrada uma taxa de R\$ 500,00.",
-    urlVideo: "dI4mU8IBk4o",
+    idVideo: "dI4mU8IBk4o",
   ),
   AccordionItem(
     accordionTitle:
-        "Ferramentas Colaborativas do Google Drive : Aplicações do Google Docs e Slides para o Ensino e Aprendizado",
+        "Ferramentas Colaborativas do Google Drive: Aplicações do Google Docs e Slides para o Ensino e Aprendizado",
     sectionTitle: "Objetivo Geral",
     firstParagraph:
         "Utilizar as ferramentas do Google Drive como apoio pedagógico para o ensino e aprendizagem.",
@@ -66,7 +67,7 @@ List<AccordionItem> accordionContent = [
     duration: "4 Horas",
     thirdParagraph:
         "Para escolas da rede pública localizadas próximas ao campus central da UFRN ou que não gerem custos elevados de transporte, diária e/ou necessidade de refeição para a equipe de formadores (nesses casos cabe aos interessados na formação viabilizar transporte, diária e/ou refeição para os formadores). No caso das instituições privadas será cobrada uma taxa de R\$ 500,00.",
-    urlVideo: "5Xqk5BcbL-8",
+    idVideo: "5Xqk5BcbL-8",
   ),
   AccordionItem(
     accordionTitle:
@@ -79,7 +80,7 @@ List<AccordionItem> accordionContent = [
     duration: "4 Horas",
     thirdParagraph:
         "Para escolas da rede pública localizadas próximas ao campus central da UFRN ou que não gerem custos elevados de transporte, diária e/ou necessidade de refeição para a equipe de formadores (nesses casos cabe aos interessados na formação viabilizar transporte, diária e/ou refeição para os formadores). No caso das instituições privadas será cobrada uma taxa de R\$ 500,00.",
-    urlVideo: "krWykANooFs",
+    idVideo: "krWykANooFs",
   ),
   AccordionItem(
     accordionTitle: "InRede Visita Tecnica",
@@ -90,6 +91,6 @@ List<AccordionItem> accordionContent = [
         "Sua escola está limitada ou não têm como realizar as atividades digitais por problemas em seu laboratório de informática? Nós do projeto InREDE podemos ajudar a sua escola!",
     duration: "Indeterminado",
     thirdParagraph: "",
-    urlVideo: "FBqMLUSdYoU",
+    idVideo: "FBqMLUSdYoU",
   ),
 ];

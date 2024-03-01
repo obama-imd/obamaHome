@@ -7,6 +7,7 @@ import '../../../components/carousel.dart';
 import '../../../components/drawer.dart';
 import '../../../components/footer.dart';
 import '../../../components/navMenu.dart';
+import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
 import 'components/dropdowns_formations.dart';
 
@@ -81,25 +82,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ]))
               ],
               BannerSuperior(context, 'Formações'),
-              // Container(
-              //   height: 320,
-              //   width: MediaQuery.of(context).size.width,
-              //   padding: const EdgeInsets.only(top: 120.0, bottom: 65.0),
-              //   child: SectionTitle(
-              //       'Plataforma OBAMA',
-              //       'Objetos de Aprendizagem para Matemática',
-              //       CrossAxisAlignment.center),
-              // ),
-              // if (MediaQuery.of(context).size.width > 1200) ...[
-              Container(
-                alignment: Alignment.topLeft,
-                child: Padding(
+              Padding(
+                padding: const EdgeInsets.only(top: 120.0, bottom: 65.0),
+                child: SectionTitle(
+                    'Plataforma OBAMA',
+                    'Objetos de Aprendizagem para Matemática',
+                    CrossAxisAlignment.center),
+              ),
+              if (MediaQuery.of(context).size.width > 1200) ...[
+                Container(
                   padding: const EdgeInsets.all(8.0),
                   child: ResponsiveGridCol(lg: 8, sm: 12, child: Dropdowns()),
                 ),
-              ),
-              Carousel(swidth),
-              Footer(swidth),
+                Carousel(swidth),
+                Footer(swidth),
+              ]
             ]))));
   }
 }

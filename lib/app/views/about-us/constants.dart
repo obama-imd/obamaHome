@@ -33,7 +33,7 @@ List<AccordionItem> accordionContent = [
     "\n\nEm 2019 a plataforma passou a ofertar trilhas de aprendizagem, ou seja, tutoriais de uso simples, disponíveis para google classroom, google forms, google meet, gmail e formações (Conhecendo a Plataforma Obama, Desenvolvimento de Práticas Inovadoras em Matemática e Uso Pedagógico do Smartphone nas Aulas de Matemática, Ferramentas colaborativas do Google Drive, ferramentas do Google for education e visita técnica)."
     "\n\nAtualmente, a maioria dos OAs disponíveis no OBAMA são oriundos de instituições produtoras ou que hospedam os recursos, mas também contam com alguns desenvolvidos diretamente ou em parceria pela equipe do Obama como o OA bicalculo, disponível na plataforma desde 2016."
     "O Obama conta com vinte e três fontes de OA para desktop e sete repositórios de apps educativos. Portanto, em um único repositório, professores passam a ter acesso a trinta bases diferentes de recursos educativos digitais para a Matemática."
-    "Hoje fazem parte do projeto professores do IMD e estudantes do curso técnico e de bacharelado em Tecnologia da Informação e dos cursos de Licenciatura em Matemática e Pedagogia.\n\n\n\n\n",
+    "Hoje fazem parte do projeto professores do IMD e estudantes do curso técnico e de bacharelado em Tecnologia da Informação e dos cursos de Licenciatura em Matemática e Pedagogia.",
   ),
 ];
 

@@ -152,23 +152,27 @@ class _NavMenuState extends State<NavMenu> {
                       barrierColor: modalBackground,
                       context: context,
                       builder: (BuildContext context) => AlertDialog(
-                        // backgroundColor: Color.fromARGB(209, 33, 149, 243),
                         contentPadding: EdgeInsets.all(0),
                         content: Container(
-                          color: surface,
+                          decoration: BoxDecoration(
+                            color: Color.fromRGBO(23, 160, 242, .8),
+                            borderRadius: BorderRadius.circular(25)
+                          ),
+                          padding: EdgeInsets.only(left: 20),
                           width: 500,
                           height: 100,
-                          padding: EdgeInsets.only(left: 20),
                           child: Row(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 420,
                                 child: TextField(
                                     style: TextStyle(color: secondary),
                                     decoration: InputDecoration(
                                         hintText: "Busca de OA",
                                         hintStyle: TextStyle(color: secondary),
-                                        focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: secondary))),
+                                        focusedBorder: UnderlineInputBorder(
+                                            borderSide:
+                                                BorderSide(color: secondary))),
                                     onChanged: (value) => setState(() {
                                           searchText = value;
                                         }),
@@ -190,18 +194,6 @@ class _NavMenuState extends State<NavMenu> {
                         ),
                       ),
                     )),
-            // AnimSearchBar(
-            //   rtl: true,
-            //   autoFocus: true,
-            //   width: 300,
-            //   textController: _searchController,
-            //   onSuffixTap: () {
-            //     _searchController.clear();
-            //   },
-            //   onSubmitted: (String value) {
-            //     debugPrint('onFieldSubmitted value $value');
-            //   },
-            // ),
           ]),
         ),
       ],

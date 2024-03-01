@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../../../../utils/app_theme.dart';
 import '../constants.dart';
 
 class Dropdowns extends StatelessWidget {
@@ -8,35 +9,25 @@ class Dropdowns extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Exemplo de inicialização da lista de AccordionItem
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 70),
-      child: Column(children: [
-        for (var lista in accordionContent) ...{
-          ExpansionTile(
-              shape: Border.all(color: Color.fromRGBO(0xe4, 0xe4, 0xe4, 1.0)),
-              collapsedShape:
-                  Border.all(color: Color.fromRGBO(0xe4, 0xe4, 0xe4, 1.0)),
-              title: Row(children: [
-                SizedBox(height: 30, width: 2),
-                Icon(FontAwesomeIcons.chartColumn, size: 19),
-                SizedBox(height: 30, width: 10),
-                Text(lista.accordionTitle,
-                    style: TextStyle(color: Colors.black)),
-              ]),
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.symmetric(horizontal: 70),
+        child: ExpansionPanelList.radio(
+          children: accordionContent.map<ExpansionPanelRadio>((AccordionItem item) {
+            return ExpansionPanelRadio(
+                value: item,
+                backgroundColor: background,
+                headerBuilder: (BuildContext context, bool isExpanded) {
+                  return ListTile(
+                    leading: Icon(FontAwesomeIcons.chartColumn, size: 20),
+                    title: Text(item.accordionTitle),
+                  );
+                },
+                body: Padding(
+                  padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 40),
                   child: ListTile(
-                    title: Text(lista.accordionContent,
-                        style: TextStyle(
-                            height: 1.4, fontWeight: FontWeight.bold)),
-                  ),
-                ),
-              ]),
-          SizedBox(height: 20, width: 10),
-        },
-      ]),
-    );
+                      title: Text(item.accordionContent)),
+                ));
+          }).toList(),
+        ));
   }
 }
