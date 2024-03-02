@@ -37,8 +37,8 @@ final List<ItemValue> itemValues = [
   ),
   ItemValue(
     name: "SERVIÇOS",
-    path: ['/servicos', '/trilhas'],
-    subItems: ["OA", "Trilhas"],
+    path: ['/servicos', '/trilhas', '/manuais'],
+    subItems: ["OA", "Trilhas", "Manuais"],
   ),
   ItemValue(
     name: "PUBLICAÇÕES",

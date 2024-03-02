@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/blog/components/blog-details.dart';
 import 'package:obamahome/app/views/formations/formacoes_view.dart';
 import 'package:obamahome/app/views/home/home_view.dart';
+import 'package:obamahome/app/views/manual/manual_view.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 
 import 'app/views/about-us/aboutUs_view.dart';
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
           '/formacoes': (context) => const Formacoes(),
           '/servicos': (context) => SearchDesktop(datas: []),
           '/trilhas': (context) => TrilhasPage(),
+          '/manuais': (context) => ManuaisPage()
         });
   }
 }
