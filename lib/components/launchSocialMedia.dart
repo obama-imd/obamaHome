@@ -2,23 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-_launchURL() async {
-  //   <-- link 1 cabeçalho
-  const url = 'https://www.instagram.com/obamaimd/';
-  if (await canLaunch(url)) {
-    await launch(url);
-  } else {
-    throw 'Could not launch $url';
-  }
-}
+List<String> socialMediaLinks = [
+  'https://www.instagram.com/obamaimd/',
+  'https://www.youtube.com/channel/UCLsGoIRTGyiUrNW5JdVi9wg'
+];
+List<IconData> socialMediaIcons = [
+  FontAwesomeIcons.instagram,
+  FontAwesomeIcons.youtube
+];
 
-_launchURL1() async {
-  //   <-- link 2 cabeçalho
-  const url = 'https://www.youtube.com/channel/UCLsGoIRTGyiUrNW5JdVi9wg';
-  if (await canLaunch(url)) {
-    await launch(url);
+_launchURL(link) async {
+  Uri url = Uri.parse(link); // Parse o link para uma URI
+  if (await canLaunch(url.toString())) {
+    await launch(url.toString());
   } else {
-    throw 'Could not launch $url';
+    throw 'Could not launch $link';
   }
 }
 
@@ -30,19 +28,17 @@ class SocialMedia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(children: [
-      SizedBox(
-          child: IconButton(
-              //  Ícones redes sociais <-- link
-              onPressed: _launchURL,
-              icon: Icon(FontAwesomeIcons.instagram,
-                  color: colorValue, size: 16.0))),
-      Container(width: 5),
-      SizedBox(
-          child: IconButton(
-            onPressed: _launchURL1,
-            icon:
-                Icon(FontAwesomeIcons.youtube, color: colorValue, size: 16.0),
-          )),
+      for (var i = 0; i < socialMediaLinks.length; i++) ...{
+        SizedBox(
+            child: IconButton(
+                //  Ícones redes sociais <-- link
+                onPressed: () {
+                  _launchURL(socialMediaLinks[i]);
+                },
+                icon: Icon(socialMediaIcons[i],
+                    color: colorValue, size: 16.0))),
+        Container(width: 5),
+      }
     ]);
   }
 }

@@ -161,11 +161,14 @@ class _HomePage1State extends State<OAFilters> {
                         );
                       }).toList())),
             },
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                mainButton(context, 'Busca Avançada'),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  mainButton(context, 'Busca Avançada', ""),
+                ],
+              ),
             ),
           ],
         ),

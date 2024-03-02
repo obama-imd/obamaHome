@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/app/views/home/components/firstSectionHome.dart';
 import 'package:obamahome/components/cores_personalizadas.dart';
 import 'package:obamahome/components/drawer.dart';
+import 'package:obamahome/components/simpleRow.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/carousel.dart';
@@ -32,12 +32,11 @@ class HomeMobile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MyStatefulWidget(
-        scrollController: scrollController,
-        postAvailable: postAvailable,
-        objectAvailable: objectAvailable,
-        posts: posts,
-        objects: objects
-      ),
+          scrollController: scrollController,
+          postAvailable: postAvailable,
+          objectAvailable: objectAvailable,
+          posts: posts,
+          objects: objects),
     );
   }
 }
@@ -76,7 +75,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       body: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Column(children: <Widget>[
-
             TopBar(swidth),
 
             if (MediaQuery.of(context).size.width != 1200) ...[
@@ -90,7 +88,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       onPressed: () => scaffoldKey.currentState?.openDrawer()),
                 ]),
               ),
-
             ],
 
             // box com gif da foto tela inicial
@@ -222,7 +219,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                     height: 100,
                                                     width: 100,
                                                     decoration: BoxDecoration(
-                                                        color: CoresPersonalizadas.azulObama,
+                                                        color:
+                                                            CoresPersonalizadas
+                                                                .azulObama,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100)),
@@ -340,7 +339,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                     height: 100,
                                                     width: 100,
                                                     decoration: BoxDecoration(
-                                                        color: CoresPersonalizadas.azulObama,
+                                                        color:
+                                                            CoresPersonalizadas
+                                                                .azulObama,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100)),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_grid/responsive_grid.dart';
-import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
@@ -98,38 +97,5 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Footer(swidth),
               ]
             ]))));
-  }
-}
-
-class CustomVideo extends StatelessWidget {
-  // final YoutubePlayerController _controller = YoutubePlayerController(
-  //     initialVideoId: 'oH3omNV9UUU',
-  //     params: const YoutubePlayerParams(
-  //       autoPlay: true,
-  //       mute: false,
-  //     ));
-
-  final _controller = YoutubePlayerController.fromVideoId(
-    videoId: 'oH3omNV9UUU',
-    autoPlay: false,
-    params: const YoutubePlayerParams(showFullscreenButton: true),
-  );
-
-  CustomVideo({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return YoutubePlayerScaffold(
-      controller: _controller,
-      aspectRatio: 16 / 9,
-      builder: (context, player) {
-        return Column(
-          children: [
-            player,
-            Text('Youtube Player'),
-          ],
-        );
-      },
-    );
   }
 }

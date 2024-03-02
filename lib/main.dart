@@ -6,6 +6,7 @@ import 'package:obamahome/app/views/search/searchOA_view.dart';
 
 import 'app/views/about-us/aboutUs_view.dart';
 import 'app/views/blog/blog_view.dart';
+import 'app/views/trilhas/trilhas_view.dart';
 import 'components/cores_personalizadas.dart';
 import 'utils/app_theme.dart';
 
@@ -49,6 +50,7 @@ class MyApp extends StatelessWidget {
           '/blog-details': (context) => BlogDetails(initialPageIndex: 0),
           '/formacoes': (context) => const Formacoes(),
           '/servicos': (context) => SearchDesktop(datas: []),
+          '/trilhas': (context) => TrilhasPage(),
         });
   }
 }

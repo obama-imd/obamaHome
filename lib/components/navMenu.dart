@@ -7,15 +7,6 @@ import '../app/controllers/search_controller.dart';
 
 final TextEditingController _searchController = TextEditingController();
 
-List<String> selValue = [
-  "HOME",
-  "SOBRE",
-  "SERVIÇOS",
-  "PUBLICAÇÕES",
-  "FORMAÇÕES",
-  "PLANOS DE AULA",
-];
-
 List<dynamic> selValueContent = [
   menuItem(const Text("HOME")),
   menuItem(const Text("SOBRE")),
@@ -25,55 +16,45 @@ List<dynamic> selValueContent = [
   menuItem(const Text("PLANOS DE AULA")),
 ];
 
-// List<itemValue> itemKeys = [
-//     'itemsHome',
-//     'itemsBoutUs',
-//     'itemsServices',
-//     'itemsBlog',
-//     'itemsPages',
-//     'itemsShop',
-//     'itemsContact',
-// ];
-
 class ItemValue {
-  final List<String>? itemsHome;
-  final List<String>? itemsBoutUs;
-  final List<String>? itemsServices;
-  final List<String>? itemsBlog;
-  final List<String>? itemsPages;
-  final List<String>? itemsShop;
-  // final List<String>? itemsSearch;
+  final List<String> subItems;
+  final String name;
+  final List<String> path;
 
-  ItemValue({
-    this.itemsHome,
-    this.itemsBoutUs,
-    this.itemsServices,
-    this.itemsBlog,
-    this.itemsPages,
-    this.itemsShop,
-    // this.itemsSearch,
-  });
+  ItemValue({required this.subItems, required this.name, required this.path});
 }
 
 final List<ItemValue> itemValues = [
   ItemValue(
-    itemsHome: ["Item 1", "Item 2"],
-    itemsBoutUs: ["Sobre"],
-    itemsServices: ["Item 1", "Item 2"],
-    itemsBlog: ["Lista de Posts", "Último post"],
-    itemsPages: ["Item 1", "Item 2"],
-    itemsShop: ["Item 1", "Item 2"],
-    // itemsSearch: ["Item 1", "Item 2"],
-  )
-];
-
-List<String> navigateTo = [
-  '/',
-  '/aboutus',
-  '/servicos',
-  '/blog',
-  '/formacoes',
-  '/loja',
+    name: "HOME",
+    path: ['/', '/'],
+    subItems: ["Item 1", "Item 2"],
+  ),
+  ItemValue(
+    name: "SOBRE",
+    path: ['/aboutus'],
+    subItems: ["Sobre"],
+  ),
+  ItemValue(
+    name: "SERVIÇOS",
+    path: ['/servicos', '/trilhas'],
+    subItems: ["OA", "Trilhas"],
+  ),
+  ItemValue(
+    name: "PUBLICAÇÕES",
+    path: ['/blog', 'blog-details'],
+    subItems: ["Lista de Posts", "Último post"],
+  ),
+  ItemValue(
+    name: "FORMAÇÕES",
+    path: ['/formacoes', '/formacoes'],
+    subItems: ["Item 1", "Item 2"],
+  ),
+  ItemValue(
+    name: "PLANOS DE AULA",
+    path: ['/loja', '/loja'],
+    subItems: ["Item 1", "Item 2"],
+  ),
 ];
 
 class NavMenu extends StatefulWidget {
@@ -140,10 +121,11 @@ class _NavMenuState extends State<NavMenu> {
           width: sizedBoxWidth,
           height: widget.heightBtn,
           child: ListView(scrollDirection: widget.eixoLista, children: [
-            for (int i = 0; i < selValue.length; i++) ...{
+            for (int i = 0; i < itemValues.length; i++) ...{
               Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 2.5),
-                  child: MenuBar0(context, i, selValue[i], selValueContent[i])),
+                  child: MenuBar0(
+                      context, i, itemValues[i].name, selValueContent[i])),
             },
             IconButton(
                 iconSize: 20,
@@ -155,9 +137,8 @@ class _NavMenuState extends State<NavMenu> {
                         contentPadding: EdgeInsets.all(0),
                         content: Container(
                           decoration: BoxDecoration(
-                            color: Color.fromRGBO(23, 160, 242, .8),
-                            borderRadius: BorderRadius.circular(25)
-                          ),
+                              color: Color.fromRGBO(23, 160, 242, .8),
+                              borderRadius: BorderRadius.circular(25)),
                           padding: EdgeInsets.only(left: 20),
                           width: 500,
                           height: 100,

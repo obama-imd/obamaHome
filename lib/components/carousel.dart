@@ -52,7 +52,7 @@ class Carousel extends StatelessWidget {
               width: swidth,
               child: Stack(children: <Widget>[
                 Column(children: [
-                  SizedBox(height: 100, width: swidth),
+                  SizedBox(height: 120, width: swidth),
                   Container(
                       width: MediaQuery.of(context).size.width,
                       padding: const EdgeInsets.only(top: 50),

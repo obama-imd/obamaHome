@@ -125,6 +125,10 @@ flutter:
     - assets/images/MayaraCabral.jpg
     - assets/images/nelson.jpg
     - assets/images/SaraSilva.png
+    - assets/images/gmail.png
+    - assets/images/meet.png
+    - assets/images/forms.png
+    - assets/images/sala-de-aula.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

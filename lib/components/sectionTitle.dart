@@ -18,13 +18,14 @@ class SectionTitle extends StatelessWidget {
             child: Text(title.toUpperCase(),
                 style: Theme.of(context).textTheme.titleLarge!)),
         if (subtitle != '') ...{
-          Text(subtitle,
-              style: Theme.of(context).textTheme.titleMedium!),
+          Padding(
+            padding: EdgeInsets.only(bottom: 22.0),
+            child: Text(subtitle,
+              style: Theme.of(context).textTheme.titleMedium!)),
         },
         Container(
-            height: 27.0,
+            height: 5.0,
             width: 82.0,
-            padding: const EdgeInsets.only(top: 22.0),
             child: Image.asset('assets/images/img2.jpg', fit: BoxFit.cover)),
       ],
     );
