@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../components/cores_personalizadas.dart';
+import '../../../../utils/app_theme.dart';
 
 List<IconData> SocialMediaLinks = [
   (FontAwesomeIcons.facebook),
@@ -42,8 +43,7 @@ class StaffCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(staffName,
-                          style: const TextStyle(
-                              fontWeight: FontWeight.w600, fontSize: 20)),
+                          style: textTheme.displaySmall),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

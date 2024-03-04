@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
+import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
 
 const List<String> nivelEnsino = <String>['Todos'];
@@ -61,8 +62,8 @@ class _HomePage1State extends State<OAFilters> {
         Container(
             alignment: Alignment.centerLeft,
             margin: const EdgeInsets.only(bottom: 30),
-            child: const Text('BUSCA',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+            child: Text('BUSCA',
+                style: textTheme.titleSmall)),
         Container(
             height: 50,
             width: swidth * 0.25,
@@ -72,12 +73,14 @@ class _HomePage1State extends State<OAFilters> {
                   final postsFiltrados = await fetchData(value);
                   updateData(postsFiltrados);
                 },
+                style: textTheme.displaySmall,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(100)),
                     hintText: 'Buscar',
-                    contentPadding: const EdgeInsets.all(15.0),
+                    hintStyle: textTheme.displaySmall,
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                     filled: true,
                     fillColor: const Color.fromARGB(255, 218, 216, 216),
                     suffixIcon: const Icon(Icons.search)))),
@@ -102,7 +105,7 @@ class _HomePage1State extends State<OAFilters> {
                         });
                       },
                     ),
-                    Text("PCN")
+                    Text("PCN", style: textTheme.displaySmall)
                   ],
                 ),
                 Padding(
@@ -123,7 +126,7 @@ class _HomePage1State extends State<OAFilters> {
                           });
                         },
                       ),
-                      Text("BNCC")
+                      Text("BNCC", style: textTheme.displaySmall)
                     ],
                   ),
                 ),
@@ -135,8 +138,7 @@ class _HomePage1State extends State<OAFilters> {
                   margin: EdgeInsets.only(
                       top: 40, bottom: 20, right: swidth * 0.07),
                   child: Text(lista,
-                      style: TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w600))),
+                      style: textTheme.titleSmall)),
               Container(
                   height: 40,
                   alignment: Alignment.centerLeft,
@@ -145,7 +147,7 @@ class _HomePage1State extends State<OAFilters> {
                       value: descritor.first,
                       icon: const Icon(Icons.arrow_drop_down),
                       elevation: 5,
-                      style: const TextStyle(color: Colors.deepPurple),
+                      style: textTheme.displayMedium,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
                         // setState(() {

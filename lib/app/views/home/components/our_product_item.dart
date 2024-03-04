@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import '../../../../components/cores_personalizadas.dart';
+import '../../../../utils/app_theme.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(
@@ -102,7 +103,7 @@ class _OurProductItemState extends State<OurProductItem> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
-                child: Text(widget.title, style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text(widget.title, style: textTheme.headlineSmall),
               ),
             ),
           ],

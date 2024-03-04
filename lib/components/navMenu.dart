@@ -147,10 +147,10 @@ class _NavMenuState extends State<NavMenu> {
                               SizedBox(
                                 width: 420,
                                 child: TextField(
-                                    style: TextStyle(color: secondary),
+                                    style: textTheme.bodySmall,
                                     decoration: InputDecoration(
                                         hintText: "Busca de OA",
-                                        hintStyle: TextStyle(color: secondary),
+                                        hintStyle: textTheme.bodySmall,
                                         focusedBorder: UnderlineInputBorder(
                                             borderSide:
                                                 BorderSide(color: secondary))),

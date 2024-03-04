@@ -6,6 +6,7 @@ import 'package:obamahome/app/views/home/home_mobile1.dart';
 import 'package:obamahome/app/views/home/home_tablet.dart';
 import 'package:obamahome/app/views/home/responsivo.dart';
 
+import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
 
 Widget blogData(BuildContext context, index, datas) {
@@ -39,7 +40,7 @@ Widget blogData(BuildContext context, index, datas) {
         Row(
           children: [
             const Icon(Icons.access_time, size: 16),
-            Text(formattedDate, style: const TextStyle(fontSize: 14)),
+            Text(formattedDate, style: textTheme.displaySmall),
           ],
         ),
         Container(

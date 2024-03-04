@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../utils/app_theme.dart';
 import 'cores_personalizadas.dart';
 
 class contentItem {
@@ -61,14 +62,12 @@ class iconspanel extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(item.texto![index],
                             textAlign: TextAlign.end,
-                            style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20))),
+                            style: textTheme.titleSmall)),
                     Container(
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(item.subtexto![index],
                             textAlign: TextAlign.end,
-                            style: const TextStyle(color: Colors.grey)))
+                            style: textTheme.displayMedium))
                   ]));
         });
   }

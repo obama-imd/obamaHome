@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../utils/app_theme.dart';
+
 Widget BannerSuperior(context, String pageName) {
   return Container(
       child: Stack(children: <Widget>[
@@ -17,8 +19,7 @@ Widget BannerSuperior(context, String pageName) {
         child: ListView(children: [
           Text(
             pageName,
-            textScaleFactor: 3.1,
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: textTheme.labelLarge,
           ),
           Container(
               child: Row(children: [
@@ -26,18 +27,15 @@ Widget BannerSuperior(context, String pageName) {
                 onPressed: () {},
                 child: Text(
                   'Home',
-                  textScaleFactor: 1.11,
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: textTheme.labelSmall,
                 )),
-            const Text(
+            Text(
               '>  ',
-              textScaleFactor: 1.11,
-              style: TextStyle(color: Colors.grey),
+              style: textTheme.displayMedium,
             ),
             Text(
               pageName,
-              textScaleFactor: 1.11,
-              style: TextStyle(color: Colors.white),
+              style: textTheme.bodySmall,
             ),
           ]))
         ]))

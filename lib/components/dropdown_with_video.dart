@@ -36,7 +36,7 @@ class _DropdownsState extends State<DropdownFormations> {
                 selectedTileColor: CoresPersonalizadas.azulObama,
                 selectedColor: background,
                 leading: Icon(FontAwesomeIcons.chartColumn, size: 20),
-                title: Text(item.accordionTitle),
+                title: Text(item.accordionTitle, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               );
             },
             body: Padding(
@@ -65,23 +65,21 @@ class _DropdownsState extends State<DropdownFormations> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Text(item.firstParagraph,
-                              style: TextStyle(height: 1.4)),
+                              style: textTheme.displaySmall),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Text(item.secondParagraph,
-                              style: TextStyle(height: 1.4)),
+                              style: textTheme.displaySmall),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Row(
                             children: [
                               Text("Duração da Formação: ",
-                                  style: TextStyle(
-                                      height: 1.4,
-                                      fontWeight: FontWeight.bold)),
+                                  style: textTheme.headlineMedium),
                               Text(item.duration,
-                                  style: TextStyle(height: 1.4)),
+                                  style: textTheme.displaySmall),
                             ],
                           ),
                         ),
@@ -94,7 +92,7 @@ class _DropdownsState extends State<DropdownFormations> {
                                         width: 5,
                                         color: CoresPersonalizadas.azulObama))),
                             child: Text(item.thirdParagraph,
-                                style: TextStyle(height: 1.4)),
+                                style: textTheme.displaySmall),
                           ),
                         }
                       ],
@@ -154,7 +152,7 @@ class _DropdownManuaisState extends State<DropdownManuais> {
                 selectedTileColor: CoresPersonalizadas.azulObama,
                 selectedColor: background,
                 leading: Icon(FontAwesomeIcons.chartColumn, size: 20),
-                title: Text(item.accordionTitle),
+                title: Text(item.accordionTitle, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               );
             },
             body: Padding(

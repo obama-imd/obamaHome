@@ -10,6 +10,7 @@ import '../../../components/cores_personalizadas.dart';
 import '../../../components/footer.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
+import '../../../utils/app_theme.dart';
 import 'components/our_product_item.dart';
 import 'constants.dart';
 import 'home_view.dart';
@@ -283,12 +284,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                               top: 20),
                                                       child: Text(grid1Title[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize:
-                                                                      20))),
+                                                              textTheme.titleSmall)),
                                                   Container(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -296,9 +292,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       child: Text(
                                                           grid1Content[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .grey)))
+                                                              textTheme.displayMedium))
                                                 ]),
                                           ),
                                         ),
@@ -410,12 +404,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                               top: 20),
                                                       child: Text(grid2Title[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold,
-                                                                  fontSize:
-                                                                      20))),
+                                                              textTheme.titleSmall)),
                                                   Container(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -423,9 +412,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       child: Text(
                                                           grid2Content[i],
                                                           style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .grey)))
+                                                              textTheme.displayMedium))
                                                 ]),
                                           ),
                                         ),

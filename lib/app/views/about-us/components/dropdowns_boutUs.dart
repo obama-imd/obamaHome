@@ -26,12 +26,12 @@ class Dropdowns extends StatelessWidget {
                     selectedTileColor: CoresPersonalizadas.azulObama,
                     selectedColor: background,
                     leading: Icon(FontAwesomeIcons.chartColumn, size: 20),
-                    title: Text(item.accordionTitle),
+                    title: Text(item.accordionTitle, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
                   );
                 },
                 body: Padding(
                   padding: const EdgeInsets.only(top: 20, left: 20, right: 20, bottom: 30),
-                  child: ListTile(title: Text(item.accordionContent)),
+                  child: ListTile(title: Text(item.accordionContent, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold))),
                 ));
           }).toList(),
         ));

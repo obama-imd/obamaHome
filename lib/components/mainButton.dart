@@ -28,9 +28,5 @@ Widget mainButton(context, content, link) {
             overlayColor: MaterialStatePropertyAll(Colors.lightBlue),
           ),
           child: Text(content,
-              style: TextStyle(
-                  shadows: [Shadow(offset: Offset(1.1, 1.1))],
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white))));
+              style: textTheme.labelMedium)));
 }

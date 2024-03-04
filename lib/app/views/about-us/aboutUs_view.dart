@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:obamahome/components/navMenu.dart';
+import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/bannerSuperior.dart';
@@ -118,9 +119,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             color: const Color.fromARGB(255, 224, 220, 220),
                             border: Border(
                                 bottom: BorderSide(
-                          color: Colors.blue,
-                          width: 8,
-                        ))),
+                              color: Colors.blue,
+                              width: 8,
+                            ))),
                         padding: EdgeInsets.all(swidth * .02),
                         child: CustomVideo(urlVideo: 'oH3omNV9UUU')),
                   )
@@ -183,25 +184,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                             color:
                                                                 Colors.white)),
                                                     Container(
-                                                        padding: const EdgeInsets
-                                                            .only(top: 20),
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(top: 20),
                                                         child: Text(
                                                             grid1Title[i],
-                                                            style: const TextStyle(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                                fontSize: 20))),
+                                                            style: textTheme
+                                                                .titleSmall)),
                                                     Container(
                                                         padding:
                                                             const EdgeInsets
                                                                 .only(top: 20),
                                                         child: Text(
                                                             grid1Content[i],
-                                                            style:
-                                                                const TextStyle(
-                                                                    color: Colors
-                                                                        .grey)))
+                                                            style: textTheme
+                                                                .displayMedium))
                                                   ]),
                                             ),
                                           ),

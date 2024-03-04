@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
+import '../utils/app_theme.dart';
 import 'cores_personalizadas.dart';
 
 class Carousel extends StatelessWidget {
@@ -26,7 +27,7 @@ class Carousel extends StatelessWidget {
     'Example Name',
   ];
 
-  final  List<String> summaryCarousel = [
+  final List<String> summaryCarousel = [
     'Example Summary',
     'Example Summary',
     'Example Summary',
@@ -70,16 +71,13 @@ class Carousel extends StatelessWidget {
                       Container(height: 140),
                       Container(
                           padding: const EdgeInsets.only(left: 90, top: 100),
-                          child: const Text('What Clients Say?',
-                              style: TextStyle(
-                                  fontSize: 36,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white))),
+                          child: Text('What Clients Say?',
+                              style: textTheme.labelLarge)),
                       Container(
                           padding: const EdgeInsets.only(top: 15, left: 90),
-                          child: const Text(
+                          child: Text(
                             'Here are testimonials from clients..',
-                            style: TextStyle(fontSize: 20, color: Colors.white),
+                            style: textTheme.bodyMedium,
                           )),
                       Container(height: 20),
                       Row(children: [
@@ -121,18 +119,13 @@ class Carousel extends StatelessWidget {
                                   width: 500,
                                   child: ListView(children: [
                                     Text(titleCarousel[i],
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 18)),
+                                        style: textTheme.bodyMedium),
                                     Container(height: 35),
                                     Text(nameCarousel[i],
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold)),
+                                        style: textTheme.bodyMedium),
                                     Container(height: 20),
                                     Text(summaryCarousel[i],
-                                        style: const TextStyle(
-                                            color: Colors.white, fontSize: 18))
+                                        style: textTheme.bodyMedium)
                                   ])),
                             ]),
                           },
@@ -154,8 +147,7 @@ class Carousel extends StatelessWidget {
                                       size: 70,
                                       color: Colors.white,
                                     )),
-                                const SizedBox(
-                                    width: 500,
+                                SizedBox(
                                     height: 100,
                                     child: Column(
                                         crossAxisAlignment:
@@ -164,17 +156,12 @@ class Carousel extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text('REQUEST A FREE QUOTE',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 34,
-                                                  fontWeight: FontWeight.bold)),
+                                              style: textTheme.labelLarge),
                                           Text(
-                                              'Get answers and advice from people you want ir from.',
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 18))
+                                              'Get answers and advice from people you want it from.',
+                                              style: textTheme.bodyMedium)
                                         ])),
-                                Container(width: swidth * 0.248),
+                                Spacer(),
                                 Container(
                                     height: 50,
                                     width: 150,
@@ -184,15 +171,9 @@ class Carousel extends StatelessWidget {
                                         color: Colors.black),
                                     child: TextButton(
                                         onPressed: () {},
-                                        child: const Text('CONTACT US',
-                                            style: TextStyle(
-                                                shadows: [
-                                                  Shadow(
-                                                      offset: Offset(1.1, 1.1))
-                                                ],
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.white)))),
+                                        child: Text('CONTACT US',
+                                            style: textTheme.labelMedium))),
+                                Container(width: 30),
                               ]))),
                     ])),
               ])),
@@ -257,16 +238,13 @@ class Carousel extends StatelessWidget {
                   Container(height: 40),
                   Container(
                       padding: const EdgeInsets.only(left: 40, top: 50),
-                      child: const Text('What Clients Say?',
-                          style: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white))),
+                      child: Text('What Clients Say?',
+                          style: textTheme.bodyLarge)),
                   Container(
                       padding: const EdgeInsets.only(top: 15, left: 40),
-                      child: const Text(
+                      child: Text(
                         'Here are testimonials from clients..',
-                        style: TextStyle(fontSize: 16, color: Colors.white),
+                        style: textTheme.bodySmall,
                       )),
                   Container(height: 20),
                   Row(children: [
@@ -307,18 +285,13 @@ class Carousel extends StatelessWidget {
                               width: swidth - 160,
                               child: ListView(children: [
                                 Text(titleCarousel[i],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 16)),
+                                    style: textTheme.bodySmall),
                                 Container(height: 35),
                                 Text(nameCarousel[i],
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold)),
+                                    style: textTheme.bodyMedium),
                                 Container(height: 20),
                                 Text(summaryCarousel[i],
-                                    style: const TextStyle(
-                                        color: Colors.white, fontSize: 16))
+                                    style: textTheme.bodySmall)
                               ])),
                         ]),
                       },
@@ -347,19 +320,15 @@ class Carousel extends StatelessWidget {
                       SizedBox(
                           width: swidth * 0.7,
                           height: 100,
-                          child: const Column(
+                          child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('REQUEST A FREE QUOTE',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 24,
-                                        fontWeight: FontWeight.bold)),
+                                    style: textTheme.bodyMedium),
                                 Text(
                                     'Get answers and advice from people you want ir from.',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 12))
+                                    style: textTheme.bodySmall)
                               ]))
                     ]),
                     Container(width: swidth * 0.25),
@@ -371,12 +340,8 @@ class Carousel extends StatelessWidget {
                             color: Colors.black),
                         child: TextButton(
                             onPressed: () {},
-                            child: const Text('CONTACT US',
-                                style: TextStyle(
-                                    shadows: [Shadow(offset: Offset(1.1, 1.1))],
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white)))),
+                            child: Text('CONTACT US',
+                                style: textTheme.labelMedium))),
                   ]))),
           SizedBox(width: swidth * 0.9, height: 40),
           SizedBox(

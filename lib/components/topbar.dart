@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../utils/app_theme.dart';
 import 'cores_personalizadas.dart';
 
 // ignore: must_be_immutable
@@ -23,7 +24,6 @@ class TopBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                      width: 550,
                       margin: EdgeInsets.only(left: swidth * 0.068),
                       child: Row(children: [
                         Container(
@@ -32,10 +32,9 @@ class TopBar extends StatelessWidget {
                               padding: const EdgeInsets.only(right: 10),
                               child: const Icon(FontAwesomeIcons.house,
                                   color: Colors.white, size: 13)),
-                          const Text(
+                          Text(
                               'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                              style: TextStyle(
-                                  color: Colors.white, fontSize: 13.0)),
+                              style: textTheme.bodySmall),
                         ])),
                         Container(
                             margin: const EdgeInsets.only(left: 20),
@@ -52,9 +51,8 @@ class TopBar extends StatelessWidget {
                                     padding: const EdgeInsets.only(right: 10),
                                     child: const Icon(FontAwesomeIcons.envelope,
                                         color: Colors.white, size: 16)),
-                                const Text('obama@imd.ufrn.br',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 13.0)),
+                                Text('obama@imd.ufrn.br',
+                                    style: textTheme.bodySmall),
                               ]),
                             ))
                       ])),
@@ -71,8 +69,7 @@ class TopBar extends StatelessWidget {
                             width: 160,
                             child: Material(
                               color: Colors.white,
-                              textStyle: const TextStyle(
-                                  color: Colors.black, fontSize: 16.0),
+                              textStyle: textTheme.headlineMedium,
                               child: InkWell(
                                   onTap: () {},
                                   child: SizedBox(
@@ -101,11 +98,6 @@ class TopBar extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Container(
-                    //   child: const Text('HOME',
-                    //       style:
-                    //           TextStyle(color: Colors.white, fontSize: 20.0)),
-                    // ),
                     Padding(
                       padding: EdgeInsets.only(
                           left: swidth * 0.04, right: swidth * 0.04),
@@ -119,8 +111,7 @@ class TopBar extends StatelessWidget {
                                 width: 160,
                                 child: Material(
                                   color: Colors.white,
-                                  textStyle: const TextStyle(
-                                      color: Colors.black, fontSize: 16.0),
+                                  textStyle: textTheme.headlineMedium,
                                   child: InkWell(
                                       onTap: () {},
                                       child: SizedBox(
@@ -151,10 +142,6 @@ class TopBar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center, 
                 children: [
-            // Container(
-            //   child: const Text('HOME',
-            //       style: TextStyle(color: Colors.white, fontSize: 20.0)),
-            // ),
             Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -168,7 +155,7 @@ class TopBar extends StatelessWidget {
                 child: Material(
                   color: Colors.white,
                   textStyle:
-                      const TextStyle(color: Colors.black, fontSize: 16.0),
+                      textTheme.headlineMedium,
                   child: InkWell(
                       onTap: () {},
                       child: SizedBox(

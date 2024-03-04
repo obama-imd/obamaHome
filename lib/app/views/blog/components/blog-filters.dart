@@ -4,6 +4,8 @@ import 'package:intl/intl.dart';
 import 'package:obamahome/app/controllers/blog_controller.dart';
 import 'package:obamahome/app/views/blog/components/blog-details.dart';
 
+import '../../../../utils/app_theme.dart';
+
 @override
 Widget blogFilters(
   BuildContext context,
@@ -16,8 +18,8 @@ Widget blogFilters(
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 30),
-        child: const Text('SEARCH',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+        child: Text('BUSCA',
+            style: textTheme.titleSmall)),
     Container(
         height: 50,
         width: swidth * 0.25,
@@ -28,30 +30,33 @@ Widget blogFilters(
               // print(postsFiltrados);
               updateData(postsFiltrados);
             },
+            style: textTheme.displaySmall,
             decoration: InputDecoration(
                 border: OutlineInputBorder(
                     borderSide: BorderSide.none,
                     borderRadius: BorderRadius.circular(100)),
                 hintText: 'Buscar',
-                contentPadding: const EdgeInsets.all(15.0),
+                hintStyle: textTheme.displaySmall,
+                contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 filled: true,
                 fillColor: const Color.fromARGB(255, 218, 216, 216),
                 suffixIcon: const Icon(Icons.search)))),
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 20),
-        child: const Text('ABOUT AUTHOR',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+        child: Text('ABOUT AUTHOR',
+            style: textTheme.titleSmall)),
     Container(
         alignment: Alignment.centerLeft,
-        margin: const EdgeInsets.only(bottom: 100),
-        child: const Text('Texto', style: TextStyle(fontSize: 18))),
+        margin: const EdgeInsets.only(bottom: 50),
+        child: Text('Texto', style: textTheme.displaySmall)),
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 20),
-        child: const Text('RECENT POST',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
-    SizedBox(
+        child: Text('ÚLTIMOS POSTS',
+            style: textTheme.titleSmall)),
+    if (datas.isNotEmpty)...{
+      SizedBox(
       height: 80 * datas.length.toDouble(),
       child: ListView.builder(
         itemCount: datas.length,
@@ -79,7 +84,7 @@ Widget blogFilters(
                         width: swidth * 0.29,
                         height: 20,
                         child: Text(item['title'],
-                            style: const TextStyle(fontWeight: FontWeight.w600))),
+                            style: textTheme.headlineSmall)),
                     Container(
                         width: swidth * 0.29,
                         height: 20,
@@ -98,11 +103,16 @@ Widget blogFilters(
         },
       ),
     ),
+    } else...{
+      Container(
+        alignment: Alignment.centerLeft,
+        child: Text('Sem posts', style: textTheme.displaySmall)),
+    },
     Container(
         alignment: Alignment.centerLeft,
-        margin: EdgeInsets.only(top: 70, bottom: 20, right: swidth * 0.07),
-        child: const Text('CATEGORIES',
-            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600))),
+        margin: EdgeInsets.only(top: 50, bottom: 20, right: swidth * 0.07),
+        child: Text('CATEGORIES',
+            style: textTheme.titleSmall)),
     Column(children: [
       Container(
           color: const Color.fromARGB(255, 235, 235, 235),
@@ -112,13 +122,10 @@ Widget blogFilters(
           margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
           child: TextButton(
               onPressed: () {},
-              child: const Row(children: [
+              child: Row(children: [
                 Icon(Icons.arrow_right, color: Colors.black),
                 Text('Text 1',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
+                    style: textTheme.headlineSmall)
               ]))),
       Container(
           color: const Color.fromARGB(255, 235, 235, 235),
@@ -128,13 +135,10 @@ Widget blogFilters(
           margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
           child: TextButton(
               onPressed: () {},
-              child: const Row(children: [
+              child: Row(children: [
                 Icon(Icons.arrow_right, color: Colors.black),
                 Text('Text 2',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
+                    style: textTheme.headlineSmall)
               ]))),
       Container(
           color: const Color.fromARGB(255, 235, 235, 235),
@@ -144,13 +148,10 @@ Widget blogFilters(
           margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
           child: TextButton(
               onPressed: () {},
-              child: const Row(children: [
+              child: Row(children: [
                 Icon(Icons.arrow_right, color: Colors.black),
                 Text('Text 3',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
+                    style: textTheme.headlineSmall)
               ]))),
       Container(
           color: const Color.fromARGB(255, 235, 235, 235),
@@ -160,13 +161,10 @@ Widget blogFilters(
           margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
           child: TextButton(
               onPressed: () {},
-              child: const Row(children: [
+              child: Row(children: [
                 Icon(Icons.arrow_right, color: Colors.black),
                 Text('Text 4',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
+                    style: textTheme.headlineSmall)
               ]))),
       Container(
           color: const Color.fromARGB(255, 235, 235, 235),
@@ -176,13 +174,10 @@ Widget blogFilters(
           margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
           child: TextButton(
               onPressed: () {},
-              child: const Row(children: [
+              child: Row(children: [
                 Icon(Icons.arrow_right, color: Colors.black),
                 Text('Text 5',
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black))
+                    style: textTheme.headlineSmall)
               ]))),
     ]),
     // Container(

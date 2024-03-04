@@ -10,6 +10,7 @@ import '../../../components/carousel.dart';
 import '../../../components/footer.dart';
 import '../../../components/navMenu.dart';
 import '../../../components/topbar.dart';
+import '../../../utils/app_theme.dart';
 import '../../controllers/blog_controller.dart';
 import 'components/blog-details.dart';
 
@@ -129,8 +130,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       padding:
                           const EdgeInsets.only(top: 100, left: 90, right: 60),
                       width: swidth * 0.67,
-                      child: const Text(
-                          "Perdão, não há nenhum post a ser exibido no momento.")),
+                      child: Text(
+                          "Perdão, não há nenhum post a ser exibido no momento.", style: textTheme.displaySmall)),
                 } else ...{
                   Container(
                     padding:
@@ -174,21 +175,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 alignment: Alignment.centerLeft,
                                 margin: const EdgeInsets.only(bottom: 20),
                                 child: Text(item['title'],
-                                    style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold))),
+                                    style: textTheme.displaySmall)),
                             Row(children: [
                               const Icon(Icons.person,
                                   color: Colors.blue, size: 16),
                               Container(width: 2),
-                              const Text('Marketing',
-                                  style: TextStyle(color: Colors.blue)),
+                              Text('Marketing', style: textTheme.labelSmall),
                               Container(width: 13),
                               const Icon(FontAwesomeIcons.calendarDays,
                                   color: Colors.blue, size: 16),
                               Container(width: 3),
-                              Text(formattedDate,
-                                  style: const TextStyle(color: Colors.blue)),
+                              Text(formattedDate, style: textTheme.labelSmall),
                             ]),
                             Container(
                                 width: swidth * 0.6,
@@ -196,7 +193,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     const EdgeInsets.only(top: 20, bottom: 30),
                                 child: Text(item['text'],
                                     maxLines: 5,
-                                    style: const TextStyle(fontSize: 16))),
+                                    style: textTheme.headlineMedium)),
                             Row(children: [
                               Material(
                                 color: Colors.blue,
@@ -211,7 +208,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     overlayColor:
                                         const MaterialStatePropertyAll(
                                             Colors.black),
-                                    child: const SizedBox(
+                                    child: SizedBox(
                                       width: 170,
                                       height: 50,
                                       child: Row(
@@ -220,17 +217,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
-                                          Text('READ MORE >',
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                shadows: [
-                                                  Shadow(
-                                                    offset: Offset(1, 1),
-                                                    color: Color.fromRGBO(
-                                                        0, 0, 0, 0.5),
-                                                  ),
-                                                ],
-                                              )),
+                                          Text(
+                                            'READ MORE >',
+                                            style: textTheme.labelMedium,
+                                          ),
                                         ],
                                       ),
                                     )),
@@ -241,8 +231,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
-                                    const Text('Share:',
-                                        style: TextStyle(fontSize: 16)),
+                                    Text('Share:',
+                                        style: textTheme.headlineMedium),
                                     Container(width: 5),
                                     SizedBox(
                                       width: 120,

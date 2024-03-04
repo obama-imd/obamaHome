@@ -8,6 +8,7 @@ import '../../../components/carousel.dart';
 import '../../../components/footer.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
+import '../../../utils/app_theme.dart';
 import 'components/our_product_item.dart';
 import 'constants.dart';
 import 'home_view.dart';
@@ -233,18 +234,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid1Title[i],
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20))),
+                                                        style:textTheme.titleSmall)),
                                                 Container(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid1Content[i],
-                                                        style: const TextStyle(
-                                                            color:
-                                                                Colors.grey)))
+                                                        style: textTheme.displayMedium))
                                               ]),
                                         ),
                                       ),
@@ -353,18 +349,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid2Title[i],
-                                                        style: const TextStyle(
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 20))),
+                                                        style:textTheme.titleSmall)),
                                                 Container(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid2Content[i],
-                                                        style: const TextStyle(
-                                                            color:
-                                                                Colors.grey)))
+                                                        style: textTheme.displayMedium))
                                               ]),
                                         ),
                                       ),
