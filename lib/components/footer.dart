@@ -44,7 +44,6 @@ class _FooterState extends State<Footer> {
   ];
   List<String> additionalPaths = ['/aboutus', '', '', '', ''];
 
-  @override
   Widget footerList(BuildContext context, List<String> categories,
       List<String> links, int index) {
     return Container(

@@ -21,7 +21,7 @@ class OqueFazemos extends StatelessWidget {
       'São exemplos de OA’s animações, simulações, jogos educativos e softwares,\n'
       'os quais podem ser favoritados e até compor planos virtuais de aulas,\n'
       'recurso permitido para docentes cadastrados na OBAMA.\n\n',
-        textScaleFactor: 1.1,
+        textScaler: TextScaler.linear(1.1),
         style: TextStyle(color: Colors.grey)
     );
   }

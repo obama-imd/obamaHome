@@ -9,7 +9,6 @@ class drawermenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
-    double sheight = MediaQuery.of(context).size.height - 81;
 
     late double drawerWidth;
 

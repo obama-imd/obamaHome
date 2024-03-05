@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ItemProduto extends StatelessWidget {
   String titulo;
   String descricao;

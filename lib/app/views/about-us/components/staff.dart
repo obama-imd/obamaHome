@@ -43,7 +43,7 @@ class StaffCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(staffName,
-                          style: textTheme.displaySmall),
+                          style: textTheme.displayLarge),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,

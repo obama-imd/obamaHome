@@ -27,6 +27,7 @@ final TextTheme textTheme = TextTheme(
     headlineMedium: GoogleFonts.raleway(color: Colors.black, fontSize: 16),
     headlineSmall: GoogleFonts.raleway(
         color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+    displayLarge: GoogleFonts.raleway(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
     displayMedium: GoogleFonts.raleway(color: Colors.grey, fontSize: 14),
     displaySmall: GoogleFonts.raleway(color: Colors.black, fontSize: 14),
     labelLarge: GoogleFonts.raleway(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),

@@ -6,8 +6,8 @@ import '../utils/app_theme.dart';
 Widget mainButton(context, content, link) {
   _launchURL(link) async {
     Uri url = Uri.parse(link); 
-    if (await canLaunch(url.toString())) {
-      await launch(url.toString());
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
     } else {
       throw 'Could not launch $link';
     }

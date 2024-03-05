@@ -13,13 +13,14 @@ List<IconData> socialMediaIcons = [
 
 _launchURL(link) async {
   Uri url = Uri.parse(link); // Parse o link para uma URI
-  if (await canLaunch(url.toString())) {
-    await launch(url.toString());
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
   } else {
     throw 'Could not launch $link';
   }
 }
 
+// ignore: must_be_immutable
 class SocialMedia extends StatelessWidget {
   Color colorValue;
 

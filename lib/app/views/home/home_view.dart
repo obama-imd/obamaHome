@@ -130,7 +130,6 @@ class _HomePage1State extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    int index = 0;
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(

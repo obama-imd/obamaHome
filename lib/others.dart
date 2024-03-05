@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class ItemProduto extends StatelessWidget {
   String titulo;
   String descricao;
@@ -34,6 +35,7 @@ class ItemProduto extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class Grid1 extends StatelessWidget {
   String titulo;
   String descricao;

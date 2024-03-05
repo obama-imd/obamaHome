@@ -4,8 +4,6 @@ import 'package:obamahome/app/views/search/searchOA_view.dart';
 import '../app/controllers/search_controller.dart';
 import '../utils/app_theme.dart';
 
-final TextEditingController _searchController = TextEditingController();
-
 class ItemValue {
   final List<String> subItems;
   final String name;
@@ -62,26 +60,9 @@ class NavMenu extends StatefulWidget {
 
 class _NavMenuState extends State<NavMenu> {
   String searchText = '';
-  final TextEditingController _controller = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
-    bool dataAvailable = true;
-    Key key = UniqueKey();
-
-    List<dynamic> postsList = [];
-    List<dynamic> datas = [];
-
-    void initState() {
-      super.initState();
-    }
-
-    void updateData(newData) {
-      setState(() {
-        datas = newData;
-        key = UniqueKey();
-      });
-    }
 
     Future searchObject() async {
       List<dynamic> filteredData = await fetchData(searchText);
