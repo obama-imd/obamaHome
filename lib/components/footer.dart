@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:obamahome/components/cores_personalizadas.dart';
+import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../components/launchSocialMedia.dart';

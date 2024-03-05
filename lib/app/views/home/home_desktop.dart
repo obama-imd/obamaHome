@@ -93,7 +93,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   fit: BoxFit.fitHeight)),
                           NavMenu(
                               swidth: swidth,
-                              eixoLista: Axis.horizontal,
                               heightBtn: 50),
                         ])),
               ] else ...[

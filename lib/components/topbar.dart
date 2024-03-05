@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/app_theme.dart';
-import 'cores_personalizadas.dart';
+import '../utils/cores_personalizadas.dart';
 
 // ignore: must_be_immutable
 class TopBar extends StatelessWidget {
@@ -17,7 +18,7 @@ class TopBar extends StatelessWidget {
     return Column(children: [
       if (swidth > 1150) ...[
         Container(
-            color:CoresPersonalizadas.azulObama,
+            color: CoresPersonalizadas.azulObama,
             height: 45.0,
             width: swidth,
             child: Row(
@@ -34,14 +35,15 @@ class TopBar extends StatelessWidget {
                                   color: Colors.white, size: 13)),
                           Text(
                               'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                              style: textTheme.bodySmall),
+                              style: GoogleFonts.raleway(
+                                  color: background, fontSize: 13)),
                         ])),
                         Container(
                             margin: const EdgeInsets.only(left: 20),
                             child: TextButton(
                               style: ButtonStyle(
-                                backgroundColor:
-                                    MaterialStateProperty.all(CoresPersonalizadas.azulObama),
+                                backgroundColor: MaterialStateProperty.all(
+                                    CoresPersonalizadas.azulObama),
                               ),
                               onPressed: () {
                                 launchUrl(emailLaunchUri);
@@ -52,7 +54,8 @@ class TopBar extends StatelessWidget {
                                     child: const Icon(FontAwesomeIcons.envelope,
                                         color: Colors.white, size: 16)),
                                 Text('obama@imd.ufrn.br',
-                                    style: textTheme.bodySmall),
+                                    style: GoogleFonts.raleway(
+                                        color: background, fontSize: 13)),
                               ]),
                             ))
                       ])),
@@ -75,11 +78,12 @@ class TopBar extends StatelessWidget {
                                   child: SizedBox(
                                     width: swidth * 0.154,
                                     height: 45,
-                                    child: const Column(
+                                    child: Column(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
                                         Text('Acesse',
+                                            style: textTheme.headlineSmall,
                                             textAlign: TextAlign.center)
                                       ],
                                     ),
@@ -91,7 +95,7 @@ class TopBar extends StatelessWidget {
       if (swidth < 1150) ...[
         if (swidth > 900) ...[
           Container(
-              color:CoresPersonalizadas.azulObama,
+              color: CoresPersonalizadas.azulObama,
               height: 80.0,
               width: swidth,
               child: Column(
@@ -117,11 +121,12 @@ class TopBar extends StatelessWidget {
                                       child: SizedBox(
                                         width: swidth * 0.154,
                                         height: 45,
-                                        child: const Column(
+                                        child: Column(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
                                           children: [
                                             Text('Acesse',
+                                                style: textTheme.headlineSmall,
                                                 textAlign: TextAlign.center)
                                           ],
                                         ),
@@ -137,39 +142,39 @@ class TopBar extends StatelessWidget {
           color: CoresPersonalizadas.azulObama,
           width: swidth,
           height: 110,
-          child:
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                crossAxisAlignment: CrossAxisAlignment.center, 
-                children: [
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.center,
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                SocialMedia(Colors.white),
-              ],
-            ),
-            SizedBox(
-                height: 35,
-                width: 210,
-                child: Material(
-                  color: Colors.white,
-                  textStyle:
-                      textTheme.headlineMedium,
-                  child: InkWell(
-                      onTap: () {},
-                      child: SizedBox(
-                        width: swidth * 0.154,
-                        height: 45,
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Acesse', textAlign: TextAlign.center)
-                          ],
-                        ),
-                      )),
-                ))
-          ]),
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SocialMedia(Colors.white),
+                  ],
+                ),
+                SizedBox(
+                    height: 35,
+                    width: 210,
+                    child: Material(
+                      color: Colors.white,
+                      textStyle: textTheme.headlineMedium,
+                      child: InkWell(
+                          onTap: () {},
+                          child: SizedBox(
+                            width: swidth * 0.154,
+                            height: 45,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text('Acesse',
+                                    style: textTheme.headlineSmall,
+                                    textAlign: TextAlign.center)
+                              ],
+                            ),
+                          )),
+                    ))
+              ]),
         )
       ],
     ]);

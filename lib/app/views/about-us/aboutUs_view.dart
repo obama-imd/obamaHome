@@ -6,12 +6,12 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
-import '../../../components/cores_personalizadas.dart';
 import '../../../components/drawer.dart';
 import '../../../components/footer.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
 import '../../../components/youtubePlayer.dart';
+import '../../../utils/cores_personalizadas.dart';
 import 'components/dropdowns_boutUs.dart';
 import 'components/staff.dart';
 
@@ -58,7 +58,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   fit: BoxFit.fitHeight)),
                           NavMenu(
                               swidth: swidth,
-                              eixoLista: Axis.horizontal,
                               heightBtn: 50),
                         ])),
               ] else ...[

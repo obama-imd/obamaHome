@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
-import '../../../../components/cores_personalizadas.dart';
 import '../../../../utils/app_theme.dart';
+import '../../../../utils/cores_personalizadas.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(

@@ -1,20 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
-import 'package:obamahome/components/menu.dart';
-import 'package:obamahome/utils/app_theme.dart';
 
 import '../app/controllers/search_controller.dart';
+import '../utils/app_theme.dart';
 
 final TextEditingController _searchController = TextEditingController();
-
-List<dynamic> selValueContent = [
-  menuItem(const Text("HOME")),
-  menuItem(const Text("SOBRE")),
-  menuItem(const Text("SERVIÇOS")),
-  menuItem(const Text("PUBLICAÇÕES")),
-  menuItem(const Text("FORMAÇÕES")),
-  menuItem(const Text("PLANOS DE AULA")),
-];
 
 class ItemValue {
   final List<String> subItems;
@@ -59,12 +49,10 @@ final List<ItemValue> itemValues = [
 
 class NavMenu extends StatefulWidget {
   final double swidth;
-  final Axis eixoLista;
   final double heightBtn;
 
   const NavMenu({
     required this.swidth,
-    required this.eixoLista,
     required this.heightBtn,
   });
 
@@ -83,17 +71,6 @@ class _NavMenuState extends State<NavMenu> {
 
     List<dynamic> postsList = [];
     List<dynamic> datas = [];
-
-    bool showBtn = false;
-    double sizedBoxWidth;
-    double sheight = MediaQuery.of(context).size.height;
-
-    if (widget.eixoLista == Axis.vertical) {
-      sizedBoxWidth = widget.swidth * .8;
-      showBtn = false;
-    } else {
-      sizedBoxWidth = widget.swidth * 0.505;
-    }
 
     void initState() {
       super.initState();
@@ -117,66 +94,98 @@ class _NavMenuState extends State<NavMenu> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        SizedBox(
-          width: sizedBoxWidth,
-          height: widget.heightBtn,
-          child: ListView(scrollDirection: widget.eixoLista, children: [
-            for (int i = 0; i < itemValues.length; i++) ...{
-              Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 2.5),
-                  child: MenuBar0(
-                      context, i, itemValues[i].name, selValueContent[i])),
-            },
-            IconButton(
-                iconSize: 20,
-                icon: Icon(Icons.search),
-                onPressed: () => showDialog<String>(
-                      barrierColor: modalBackground,
-                      context: context,
-                      builder: (BuildContext context) => AlertDialog(
-                        contentPadding: EdgeInsets.all(0),
-                        content: Container(
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(23, 160, 242, .8),
-                              borderRadius: BorderRadius.circular(25)),
-                          padding: EdgeInsets.only(left: 20),
-                          width: 500,
-                          height: 100,
-                          child: Row(
-                            children: [
-                              SizedBox(
-                                width: 420,
-                                child: TextField(
-                                    style: textTheme.bodySmall,
-                                    decoration: InputDecoration(
-                                        hintText: "Busca de OA",
-                                        hintStyle: textTheme.bodySmall,
-                                        focusedBorder: UnderlineInputBorder(
-                                            borderSide:
-                                                BorderSide(color: secondary))),
-                                    onChanged: (value) => setState(() {
-                                          searchText = value;
-                                        }),
-                                    onSubmitted: (value) {
-                                      searchObject();
-                                    }),
-                              ),
-                              Container(
-                                padding: EdgeInsets.only(left: 10),
-                                child: IconButton(
-                                  icon: Icon(Icons.search, color: secondary),
-                                  onPressed: () {
-                                    searchObject();
-                                  },
-                                ),
-                              )
-                            ],
+        MenuBar( children: [
+          for (int i = 0; i < itemValues.length; i++) ...{
+            Padding(
+                padding: EdgeInsetsDirectional.symmetric(horizontal: 5),
+                child: SubmenuButton(
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(background),
+                    textStyle: MaterialStateProperty.all(
+                        textTheme.headlineSmall),
+                  ),
+                  menuChildren: <Widget>[
+                    if (i >= 0 && i < itemValues.length) ...{
+                      for (var j = 0;
+                          j < itemValues[i].subItems.length;
+                          j++) ...{
+                        MenuItemButton(
+                          style: ButtonStyle(
+                            padding: MaterialStatePropertyAll(
+                                EdgeInsets.symmetric(horizontal: 20)),
+                            minimumSize:
+                                MaterialStatePropertyAll(Size(250, 44)),
+                            backgroundColor:
+                                MaterialStateProperty.all(background),
+                            textStyle: MaterialStateProperty.all(
+                                textTheme.displaySmall),
                           ),
+                          onPressed: () {
+                            Navigator.pushNamed(
+                                context, itemValues[i].path[j]);
+                          },
+                          child: MenuAcceleratorLabel(
+                              itemValues[i].subItems[j]),
+                        ),
+                      }
+                    }
+                  ],
+                  child: MenuAcceleratorLabel(itemValues[i].name),
+                )),
+          },
+          InkWell(
+              child: Container(
+                  width: 40,
+                  height: 40,
+                  child: Icon(Icons.search, size: 20)),
+              onTap: () => showDialog<String>(
+                    barrierColor: modalBackground,
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      contentPadding: EdgeInsets.all(0),
+                      content: Container(
+                        decoration: BoxDecoration(
+                            color: Color.fromRGBO(23, 160, 242, .8),
+                            borderRadius: BorderRadius.circular(25)),
+                        padding: EdgeInsets.only(left: 20),
+                        width: 500,
+                        height: 100,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 420,
+                              child: TextField(
+                                  style: textTheme.bodySmall,
+                                  decoration: InputDecoration(
+                                      hintText: "Busca de OA",
+                                      hintStyle: textTheme.bodySmall,
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide: BorderSide(
+                                              color: secondary))),
+                                  onChanged: (value) => setState(() {
+                                        searchText = value;
+                                      }),
+                                  onSubmitted: (value) {
+                                    searchObject();
+                                  }),
+                            ),
+                            Container(
+                              padding: EdgeInsets.only(left: 10),
+                              child: IconButton(
+                                icon:
+                                    Icon(Icons.search, color: secondary),
+                                onPressed: () {
+                                  searchObject();
+                                },
+                              ),
+                            )
+                          ],
                         ),
                       ),
-                    )),
-          ]),
-        ),
+                    ),
+                  )),
+        ]),
       ],
     );
   }

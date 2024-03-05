@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:obamahome/components/cores_personalizadas.dart';
+import 'package:obamahome/utils/cores_personalizadas.dart';
 
 // import '../about-us/nossa_historia.dart';
 import 'home_Mobile.dart';

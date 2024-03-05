@@ -8,8 +8,8 @@ import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'app/views/about-us/aboutUs_view.dart';
 import 'app/views/blog/blog_view.dart';
 import 'app/views/trilhas/trilhas_view.dart';
-import 'components/cores_personalizadas.dart';
 import 'utils/app_theme.dart';
+import 'utils/cores_personalizadas.dart';
 
 void main() {
   runApp(const MyApp());
@@ -22,25 +22,33 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
-          useMaterial3: true,
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-          primaryColor: CoresPersonalizadas.azulObama,
-          // hoverColor: Colors.black,
-          colorScheme: ColorScheme(
-            brightness: Brightness.light,
-            primary: primary,
-            onPrimary: onPrimary,
-            secondary: secondary,
-            onSecondary: onSecondary,
-            error: error,
-            onError: onError,
-            background: background,
-            onBackground: onBackground,
-            surface: surface,
-            onSurface: onSurface,
-          ),
-          textTheme: textTheme
-        ),
+            menuBarTheme: MenuBarThemeData(
+                style: MenuStyle(
+              elevation: MaterialStatePropertyAll(0),
+              backgroundColor: MaterialStatePropertyAll(
+                  Colors.white),
+              side:
+                  MaterialStatePropertyAll(BorderSide.none),
+            )),
+            useMaterial3: true,
+            visualDensity: VisualDensity.adaptivePlatformDensity,
+            primaryColor: CoresPersonalizadas.azulObama,
+            splashColor: background,
+            // hoverColor: Colors.black,
+            colorScheme: ColorScheme(
+              brightness: Brightness.light,
+              primary: primary,
+              onPrimary: onPrimary,
+              secondary: secondary,
+              onSecondary: onSecondary,
+              error: error,
+              onError: onError,
+              background: background,
+              onBackground: onBackground,
+              surface: surface,
+              onSurface: onSurface,
+            ),
+            textTheme: textTheme),
         debugShowCheckedModeBanner: false,
         title: 'Home',
         home: const HomeView(),

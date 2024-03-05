@@ -96,7 +96,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   fit: BoxFit.fitHeight)),
                           NavMenu(
                               swidth: swidth,
-                              eixoLista: Axis.horizontal,
                               heightBtn: 50),
                         ])),
               ] else ...[
@@ -124,7 +123,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ]))
               ],
               BannerSuperior(context, 'Publicações'),
-              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Row(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 if (dataAvailable == true) ...{
                   Container(
                       padding:
@@ -218,7 +217,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                             CrossAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'READ MORE >',
+                                            'VER MAIS >',
                                             style: textTheme.labelMedium,
                                           ),
                                         ],
@@ -267,7 +266,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 },
                 Container(
                     padding: const EdgeInsets.only(top: 85.0),
-                    width: swidth * .23,
+                    width: swidth * .27,
                     child: blogFilters(
                         context, swidth, postsList, dataAvailable, updateData)),
               ]),

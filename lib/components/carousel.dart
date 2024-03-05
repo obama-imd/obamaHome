@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 
 import '../utils/app_theme.dart';
-import 'cores_personalizadas.dart';
+import '../utils/cores_personalizadas.dart';
 
 class Carousel extends StatelessWidget {
   final double swidth;

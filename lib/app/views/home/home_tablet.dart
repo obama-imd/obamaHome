@@ -6,11 +6,11 @@ import 'package:obamahome/components/simpleRow.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/carousel.dart';
-import '../../../components/cores_personalizadas.dart';
 import '../../../components/footer.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
 import '../../../utils/app_theme.dart';
+import '../../../utils/cores_personalizadas.dart';
 import 'components/our_product_item.dart';
 import 'constants.dart';
 import 'home_view.dart';
@@ -96,7 +96,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   fit: BoxFit.fitHeight)),
                           NavMenu(
                               swidth: swidth,
-                              eixoLista: Axis.horizontal,
                               heightBtn: 50),
                         ])),
               ] else ...[

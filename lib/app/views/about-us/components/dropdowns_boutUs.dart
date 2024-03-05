@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:obamahome/components/cores_personalizadas.dart';
+import 'package:obamahome/utils/cores_personalizadas.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../constants.dart';

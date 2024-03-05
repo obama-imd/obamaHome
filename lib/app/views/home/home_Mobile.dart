@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/components/cores_personalizadas.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:obamahome/components/simpleRow.dart';
+import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/carousel.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/components/cores_personalizadas.dart';
 import 'package:obamahome/components/mainButton.dart';
+import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/bannerSuperior.dart';
@@ -70,7 +70,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     fit: BoxFit.fitHeight)),
                             NavMenu(
                                 swidth: swidth,
-                                eixoLista: Axis.horizontal,
                                 heightBtn: 50),
                           ])),
                 ] else ...[
