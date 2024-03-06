@@ -46,13 +46,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   List<dynamic> searchResult = [];
   bool dataAvailable = true;
   Key key = UniqueKey();
+  Object? totalPages;
+  Object? currentPage;
 
   Future<void> fetchDataAndUpdateState() async {
-    final fetchedData = await fetchData('');
+    (List<Map<String, dynamic>>, Object?, Object?) fetchedData =
+        await fetchData('');
     setState(() {
-      if (fetchedData.isNotEmpty) {
+      if (fetchedData.$1.isNotEmpty) {
         dataAvailable = false;
-        searchResult = fetchedData;
+        searchResult = fetchedData.$1;
+        totalPages = fetchedData.$2;
+        currentPage = fetchedData.$3;
       } else {
         dataAvailable = true;
       }
@@ -82,6 +87,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     double paddingCard = MediaQuery.of(context).size.width * .02;
     double swidth = MediaQuery.of(context).size.width;
+    PageController _pageController = PageController();
 
     return Scaffold(
         key: scaffoldKey,
@@ -103,9 +109,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(
-                              swidth: swidth,
-                              heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
                 SizedBox(
@@ -128,53 +132,104 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ]))
               ],
               BannerSuperior(context, 'Objetos de Aprendizagem'),
-              // if (MediaQuery.of(context).size.width > 1000) ...[
-              Padding(
-                padding: EdgeInsets.only(
-                    top: 100, left: swidth * .048, right: swidth * .068),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    SizedBox(
-                      width: swidth * .65,
-                      child: ResponsiveGridRow(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // for (var lista in widget.datas) ...{
-                          for (var lista in searchResult) ...{
-                            ResponsiveGridCol(
-                              lg: 4,
-                              md: 6,
-                              xs: 12,
-                              child: SizedBox(
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: paddingCard, vertical: 15),
-                                  child: OurProductItem(
-                                    title: lista["nome"],
-                                    image: lista["url"],
-                                  ),
+              if (MediaQuery.of(context).size.width > 1000) ...[
+                Padding(
+                  padding: EdgeInsets.only(
+                      top: 100, left: swidth * .048, right: swidth * .068),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(children: [
+                        searchResult.isEmpty
+                            ? Center(child: CircularProgressIndicator())
+                            : Container(
+                                width: swidth * .65,
+                                height: 1500,
+                                child: PageView.builder(
+                                  controller: _pageController,
+                                  itemCount: int.parse(totalPages.toString()),
+                                  physics: NeverScrollableScrollPhysics(),
+                                  onPageChanged: (index) {
+                                    setState(() {
+                                      currentPage = index;
+                                    });
+                                  },
+                                  itemBuilder: (context, index) {
+                                    return ResponsiveGridRow(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          // for (var lista in widget.datas) ...{
+                                          for (var lista in searchResult) ...{
+                                            ResponsiveGridCol(
+                                              lg: 4,
+                                              md: 6,
+                                              xs: 12,
+                                              child: SizedBox(
+                                                child: Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      horizontal: paddingCard,
+                                                      vertical: 15),
+                                                  child: OurProductItem(
+                                                    title: lista["nome"],
+                                                    image: lista["url"],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          }
+                                        ]);
+                                  },
                                 ),
                               ),
-                            ),
-                          },
-                        ],
+                        BottomAppBar(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                icon: Icon(Icons.navigate_before),
+                                onPressed: () {
+                                  if (currentPage as int > 0) {
+                                    _pageController.previousPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  }
+                                },
+                              ),
+                              Text(
+                                  'Página ${int.parse(currentPage.toString()) + 1} de $totalPages'),
+                              IconButton(
+                                icon: Icon(Icons.navigate_next),
+                                onPressed: () {
+                                  if (int.parse(currentPage.toString()) <
+                                      int.parse(totalPages.toString()) - 1) {
+                                    _pageController.nextPage(
+                                      duration: Duration(milliseconds: 300),
+                                      curve: Curves.easeInOut,
+                                    );
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ]),
+                      SizedBox(
+                        width: swidth * .2,
+                        child: OAFilters(
+                            swidth: swidth,
+                            datas: searchResult,
+                            dataAvailable: dataAvailable,
+                            updateData: updateData),
                       ),
-                    ),
-                    SizedBox(
-                      width: swidth * .2,
-                      child: OAFilters(
-                          swidth: swidth,
-                          datas: searchResult,
-                          dataAvailable: dataAvailable,
-                          updateData: updateData),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-              Carousel(swidth),
-              Footer(swidth),
+                Carousel(swidth),
+                Footer(swidth),
+              ]
             ])));
   }
 }

@@ -84,11 +84,11 @@ class _NavMenuState extends State<NavMenu> {
   @override
   Widget build(BuildContext context) {
     Future searchObject() async {
-      List<dynamic> filteredData = await fetchData(searchText);
+      (List<Map<String, dynamic>>, Object?, Object?) filteredData = await fetchData(searchText);
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => SearchDesktop(datas: filteredData)));
+              builder: (context) => SearchDesktop(datas: filteredData.$1)));
     }
 
     String? currentRoute = ModalRoute.of(context)?.settings.name;

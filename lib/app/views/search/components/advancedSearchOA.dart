@@ -71,7 +71,7 @@ class _HomePage1State extends State<OAFilters> {
             child: TextField(
                 onSubmitted: (value) async {
                   final postsFiltrados = await fetchData(value);
-                  updateData(postsFiltrados);
+                  updateData(postsFiltrados.$1);
                 },
                 style: textTheme.displaySmall,
                 decoration: InputDecoration(

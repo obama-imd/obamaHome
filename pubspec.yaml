@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.6 <4.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -54,6 +54,7 @@ dependencies:
   animated_search_bar: ^2.7.1
 
   riverpod: any
+  flutter_map_cancellable_tile_provider: ^2.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
