@@ -22,13 +22,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(
+            menuButtonTheme: MenuButtonThemeData(
+                style: ButtonStyle(
+              overlayColor: MaterialStatePropertyAll(Colors.white),
+            )),
             menuBarTheme: MenuBarThemeData(
                 style: MenuStyle(
               elevation: MaterialStatePropertyAll(0),
-              backgroundColor: MaterialStatePropertyAll(
-                  Colors.white),
-              side:
-                  MaterialStatePropertyAll(BorderSide.none),
+              backgroundColor: MaterialStatePropertyAll(Colors.white),
+              side: MaterialStatePropertyAll(BorderSide.none),
             )),
             useMaterial3: true,
             visualDensity: VisualDensity.adaptivePlatformDensity,

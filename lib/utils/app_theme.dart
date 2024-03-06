@@ -24,6 +24,7 @@ final TextTheme textTheme = TextTheme(
     titleMedium: GoogleFonts.raleway(color: Colors.grey, fontSize: 20),
     titleSmall: GoogleFonts.raleway(
         color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+    headlineLarge: GoogleFonts.raleway(color: primary, fontSize: 14, fontWeight: FontWeight.bold),
     headlineMedium: GoogleFonts.raleway(color: Colors.black, fontSize: 16),
     headlineSmall: GoogleFonts.raleway(
         color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
@@ -41,7 +42,7 @@ final TextTheme textTheme = TextTheme(
         )
       ],
     ),
-    labelSmall: GoogleFonts.raleway(color: Colors.blue, fontSize: 14),
+    labelSmall: GoogleFonts.raleway(color: primary, fontSize: 14),
     bodyLarge: GoogleFonts.raleway(fontSize: 30, color: Colors.white),
     bodyMedium: GoogleFonts.raleway(fontSize: 20, color: Colors.white),
     bodySmall: GoogleFonts.raleway(color: Colors.white, fontSize: 14),
