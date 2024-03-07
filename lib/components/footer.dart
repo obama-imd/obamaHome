@@ -88,7 +88,7 @@ class _FooterState extends State<Footer> {
             Container(
                 height: 650,
                 width: widget.swidth * 0.7,
-                color: Colors.black,
+                color: primary,
                 child: Row(children: [
                   Container(
                       height: 600,
@@ -169,7 +169,7 @@ class _FooterState extends State<Footer> {
                                         hintStyle: textTheme.displaySmall,
                                         contentPadding: EdgeInsets.all(5.0),
                                         filled: true,
-                                        fillColor: Colors.white))),
+                                        fillColor: background))),
                             Container(
                                 height: 40,
                                 width: 40,
@@ -179,7 +179,7 @@ class _FooterState extends State<Footer> {
                                       launchUrl(emailLaunchUri);
                                     },
                                     child: const Icon(Icons.mail,
-                                        color: Colors.white, size: 16.0)))
+                                        color: background, size: 16.0)))
                           ]))
                 ])),
             Container(
@@ -200,7 +200,7 @@ class _FooterState extends State<Footer> {
           Container(
             height: 1350,
             width: widget.swidth,
-            color: Colors.black,
+            color: primary,
             padding: const EdgeInsets.only(left: 40, top: 60),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -262,7 +262,7 @@ class _FooterState extends State<Footer> {
                               hintStyle: textTheme.displaySmall,
                               contentPadding: EdgeInsets.all(10.0),
                               filled: true,
-                              fillColor: Colors.white))),
+                              fillColor: background))),
                   Container(
                       height: 40,
                       width: 40,
@@ -272,7 +272,7 @@ class _FooterState extends State<Footer> {
                             launchUrl(emailLaunchUri);
                           },
                           child: const Icon(Icons.mail,
-                              color: Colors.white, size: 16.0))),
+                              color: background, size: 16.0))),
                 ],
               ),
             ]),
@@ -311,7 +311,7 @@ Widget flutterMapArea(BuildContext context) {
             width: 50,
             height: 50,
             child: const Icon(FontAwesomeIcons.locationDot,
-                size: 30, color: Colors.black),
+                size: 30, color: primary),
           ),
         ],
       ),

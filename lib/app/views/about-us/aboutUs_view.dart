@@ -69,7 +69,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: Colors.black),
+                                  const Icon(Icons.menu, color: primary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
@@ -81,7 +81,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           TextButton(
                               onPressed: () {},
                               child: const Icon(Icons.search,
-                                  color: Colors.black, size: 25))
+                                  color: primary, size: 25))
                         ]))
               ],
               BannerSuperior(context, 'Sobre Nós'),
@@ -181,7 +181,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                             grid1Icon[i],
                                                             size: iconSize[i],
                                                             color:
-                                                                Colors.white)),
+                                                                background)),
                                                     Container(
                                                         padding:
                                                             const EdgeInsets

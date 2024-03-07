@@ -4,13 +4,13 @@ import 'package:google_fonts/google_fonts.dart';
 const Color primary = Color.fromRGBO(23, 119, 242, 1);
 const Color onPrimary = Colors.black;
 const Color secondary = Colors.white;
-const Color onSecondary = Colors.white;
+const Color onSecondary = Colors.transparent;
 const Color error = Colors.red;
 const Color onError = Colors.redAccent;
 const Color background = Colors.white;
 const Color onBackground = Colors.white;
 const Color surface = Color.fromRGBO(23, 160, 242, 1);
-const Color modalBackground = Color.fromRGBO(23, 160, 242, .9);
+const Color modalBackground = Color.fromRGBO(23, 160, 242, .95);
 const Color onSurface = Colors.black;
 
 const LinearGradient gradientColor = LinearGradient(

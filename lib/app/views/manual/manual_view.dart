@@ -10,6 +10,7 @@ import '../../../components/footer.dart';
 import '../../../components/navMenu.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
+import '../../../utils/app_theme.dart';
 
 class ManuaisPage extends StatelessWidget {
   const ManuaisPage({super.key});
@@ -67,7 +68,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: Colors.black),
+                                  const Icon(Icons.menu, color: primary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
@@ -79,7 +80,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           TextButton(
                               onPressed: () {},
                               child: const Icon(Icons.search,
-                                  color: Colors.black, size: 25))
+                                  color: primary, size: 25))
                         ]))
               ],
               BannerSuperior(context, 'Manuais'),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'utils/app_theme.dart';
+
 // ignore: must_be_immutable
 class ItemProduto extends StatelessWidget {
   String titulo;
@@ -56,7 +58,7 @@ class Grid1 extends StatelessWidget {
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(100)),
                 child: Icon(icone,
-                    size: 39.0, color: Colors.white)),
+                    size: 39.0, color: background)),
           ),
           Expanded(
             child: Column(

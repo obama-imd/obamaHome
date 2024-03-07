@@ -32,7 +32,7 @@ class TopBar extends StatelessWidget {
                           Container(
                               padding: const EdgeInsets.only(right: 10),
                               child: const Icon(FontAwesomeIcons.house,
-                                  color: Colors.white, size: 13)),
+                                  color: background, size: 13)),
                           Text(
                               'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
                               style: GoogleFonts.raleway(
@@ -52,7 +52,7 @@ class TopBar extends StatelessWidget {
                                 Container(
                                     padding: const EdgeInsets.only(right: 10),
                                     child: const Icon(FontAwesomeIcons.envelope,
-                                        color: Colors.white, size: 16)),
+                                        color: background, size: 16)),
                                 Text('obama@imd.ufrn.br',
                                     style: GoogleFonts.raleway(
                                         color: background, fontSize: 13)),
@@ -64,14 +64,14 @@ class TopBar extends StatelessWidget {
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                        SocialMedia(Colors.white),
+                        SocialMedia(background),
                         Container(
                             margin: EdgeInsets.only(
                                 left: 15.0, right: swidth * 0.068),
                             height: 45,
                             width: 160,
                             child: Material(
-                              color: Colors.white,
+                              color: background,
                               textStyle: textTheme.headlineMedium,
                               child: InkWell(
                                   onTap: () {},
@@ -109,12 +109,12 @@ class TopBar extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(child: SocialMedia(Colors.white)),
+                            Container(child: SocialMedia(background)),
                             SizedBox(
                                 height: 45,
                                 width: 160,
                                 child: Material(
-                                  color: Colors.white,
+                                  color: background,
                                   textStyle: textTheme.headlineMedium,
                                   child: InkWell(
                                       onTap: () {},
@@ -150,14 +150,14 @@ class TopBar extends StatelessWidget {
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SocialMedia(Colors.white),
+                    SocialMedia(background),
                   ],
                 ),
                 SizedBox(
                     height: 35,
                     width: 210,
                     child: Material(
-                      color: Colors.white,
+                      color: background,
                       textStyle: textTheme.headlineMedium,
                       child: InkWell(
                           onTap: () {},

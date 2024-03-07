@@ -107,7 +107,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: Colors.black),
+                                  const Icon(Icons.menu, color: primary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
@@ -224,7 +224,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               //                                     ],
               //                                     fontSize: 15,
               //                                     fontWeight: FontWeight.w600,
-              //                                     color: Colors.white)))),
+              //                                     color: background)))),
               //                   ]),
               //                   Container(height: 140),
               //                 ])),
@@ -276,7 +276,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                                       100)),
                                                       child: Icon(grid1Icon[i],
                                                           size: iconSize2[i],
-                                                          color: Colors.white)),
+                                                          color: background)),
                                                   Container(
                                                       padding:
                                                           const EdgeInsets.only(
@@ -396,7 +396,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                                       100)),
                                                       child: Icon(grid2Icon[i],
                                                           size: iconSize2[i],
-                                                          color: Colors.white)),
+                                                          color: background)),
                                                   Container(
                                                       padding:
                                                           const EdgeInsets.only(

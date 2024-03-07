@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 
@@ -84,7 +85,8 @@ class _NavMenuState extends State<NavMenu> {
   @override
   Widget build(BuildContext context) {
     Future searchObject() async {
-      (List<Map<String, dynamic>>, Object?, Object?, Object?) filteredData = await fetchData(searchText);
+      (List<Map<String, dynamic>>, Object?, Object?, Object?) filteredData =
+          await fetchData(searchText);
       Navigator.push(
           context,
           MaterialPageRoute(
@@ -92,6 +94,7 @@ class _NavMenuState extends State<NavMenu> {
     }
 
     String? currentRoute = ModalRoute.of(context)?.settings.name;
+    double swidth = MediaQuery.of(context).size.width;
 
     return MenuBar(children: [
       for (int i = 0; i < itemValues.length; i++) ...{
@@ -162,44 +165,70 @@ class _NavMenuState extends State<NavMenu> {
                 barrierColor: modalBackground,
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
+                  backgroundColor: onSecondary,
                   contentPadding: EdgeInsets.all(0),
-                  content: Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(23, 160, 242, .8),
-                        borderRadius: BorderRadius.circular(25)),
-                    padding: EdgeInsets.only(left: 20),
-                    width: 500,
-                    height: 100,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 420,
-                          child: TextField(
-                              style: textTheme.bodySmall,
-                              decoration: InputDecoration(
-                                  hintText: "Busca de OA",
-                                  hintStyle: textTheme.bodySmall,
-                                  focusedBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: secondary))),
-                              onChanged: (value) => setState(() {
-                                    searchText = value;
+                  content: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(25)),
+                        padding: EdgeInsets.only(left: 20),
+                        width: swidth * .7,
+                        height: 100,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: swidth * .6,
+                              child: TextField(
+                                  style: TextStyle(
+                                      fontSize: 60,
+                                      fontWeight: FontWeight.bold,
+                                      color: background),
+                                  decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.only(bottom: 20),
+                                      hintText: "Busca de OA",
+                                      hintStyle: TextStyle(
+                                        fontSize: 60,
+                                        fontWeight: FontWeight.bold,
+                                        color: background,
+                                      ),
+                                      focusedBorder: UnderlineInputBorder(
+                                          borderSide:
+                                              BorderSide(color: secondary))),
+                                  onChanged: (value) => setState(() {
+                                        searchText = value;
+                                      }),
+                                  onSubmitted: (value) {
+                                    searchObject();
                                   }),
-                              onSubmitted: (value) {
-                                searchObject();
-                              }),
+                            ),
+                            Container(
+                              width: 100,
+                              height: 100,
+                              child: IconButton(
+                                hoverColor: null,
+                                highlightColor: null,
+                                icon: Icon(CupertinoIcons.search,
+                                    color: secondary, size: 80),
+                                onPressed: () {
+                                  searchObject();
+                                },
+                              ),
+                            )
+                          ],
                         ),
-                        Container(
-                          padding: EdgeInsets.only(left: 10),
-                          child: IconButton(
-                            icon: Icon(Icons.search, color: secondary),
-                            onPressed: () {
-                              searchObject();
-                            },
+                      ),
+                      Row(mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 20, top: 25),
+                            child: Text("Consulte os OA disponíveis no nosso catálogo"),
                           ),
-                        )
-                      ],
-                    ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               )),

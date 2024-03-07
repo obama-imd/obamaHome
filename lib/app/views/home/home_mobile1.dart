@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 
 // import '../about-us/nossa_historia.dart';
+import '../../../utils/app_theme.dart';
 import 'home_Mobile.dart';
 
 class HomeMobile1 extends StatefulWidget {
@@ -50,32 +51,32 @@ class _HomeMobile1State extends State<HomeMobile1> {
     final List<Widget> items = [
       Icon(
         Icons.home,
-        color: Colors.black,
+        color: primary,
         size: 30,
       ),
       Icon(
         FontAwesomeIcons.faceSmile,
         size: 30,
-        color: Colors.black,
+        color: primary,
       ), //sobre nos
       Icon(
         FontAwesomeIcons.desktop,
         size: 30,
-        color: Colors.black,
+        color: primary,
       ), //"Planos de Aula"
       Icon(
         FontAwesomeIcons.book,
-        color: Colors.black,
+        color: primary,
         size: 30,
       ), //"Trilhas"
       Icon(
         FontAwesomeIcons.trophy,
-        color: Colors.black,
+        color: primary,
         size: 30,
       ),
       Icon(
         Icons.menu,
-        color: Colors.black,
+        color: primary,
         size: 30,
       ),
     ];

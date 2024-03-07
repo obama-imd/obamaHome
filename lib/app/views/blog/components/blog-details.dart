@@ -122,7 +122,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: Colors.black),
+                                  const Icon(Icons.menu, color: primary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
@@ -134,7 +134,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           TextButton(
                               onPressed: () {},
                               child: const Icon(Icons.search,
-                                  color: Colors.black, size: 25))
+                                  color: primary, size: 25))
                         ]))
               ],
               BannerSuperior(context, 'Publicações'),
@@ -251,7 +251,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   height: 15,
                                                   child: Icon(shareMedia[index],
                                                       size: 15,
-                                                      color: Colors.black),
+                                                      color: primary),
                                                 ));
                                           }),
                                     )

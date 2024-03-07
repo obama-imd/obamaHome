@@ -92,7 +92,7 @@ Widget blogFilters(
                           margin: const EdgeInsets.only(top: 10),
                           child: Row(children: [
                             const Icon(FontAwesomeIcons.calendarDays,
-                                color: Colors.black, size: 15),
+                                color: primary, size: 15),
                             Padding(
                               padding: const EdgeInsets.only(left: 2, top: 1.5),
                               child: Text(formattedDate),
@@ -124,7 +124,7 @@ Widget blogFilters(
             child: TextButton(
                 onPressed: () {},
                 child: Row(children: [
-                  Icon(Icons.arrow_right, color: Colors.black),
+                  Icon(Icons.arrow_right, color: primary),
                   Text('Text 1',
                       style: textTheme.headlineSmall)
                 ]))),
@@ -137,7 +137,7 @@ Widget blogFilters(
             child: TextButton(
                 onPressed: () {},
                 child: Row(children: [
-                  Icon(Icons.arrow_right, color: Colors.black),
+                  Icon(Icons.arrow_right, color: primary),
                   Text('Text 2',
                       style: textTheme.headlineSmall)
                 ]))),
@@ -150,7 +150,7 @@ Widget blogFilters(
             child: TextButton(
                 onPressed: () {},
                 child: Row(children: [
-                  Icon(Icons.arrow_right, color: Colors.black),
+                  Icon(Icons.arrow_right, color: primary),
                   Text('Text 3',
                       style: textTheme.headlineSmall)
                 ]))),
@@ -163,7 +163,7 @@ Widget blogFilters(
             child: TextButton(
                 onPressed: () {},
                 child: Row(children: [
-                  Icon(Icons.arrow_right, color: Colors.black),
+                  Icon(Icons.arrow_right, color: primary),
                   Text('Text 4',
                       style: textTheme.headlineSmall)
                 ]))),
@@ -176,7 +176,7 @@ Widget blogFilters(
             child: TextButton(
                 onPressed: () {},
                 child: Row(children: [
-                  Icon(Icons.arrow_right, color: Colors.black),
+                  Icon(Icons.arrow_right, color: primary),
                   Text('Text 5',
                       style: textTheme.headlineSmall)
                 ]))),
@@ -198,7 +198,7 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Text('Bootstrap',
-      //               style: TextStyle(fontSize: 15, color: Colors.black)))),
+      //               style: TextStyle(fontSize: 15, color: primary)))),
       //   Container(
       //       padding: const EdgeInsets.all(15),
       //       height: 50,
@@ -210,7 +210,7 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Text('HTML5',
-      //               style: TextStyle(fontSize: 15, color: Colors.black)))),
+      //               style: TextStyle(fontSize: 15, color: primary)))),
       //   Container(
       //       padding: const EdgeInsets.all(15),
       //       height: 50,
@@ -222,7 +222,7 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Text('Wordpress',
-      //               style: TextStyle(fontSize: 15, color: Colors.black)))),
+      //               style: TextStyle(fontSize: 15, color: primary)))),
       // ]),
       // Container(
       //     alignment: Alignment.centerLeft,
@@ -239,12 +239,12 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Row(children: [
-      //             Icon(Icons.arrow_right, color: Colors.black),
+      //             Icon(Icons.arrow_right, color: primary),
       //             Text('Text 1',
       //                 style: TextStyle(
       //                     fontSize: 15,
       //                     fontWeight: FontWeight.w500,
-      //                     color: Colors.black))
+      //                     color: primary))
       //           ]))),
       //   Container(
       //       color: const Color.fromARGB(255, 235, 235, 235),
@@ -255,12 +255,12 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Row(children: [
-      //             Icon(Icons.arrow_right, color: Colors.black),
+      //             Icon(Icons.arrow_right, color: primary),
       //             Text('Text 2',
       //                 style: TextStyle(
       //                     fontSize: 15,
       //                     fontWeight: FontWeight.w500,
-      //                     color: Colors.black))
+      //                     color: primary))
       //           ]))),
       //   Container(
       //       color: const Color.fromARGB(255, 235, 235, 235),
@@ -271,12 +271,12 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Row(children: [
-      //             Icon(Icons.arrow_right, color: Colors.black),
+      //             Icon(Icons.arrow_right, color: primary),
       //             Text('Text 3',
       //                 style: TextStyle(
       //                     fontSize: 15,
       //                     fontWeight: FontWeight.w500,
-      //                     color: Colors.black))
+      //                     color: primary))
       //           ]))),
       //   Container(
       //       color: const Color.fromARGB(255, 235, 235, 235),
@@ -287,12 +287,12 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Row(children: [
-      //             Icon(Icons.arrow_right, color: Colors.black),
+      //             Icon(Icons.arrow_right, color: primary),
       //             Text('Text 4',
       //                 style: TextStyle(
       //                     fontSize: 15,
       //                     fontWeight: FontWeight.w500,
-      //                     color: Colors.black))
+      //                     color: primary))
       //           ]))),
       //   Container(
       //       color: const Color.fromARGB(255, 235, 235, 235),
@@ -303,12 +303,12 @@ Widget blogFilters(
       //       child: TextButton(
       //           onPressed: () {},
       //           child: const Row(children: [
-      //             Icon(Icons.arrow_right, color: Colors.black),
+      //             Icon(Icons.arrow_right, color: primary),
       //             Text('Text 5',
       //                 style: TextStyle(
       //                     fontSize: 15,
       //                     fontWeight: FontWeight.w500,
-      //                     color: Colors.black))
+      //                     color: primary))
       //           ])))
       // ])
     ]),

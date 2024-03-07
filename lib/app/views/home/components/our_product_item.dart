@@ -22,7 +22,7 @@ class OurProductItem extends StatefulWidget {
 
 final shadowHouver = [
   BoxShadow(
-    color: Colors.black.withOpacity(0.1),
+    color: primary.withOpacity(0.1),
     spreadRadius: 4.0,
     blurRadius: 4.0,
   ),
@@ -51,7 +51,7 @@ class _OurProductItemState extends State<OurProductItem> {
         width: widget.width,
         height: widget.height,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: background,
           boxShadow: houver ? shadowHouver : shadowNoHouver,
           border: Border(
             bottom: houver
@@ -73,7 +73,7 @@ class _OurProductItemState extends State<OurProductItem> {
                 alignment: Alignment.center,
                 width: widget.width,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: background,
                   border: houver
                       ? const Border(
                           top: BorderSide.none,
@@ -101,7 +101,7 @@ class _OurProductItemState extends State<OurProductItem> {
               child: Container(
                 alignment: Alignment.center,
                 decoration: const BoxDecoration(
-                  color: Colors.white,
+                  color: background,
                 ),
                 child: Text(widget.title, style: textTheme.headlineSmall),
               ),

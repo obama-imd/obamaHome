@@ -8,6 +8,7 @@ import '../../../components/footer.dart';
 import '../../../components/navMenu.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../components/topbar.dart';
+import '../../../utils/app_theme.dart';
 import 'components/our_product_item.dart';
 import 'constants.dart';
 import 'home_view.dart';
@@ -103,7 +104,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: Colors.black),
+                                  const Icon(Icons.menu, color: primary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
@@ -204,7 +205,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                             grid1Icon[i],
                                                             size: iconSize2[i],
                                                             color:
-                                                                Colors.white)),
+                                                                background)),
                                                     Container(
                                                         padding:
                                                             const EdgeInsets
@@ -330,7 +331,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                                       100)),
                                                       child: Icon(grid2Icon[i],
                                                           size: iconSize2[i],
-                                                          color: Colors.white)),
+                                                          color: background)),
                                                   Container(
                                                       padding:
                                                           const EdgeInsets.only(

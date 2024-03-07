@@ -145,7 +145,7 @@ class Carousel extends StatelessWidget {
                                     child: Icon(
                                       Icons.phone,
                                       size: 70,
-                                      color: Colors.white,
+                                      color: background,
                                     )),
                                 SizedBox(
                                     height: 100,
@@ -168,7 +168,7 @@ class Carousel extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        color: Colors.black),
+                                        color: primary),
                                     child: TextButton(
                                         onPressed: () {},
                                         child: Text('CONTACT US',
@@ -315,7 +315,7 @@ class Carousel extends StatelessWidget {
                           child: Icon(
                             Icons.phone,
                             size: 40,
-                            color: Colors.white,
+                            color: background,
                           )),
                       SizedBox(
                           width: swidth * 0.7,
@@ -337,7 +337,7 @@ class Carousel extends StatelessWidget {
                         width: 150,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: Colors.black),
+                            color: primary),
                         child: TextButton(
                             onPressed: () {},
                             child: Text('CONTACT US',
