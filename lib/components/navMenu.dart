@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 
-import '../app/controllers/search_controller.dart';
 import '../utils/app_theme.dart';
 
 class ItemValue {
@@ -78,21 +77,22 @@ class NavMenu extends StatefulWidget {
   State<NavMenu> createState() => _NavMenuState();
 }
 
+// Future searchObject(String value) async {
+//   // (List<Map<String, dynamic>>, Object?, Object?, Object?) filteredData =
+//   //     await fetchData(value);
+//   Navigator.push(
+//       context,
+//       MaterialPageRoute(
+//           builder: (context) => SearchDesktop(termSearched: value)));
+// }
+
 class _NavMenuState extends State<NavMenu> {
   String searchText = '';
   bool isHovered = false;
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    Future searchObject() async {
-      (List<Map<String, dynamic>>, Object?, Object?, Object?) filteredData =
-          await fetchData(searchText);
-      Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => SearchDesktop(datas: filteredData.$1)));
-    }
-
     String? currentRoute = ModalRoute.of(context)?.settings.name;
     double swidth = MediaQuery.of(context).size.width;
 
@@ -197,11 +197,16 @@ class _NavMenuState extends State<NavMenu> {
                                       focusedBorder: UnderlineInputBorder(
                                           borderSide:
                                               BorderSide(color: secondary))),
-                                  onChanged: (value) => setState(() {
-                                        searchText = value;
-                                      }),
+                                  // onChanged: (value) => setState(() {
+                                  //       searchText = value;
+                                  //     }),
                                   onSubmitted: (value) {
-                                    searchObject();
+                                    searchText = value;
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => SearchDesktop(
+                                                termSearched: value)));
                                   }),
                             ),
                             Container(
@@ -213,7 +218,11 @@ class _NavMenuState extends State<NavMenu> {
                                 icon: Icon(CupertinoIcons.search,
                                     color: secondary, size: 80),
                                 onPressed: () {
-                                  searchObject();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => SearchDesktop(
+                                              termSearched: searchText)));
                                 },
                               ),
                             )

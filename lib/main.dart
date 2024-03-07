@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
           '/blog': (context) => const BlogPage(),
           '/blog-details': (context) => BlogDetails(initialPageIndex: 0),
           '/formacoes': (context) => const Formacoes(),
-          '/servicos': (context) => SearchDesktop(datas: []),
+          '/servicos': (context) => SearchDesktop(termSearched: ''),
           '/trilhas': (context) => TrilhasPage(),
           '/manuais': (context) => ManuaisPage()
         });

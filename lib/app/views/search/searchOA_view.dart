@@ -13,27 +13,27 @@ import '../../../components/topbar.dart';
 import '../home/components/our_product_item.dart';
 
 class SearchDesktop extends StatelessWidget {
-  final List<dynamic> datas;
+  final String termSearched;
 
   const SearchDesktop({
     Key? key,
-    required this.datas,
+    required this.termSearched,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: MyStatefulWidget(datas: datas),
+      body: MyStatefulWidget(termSearched: termSearched),
     );
   }
 }
 
 class MyStatefulWidget extends StatefulWidget {
-  final List<dynamic> datas;
+  final String termSearched;
 
   const MyStatefulWidget({
     Key? key,
-    required this.datas,
+    required this.termSearched,
   }) : super(key: key);
 
   @override
@@ -42,7 +42,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  // final TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   List<dynamic> searchResult = [];
   bool dataAvailable = true;
@@ -51,9 +51,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int? currentPage;
   int? itemsPerPage;
 
-  Future<void> fetchDataAndUpdateState() async {
+  Future<void> fetchDataAndUpdateState(String item) async {
     (List<Map<String, dynamic>>, Object?, Object?, Object?) fetchedData =
-        await fetchData('');
+        await fetchData(item);
+
     setState(() {
       if (fetchedData.$1.isNotEmpty) {
         dataAvailable = false;
@@ -73,13 +74,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   void initState() {
     super.initState();
-    if (widget.datas.isEmpty) {
-      fetchDataAndUpdateState();
-    } else {
-      setState(() {
-        searchResult = widget.datas;
-      });
-    }
+    // if (widget.termSearched == "") {
+    fetchDataAndUpdateState(widget.termSearched);
+    // } else {
+    // setState(() {
+    //   searchResult = widget.datas;
+    // });
+    // AlertDialog(title: Text('data'));
+    // updateData(widget.termSearched);
+    // }
   }
 
   void updateData(newData) {
@@ -136,8 +139,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                              child:
-                                  const Icon(Icons.menu, color: onPrimary),
+                              child: const Icon(Icons.menu, color: onPrimary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
