@@ -99,7 +99,7 @@ class _NavMenuState extends State<NavMenu> {
     return MenuBar(children: [
       for (int i = 0; i < itemValues.length; i++) ...{
         Padding(
-            padding: EdgeInsetsDirectional.symmetric(horizontal: 5),
+            padding: EdgeInsets.only(left: 10),
             child: SubmenuButton(
               onHover: (value) {
                 setState(() {
@@ -159,14 +159,13 @@ class _NavMenuState extends State<NavMenu> {
           child: Container(
               width: 40,
               height: 40,
-              child: Icon(Icons.search,
+              child: Icon(CupertinoIcons.search,
                   size: 20, color: isHovered ? primary : onPrimary)),
           onPressed: () => showDialog<String>(
                 barrierColor: modalBackground,
                 context: context,
                 builder: (BuildContext context) => AlertDialog(
                   backgroundColor: onSecondary,
-                  contentPadding: EdgeInsets.all(0),
                   content: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -187,7 +186,8 @@ class _NavMenuState extends State<NavMenu> {
                                       fontWeight: FontWeight.bold,
                                       color: background),
                                   decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.only(bottom: 20),
+                                      contentPadding:
+                                          EdgeInsets.only(bottom: 20),
                                       hintText: "Busca de OA",
                                       hintStyle: TextStyle(
                                         fontSize: 60,
@@ -220,11 +220,13 @@ class _NavMenuState extends State<NavMenu> {
                           ],
                         ),
                       ),
-                      Row(mainAxisAlignment: MainAxisAlignment.start,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 20, top: 25),
-                            child: Text("Consulte os OA disponíveis no nosso catálogo"),
+                            child: Text(
+                                "Consulte os OA disponíveis no nosso catálogo"),
                           ),
                         ],
                       ),

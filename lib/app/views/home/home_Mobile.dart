@@ -85,7 +85,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 child:
                     Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   TextButton(
-                      child: const Icon(Icons.menu, color: primary),
+                      child: const Icon(Icons.menu, color: onPrimary),
                       onPressed: () => scaffoldKey.currentState?.openDrawer()),
                 ]),
               ),

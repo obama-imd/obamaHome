@@ -88,7 +88,7 @@ class _FooterState extends State<Footer> {
             Container(
                 height: 650,
                 width: widget.swidth * 0.7,
-                color: primary,
+                color: onPrimary,
                 child: Row(children: [
                   Container(
                       height: 600,
@@ -200,7 +200,7 @@ class _FooterState extends State<Footer> {
           Container(
             height: 1350,
             width: widget.swidth,
-            color: primary,
+            color: onPrimary,
             padding: const EdgeInsets.only(left: 40, top: 60),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -311,7 +311,7 @@ Widget flutterMapArea(BuildContext context) {
             width: 50,
             height: 50,
             child: const Icon(FontAwesomeIcons.locationDot,
-                size: 30, color: primary),
+                size: 30, color: onPrimary),
           ),
         ],
       ),

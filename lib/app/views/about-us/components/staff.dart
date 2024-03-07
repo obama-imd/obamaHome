@@ -56,7 +56,7 @@ class StaffCard extends StatelessWidget {
                                   child: TextButton(
                                       onPressed: () {},
                                       child: Icon(SocialMediaLinks[i],
-                                          size: 16.0, color: primary))),
+                                          size: 16.0, color: onPrimary))),
                             }
                           ])
                     ]),

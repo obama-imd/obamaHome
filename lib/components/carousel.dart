@@ -168,7 +168,7 @@ class Carousel extends StatelessWidget {
                                     decoration: BoxDecoration(
                                         borderRadius:
                                             BorderRadius.circular(100),
-                                        color: primary),
+                                        color: onPrimary),
                                     child: TextButton(
                                         onPressed: () {},
                                         child: Text('CONTACT US',
@@ -337,7 +337,7 @@ class Carousel extends StatelessWidget {
                         width: 150,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: primary),
+                            color: onPrimary),
                         child: TextButton(
                             onPressed: () {},
                             child: Text('CONTACT US',

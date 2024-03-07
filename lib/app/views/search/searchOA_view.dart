@@ -137,7 +137,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: primary),
+                                  const Icon(Icons.menu, color: onPrimary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(

@@ -51,32 +51,32 @@ class _HomeMobile1State extends State<HomeMobile1> {
     final List<Widget> items = [
       Icon(
         Icons.home,
-        color: primary,
+        color: onPrimary,
         size: 30,
       ),
       Icon(
         FontAwesomeIcons.faceSmile,
         size: 30,
-        color: primary,
+        color: onPrimary,
       ), //sobre nos
       Icon(
         FontAwesomeIcons.desktop,
         size: 30,
-        color: primary,
+        color: onPrimary,
       ), //"Planos de Aula"
       Icon(
         FontAwesomeIcons.book,
-        color: primary,
+        color: onPrimary,
         size: 30,
       ), //"Trilhas"
       Icon(
         FontAwesomeIcons.trophy,
-        color: primary,
+        color: onPrimary,
         size: 30,
       ),
       Icon(
         Icons.menu,
-        color: primary,
+        color: onPrimary,
         size: 30,
       ),
     ];

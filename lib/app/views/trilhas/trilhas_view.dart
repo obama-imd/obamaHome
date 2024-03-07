@@ -81,7 +81,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           children: [
                             TextButton(
                                 child:
-                                    const Icon(Icons.menu, color: primary),
+                                    const Icon(Icons.menu, color: onPrimary),
                                 onPressed: () =>
                                     scaffoldKey.currentState?.openDrawer()),
                             Container(
@@ -93,7 +93,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             TextButton(
                                 onPressed: () {},
                                 child: const Icon(Icons.search,
-                                    color: primary, size: 25))
+                                    color: onPrimary, size: 25))
                           ]))
                 ],
                 BannerSuperior(context, 'Trilhas'),

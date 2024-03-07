@@ -107,7 +107,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         children: [
                           TextButton(
                               child:
-                                  const Icon(Icons.menu, color: primary),
+                                  const Icon(Icons.menu, color: onPrimary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
@@ -119,7 +119,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           TextButton(
                               onPressed: () {},
                               child: const Icon(Icons.search,
-                                  color: primary, size: 25))
+                                  color: onPrimary, size: 25))
                         ]))
               ],
               BannerSuperior(context, 'Publicações'),
@@ -206,7 +206,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     },
                                     overlayColor:
                                         const MaterialStatePropertyAll(
-                                            primary),
+                                            onPrimary),
                                     child: SizedBox(
                                       width: 170,
                                       height: 50,
@@ -252,7 +252,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                   height: 15,
                                                   child: Icon(shareMedia[index],
                                                       size: 15,
-                                                      color: primary),
+                                                      color: onPrimary),
                                                 ));
                                           }),
                                     )
