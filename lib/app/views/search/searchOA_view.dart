@@ -74,15 +74,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   @override
   void initState() {
     super.initState();
-    // if (widget.termSearched == "") {
     fetchDataAndUpdateState(widget.termSearched);
-    // } else {
-    // setState(() {
-    //   searchResult = widget.datas;
-    // });
-    // AlertDialog(title: Text('data'));
-    // updateData(widget.termSearched);
-    // }
   }
 
   void updateData(newData) {
@@ -216,104 +208,108 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              margin: EdgeInsets.symmetric(horizontal: 5.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Color.fromRGBO(225, 225, 225, 1.0),
-                                ),
-                              ),
-                              child: InkWell(
-                                child: Icon(Icons.navigate_before),
-                                onTap: currentPage! > 0
-                                    ? () {
-                                        _pageController.previousPage(
-                                          duration: Duration(milliseconds: 300),
-                                          curve: Curves.easeInOut,
-                                        );
-                                        selectedPage(
-                                          startValue + 1,
-                                        );
-                                        setState(() {
-                                          if (startValue > 0) {
-                                            startValue--;
-                                            endValue--;
-                                          }
-                                        });
-                                      }
-                                    : null,
-                              ),
-                            ),
-                            for (int i = startValue; i <= endValue; i++) ...{
+                            if (searchResult.length < itemsPerPage!) ...{
                               Container(
                                 width: 40,
                                 height: 40,
                                 margin: EdgeInsets.symmetric(horizontal: 5.0),
                                 decoration: BoxDecoration(
-                                  color:
-                                      selectedPageIndex == i ? primary : null,
                                   border: Border.all(
                                     width: 1,
                                     color: Color.fromRGBO(225, 225, 225, 1.0),
                                   ),
-                                  borderRadius: BorderRadius.circular(5.0),
                                 ),
                                 child: InkWell(
-                                  child: Center(
-                                    child: Text((i + 1).toString(),
-                                        style: selectedPageIndex == i
-                                            ? textTheme.bodySmall
-                                            : textTheme.displaySmall),
-                                  ),
-                                  onTap: () {
-                                    if ((i) != currentPage) {
-                                      _pageController.jumpToPage(i);
-                                      selectedPage(i);
-                                      setState(() {
-                                        if (i > 0 && i < totalPages! - 1) {
-                                          startValue = i - 1;
-                                          endValue = i + 1;
+                                  child: Icon(Icons.navigate_before),
+                                  onTap: currentPage! > 0
+                                      ? () {
+                                          _pageController.previousPage(
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            curve: Curves.easeInOut,
+                                          );
+                                          selectedPage(
+                                            startValue + 1,
+                                          );
+                                          setState(() {
+                                            if (startValue > 0) {
+                                              startValue--;
+                                              endValue--;
+                                            }
+                                          });
                                         }
-                                      });
-                                    }
-                                  },
-                                ),
-                              )
-                            },
-                            Container(
-                              width: 40,
-                              height: 40,
-                              margin: EdgeInsets.symmetric(horizontal: 5.0),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  width: 1,
-                                  color: Color.fromRGBO(225, 225, 225, 1.0),
+                                      : null,
                                 ),
                               ),
-                              child: InkWell(
-                                child: Icon(Icons.navigate_next),
-                                onTap: currentPage! < totalPages! - 1
-                                    ? () {
-                                        _pageController.nextPage(
-                                          duration: Duration(milliseconds: 300),
-                                          curve: Curves.easeInOut,
-                                        );
-                                        selectedPage(
-                                          startValue + 1,
-                                        );
+                              for (int i = startValue; i <= endValue; i++) ...{
+                                Container(
+                                  width: 40,
+                                  height: 40,
+                                  margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                  decoration: BoxDecoration(
+                                    color:
+                                        selectedPageIndex == i ? primary : null,
+                                    border: Border.all(
+                                      width: 1,
+                                      color: Color.fromRGBO(225, 225, 225, 1.0),
+                                    ),
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  child: InkWell(
+                                    child: Center(
+                                      child: Text((i + 1).toString(),
+                                          style: selectedPageIndex == i
+                                              ? textTheme.bodySmall
+                                              : textTheme.displaySmall),
+                                    ),
+                                    onTap: () {
+                                      if ((i) != currentPage) {
+                                        _pageController.jumpToPage(i);
+                                        selectedPage(i);
                                         setState(() {
-                                          if (endValue < totalPages! - 1) {
-                                            startValue++;
-                                            endValue++;
+                                          if (i > 0 && i < totalPages! - 1) {
+                                            startValue = i - 1;
+                                            endValue = i + 1;
                                           }
                                         });
                                       }
-                                    : null,
+                                    },
+                                  ),
+                                )
+                              },
+                              Container(
+                                width: 40,
+                                height: 40,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Color.fromRGBO(225, 225, 225, 1.0),
+                                  ),
+                                ),
+                                child: InkWell(
+                                  child: Icon(Icons.navigate_next),
+                                  onTap: currentPage! < totalPages! - 1
+                                      ? () {
+                                          _pageController.nextPage(
+                                            duration:
+                                                Duration(milliseconds: 300),
+                                            curve: Curves.easeInOut,
+                                          );
+                                          selectedPage(
+                                            startValue + 1,
+                                          );
+                                          setState(() {
+                                            if (endValue < totalPages! - 1) {
+                                              startValue++;
+                                              endValue++;
+                                            }
+                                          });
+                                        }
+                                      : null,
+                                ),
                               ),
-                            ),
+                            }
                           ],
                         )
                       ]),
