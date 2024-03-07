@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/app/controllers/search_controller.dart';
 import 'package:obamahome/app/views/search/components/advancedSearchOA.dart';
 import 'package:obamahome/components/drawer.dart';
+import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/bannerSuperior.dart';
@@ -46,23 +47,28 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   List<dynamic> searchResult = [];
   bool dataAvailable = true;
   Key key = UniqueKey();
-  Object? totalPages;
-  Object? currentPage;
+  int? totalPages;
+  int? currentPage;
+  int? itemsPerPage;
 
   Future<void> fetchDataAndUpdateState() async {
-    (List<Map<String, dynamic>>, Object?, Object?) fetchedData =
+    (List<Map<String, dynamic>>, Object?, Object?, Object?) fetchedData =
         await fetchData('');
     setState(() {
       if (fetchedData.$1.isNotEmpty) {
         dataAvailable = false;
         searchResult = fetchedData.$1;
-        totalPages = fetchedData.$2;
-        currentPage = fetchedData.$3;
+        totalPages = int.parse(fetchedData.$2.toString());
+        currentPage = int.parse(fetchedData.$3.toString());
+        itemsPerPage = int.parse(fetchedData.$4.toString());
       } else {
         dataAvailable = true;
       }
     });
   }
+
+  int startValue = 0;
+  int endValue = 2;
 
   @override
   void initState() {
@@ -83,11 +89,22 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     });
   }
 
+  late int selectedPageIndex;
+
+  void selectedPage(int i) {
+    if (i != selectedPageIndex) {
+      setState() {
+        selectedPageIndex = i;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double paddingCard = MediaQuery.of(context).size.width * .02;
     double swidth = MediaQuery.of(context).size.width;
     PageController _pageController = PageController();
+    selectedPageIndex = currentPage!;
 
     return Scaffold(
         key: scaffoldKey,
@@ -156,12 +173,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                     });
                                   },
                                   itemBuilder: (context, index) {
+                                    int startIndex = index *
+                                        int.parse(itemsPerPage.toString());
+                                    int endIndex = (index + 1) *
+                                        int.parse(itemsPerPage.toString());
+                                    endIndex = endIndex > searchResult.length
+                                        ? searchResult.length
+                                        : endIndex;
                                     return ResponsiveGridRow(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.center,
                                         children: [
                                           // for (var lista in widget.datas) ...{
-                                          for (var lista in searchResult) ...{
+                                          for (int i = startIndex;
+                                              i < endIndex;
+                                              i++) ...{
                                             ResponsiveGridCol(
                                               lg: 4,
                                               md: 6,
@@ -172,8 +198,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                       horizontal: paddingCard,
                                                       vertical: 15),
                                                   child: OurProductItem(
-                                                    title: lista["nome"],
-                                                    image: lista["url"],
+                                                    title: searchResult[i]
+                                                        ["nome"],
+                                                    image: searchResult[i]
+                                                        ["url"],
                                                   ),
                                                 ),
                                               ),
@@ -183,38 +211,109 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   },
                                 ),
                               ),
-                        BottomAppBar(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                icon: Icon(Icons.navigate_before),
-                                onPressed: () {
-                                  if (currentPage as int > 0) {
-                                    _pageController.previousPage(
-                                      duration: Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  }
-                                },
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              width: 40,
+                              height: 40,
+                              margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Color.fromRGBO(225, 225, 225, 1.0),
+                                ),
                               ),
-                              Text(
-                                  'Página ${int.parse(currentPage.toString()) + 1} de $totalPages'),
-                              IconButton(
-                                icon: Icon(Icons.navigate_next),
-                                onPressed: () {
-                                  if (int.parse(currentPage.toString()) <
-                                      int.parse(totalPages.toString()) - 1) {
-                                    _pageController.nextPage(
-                                      duration: Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                    );
-                                  }
-                                },
+                              child: InkWell(
+                                child: Icon(Icons.navigate_before),
+                                onTap: currentPage! > 0
+                                    ? () {
+                                        _pageController.previousPage(
+                                          duration: Duration(milliseconds: 300),
+                                          curve: Curves.easeInOut,
+                                        );
+                                        selectedPage(
+                                          startValue + 1,
+                                        );
+                                        setState(() {
+                                          if (startValue > 0) {
+                                            startValue--;
+                                            endValue--;
+                                          }
+                                        });
+                                      }
+                                    : null,
                               ),
-                            ],
-                          ),
-                        ),
+                            ),
+                            for (int i = startValue; i <= endValue; i++) ...{
+                              Container(
+                                width: 40,
+                                height: 40,
+                                margin: EdgeInsets.symmetric(horizontal: 5.0),
+                                decoration: BoxDecoration(
+                                  color:
+                                      selectedPageIndex == i ? primary : null,
+                                  border: Border.all(
+                                    width: 1,
+                                    color: Color.fromRGBO(225, 225, 225, 1.0),
+                                  ),
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                child: InkWell(
+                                  child: Center(
+                                    child: Text((i + 1).toString(),
+                                        style: selectedPageIndex == i
+                                            ? textTheme.bodySmall
+                                            : textTheme.displaySmall),
+                                  ),
+                                  onTap: () {
+                                    if ((i) != currentPage) {
+                                      _pageController.jumpToPage(i);
+                                      selectedPage(i);
+                                      setState(() {
+                                        if (i > 0 && i < totalPages! - 1) {
+                                          startValue = i - 1;
+                                          endValue = i + 1;
+                                        }
+                                      });
+                                    }
+                                  },
+                                ),
+                              )
+                            },
+                            Container(
+                              width: 40,
+                              height: 40,
+                              margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  width: 1,
+                                  color: Color.fromRGBO(225, 225, 225, 1.0),
+                                ),
+                              ),
+                              child: InkWell(
+                                child: Icon(Icons.navigate_next),
+                                onTap: currentPage! < totalPages! - 1
+                                    ? () {
+                                        _pageController.nextPage(
+                                          duration: Duration(milliseconds: 300),
+                                          curve: Curves.easeInOut,
+                                        );
+                                        selectedPage(
+                                          startValue + 1,
+                                        );
+                                        setState(() {
+                                          if (endValue < totalPages! - 1) {
+                                            startValue++;
+                                            endValue++;
+                                          }
+                                        });
+                                      }
+                                    : null,
+                              ),
+                            ),
+                          ],
+                        )
                       ]),
                       SizedBox(
                         width: swidth * .2,

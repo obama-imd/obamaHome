@@ -84,7 +84,7 @@ class _NavMenuState extends State<NavMenu> {
   @override
   Widget build(BuildContext context) {
     Future searchObject() async {
-      (List<Map<String, dynamic>>, Object?, Object?) filteredData = await fetchData(searchText);
+      (List<Map<String, dynamic>>, Object?, Object?, Object?) filteredData = await fetchData(searchText);
       Navigator.push(
           context,
           MaterialPageRoute(

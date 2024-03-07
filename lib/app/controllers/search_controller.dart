@@ -1,4 +1,4 @@
-Future<(List<Map<String, dynamic>>, Object?, Object?)> fetchData(String searchTerm) async {
+Future<(List<Map<String, dynamic>>, Object?, Object?, Object?)> fetchData(String searchTerm) async {
   // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
   final response = {
@@ -95,6 +95,7 @@ Future<(List<Map<String, dynamic>>, Object?, Object?)> fetchData(String searchTe
   // final jsonData = jsonDecode(response.body);
   final totalPages = response['totalPages'];
   final currentPage = response['number'];
+  final itemsPerPage = response['numberOfElements'];
   List<dynamic> jsonData = response['content'] as List<dynamic>;
 
   final postsFiltrados = filtrarOA(jsonData, searchTerm);
@@ -107,7 +108,7 @@ Future<(List<Map<String, dynamic>>, Object?, Object?)> fetchData(String searchTe
       .toList()
       .reversed
       .toList();
-  return (posts, totalPages, currentPage);
+  return (posts, totalPages, currentPage, itemsPerPage);
 }
 
 List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {
