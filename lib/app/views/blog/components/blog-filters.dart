@@ -56,7 +56,9 @@ Widget blogFilters(
       Container(
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(bottom: 50),
-          child: Text('Texto', )),
+          child: Text(
+            'Texto',
+          )),
       Container(
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(bottom: 20),
@@ -101,7 +103,9 @@ Widget blogFilters(
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 2, top: 1.5),
-                                child: Text(formattedDate, ),
+                                child: Text(
+                                  formattedDate,
+                                ),
                               )
                             ])),
                       ]),
@@ -113,7 +117,9 @@ Widget blogFilters(
       } else ...{
         Container(
             alignment: Alignment.centerLeft,
-            child: Text('Sem posts', )),
+            child: Text(
+              'Sem posts',
+            )),
       },
       Container(
           alignment: Alignment.centerLeft,
@@ -123,21 +129,26 @@ Widget blogFilters(
         for (var title in titleCategories) ...{
           Padding(
               padding: EdgeInsets.only(bottom: 3),
-              child: InkWell(
-                  hoverColor: primary,
-                  onHover: (value) {
-                    !isHover;
-                  },
-                  onTap: () {},
-                  child: Container(
-                    height: 46,
-                    alignment: Alignment.centerLeft,
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(children: [
-                      Icon(Icons.arrow_right, color: isHover? background : onPrimary),
-                      Text(title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: isHover? background : onPrimary))
-                    ]),
-                  ))),
+              child: Material(
+                color: const Color.fromARGB(255, 231, 228, 228),
+                child: InkWell(
+                    hoverColor: primary,
+                    onTap: () {},
+                    child: Container(
+                      height: 46,
+                      alignment: Alignment.centerLeft,
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Row(children: [
+                        Icon(Icons.arrow_right,
+                            color: isHover ? background : onPrimary),
+                        Text(title,
+                            style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: isHover ? background : onPrimary))
+                      ]),
+                    )),
+              )),
         }
       ]),
     ]),

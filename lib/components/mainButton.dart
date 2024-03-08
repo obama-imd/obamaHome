@@ -3,15 +3,16 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/app_theme.dart';
 
-Widget mainButton(context, content, link) {
-  _launchURL(link) async {
-    Uri url = Uri.parse(link); 
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
-    } else {
-      throw 'Could not launch $link';
+Widget mainButton(context, String content, String? urlValue, void Function()? onPressed) {
+
+    _launchURL(link) async {
+      Uri url = Uri.parse(link);
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url);
+      } else {
+        throw 'Could not launch $link';
+      }
     }
-  }
 
   return Container(
       height: 50,
@@ -19,14 +20,15 @@ Widget mainButton(context, content, link) {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)),
       child: TextButton(
           onPressed: () {
-            if (link != "") {
-              _launchURL(link);
+            if (urlValue != null) {
+              _launchURL(urlValue);
+            } else {
+              onPressed;
             }
           },
           style: const ButtonStyle(
             backgroundColor: MaterialStatePropertyAll(primary),
             overlayColor: MaterialStatePropertyAll(Colors.lightBlue),
           ),
-          child: Text(content,
-              style: textTheme.labelMedium)));
+          child: Text(content, style: textTheme.labelMedium)));
 }

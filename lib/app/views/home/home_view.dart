@@ -6,7 +6,6 @@ import 'package:obamahome/app/views/home/home_mobile1.dart';
 import 'package:obamahome/app/views/home/home_tablet.dart';
 import 'package:obamahome/app/views/home/responsivo.dart';
 
-import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
 
 Widget blogData(BuildContext context, index, datas) {

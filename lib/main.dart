@@ -5,6 +5,7 @@ import 'package:obamahome/app/views/home/home_view.dart';
 import 'package:obamahome/app/views/manual/manual_view.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 
+import '404.dart';
 import 'app/views/about-us/aboutUs_view.dart';
 import 'app/views/blog/blog_view.dart';
 import 'app/views/trilhas/trilhas_view.dart';
@@ -12,6 +13,9 @@ import 'utils/app_theme.dart';
 import 'utils/cores_personalizadas.dart';
 
 void main() {
+  FlutterError.onError = (details) {
+    FlutterError.presentError(details);
+  };
   runApp(const MyApp());
 }
 
@@ -60,9 +64,35 @@ class MyApp extends StatelessWidget {
           '/blog': (context) => const BlogPage(),
           '/blog-details': (context) => BlogDetails(initialPageIndex: 0),
           '/formacoes': (context) => const Formacoes(),
-          '/servicos': (context) => SearchDesktop(termSearched : ModalRoute.of(context)?.settings.arguments as String? ?? ''),
+          '/servicos': (context) => SearchDesktop(
+              termSearched:
+                  ModalRoute.of(context)?.settings.arguments as String? ?? ''),
           '/trilhas': (context) => TrilhasPage(),
           '/manuais': (context) => ManuaisPage()
-        });
+        },
+        onGenerateRoute: (settings) {
+          if (settings.name == null) {
+            return null;
+          }
+
+          final routeName = settings.name!;
+          // final args = settings.arguments;
+
+          WidgetBuilder builder;
+          switch (routeName) {
+            case '/':
+              builder = (context) => HomeView();
+              break;
+            case '/aboutus':
+              builder = (context) => const AboutUsPage();
+              break;
+            default:
+              builder = (context) => ErrorPage();
+          }
+
+          return MaterialPageRoute(builder: builder, settings: settings);
+        },
+        onUnknownRoute: (settings) =>
+            MaterialPageRoute(builder: (_) => ErrorPage()));
   }
 }

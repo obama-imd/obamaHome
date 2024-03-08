@@ -108,8 +108,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     PageController _pageController = PageController();
     selectedPageIndex = currentPage!;
 
-    void testFunction() {}
-
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
