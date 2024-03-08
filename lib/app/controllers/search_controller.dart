@@ -1,4 +1,5 @@
-Future<(List<Map<String, dynamic>>, Object?, Object?, Object?)> fetchData(String searchTerm) async {
+Future<(List<Map<String, dynamic>>, Object?, Object?, Object?, Object?)> fetchData(
+    String searchTerm) async {
   // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
   final response = {
@@ -94,6 +95,7 @@ Future<(List<Map<String, dynamic>>, Object?, Object?, Object?)> fetchData(String
   // if (response.statusCode == 200) {
   // final jsonData = jsonDecode(response.body);
   final totalPages = response['totalPages'];
+  final totalElements = response['totalElements'];
   final currentPage = response['number'];
   final itemsPerPage = response['numberOfElements'];
   List<dynamic> jsonData = response['content'] as List<dynamic>;
@@ -108,7 +110,7 @@ Future<(List<Map<String, dynamic>>, Object?, Object?, Object?)> fetchData(String
       .toList()
       .reversed
       .toList();
-  return (posts, totalPages, currentPage, itemsPerPage);
+  return (posts, totalPages, totalElements, currentPage, itemsPerPage);
 }
 
 List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {
@@ -116,11 +118,17 @@ List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {
     return jsonData;
   }
 
-  return jsonData.where((item) {
+  List<dynamic> comparingData = jsonData.where((item) {
     final id = item['id'].toString().toLowerCase();
     final nome = item['nome'].toString().toLowerCase();
 
     return nome.contains(searchTerm.toLowerCase()) ||
         id.contains(searchTerm.toLowerCase());
   }).toList();
+
+  if (comparingData.isEmpty) {
+    return jsonData;
+  } else {
+    return comparingData;
+  }
 }

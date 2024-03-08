@@ -142,14 +142,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 if (dataAvailable == true) ...{
                   Container(
                       padding:
-                          const EdgeInsets.only(top: 100, left: 90, right: 60),
+                          const EdgeInsets.only(top: 100, left: 90, right: 15),
                       width: swidth * 0.67,
                       child: Text(
                           "Perdão, não há nenhum post a ser exibido no momento.", style: textTheme.displaySmall)),
                 } else ...{
                   Container(
                     padding:
-                        const EdgeInsets.only(top: 100, left: 90, right: 60),
+                        const EdgeInsets.only(top: 100, left: 90, right: 15),
                     width: swidth * 0.67,
                     height: 1400,
                     child: PageView.builder(
@@ -324,8 +324,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   ),
                 },
                 Container(
-                    padding: const EdgeInsets.only(top: 85.0),
-                    width: swidth * .23,
+                    padding: const EdgeInsets.only(top: 85.0, left: 15),
+                    width: swidth * .33,
                     child: blogFilters(
                         context, swidth, postsList, dataAvailable, updateData)),
               ]),

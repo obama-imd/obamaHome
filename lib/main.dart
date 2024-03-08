@@ -60,7 +60,7 @@ class MyApp extends StatelessWidget {
           '/blog': (context) => const BlogPage(),
           '/blog-details': (context) => BlogDetails(initialPageIndex: 0),
           '/formacoes': (context) => const Formacoes(),
-          '/servicos': (context) => SearchDesktop(termSearched: ''),
+          '/servicos': (context) => SearchDesktop(termSearched : ModalRoute.of(context)?.settings.arguments as String? ?? ''),
           '/trilhas': (context) => TrilhasPage(),
           '/manuais': (context) => ManuaisPage()
         });

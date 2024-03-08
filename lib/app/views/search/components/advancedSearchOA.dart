@@ -57,21 +57,29 @@ class _HomePage1State extends State<OAFilters> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: swidth * .2,
+      width: swidth * .288,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
             alignment: Alignment.centerLeft,
             margin: const EdgeInsets.only(bottom: 30),
-            child: Text('BUSCA',
-                style: textTheme.titleSmall)),
+            child: Text('BUSCA', style: textTheme.titleSmall)),
         Container(
             height: 50,
-            width: swidth * 0.25,
             margin: const EdgeInsets.only(bottom: 50),
             child: TextField(
                 onSubmitted: (value) async {
                   final postsFiltrados = await fetchData(value);
-                  updateData(postsFiltrados.$1);
+                  if (postsFiltrados.$1.isNotEmpty) {
+                    updateData(postsFiltrados.$1);
+                  } else {
+                    showDialog<String>(
+                        barrierColor: modalBackground,
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                            backgroundColor: onSecondary,
+                            content: Text(
+                                "Perdão, nenhum valor correspondente foi encontrado")));
+                  }
                 },
                 style: textTheme.displaySmall,
                 decoration: InputDecoration(
@@ -135,10 +143,8 @@ class _HomePage1State extends State<OAFilters> {
             for (var lista in tileTitle) ...{
               Container(
                   alignment: Alignment.centerLeft,
-                  margin: EdgeInsets.only(
-                      top: 40, bottom: 20, right: swidth * 0.07),
-                  child: Text(lista,
-                      style: textTheme.titleSmall)),
+                  margin: EdgeInsets.only(top: 40, bottom: 20),
+                  child: Text(lista, style: textTheme.titleSmall)),
               Container(
                   height: 40,
                   alignment: Alignment.centerLeft,
@@ -159,7 +165,7 @@ class _HomePage1State extends State<OAFilters> {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Container(
-                              width: swidth * .18, child: Text(value)),
+                              width: swidth * .245, child: Text(value)),
                         );
                       }).toList())),
             },

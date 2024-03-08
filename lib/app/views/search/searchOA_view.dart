@@ -50,21 +50,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   int? totalPages;
   int? currentPage;
   int? itemsPerPage;
+  int? totalElements;
 
   Future<void> fetchDataAndUpdateState(String item) async {
-    (List<Map<String, dynamic>>, Object?, Object?, Object?) fetchedData =
-        await fetchData(item);
+    (
+      List<Map<String, dynamic>>,
+      Object?,
+      Object?,
+      Object?,
+      Object?
+    ) fetchedData = await fetchData(item);
 
     setState(() {
-      if (fetchedData.$1.isNotEmpty) {
-        dataAvailable = false;
-        searchResult = fetchedData.$1;
-        totalPages = int.parse(fetchedData.$2.toString());
-        currentPage = int.parse(fetchedData.$3.toString());
-        itemsPerPage = int.parse(fetchedData.$4.toString());
-      } else {
-        dataAvailable = true;
-      }
+      searchResult = fetchedData.$1;
+      totalPages = int.parse(fetchedData.$2.toString());
+      totalElements = int.parse(fetchedData.$3.toString());
+      currentPage = int.parse(fetchedData.$4.toString());
+      itemsPerPage = int.parse(fetchedData.$5.toString());
     });
   }
 
@@ -75,6 +77,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void initState() {
     super.initState();
     fetchDataAndUpdateState(widget.termSearched);
+    if (searchResult.length == totalElements) {
+      showDialog<String>(
+          barrierColor: modalBackground,
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+              backgroundColor: onSecondary,
+              content:
+                  Text("Perdão, nenhum valor correspondente foi encontrado")));
+    }
   }
 
   void updateData(newData) {
@@ -146,7 +157,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               if (MediaQuery.of(context).size.width > 1000) ...[
                 Padding(
                   padding: EdgeInsets.only(
-                      top: 100, left: swidth * .048, right: swidth * .068),
+                      top: 100, left: swidth * .068, right: swidth * .068),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,8 +166,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         searchResult.isEmpty
                             ? Center(child: CircularProgressIndicator())
                             : Container(
-                                width: swidth * .65,
-                                height: 1500,
+                                padding: EdgeInsets.only(right: 30),
+                                width: (swidth * .576),
+                                height: (500 *
+                                    (searchResult.length / 3).roundToDouble()),
                                 child: PageView.builder(
                                   controller: _pageController,
                                   itemCount: int.parse(totalPages.toString()),
@@ -208,7 +221,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            if (searchResult.length < itemsPerPage!) ...{
+                            if (searchResult.length > itemsPerPage!) ...{
                               Container(
                                 width: 40,
                                 height: 40,
@@ -314,7 +327,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         )
                       ]),
                       SizedBox(
-                        width: swidth * .2,
+                        width: (swidth * .288) - 30,
                         child: OAFilters(
                             swidth: swidth,
                             datas: searchResult,

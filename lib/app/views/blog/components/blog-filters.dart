@@ -22,6 +22,7 @@ Widget blogFilters(
   bool dataAvailable,
   Function(List<dynamic>) updateData,
 ) {
+  bool isHover = false;
   return Padding(
     padding: EdgeInsets.only(right: swidth * 0.068),
     child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
@@ -101,7 +102,7 @@ Widget blogFilters(
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 2, top: 1.5),
-                                child: Text(formattedDate),
+                                child: Text(formattedDate, style: textTheme.displaySmall),
                               )
                             ])),
                       ]),
@@ -119,20 +120,25 @@ Widget blogFilters(
           alignment: Alignment.centerLeft,
           margin: EdgeInsets.only(top: 50, bottom: 20, right: swidth * 0.07),
           child: Text('CATEGORIES', style: textTheme.titleSmall)),
-      Column(children: [
+      Column(mainAxisSize: MainAxisSize.max, children: [
         for (var title in titleCategories) ...{
-          Container(
-              color: const Color.fromARGB(255, 235, 235, 235),
-              width: swidth * 0.3,
-              height: 40,
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(bottom: 4, right: swidth * 0.015),
-              child: TextButton(
-                  onPressed: () {},
-                  child: Row(children: [
-                    Icon(Icons.arrow_right, color: onPrimary),
-                    Text(title, style: textTheme.headlineSmall)
-                  ]))),
+          Padding(
+              padding: EdgeInsets.only(bottom: 3),
+              child: InkWell(
+                  hoverColor: primary,
+                  onHover: (value) {
+                    !isHover;
+                  },
+                  onTap: () {},
+                  child: Container(
+                    height: 46,
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(children: [
+                      Icon(Icons.arrow_right, color: isHover? background : onPrimary),
+                      Text(title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: isHover? background : onPrimary))
+                    ]),
+                  ))),
         }
       ]),
     ]),
