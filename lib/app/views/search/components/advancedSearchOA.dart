@@ -168,7 +168,7 @@ class _HomePage1State extends State<OAFilters> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  mainButton(context, 'Busca Avançada', ""),
+                  mainButton(context, 'Busca Avançada', null, null),
                 ],
               ),
             ),

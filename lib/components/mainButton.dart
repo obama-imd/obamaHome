@@ -3,16 +3,16 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/app_theme.dart';
 
-Widget mainButton(context, String content, String? urlValue, void Function()? onPressed) {
-
-    _launchURL(link) async {
-      Uri url = Uri.parse(link);
-      if (await canLaunchUrl(url)) {
-        await launchUrl(url);
-      } else {
-        throw 'Could not launch $link';
-      }
+Widget mainButton(
+    context, String content, String? urlValue, void Function()? onPressed) {
+  _launchURL(link) async {
+    Uri url = Uri.parse(link);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $link';
     }
+  }
 
   return Container(
       height: 50,
@@ -22,8 +22,10 @@ Widget mainButton(context, String content, String? urlValue, void Function()? on
           onPressed: () {
             if (urlValue != null) {
               _launchURL(urlValue);
+            } else if (onPressed != null) {
+              onPressed();
             } else {
-              onPressed;
+              print('No action defined for the button');
             }
           },
           style: const ButtonStyle(

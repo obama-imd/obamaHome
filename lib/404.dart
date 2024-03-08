@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
@@ -14,13 +15,13 @@ class ErrorPage extends StatelessWidget {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
+  // returnPage(context) {
+  //   () => Navigator.pushNamed(context, '/');
+  // }
+
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
-
-    returnPage() {
-      Navigator.pop(context);
-    };
 
     return Scaffold(
         key: scaffoldKey,
@@ -76,15 +77,37 @@ class ErrorPage extends StatelessWidget {
                   children: [
                     Padding(
                         padding: EdgeInsets.only(bottom: 30),
-                        child: ConstrainedBox( constraints: BoxConstraints(maxWidth: 750), child: Image.asset("assets/images/not-found.png"))),
+                        child: ConstrainedBox(
+                            constraints: BoxConstraints(maxWidth: 750),
+                            child: Container(
+                              color: Color(0xFF678A8A),
+                              child: Column(children: [
+                                Padding(
+                                    padding: const EdgeInsets.only(top: 40),
+                                    child: Text("404",
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.raleway(fontSize: 60, color: background))),
+                                Padding(
+                                  padding: const EdgeInsets.only(bottom: 20),
+                                  child: Text(
+                                      "Oops... Página não encontrada!",
+                                      textAlign: TextAlign.center,
+                                      style: textTheme.displayLarge),
+                                ),
+                                Image.asset("assets/images/not-found.png"),
+                              ]),
+                            ))),
                     Padding(
                         padding: EdgeInsets.symmetric(vertical: 15),
                         child: Text(
-                            "A página que você procura foi movida, removida, renomeada ou não existe!"
-                            "\nOu pode ter ocorrido uma falha na digitação do endereço;"
-                            "\nOu com sua conexão de internet;"
-                            "\nResumindo, algo não está certo.", textAlign: TextAlign.center,)),
-                    mainButton(context, "Voltar", null, returnPage()),
+                          "A página que você procura foi movida, removida, renomeada ou não existe!"
+                          "\nOu pode ter ocorrido uma falha na digitação do endereço;"
+                          "\nOu com sua conexão de internet;"
+                          "\nResumindo, algo não está certo.",
+                          textAlign: TextAlign.center,
+                        )),
+                    mainButton(context, "Voltar".toUpperCase(), null,
+                        () => Navigator.pushNamed(context, '/')),
                   ],
                 ),
               ),

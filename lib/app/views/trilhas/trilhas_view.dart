@@ -170,7 +170,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         mainButton(
                                                             context,
                                                             "Acessar Trilha",
-                                                            sectionLinks[i])
+                                                            sectionLinks[i], null)
                                                       ]),
                                                 ),
                                               ),
