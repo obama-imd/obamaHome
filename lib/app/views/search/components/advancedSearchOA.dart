@@ -81,7 +81,6 @@ class _HomePage1State extends State<OAFilters> {
                                 "Perdão, nenhum valor correspondente foi encontrado")));
                   }
                 },
-                style: textTheme.displaySmall,
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderSide: BorderSide.none,
@@ -113,7 +112,7 @@ class _HomePage1State extends State<OAFilters> {
                         });
                       },
                     ),
-                    Text("PCN", style: textTheme.displaySmall)
+                    Text("PCN", )
                   ],
                 ),
                 Padding(
@@ -134,7 +133,7 @@ class _HomePage1State extends State<OAFilters> {
                           });
                         },
                       ),
-                      Text("BNCC", style: textTheme.displaySmall)
+                      Text("BNCC", )
                     ],
                   ),
                 ),
@@ -153,7 +152,7 @@ class _HomePage1State extends State<OAFilters> {
                       value: descritor.first,
                       icon: const Icon(Icons.arrow_drop_down),
                       elevation: 5,
-                      style: textTheme.displayMedium,
+                       style: textTheme.bodyMedium,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
                         // setState(() {

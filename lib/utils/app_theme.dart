@@ -28,9 +28,6 @@ final TextTheme textTheme = TextTheme(
     headlineMedium: GoogleFonts.raleway(color: Colors.black, fontSize: 16),
     headlineSmall: GoogleFonts.raleway(
         color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
-    displayLarge: GoogleFonts.raleway(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-    displayMedium: GoogleFonts.raleway(color: Colors.grey, fontSize: 14),
-    displaySmall: GoogleFonts.raleway(color: Colors.black, fontSize: 14),
     labelLarge: GoogleFonts.raleway(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
     labelMedium: GoogleFonts.raleway(
       color: Colors.white,
@@ -43,7 +40,10 @@ final TextTheme textTheme = TextTheme(
       ],
     ),
     labelSmall: GoogleFonts.raleway(color: primary, fontSize: 14),
-    bodyLarge: GoogleFonts.raleway(fontSize: 30, color: Colors.white),
-    bodyMedium: GoogleFonts.raleway(fontSize: 20, color: Colors.white),
-    bodySmall: GoogleFonts.raleway(color: Colors.white, fontSize: 14),
+    bodyLarge: GoogleFonts.raleway(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+    bodyMedium: GoogleFonts.raleway(color: Colors.grey, fontSize: 14),
+    bodySmall: GoogleFonts.raleway(color: Colors.black, fontSize: 14),
+    displayLarge: GoogleFonts.raleway(fontSize: 30, color: Colors.white),
+    displayMedium: GoogleFonts.raleway(fontSize: 20, color: Colors.white),
+    displaySmall: GoogleFonts.raleway(color: Colors.white, fontSize: 14),
     );

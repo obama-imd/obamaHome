@@ -130,7 +130,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           const EdgeInsets.only(top: 100, left: 90, right: 15),
                       width: swidth * 0.67,
                       child: Text(
-                          "Perdão, não há nenhum post a ser exibido no momento.", style: textTheme.displaySmall)),
+                          "Perdão, não há nenhum post a ser exibido no momento.", )),
                 } else ...{
                   Container(
                     padding:
@@ -174,7 +174,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 alignment: Alignment.centerLeft,
                                 margin: const EdgeInsets.only(bottom: 20),
                                 child: Text(item['title'],
-                                    style: textTheme.displaySmall)),
+                                    )),
                             Row(children: [
                               const Icon(Icons.person,
                                   color: Colors.blue, size: 16),

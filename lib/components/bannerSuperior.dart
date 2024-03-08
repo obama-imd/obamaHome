@@ -31,11 +31,11 @@ Widget BannerSuperior(context, String pageName) {
                 )),
             Text(
               '>  ',
-              style: textTheme.displayMedium,
+               style: textTheme.bodyMedium,
             ),
             Text(
               pageName,
-              style: textTheme.bodySmall,
+               style: textTheme.displaySmall,
             ),
           ]))
         ]))

@@ -40,7 +40,7 @@ Widget blogData(BuildContext context, index, datas) {
         Row(
           children: [
             const Icon(Icons.access_time, size: 16),
-            Text(formattedDate, style: textTheme.displaySmall),
+            Text(formattedDate, ),
           ],
         ),
         Container(

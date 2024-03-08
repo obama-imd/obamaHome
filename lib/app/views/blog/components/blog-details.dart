@@ -145,7 +145,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           const EdgeInsets.only(top: 100, left: 90, right: 15),
                       width: swidth * 0.67,
                       child: Text(
-                          "Perdão, não há nenhum post a ser exibido no momento.", style: textTheme.displaySmall)),
+                          "Perdão, não há nenhum post a ser exibido no momento.", )),
                 } else ...{
                   Container(
                     padding:

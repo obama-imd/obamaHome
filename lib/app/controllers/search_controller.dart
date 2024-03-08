@@ -1,5 +1,5 @@
-Future<(List<Map<String, dynamic>>, Object?, Object?, Object?, Object?)> fetchData(
-    String searchTerm) async {
+Future<(List<Map<String, dynamic>>, Object?, Object?, Object?, Object?)>
+    fetchData(String searchTerm) async {
   // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
   final response = {
@@ -101,16 +101,21 @@ Future<(List<Map<String, dynamic>>, Object?, Object?, Object?, Object?)> fetchDa
   List<dynamic> jsonData = response['content'] as List<dynamic>;
 
   final postsFiltrados = filtrarOA(jsonData, searchTerm);
-  final posts = postsFiltrados
-      .map((item) => {
-            'id': item['id'],
-            'nome': item['nome'],
-            'url': item['url'],
-          })
-      .toList()
-      .reversed
-      .toList();
-  return (posts, totalPages, totalElements, currentPage, itemsPerPage);
+  if (postsFiltrados.isNotEmpty) {
+    final posts = postsFiltrados
+        .map((item) => {
+              'id': item['id'],
+              'nome': item['nome'],
+              'url': item['url'],
+            })
+        .toList()
+        .reversed
+        .toList();
+    return (posts, totalPages, totalElements, currentPage, itemsPerPage);
+  } else {
+    List<Map<String, dynamic>> listaVazia = [];
+    return (listaVazia, totalPages, totalElements, currentPage, itemsPerPage);
+  }
 }
 
 List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {
@@ -127,7 +132,7 @@ List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {
   }).toList();
 
   if (comparingData.isEmpty) {
-    return jsonData;
+    return <dynamic>[];
   } else {
     return comparingData;
   }

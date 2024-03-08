@@ -239,12 +239,12 @@ class Carousel extends StatelessWidget {
                   Container(
                       padding: const EdgeInsets.only(left: 40, top: 50),
                       child: Text('What Clients Say?',
-                          style: textTheme.bodyLarge)),
+                           style: textTheme.displayLarge)),
                   Container(
                       padding: const EdgeInsets.only(top: 15, left: 40),
                       child: Text(
                         'Here are testimonials from clients..',
-                        style: textTheme.bodySmall,
+                         style: textTheme.displaySmall,
                       )),
                   Container(height: 20),
                   Row(children: [
@@ -285,13 +285,13 @@ class Carousel extends StatelessWidget {
                               width: swidth - 160,
                               child: ListView(children: [
                                 Text(titleCarousel[i],
-                                    style: textTheme.bodySmall),
+                                     style: textTheme.displaySmall),
                                 Container(height: 35),
                                 Text(nameCarousel[i],
                                     style: textTheme.bodyMedium),
                                 Container(height: 20),
                                 Text(summaryCarousel[i],
-                                    style: textTheme.bodySmall)
+                                     style: textTheme.displaySmall)
                               ])),
                         ]),
                       },
@@ -328,7 +328,7 @@ class Carousel extends StatelessWidget {
                                     style: textTheme.bodyMedium),
                                 Text(
                                     'Get answers and advice from people you want ir from.',
-                                    style: textTheme.bodySmall)
+                                     style: textTheme.displaySmall)
                               ]))
                     ]),
                     Container(width: swidth * 0.25),

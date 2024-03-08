@@ -61,13 +61,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       Object?
     ) fetchedData = await fetchData(item);
 
-    setState(() {
-      searchResult = fetchedData.$1;
-      totalPages = int.parse(fetchedData.$2.toString());
-      totalElements = int.parse(fetchedData.$3.toString());
-      currentPage = int.parse(fetchedData.$4.toString());
-      itemsPerPage = int.parse(fetchedData.$5.toString());
-    });
+    totalPages = int.parse(fetchedData.$2.toString());
+    totalElements = int.parse(fetchedData.$3.toString());
+    currentPage = int.parse(fetchedData.$4.toString());
+    itemsPerPage = int.parse(fetchedData.$5.toString());
+
+    if (fetchedData.$1.isEmpty) {
+      showDialog<String>(
+          barrierColor: modalBackground,
+          context: context,
+          builder: (BuildContext context) => AlertDialog(
+              backgroundColor: onSecondary,
+              content:
+                  Text("Perdão, nenhum valor correspondente foi encontrado")));
+    } else {
+      setState(() {
+        searchResult = fetchedData.$1;
+      });
+    }
   }
 
   int startValue = 0;
@@ -77,15 +88,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   void initState() {
     super.initState();
     fetchDataAndUpdateState(widget.termSearched);
-    if (searchResult.length == totalElements) {
-      showDialog<String>(
-          barrierColor: modalBackground,
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-              backgroundColor: onSecondary,
-              content:
-                  Text("Perdão, nenhum valor correspondente foi encontrado")));
-    }
   }
 
   void updateData(newData) {
@@ -111,6 +113,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     double swidth = MediaQuery.of(context).size.width;
     PageController _pageController = PageController();
     selectedPageIndex = currentPage!;
+
+    void testFunction() {}
 
     return Scaffold(
         key: scaffoldKey,
@@ -164,7 +168,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     children: [
                       Column(children: [
                         searchResult.isEmpty
-                            ? Center(child: CircularProgressIndicator())
+                            ? Text('Nenhum resultado não encontrado')
                             : Container(
                                 padding: EdgeInsets.only(right: 30),
                                 width: (swidth * .576),

@@ -57,7 +57,7 @@ class _FooterState extends State<Footer> {
               },
               child: Text(
                 categories[index],
-                style: textTheme.displayMedium,
+                 style: textTheme.bodyMedium,
               ),
             ),
             Container(height: 5),
@@ -97,18 +97,18 @@ class _FooterState extends State<Footer> {
                       child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('OBAMA', style: textTheme.bodySmall),
+                            Text('OBAMA',  style: textTheme.displaySmall),
                             Container(height: 15),
                             Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
                             SizedBox(
                                 height: 100,
                                 child: Text('Texto',
-                                    style: textTheme.displayMedium)),
+                                     style: textTheme.bodyMedium)),
                             Container(height: 20),
                             SocialMedia(Colors.grey),
                             Container(height: 35),
-                            Text('NOSSOS SERVIÇOS', style: textTheme.bodySmall),
+                            Text('NOSSOS SERVIÇOS',  style: textTheme.displaySmall),
                             Container(height: 15),
                             Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
@@ -127,7 +127,7 @@ class _FooterState extends State<Footer> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text('LINKS ADICIONAIS',
-                                style: textTheme.bodySmall),
+                                 style: textTheme.displaySmall),
                             Container(height: 15),
                             Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
@@ -138,7 +138,7 @@ class _FooterState extends State<Footer> {
                                   additionalPaths, i),
                             },
                             Container(height: 35),
-                            Text('FALE CONOSCO', style: textTheme.bodySmall),
+                            Text('FALE CONOSCO',  style: textTheme.displaySmall),
                             Container(height: 15),
                             Container(height: 4, width: 35, color: Colors.blue),
                             Container(height: 20),
@@ -147,13 +147,12 @@ class _FooterState extends State<Footer> {
                                 width: 300,
                                 child: Text(
                                     'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
-                                    style: textTheme.displayMedium)),
+                                     style: textTheme.bodyMedium)),
                             Container(height: 20),
                             SizedBox(
                                 height: 40,
                                 width: 300,
                                 child: TextField(
-                                    style: textTheme.displaySmall,
                                     onChanged: (value) {
                                       setState(() {
                                         emailText = value;
@@ -188,7 +187,7 @@ class _FooterState extends State<Footer> {
                 color: CoresPersonalizadas.azulObama,
                 child: Center(
                     child: Text('Obama © Copyright 2022',
-                        style: textTheme.bodySmall)))
+                         style: textTheme.displaySmall)))
           ])
         ]))
       ] else ...[
@@ -204,17 +203,17 @@ class _FooterState extends State<Footer> {
             padding: const EdgeInsets.only(left: 40, top: 60),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('OBAMA THEME', style: textTheme.bodySmall),
+              Text('OBAMA THEME',  style: textTheme.displaySmall),
               Container(height: 15),
               Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
               SizedBox(
                   height: 100,
-                  child: Text('Texto', style: textTheme.displayMedium)),
+                  child: Text('Texto',  style: textTheme.bodyMedium)),
               Container(height: 20),
               SocialMedia(Colors.grey),
               Container(height: 45),
-              Text('NOSSOS SERVIÇOS', style: textTheme.bodySmall),
+              Text('NOSSOS SERVIÇOS',  style: textTheme.displaySmall),
               Container(height: 15),
               Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
@@ -222,7 +221,7 @@ class _FooterState extends State<Footer> {
                 footerList(context, serviceCategories, servicePaths, i),
               },
               Container(height: 35),
-              Text('LINKS ADICIONAIS', style: textTheme.bodySmall),
+              Text('LINKS ADICIONAIS',  style: textTheme.displaySmall),
               Container(height: 15),
               Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
@@ -230,7 +229,7 @@ class _FooterState extends State<Footer> {
                 footerList(context, additionalCategories, additionalPaths, i),
               },
               Container(height: 35),
-              Text('FALE CONOSCO', style: textTheme.bodySmall),
+              Text('FALE CONOSCO',  style: textTheme.displaySmall),
               Container(height: 15),
               Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
@@ -239,7 +238,7 @@ class _FooterState extends State<Footer> {
                   width: 300,
                   child: Text(
                       'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
-                      style: textTheme.displayMedium)),
+                       style: textTheme.bodyMedium)),
               Container(height: 20),
               Row(
                 children: [
@@ -283,7 +282,7 @@ class _FooterState extends State<Footer> {
               color: CoresPersonalizadas.azulObama,
               child: Center(
                   child: Text('Obama © Copyright 2024',
-                      style: textTheme.bodySmall)))
+                       style: textTheme.displaySmall)))
         ])
       ]
     ]);

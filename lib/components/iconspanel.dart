@@ -67,7 +67,7 @@ class iconspanel extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(item.subtexto![index],
                             textAlign: TextAlign.end,
-                            style: textTheme.displayMedium))
+                             style: textTheme.bodyMedium))
                   ]));
         });
   }

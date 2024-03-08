@@ -65,12 +65,12 @@ class _DropdownsState extends State<DropdownFormations> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Text(item.firstParagraph,
-                              style: textTheme.displaySmall),
+                              ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Text(item.secondParagraph,
-                              style: textTheme.displaySmall),
+                              ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
@@ -79,7 +79,7 @@ class _DropdownsState extends State<DropdownFormations> {
                               Text("Duração da Formação: ",
                                   style: textTheme.headlineMedium),
                               Text(item.duration,
-                                  style: textTheme.displaySmall),
+                                  ),
                             ],
                           ),
                         ),
@@ -92,7 +92,7 @@ class _DropdownsState extends State<DropdownFormations> {
                                         width: 5,
                                         color: CoresPersonalizadas.azulObama))),
                             child: Text(item.thirdParagraph,
-                                style: textTheme.displaySmall),
+                                ),
                           ),
                         }
                       ],
@@ -172,7 +172,7 @@ class _DropdownManuaisState extends State<DropdownManuais> {
                           Padding(
                             padding: const EdgeInsets.only(bottom: 10.0),
                             child: Text(item.paragraph,
-                                style: textTheme.displaySmall),
+                                ),
                           ),
                         },
                         if (item.subtitle != "") ...{
@@ -188,7 +188,7 @@ class _DropdownManuaisState extends State<DropdownManuais> {
                               padding: const EdgeInsets.only(bottom: 10.0),
                               child: Text(
                                   (i + 1).toString() + ". " + item.topics[i],
-                                  style: textTheme.displaySmall),
+                                  ),
                             ),
                           },
                         },

@@ -39,7 +39,6 @@ Widget blogFilters(
                 // print(postsFiltrados);
                 updateData(postsFiltrados);
               },
-              style: textTheme.displaySmall,
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -57,7 +56,7 @@ Widget blogFilters(
       Container(
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(bottom: 50),
-          child: Text('Texto', style: textTheme.displaySmall)),
+          child: Text('Texto', )),
       Container(
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(bottom: 20),
@@ -102,7 +101,7 @@ Widget blogFilters(
                               Padding(
                                 padding:
                                     const EdgeInsets.only(left: 2, top: 1.5),
-                                child: Text(formattedDate, style: textTheme.displaySmall),
+                                child: Text(formattedDate, ),
                               )
                             ])),
                       ]),
@@ -114,7 +113,7 @@ Widget blogFilters(
       } else ...{
         Container(
             alignment: Alignment.centerLeft,
-            child: Text('Sem posts', style: textTheme.displaySmall)),
+            child: Text('Sem posts', )),
       },
       Container(
           alignment: Alignment.centerLeft,

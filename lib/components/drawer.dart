@@ -33,7 +33,7 @@ class drawermenu extends StatelessWidget {
                     for (var i = 0; i < item.subItems.length; i++) ...{
                       ListTile(
                           title: InkWell(
-                              child: Text(item.subItems[i], style: textTheme.displaySmall),
+                              child: Text(item.subItems[i], ),
                               onTap: () {
                                 Navigator.pushNamed(context, item.path[i]);
                               }))
