@@ -67,13 +67,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     itemsPerPage = int.parse(fetchedData.$5.toString());
 
     if (fetchedData.$1.isEmpty) {
-      showDialog<String>(
-          barrierColor: modalBackground,
-          context: context,
-          builder: (BuildContext context) => AlertDialog(
-              backgroundColor: onSecondary,
-              content:
-                  Text("Perdão, nenhum valor correspondente foi encontrado")));
+      showMessage(context);
     } else {
       setState(() {
         searchResult = fetchedData.$1;
@@ -168,7 +162,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     children: [
                       Column(children: [
                         searchResult.isEmpty
-                            ? Text('Nenhum resultado não encontrado')
+                            ? Text(
+                                'Nenhum resultado foi encontrado, tente novamente')
                             : Container(
                                 padding: EdgeInsets.only(right: 30),
                                 width: (swidth * .576),
@@ -347,3 +342,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ])));
   }
 }
+
+  void showMessage(context) {
+    showDialog<String>(
+        barrierColor: modalBackground,
+        context: context,
+        builder: (BuildContext context) => AlertDialog(
+            backgroundColor: onSecondary,
+            content: Text("Perdão, nenhum valor correspondente foi encontrado",
+                style: textTheme.displayMedium)));
+  }

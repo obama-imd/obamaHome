@@ -31,7 +31,7 @@ Widget BannerSuperior(context, String pageName) {
                 )),
             Text(
               '>  ',
-               style: textTheme.bodyMedium,
+               style: textTheme.bodySmall,
             ),
             Text(
               pageName,

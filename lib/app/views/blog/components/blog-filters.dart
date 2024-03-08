@@ -44,7 +44,7 @@ Widget blogFilters(
                       borderSide: BorderSide.none,
                       borderRadius: BorderRadius.circular(100)),
                   hintText: 'Buscar',
-                  hintStyle: textTheme.displaySmall,
+                  hintStyle: textTheme.bodySmall,
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                   filled: true,
                   fillColor: const Color.fromARGB(255, 218, 216, 216),

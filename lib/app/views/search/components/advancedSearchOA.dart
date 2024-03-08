@@ -3,6 +3,7 @@ import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
+import '../searchOA_view.dart';
 
 const List<String> nivelEnsino = <String>['Todos'];
 const List<String> temaCurricular = <String>['Todos'];
@@ -72,13 +73,7 @@ class _HomePage1State extends State<OAFilters> {
                   if (postsFiltrados.$1.isNotEmpty) {
                     updateData(postsFiltrados.$1);
                   } else {
-                    showDialog<String>(
-                        barrierColor: modalBackground,
-                        context: context,
-                        builder: (BuildContext context) => AlertDialog(
-                            backgroundColor: onSecondary,
-                            content: Text(
-                                "Perdão, nenhum valor correspondente foi encontrado")));
+                    showMessage(context);
                   }
                 },
                 decoration: InputDecoration(
@@ -86,7 +81,7 @@ class _HomePage1State extends State<OAFilters> {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(100)),
                     hintText: 'Buscar',
-                    hintStyle: textTheme.displaySmall,
+                    hintStyle: textTheme.bodySmall,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                     filled: true,
                     fillColor: const Color.fromARGB(255, 218, 216, 216),
@@ -152,7 +147,7 @@ class _HomePage1State extends State<OAFilters> {
                       value: descritor.first,
                       icon: const Icon(Icons.arrow_drop_down),
                       elevation: 5,
-                       style: textTheme.bodyMedium,
+                       style: textTheme.displayMedium,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
                         // setState(() {

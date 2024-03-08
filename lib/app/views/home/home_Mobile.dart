@@ -240,7 +240,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid1Content[i],
-                                                         style: textTheme.bodyMedium))
+                                                         style: textTheme.bodySmall))
                                               ]),
                                         ),
                                       ),
@@ -355,7 +355,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid2Content[i],
-                                                         style: textTheme.bodyMedium))
+                                                         style: textTheme.bodySmall))
                                               ]),
                                         ),
                                       ),

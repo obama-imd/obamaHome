@@ -57,7 +57,7 @@ class _FooterState extends State<Footer> {
               },
               child: Text(
                 categories[index],
-                 style: textTheme.bodyMedium,
+                 style: textTheme.bodySmall,
               ),
             ),
             Container(height: 5),
@@ -104,7 +104,7 @@ class _FooterState extends State<Footer> {
                             SizedBox(
                                 height: 100,
                                 child: Text('Texto',
-                                     style: textTheme.bodyMedium)),
+                                     style: textTheme.bodySmall)),
                             Container(height: 20),
                             SocialMedia(Colors.grey),
                             Container(height: 35),
@@ -147,7 +147,7 @@ class _FooterState extends State<Footer> {
                                 width: 300,
                                 child: Text(
                                     'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
-                                     style: textTheme.bodyMedium)),
+                                     style: textTheme.bodySmall)),
                             Container(height: 20),
                             SizedBox(
                                 height: 40,
@@ -165,7 +165,7 @@ class _FooterState extends State<Footer> {
                                         border: OutlineInputBorder(
                                             borderSide: BorderSide.none),
                                         hintText: 'E-mail',
-                                        hintStyle: textTheme.displaySmall,
+                                        hintStyle: textTheme.bodySmall,
                                         contentPadding: EdgeInsets.all(5.0),
                                         filled: true,
                                         fillColor: background))),
@@ -209,7 +209,7 @@ class _FooterState extends State<Footer> {
               Container(height: 20),
               SizedBox(
                   height: 100,
-                  child: Text('Texto',  style: textTheme.bodyMedium)),
+                  child: Text('Texto',  style: textTheme.bodySmall)),
               Container(height: 20),
               SocialMedia(Colors.grey),
               Container(height: 45),
@@ -238,7 +238,7 @@ class _FooterState extends State<Footer> {
                   width: 300,
                   child: Text(
                       'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
-                       style: textTheme.bodyMedium)),
+                       style: textTheme.bodySmall)),
               Container(height: 20),
               Row(
                 children: [
@@ -258,7 +258,7 @@ class _FooterState extends State<Footer> {
                               border: OutlineInputBorder(
                                   borderSide: BorderSide.none),
                               hintText: 'E-mail',
-                              hintStyle: textTheme.displaySmall,
+                              hintStyle: textTheme.bodySmall,
                               contentPadding: EdgeInsets.all(10.0),
                               filled: true,
                               fillColor: background))),

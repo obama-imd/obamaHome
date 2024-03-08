@@ -77,7 +77,7 @@ class Carousel extends StatelessWidget {
                           padding: const EdgeInsets.only(top: 15, left: 90),
                           child: Text(
                             'Here are testimonials from clients..',
-                            style: textTheme.bodyMedium,
+                            style: textTheme.displaySmall,
                           )),
                       Container(height: 20),
                       Row(children: [
@@ -119,13 +119,13 @@ class Carousel extends StatelessWidget {
                                   width: 500,
                                   child: ListView(children: [
                                     Text(titleCarousel[i],
-                                        style: textTheme.bodyMedium),
+                                        style: textTheme.displayMedium),
                                     Container(height: 35),
                                     Text(nameCarousel[i],
-                                        style: textTheme.bodyMedium),
+                                        style: textTheme.displaySmall),
                                     Container(height: 20),
                                     Text(summaryCarousel[i],
-                                        style: textTheme.bodyMedium)
+                                        style: textTheme.displaySmall)
                                   ])),
                             ]),
                           },
@@ -159,7 +159,7 @@ class Carousel extends StatelessWidget {
                                               style: textTheme.labelLarge),
                                           Text(
                                               'Get answers and advice from people you want it from.',
-                                              style: textTheme.bodyMedium)
+                                              style: textTheme.displayMedium)
                                         ])),
                                 Spacer(),
                                 Container(
@@ -285,10 +285,10 @@ class Carousel extends StatelessWidget {
                               width: swidth - 160,
                               child: ListView(children: [
                                 Text(titleCarousel[i],
-                                     style: textTheme.displaySmall),
+                                     style: textTheme.displayMedium),
                                 Container(height: 35),
                                 Text(nameCarousel[i],
-                                    style: textTheme.bodyMedium),
+                                    style: textTheme.displaySmall),
                                 Container(height: 20),
                                 Text(summaryCarousel[i],
                                      style: textTheme.displaySmall)
@@ -325,10 +325,10 @@ class Carousel extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text('REQUEST A FREE QUOTE',
-                                    style: textTheme.bodyMedium),
+                                    style: textTheme.bodySmall),
                                 Text(
                                     'Get answers and advice from people you want ir from.',
-                                     style: textTheme.displaySmall)
+                                     style: textTheme.bodySmall)
                               ]))
                     ]),
                     Container(width: swidth * 0.25),

@@ -222,7 +222,7 @@ class _NavMenuState extends State<NavMenu> {
                           Padding(
                             padding: const EdgeInsets.only(left: 20, top: 25),
                             child: Text(
-                                "Consulte os OA disponíveis no nosso catálogo"),
+                                "Consulte os OA disponíveis no nosso catálogo", style: textTheme.displaySmall),
                           ),
                         ],
                       ),
