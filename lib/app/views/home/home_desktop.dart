@@ -222,10 +222,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                                 .only(top: 20),
                                                         child: Text(
                                                             grid1Content[i],
-                                                            style: Theme.of(
-                                                                    context)
-                                                                .textTheme
-                                                                .displayMedium!))
+                                                            style: textTheme.bodySmall))
                                                   ]),
                                             ),
                                           ),
@@ -347,10 +344,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                               top: 20),
                                                       child: Text(
                                                           grid2Content[i],
-                                                          style: Theme.of(
-                                                                  context)
-                                                              .textTheme
-                                                              .displayMedium!))
+                                                          style: textTheme.bodySmall))
                                                 ]),
                                           ),
                                         ),

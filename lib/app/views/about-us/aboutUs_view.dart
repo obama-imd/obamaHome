@@ -197,7 +197,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         child: Text(
                                                             grid1Content[i],
                                                             style: textTheme
-                                                                .displayMedium))
+                                                                .bodySmall))
                                                   ]),
                                             ),
                                           ),
