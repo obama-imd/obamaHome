@@ -234,13 +234,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid1Title[i],
-                                                        style:textTheme.titleSmall)),
+                                                        style: textTheme
+                                                            .titleSmall)),
                                                 Container(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid1Content[i],
-                                                         style: textTheme.bodySmall))
+                                                        style: textTheme
+                                                            .bodySmall))
                                               ]),
                                         ),
                                       ),
@@ -349,13 +351,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid2Title[i],
-                                                        style:textTheme.titleSmall)),
+                                                        style: textTheme
+                                                            .titleSmall)),
                                                 Container(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             top: 20),
                                                     child: Text(grid2Content[i],
-                                                         style: textTheme.bodySmall))
+                                                        style: textTheme
+                                                            .bodySmall))
                                               ]),
                                         ),
                                       ),
@@ -381,17 +385,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 60),
-                      child: ResponsiveGridRow(
-                        children: [
-                          for (int i = 0; i < widget.posts.length; i++) ...{
-                            ResponsiveGridCol(
-                                lg: 4,
-                                md: 6,
-                                xs: 12,
-                                child: blogData(context, i, widget.posts)),
-                          }
-                        ],
-                      ),
+                      child: ResponsiveGridList(
+                          scroll: false,
+                          physics: NeverScrollableScrollPhysics(),
+                          desiredItemWidth: swidth * 9,
+                          minSpacing: swidth * .016,
+                          children: widget.posts.map((post) {
+                            return Container(
+                              alignment: Alignment(0, 0),
+                              child: blogData(context, post),
+                            );
+                          }).toList()
+                          // for (int i = 0; i < widget.posts.length; i++) ...{
+                          //   blogData(context, i, widget.posts),
+                          // }
+                          ),
                     ),
                   ],
                 ),

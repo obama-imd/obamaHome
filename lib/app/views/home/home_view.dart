@@ -6,13 +6,15 @@ import 'package:obamahome/app/views/home/home_mobile1.dart';
 import 'package:obamahome/app/views/home/home_tablet.dart';
 import 'package:obamahome/app/views/home/responsivo.dart';
 
+import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
 
-Widget blogData(BuildContext context, index, datas) {
-  double imageWidth = MediaQuery.of(context).size.width * .3;
+Widget blogData(BuildContext context, datas) {
+  double imageWidth = (MediaQuery.of(context).size.width * .3);
   double imageHeight = 185;
 
-  final item = datas[index];
+  // final item = datas[index];
+  final item = datas;
 
   String extractImagePath(String content) {
     final document = parse(content);
@@ -28,30 +30,29 @@ Widget blogData(BuildContext context, index, datas) {
   String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
 
   // String sumValue = extractSummaryPath(item['summary']);
-  return Padding(
-    padding: const EdgeInsets.all(15),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Image.network(imagePath,
-            height: imageHeight, width: imageWidth, fit: BoxFit.cover),
-        // Text(imagePath),
-        Row(
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Image.network(imagePath,
+          height: imageHeight, width: imageWidth, fit: BoxFit.cover),
+      // Text(imagePath),
+      Padding(
+        padding: paddingValues("blogPostDate", null),
+        child: Row(
           children: [
             const Icon(Icons.access_time, size: 16),
-            Text(formattedDate, ),
+            Text(formattedDate),
           ],
         ),
-        Container(
-          margin: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-          child: Text(item['title'],
-              style: Theme.of(context).textTheme.titleSmall!),
-        ),
-        Text(item['text'],
-            style: Theme.of(context).textTheme.displaySmall!, maxLines: 4),
-        // Text(sumValue),
-      ],
-    ),
+      ),
+      Container(
+        margin: paddingValues("blogHomeTitle", null),
+        child: Text(item['title'],
+            style: textTheme.titleSmall!),
+      ),
+      Text(item['text'], maxLines: 4),
+      // Text(sumValue),
+    ],
   );
 }
 

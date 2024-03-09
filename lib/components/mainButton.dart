@@ -28,9 +28,5 @@ Widget mainButton(
               print('No action defined for the button');
             }
           },
-          style: const ButtonStyle(
-            backgroundColor: MaterialStatePropertyAll(primary),
-            overlayColor: MaterialStatePropertyAll(Colors.lightBlue),
-          ),
           child: Text(content, style: textTheme.labelMedium)));
 }

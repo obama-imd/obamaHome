@@ -42,7 +42,7 @@ class _FooterState extends State<Footer> {
     "> News",
     "> Contact us",
   ];
-  List<String> additionalPaths = ['/aboutus', '', '', '', ''];
+  List<String> additionalPaths = ['/sobre', '', '', '', ''];
 
   Widget footerList(BuildContext context, List<String> categories,
       List<String> links, int index) {
@@ -173,11 +173,11 @@ class _FooterState extends State<Footer> {
                                 height: 40,
                                 width: 40,
                                 color: CoresPersonalizadas.azulObama,
-                                child: TextButton(
+                                child: IconButton(
                                     onPressed: () {
                                       launchUrl(emailLaunchUri);
                                     },
-                                    child: const Icon(Icons.mail,
+                                    icon: const Icon(Icons.mail,
                                         color: background, size: 16.0)))
                           ]))
                 ])),
@@ -266,11 +266,11 @@ class _FooterState extends State<Footer> {
                       height: 40,
                       width: 40,
                       color: CoresPersonalizadas.azulObama,
-                      child: TextButton(
+                      child: IconButton(
                           onPressed: () {
                             launchUrl(emailLaunchUri);
                           },
-                          child: const Icon(Icons.mail,
+                          icon: const Icon(Icons.mail,
                               color: background, size: 16.0))),
                 ],
               ),

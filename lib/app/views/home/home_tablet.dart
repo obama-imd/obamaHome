@@ -35,12 +35,11 @@ class HomeTablet extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: MyStatefulWidget(
-        scrollController: scrollController,
-        postAvailable: postAvailable,
-        objectAvailable: objectAvailable,
-        posts: posts,
-        objects: objects
-      ),
+          scrollController: scrollController,
+          postAvailable: postAvailable,
+          objectAvailable: objectAvailable,
+          posts: posts,
+          objects: objects),
     );
   }
 }
@@ -94,9 +93,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(
-                              swidth: swidth,
-                              heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
                 SizedBox(
@@ -106,8 +103,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           TextButton(
-                              child:
-                                  const Icon(Icons.menu, color: onPrimary),
+                              child: const Icon(Icons.menu, color: onPrimary),
                               onPressed: () =>
                                   scaffoldKey.currentState?.openDrawer()),
                           Container(
@@ -282,16 +278,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                           const EdgeInsets.only(
                                                               top: 20),
                                                       child: Text(grid1Title[i],
-                                                          style:
-                                                              textTheme.titleSmall)),
+                                                          style: textTheme
+                                                              .titleSmall)),
                                                   Container(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               top: 20),
                                                       child: Text(
                                                           grid1Content[i],
-                                                          style:
-                                                              textTheme.displayMedium))
+                                                          style: textTheme
+                                                              .displayMedium))
                                                 ]),
                                           ),
                                         ),
@@ -402,16 +398,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                           const EdgeInsets.only(
                                                               top: 20),
                                                       child: Text(grid2Title[i],
-                                                          style:
-                                                              textTheme.titleSmall)),
+                                                          style: textTheme
+                                                              .titleSmall)),
                                                   Container(
                                                       padding:
                                                           const EdgeInsets.only(
                                                               top: 20),
                                                       child: Text(
                                                           grid2Content[i],
-                                                          style:
-                                                              textTheme.displayMedium))
+                                                          style: textTheme
+                                                              .displayMedium))
                                                 ]),
                                           ),
                                         ),
@@ -437,17 +433,21 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 60),
-                        child: ResponsiveGridRow(
-                          children: [
-                            for (int i = 0; i < widget.posts.length; i++) ...{
-                              ResponsiveGridCol(
-                                  lg: 4,
-                                  md: 6,
-                                  xs: 12,
-                                  child: blogData(context, i, widget.posts)),
-                            }
-                          ],
-                        ),
+                        child: ResponsiveGridList(
+                            scroll: false,
+                            physics: NeverScrollableScrollPhysics(),
+                            desiredItemWidth: swidth * .45,
+                            minSpacing: swidth * .016,
+                            children: widget.posts.map((post) {
+                              return Container(
+                                alignment: Alignment(0, 0),
+                                child: blogData(context, post),
+                              );
+                            }).toList()
+                            // for (int i = 0; i < widget.posts.length; i++) ...{
+                            //   blogData(context, i, widget.posts),
+                            // }
+                            ),
                       ),
                     ],
                   ),

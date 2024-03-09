@@ -28,7 +28,7 @@ final List<ItemValue> itemValues = [
   ),
   ItemValue(
     name: "SOBRE",
-    path: ['/aboutus'],
+    path: ['/sobre'],
     subItems: ["Sobre"],
     itemHover: false,
     subItemHover: List.generate(1, (index) => false),
@@ -94,7 +94,7 @@ class _NavMenuState extends State<NavMenu> {
     return MenuBar(children: [
       for (int i = 0; i < itemValues.length; i++) ...{
         Padding(
-            padding: EdgeInsets.only(left: 10),
+            padding: EdgeInsets.only(left: 18),
             child: SubmenuButton(
               onHover: (value) {
                 setState(() {
@@ -164,11 +164,14 @@ class _NavMenuState extends State<NavMenu> {
               isHovered = value;
             });
           },
-          child: Container(
-              width: 40,
-              height: 40,
-              child: Icon(CupertinoIcons.search,
-                  size: 20, color: isHovered ? primary : onPrimary)),
+          style: ButtonStyle(
+            fixedSize: MaterialStatePropertyAll(Size(40, 40)),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.only(left: 18),
+            child: Icon(CupertinoIcons.search,
+                size: 20, color: isHovered ? primary : onPrimary),
+          ),
           onPressed: () => showDialog<String>(
                 barrierColor: modalBackground,
                 context: context,
