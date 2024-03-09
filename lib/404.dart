@@ -15,10 +15,6 @@ class ErrorPage extends StatelessWidget {
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  // returnPage(context) {
-  //   () => Navigator.pushNamed(context, '/');
-  // }
-
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;

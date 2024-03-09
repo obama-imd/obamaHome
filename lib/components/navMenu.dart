@@ -101,6 +101,9 @@ class _NavMenuState extends State<NavMenu> {
                   itemValues[i].itemHover = value;
                 });
               },
+              menuStyle: MenuStyle(
+                backgroundColor: MaterialStateProperty.all(background),
+              ),
               style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(background),
                 foregroundColor: MaterialStateProperty.all(
@@ -114,32 +117,41 @@ class _NavMenuState extends State<NavMenu> {
               menuChildren: <Widget>[
                 if (i >= 0 && i < itemValues.length) ...{
                   for (var j = 0; j < itemValues[i].subItems.length; j++) ...{
-                    MenuItemButton(
-                      onHover: (value) {
-                        setState(() {
-                          itemValues[i].itemHover = value;
-                          itemValues[i].subItemHover[j] = value;
-                        });
-                      },
-                      style: ButtonStyle(
-                        padding: MaterialStatePropertyAll(
-                            EdgeInsets.symmetric(horizontal: 20)),
-                        minimumSize: MaterialStatePropertyAll(Size(250, 44)),
-                        backgroundColor: MaterialStateProperty.all(background),
-                        overlayColor: MaterialStateProperty.all(primary),
-                        foregroundColor: MaterialStateProperty.all(
-                            itemValues[i].subItemHover[j]
-                                ? background
-                                : onPrimary),
-                        textStyle:
-                            MaterialStateProperty.all(textTheme.displaySmall),
+                    Container(
+                      decoration: BoxDecoration(
+                          // color: background,
+                          border: j == 0
+                              ? Border(
+                                  top: BorderSide(color: surface, width: 3))
+                              : Border(top: BorderSide.none)),
+                      child: MenuItemButton(
+                        onHover: (value) {
+                          setState(() {
+                            itemValues[i].itemHover = value;
+                            itemValues[i].subItemHover[j] = value;
+                          });
+                        },
+                        style: ButtonStyle(
+                          padding: MaterialStatePropertyAll(
+                              EdgeInsets.symmetric(horizontal: 20)),
+                          minimumSize: MaterialStatePropertyAll(Size(250, 44)),
+                          backgroundColor:
+                              MaterialStateProperty.all(background),
+                          overlayColor: MaterialStateProperty.all(primary),
+                          foregroundColor: MaterialStateProperty.all(
+                              itemValues[i].subItemHover[j]
+                                  ? background
+                                  : onPrimary),
+                          textStyle:
+                              MaterialStateProperty.all(textTheme.displaySmall),
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamed(context, itemValues[i].path[j],
+                              arguments: '');
+                        },
+                        child: MenuAcceleratorLabel(itemValues[i].subItems[j]),
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, itemValues[i].path[j],
-                            arguments: '');
-                      },
-                      child: MenuAcceleratorLabel(itemValues[i].subItems[j]),
-                    ),
+                    )
                   }
                 }
               ],
@@ -222,7 +234,8 @@ class _NavMenuState extends State<NavMenu> {
                           Padding(
                             padding: const EdgeInsets.only(left: 20, top: 25),
                             child: Text(
-                                "Consulte os OA disponíveis no nosso catálogo", style: textTheme.displaySmall),
+                                "Consulte os OA disponíveis no nosso catálogo",
+                                style: textTheme.displaySmall),
                           ),
                         ],
                       ),

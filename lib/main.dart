@@ -76,15 +76,11 @@ class MyApp extends StatelessWidget {
           }
 
           final routeName = settings.name!;
-          // final args = settings.arguments;
 
           WidgetBuilder builder;
           switch (routeName) {
             case '/':
               builder = (context) => HomeView();
-              break;
-            case '/aboutus':
-              builder = (context) => const AboutUsPage();
               break;
             default:
               builder = (context) => ErrorPage();
