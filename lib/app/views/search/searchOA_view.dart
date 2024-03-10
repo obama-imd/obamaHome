@@ -132,7 +132,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
-                menuMobile(context, scaffoldKey),
+                menuMobile(context, scaffoldKey, swidth),
               ],
               BannerSuperior(context, 'Objetos de Aprendizagem'),
               if (MediaQuery.of(context).size.width > 1000) ...[

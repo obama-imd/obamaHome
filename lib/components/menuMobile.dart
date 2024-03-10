@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../utils/app_theme.dart';
+import 'modalSearch.dart';
 
-Widget menuMobile(context, scaffoldKey) {
+menuMobile(context, scaffoldKey, swidth) {
   return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: 125,
@@ -15,8 +16,12 @@ Widget menuMobile(context, scaffoldKey) {
             margin: const EdgeInsets.only(right: 15, left: 15),
             child:
                 Image.asset('assets/images/logo.png', fit: BoxFit.fitHeight)),
-        MenuItemButton(
-            onPressed: () {},
-            child: const Icon(Icons.search, color: onPrimary, size: 25))
+        SizedBox(
+          width: 36, height: 40,
+          child: SearchDialog(
+              swidth: swidth,
+              searchText: '',
+              isHovered: false),
+        ),
       ]));
 }

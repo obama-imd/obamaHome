@@ -23,14 +23,14 @@ Widget BannerSuperior(context, String pageName) {
           ),
           Container(
               child: Row(children: [
-            TextButton(
-                onPressed: () {},
+            InkWell(
+                onTap: () {},
                 child: Text(
                   'Home',
                   style: textTheme.labelSmall,
                 )),
             Text(
-              '>  ',
+              '  >  ',
                style: textTheme.bodySmall,
             ),
             Text(

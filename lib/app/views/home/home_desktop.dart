@@ -97,7 +97,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       ]),
                 ),
               ] else ...[
-                menuMobile(context, scaffoldKey),
+                menuMobile(context, scaffoldKey, swidth),
               ],
 
               // box com gif da foto tela inicial

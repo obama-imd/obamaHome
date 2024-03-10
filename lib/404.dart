@@ -44,7 +44,7 @@ class ErrorPage extends StatelessWidget {
                           NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
-                menuMobile(context, scaffoldKey),
+                menuMobile(context, scaffoldKey, swidth),
               ],
               BannerSuperior(context, 'Erro 404'),
               Padding(

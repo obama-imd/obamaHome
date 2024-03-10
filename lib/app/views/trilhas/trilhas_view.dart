@@ -74,7 +74,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                 heightBtn: 50),
                           ])),
                 ] else ...[
-                 menuMobile(context, scaffoldKey),
+                 menuMobile(context, scaffoldKey, swidth),
                 ],
                 BannerSuperior(context, 'Trilhas'),
                 // Padding(
