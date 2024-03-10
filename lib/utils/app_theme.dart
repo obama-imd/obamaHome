@@ -21,7 +21,7 @@ const Color onError = Colors.redAccent;
 const Color background = Colors.white;
 const Color onBackground = Colors.white;
 const Color surface = Color.fromRGBO(23, 160, 242, 1);
-const Color modalBackground = Color.fromRGBO(23, 119, 242, .8);
+const Color modalBackground = Color.fromRGBO(23, 119, 242, .9);
 const Color onSurface = Colors.black;
 
 const LinearGradient gradientColor = LinearGradient(
