@@ -247,7 +247,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
                 // if (MediaQuery.of(context).size.width > 1000) ...[
                 Padding(
-                  padding: paddingValues("sideMainPadding", swidth),
+                  padding: paddingValues("sideHomeCards", swidth),
                   child: ResponsiveGridRow(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -256,9 +256,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           lg: 3,
                           md: 6,
                           xs: 12,
-                          child: OurProductItem(
-                            title: lista['nome'],
-                            image: lista['url'],
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 30),
+                            child: OurProductItem(
+                              title: lista['nome'],
+                              image: lista['url'],
+                            ),
                           ),
                         ),
                       }
@@ -267,7 +270,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
               },
               Padding(
-                padding: paddingValues("sectionPadding", null),
+                padding: paddingValues("carouselTop", null),
                 child: Container(
                   color: CoresPersonalizadas.azulObama,
                   child: ResponsiveGridRow(children: [
@@ -337,9 +340,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                                     top: 20),
                                                             child: Text(
                                                                 grid2Title[i],
-                                                                style: Theme.of(
-                                                                        context)
-                                                                    .textTheme
+                                                                style: textTheme
                                                                     .titleSmall!)),
                                                         Container(
                                                             padding:
@@ -372,7 +373,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsets.symmetric(horizontal: swidth*.016),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: swidth * .016),
                               child: SectionTitle('Últimos posts do blog', '',
                                   CrossAxisAlignment.start),
                             ),
@@ -380,10 +382,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         ),
                       ),
                       ResponsiveGridList(
-                        physics: NeverScrollableScrollPhysics(),
-                        scroll: false,
-                          desiredItemWidth: swidth*.25,
-                          minSpacing: swidth*.016,
+                          physics: NeverScrollableScrollPhysics(),
+                          scroll: false,
+                          desiredItemWidth: swidth * .25,
+                          minSpacing: swidth * .016,
                           children: widget.posts.map((post) {
                             return Container(
                               alignment: Alignment(0, 0),

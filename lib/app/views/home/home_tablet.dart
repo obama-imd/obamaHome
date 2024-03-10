@@ -1,4 +1,3 @@
-import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:obamahome/components/navMenu.dart';
@@ -114,20 +113,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                   fit: BoxFit.fitHeight)),
 
                           // barra de pesquisa
-                          AnimSearchBar(
-                            helpText: "Search",
-                            autoFocus: true,
-                            width: 400,
-                            textController: _searchController,
-                            onSuffixTap: () {
-                              setState(() {
-                                _searchController.clear();
-                              });
-                            },
-                            onSubmitted: (String value) {
-                              debugPrint('onFieldSubmitted value $value');
-                            },
-                          ),
+                          
                         ]))
               ],
 

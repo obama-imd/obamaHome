@@ -144,6 +144,8 @@ EdgeInsets paddingValues(String paddingName, double? swidth) {
       return EdgeInsets.symmetric(horizontal: swidth! *.068);
     case "sideHomePosts":
       return EdgeInsets.symmetric(horizontal: swidth! *.052);
+    case "sideHomeCards":
+      return EdgeInsets.symmetric(horizontal: (swidth! *.068) - 30);
     case "sectionPadding":
       return EdgeInsets.only(top: 120, bottom: 115);
     case "logo":

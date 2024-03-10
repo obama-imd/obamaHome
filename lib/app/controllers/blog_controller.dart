@@ -1,7 +1,10 @@
 import 'dart:convert';
 
-import 'package:html/parser.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
+
+import '../models/blog_models.dart';
 
 Future<List<dynamic>> fetchData(String searchTerm) async {
   final response = await http.get(Uri.parse('http://localhost:3000/dados'));
@@ -44,16 +47,25 @@ List<dynamic> filtrarPosts(List<dynamic> jsonData, String searchTerm) {
   }).toList();
 }
 
-String extractImagePath(String content) {
-  final document = parse(content);
-  final imgElement = document.getElementsByTagName('img').last;
-  final result = imgElement.attributes['src'];
-  return result!;
-}
+class BlogController {
+  static void updateBlogContent(BuildContext context) async {
+    final viewModel = Provider.of<BlogViewModel>(context, listen: false);
 
-String extractSummaryPath(String summary) {
-  final document = parse(summary);
-  final sumElement = document.getElementsByTagName('p').last;
-  final sumValue = sumElement.text;
-  return sumValue;
+    final posts = await fetchData('');
+    final filteredPosts = filtrarPosts(posts, '');
+    final updatedPosts = filteredPosts
+        .map((postData) => BlogModel(
+              title: postData['title'],
+              text: postData['text'],
+              summary: extractSummaryPath(postData['summary']),
+              content: postData['content'],
+              publishedDate: convertDate(postData['published_date']),
+              imagePath: extractImagePath(postData['content']),
+            ))
+        .toList();
+
+    print (updatedPosts);
+
+    viewModel.updateContent(updatedPosts);
+  }
 }
