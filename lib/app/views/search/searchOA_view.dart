@@ -8,6 +8,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
 import '../../../components/footer.dart';
+import '../../../components/menuMobile.dart';
 import '../../../components/navMenu.dart';
 import '../../../components/topbar.dart';
 import '../home/components/our_product_item.dart';
@@ -131,23 +132,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
-                SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 125,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              child: const Icon(Icons.menu, color: onPrimary),
-                              onPressed: () =>
-                                  scaffoldKey.currentState?.openDrawer()),
-                          Container(
-                              width: 280,
-                              padding:
-                                  const EdgeInsets.only(right: 30, left: 30),
-                              child: Image.asset('assets/images/logo.png',
-                                  fit: BoxFit.fitHeight)),
-                        ]))
+                menuMobile(context, scaffoldKey),
               ],
               BannerSuperior(context, 'Objetos de Aprendizagem'),
               if (MediaQuery.of(context).size.width > 1000) ...[

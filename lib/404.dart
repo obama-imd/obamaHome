@@ -9,6 +9,7 @@ import '../../../components/navMenu.dart';
 import '../../../components/topbar.dart';
 import '../../../utils/app_theme.dart';
 import 'components/mainButton.dart';
+import 'components/menuMobile.dart';
 
 class ErrorPage extends StatelessWidget {
   ErrorPage({super.key});
@@ -43,27 +44,7 @@ class ErrorPage extends StatelessWidget {
                           NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
-                SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 125,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              child: const Icon(Icons.menu, color: onPrimary),
-                              onPressed: () =>
-                                  scaffoldKey.currentState?.openDrawer()),
-                          Container(
-                              width: 280,
-                              padding:
-                                  const EdgeInsets.only(right: 30, left: 30),
-                              child: Image.asset('assets/images/logo.png',
-                                  fit: BoxFit.fitHeight)),
-                          TextButton(
-                              onPressed: () {},
-                              child: const Icon(Icons.search,
-                                  color: onPrimary, size: 25))
-                        ]))
+                menuMobile(context, scaffoldKey),
               ],
               BannerSuperior(context, 'Erro 404'),
               Padding(

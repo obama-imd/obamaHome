@@ -9,6 +9,7 @@ import '../../../../../components/carousel.dart';
 import '../../../../../components/footer.dart';
 import '../../../../../components/topbar.dart';
 import '../../../../components/bannerSuperior.dart';
+import '../../../../components/menuMobile.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
@@ -114,28 +115,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               heightBtn: 50),
                         ])),
               ] else ...[
-                SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 125,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              child:
-                                  const Icon(Icons.menu, color: onPrimary),
-                              onPressed: () =>
-                                  scaffoldKey.currentState?.openDrawer()),
-                          Container(
-                              width: 280,
-                              margin:
-                                  const EdgeInsets.only(right: 15, left: 15),
-                              child: Image.asset('assets/images/logo.png',
-                                  fit: BoxFit.fitHeight)),
-                          TextButton(
-                              onPressed: () {},
-                              child: const Icon(Icons.search,
-                                  color: onPrimary, size: 25))
-                        ]))
+                menuMobile(context, scaffoldKey),
               ],
               BannerSuperior(context, 'Publicações'),
               Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
