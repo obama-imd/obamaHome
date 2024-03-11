@@ -19,7 +19,7 @@ class TopBar extends StatelessWidget {
       if (swidth > 1150) ...[
         Container(
             color: CoresPersonalizadas.azulObama,
-            height: 45.0,
+            height: 44.0,
             width: swidth,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -141,39 +141,68 @@ class TopBar extends StatelessWidget {
         Container(
           color: CoresPersonalizadas.azulObama,
           width: swidth,
-          height: 110,
+          height: 130,
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SocialMedia(background),
-                  ],
+                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Container(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: const Icon(FontAwesomeIcons.house,
+                          color: background, size: 13)),
+                  Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
+                      style:
+                          GoogleFonts.raleway(color: background, fontSize: 13)),
+                ]),
+                Container(
+                    child: TextButton(
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(
+                              CoresPersonalizadas.azulObama),
+                        ),
+                        onPressed: () {
+                          launchUrl(emailLaunchUri);
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.min, children: [
+                            Container(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: const Icon(FontAwesomeIcons.envelope,
+                                    color: background, size: 16)),
+                            Text('obama@imd.ufrn.br',
+                                style: GoogleFonts.raleway(
+                                    color: background, fontSize: 13)),
+                          ]),
+                        ))),
+                Padding(
+                  padding: const EdgeInsets.only(top: 13),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      // SocialMedia(background),
+                      Material(
+                        color: background,
+                        textStyle: textTheme.headlineMedium,
+                        child: InkWell(
+                            onTap: () {},
+                            child: SizedBox(
+                              width: 190,
+                              height: 45,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('Acesse',
+                                      style: textTheme.headlineSmall,
+                                      textAlign: TextAlign.center)
+                                ],
+                              ),
+                            )),
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(
-                    height: 35,
-                    width: 210,
-                    child: Material(
-                      color: background,
-                      textStyle: textTheme.headlineMedium,
-                      child: InkWell(
-                          onTap: () {},
-                          child: SizedBox(
-                            width: swidth * 0.154,
-                            height: 45,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('Acesse',
-                                    style: textTheme.headlineSmall,
-                                    textAlign: TextAlign.center)
-                              ],
-                            ),
-                          )),
-                    ))
               ]),
         )
       ],

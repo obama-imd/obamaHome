@@ -37,7 +37,7 @@ Widget blogData(BuildContext context, datas) {
           height: imageHeight, width: imageWidth, fit: BoxFit.cover),
       // Text(imagePath),
       Padding(
-        padding: paddingValues("blogPostDate", null),
+        padding: paddingValues("blogPostDate", context),
         child: Row(
           children: [
             const Icon(Icons.access_time, size: 16),
@@ -46,7 +46,7 @@ Widget blogData(BuildContext context, datas) {
         ),
       ),
       Container(
-        margin: paddingValues("blogHomeTitle", null),
+        margin: paddingValues("blogHomeTitle", context),
         child: Text(item['title'],
             style: textTheme.titleSmall!),
       ),

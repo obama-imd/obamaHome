@@ -8,7 +8,7 @@ class mainContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(margin: paddingValues("sectionPadding", null), child: Column(
+    return Container(margin: paddingValues("sectionPadding", context), child: Column(
       children: [
         content
       ],

@@ -107,7 +107,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                              width: 250,
+                              width: 200,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                           NavMenu(

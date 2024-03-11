@@ -16,6 +16,7 @@ const Color primary = Color.fromRGBO(23, 119, 242, 1);
 const Color onPrimary = Colors.black;
 const Color secondary = Colors.grey;
 const Color onSecondary = Colors.transparent;
+const Color terciary = Color.fromARGB(255, 231, 228, 228);
 const Color error = Colors.red;
 const Color onError = Colors.redAccent;
 const Color background = Colors.white;
@@ -138,20 +139,31 @@ final MaterialApp AppMaterial = MaterialApp(
   navigatorKey: GlobalKey(),
 );
 
-EdgeInsets paddingValues(String paddingName, double? swidth) {
+EdgeInsets paddingValues(String paddingName, context) {
+
+  double swidth = MediaQuery.of(context).size.width;
+
   switch (paddingName) {
     case "sideMainPadding":
-      return EdgeInsets.symmetric(horizontal: swidth! *.068);
+      return EdgeInsets.symmetric(horizontal: swidth *.068);
     case "sideHomePosts":
-      return EdgeInsets.symmetric(horizontal: swidth! *.052);
+      return EdgeInsets.symmetric(horizontal: swidth *.052);
     case "sideHomeCards":
-      return EdgeInsets.symmetric(horizontal: (swidth! *.068) - 30);
+      return EdgeInsets.symmetric(horizontal: (swidth*.068) - 30);
     case "sectionPadding":
-      return EdgeInsets.only(top: 120, bottom: 115);
+      if (swidth < 700 ) {
+        return EdgeInsets.only(top: 75, bottom: 65);
+      } else {
+        return EdgeInsets.only(top: 120, bottom: 115);
+      }
     case "logo":
       return EdgeInsets.only(top: 19, bottom: 19);
     case "mainTitle":
-      return EdgeInsets.only(top: 120, bottom: 65);
+      if (swidth < 700 ) {
+        return EdgeInsets.only(top: 75, bottom: 65);
+      } else {
+        return EdgeInsets.only(top: 120, bottom: 65);
+      }
     case "mainTitleBottom":
       return EdgeInsets.only(bottom: 65);
     case "menuItems":
@@ -175,7 +187,11 @@ EdgeInsets paddingValues(String paddingName, double? swidth) {
     case "sectionSubTitle":
       return EdgeInsets.only(top: 15, bottom: 10);
     case "carouselTop":
-      return EdgeInsets.only(top: 120);
+      if (swidth < 700 ) {
+        return EdgeInsets.only(top: 75);
+      } else {
+        return EdgeInsets.only(top: 120);
+      }
     case "sliderSubtitle":
       return EdgeInsets.only(top: 30, bottom: 20);
     case "partners":

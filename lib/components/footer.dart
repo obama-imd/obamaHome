@@ -90,7 +90,7 @@ class _FooterState extends State<Footer> {
                 height: 650,
                 width: widget.swidth * 0.7,
                 color: onPrimary,
-                padding: paddingValues("footer", null),
+                padding: paddingValues("footer", context),
                 child: ResponsiveGridRow(children: [
                   ResponsiveGridCol(
                     lg: 6,

@@ -12,7 +12,7 @@ menuMobile(context, scaffoldKey, swidth) {
             child: const Icon(Icons.menu, color: onPrimary),
             onPressed: () => scaffoldKey.currentState?.openDrawer()),
         Container(
-            width: 240,
+            width: 190,
             margin: const EdgeInsets.only(right: 15, left: 15),
             child:
                 Image.asset('assets/images/logo.png', fit: BoxFit.fitHeight)),

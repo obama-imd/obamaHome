@@ -82,12 +82,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
               if (swidth >= 1360) ...[
                 Padding(
-                  padding: paddingValues("sideMainPadding", swidth),
+                  padding: paddingValues("sideMainPadding", context),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: paddingValues("logo", null),
+                          padding: paddingValues("logo", context),
                           child: SizedBox(
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
@@ -112,14 +112,14 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Container(
                 height: 320,
                 width: MediaQuery.of(context).size.width,
-                padding: paddingValues("mainTitle", null),
+                padding: paddingValues("mainTitle", context),
                 child: SectionTitle(
                     'Plataforma OBAMA',
                     'Objetos de Aprendizagem para Matemática',
                     CrossAxisAlignment.center),
               ),
               Container(
-                  margin: paddingValues("sideMainPadding", swidth),
+                  margin: paddingValues("sideMainPadding", context),
                   child: Expanded(
                     child: ResponsiveGridRow(
                       children: [
@@ -139,7 +139,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ),
                   )),
               Container(
-                margin: paddingValues("sectionPadding", null),
+                margin: paddingValues("sectionPadding", context),
                 color: CoresPersonalizadas.azulObama,
                 child: ResponsiveGridRow(children: [
                   ResponsiveGridCol(
@@ -147,9 +147,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     sm: 12,
                     child: Container(
                         color: const Color.fromARGB(255, 241, 238, 238),
-                        padding: paddingValues("sideMainPadding", swidth),
+                        padding: paddingValues("sideMainPadding", context),
                         child: Padding(
-                          padding: paddingValues("sectionPadding", null),
+                          padding: paddingValues("sectionPadding", context),
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -226,13 +226,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               if (widget.objectAvailable == false) ...{
                 Container(
-                  margin: paddingValues("mainTitleBottom", null),
+                  margin: paddingValues("mainTitleBottom", context),
                   child: SectionTitle('OBJETOS DE APRENDIZAGEM',
                       'Mais populares', CrossAxisAlignment.center),
                 ),
                 // if (MediaQuery.of(context).size.width > 1000) ...[
                 Padding(
-                  padding: paddingValues("sideHomeCards", swidth),
+                  padding: paddingValues("sideHomeCards", context),
                   child: ResponsiveGridRow(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
@@ -255,7 +255,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 ),
               },
               Padding(
-                padding: paddingValues("carouselTop", null),
+                padding: paddingValues("carouselTop", context),
                 child: Container(
                   color: CoresPersonalizadas.azulObama,
                   child: ResponsiveGridRow(children: [
@@ -270,9 +270,9 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                       sm: 12,
                       child: Container(
                           color: const Color.fromARGB(255, 241, 238, 238),
-                          padding: paddingValues("sideMainPadding", swidth),
+                          padding: paddingValues("sideMainPadding", context),
                           child: Padding(
-                            padding: paddingValues("sectionPadding", null),
+                            padding: paddingValues("sectionPadding", context),
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
@@ -349,11 +349,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               if (widget.postAvailable == false) ...{
                 Padding(
-                  padding: paddingValues("sideHomePosts", swidth),
+                  padding: paddingValues("sideHomePosts", context),
                   child: Column(
                     children: [
                       Padding(
-                        padding: paddingValues("mainTitleBottom", null),
+                        padding: paddingValues("mainTitleBottom", context),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [

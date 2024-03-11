@@ -23,7 +23,7 @@ class StaffCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       Material(
-        color: const Color.fromARGB(255, 231, 228, 228),
+        color: terciary,
         child: InkWell(
           onTap: () {},
           mouseCursor: SystemMouseCursors.basic,
@@ -35,28 +35,32 @@ class StaffCard extends StatelessWidget {
                   padding: const EdgeInsets.all(1),
                   width: 271,
                   height: 271,
-                  child: Image.asset(staffImg, fit: BoxFit.cover, alignment: Alignment.topCenter)),
+                  child: Image.asset(staffImg,
+                      fit: BoxFit.cover, alignment: Alignment.topCenter)),
               Container(
                 width: 271,
                 padding: const EdgeInsets.only(top: 30, bottom: 25),
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(staffName,
-                           style: textTheme.bodyLarge),
+                      Text(staffName, style: textTheme.bodyLarge),
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             for (int i = 0;
                                 i < SocialMediaLinks.length;
                                 i++) ...{
                               SizedBox(
-                                  width: 40,
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      child: Icon(SocialMediaLinks[i],
-                                          size: 16.0, color: onPrimary))),
+                                  width: 30,
+                                  height: 30,
+                                  child: Material(
+                                    color: onSecondary,
+                                    child: InkWell(
+                                        onTap: () {},
+                                        child: Icon(SocialMediaLinks[i],
+                                            size: 16.0, color: onPrimary)),
+                                  )),
                             }
                           ])
                     ]),

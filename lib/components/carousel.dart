@@ -46,7 +46,7 @@ class Carousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: paddingValues("carouselTop", null),
+      padding: paddingValues("carouselTop", context),
       child: Column(
         children: [
           if (swidth > 1300) ...[
@@ -70,7 +70,7 @@ class Carousel extends StatelessWidget {
                           children: [
                         Container(height: 140),
                         Container(
-                            padding: paddingValues("sideMainPadding", swidth),
+                            padding: paddingValues("sideMainPadding", context),
                             child: Text('What Clients Say?',
                                 style: textTheme.labelLarge)),
                         Container(
@@ -184,7 +184,7 @@ class Carousel extends StatelessWidget {
                       ])),
                 ])),
             Padding(
-              padding: paddingValues("sideMainPadding", swidth),
+              padding: paddingValues("sideMainPadding", context),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [

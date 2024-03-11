@@ -27,15 +27,18 @@ class _SearchDialogState extends State<SearchDialog> {
     double modalFont = 60;
     double iconSize = 80;
     double searchBarWidth = widget.swidth * .6;
+    double buttonDimensions = 100;
 
     if (widget.swidth < 1300 && widget.swidth >= 700) {
       modalFont = 40;
       iconSize = 60;
-      searchBarWidth = widget.swidth * .85;
+      searchBarWidth = widget.swidth * .7;
+      buttonDimensions = 75;
     } else if (widget.swidth < 700) {
       modalFont = 20;
       iconSize = 25;
-      searchBarWidth = widget.swidth * .95;
+      searchBarWidth = widget.swidth * .8;
+      buttonDimensions = 50;
     }
 
     return MenuItemButton(
@@ -80,7 +83,7 @@ class _SearchDialogState extends State<SearchDialog> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Container(
-                                  constraints: BoxConstraints(minWidth: 300),
+                                  constraints: BoxConstraints(minWidth: 150),
                                   width: searchBarWidth,
                                   child: TextField(
                                       style: TextStyle(
@@ -107,8 +110,8 @@ class _SearchDialogState extends State<SearchDialog> {
                                       }),
                                 ),
                                 Container(
-                                  width: 100,
-                                  height: 100,
+                                  width: buttonDimensions,
+                                  height: buttonDimensions,
                                   child: IconButton(
                                     hoverColor: null,
                                     highlightColor: null,
