@@ -180,7 +180,7 @@ Widget blogFilters(
   Function(List<dynamic>) updateData,
 ) {
   bool isHover = false;
-  print(" aqui, OTÀRIO => ${datas.length}");
+  // print(" aqui, OTÀRIO => ${datas.length}");
   return Padding(
     padding: EdgeInsets.only(right: swidth * 0.068),
     child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [

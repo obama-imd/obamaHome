@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
 
@@ -42,15 +41,13 @@ String convertDate(String date) {
   return formattedDate;
 }
 
-class BlogViewModel extends ChangeNotifier {
-  final List<BlogModel?> _posts = [];
+// class BlogViewModel extends ConsumerState {
+//   // List<BlogModel?> newPosts = [];
 
-    List<BlogModel?> get posts => _posts;
-
-  void updateContent(List<BlogModel?> newPosts) {
-    _posts.clear();
-    _posts.addAll(newPosts);
-    notifyListeners();
-  }
-}
+//   @override
+//   Widget build(BuildContext context, WidgetRef ref) {
+//     var _posts = BlogController().updateBlogContent(ref);
+//     return _posts;
+//   }
+// }
 // final teste = Provider<String>((ref) => "ola");

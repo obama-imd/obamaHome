@@ -52,8 +52,6 @@ final seila = StateProvider<List<BlogModel?>>((ref) {
 
 class BlogController {
   Future<List<BlogModel?>> updateBlogContent(WidgetRef ref) async {
-    // final lista2 = ref.watch(seila);
-    // final viewModel = context.watch<BlogViewModel?>();
 
     final posts = await fetchData('');
     final filteredPosts = filtrarPosts(posts, '');
@@ -67,11 +65,9 @@ class BlogController {
               imagePath: extractImagePath(postData['content']),
             ))
         .toList();
-
+    // print ("here => ${updatedPosts.length}");
+    final newPosts = ref.read(seila);
+    newPosts.addAll(updatedPosts);
     return updatedPosts;
-
-    // print (updatedPosts);
-
-    // viewModel?.updateContent(updatedPosts);
   }
 }
