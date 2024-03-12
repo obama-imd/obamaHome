@@ -52,7 +52,6 @@ dependencies:
   flutter_riverpod: ^2.4.8
   riverpod: any
   flutter_map_cancellable_tile_provider: ^2.0.0
-  provider: ^6.1.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

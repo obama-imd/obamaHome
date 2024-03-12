@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_network/image_network.dart';
-import 'package:obamahome/app/views/blog/components/blog-filters.dart';
 import 'package:obamahome/components/drawer.dart';
 import 'package:obamahome/components/navMenu.dart';
 
@@ -301,11 +300,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     ),
                   ),
                 },
-                Container(
-                    padding: const EdgeInsets.only(top: 85.0, left: 15),
-                    width: swidth * .33,
-                    child: blogFilters(
-                        context, swidth, postsList, dataAvailable, updateData)),
+                // Container(
+                //     padding: const EdgeInsets.only(top: 85.0, left: 15),
+                //     width: swidth * .33,
+                //     child: blogFilters(
+                //         context, swidth, postsList, dataAvailable, updateData)),
               ]),
               Carousel(swidth),
               Footer(swidth),

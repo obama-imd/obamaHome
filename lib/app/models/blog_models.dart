@@ -10,6 +10,8 @@ class BlogModel {
   String publishedDate;
   String imagePath;
 
+  BlogModel? posts;
+
   BlogModel({
     required this.title,
     required this.text,
@@ -41,13 +43,14 @@ String convertDate(String date) {
 }
 
 class BlogViewModel extends ChangeNotifier {
-  final List<BlogModel> _posts = [];
+  final List<BlogModel?> _posts = [];
 
-  List<BlogModel> get posts => _posts;
+    List<BlogModel?> get posts => _posts;
 
-  void updateContent(List<BlogModel> newPosts) {
+  void updateContent(List<BlogModel?> newPosts) {
     _posts.clear();
     _posts.addAll(newPosts);
     notifyListeners();
   }
 }
+// final teste = Provider<String>((ref) => "ola");

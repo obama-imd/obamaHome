@@ -1,8 +1,7 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 
 import '../models/blog_models.dart';
 
@@ -47,9 +46,14 @@ List<dynamic> filtrarPosts(List<dynamic> jsonData, String searchTerm) {
   }).toList();
 }
 
+final seila = StateProvider<List<BlogModel?>>((ref) {
+  return [];
+});
+
 class BlogController {
-  static void updateBlogContent(BuildContext context) async {
-    final viewModel = Provider.of<BlogViewModel>(context, listen: false);
+  Future<List<BlogModel?>> updateBlogContent(WidgetRef ref) async {
+    // final lista2 = ref.watch(seila);
+    // final viewModel = context.watch<BlogViewModel?>();
 
     final posts = await fetchData('');
     final filteredPosts = filtrarPosts(posts, '');
@@ -64,8 +68,10 @@ class BlogController {
             ))
         .toList();
 
-    print (updatedPosts);
+    return updatedPosts;
 
-    viewModel.updateContent(updatedPosts);
+    // print (updatedPosts);
+
+    // viewModel?.updateContent(updatedPosts);
   }
 }
