@@ -288,14 +288,6 @@ List<IconData> shareMedia = [
   FontAwesomeIcons.pinterest,
 ];
 
-// class BlogPage extends StatelessWidget {
-//   const BlogPage({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Scaffold(body: MyStatefulWidget());
-//   }
-// }
-
 class BlogPage extends ConsumerStatefulWidget {
   const BlogPage({Key? key}) : super(key: key);
   @override
@@ -307,15 +299,10 @@ class BlogPageState extends ConsumerState<BlogPage> {
   bool dataAvailable = false;
   Key key = UniqueKey();
 
-  List<dynamic> postsList = [];
-  List<dynamic> datas = [];
-
-  // Future<List<BlogModel?>> future = Future[];
-
   void updateData(newData) {
-    print(newData);
+    // print(newData);
     // setState(() {
-    //   datas = newData;
+    //   po = newData;
     //   key = UniqueKey();
     // });
   }
@@ -388,23 +375,11 @@ class BlogPageState extends ConsumerState<BlogPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          if (dataAvailable == true) ...{
-                            Container(
-                                padding: const EdgeInsets.only(
-                                    top: 100, left: 90, right: 15),
-                                width: swidth * 0.67,
-                                child: Text(
-                                  "Perdão, não há nenhum post a ser exibido no momento.",
-                                )),
-                          } else ...{
-                            Container(
-                              padding: const EdgeInsets.only(
-                                  top: 100, left: 90, right: 15),
-                              width: swidth * 0.67,
-                              height: 850 * (datas.length).toDouble(),
-                              child: blogListView(context, key, swidth, posts),
-                            ),
-                          },
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                top: 100, left: 90, right: 15),
+                            child: blogListView(context, key, swidth, posts),
+                          ),
                           Container(
                               padding:
                                   const EdgeInsets.only(top: 85.0, left: 15),
@@ -416,7 +391,12 @@ class BlogPageState extends ConsumerState<BlogPage> {
                     Footer(swidth),
                   ]))));
         } else if (snapshot.hasError) {
-          return Text('Error: ${snapshot.error}');
+          Container(
+              padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+              width: swidth * 0.67,
+              child: Text(
+                "Perdão, não há nenhum post a ser exibido no momento.",
+              ));
         }
         return CircularProgressIndicator();
       },
@@ -426,111 +406,113 @@ class BlogPageState extends ConsumerState<BlogPage> {
 
 @override
 Widget blogListView(BuildContext context, key, swidth, posts) {
-  print(" aqui, OTÀRIO => ${posts.length}");
-  return ListView.builder(
-    physics: NeverScrollableScrollPhysics(),
-    itemCount: posts.length,
-    itemBuilder: (context, index) {
-      final post = posts[index];
-      return SizedBox(
-        height: 800,
-        width: swidth * .6,
-        child: Column(children: [
-          Container(
-            margin: const EdgeInsets.only(bottom: 30),
-            decoration: const BoxDecoration(
-                border: Border(
-                    bottom: BorderSide(
-              color: Colors.blue,
-              width: 8,
-            ))),
-            child: ImageNetwork(
-                key: key,
-                image: post!.imagePath,
-                width: swidth * .6,
-                height: 400,
-                fitAndroidIos: BoxFit.cover,
-                fitWeb: BoxFitWeb.cover),
-          ),
-          Container(
-              alignment: Alignment.centerLeft,
-              margin: const EdgeInsets.only(bottom: 20),
-              child: Text(
-                post.title,
-              )),
-          Row(children: [
-            const Icon(Icons.person, color: Colors.blue, size: 16),
-            Container(width: 2),
-            Text('Marketing', style: textTheme.labelSmall),
-            Container(width: 13),
-            const Icon(FontAwesomeIcons.calendarDays,
-                color: Colors.blue, size: 16),
-            Container(width: 3),
-            Text(post.publishedDate, style: textTheme.labelSmall),
-          ]),
-          Container(
-              width: swidth * 0.6,
-              margin: const EdgeInsets.only(top: 20, bottom: 30),
-              child: Text(post.text,
-                  maxLines: 5, style: textTheme.headlineMedium)),
-          Row(children: [
-            Material(
-              color: Colors.blue,
-              child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                BlogDetails(initialPageIndex: index)));
-                  },
-                  overlayColor: const MaterialStatePropertyAll(onPrimary),
-                  child: SizedBox(
-                    width: 170,
-                    height: 50,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'VER MAIS >',
-                          style: textTheme.labelMedium,
-                        ),
-                      ],
-                    ),
+  List<BlogModel> post = [...posts];
+
+  print(" aqui, OTÀRIO => ${post[0].imagePath}");
+
+  return SizedBox(
+    height: 850*(post.length).toDouble(),
+    child: Column(children: [
+      for (var i = 0; i < post.length; i++) ...{
+        SizedBox(
+            height: 800,
+            width: swidth * .57,
+            child: Column(children: [
+              Container(
+                margin: const EdgeInsets.only(bottom: 30),
+                decoration: const BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(
+                  color: Colors.blue,
+                  width: 8,
+                ))),
+                child: ImageNetwork(
+                    key: key,
+                    image: post[i].imagePath,
+                    width: swidth * .6,
+                    height: 400,
+                    fitAndroidIos: BoxFit.cover,
+                    fitWeb: BoxFitWeb.cover),
+              ),
+              Container(
+                  alignment: Alignment.centerLeft,
+                  margin: const EdgeInsets.only(bottom: 20),
+                  child: Text(
+                    post[i].title, style: textTheme.titleSmall
                   )),
-            ),
-            const Spacer(),
-            Container(
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                  Text('Share:', style: textTheme.headlineMedium),
-                  Container(width: 5),
-                  // SizedBox(
-                  //   width: 120,
-                  //   height: 30,
-                  //   child: GridView.builder(
-                  //     physics: NeverScrollableScrollPhysics(),
-                  //       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  //           crossAxisCount: shareMedia.length),
-                  //       itemBuilder: (BuildContext context, int mediaId) {
-                  //         return InkWell(
-                  //             overlayColor: const MaterialStatePropertyAll(
-                  //                 Colors.transparent),
-                  //             onTap: () {},
-                  //             child: SizedBox(
-                  //               width: 15,
-                  //               height: 15,
-                  //               child: Icon(shareMedia[mediaId],
-                  //                   size: 15, color: onPrimary),
-                  //             ));
-                  //       }),
-                  // )
-                ])),
-          ]),
-        ]),
-      );
-    },
+              Row(children: [
+                const Icon(Icons.person, color: Colors.blue, size: 16),
+                Container(width: 2),
+                Text('Marketing', style: textTheme.labelSmall),
+                Container(width: 13),
+                const Icon(FontAwesomeIcons.calendarDays,
+                    color: Colors.blue, size: 16),
+                Container(width: 3),
+                Text(post[i].publishedDate, style: textTheme.labelSmall),
+              ]),
+              Container(
+                  width: swidth * 0.6,
+                  margin: const EdgeInsets.only(top: 20, bottom: 30),
+                  child: Text(post[i].text,
+                      maxLines: 5, style: textTheme.headlineMedium)),
+              Row(children: [
+                Material(
+                  color: Colors.blue,
+                  child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BlogDetails(initialPageIndex: i)));
+                      },
+                      overlayColor: const MaterialStatePropertyAll(onPrimary),
+                      child: SizedBox(
+                        width: 170,
+                        height: 50,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              'VER MAIS >',
+                              style: textTheme.labelMedium,
+                            ),
+                          ],
+                        ),
+                      )),
+                ),
+                const Spacer(),
+                Container(
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                      Text('Share:', style: textTheme.headlineMedium),
+                      Container(width: 5),
+                      SizedBox(
+                        width: 120,
+                        height: 30,
+                        child: GridView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: shareMedia.length),
+                            itemBuilder: (BuildContext context, int mediaId) {
+                              return InkWell(
+                                  overlayColor: const MaterialStatePropertyAll(
+                                      Colors.transparent),
+                                  onTap: () {},
+                                  child: SizedBox(
+                                    width: 15,
+                                    height: 15,
+                                    child: Icon(shareMedia[mediaId],
+                                        size: 15, color: onPrimary),
+                                  ));
+                            }),
+                      )
+                    ])),
+              ]),
+            ]))
+      },
+    ]),
   );
 }
