@@ -46,14 +46,14 @@ List<dynamic> filtrarPosts(List<dynamic> jsonData, String searchTerm) {
   }).toList();
 }
 
-final seila = StateProvider<List<BlogModel?>>((ref) {
+final blogPosts = StateProvider<List<BlogModel?>>((ref) {
   return [];
 });
 
 class BlogController {
-  Future<List<BlogModel?>> updateBlogContent(WidgetRef ref) async {
+  Future<List<BlogModel?>> updateBlogContent(WidgetRef ref, String search) async {
 
-    final posts = await fetchData('');
+    final posts = await fetchData(search);
     final filteredPosts = filtrarPosts(posts, '');
     final updatedPosts = filteredPosts
         .map((postData) => BlogModel(
@@ -66,7 +66,8 @@ class BlogController {
             ))
         .toList();
     // print ("here => ${updatedPosts.length}");
-    final newPosts = ref.read(seila);
+    final newPosts = ref.read(blogPosts);
+    newPosts.clear();
     newPosts.addAll(updatedPosts);
     return updatedPosts;
   }

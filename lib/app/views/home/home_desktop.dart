@@ -353,7 +353,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: paddingValues("mainTitleBottom", context),
+                        padding: paddingValues("mainTitle", context),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [

@@ -5,18 +5,7 @@ import 'utils/app_theme.dart';
 
 void main() {
   runApp(
-    // MultiProvider(
-    //   providers: [
-    //     ChangeNotifierProvider(
-    //         create: (context) => BlogViewModel(),
-    //         child: MaterialApp(routes: {
-    //           '/blog': (context) => const BlogPage(),
-    //           '/blog-detalhes': (context) => BlogDetails(initialPageIndex: 0),
-    //         })),
-    //   ],
-    //   child: MyApp(),
     ProviderScope(
-
       child: MyApp(),
     )
   );

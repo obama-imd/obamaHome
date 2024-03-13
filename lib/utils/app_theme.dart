@@ -112,7 +112,7 @@ final MaterialApp AppMaterial = MaterialApp(
   routes: {
     '/sobre': (context) => const AboutUsPage(),
     '/blog': (context) => const BlogPage(),
-    '/blog-detalhes': (context) => BlogDetails(initialPageIndex: 0),
+    '/blog-detalhes': (context) => BlogDetails(initialPageIndex: ModalRoute.of(context)?.settings.arguments as int? ?? 0),
     '/formacoes': (context) => const Formacoes(),
     '/servicos': (context) => SearchDesktop(
         termSearched:
