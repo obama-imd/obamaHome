@@ -41,7 +41,7 @@ class Carousel extends StatelessWidget {
     'assets/images/ppgite.png',
   ];
 
-  final List<double> partnersPadding = [24, 25, 0, 25, 0];
+  final List<double> partnersPadding = [24, 30, 0, 25, 0];
 
   @override
   Widget build(BuildContext context) {
