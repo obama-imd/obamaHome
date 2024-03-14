@@ -24,20 +24,6 @@ Future<List<dynamic>> fetchPosts(String searchTerm) async {
   }
 }
 
-// String extractImagePath(String content) {
-//   final document = parse(content);
-//   final imgElement = document.getElementsByTagName('img').last;
-//   final result = imgElement.attributes['src'];
-//   return result!;
-// }
-
-// String extractSummaryPath(String summary) {
-//   final document = parse(summary);
-//   final sumElement = document.getElementsByTagName('p').last;
-//   final sumValue = sumElement.text;
-//   return sumValue;
-// }
-
 Future<List<dynamic>> fetchObjects(String searchTerm) async {
   // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 

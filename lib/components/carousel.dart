@@ -96,7 +96,6 @@ class Carousel extends StatelessWidget {
                           indicatorColor: CoresPersonalizadas.azulObama,
                           indicatorBackgroundColor: Colors.grey,
                           onPageChanged: (value) {
-                            print('Page changed: $value');
                           },
                           autoPlayInterval: 3500,
                           isLoop: true,
@@ -253,7 +252,6 @@ class Carousel extends StatelessWidget {
                           indicatorColor: CoresPersonalizadas.azulObama,
                           indicatorBackgroundColor: Colors.grey,
                           onPageChanged: (value) {
-                            print('Page changed: $value');
                           },
                           autoPlayInterval: 3500,
                           isLoop: true,
