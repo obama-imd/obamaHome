@@ -16,7 +16,8 @@ import '../../../utils/cores_personalizadas.dart';
 import '../home/components/our_product_item.dart';
 import 'components/advancedSearchOA.dart';
 
-class SearchDesktop extends StatelessWidget {
+// ignore: must_be_immutable
+class SearchDesktop extends StatefulWidget {
   String termSearched;
 
   SearchDesktop({
@@ -24,6 +25,11 @@ class SearchDesktop extends StatelessWidget {
     required this.termSearched,
   }) : super(key: key);
 
+  @override
+  State<SearchDesktop> createState() => _SearchDesktopState();
+}
+
+class _SearchDesktopState extends State<SearchDesktop> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -55,13 +61,14 @@ class SearchDesktop extends StatelessWidget {
                 menuMobile(context, scaffoldKey, swidth),
               ],
               BannerSuperior(context, 'Objetos de Aprendizagem'),
-              SearchPageView(termSearched, swidth),
+              SearchPageView(widget.termSearched, swidth),
               Carousel(swidth),
               Footer(swidth),
             ])));
   }
 }
 
+// ignore: must_be_immutable
 class SearchPageView extends ConsumerStatefulWidget {
   String termSearched;
   final double swidth;
@@ -140,11 +147,11 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                           });
                         },
                         itemBuilder: (context, index) {
-                          int startIndex = index * itemsPerPage;
-                          int endIndex = (index + 1) * itemsPerPage;
-                          endIndex = endIndex > searchResult.length
-                              ? searchResult.length
-                              : endIndex;
+                          // int startIndex = index * itemsPerPage;
+                          // int endIndex = (index + 1) * itemsPerPage;
+                          // endIndex = endIndex > searchResult.length
+                          //     ? searchResult.length
+                          //     : endIndex;
                           return ResponsiveGridRow(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
@@ -234,7 +241,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                                     _pageController.jumpToPage(i);
                                     selectedPage(i);
                                     setState(() {
-                                      if (i > 0 && i < totalPages! - 1) {
+                                      if (i > 0 && i < totalPages - 1) {
                                         startValue = i - 1;
                                         endValue = i + 1;
                                       }
@@ -256,7 +263,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                             ),
                             child: InkWell(
                               child: Icon(Icons.navigate_next),
-                              onTap: currentPage! < totalPages! - 1
+                              onTap: currentPage! < totalPages - 1
                                   ? () {
                                       _pageController.nextPage(
                                         duration: Duration(milliseconds: 300),
@@ -266,7 +273,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                                         startValue + 1,
                                       );
                                       setState(() {
-                                        if (endValue < totalPages! - 1) {
+                                        if (endValue < totalPages - 1) {
                                           startValue++;
                                           endValue++;
                                         }

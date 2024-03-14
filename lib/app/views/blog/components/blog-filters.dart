@@ -17,7 +17,6 @@ Widget blogFilters(
   BuildContext context,
   double swidth,
   List<BlogModel?> datas,
-  bool dataAvailable,
   Function(String) updateData,
 ) {
   bool isHover = false;

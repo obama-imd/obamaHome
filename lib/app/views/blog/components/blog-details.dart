@@ -52,7 +52,6 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
   void updateData(String value) {
     setState(() {
       newData = value;
-      key = UniqueKey();
     });
   }
 
@@ -162,7 +161,7 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
                                       const Icon(FontAwesomeIcons.calendarDays,
                                           color: Colors.blue, size: 16),
                                       Container(width: 3),
-                                      Text(item!.publishedDate,
+                                      Text(item.publishedDate,
                                           style: textTheme.labelSmall),
                                     ]),
                                     Container(
@@ -292,7 +291,7 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
                                     const EdgeInsets.only(top: 85.0, left: 15),
                                 width: swidth * .295,
                                 child: blogFilters(
-                                    context, swidth, datas, false, updateData)),
+                                    context, swidth, datas, updateData)),
                           ]),
                     ),
                     Carousel(swidth),

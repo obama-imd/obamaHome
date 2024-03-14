@@ -4,25 +4,25 @@ import 'package:obamahome/components/simpleRow.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../components/carousel.dart';
-import '../../../components/footer.dart';
-import '../../../components/menuMobile.dart';
-import '../../../components/navMenu.dart';
-import '../../../components/sectionTitle.dart';
-import '../../../components/topbar.dart';
-import '../../../utils/app_theme.dart';
-import 'components/our_product_item.dart';
-import 'constants.dart';
-import 'home_view.dart';
+import '../../../../components/carousel.dart';
+import '../../../../components/footer.dart';
+import '../../../../components/menuMobile.dart';
+import '../../../../components/navMenu.dart';
+import '../../../../components/sectionTitle.dart';
+import '../../../../components/topbar.dart';
+import '../../../../utils/app_theme.dart';
+import '../components/our_product_item.dart';
+import '../constants.dart';
+import '../home_view.dart';
 
-class HomeDesktop extends StatelessWidget {
+class HomeDesktop extends StatefulWidget {
   final TrackingScrollController scrollController;
   final bool postAvailable;
   final bool objectAvailable;
   final List<dynamic> posts;
   final List<dynamic> objects;
 
-  const HomeDesktop({
+  HomeDesktop({
     required this.scrollController,
     required this.postAvailable,
     required this.objectAvailable,
@@ -32,44 +32,15 @@ class HomeDesktop extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: MyStatefulWidget(
-          scrollController: scrollController,
-          postAvailable: postAvailable,
-          objectAvailable: objectAvailable,
-          posts: posts,
-          objects: objects),
-    );
-  }
+  State<HomeDesktop> createState() => _HomeDesktopState();
 }
 
-class MyStatefulWidget extends StatefulWidget {
-  final TrackingScrollController scrollController;
-  final bool postAvailable;
-  final bool objectAvailable;
-  final List<dynamic> posts;
-  final List<dynamic> objects;
-
-  const MyStatefulWidget({
-    required this.scrollController,
-    required this.postAvailable,
-    required this.objectAvailable,
-    required this.posts,
-    required this.objects,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  State<MyStatefulWidget> createState() => _MyStatefulWidgetState();
-}
-
-class _MyStatefulWidgetState extends State<MyStatefulWidget> {
+class _HomeDesktopState extends State<HomeDesktop> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
-    double paddingCard = MediaQuery.of(context).size.width * .025;
+    // double paddingCard = MediaQuery.of(context).size.width * .025;
     double swidth = MediaQuery.of(context).size.width;
 
     return Scaffold(

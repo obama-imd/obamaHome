@@ -4,15 +4,15 @@ import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/components/simpleRow.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../components/carousel.dart';
-import '../../../components/footer.dart';
-import '../../../components/sectionTitle.dart';
-import '../../../components/topbar.dart';
-import '../../../utils/app_theme.dart';
-import '../../../utils/cores_personalizadas.dart';
-import 'components/our_product_item.dart';
-import 'constants.dart';
-import 'home_view.dart';
+import '../../../../components/carousel.dart';
+import '../../../../components/footer.dart';
+import '../../../../components/sectionTitle.dart';
+import '../../../../components/topbar.dart';
+import '../../../../utils/app_theme.dart';
+import '../../../../utils/cores_personalizadas.dart';
+import '../components/our_product_item.dart';
+import '../constants.dart';
+import '../home_view.dart';
 
 class HomeTablet extends StatelessWidget {
   final TrackingScrollController scrollController;
@@ -65,7 +65,7 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  final TextEditingController _searchController = TextEditingController();
+  // final TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double paddingCard = MediaQuery.of(context).size.width * .25;

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:intl/intl.dart';
-import 'package:obamahome/app/views/home/home_desktop.dart';
-import 'package:obamahome/app/views/home/home_mobile1.dart';
-import 'package:obamahome/app/views/home/home_tablet.dart';
-import 'package:obamahome/app/views/home/responsivo.dart';
+import 'package:obamahome/app/views/home/responsividade/home_desktop.dart';
+import 'package:obamahome/app/views/home/responsividade/home_mobile1.dart';
+import 'package:obamahome/app/views/home/responsividade/home_tablet.dart';
+import 'package:obamahome/utils/responsivo.dart';
 
 import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
@@ -70,25 +70,6 @@ class _HomePage1State extends State<HomeView> {
   List<dynamic> objects = [];
   bool postAvailable = true;
   bool objectAvailable = true;
-
-  // Future<void> fetchDataAndUpdateState() async {
-  //   final fetchedPosts = await fetchPosts('');
-  //   final fetchedObjects = await fetchObjects('');
-  //   setState(() {
-  //     if (fetchedPosts.isNotEmpty) {
-  //       postAvailable = false;
-  //       posts = fetchedPosts;
-  //     } else {
-  //       postAvailable = true;
-  //     }
-  //     if (fetchedObjects.isNotEmpty) {
-  //       objectAvailable = false;
-  //       objects = fetchedObjects;
-  //     } else {
-  //       objectAvailable = true;
-  //     }
-  //   });
-  // }
 
   Future<void> fetchandUpdatePosts() async {
     final fetchedPosts = await fetchPosts('');

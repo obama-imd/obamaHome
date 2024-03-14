@@ -4,14 +4,14 @@ import 'package:obamahome/components/simpleRow.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../components/carousel.dart';
-import '../../../components/footer.dart';
-import '../../../components/sectionTitle.dart';
-import '../../../components/topbar.dart';
-import '../../../utils/app_theme.dart';
-import 'components/our_product_item.dart';
-import 'constants.dart';
-import 'home_view.dart';
+import '../../../../components/carousel.dart';
+import '../../../../components/footer.dart';
+import '../../../../components/sectionTitle.dart';
+import '../../../../components/topbar.dart';
+import '../../../../utils/app_theme.dart';
+import '../components/our_product_item.dart';
+import '../constants.dart';
+import '../home_view.dart';
 
 class HomeMobile extends StatelessWidget {
   final TrackingScrollController scrollController;
