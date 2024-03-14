@@ -54,8 +54,7 @@ class BlogController {
   Future<List<BlogModel?>> updateBlogContent(WidgetRef ref, String search) async {
 
     final posts = await fetchData(search);
-    final filteredPosts = filtrarPosts(posts, '');
-    final updatedPosts = filteredPosts
+    final updatedPosts = posts
         .map((postData) => BlogModel(
               title: postData['title'],
               text: postData['text'],
@@ -65,7 +64,7 @@ class BlogController {
               imagePath: extractImagePath(postData['content']),
             ))
         .toList();
-    // print ("here => ${updatedPosts.length}");
+
     final newPosts = ref.read(blogPosts);
     newPosts.clear();
     newPosts.addAll(updatedPosts);

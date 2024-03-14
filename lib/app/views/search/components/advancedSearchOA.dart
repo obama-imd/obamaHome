@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
-import '../../../controllers/search_controller.dart';
-import '../searchOA_view.dart';
 
 const List<String> nivelEnsino = <String>['Todos'];
 const List<String> temaCurricular = <String>['Todos'];
@@ -22,36 +20,31 @@ bool bnccCheck = false;
 
 class OAFilters extends StatefulWidget {
   final double swidth;
-  final List<dynamic> datas;
-  final bool dataAvailable;
-  final Function(List<dynamic>) updateData;
+  final String data;
+  final Function(String) updateData;
   const OAFilters({
     required this.swidth,
-    required this.datas,
-    required this.dataAvailable,
+    required this.data,
     required this.updateData,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<OAFilters> createState() => _HomePage1State(
+  State<OAFilters> createState() => OAFilterState(
         swidth: swidth,
-        datas: datas,
-        dataAvailable: dataAvailable,
+        data: data,
         updateData: updateData,
       );
 }
 
-class _HomePage1State extends State<OAFilters> {
+class OAFilterState extends State<OAFilters> {
   final double swidth;
-  final List<dynamic> datas;
-  final bool dataAvailable;
-  final Function(List<dynamic>) updateData;
+  final String data;
+  final Function(String) updateData;
 
-  _HomePage1State({
+  OAFilterState({
     required this.swidth,
-    required this.datas,
-    required this.dataAvailable,
+    required this.data,
     required this.updateData,
   });
 
@@ -69,19 +62,14 @@ class _HomePage1State extends State<OAFilters> {
             margin: const EdgeInsets.only(bottom: 50),
             child: TextField(
                 onSubmitted: (value) async {
-                  final postsFiltrados = await fetchData(value);
-                  if (postsFiltrados.$1.isNotEmpty) {
-                    updateData(postsFiltrados.$1);
-                  } else {
-                    showMessage(context);
-                  }
+                  updateData(value);
                 },
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(100)),
                     hintText: 'Buscar',
-                    hintStyle: textTheme.bodySmall,
+                    hintStyle: textTheme.displaySmall,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                     filled: true,
                     fillColor: const Color.fromARGB(255, 218, 216, 216),
@@ -107,7 +95,9 @@ class _HomePage1State extends State<OAFilters> {
                         });
                       },
                     ),
-                    Text("PCN", )
+                    Text(
+                      "PCN",
+                    )
                   ],
                 ),
                 Padding(
@@ -128,7 +118,9 @@ class _HomePage1State extends State<OAFilters> {
                           });
                         },
                       ),
-                      Text("BNCC", )
+                      Text(
+                        "BNCC",
+                      )
                     ],
                   ),
                 ),
@@ -147,7 +139,7 @@ class _HomePage1State extends State<OAFilters> {
                       value: descritor.first,
                       icon: const Icon(Icons.arrow_drop_down),
                       elevation: 5,
-                       style: textTheme.displayMedium,
+                      style: textTheme.displayMedium,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
                         // setState(() {

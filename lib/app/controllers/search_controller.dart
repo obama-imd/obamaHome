@@ -1,3 +1,7 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../models/search_models.dart';
+
 Future<(List<Map<String, dynamic>>, Object?, Object?, Object?, Object?)>
     fetchData(String searchTerm) async {
   // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
@@ -98,7 +102,7 @@ Future<(List<Map<String, dynamic>>, Object?, Object?, Object?, Object?)>
   final totalElements = response['totalElements'];
   final currentPage = response['number'];
   final itemsPerPage = response['numberOfElements'];
-  List<dynamic> jsonData = response['content'] as List<dynamic>;
+  List<dynamic> jsonData = response['content'] as List;
 
   final postsFiltrados = filtrarOA(jsonData, searchTerm);
   if (postsFiltrados.isNotEmpty) {
@@ -135,5 +139,49 @@ List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {
     return <dynamic>[];
   } else {
     return comparingData;
+  }
+}
+
+final searchPagination = StateProvider<List<SearchResponse>>((ref) {
+  return [];
+});
+
+class SearchOAController {
+  Future<SearchResponse> fetchDataAndUpdateState(
+      String item, WidgetRef ref) async {
+    (
+      List<Map<String, dynamic>>,
+      Object?,
+      Object?,
+      Object?,
+      Object?
+    ) fetchedData = await fetchData(item);
+
+    List<Map<String, dynamic>> searchResult = fetchedData.$1;
+
+    final updatedSearch = searchResult
+        .map((searchData) => SearchModel(
+              id: searchData['id'],
+              nome: searchData['nome'],
+              url: searchData['url'],
+            ))
+        .toList();
+
+    final paginationInfo = SearchResponse(
+        content: updatedSearch,
+        totalPages: convertToInt(fetchedData.$2!),
+        totalElements: convertToInt(fetchedData.$3!),
+        itemsPerPage: convertToInt(fetchedData.$4!),
+        currentPage: convertToInt(fetchedData.$5!),
+        last: null,
+        size: null,
+        number: null,
+        first: null,
+        empty: null);
+
+    final pagination = ref.read(searchPagination);
+    pagination.clear();
+    pagination.add(paginationInfo);
+    return paginationInfo;
   }
 }
