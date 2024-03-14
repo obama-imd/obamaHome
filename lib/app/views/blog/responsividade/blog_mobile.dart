@@ -5,10 +5,10 @@ import 'package:image_network/image_network.dart';
 import 'package:obamahome/app/views/blog/components/blog-filters.dart';
 import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/components/drawer.dart';
-import 'package:obamahome/utils/cores_personalizadas.dart';
 
 import '../../../../components/carousel.dart';
 import '../../../../components/footer.dart';
+import '../../../../components/loadCircle.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../../../../utils/app_theme.dart';
@@ -119,12 +119,8 @@ class BlogPageState extends ConsumerState<BlogMobile> {
                 "Perdão, não há nenhum post a ser exibido no momento.",
               ));
         }
-        return SizedBox(
-          width: 75,
-          height: 75,
-          child: CircularProgressIndicator(
-            color: CoresPersonalizadas.azulObama,
-          ),
+        return Center(
+          child: circleLoadSpinner(context)
         );
       },
     );

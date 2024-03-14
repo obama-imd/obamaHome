@@ -9,10 +9,10 @@ import 'package:responsive_grid/responsive_grid.dart';
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
 import '../../../components/footer.dart';
+import '../../../components/loadCircle.dart';
 import '../../../components/menuMobile.dart';
 import '../../../components/navMenu.dart';
 import '../../../components/topbar.dart';
-import '../../../utils/cores_personalizadas.dart';
 import '../home/components/our_product_item.dart';
 import 'components/advancedSearchOA.dart';
 
@@ -110,7 +110,8 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
     selectedPageIndex = 0;
 
     return FutureBuilder<void>(
-        future: SearchOAController().fetchDataAndUpdateState(widget.termSearched, ref),
+        future: SearchOAController()
+            .fetchDataAndUpdateState(widget.termSearched, ref),
         builder: (context, snapshot) {
           final paginationData = ref.watch(searchPagination);
 
@@ -305,13 +306,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                   "Perdão, não há nenhum OA correspondente com a sua pesquisa.",
                 ));
           }
-          return SizedBox(
-            width: 75,
-            height: 75,
-            child: CircularProgressIndicator(
-              color: CoresPersonalizadas.azulObama,
-            ),
-          );
+          return Center(child: circleLoadSpinner(context));
         });
   }
 }

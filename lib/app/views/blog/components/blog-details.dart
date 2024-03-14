@@ -9,9 +9,9 @@ import '../../../../../components/carousel.dart';
 import '../../../../../components/footer.dart';
 import '../../../../../components/topbar.dart';
 import '../../../../components/bannerSuperior.dart';
+import '../../../../components/loadCircle.dart';
 import '../../../../components/menuMobile.dart';
 import '../../../../utils/app_theme.dart';
-import '../../../../utils/cores_personalizadas.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
 import 'blog-filters.dart';
@@ -305,13 +305,7 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
                 "Perdão, não há nenhum post a ser exibido no momento.",
               ));
         }
-        return SizedBox(
-          width: 75,
-          height: 75,
-          child: CircularProgressIndicator(
-            color: CoresPersonalizadas.azulObama,
-          ),
-        );
+        return circleLoadSpinner(context);
       },
     );
   }

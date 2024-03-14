@@ -31,8 +31,6 @@ Widget blogFilters(
         margin: const EdgeInsets.only(bottom: 50),
         child: TextField(
             onSubmitted: (value) async {
-              // final postsFiltrados = await fetchData(value);
-              // print(postsFiltrados);
               updateData(value);
             },
             decoration: InputDecoration(

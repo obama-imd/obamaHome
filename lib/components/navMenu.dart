@@ -42,7 +42,7 @@ final List<ItemValue> itemValues = [
   ),
   ItemValue(
     name: "PUBLICAÇÕES",
-    path: ['/blog', 'blog-details'],
+    path: ['/blog', '/blog-detalhes'],
     subItems: ["Lista de Posts", "Último post"],
     itemHover: false,
     subItemHover: List.generate(2, (index) => false),
@@ -152,7 +152,7 @@ class _NavMenuState extends State<NavMenu> {
                         ),
                         onPressed: () {
                           Navigator.pushNamed(context, itemValues[i].path[j],
-                              arguments: '');
+                              arguments: itemValues[i].path[j] == '/blog-detalhes' ? 0: "");
                         },
                         child: MenuAcceleratorLabel(itemValues[i].subItems[j]),
                       ),
