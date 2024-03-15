@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import '../utils/cores_personalizadas.dart';
 
-Widget circleLoadSpinner(context) {
-  return Center(
-    child: Padding(
-      padding: const EdgeInsets.only(top: 100),
+Widget circleLoadSpinner(context, swidth) {
+  return Container(
+    width: swidth,
+    padding: const EdgeInsets.only(top: 100),
+    child: Center(
       child: SizedBox(
         width: 50,
         height: 50,

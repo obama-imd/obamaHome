@@ -265,7 +265,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                   "Perdão, não há nenhum OA correspondente com a sua pesquisa.",
                 ));
           }
-          return Center(child: circleLoadSpinner(context));
+          return circleLoadSpinner(context, widget.swidth);
         });
   }
 }

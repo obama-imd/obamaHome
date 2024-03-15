@@ -50,10 +50,20 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 100),
-                        child: blogListView(context, widget.key, swidth, posts),
-                      ),
+                      if (posts.isEmpty) ...{
+                        Container(
+                            padding: const EdgeInsets.only(top: 100, right: 15),
+                            width: swidth * 0.565,
+                            child: Text(
+                              "Perdão, não há nenhum post a ser exibido no momento.",
+                            ))
+                      } else ...{
+                        Padding(
+                          padding: const EdgeInsets.only(top: 100),
+                          child:
+                              blogListView(context, widget.key, swidth, posts),
+                        ),
+                      },
                       Container(
                           padding: const EdgeInsets.only(top: 100, left: 30),
                           width: swidth * .286,
@@ -67,10 +77,10 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
                 padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
                 width: swidth * 0.67,
                 child: Text(
-                  "Perdão, não há nenhum post a ser exibido no momento.",
+                  "Perdão, ocorreu um erro interno.",
                 ));
           }
-          return Center(child: circleLoadSpinner(context));
+          return circleLoadSpinner(context, widget.swidth);
         },
       )
     ]);

@@ -81,7 +81,7 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
                   "Perdão, não há nenhum post a ser exibido no momento.",
                 ));
           }
-          return circleLoadSpinner(context);
+          return circleLoadSpinner(context, swidth);
         },
       ),
     ]);

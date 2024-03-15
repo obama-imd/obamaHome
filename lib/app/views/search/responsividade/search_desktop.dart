@@ -108,8 +108,10 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
           int? totalPages = pagination[0]!.totalPages;
           int? currentPage = pagination[0]!.currentPage;
           int? itemsPerPage = pagination[0]!.itemsPerPage;
+
+          print("right here => ${totalPages}, ${currentPage}, ${itemsPerPage}");
           // int? totalElements = pagination[0]!.totalElements;
-          // selectedPageIndex = currentPage!;
+          widget.selectedPageIndex = currentPage!;
           List<SearchModel?> searchResult = pagination[0]!.content;
 
           if (snapshot.connectionState == ConnectionState.done) {
@@ -159,9 +161,9 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                   ),
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (searchResult.length > 10) ...{
+                    if (searchResult.length > itemsPerPage) ...{
                       Container(
                         width: 40,
                         height: 40,
@@ -278,7 +280,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                   "Perdão, houve um erro interno.",
                 ));
           }
-          return Center(child: circleLoadSpinner(context));
+          return circleLoadSpinner(context, widget.swidth);
         });
   }
 }
