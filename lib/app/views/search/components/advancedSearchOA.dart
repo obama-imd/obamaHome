@@ -51,7 +51,7 @@ class OAFilterState extends State<OAFilters> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: swidth * .288,
+      width: swidth * .25,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
             alignment: Alignment.centerLeft,
@@ -69,7 +69,7 @@ class OAFilterState extends State<OAFilters> {
                         borderSide: BorderSide.none,
                         borderRadius: BorderRadius.circular(100)),
                     hintText: 'Buscar',
-                    hintStyle: textTheme.displaySmall,
+                    hintStyle: textTheme.bodySmall,
                     contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                     filled: true,
                     fillColor: const Color.fromARGB(255, 218, 216, 216),
@@ -139,7 +139,7 @@ class OAFilterState extends State<OAFilters> {
                       value: descritor.first,
                       icon: const Icon(Icons.arrow_drop_down),
                       elevation: 5,
-                      style: textTheme.displayMedium,
+                      style: textTheme.bodySmall,
                       onChanged: (String? value) {
                         // This is called when the user selects an item.
                         // setState(() {
@@ -151,7 +151,7 @@ class OAFilterState extends State<OAFilters> {
                         return DropdownMenuItem<String>(
                           value: value,
                           child: Container(
-                              width: swidth * .245, child: Text(value)),
+                              width: swidth * .21, child: Text(value)),
                         );
                       }).toList())),
             },

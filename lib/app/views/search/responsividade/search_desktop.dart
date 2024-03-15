@@ -44,7 +44,7 @@ class _SearchDesktopState extends State<SearchDesktop> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: (swidth * .576),
+              width: (swidth * .614),
               child: Column(
                 children: [
                   SearchPageView(
@@ -59,7 +59,7 @@ class _SearchDesktopState extends State<SearchDesktop> {
             Padding(
               padding: const EdgeInsets.only(left: 30),
               child: SizedBox(
-                width: (swidth * .288) - 30,
+                width: (swidth * .25) - 30,
                 child: OAFilters(
                     swidth: swidth,
                     data: widget.termSearched,
