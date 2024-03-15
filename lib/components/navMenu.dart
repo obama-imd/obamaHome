@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/components/modalSearch.dart';
 
+import '../app/views/search/searchOA_view.dart';
 import '../utils/app_theme.dart';
 
 class ItemValue {
@@ -79,7 +80,11 @@ class NavMenu extends StatefulWidget {
 String searchText = '';
 
 Future searchObject(context, String value) async {
-  Navigator.pushNamed(context, '/servicos', arguments: value);
+  if (value == '') {
+    showMessage(context);
+  } else {
+    Navigator.pushNamed(context, '/servicos', arguments: value);
+  }
 }
 
 class _NavMenuState extends State<NavMenu> {
@@ -152,7 +157,7 @@ class _NavMenuState extends State<NavMenu> {
                         ),
                         onPressed: () {
                           Navigator.pushNamed(context, itemValues[i].path[j],
-                              arguments: itemValues[i].path[j] == '/blog-detalhes' ? 0: "");
+                              arguments: itemValues[i].path[j] == '/blog-detalhes' ? 0: searchText);
                         },
                         child: MenuAcceleratorLabel(itemValues[i].subItems[j]),
                       ),

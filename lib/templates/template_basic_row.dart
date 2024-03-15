@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/components/drawer.dart';
 
 import '../../../../components/carousel.dart';
@@ -8,14 +7,17 @@ import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../../../../utils/app_theme.dart';
 
-class TemplateWithBanner extends StatefulWidget {
-  dynamic children;
-  TemplateWithBanner(this.children);
+class TemplateRow extends StatefulWidget {
+  final List<Widget> children;
+  const TemplateRow({
+    required this.children,
+  });
+
   @override
-  State<TemplateWithBanner> createState() => BlogPageState();
+  State<TemplateRow> createState() => TemplateRowState();
 }
 
-class BlogPageState extends State<TemplateWithBanner> {
+class TemplateRowState extends State<TemplateRow> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -68,16 +70,12 @@ class BlogPageState extends State<TemplateWithBanner> {
                                   color: onPrimary, size: 25))
                         ]))
               ],
-              BannerSuperior(context, 'Publicações'),
-              Padding(
-                padding: paddingValues("sideMainPadding", context),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ...widget.children
-                    ]),
-              ),
+              Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    ...widget.children
+                  ]),
               Carousel(swidth),
               Footer(swidth),
             ]))));

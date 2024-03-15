@@ -114,7 +114,7 @@ final MaterialApp AppMaterial = MaterialApp(
     '/blog': (context) => const BlogPage(),
     '/blog-detalhes': (context) => BlogDetails(initialPageIndex: ModalRoute.of(context)?.settings.arguments as int? ?? 0),
     '/formacoes': (context) => const Formacoes(),
-    '/servicos': (context) => SearchDesktop(
+    '/servicos': (context) => SearchPage(
         termSearched:
             ModalRoute.of(context)?.settings.arguments as String? ?? ''),
     '/trilhas': (context) => TrilhasPage(),

@@ -7,14 +7,18 @@ import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../../../../utils/app_theme.dart';
 
-class TemplateNoBanner extends StatefulWidget {
-  dynamic children;
-  TemplateNoBanner(this.children);
+// ignore: must_be_immutable
+class TemplateColumn extends StatefulWidget {
+  final List<Widget> children;
+
+  const TemplateColumn({
+    required this.children,
+  });
   @override
-  State<TemplateNoBanner> createState() => BlogPageState();
+  State<TemplateColumn> createState() => TemplateColumnState();
 }
 
-class BlogPageState extends State<TemplateNoBanner> {
+class TemplateColumnState extends State<TemplateColumn> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -67,15 +71,10 @@ class BlogPageState extends State<TemplateNoBanner> {
                                   color: onPrimary, size: 25))
                         ]))
               ],
-              Padding(
-                padding: paddingValues("sideMainPadding", context),
-                child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      ...widget.children
-                    ]),
-              ),
+              Column(
+                  children: [
+                    ...widget.children
+                  ]),
               Carousel(swidth),
               Footer(swidth),
             ]))));
