@@ -39,7 +39,6 @@ class _HomeDesktopState extends State<TemplateHome>
 
   @override
   Widget build(BuildContext context) {
-    // double paddingCard = MediaQuery.of(context).size.width * .025;
     double swidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
