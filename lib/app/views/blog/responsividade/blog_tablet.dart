@@ -17,6 +17,7 @@ import '../../../models/blog_models.dart';
 import '../blog_view.dart';
 import '../components/blog-details.dart';
 
+// ignore: must_be_immutable
 class BlogTablet extends ConsumerStatefulWidget {
   String newData;
   Key key;

@@ -8,39 +8,16 @@ import '../../../../utils/app_theme.dart';
 import 'home_Mobile.dart';
 
 class HomeMobile1 extends StatefulWidget {
-  final bool postAvailable;
-  final bool objectAvailable;
-  final List<dynamic> posts;
-  final List<dynamic> objects;
 
   const HomeMobile1({
-    required this.postAvailable,
-    required this.objectAvailable,
-    required this.posts,
-    required this.objects,
     Key? key,
   }) : super(key: key);
 
   @override
-  State<HomeMobile1> createState() => _HomeMobile1State(
-      postAvailable: postAvailable,
-      objectAvailable: objectAvailable,
-      posts: posts,
-      objects: objects);
+  State<HomeMobile1> createState() => _HomeMobile1State();
 }
 
 class _HomeMobile1State extends State<HomeMobile1> {
-  final bool postAvailable;
-  final bool objectAvailable;
-  final List<dynamic> posts;
-  final List<dynamic> objects;
-
-  _HomeMobile1State({
-    required this.postAvailable,
-    required this.objectAvailable,
-    required this.posts,
-    required this.objects,
-  });
 
   final TrackingScrollController _scrollController = TrackingScrollController();
   final navigationKey = GlobalKey<CurvedNavigationBarState>();
@@ -83,11 +60,7 @@ class _HomeMobile1State extends State<HomeMobile1> {
 
     final List<Widget> telas = [
       HomeMobile(
-          scrollController: _scrollController,
-          postAvailable: postAvailable,
-          objectAvailable: objectAvailable,
-          posts: posts,
-          objects: objects),
+          scrollController: _scrollController,),
       //  NossaHistoria(),
       Scaffold(
         backgroundColor: Colors.amber,

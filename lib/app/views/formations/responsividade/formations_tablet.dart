@@ -28,7 +28,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
-    double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
       BannerSuperior(context, 'Formações'),
       Padding(

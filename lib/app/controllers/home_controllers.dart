@@ -1,30 +1,46 @@
 import 'dart:convert';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:obamahome/app/models/search_models.dart';
 
-Future<List<dynamic>> fetchPosts(String searchTerm) async {
+import '../models/blog_models.dart';
+
+final blogPostsHome = StateProvider<List<BlogModel?>>((ref) {
+  return [];
+});
+
+Future<List<dynamic>> fetchPosts(WidgetRef ref) async {
   final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(response.body);
     final posts = jsonData
-        .map((item) => {
-              'title': item['title'],
-              'text': item['text'],
-              'summary': item['summary'],
-              'content': item['content'],
-              'published_date': item['published_date'],
-            })
-        .toList()
-        .reversed
-        .toList();
-    return posts.sublist(0, 3);
+    .map<BlogModel>((item) => BlogModel(
+          title: item['title'],
+          text: item['text'],
+          summary: extractSummaryPath(item['summary']),
+          publishedDate: convertDate(item['published_date']),
+          imagePath: extractImagePath(item['content']),
+        ))
+    .toList() as List<BlogModel>;
+
+    final newPosts = ref.read(blogPostsHome);
+    print("aqui => $newPosts");
+    newPosts.clear();
+    newPosts.addAll(posts);
+
+    return posts;
   } else {
     return [];
   }
 }
 
-Future<List<dynamic>> fetchObjects(String searchTerm) async {
+final searchListHome = StateProvider<List<SearchModel?>>((ref) {
+  return [];
+});
+
+Future<List<dynamic>> fetchObjects(WidgetRef ref) async {
   // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
   final result = {
@@ -121,13 +137,17 @@ Future<List<dynamic>> fetchObjects(String searchTerm) async {
   // final jsonData = jsonDecode(response.body);
   List<dynamic> jsonData = result['content'] as List<dynamic>;
   final posts = jsonData
-      .map((item) => {
-            'id': item['id'],
-            'nome': item['nome'],
-            'url': item['url'],
-          })
+      .map((item) => SearchModel(
+            id: item['id'],
+            nome: item['nome'],
+            url: item['url'],
+          ))
       .toList()
-      .reversed
-      .toList();
-  return posts.sublist(0, 4);
+      .sublist(0, 8);
+
+  final newPosts = ref.read(searchListHome);
+  newPosts.clear();
+  newPosts.addAll(posts);
+
+  return posts;
 }

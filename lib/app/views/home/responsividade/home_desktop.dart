@@ -6,23 +6,14 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../../components/sectionTitle.dart';
 import '../../../../utils/app_theme.dart';
-import '../components/our_product_item.dart';
 import '../constants.dart';
 import '../home_view.dart';
 
 class HomeDesktop extends StatefulWidget {
   final TrackingScrollController scrollController;
-  final bool postAvailable;
-  final bool objectAvailable;
-  final List<dynamic> posts;
-  final List<dynamic> objects;
 
   HomeDesktop({
     required this.scrollController,
-    required this.postAvailable,
-    required this.objectAvailable,
-    required this.posts,
-    required this.objects,
     Key? key,
   }) : super(key: key);
 
@@ -150,36 +141,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ),
         ]),
       ),
-      if (widget.objectAvailable == false) ...{
-        Container(
-          margin: paddingValues("mainTitleBottom", context),
-          child: SectionTitle('OBJETOS DE APRENDIZAGEM', 'Mais populares',
-              CrossAxisAlignment.center),
-        ),
-        // if (MediaQuery.of(context).size.width > 1000) ...[
-        Padding(
-          padding: paddingValues("sideHomeCards", context),
-          child: ResponsiveGridRow(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              for (var lista in widget.objects) ...{
-                ResponsiveGridCol(
-                  lg: 3,
-                  md: 6,
-                  xs: 12,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 30),
-                    child: OurProductItem(
-                      title: lista['nome'],
-                      image: lista['url'],
-                    ),
-                  ),
-                ),
-              }
-            ],
-          ),
-        ),
-      },
+      OAHome(swidth),
       Padding(
         padding: paddingValues("carouselTop", context),
         child: Container(
@@ -261,43 +223,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ]),
         ),
       ),
-      if (widget.postAvailable == false) ...{
-        Padding(
-          padding: paddingValues("sideHomePosts", context),
-          child: Column(
-            children: [
-              Padding(
-                padding: paddingValues("mainTitle", context),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: swidth * .016),
-                      child: SectionTitle('Últimos posts do blog', '',
-                          CrossAxisAlignment.start),
-                    ),
-                  ],
-                ),
-              ),
-              ResponsiveGridList(
-                  physics: NeverScrollableScrollPhysics(),
-                  scroll: false,
-                  desiredItemWidth: swidth * .25,
-                  minSpacing: swidth * .016,
-                  children: widget.posts.map((post) {
-                    return Container(
-                      alignment: Alignment(0, 0),
-                      child: blogData(context, post),
-                    );
-                  }).toList()
-                  // for (int i = 0; i < widget.posts.length; i++) ...{
-                  //   blogData(context, i, widget.posts),
-                  // }
-                  ),
-            ],
-          ),
-        ),
-      },
+      BlogHome(swidth)
     ]);
   }
 }

@@ -23,12 +23,10 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-
   var item;
 
   @override
   Widget build(BuildContext context) {
-    double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
       BannerSuperior(context, 'Formações'),
       Padding(

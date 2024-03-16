@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
@@ -111,7 +113,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
 
           print("right here => ${totalPages}, ${currentPage}, ${itemsPerPage}");
           // int? totalElements = pagination[0]!.totalElements;
-          widget.selectedPageIndex = currentPage!;
+          widget.selectedPageIndex = currentPage;
           List<SearchModel?> searchResult = pagination[0]!.content;
 
           if (snapshot.connectionState == ConnectionState.done) {

@@ -5,7 +5,6 @@ class BlogModel {
   String title;
   String text;
   String summary;
-  String content;
   String publishedDate;
   String imagePath;
 
@@ -15,7 +14,6 @@ class BlogModel {
     required this.title,
     required this.text,
     required this.summary,
-    required this.content,
     required this.publishedDate,
     required this.imagePath,
   });

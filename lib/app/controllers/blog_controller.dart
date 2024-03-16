@@ -59,7 +59,6 @@ class BlogController {
               title: postData['title'],
               text: postData['text'],
               summary: extractSummaryPath(postData['summary']),
-              content: postData['content'],
               publishedDate: convertDate(postData['published_date']),
               imagePath: extractImagePath(postData['content']),
             ))

@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
@@ -43,6 +45,7 @@ class _SearchTabletState extends State<SearchTablet> {
   }
 }
 
+// ignore: duplicate_ignore
 // ignore: must_be_immutable
 class SearchPageView extends ConsumerStatefulWidget {
   String termSearched;
@@ -145,7 +148,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (searchResult.length > 10) ...{
+                        if (searchResult.length > itemsPerPage) ...{
                           Container(
                             width: 40,
                             height: 40,

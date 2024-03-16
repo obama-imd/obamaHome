@@ -36,13 +36,13 @@ class TemplateRowState extends State<TemplateRow> {
                 Container(
                     width: swidth,
                     height: 125,
-                    margin: EdgeInsets.only(
-                        left: swidth * 0.068, right: swidth * 0.06),
+                    margin:  EdgeInsets.only(
+                        left: swidth * 0.068, right: swidth * 0.058),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SizedBox(
-                              width: 250,
+                              width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                           NavMenu(swidth: swidth, heightBtn: 50),

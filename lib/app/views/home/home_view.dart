@@ -1,60 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:html/parser.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obamahome/app/models/blog_models.dart';
+import 'package:obamahome/app/models/search_models.dart';
 import 'package:obamahome/app/views/home/responsividade/home_desktop.dart';
 import 'package:obamahome/app/views/home/responsividade/home_mobile1.dart';
 import 'package:obamahome/app/views/home/responsividade/home_tablet.dart';
 import 'package:obamahome/utils/responsivo.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
+import '../../../components/loadCircle.dart';
+import '../../../components/sectionTitle.dart';
 import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
-
-Widget blogData(BuildContext context, datas) {
-  double imageWidth = (MediaQuery.of(context).size.width * .3);
-  double imageHeight = 185;
-
-  // final item = datas[index];
-  final item = datas;
-
-  String extractImagePath(String content) {
-    final document = parse(content);
-    final imgElement = document.getElementsByTagName('img').last;
-    final result = imgElement.attributes['src'];
-    return result!;
-  }
-
-  String imagePath = extractImagePath(item['content']);
-
-  String pubDate = item['published_date'];
-  DateTime dateTime = DateTime.parse(pubDate);
-  String formattedDate = DateFormat('dd/MM/yyyy').format(dateTime);
-
-  // String sumValue = extractSummaryPath(item['summary']);
-  return Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Image.network(imagePath,
-          height: imageHeight, width: imageWidth, fit: BoxFit.cover),
-      // Text(imagePath),
-      Padding(
-        padding: paddingValues("blogPostDate", context),
-        child: Row(
-          children: [
-            const Icon(Icons.access_time, size: 16),
-            Text(formattedDate),
-          ],
-        ),
-      ),
-      Container(
-        margin: paddingValues("blogHomeTitle", context),
-        child: Text(item['title'],
-            style: textTheme.titleSmall!),
-      ),
-      Text(item['text'], maxLines: 4),
-      // Text(sumValue),
-    ],
-  );
-}
+import 'components/our_product_item.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -71,38 +29,6 @@ class _HomePage1State extends State<HomeView> {
   bool postAvailable = true;
   bool objectAvailable = true;
 
-  Future<void> fetchandUpdatePosts() async {
-    final fetchedPosts = await fetchPosts('');
-    setState(() {
-      if (fetchedPosts.isNotEmpty) {
-        postAvailable = false;
-        posts = fetchedPosts;
-      } else {
-        postAvailable = true;
-      }
-    });
-  }
-
-  Future<void> fetchandUpdateObjects() async {
-    final fetchedObjects = await fetchObjects('');
-    setState(() {
-      if (fetchedObjects.isNotEmpty) {
-        objectAvailable = false;
-        objects = fetchedObjects;
-      } else {
-        objectAvailable = true;
-      }
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // fetchDataAndUpdateState();
-    fetchandUpdatePosts();
-    fetchandUpdateObjects();
-  }
-
   @override
   void dispose() {
     _scrollController.dispose();
@@ -114,25 +40,175 @@ class _HomePage1State extends State<HomeView> {
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          body: Responsivo(
-              mobile: HomeMobile1(
-                  postAvailable: postAvailable,
-                  objectAvailable: objectAvailable,
-                  posts: posts,
-                  objects: objects),
-              //mobile: HomeMobile( scrollController: _scrollController,),
-              tablet: HomeTablet(
+            body: Responsivo(
+                mobile: HomeMobile1(),
+                //mobile: HomeMobile( scrollController: _scrollController,),
+                tablet: HomeTablet(
                   scrollController: _scrollController,
-                  postAvailable: postAvailable,
-                  objectAvailable: objectAvailable,
-                  posts: posts,
-                  objects: objects),
-              desktop: HomeDesktop(
+                ),
+                desktop: HomeDesktop(
                   scrollController: _scrollController,
-                  postAvailable: postAvailable,
-                  objectAvailable: objectAvailable,
-                  posts: posts,
-                  objects: objects)),
-        ));
+                ))));
+  }
+}
+
+class OAHome extends ConsumerStatefulWidget {
+  final double swidth;
+  const OAHome(this.swidth, {super.key});
+
+  @override
+  OAHomeState createState() => OAHomeState();
+}
+
+class OAHomeState extends ConsumerState<OAHome> {
+  Key key = UniqueKey();
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder(
+      future: fetchObjects(ref),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final searchList = ref.watch(searchListHome);
+          List<SearchModel?> data = [...searchList];
+          return Column(children: [
+            Padding(
+              padding: paddingValues("sideHomePosts", context),
+              child: Column(
+                children: [
+                  if (data.isNotEmpty) ...{
+                    Padding(
+                      padding: paddingValues("mainTitleBottom", context),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: widget.swidth * .016),
+                            child: SectionTitle('Objetos de Aprendizagem', '',
+                                CrossAxisAlignment.start),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ResponsiveGridList(
+                        physics: NeverScrollableScrollPhysics(),
+                        scroll: false,
+                        desiredItemWidth: widget.swidth * .2,
+                        minSpacing: widget.swidth * .016,
+                        children: data.map((post) {
+                          return Container(
+                            alignment: Alignment(0, 0),
+                            child: OurProductItem(
+                                title: post!.nome, image: post.url),
+                          );
+                        }).toList()),
+                  } else
+                    ...{}
+                ],
+              ),
+            )
+          ]);
+        } else if (snapshot.hasError) {
+          Container(
+              padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+              width: widget.swidth * 0.67,
+              child: Text(
+                "Perdão, tivemos um problema, tente mais tarde.",
+              ));
+        }
+        return circleLoadSpinner(context, widget.swidth);
+      },
+    );
+  }
+}
+
+class BlogHome extends ConsumerStatefulWidget {
+  final double swidth;
+  const BlogHome(this.swidth, {super.key});
+
+  @override
+  BlogHomeState createState() => BlogHomeState();
+}
+
+class BlogHomeState extends ConsumerState<BlogHome> {
+  @override
+  Widget build(BuildContext context) {
+    double imageWidth = widget.swidth * .3;
+    double imageHeight = 185;
+
+    return FutureBuilder(
+      future: fetchPosts(ref),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final blogList = ref.watch(blogPostsHome);
+          List<BlogModel?> posts = [...blogList];
+          // print(posts);
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: widget.swidth*.057),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              if (posts.isNotEmpty) ...{
+                Padding(
+                  padding: paddingValues("mainTitle", context),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: widget.swidth * .01),
+                        child: SectionTitle('Últimos posts do blog', '',
+                            CrossAxisAlignment.start),
+                      ),
+                    ],
+                  ),
+                ),
+                ResponsiveGridRow(children: [
+                  for (var item in posts) ...{
+                    ResponsiveGridCol(
+                      lg: 4,
+                      md: 8,
+                      sm: 12,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: widget.swidth*.01),
+                        child: Column( crossAxisAlignment: CrossAxisAlignment.start, children: [
+                          Image.network(item!.imagePath,
+                              height: imageHeight,
+                              width: imageWidth,
+                              fit: BoxFit.cover),
+                          Padding(
+                            padding: paddingValues("blogPostDate", context),
+                            child: Row(
+                              children: [
+                                const Icon(Icons.access_time, size: 16),
+                                Text(item.publishedDate),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            margin: paddingValues("blogHomeTitle", context),
+                            child: Text(item.title, style: textTheme.titleSmall!),
+                          ),
+                          Text(item.text, maxLines: 4),
+                        ]),
+                      ),
+                    )
+                  }
+                ])
+              } else
+                ...{}
+            ]),
+          );
+        } else if (snapshot.hasError) {
+          Container(
+              padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+              width: widget.swidth,
+              child: Text(
+                "Perdão, tivemos um problema, tente mais tarde.",
+              ));
+        }
+        return circleLoadSpinner(context, widget.swidth);
+      },
+    );
   }
 }

@@ -157,7 +157,7 @@ EdgeInsets paddingValues(String paddingName, context) {
         return EdgeInsets.only(top: 120, bottom: 115);
       }
     case "logo":
-      return EdgeInsets.only(top: 19, bottom: 19);
+      return EdgeInsets.only(top: 24, bottom: 24);
     case "mainTitle":
       if (swidth < 700 ) {
         return EdgeInsets.only(top: 75, bottom: 65);

@@ -36,14 +36,15 @@ class _HomeDesktopState extends State<TemplateHome> {
               TopBar(swidth),
               if (swidth >= 1360) ...[
                 Padding(
-                  padding: paddingValues("sideMainPadding", context),
+                  padding: EdgeInsets.only(
+                      left: swidth * 0.068, right: swidth * 0.058),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
                           padding: paddingValues("logo", context),
                           child: SizedBox(
-                              width: 250,
+                              width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
                         ),
@@ -53,6 +54,9 @@ class _HomeDesktopState extends State<TemplateHome> {
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
               ],
+              LinearProgressIndicator(
+                minHeight: 5,
+              ),
               ...widget.children,
               Carousel(swidth),
               Footer(swidth),
