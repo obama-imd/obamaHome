@@ -29,16 +29,38 @@ class drawermenu extends StatelessWidget {
             child: Column(
               children: [
                 for (var item in itemValues) ...{
-                  ExpansionTile(title: Text(item.name, style: textTheme.headlineSmall), children: [
-                    for (var i = 0; i < item.subItems.length; i++) ...{
-                      ListTile(
-                          title: InkWell(
-                              child: Text(item.subItems[i], ),
+                  if (item.subItems.isNotEmpty) ...{
+                    ExpansionTile(
+                        title: Text(item.name, style: textTheme.headlineSmall),
+                        children: [
+                          for (var i = 0; i < item.subItems.length; i++) ...{
+                            ListTile(
+                                title: InkWell(
+                                    child: Text(
+                                      item.subItems[i]!, style: textTheme.bodyMedium,
+                                    ),
+                                    onTap: () {
+                                      Navigator.pushNamed(
+                                          context, item.path[i]);
+                                    }))
+                          }
+                        ]),
+                  } else ...{
+                    Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: InkWell(
                               onTap: () {
-                                Navigator.pushNamed(context, item.path[i]);
-                              }))
-                    }
-                  ]),
+                                Navigator.pushNamed(context, item.path[0]);
+                              },
+                              child: Text(item.name, style: textTheme.headlineSmall)),
+                        ),
+                      ],
+                    )
+                  }
                 }
               ],
             )));

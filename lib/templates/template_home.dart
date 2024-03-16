@@ -19,8 +19,23 @@ class TemplateHome extends StatefulWidget {
   State<TemplateHome> createState() => _HomeDesktopState();
 }
 
-class _HomeDesktopState extends State<TemplateHome> {
+class _HomeDesktopState extends State<TemplateHome>
+    with TickerProviderStateMixin {
   var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  late AnimationController controller;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 5),
+    )..addListener(() {
+        setState(() {});
+      });
+    controller.repeat();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +69,18 @@ class _HomeDesktopState extends State<TemplateHome> {
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
               ],
-              LinearProgressIndicator(
-                minHeight: 5,
-              ),
+              Stack(children: [
+                Container(
+                    width: swidth,
+                    constraints: BoxConstraints(maxHeight: 660),
+                    child: Image.asset("assets/images/animate.gif",
+                        fit: BoxFit.cover)),
+                LinearProgressIndicator(
+                  minHeight: 5,
+                  backgroundColor: onSecondary,
+                  value: controller.value,
+                ),
+              ]),
               ...widget.children,
               Carousel(swidth),
               Footer(swidth),

@@ -30,13 +30,6 @@ class _HomeDesktopState extends State<HomeDesktop> {
     double swidth = MediaQuery.of(context).size.width;
 
     return TemplateHome(children: [
-// box com gif da foto tela inicial
-      SizedBox(
-          width: swidth,
-          height: 660,
-          // color: Colors.grey,
-          child: Image.asset("assets/images/animate.gif", fit: BoxFit.cover)),
-
       //abaixo do gif
       Container(
         height: 320,
