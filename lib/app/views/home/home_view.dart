@@ -5,10 +5,10 @@ import 'package:obamahome/app/models/search_models.dart';
 import 'package:obamahome/app/views/home/responsividade/home_desktop.dart';
 import 'package:obamahome/app/views/home/responsividade/home_mobile1.dart';
 import 'package:obamahome/app/views/home/responsividade/home_tablet.dart';
+import 'package:obamahome/components/loadCircle.dart';
 import 'package:obamahome/utils/responsivo.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../components/loadCircle.dart';
 import '../../../components/sectionTitle.dart';
 import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
@@ -18,16 +18,11 @@ class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => _HomePage1State();
+  State<HomeView> createState() => HomeViewState();
 }
 
-class _HomePage1State extends State<HomeView> {
+class HomeViewState extends State<HomeView> {
   final TrackingScrollController _scrollController = TrackingScrollController();
-
-  List<dynamic> posts = [];
-  List<dynamic> objects = [];
-  bool postAvailable = true;
-  bool objectAvailable = true;
 
   @override
   void dispose() {
@@ -35,26 +30,66 @@ class _HomePage1State extends State<HomeView> {
     super.dispose();
   }
 
+  bool loadPosts = false;
+  bool loadObjects = false;
+
+  @override
+  void initState() {
+    super.initState();
+    activateLoad();
+  }
+
+  void activateLoad() {
+    setState(() {
+      loadPosts = true;
+      loadObjects = true;
+    });
+  }
+
+  void hideObjects() {
+    setState(() {
+      loadObjects = false;
+    });
+  }
+
+  void hidePosts() {
+    // print("olha aqui =>");
+    setState(() {
+      loadPosts = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-            body: Responsivo(
-                mobile: HomeMobile1(),
+            body: Stack(
+          children: [
+            Responsivo(
+                mobile: HomeMobile1(
+                  hidePosts: () => hidePosts(),
+                ),
                 //mobile: HomeMobile( scrollController: _scrollController,),
                 tablet: HomeTablet(
                   scrollController: _scrollController,
+                  hidePosts: () => hidePosts(),
                 ),
                 desktop: HomeDesktop(
                   scrollController: _scrollController,
-                ))));
+                  hidePosts: () => hidePosts(),
+                  hideObjects: () => hideObjects(),
+                )),
+            // if (loadPosts || loadObjects) ...{circleLoadSpinner(context)}
+          ],
+        )));
   }
 }
 
 class OAHome extends ConsumerStatefulWidget {
   final double swidth;
-  const OAHome(this.swidth, {super.key});
+  final void Function() hideObjects;
+  const OAHome(this.swidth, this.hideObjects, {super.key});
 
   @override
   OAHomeState createState() => OAHomeState();
@@ -63,7 +98,16 @@ class OAHome extends ConsumerStatefulWidget {
 class OAHomeState extends ConsumerState<OAHome> {
   Key key = UniqueKey();
 
-  @override
+  // void initState() {
+  //   super.initState();
+  //   waitObject();
+  // }
+
+  // void waitObject() async {
+  //   await fetchObjects(ref).whenComplete(widget.hideObjects);
+  // }
+
+ @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: fetchObjects(ref),
@@ -117,7 +161,7 @@ class OAHomeState extends ConsumerState<OAHome> {
                 "Perdão, tivemos um problema, tente mais tarde.",
               ));
         }
-        return circleLoadSpinner(context, widget.swidth);
+        return circleLoadSpinner(context);
       },
     );
   }
@@ -125,13 +169,24 @@ class OAHomeState extends ConsumerState<OAHome> {
 
 class BlogHome extends ConsumerStatefulWidget {
   final double swidth;
-  const BlogHome(this.swidth, {super.key});
+  final void Function() hidePosts;
+  const BlogHome(this.swidth, this.hidePosts, {super.key});
 
   @override
   BlogHomeState createState() => BlogHomeState();
 }
 
 class BlogHomeState extends ConsumerState<BlogHome> {
+  @override
+  void initState() {
+    super.initState();
+    // waitPost();
+  }
+
+  // void waitPost() async {
+  //   await fetchObjects(ref).whenComplete(widget.hidePosts);
+  // }
+
   @override
   Widget build(BuildContext context) {
     double imageWidth = widget.swidth * .3;
@@ -141,11 +196,14 @@ class BlogHomeState extends ConsumerState<BlogHome> {
       future: fetchPosts(ref),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
+          // Navigator.of(context, rootNavigator: true).pop();
+          // _HomePage1State().hidePosts();
+
           final blogList = ref.watch(blogPostsHome);
           List<BlogModel?> posts = [...blogList];
           // print(posts);
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: widget.swidth*.057),
+            padding: EdgeInsets.symmetric(horizontal: widget.swidth * .057),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               if (posts.isNotEmpty) ...{
@@ -170,27 +228,31 @@ class BlogHomeState extends ConsumerState<BlogHome> {
                       md: 8,
                       sm: 12,
                       child: Padding(
-                        padding: EdgeInsets.symmetric(horizontal: widget.swidth*.01),
-                        child: Column( crossAxisAlignment: CrossAxisAlignment.start, children: [
-                          Image.network(item!.imagePath,
-                              height: imageHeight,
-                              width: imageWidth,
-                              fit: BoxFit.cover),
-                          Padding(
-                            padding: paddingValues("blogPostDate", context),
-                            child: Row(
-                              children: [
-                                const Icon(Icons.access_time, size: 16),
-                                Text(item.publishedDate),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            margin: paddingValues("blogHomeTitle", context),
-                            child: Text(item.title, style: textTheme.titleSmall!),
-                          ),
-                          Text(item.text, maxLines: 4),
-                        ]),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: widget.swidth * .01),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Image.network(item!.imagePath,
+                                  height: imageHeight,
+                                  width: imageWidth,
+                                  fit: BoxFit.cover),
+                              Padding(
+                                padding: paddingValues("blogPostDate", context),
+                                child: Row(
+                                  children: [
+                                    const Icon(Icons.access_time, size: 16),
+                                    Text(item.publishedDate),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                margin: paddingValues("blogHomeTitle", context),
+                                child: Text(item.title,
+                                    style: textTheme.titleSmall!),
+                              ),
+                              Text(item.text, maxLines: 4),
+                            ]),
                       ),
                     )
                   }
@@ -207,7 +269,7 @@ class BlogHomeState extends ConsumerState<BlogHome> {
                 "Perdão, tivemos um problema, tente mais tarde.",
               ));
         }
-        return circleLoadSpinner(context, widget.swidth);
+        return circleLoadSpinner(context);
       },
     );
   }

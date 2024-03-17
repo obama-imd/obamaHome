@@ -11,9 +11,13 @@ import '../home_view.dart';
 
 class HomeDesktop extends StatefulWidget {
   final TrackingScrollController scrollController;
+  final void Function() hidePosts;
+  final void Function() hideObjects;
 
   HomeDesktop({
     required this.scrollController,
+    required this.hidePosts,
+    required this.hideObjects,
     Key? key,
   }) : super(key: key);
 
@@ -42,23 +46,21 @@ class _HomeDesktopState extends State<HomeDesktop> {
       ),
       Container(
           margin: paddingValues("sideMainPadding", context),
-          child: Expanded(
-            child: ResponsiveGridRow(
-              children: [
-                for (int i = 0; i < sectionTitle.length; i++) ...{
-                  ResponsiveGridCol(
-                    lg: 3,
-                    md: 6,
-                    xs: 12,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      child: ItemProduto("Data Recovery",
-                          "nononon nono nonon non !", "i1.png"),
-                    ),
+          child: ResponsiveGridRow(
+            children: [
+              for (int i = 0; i < sectionTitle.length; i++) ...{
+                ResponsiveGridCol(
+                  lg: 3,
+                  md: 6,
+                  xs: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: ItemProduto(
+                        "Data Recovery", "nononon nono nonon non !", "i1.png"),
                   ),
-                }
-              ],
-            ),
+                ),
+              }
+            ],
           )),
       Container(
         margin: paddingValues("sectionPadding", context),
@@ -134,7 +136,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ),
         ]),
       ),
-      OAHome(swidth),
+      OAHome(swidth, widget.hideObjects),
       Padding(
         padding: paddingValues("carouselTop", context),
         child: Container(
@@ -216,7 +218,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ]),
         ),
       ),
-      BlogHome(swidth)
+      BlogHome(swidth, widget.hidePosts)
     ]);
   }
 }

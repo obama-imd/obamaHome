@@ -25,7 +25,6 @@ Widget mainButton(
             } else if (onPressed != null) {
               onPressed();
             } else {
-              print('No action defined for the button');
             }
           },
           child: Text(content, style: textTheme.labelMedium)));

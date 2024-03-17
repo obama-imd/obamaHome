@@ -101,6 +101,7 @@ class _NavMenuState extends State<NavMenu> {
   Widget build(BuildContext context) {
     String? currentRoute = ModalRoute.of(context)?.settings.name;
     double swidth = MediaQuery.of(context).size.width;
+    print("veja aqui => ${currentRoute}");
 
     return MenuBar(children: [
       for (int i = 0; i < itemValues.length; i++) ...{
@@ -118,6 +119,7 @@ class _NavMenuState extends State<NavMenu> {
                         });
                       },
                       hoverColor: background,
+                      highlightColor: background,
                       onTap: () {
                         Navigator.pushNamed(context, itemValues[i].path[0]);
                       },
@@ -126,9 +128,11 @@ class _NavMenuState extends State<NavMenu> {
                         child: Text(itemValues[i].name,
                             style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.bold,
-                                color: itemValues[i].itemHover
+                                color: itemValues[i].path[0] == currentRoute
                                     ? primary
-                                    : onPrimary)),
+                                    : itemValues[i].itemHover
+                                        ? primary
+                                        : onPrimary)),
                       ),
                     ),
                   ))),

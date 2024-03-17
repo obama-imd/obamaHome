@@ -7,13 +7,14 @@ import '../../../../components/sectionTitle.dart';
 import '../../../../templates/template_home.dart';
 import '../../../../utils/app_theme.dart';
 import '../constants.dart';
-import '../home_view.dart';
 
 class HomeMobile extends StatefulWidget {
   final TrackingScrollController scrollController;
+  final void hidePosts;
 
   const HomeMobile({
     required this.scrollController,
+    required this.hidePosts,
     Key? key,
   }) : super(key: key);
 
@@ -50,23 +51,21 @@ class _HomeMobileState extends State<HomeMobile> {
       Container(
           margin: EdgeInsets.symmetric(horizontal: swidth * .05),
           padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Expanded(
-            child: ResponsiveGridRow(
-              children: [
-                for (int i = 0; i < sectionTitle.length; i++) ...{
-                  ResponsiveGridCol(
-                    lg: 3,
-                    md: 6,
-                    xs: 12,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 30),
-                      child: ItemProduto("Data Recovery",
-                          "nononon nono nonon non !", "i1.png"),
-                    ),
+          child: ResponsiveGridRow(
+            children: [
+              for (int i = 0; i < sectionTitle.length; i++) ...{
+                ResponsiveGridCol(
+                  lg: 3,
+                  md: 6,
+                  xs: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 30),
+                    child: ItemProduto("Data Recovery",
+                        "nononon nono nonon non !", "i1.png"),
                   ),
-                }
-              ],
-            ),
+                ),
+              }
+            ],
           )),
       // Container(
       //     width: MediaQuery.of(context).size.width,
@@ -201,7 +200,7 @@ class _HomeMobileState extends State<HomeMobile> {
             CrossAxisAlignment.center),
       ),
       // if (MediaQuery.of(context).size.width > 1000) ...[
-      OAHome(swidth),
+      // OAHome(swidth),
       ResponsiveGridRow(children: [
         if (swidth > 992) ...{
           ResponsiveGridCol(

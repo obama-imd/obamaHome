@@ -120,7 +120,7 @@ class BlogPageState extends ConsumerState<BlogMobile> {
                 "Perdão, não há nenhum post a ser exibido no momento.",
               ));
         }
-        return circleLoadSpinner(context, widget.swidth);
+        return circleLoadSpinner(context);
       },
     );
   }

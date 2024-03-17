@@ -82,7 +82,7 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
                   "Perdão, ocorreu um erro interno.",
                 ));
           }
-          return circleLoadSpinner(context, widget.swidth);
+          return circleLoadSpinner(context);
         },
       )
     ]);

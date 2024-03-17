@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/utils/app_theme.dart';
 
-import '../utils/cores_personalizadas.dart';
-
-
 // Future<void> circleLoadSpinner(BuildContext context) async {
 //   return showDialog<void>(
 //     context: context,
@@ -25,24 +22,20 @@ import '../utils/cores_personalizadas.dart';
 //   );
 // }
 
-Widget circleLoadSpinner(context, swidth) {
+Widget circleLoadSpinner(context) {
   double sheight = MediaQuery.of(context).size.height;
-  return IndexedStack(
-    children: [
-      Container(
-        width: swidth,
-        height: sheight,
-        color: modalBackground,
-        child: Center(
-          child: SizedBox(
-            width: 50,
-            height: 50,
-            child: CircularProgressIndicator(
-              color: CoresPersonalizadas.azulObama,
-            ),
-          ),
+  double swidth = MediaQuery.of(context).size.width;
+  return Container(
+    width: swidth,
+    height: sheight,
+    child: Center(
+      child: SizedBox(
+        width: 50,
+        height: 50,
+        child: CircularProgressIndicator(
+          color: primary,
         ),
-      )
-    ],
+      ),
+    ),
   );
 }

@@ -19,23 +19,22 @@ class TemplateHome extends StatefulWidget {
   State<TemplateHome> createState() => _HomeDesktopState();
 }
 
-class _HomeDesktopState extends State<TemplateHome>
-    with TickerProviderStateMixin {
+class _HomeDesktopState extends State<TemplateHome> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
   late AnimationController controller;
 
-  @override
-  void initState() {
-    controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 5),
-    )..addListener(() {
-        setState(() {});
-      });
-    controller.repeat();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   controller = AnimationController(
+  //     vsync: this,
+  //     duration: const Duration(seconds: 5),
+  //   )..addListener(() {
+  //       setState(() {});
+  //     });
+  //   controller.repeat();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +76,7 @@ class _HomeDesktopState extends State<TemplateHome>
                 LinearProgressIndicator(
                   minHeight: 5,
                   backgroundColor: onSecondary,
-                  value: controller.value,
+                  // value: controller.value,
                 ),
               ]),
               ...widget.children,

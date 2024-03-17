@@ -5,12 +5,13 @@ import 'package:obamahome/utils/cores_personalizadas.dart';
 
 // import '../about-us/nossa_historia.dart';
 import '../../../../utils/app_theme.dart';
-import 'home_Mobile.dart';
 
 class HomeMobile1 extends StatefulWidget {
+  final void hidePosts;
 
   const HomeMobile1({
     Key? key,
+    required this.hidePosts
   }) : super(key: key);
 
   @override
@@ -59,9 +60,9 @@ class _HomeMobile1State extends State<HomeMobile1> {
     ];
 
     final List<Widget> telas = [
-      HomeMobile(
-          scrollController: _scrollController,),
-      //  NossaHistoria(),
+      // HomeMobile(
+      //     scrollController: _scrollController),
+      // //  NossaHistoria(),
       Scaffold(
         backgroundColor: Colors.amber,
       ),
