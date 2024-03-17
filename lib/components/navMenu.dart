@@ -101,7 +101,6 @@ class _NavMenuState extends State<NavMenu> {
   Widget build(BuildContext context) {
     String? currentRoute = ModalRoute.of(context)?.settings.name;
     double swidth = MediaQuery.of(context).size.width;
-    print("veja aqui => ${currentRoute}");
 
     return MenuBar(children: [
       for (int i = 0; i < itemValues.length; i++) ...{

@@ -20,7 +20,6 @@ Widget blogFilters(
   Function(String) updateData,
 ) {
   bool isHover = false;
-  // print(" aqui, OTÀRIO => ${datas.length}");
   return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
     Container(
         alignment: Alignment.centerLeft,

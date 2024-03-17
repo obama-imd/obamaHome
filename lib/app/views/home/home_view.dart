@@ -53,7 +53,6 @@ class HomeViewState extends State<HomeView> {
   }
 
   void hidePosts() {
-    // print("olha aqui =>");
     setState(() {
       loadPosts = false;
     });

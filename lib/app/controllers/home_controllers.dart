@@ -26,7 +26,6 @@ Future<List<dynamic>> fetchPosts(WidgetRef ref) async {
     .toList() as List<BlogModel>;
 
     final newPosts = ref.read(blogPostsHome);
-    print("aqui => $newPosts");
     newPosts.clear();
     newPosts.addAll(posts);
 
