@@ -58,9 +58,11 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
   }
 
   void waitData() async {
-    await fetchData("").whenComplete(() => setState(() {
-          loadPosts = false;
-        }));
+    Future.wait([fetchData("")])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadPosts = false;
+            }));
   }
 
   @override

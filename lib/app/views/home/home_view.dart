@@ -48,13 +48,13 @@ class HomeViewState extends ConsumerState<HomeView> {
     });
   }
 
-  void waitData(ref) async {
-    await fetchPosts(ref).whenComplete(() => setState(() {
-          loadPosts = false;
-        }));
-    await fetchObjects(ref).whenComplete(() => setState(() {
-          loadObjects = false;
-        }));
+  void waitData(ref) {
+    Future.wait([fetchPosts(ref), fetchObjects(ref)])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadPosts = false;
+              loadObjects = false;
+            }));
   }
 
   @override

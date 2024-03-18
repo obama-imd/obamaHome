@@ -52,14 +52,15 @@ class _BlogPageState extends State<BlogPage> {
   void activateLoad() {
     setState(() {
       loadPosts = true;
-      loadObjects = true;
     });
   }
 
   void waitData() async {
-    await fetchData("").whenComplete(() => setState(() {
-          loadPosts = false;
-        }));
+    Future.wait([fetchData("")])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadPosts = false;
+            }));
   }
 
   @override
