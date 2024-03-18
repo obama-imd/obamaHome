@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/models/lesson_plan_models.dart';
+import 'package:obamahome/components/bannerSuperior.dart';
+import 'package:obamahome/templates/template_basic_col.dart';
+import 'package:obamahome/utils/app_padding.dart';
 
 class ListLessonPlan extends StatefulWidget {
   const ListLessonPlan({super.key});
@@ -23,28 +26,31 @@ class _ListLessonPlanState extends State<ListLessonPlan> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: _lessonPlans.length + 1,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return _buildHeader();
-                } else {
-                  final lessonPlan = _lessonPlans[index - 1];
-                  return _buildRow(
-                    lessonPlan.titulo,
-                    lessonPlan.autor,
-                    lessonPlan.dataPublicacao.toString(),
-                  );
-                }
-              },
-            ),
+    return TemplateColumn(
+      children: [
+        BannerSuperior(context, "Planos de Aula"),
+        Container(
+          margin: paddingValues("carouselTop", context),
+          padding: paddingValues("sideMainPadding", context),
+          child: ListView.builder(
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            itemCount: _lessonPlans.length + 1,
+            itemBuilder: (context, index) {
+              if (index == 0) {
+                return _buildHeader();
+              } else {
+                final lessonPlan = _lessonPlans[index - 1];
+                return _buildRow(
+                  lessonPlan.titulo,
+                  lessonPlan.autor,
+                  lessonPlan.dataPublicacao.toString(),
+                );
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 

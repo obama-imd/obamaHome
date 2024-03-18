@@ -58,7 +58,7 @@ final List<ItemValue> itemValues = [
   ),
   ItemValue(
     name: "PLANOS DE AULA",
-    path: ['/loja'],
+    path: ['/planos-aulas'],
     subItems: [],
     itemHover: false,
     subItemHover: List.generate(1, (index) => false),
