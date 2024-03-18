@@ -7,6 +7,7 @@ import '../../../../components/menuMobile.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../../../../utils/app_theme.dart';
+import '../utils/app_padding.dart';
 
 class TemplateHome extends StatefulWidget {
   final List<Widget> children;

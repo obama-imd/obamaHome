@@ -5,7 +5,7 @@ import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import '../../../../components/bannerSuperior.dart';
-import '../../../../utils/app_theme.dart';
+import '../../../../utils/app_padding.dart';
 import '../components/advancedSearchOA.dart';
 
 class SearchDesktop extends StatefulWidget {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/formations/constants.dart';
 import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
-import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../../components/dropdown_with_video.dart';
+import '../../../../utils/app_padding.dart';
 
 class FormacoesDesktop extends StatelessWidget {
   const FormacoesDesktop({super.key});

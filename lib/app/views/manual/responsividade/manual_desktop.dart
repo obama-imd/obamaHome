@@ -5,7 +5,7 @@ import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../../components/dropdown_with_video.dart';
-import '../../../../utils/app_theme.dart';
+import '../../../../utils/app_padding.dart';
 
 class ManuaisDesktop extends StatefulWidget {
   const ManuaisDesktop({super.key});
