@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
 
 import '../404.dart';
 import '../app/views/about-us/aboutUs_view.dart';
@@ -118,7 +119,8 @@ final MaterialApp AppMaterial = MaterialApp(
         termSearched:
             ModalRoute.of(context)?.settings.arguments as String? ?? ''),
     '/trilhas': (context) => TrilhasPage(),
-    '/manuais': (context) => ManuaisPage()
+    '/manuais': (context) => ManuaisPage(),
+    '/planos-aulas':(context) => ListLessonPlan(),
   },
   onGenerateRoute: (settings) {
     if (settings.name == null) {
