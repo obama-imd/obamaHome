@@ -10,11 +10,11 @@ import '../constants.dart';
 
 class HomeTablet extends StatefulWidget {
   final TrackingScrollController scrollController;
-    final void hidePosts;
+    // final void hidePosts;
 
   const HomeTablet({
     required this.scrollController,
-    required this.hidePosts,
+    // required this.hidePosts,
     Key? key,
   }) : super(key: key);
 

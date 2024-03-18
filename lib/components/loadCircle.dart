@@ -28,12 +28,13 @@ Widget circleLoadSpinner(context) {
   return Container(
     width: swidth,
     height: sheight,
+    color: modalBackground,
     child: Center(
       child: SizedBox(
         width: 50,
         height: 50,
         child: CircularProgressIndicator(
-          color: primary,
+          color: background,
         ),
       ),
     ),

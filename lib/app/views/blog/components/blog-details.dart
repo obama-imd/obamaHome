@@ -28,6 +28,9 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
   _MyStatefulWidgetState({required this.pageIndex});
   var scaffoldKey = GlobalKey<ScaffoldState>();
   late PageController _pageController;
+  String newData = '';
+  Key key = UniqueKey();
+  bool loadPosts = false;
 
   @override
   void dispose() {
@@ -35,13 +38,29 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
     super.dispose();
   }
 
-  String newData = '';
-  Key key = UniqueKey();
-
   void updateData(String value) {
     setState(() {
       newData = value;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    activateLoad();
+    waitData();
+  }
+
+  void activateLoad() {
+    setState(() {
+      loadPosts = true;
+    });
+  }
+
+  void waitData() async {
+    await fetchData("").whenComplete(() => setState(() {
+          loadPosts = false;
+        }));
   }
 
   @override
@@ -56,35 +75,41 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
 
     _pageController = PageController(initialPage: pageArgs);
 
-    return TemplateRow(children: [
-      FutureBuilder<void>(
-        future: BlogController().updateBlogContent(ref, newData),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            final blogDataList = ref.watch(blogPosts);
-            List<BlogModel?> datas = [...blogDataList];
-            return Column(children: [
-              BannerSuperior(context, 'Publicações'),
-              Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                blogPageView(context, swidth, _pageController, datas),
+    return Stack(
+      children: [
+        TemplateRow(children: [
+          FutureBuilder<void>(
+            future: BlogController().updateBlogContent(ref, newData),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                final blogDataList = ref.watch(blogPosts);
+                List<BlogModel?> datas = [...blogDataList];
+                return Column(children: [
+                  BannerSuperior(context, 'Publicações'),
+                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                    blogPageView(context, swidth, _pageController, datas),
+                    Container(
+                        padding: const EdgeInsets.only(top: 85.0, left: 15),
+                        width: swidth * .295,
+                        child: blogFilters(context, swidth, datas, updateData)),
+                  ])
+                ]);
+              } else if (snapshot.hasError) {
                 Container(
-                    padding: const EdgeInsets.only(top: 85.0, left: 15),
-                    width: swidth * .295,
-                    child: blogFilters(context, swidth, datas, updateData)),
-              ])
-            ]);
-          } else if (snapshot.hasError) {
-            Container(
-                padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-                width: swidth * 0.67,
-                child: Text(
-                  "Perdão, não há nenhum post a ser exibido no momento.",
-                ));
-          }
-          return circleLoadSpinner(context);
-        },
-      ),
-    ]);
+                    padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+                    width: swidth * 0.67,
+                    child: Text(
+                      "Perdão, não há nenhum post a ser exibido no momento.",
+                    ));
+              }
+              return Container();
+              // return circleLoadSpinner(context);
+            },
+          ),
+        ]),
+        if (loadPosts) ...{circleLoadSpinner(context)}
+      ],
+    );
   }
 }
 

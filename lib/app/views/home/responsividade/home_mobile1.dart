@@ -7,11 +7,11 @@ import 'package:obamahome/utils/cores_personalizadas.dart';
 import '../../../../utils/app_theme.dart';
 
 class HomeMobile1 extends StatefulWidget {
-  final void hidePosts;
+  // final void hidePosts;
 
   const HomeMobile1({
     Key? key,
-    required this.hidePosts
+    // required this.hidePosts
   }) : super(key: key);
 
   @override

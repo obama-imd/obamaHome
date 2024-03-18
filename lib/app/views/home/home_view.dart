@@ -14,14 +14,14 @@ import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
 import 'components/our_product_item.dart';
 
-class HomeView extends StatefulWidget {
+class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
 
   @override
-  State<HomeView> createState() => HomeViewState();
+  HomeViewState createState() => HomeViewState();
 }
 
-class HomeViewState extends State<HomeView> {
+class HomeViewState extends ConsumerState<HomeView> {
   final TrackingScrollController _scrollController = TrackingScrollController();
 
   @override
@@ -37,6 +37,7 @@ class HomeViewState extends State<HomeView> {
   void initState() {
     super.initState();
     activateLoad();
+    waitData(ref);
   }
 
   void activateLoad() {
@@ -46,16 +47,13 @@ class HomeViewState extends State<HomeView> {
     });
   }
 
-  void hideObjects() {
-    setState(() {
-      loadObjects = false;
-    });
-  }
-
-  void hidePosts() {
-    setState(() {
-      loadPosts = false;
-    });
+  void waitData(ref) async {
+    await fetchPosts(ref).whenComplete(() => setState(() {
+          loadPosts = false;
+        }));
+    await fetchObjects(ref).whenComplete(() => setState(() {
+          loadObjects = false;
+        }));
   }
 
   @override
@@ -67,19 +65,19 @@ class HomeViewState extends State<HomeView> {
           children: [
             Responsivo(
                 mobile: HomeMobile1(
-                  hidePosts: () => hidePosts(),
-                ),
+                    // hidePosts: () => hidePosts(),
+                    ),
                 //mobile: HomeMobile( scrollController: _scrollController,),
                 tablet: HomeTablet(
                   scrollController: _scrollController,
-                  hidePosts: () => hidePosts(),
+                  // hidePosts: () => hidePosts(),
                 ),
                 desktop: HomeDesktop(
                   scrollController: _scrollController,
-                  hidePosts: () => hidePosts(),
-                  hideObjects: () => hideObjects(),
+                  // hidePosts: () => hidePosts(),
+                  // hideObjects: () => hideObjects(),
                 )),
-            // if (loadPosts || loadObjects) ...{circleLoadSpinner(context)}
+            if (loadPosts || loadObjects) ...{circleLoadSpinner(context)}
           ],
         )));
   }
@@ -87,8 +85,7 @@ class HomeViewState extends State<HomeView> {
 
 class OAHome extends ConsumerStatefulWidget {
   final double swidth;
-  final void Function() hideObjects;
-  const OAHome(this.swidth, this.hideObjects, {super.key});
+  const OAHome(this.swidth, {super.key});
 
   @override
   OAHomeState createState() => OAHomeState();
@@ -97,16 +94,7 @@ class OAHome extends ConsumerStatefulWidget {
 class OAHomeState extends ConsumerState<OAHome> {
   Key key = UniqueKey();
 
-  // void initState() {
-  //   super.initState();
-  //   waitObject();
-  // }
-
-  // void waitObject() async {
-  //   await fetchObjects(ref).whenComplete(widget.hideObjects);
-  // }
-
- @override
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: fetchObjects(ref),
@@ -160,7 +148,8 @@ class OAHomeState extends ConsumerState<OAHome> {
                 "Perdão, tivemos um problema, tente mais tarde.",
               ));
         }
-        return circleLoadSpinner(context);
+        return Container();
+        // return circleLoadSpinner(context);
       },
     );
   }
@@ -168,8 +157,7 @@ class OAHomeState extends ConsumerState<OAHome> {
 
 class BlogHome extends ConsumerStatefulWidget {
   final double swidth;
-  final void Function() hidePosts;
-  const BlogHome(this.swidth, this.hidePosts, {super.key});
+  const BlogHome(this.swidth, {super.key});
 
   @override
   BlogHomeState createState() => BlogHomeState();
@@ -179,12 +167,7 @@ class BlogHomeState extends ConsumerState<BlogHome> {
   @override
   void initState() {
     super.initState();
-    // waitPost();
   }
-
-  // void waitPost() async {
-  //   await fetchObjects(ref).whenComplete(widget.hidePosts);
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -195,12 +178,8 @@ class BlogHomeState extends ConsumerState<BlogHome> {
       future: fetchPosts(ref),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          // Navigator.of(context, rootNavigator: true).pop();
-          // _HomePage1State().hidePosts();
-
           final blogList = ref.watch(blogPostsHome);
           List<BlogModel?> posts = [...blogList];
-          // print(posts);
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: widget.swidth * .057),
             child:

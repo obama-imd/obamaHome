@@ -15,7 +15,7 @@ import 'responsividade/search_desktop.dart';
 import 'responsividade/search_mobile.dart';
 import 'responsividade/search_tablet.dart';
 
-class SearchPage extends StatefulWidget {
+class SearchPage extends ConsumerStatefulWidget {
   String termSearched;
 
   SearchPage({
@@ -24,11 +24,12 @@ class SearchPage extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<SearchPage> createState() => _SearchPageState();
+  SearchPageState createState() => SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
+  bool loadObjects = false;
 
   void updateData(newData) {
     setState(() {
@@ -45,11 +46,33 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    activateLoad();
+    waitData();
+  }
+
+  void activateLoad() {
+    setState(() {
+      loadObjects = true;
+    });
+  }
+
+  void waitData() async {
+    await fetchData("").whenComplete(() => setState(() {
+          loadObjects = false;
+        }));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-            body: Responsivo(
+            body: Stack(
+              alignment: Alignment.topCenter,
+          children: [
+            Responsivo(
                 mobile: SearchMobile(
                     termSearched: widget.termSearched,
                     selectedPageIndex: selectedPageIndex,
@@ -64,7 +87,10 @@ class _SearchPageState extends State<SearchPage> {
                     termSearched: widget.termSearched,
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
-                    selectedPage: selectedPage))));
+                    selectedPage: selectedPage)),
+            if (loadObjects) ...{circleLoadSpinner(context)}
+          ],
+        )));
   }
 }
 
@@ -95,8 +121,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
     PageController _pageController = PageController();
 
     return FutureBuilder<void>(
-        future: SearchOAController()
-            .fetchDataAndUpdateState(widget.termSearched, ref),
+        future: fetchDataAndUpdateState(widget.termSearched, ref),
         builder: (context, snapshot) {
           final paginationData = ref.watch(searchPagination);
           List<SearchResponse?> pagination = [...paginationData];
@@ -274,11 +299,11 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                   "Perdão, houve um erro interno.",
                 ));
           }
-          return circleLoadSpinner(context);
+          return Container();
+          // return circleLoadSpinner(context);
         });
   }
 }
-
 
 void showMessage(context) {
   showDialog<String>(

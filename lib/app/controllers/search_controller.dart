@@ -146,7 +146,7 @@ final searchPagination = StateProvider<List<SearchResponse>>((ref) {
   return [];
 });
 
-class SearchOAController {
+// class SearchOAController {
   Future<SearchResponse> fetchDataAndUpdateState(
       String item, WidgetRef ref) async {
     (
@@ -184,4 +184,4 @@ class SearchOAController {
     pagination.add(paginationInfo);
     return paginationInfo;
   }
-}
+// }

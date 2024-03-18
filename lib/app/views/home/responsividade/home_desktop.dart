@@ -11,13 +11,13 @@ import '../home_view.dart';
 
 class HomeDesktop extends StatefulWidget {
   final TrackingScrollController scrollController;
-  final void Function() hidePosts;
-  final void Function() hideObjects;
+  // final void Function() hidePosts;
+  // final void Function() hideObjects;
 
   HomeDesktop({
     required this.scrollController,
-    required this.hidePosts,
-    required this.hideObjects,
+    // required this.hidePosts,
+    // required this.hideObjects,
     Key? key,
   }) : super(key: key);
 
@@ -136,7 +136,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ),
         ]),
       ),
-      OAHome(swidth, widget.hideObjects),
+      OAHome(swidth),
       Padding(
         padding: paddingValues("carouselTop", context),
         child: Container(
@@ -218,7 +218,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
           ]),
         ),
       ),
-      BlogHome(swidth, widget.hidePosts)
+      BlogHome(swidth)
     ]);
   }
 }
