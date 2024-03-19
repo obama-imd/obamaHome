@@ -1,57 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obamahome/app/controllers/lessons_controller.dart';
 import 'package:obamahome/app/models/lesson_plan_models.dart';
 import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_padding.dart';
 
-class ListLessonPlan extends StatefulWidget {
+class ListLessonPlan extends ConsumerStatefulWidget {
   const ListLessonPlan({super.key});
 
   @override
   _ListLessonPlanState createState() => _ListLessonPlanState();
 }
 
-class _ListLessonPlanState extends State<ListLessonPlan> {
-  final List<LessonPlan> _lessonPlans = List.generate(
-    100,
-    (index) {
-      return LessonPlan(
-        titulo:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-        autor: index % 2 == 0 ? ' J. R. R. Tolkien' : 'C. S. Lewis',
-        dataPublicacao: DateTime.now(),
-      );
-    },
-  );
+class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
+  String searchTerm = "";
 
   @override
   Widget build(BuildContext context) {
-    return TemplateColumn(
-      children: [
-        BannerSuperior(context, "Planos de Aula"),
-        Container(
-          margin: paddingValues("carouselTop", context),
-          padding: paddingValues("sideMainPadding", context),
-          child: ListView.builder(
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            itemCount: _lessonPlans.length + 1,
-            itemBuilder: (context, index) {
-              if (index == 0) {
-                return _buildHeader();
-              } else {
-                final lessonPlan = _lessonPlans[index - 1];
-                return _buildRow(
-                  lessonPlan.titulo,
-                  lessonPlan.autor,
-                  lessonPlan.dataPublicacao.toString(),
-                );
-              }
-            },
-          ),
-        ),
-      ],
-    );
+    return FutureBuilder(
+        future: randomName(searchTerm, ref),
+        builder: (context, snapshot) {
+          final lessonsData = ref.watch(lessons);
+          List<LessonPlan> data = [...lessonsData];
+          return TemplateColumn(
+            children: [
+              BannerSuperior(context, "Planos de Aula"),
+              Container(
+                  margin: paddingValues("carouselTop", context),
+                  padding: paddingValues("sideMainPadding", context),
+                  child: Column(children: [
+                    TextField(
+                      onSubmitted: (value) {},
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: data.length + 1,
+                      itemBuilder: (context, index) {
+                        if (index == 0) {
+                          return _buildHeader();
+                        } else {
+                          final lessonPlan = data[index - 1];
+                          return _buildRow(
+                            lessonPlan.titulo,
+                            lessonPlan.autor,
+                            lessonPlan.dataPublicacao.toString(),
+                          );
+                        }
+                      },
+                    ),
+                  ])),
+            ],
+          );
+        });
   }
 
   Widget _buildHeader() {

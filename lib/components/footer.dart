@@ -79,7 +79,7 @@ class _FooterState extends State<Footer> {
     );
 
     return Column(children: [
-      if (widget.swidth > 700) ...[
+      if (widget.swidth > 800) ...[
         Container(
             child: Row(children: [
           Container(
@@ -94,7 +94,7 @@ class _FooterState extends State<Footer> {
                 padding: paddingValues("footer", context),
                 child: ResponsiveGridRow(children: [
                   ResponsiveGridCol(
-                    lg: 6,
+                    sm: 6,
                     child: Container(
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -126,7 +126,7 @@ class _FooterState extends State<Footer> {
                             ])),
                   ),
                   ResponsiveGridCol(
-                    lg: 6,
+                    sm: 6,
                     child: Container(
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -203,7 +203,7 @@ class _FooterState extends State<Footer> {
               width: widget.swidth,
               child: flutterMapArea(context)),
           Container(
-            height: 1350,
+            height: 1150,
             width: widget.swidth,
             color: onPrimary,
             padding: const EdgeInsets.only(left: 40, top: 60),
