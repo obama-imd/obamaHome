@@ -74,7 +74,7 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
           } else if (snapshot.hasError) {
             Center(
               child: Container(
-                  width: swidth * 0.67,
+                  width: swidth,
                   child: Text(
                     "Perdão, ocorreu um erro interno.",
                   )),

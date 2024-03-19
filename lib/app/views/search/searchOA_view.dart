@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/utils/app_padding.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/loadCircle.dart';
@@ -72,7 +73,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
             body: Stack(
-              alignment: Alignment.topCenter,
+          alignment: Alignment.topCenter,
           children: [
             Responsivo(
                 mobile: SearchMobile(
@@ -135,11 +136,19 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
           widget.selectedPageIndex = currentPage;
           List<SearchModel?> searchResult = pagination[0]!.content;
 
+          double rowNumbers = 0;
+
+          if (widget.swidth < 700) {
+            rowNumbers = searchResult.length / 1.39;
+          } else {
+            rowNumbers = searchResult.length / 3;
+          }
+
           if (snapshot.connectionState == ConnectionState.done) {
             return Column(children: [
               if (searchResult.isNotEmpty) ...{
                 Container(
-                  height: (500 * (searchResult.length / 3).roundToDouble()),
+                  height: (500 * rowNumbers),
                   child: PageView.builder(
                     controller: _pageController,
                     itemCount: totalPages,
@@ -155,29 +164,33 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                       // endIndex = endIndex > searchResult.length
                       //     ? searchResult.length
                       //     : endIndex;
-                      return ResponsiveGridRow(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            // for (var lista in widget.datas) ...{
-                            for (int i = 0; i < searchResult.length; i++) ...{
-                              ResponsiveGridCol(
-                                lg: 4,
-                                md: 6,
-                                xs: 12,
-                                child: SizedBox(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        horizontal: paddingCard, vertical: 15),
-                                    // child: Container(),
-                                    child: OurProductItem(
-                                      title: searchResult[i]!.nome,
-                                      image: searchResult[i]!.url,
+                      return Padding(
+                        padding: paddingValues("sideMainPadding", context),
+                        child: ResponsiveGridRow(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              // for (var lista in widget.datas) ...{
+                              for (int i = 0; i < searchResult.length; i++) ...{
+                                ResponsiveGridCol(
+                                  lg: 4,
+                                  sm: 6,
+                                  xs: 12,
+                                  child: SizedBox(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: paddingCard,
+                                          vertical: 15),
+                                      // child: Container(),
+                                      child: OurProductItem(
+                                        title: searchResult[i]!.nome,
+                                        image: searchResult[i]!.url,
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            }
-                          ]);
+                              }
+                            ]),
+                      );
                     },
                   ),
                 ),

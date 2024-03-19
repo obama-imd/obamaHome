@@ -4,6 +4,7 @@ import 'package:obamahome/app/views/blog/components/blog-filters.dart';
 import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
+import '../../../../utils/app_padding.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
 import '../blog_view.dart';
@@ -36,32 +37,47 @@ class BlogTabletState extends ConsumerState<BlogTablet> {
               children: [
                 BannerSuperior(context, "Publicações"),
                 Container(
-                    padding: const EdgeInsets.only(top: 100, left: 30),
-                    width: swidth,
-                    child:
-                        blogFilters(context, swidth, posts, widget.updateData)),
-                if (posts.isEmpty) ...{
-                  Container(
-                      padding: const EdgeInsets.only(top: 100, right: 15),
-                      width: swidth,
-                      child: Text(
-                        "Perdão, não há nenhum post a ser exibido no momento.",
-                      ))
-                } else ...{
-                  Padding(
-                    padding: const EdgeInsets.only(top: 100),
-                    child: blogListView(context, widget.key, swidth, posts),
-                  ),
-                },
+                  margin: paddingValues("carouselTop", context),
+                  padding: paddingValues("sideMainPadding", context),
+                  child: Column(children: [
+                    Container(
+                        // padding: paddingValues(paddingName, context)
+                        width: swidth,
+                        child: ExpansionTile(
+                            title: Text("Busca Avançada"),
+                            children: [
+                              Padding(
+                                padding: paddingValues("fullGrid", context),
+                                child: blogFilters(
+                                    context, swidth, posts, widget.updateData),
+                              ),
+                            ])),
+                    if (posts.isEmpty) ...{
+                      Container(
+                          padding: const EdgeInsets.only(top: 100),
+                          width: swidth,
+                          child: Center(
+                              child: Text(
+                            "Perdão, não há nenhum post a ser exibido no momento.",
+                          )))
+                    } else ...{
+                      Padding(
+                        padding: const EdgeInsets.only(top: 100),
+                        child: blogListView(context, widget.key, swidth, posts),
+                      ),
+                    },
+                  ]),
+                )
               ],
             );
           } else if (snapshot.hasError) {
-            Container(
-                padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-                width: swidth * 0.67,
-                child: Text(
-                  "Perdão, ocorreu um erro interno.",
-                ));
+            Center(
+              child: Container(
+                  width: swidth,
+                  child: Text(
+                    "Perdão, ocorreu um erro interno.",
+                  )),
+            );
           }
           return Container();
           // return circleLoadSpinner(context);
