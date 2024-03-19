@@ -139,7 +139,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
           double rowNumbers = 0;
 
           if (widget.swidth < 700) {
-            rowNumbers = searchResult.length / 1.39;
+            rowNumbers = searchResult.length / 1.38;
           } else {
             rowNumbers = searchResult.length / 3;
           }
@@ -166,30 +166,17 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                       //     : endIndex;
                       return Padding(
                         padding: paddingValues("sideMainPadding", context),
-                        child: ResponsiveGridRow(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              // for (var lista in widget.datas) ...{
-                              for (int i = 0; i < searchResult.length; i++) ...{
-                                ResponsiveGridCol(
-                                  lg: 4,
-                                  sm: 6,
-                                  xs: 12,
-                                  child: SizedBox(
-                                    child: Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: paddingCard,
-                                          vertical: 15),
-                                      // child: Container(),
-                                      child: OurProductItem(
-                                        title: searchResult[i]!.nome,
-                                        image: searchResult[i]!.url,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              }
-                            ]),
+                        child: ResponsiveGridList(
+                            physics: NeverScrollableScrollPhysics(),
+                            scroll: false,
+                            desiredItemWidth: 237.5,
+                            minSpacing: 30,
+                            children: searchResult.map((post) {
+                              return Container(
+                                  alignment: Alignment(0, 0),
+                                  child: OurProductItem(
+                                      title: post!.nome, image: post!.url));
+                            }).toList()),
                       );
                     },
                   ),

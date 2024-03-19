@@ -65,18 +65,13 @@ class HomeViewState extends ConsumerState<HomeView> {
             body: Stack(
           children: [
             Responsivo(
-                mobile: HomeMobile1(
-                    // hidePosts: () => hidePosts(),
-                    ),
+                mobile: HomeMobile1(),
                 //mobile: HomeMobile( scrollController: _scrollController,),
                 tablet: HomeTablet(
                   scrollController: _scrollController,
-                  // hidePosts: () => hidePosts(),
                 ),
                 desktop: HomeDesktop(
                   scrollController: _scrollController,
-                  // hidePosts: () => hidePosts(),
-                  // hideObjects: () => hideObjects(),
                 )),
             if (loadPosts || loadObjects) ...{circleLoadSpinner(context)}
           ],
@@ -108,35 +103,32 @@ class OAHomeState extends ConsumerState<OAHome> {
               padding: paddingValues("sideHomePosts", context),
               child: Column(
                 children: [
-                  if (data.isNotEmpty) ...{
-                    Padding(
-                      padding: paddingValues("mainTitleBottom", context),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: widget.swidth * .016),
-                            child: SectionTitle('Objetos de Aprendizagem', '',
-                                CrossAxisAlignment.start),
-                          ),
-                        ],
-                      ),
+                  Padding(
+                    padding: paddingValues("mainTitleBottom", context),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: widget.swidth * .016),
+                          child: SectionTitle('Objetos de Aprendizagem', '',
+                              CrossAxisAlignment.start),
+                        ),
+                      ],
                     ),
-                    ResponsiveGridList(
-                        physics: NeverScrollableScrollPhysics(),
-                        scroll: false,
-                        desiredItemWidth: widget.swidth * .2,
-                        minSpacing: widget.swidth * .016,
-                        children: data.map((post) {
-                          return Container(
-                            alignment: Alignment(0, 0),
-                            child: OurProductItem(
-                                title: post!.nome, image: post.url),
-                          );
-                        }).toList()),
-                  } else
-                    ...{}
+                  ),
+                  ResponsiveGridList(
+                      physics: NeverScrollableScrollPhysics(),
+                      scroll: false,
+                      desiredItemWidth: 237.5,
+                      minSpacing: widget.swidth * .016,
+                      children: data.map((post) {
+                        return Container(
+                          alignment: Alignment(0, 0),
+                          child: OurProductItem(
+                              title: post!.nome, image: post.url),
+                        );
+                      }).toList()),
                 ],
               ),
             )

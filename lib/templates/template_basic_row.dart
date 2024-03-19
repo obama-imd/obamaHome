@@ -5,7 +5,7 @@ import '../../../../components/carousel.dart';
 import '../../../../components/footer.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
-import '../../../../utils/app_theme.dart';
+import '../components/menuMobile.dart';
 
 class TemplateRow extends StatefulWidget {
   final List<Widget> children;
@@ -48,27 +48,7 @@ class TemplateRowState extends State<TemplateRow> {
                           NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
-                SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 125,
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          TextButton(
-                              child: const Icon(Icons.menu, color: onPrimary),
-                              onPressed: () =>
-                                  scaffoldKey.currentState?.openDrawer()),
-                          Container(
-                              width: 280,
-                              margin:
-                                  const EdgeInsets.only(right: 15, left: 15),
-                              child: Image.asset('assets/images/logo.png',
-                                  fit: BoxFit.fitHeight)),
-                          TextButton(
-                              onPressed: () {},
-                              child: const Icon(Icons.search,
-                                  color: onPrimary, size: 25))
-                        ]))
+                menuMobile(context, scaffoldKey, swidth),
               ],
               Row(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -32,12 +32,12 @@ class _SearchDialogState extends State<SearchDialog> {
     if (widget.swidth < 1300 && widget.swidth >= 700) {
       modalFont = 40;
       iconSize = 60;
-      searchBarWidth = widget.swidth * .7;
+      searchBarWidth = widget.swidth * .75;
       buttonDimensions = 75;
     } else if (widget.swidth < 700) {
       modalFont = 20;
       iconSize = 25;
-      searchBarWidth = widget.swidth * .8;
+      searchBarWidth = widget.swidth;
       buttonDimensions = 50;
     }
 
@@ -58,32 +58,32 @@ class _SearchDialogState extends State<SearchDialog> {
             context: context,
             builder: (BuildContext context) {
               return Stack(
-                alignment: Alignment.topRight,
+                // alignment: Alignment.topRight,
                 children: [
-                  Container(
-                      color: background,
-                      width: 60,
-                      height: 60,
-                      child: Material(
-                        child: InkWell(child: Icon(FontAwesomeIcons.xmark, size: 18),
-                        onTap: () => Navigator.pop(context)),
-                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          color: background,
+                          width: 60,
+                          height: 60,
+                          child: Material(
+                            child: InkWell(child: Icon(FontAwesomeIcons.xmark, size: 18),
+                            onTap: () => Navigator.pop(context)),
+                          )),
+                    ],
+                  ),
                   AlertDialog(
                       backgroundColor: onSecondary,
                       content: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(25)),
-                            padding: EdgeInsets.only(left: 6),
-                            width: widget.swidth,
-                            height: 100,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Container(
-                                  constraints: BoxConstraints(minWidth: 150),
+                          Row(
+                            // crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Container(                                 
                                   width: searchBarWidth,
                                   child: TextField(
                                       style: TextStyle(
@@ -109,21 +109,21 @@ class _SearchDialogState extends State<SearchDialog> {
                                         searchObject(context, value);
                                       }),
                                 ),
-                                Container(
-                                  width: buttonDimensions,
-                                  height: buttonDimensions,
-                                  child: IconButton(
-                                    hoverColor: null,
-                                    highlightColor: null,
-                                    icon: Icon(CupertinoIcons.search,
-                                        color: background, size: iconSize),
-                                    onPressed: () {
-                                      searchObject(context, searchText);
-                                    },
-                                  ),
-                                )
-                              ],
-                            ),
+                              ),
+                              Container(
+                                width: buttonDimensions,
+                                height: buttonDimensions,
+                                child: IconButton(
+                                  hoverColor: null,
+                                  highlightColor: null,
+                                  icon: Icon(CupertinoIcons.search,
+                                      color: background, size: iconSize),
+                                  onPressed: () {
+                                    searchObject(context, searchText);
+                                  },
+                                ),
+                              )
+                            ],
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -132,7 +132,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                 padding:
                                     const EdgeInsets.only(left: 20, top: 25),
                                 child: Text(
-                                    "Consulte os OA disponíveis no nosso catálogo",
+                                    "Consulte os OA do nosso catálogo",
                                     style: textTheme.displaySmall),
                               ),
                             ],
