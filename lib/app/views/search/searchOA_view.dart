@@ -140,6 +140,8 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
 
           if (widget.swidth < 700) {
             rowNumbers = searchResult.length / 1.38;
+          } else if (widget.swidth >=700 && widget.swidth < 1300) {
+            rowNumbers = searchResult.length / 2.7;
           } else {
             rowNumbers = searchResult.length / 3;
           }
