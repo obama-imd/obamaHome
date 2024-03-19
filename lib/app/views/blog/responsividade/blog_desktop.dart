@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/app/views/blog/components/blog-filters.dart';
 import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/templates/template_basic_row.dart';
@@ -20,13 +19,6 @@ class BlogDesktop extends ConsumerStatefulWidget {
   @override
   BlogDesktopState createState() => BlogDesktopState();
 }
-
-List<IconData> shareMedia = [
-  FontAwesomeIcons.facebook,
-  FontAwesomeIcons.twitter,
-  FontAwesomeIcons.googlePlus,
-  FontAwesomeIcons.pinterest,
-];
 
 class BlogDesktopState extends ConsumerState<BlogDesktop> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
