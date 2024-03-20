@@ -93,7 +93,7 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
                     Container(
                         padding: const EdgeInsets.only(top: 85.0, left: 15),
                         width: swidth * .295,
-                        child: blogFilters(context, swidth, datas, updateData)),
+                        child: blogFilters(context, swidth, datas, updateData, textTheme.titleSmall!)),
                   ])
                 ]);
               } else if (snapshot.hasError) {

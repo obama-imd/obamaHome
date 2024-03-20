@@ -13,13 +13,15 @@ class SearchTablet extends StatefulWidget {
   int selectedPageIndex;
   Function(void) updateData;
   void Function(int) selectedPage;
+  TextStyle titleStyle;
 
   SearchTablet(
       {Key? key,
       required this.termSearched,
       required this.selectedPageIndex,
       required this.updateData,
-      required this.selectedPage})
+      required this.selectedPage,
+      required this.titleStyle})
       : super(key: key);
 
   @override
@@ -43,12 +45,14 @@ class _SearchTabletState extends State<SearchTablet> {
             child: OAFilters(
               swidth: swidth,
               data: widget.termSearched,
-              updateData: widget.updateData),
+              updateData: widget.updateData,
+              titleStyle: widget.titleStyle,
+            ),
           ),
         ]),
       ),
-      SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex, widget.updateData,
-          widget.selectedPage),
+      SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
+          widget.updateData, widget.selectedPage),
     ]);
   }
 }

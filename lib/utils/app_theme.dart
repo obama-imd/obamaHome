@@ -27,7 +27,7 @@ const Color modalBackground = Color.fromRGBO(23, 119, 242, .9);
 const Color onSurface = Colors.black;
 
 const LinearGradient gradientColor = LinearGradient(
-    begin: Alignment.topLeft, colors: [Colors.white, Colors.blue]);
+    begin: Alignment.topLeft, colors: [Color.fromARGB(255, 150, 144, 144), Colors.blue]);
 
 final TextTheme textTheme = TextTheme(
   titleLarge: GoogleFonts.raleway(

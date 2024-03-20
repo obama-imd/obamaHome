@@ -15,7 +15,8 @@ class BlogDesktop extends ConsumerStatefulWidget {
   Key key;
   final double swidth;
   Function(String) updateData;
-  BlogDesktop(this.newData, this.key, this.swidth, this.updateData);
+  final TextStyle titleStyle;
+  BlogDesktop(this.newData, this.key, this.swidth, this.updateData, this.titleStyle);
   @override
   BlogDesktopState createState() => BlogDesktopState();
 }
@@ -59,7 +60,7 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
                           padding: const EdgeInsets.only(top: 100, left: 30),
                           width: swidth * .286,
                           child: blogFilters(
-                              context, swidth, posts, widget.updateData)),
+                              context, swidth, posts, widget.updateData, widget.titleStyle)),
                     ]),
               ],
             );

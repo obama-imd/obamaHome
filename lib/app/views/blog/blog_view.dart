@@ -28,9 +28,11 @@ class BlogPage extends StatefulWidget {
 class _BlogPageState extends State<BlogPage> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
   bool dataAvailable = false;
-
   String newData = '';
   Key key = UniqueKey();
+  late TextStyle titleStyle;
+  bool loadPosts = false;
+  bool loadObjects = false;
 
   void updateData(String value) {
     setState(() {
@@ -38,9 +40,6 @@ class _BlogPageState extends State<BlogPage> {
       key = UniqueKey();
     });
   }
-
-  bool loadPosts = false;
-  bool loadObjects = false;
 
   @override
   void initState() {
@@ -73,9 +72,9 @@ class _BlogPageState extends State<BlogPage> {
             body: Stack(
           children: [
             Responsivo(
-                mobile: BlogMobile(newData, key, swidth, updateData),
-                tablet: BlogTablet(newData, key, swidth, updateData),
-                desktop: BlogDesktop(newData, key, swidth, updateData)),
+                mobile: BlogMobile(newData, key, swidth, updateData, textTheme.titleSmall!),
+                tablet: BlogTablet(newData, key, swidth, updateData, textTheme.headlineSmall!),
+                desktop: BlogDesktop(newData, key, swidth, updateData, textTheme.headlineSmall!)),
             if (loadPosts) ...{circleLoadSpinner(context)}
           ],
         )));

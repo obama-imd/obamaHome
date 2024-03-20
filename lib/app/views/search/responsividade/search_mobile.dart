@@ -13,15 +13,16 @@ class SearchMobile extends StatefulWidget {
   int selectedPageIndex;
   Function(void) updateData;
   void Function(int) selectedPage;
+  TextStyle titleStyle;
 
   SearchMobile(
       {Key? key,
       required this.termSearched,
       required this.selectedPageIndex,
       required this.updateData,
-      required this.selectedPage})
+      required this.selectedPage,
+      required this.titleStyle})
       : super(key: key);
-
   @override
   State<SearchMobile> createState() => _SearchMobileState();
 }
@@ -41,9 +42,10 @@ class _SearchMobileState extends State<SearchMobile> {
           Padding(
             padding: paddingValues("fullGrid", context),
             child: OAFilters(
-              swidth: swidth,
-              data: widget.termSearched,
-              updateData: widget.updateData),
+                swidth: swidth,
+                data: widget.termSearched,
+                updateData: widget.updateData,
+                titleStyle: widget.titleStyle),
           ),
         ]),
       ),

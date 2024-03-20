@@ -14,7 +14,8 @@ class BlogTablet extends ConsumerStatefulWidget {
   Key key;
   final double swidth;
   Function(String) updateData;
-  BlogTablet(this.newData, this.key, this.swidth, this.updateData);
+  final TextStyle titleStyle;
+  BlogTablet(this.newData, this.key, this.swidth, this.updateData, this.titleStyle);
   @override
   BlogTabletState createState() => BlogTabletState();
 }
@@ -49,7 +50,7 @@ class BlogTabletState extends ConsumerState<BlogTablet> {
                               Padding(
                                 padding: paddingValues("fullGrid", context),
                                 child: blogFilters(
-                                    context, swidth, posts, widget.updateData),
+                                    context, swidth, posts, widget.updateData, widget.titleStyle),
                               ),
                             ])),
                     if (posts.isEmpty) ...{

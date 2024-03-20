@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:obamahome/utils/app_padding.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/loadCircle.dart';
@@ -31,6 +30,7 @@ class SearchPage extends ConsumerStatefulWidget {
 class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
   bool loadObjects = false;
+  late TextStyle titleStyle;
 
   void updateData(newData) {
     setState(() {
@@ -80,17 +80,22 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     termSearched: widget.termSearched,
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
-                    selectedPage: selectedPage),
+                    selectedPage: selectedPage,
+                    titleStyle: textTheme.headlineSmall!
+                    ),
                 tablet: SearchTablet(
                     termSearched: widget.termSearched,
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
-                    selectedPage: selectedPage),
+                    selectedPage: selectedPage,
+                    titleStyle: textTheme.headlineSmall!),
                 desktop: SearchDesktop(
                     termSearched: widget.termSearched,
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
-                    selectedPage: selectedPage)),
+                    selectedPage: selectedPage,
+                    titleStyle: textTheme.titleSmall!
+                    )),
             if (loadObjects) ...{circleLoadSpinner(context)}
           ],
         )));
@@ -138,10 +143,10 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
 
           double rowNumbers = 0;
 
-          if (widget.swidth < 700) {
-            rowNumbers = searchResult.length / 1.38;
-          } else if (widget.swidth >=700 && widget.swidth < 1300) {
-            rowNumbers = searchResult.length / 2.7;
+          if (widget.swidth < 360) {
+            rowNumbers = searchResult.length / 1.28;
+          } else if (widget.swidth >= 460 && widget.swidth < 680) {
+            rowNumbers = searchResult.length / 1.5;
           } else {
             rowNumbers = searchResult.length / 3;
           }
@@ -150,9 +155,8 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
             return Column(children: [
               if (searchResult.isNotEmpty) ...{
                 Container(
-                  height: (500 * rowNumbers),
+                  height: (450 * rowNumbers),
                   child: PageView.builder(
-                    controller: _pageController,
                     itemCount: totalPages,
                     physics: NeverScrollableScrollPhysics(),
                     onPageChanged: (index) {
@@ -166,20 +170,17 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                       // endIndex = endIndex > searchResult.length
                       //     ? searchResult.length
                       //     : endIndex;
-                      return Padding(
-                        padding: paddingValues("sideMainPadding", context),
-                        child: ResponsiveGridList(
-                            physics: NeverScrollableScrollPhysics(),
-                            scroll: false,
-                            desiredItemWidth: 237.5,
-                            minSpacing: 30,
-                            children: searchResult.map((post) {
-                              return Container(
-                                  alignment: Alignment(0, 0),
-                                  child: OurProductItem(
-                                      title: post!.nome, image: post!.url));
-                            }).toList()),
-                      );
+                      return ResponsiveGridList(
+                          physics: NeverScrollableScrollPhysics(),
+                          scroll: false,
+                          desiredItemWidth: 200,
+                          minSpacing: 20,
+                          children: searchResult.map((post) {
+                            return Container(
+                                alignment: Alignment(0, 0),
+                                child: OurProductItem(
+                                    title: post!.nome, image: post!.url));
+                          }).toList());
                     },
                   ),
                 ),

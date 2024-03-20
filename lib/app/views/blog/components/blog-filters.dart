@@ -18,13 +18,14 @@ Widget blogFilters(
   double swidth,
   List<BlogModel?> datas,
   Function(String) updateData,
+  TextStyle titleStyle
 ) {
   bool isHover = false;
   return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 30),
-        child: Text('BUSCA', style: textTheme.titleSmall)),
+        child: Text('BUSCA', style: titleStyle)),
     Container(
         height: 50,
         margin: const EdgeInsets.only(bottom: 50),
@@ -45,7 +46,7 @@ Widget blogFilters(
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 20),
-        child: Text('ABOUT AUTHOR', style: textTheme.titleSmall)),
+        child: Text('ABOUT AUTHOR', style: titleStyle)),
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 50),
@@ -55,7 +56,7 @@ Widget blogFilters(
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 20),
-        child: Text('ÚLTIMOS POSTS', style: textTheme.titleSmall)),
+        child: Text('ÚLTIMOS POSTS', style: titleStyle)),
     // if (datas.isNotEmpty) ...{
       SizedBox(
         height: 80 * datas.length.toDouble(),

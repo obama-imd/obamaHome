@@ -13,13 +13,15 @@ class SearchDesktop extends StatefulWidget {
   int selectedPageIndex;
   Function(void) updateData;
   void Function(int) selectedPage;
+  TextStyle titleStyle;
 
   SearchDesktop(
       {Key? key,
       required this.termSearched,
       required this.selectedPageIndex,
       required this.updateData,
-      required this.selectedPage})
+      required this.selectedPage,
+      required this.titleStyle})
       : super(key: key);
 
   @override
@@ -41,7 +43,7 @@ class _SearchDesktopState extends State<SearchDesktop> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              width: (swidth * .614),
+              width: (swidth * .61),
               child: Column(
                 children: [
                   SearchPageView(
@@ -60,7 +62,9 @@ class _SearchDesktopState extends State<SearchDesktop> {
                 child: OAFilters(
                     swidth: swidth,
                     data: widget.termSearched,
-                    updateData: widget.updateData),
+                    updateData: widget.updateData,
+                    titleStyle: widget.titleStyle,
+                    ),
               ),
             ),
           ],

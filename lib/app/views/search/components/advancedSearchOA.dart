@@ -22,18 +22,19 @@ class OAFilters extends StatefulWidget {
   final double swidth;
   final String data;
   final Function(String) updateData;
+  final TextStyle titleStyle;
   const OAFilters({
     required this.swidth,
     required this.data,
     required this.updateData,
-    Key? key,
-  }) : super(key: key);
+    required this.titleStyle});
 
   @override
   State<OAFilters> createState() => OAFilterState(
         swidth: swidth,
         data: data,
         updateData: updateData,
+        titleStyle: titleStyle
       );
 }
 
@@ -41,11 +42,13 @@ class OAFilterState extends State<OAFilters> {
   final double swidth;
   final String data;
   final Function(String) updateData;
+  final TextStyle titleStyle;
 
   OAFilterState({
     required this.swidth,
     required this.data,
     required this.updateData,
+    required this.titleStyle
   });
 
   @override
@@ -54,7 +57,7 @@ class OAFilterState extends State<OAFilters> {
       Container(
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(bottom: 30),
-          child: Text('BUSCA', style: textTheme.titleSmall)),
+          child: Text('BUSCA', style: titleStyle)),
       Container(
           height: 50,
           margin: const EdgeInsets.only(bottom: 50),
@@ -128,7 +131,7 @@ class OAFilterState extends State<OAFilters> {
             Container(
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.only(top: 40, bottom: 20),
-                child: Text(lista, style: textTheme.titleSmall)),
+                child: Text(lista, style: titleStyle)),
             Container(
                 height: 40,
                 alignment: Alignment.centerLeft,
