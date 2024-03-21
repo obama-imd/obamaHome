@@ -6,6 +6,8 @@ import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_theme.dart';
 
+import 'components/formFields.dart';
+
 class LoginPageView extends StatefulWidget {
   const LoginPageView({super.key});
 
@@ -16,6 +18,12 @@ class LoginPageView extends StatefulWidget {
 class _LoginPageViewState extends State<LoginPageView> {
   GlobalKey loginKey = GlobalKey<FormState>();
   bool showPassword = true;
+
+  void displayPassword() {
+    setState(() {
+      showPassword = !showPassword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,54 +40,13 @@ class _LoginPageViewState extends State<LoginPageView> {
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
                   child: Image.network("assets/images/icone.png", width: 150),
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      label: Text("E-mail"),
-                      labelStyle: textTheme.bodySmall,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                      fillColor: textFieldBackground,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: secondary))),
-                ),
+                formFieldNoHide(context, "E-mail"),
                 SizedBox(height: 10),
-                TextFormField(
-                  obscureText: showPassword,
-                  decoration: InputDecoration(
-                      filled: true,
-                      label: Text("Senha"),
-                      labelStyle: textTheme.bodySmall,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                      fillColor: textFieldBackground,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: secondary)),
-                      suffixIcon: Padding(
-                        padding: const EdgeInsets.only(right: 5),
-                        child: IconButton(
-                          hoverColor: onSecondary,
-                          highlightColor: onSecondary,
-                          splashColor: onSecondary,
-                          style: ButtonStyle(
-                              fixedSize:
-                                  MaterialStatePropertyAll(Size(18, 18))),
-                          onPressed: () {
-                            setState(() {
-                              showPassword = !showPassword;
-                            });
-                          },
-                          icon: showPassword
-                              ? Icon(FontAwesomeIcons.eye)
-                              : Icon(FontAwesomeIcons.eyeSlash),
-                          iconSize: 18,
-                        ),
-                      )),
-                ),
+                formFieldHidden(
+                    context, "Senha", showPassword, displayPassword),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 35),
-                  child:
-                      ForgotPasswordView(),
+                  child: ForgotPasswordView(),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

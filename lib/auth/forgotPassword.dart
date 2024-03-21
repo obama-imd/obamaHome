@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../utils/app_theme.dart';
+import 'components/formFields.dart';
 
 class ForgotPasswordView extends StatefulWidget {
   const ForgotPasswordView({super.key});
@@ -21,8 +22,9 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               barrierColor: modalBackground,
               builder: (BuildContext context) => AlertDialog(
                   contentPadding: EdgeInsets.all(35),
-                  title:
-                      Center(child: Text("Recuperação de Senha", style: textTheme.titleSmall)),
+                  title: Center(
+                      child: Text("Recuperação de Senha",
+                          style: textTheme.titleSmall)),
                   content: ConstrainedBox(
                     constraints: BoxConstraints(maxHeight: 210, maxWidth: 350),
                     child: Column(
@@ -32,18 +34,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                             "Informe o e-mail cadastrado para que possamos te ajudar a recuperar os dados de acesso."),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 35),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                filled: true,
-                                label: Text("E-mail"),
-                                labelStyle: textTheme.bodySmall,
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 5),
-                                fillColor: textFieldBackground,
-                                border: OutlineInputBorder(
-                                    borderSide: BorderSide(
-                                        width: 1, color: secondary))),
-                          ),
+                          child: formFieldNoHide(context, "E-mail"),
                         ),
                         mainButton(context, "Enviar", null, () {})
                       ],

@@ -5,6 +5,7 @@ import '../components/bannerSuperior.dart';
 import '../components/mainButton.dart';
 import '../templates/template_basic_col.dart';
 import '../utils/app_theme.dart';
+import 'components/formFields.dart';
 
 List<String> passwordFields = ["Senha", "Confirmar senha"];
 
@@ -18,6 +19,12 @@ class SignInPageView extends StatefulWidget {
 class _SignInPageViewState extends State<SignInPageView> {
   GlobalKey loginKey = GlobalKey<FormState>();
   bool showPassword = true;
+
+  void displayPassword() {
+    setState(() {
+      showPassword = !showPassword;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,63 +41,13 @@ class _SignInPageViewState extends State<SignInPageView> {
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
                   child: Image.network("assets/images/icone.png", width: 150),
                 ),
-                TextFormField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      label: Text("Nome"),
-                      labelStyle: textTheme.bodySmall,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                      fillColor: textFieldBackground,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: secondary))),
-                ),
+                formFieldNoHide(context, "Nome"),
                 SizedBox(height: 10),
-                TextFormField(
-                  decoration: InputDecoration(
-                      filled: true,
-                      label: Text("E-mail"),
-                      labelStyle: textTheme.bodySmall,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                      fillColor: textFieldBackground,
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(width: 1, color: secondary))),
-                ),
+                formFieldNoHide(context, "E-mail"),
                 for (var passwordField in passwordFields) ...{
                   SizedBox(height: 10),
-                  TextFormField(
-                    obscureText: showPassword,
-                    decoration: InputDecoration(
-                        filled: true,
-                        label: Text(passwordField),
-                        labelStyle: textTheme.bodySmall,
-                        contentPadding:
-                            EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                        fillColor: textFieldBackground,
-                        border: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: secondary)),
-                        suffixIcon: Padding(
-                          padding: const EdgeInsets.only(right: 5),
-                          child: IconButton(
-                            hoverColor: onSecondary,
-                            highlightColor: onSecondary,
-                            splashColor: onSecondary,
-                            style: ButtonStyle(
-                                fixedSize:
-                                    MaterialStatePropertyAll(Size(18, 18))),
-                            onPressed: () {
-                              setState(() {
-                                showPassword = !showPassword;
-                              });
-                            },
-                            icon: showPassword
-                                ? Icon(FontAwesomeIcons.eye)
-                                : Icon(FontAwesomeIcons.eyeSlash),
-                            iconSize: 18,
-                          ),
-                        )),
-                  ),
+                  formFieldHidden(
+                      context, passwordField, showPassword, displayPassword),
                 },
                 Padding(
                   padding: const EdgeInsets.only(top: 35),
@@ -110,7 +67,8 @@ class _SignInPageViewState extends State<SignInPageView> {
                             child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text("Google", style: textTheme.headlineSmall),
+                                  Text("Google",
+                                      style: textTheme.headlineSmall),
                                   SizedBox(width: 5),
                                   Icon(FontAwesomeIcons.google,
                                       color: Colors.red, size: 14)
