@@ -187,7 +187,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    if (searchResult.length > itemsPerPage) ...{
+                    if (searchResult.length > 5) ...{
                       Container(
                         width: 40,
                         height: 40,

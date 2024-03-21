@@ -11,7 +11,7 @@ class AccordionItem {
   });
 }
 
-List<AccordionItem> accordionContent = [
+List<AccordionItem> accordionItems = [
   AccordionItem(
     accordionTitle: "O que nós fazemos?",
     accordionContent: 'A Plataforma OBAMA é um repositório que faz a catalogação de Objetos de Aprendizagem (OA) classificados a partir de critérios pedagógicos e técnicos, com conteúdos explorados e habilidades que podem ser desenvolvidas em plataformas de funcionamento diferentes (desktop ou mobile). Além do desenvolvimento do repositório para ajudar professores da Educação Básica a encontrar recursos educativos digitais para diversificar as estratégias de ensino de Matemática em sala de aula, a OBAMA intenciona formar docentes para a busca, utilização e integração dos OA em processos de ensino e aprendizagem. A plataforma também tem mapeados e catalogados aplicativos voltados para o ensino da Matemática segundo as habilidades trabalhadas na Prova Brasil e na Base Nacional Comum Curricular (BNCC). São exemplos de OA’s animações, simulações, jogos educativos e softwares, os quais podem ser favoritados e até compor planos virtuais de aulas, recurso permitido para docentes cadastrados na OBAMA.'
@@ -20,7 +20,7 @@ List<AccordionItem> accordionContent = [
     accordionTitle: "Nossa História",
     accordionContent: "A história do Obama começa no ano de 2010 com o professor Dennys Leite Maia, formado em Pedagogia, que na época ainda era estudante de Mestrado na Universidade Estadual do Ceará (UECE) e fazia muitas formações de professores mostrando os objetos de aprendizagem e tecnologias digitais."
     "\n\nA principal tecnologia existente nesse período eram os objetos de aprendizagem e durante as formações, Dennys Leite apresentava uma lista com 8 a 10 repositórios para as pessoas identificarem, guardarem os endereços e buscarem os objetos de aprendizagem."
-    "\n\nDurante as formações, ele percebeu a dificuldade dos professores, seja porque tinham pouca fluência tecnológica ou porque não lembravam qual era o objeto e em qual repositório estava. Diante desse cenário, Dennis percebeu que seria ótimo se existisse um ambiente que armazenasse, de forma organizada, todos os objetos de aprendizagem e os professores só tivessem a preocupação de identificar as habilidades que desejassem trabalhar com os alunos."
+    "\n\nDurante as formações, ele percebeu a dificuldade dos professores, seja porque tinham pouca fluência tecnológica ou porque não lembravam qual era o objeto e em qual repositório estava. Diante desse cenário, Dennys percebeu que seria ótimo se existisse um ambiente que armazenasse, de forma organizada, todos os objetos de aprendizagem e os professores só tivessem a preocupação de identificar as habilidades que desejassem trabalhar com os alunos."
     "\n\nApós terminar o Mestrado, Dennys assumiu como professor substituto na UECE, na área de tecnologia educacionais e Educação em Matemática e junto com o os bolsistas de iniciação científica do Grupo de Pesquisa Matemática e Ensino (MAES), teve a ideia de criar um repositório e assim nasceu o Obama (Objetos de Aprendizagem de Matemática)."
     "\n\nO Obama foi lançado em 2013  como um Google Site, que consistia em uma lista com os títulos dos objetos e com os links para onde eles estavam hospedados. Quem usasse o site tinha que fazer uma busca manual (teclas ctrl +f), usando o nome do objeto ou palavras chaves para encontrar o objeto desejado."
     "\n\nDurante as formações, Dennys Leite recebia feedback positivos dos professores pois o repositório ajudava muito, mesmo com limitações de design de interface e de interatividade, pois já reunia metadados relevantes para a classificação e busca de OA, como: nível de ensino, blocos de conteúdos e descritores da Prova Brasil, além de possuir mais de 260 Objetos de Aprendizagem do tipo animação/simulação."
@@ -39,12 +39,12 @@ List<AccordionItem> accordionContent = [
 
   List<String> LeaderNames = [
     "Dennys Leite Maia",
-    "Nelson Ion de Oliveira",
+    // "Nelson Ion de Oliveira",
   ];
 
   List<String> LeaderImgs = [
     "assets/images/DennysLeite.png",
-    "assets/images/nelson.jpg",
+    // "assets/images/nelson.jpg",
   ];
 
   List<String> staffNames = [

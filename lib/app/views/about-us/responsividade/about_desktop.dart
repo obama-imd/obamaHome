@@ -7,8 +7,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 import '../../../../components/bannerSuperior.dart';
 import '../../../../components/sectionTitle.dart';
 import '../../../../components/youtubePlayer.dart';
-import '../../../../utils/cores_personalizadas.dart';
-import '../components/dropdowns_boutUs.dart';
+import '../../../../utils/app_padding.dart';
 import '../components/staff.dart';
 
 // class AboutUsDesktop extends StatelessWidget {
@@ -34,7 +33,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
     return TemplateColumn(children: [
       BannerSuperior(context, 'Sobre Nós'),
       Padding(
-        padding: const EdgeInsets.only(top: 120.0, bottom: 65.0),
+        padding: paddingValues("sectionPadding", context),
         child: SectionTitle(
             'Plataforma OBAMA',
             'Objetos de Aprendizagem para Matemática',
@@ -42,115 +41,128 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
       ),
       // if (MediaQuery.of(context).size.width > 1200) ...[
       Container(
-        padding: const EdgeInsets.symmetric(horizontal: 72),
-        child: ResponsiveGridRow(children: [
-          // ResponsiveGridCol(
-          //   lg: 6,
-          //   sm: 12,
-          //   child: Container(
-          //       height: 343,
-          //       color: const Color.fromARGB(255, 224, 220, 220),
-          //       padding: const EdgeInsets.only(left: 40.0, top: 30.0),
-          //       child: ListView(children: [
-          //         const Text('O que nós Fazemos',
-          //             style: TextStyle(fontWeight: FontWeight.bold)),
-          //         Container(height: 15),
-          //         const OqueFazemos()
-          //       ])),
-          // ),
-          ResponsiveGridCol(
-            lg: 12,
-            sm: 12,
-            child: Container(
-                decoration: const BoxDecoration(
-                    color: const Color.fromARGB(255, 224, 220, 220),
-                    border: Border(
-                        bottom: BorderSide(
-                      color: Colors.blue,
-                      width: 8,
-                    ))),
-                padding: EdgeInsets.all(swidth * .02),
-                child: CustomVideo(urlVideo: 'oH3omNV9UUU')),
-          )
-        ]),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 100),
-        child: ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 100),
+        height: 390,
+        color: const Color.fromARGB(255, 224, 220, 220),
+        margin: paddingValues("sideMainPadding", context),
         child: ResponsiveGridRow(children: [
           ResponsiveGridCol(
-            lg: 8,
+            lg: 6,
             sm: 12,
             child: Container(
-                color: const Color.fromARGB(255, 241, 238, 238),
-                padding: const EdgeInsets.only(top: 110, left: 90),
+                padding: const EdgeInsets.all(30.0),
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SectionTitle(
-                          'Serviços Oferecidos',
-                          'Easy and effective way to get your device repaired.',
-                          CrossAxisAlignment.start),
-                      Container(
-                          padding: const EdgeInsets.only(top: 60),
-                          child: ResponsiveGridRow(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                for (int i = 0; i < grid1Title.length; i++) ...{
-                                  ResponsiveGridCol(
-                                    lg: 6,
-                                    sm: 12,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 100),
-                                      child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Container(
-                                                height: 100,
-                                                width: 100,
-                                                decoration: BoxDecoration(
-                                                    color: CoresPersonalizadas
-                                                        .azulObama,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100)),
-                                                child: Icon(grid1Icon[i],
-                                                    size: iconSize[i],
-                                                    color: background)),
-                                            Container(
-                                                padding: const EdgeInsets.only(
-                                                    top: 20),
-                                                child: Text(grid1Title[i],
-                                                    style:
-                                                        textTheme.titleSmall)),
-                                            Container(
-                                                padding: const EdgeInsets.only(
-                                                    top: 20),
-                                                child: Text(grid1Content[i],
-                                                    style: textTheme.bodySmall))
-                                          ]),
-                                    ),
-                                  ),
-                                },
-                              ]))
+                      Text(accordionItems[0].accordionTitle,
+                          style: textTheme.titleSmall),
+                      Container(height: 15),
+                      Text(accordionItems[0].accordionContent,
+                          textAlign: TextAlign.justify)
                     ])),
           ),
-          if (swidth > 992) ...{
-            ResponsiveGridCol(
-              lg: 4,
-              child: SizedBox(
-                  height: 865,
-                  child:
-                      Image.asset('assets/images/img2.jpg', fit: BoxFit.cover)),
-            ),
-          }
+          ResponsiveGridCol(
+            lg: 6,
+            sm: 12,
+            child: Container(
+                height: 390,
+                color: primary,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomVideo(urlVideo: 'oH3omNV9UUU'),
+                  ],
+                )),
+          )
         ]),
       ),
+      Container(
+          margin: const EdgeInsets.only(top: 100),
+          padding: paddingValues("sideMainPadding", context),
+          child: ResponsiveGridCol(
+            lg: 8,
+            sm: 12,
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(accordionItems[1].accordionTitle,
+                  style: textTheme.titleSmall),
+              Container(height: 15),
+              Text(accordionItems[1].accordionContent,
+                  textAlign: TextAlign.justify)
+            ]),
+          )),
+      // Padding(
+      //   padding: const EdgeInsets.only(top: 100),
+      //   child: ResponsiveGridRow(children: [
+      //     ResponsiveGridCol(
+      //       lg: 8,
+      //       sm: 12,
+      //       child: Container(
+      //           color: const Color.fromARGB(255, 241, 238, 238),
+      //           padding: const EdgeInsets.only(top: 110, left: 90),
+      //           child: Column(
+      //               crossAxisAlignment: CrossAxisAlignment.start,
+      //               children: [
+      //                 SectionTitle(
+      //                     'Serviços Oferecidos',
+      //                     'Easy and effective way to get your device repaired.',
+      //                     CrossAxisAlignment.start),
+      //                 Container(
+      //                     padding: const EdgeInsets.only(top: 60),
+      //                     child: ResponsiveGridRow(
+      //                         crossAxisAlignment: CrossAxisAlignment.start,
+      //                         children: [
+      //                           for (int i = 0; i < grid1Title.length; i++) ...{
+      //                             ResponsiveGridCol(
+      //                               lg: 6,
+      //                               sm: 12,
+      //                               child: Padding(
+      //                                 padding:
+      //                                     const EdgeInsets.only(bottom: 100),
+      //                                 child: Column(
+      //                                     crossAxisAlignment:
+      //                                         CrossAxisAlignment.start,
+      //                                     children: [
+      //                                       Container(
+      //                                           height: 100,
+      //                                           width: 100,
+      //                                           decoration: BoxDecoration(
+      //                                               color: CoresPersonalizadas
+      //                                                   .azulObama,
+      //                                               borderRadius:
+      //                                                   BorderRadius.circular(
+      //                                                       100)),
+      //                                           child: Icon(grid1Icon[i],
+      //                                               size: iconSize[i],
+      //                                               color: background)),
+      //                                       Container(
+      //                                           padding: const EdgeInsets.only(
+      //                                               top: 20),
+      //                                           child: Text(grid1Title[i],
+      //                                               style:
+      //                                                   textTheme.titleSmall)),
+      //                                       Container(
+      //                                           padding: const EdgeInsets.only(
+      //                                               top: 20),
+      //                                           child: Text(grid1Content[i],
+      //                                               style: textTheme.bodySmall))
+      //                                     ]),
+      //                               ),
+      //                             ),
+      //                           },
+      //                         ]))
+      //               ])),
+      //     ),
+      //     if (swidth > 992) ...{
+      //       ResponsiveGridCol(
+      //         lg: 4,
+      //         child: SizedBox(
+      //             height: 865,
+      //             child:
+      //                 Image.asset('assets/images/img2.jpg', fit: BoxFit.cover)),
+      //       ),
+      //     }
+      //   ]),
+      // ),
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Container(
           width: MediaQuery.of(context).size.width,
@@ -163,8 +175,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
             ResponsiveGridCol(lg: 3, child: Spacer()),
             for (int i = 0; i < LeaderNames.length; i++) ...{
               ResponsiveGridCol(
-                  lg: 3,
-                  xs: 12,
+                  lg: 6,
                   child: Padding(
                     padding:
                         const EdgeInsets.only(bottom: 30, left: 10, right: 10),

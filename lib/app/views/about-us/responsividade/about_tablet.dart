@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:obamahome/components/navMenu.dart';
+import 'package:obamahome/utils/app_padding.dart';
 import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -13,7 +14,6 @@ import '../../../../components/sectionTitle.dart';
 import '../../../../components/topbar.dart';
 import '../../../../components/youtubePlayer.dart';
 import '../../../../utils/cores_personalizadas.dart';
-import '../components/dropdowns_boutUs.dart';
 import '../components/staff.dart';
 
 class AboutUsTablet extends StatelessWidget {
@@ -57,12 +57,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(
-                              swidth: swidth,
-                              heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
-               menuMobile(context, scaffoldKey, swidth),
+                menuMobile(context, scaffoldKey, swidth),
               ],
               BannerSuperior(context, 'Sobre Nós'),
               Padding(
@@ -76,20 +74,20 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 72),
                 child: ResponsiveGridRow(children: [
-                  // ResponsiveGridCol(
-                  //   lg: 6,
-                  //   sm: 12,
-                  //   child: Container(
-                  //       height: 343,
-                  //       color: const Color.fromARGB(255, 224, 220, 220),
-                  //       padding: const EdgeInsets.only(left: 40.0, top: 30.0),
-                  //       child: ListView(children: [
-                  //         const Text('O que nós Fazemos',
-                  //             style: TextStyle(fontWeight: FontWeight.bold)),
-                  //         Container(height: 15),
-                  //         const OqueFazemos()
-                  //       ])),
-                  // ),
+                  ResponsiveGridCol(
+                    lg: 12,
+                    sm: 12,
+                    child: Container(
+                        height: 343,
+                        color: const Color.fromARGB(255, 224, 220, 220),
+                        padding: const EdgeInsets.only(left: 40.0, top: 30.0),
+                        child: Column(children: [
+                          Text(accordionItems[0].accordionTitle,
+                              style: textTheme.titleSmall),
+                          Container(height: 15),
+                          Text(accordionItems[0].accordionContent)
+                        ])),
+                  ),
                   ResponsiveGridCol(
                     lg: 12,
                     sm: 12,
@@ -106,11 +104,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   )
                 ]),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child:
-                    ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
-              ),
+              Container(
+                  margin: const EdgeInsets.only(top: 100),
+                  padding: paddingValues("sideMainPadding", context),
+                  child: ResponsiveGridCol(
+                    lg: 8,
+                    sm: 12,
+                    child: Column(children: [
+                      Text(accordionItems[1].accordionTitle,
+                          style: textTheme.titleSmall),
+                      Container(height: 15),
+                      Text(accordionItems[1].accordionContent)
+                    ]),
+                  )),
               Padding(
                 padding: const EdgeInsets.only(top: 100),
                 child: ResponsiveGridRow(children: [
@@ -160,8 +166,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         child: Icon(
                                                             grid1Icon[i],
                                                             size: iconSize[i],
-                                                            color:
-                                                                background)),
+                                                            color: background)),
                                                     Container(
                                                         padding:
                                                             const EdgeInsets

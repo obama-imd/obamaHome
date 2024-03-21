@@ -12,8 +12,8 @@ import '../../../../components/menuMobile.dart';
 import '../../../../components/sectionTitle.dart';
 import '../../../../components/topbar.dart';
 import '../../../../components/youtubePlayer.dart';
+import '../../../../utils/app_padding.dart';
 import '../../../../utils/cores_personalizadas.dart';
-import '../components/dropdowns_boutUs.dart';
 import '../components/staff.dart';
 
 class AboutUsMobile extends StatelessWidget {
@@ -57,12 +57,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(
-                              swidth: swidth,
-                              heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50),
                         ])),
               ] else ...[
-               menuMobile(context, scaffoldKey, swidth),
+                menuMobile(context, scaffoldKey, swidth),
               ],
               BannerSuperior(context, 'Sobre Nós'),
               Padding(
@@ -106,13 +104,23 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   )
                 ]),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 100),
-                child:
-                    ResponsiveGridCol(lg: 8, sm: 12, child: const Dropdowns()),
+              ResponsiveGridCol(
+                lg: 8,
+                sm: 12,
+                child: Container(
+                    height: 343,
+                    color: const Color.fromARGB(255, 224, 220, 220),
+                    padding: const EdgeInsets.only(left: 40.0, top: 30.0),
+                    child: Column(children: [
+                      Text(accordionItems[0].accordionTitle,
+                          style: textTheme.titleSmall),
+                      Container(height: 15),
+                      Text(accordionItems[0].accordionContent)
+                    ])),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 100),
+              Container(
+                margin: const EdgeInsets.only(top: 100),
+                padding: paddingValues("sideMainPadding", context),
                 child: ResponsiveGridRow(children: [
                   ResponsiveGridCol(
                     lg: 8,
@@ -160,8 +168,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                         child: Icon(
                                                             grid1Icon[i],
                                                             size: iconSize[i],
-                                                            color:
-                                                                background)),
+                                                            color: background)),
                                                     Container(
                                                         padding:
                                                             const EdgeInsets
