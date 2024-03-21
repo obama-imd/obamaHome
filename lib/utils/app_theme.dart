@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
+import 'package:obamahome/auth/login.dart';
 
 import '../404.dart';
 import '../app/views/about-us/aboutUs_view.dart';
@@ -11,6 +12,7 @@ import '../app/views/home/home_view.dart';
 import '../app/views/manual/manual_view.dart';
 import '../app/views/search/searchOA_view.dart';
 import '../app/views/trilhas/trilhas_view.dart';
+import '../auth/signin.dart';
 import 'cores_personalizadas.dart';
 
 const Color primary = Color.fromRGBO(23, 119, 242, 1);
@@ -25,9 +27,12 @@ const Color onBackground = Colors.white;
 const Color surface = Color.fromRGBO(23, 160, 242, 1);
 const Color modalBackground = Color.fromRGBO(23, 119, 242, .9);
 const Color onSurface = Colors.black;
+const Color borderInput = Color.fromARGB(158, 225, 225, 225);
+const Color textFieldBackground = Color.fromARGB(255, 248, 248, 248);
 
 const LinearGradient gradientColor = LinearGradient(
-    begin: Alignment.topLeft, colors: [Color.fromARGB(255, 150, 144, 144), Colors.blue]);
+    begin: Alignment.topLeft,
+    colors: [Color.fromARGB(255, 150, 144, 144), Colors.blue]);
 
 final TextTheme textTheme = TextTheme(
   titleLarge: GoogleFonts.raleway(
@@ -113,14 +118,19 @@ final MaterialApp AppMaterial = MaterialApp(
   routes: {
     '/sobre': (context) => const AboutUsPage(),
     '/blog': (context) => const BlogPage(),
-    '/blog-detalhes': (context) => BlogDetails(initialPageIndex: ModalRoute.of(context)?.settings.arguments as int? ?? 0),
+    '/blog-detalhes': (context) => BlogDetails(
+        initialPageIndex:
+            ModalRoute.of(context)?.settings.arguments as int? ?? 0),
     '/formacoes': (context) => const Formacoes(),
     '/servicos': (context) => SearchPage(
         termSearched:
             ModalRoute.of(context)?.settings.arguments as String? ?? ''),
     '/trilhas': (context) => TrilhasPage(),
     '/manuais': (context) => ManuaisPage(),
-    '/planos-aulas':(context) => ListLessonPlan(),
+    '/planos-aulas': (context) => ListLessonPlan(),
+    '/login': (context) => LoginPageView(),
+    '/cadastro': (context) => SignInPageView(),
+    // '/esqueciMinhaSenha': (context) => ForgotPasswordView()
   },
   onGenerateRoute: (settings) {
     if (settings.name == null) {

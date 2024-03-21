@@ -74,7 +74,9 @@ class TopBar extends StatelessWidget {
                               color: background,
                               textStyle: textTheme.headlineMedium,
                               child: InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    Navigator.pushNamed(context, "/login");
+                                  },
                                   child: SizedBox(
                                     width: swidth * 0.154,
                                     height: 45,
@@ -117,7 +119,9 @@ class TopBar extends StatelessWidget {
                                   color: background,
                                   textStyle: textTheme.headlineMedium,
                                   child: InkWell(
-                                      onTap: () {},
+                                      onTap: () {
+                                        Navigator.pushNamed(context, "/login");
+                                      },
                                       child: SizedBox(
                                         width: swidth * 0.154,
                                         height: 45,
@@ -186,7 +190,9 @@ class TopBar extends StatelessWidget {
                         color: background,
                         textStyle: textTheme.headlineMedium,
                         child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.pushNamed(context, "/login");
+                            },
                             child: SizedBox(
                               width: 190,
                               height: 45,
