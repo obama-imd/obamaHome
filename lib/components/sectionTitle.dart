@@ -20,7 +20,7 @@ class SectionTitle extends StatelessWidget {
         if (subtitle != '') ...{
           Padding(
             padding: EdgeInsets.only(bottom: 22.0),
-            child: Text(subtitle,
+            child: Text(subtitle, textAlign: TextAlign.justify,
               style: Theme.of(context).textTheme.titleMedium!)),
         },
         Container(

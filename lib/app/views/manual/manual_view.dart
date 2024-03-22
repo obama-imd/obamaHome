@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/manual/responsividade/manual_desktop.dart';
-import 'package:obamahome/app/views/manual/responsividade/manual_mobile.dart';
-import 'package:obamahome/app/views/manual/responsividade/manual_tablet.dart';
-
-import '../../../utils/responsivo.dart';
 
 class ManuaisPage extends StatelessWidget {
   const ManuaisPage({super.key});
@@ -21,18 +17,19 @@ class MyStatefulWidget extends StatefulWidget {
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-  
+
   var item = 0;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          body: Responsivo(
-              mobile: ManuaisMobile(),
-              tablet: ManuaisTablet(),
-              desktop: ManuaisDesktop()
-        )));
+        child: Scaffold(body: ManuaisDesktop()
+            //   Responsivo(
+            //       mobile: ManuaisMobile(),
+            //       tablet: ManuaisTablet(),
+            //       desktop: ManuaisDesktop()
+            // )
+            ));
   }
 }

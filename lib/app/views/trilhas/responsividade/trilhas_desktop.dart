@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/components/mainButton.dart';
+import 'package:obamahome/utils/app_padding.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -33,19 +34,19 @@ class _MyStatefulWidgetState extends State<TrilhasDesktop> {
               sm: 12,
               child: Container(
                   color: const Color.fromARGB(255, 241, 238, 238),
-                  padding: EdgeInsets.only(right: 90, left: 90),
+                  padding: paddingValues("sideMainPadding", context),
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 110),
+                          padding: paddingValues("sectionPadding", context),
                           child: SectionTitle(
                               'Trilhas de aprendizagem',
                               'Como o nome já diz, as trilhas que você acessará aqui são dicas para seguir um caminho e conhecer as principais funcionalidades das mais importantes ferramentas do Google que podem te auxiliar no processo de ensino remoto. Ah, e nós já trilhamos o caminho das pedras por você. Então agora basta você ir respondendo às perguntas, quando houver, e seguir as instruções. Bons estudos!',
                               CrossAxisAlignment.start),
                         ),
                         Container(
-                            padding: const EdgeInsets.only(top: 60),
+                            padding: paddingValues("fullGrid", context),
                             child: ResponsiveGridRow(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

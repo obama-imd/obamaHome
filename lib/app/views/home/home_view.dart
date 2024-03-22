@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/models/blog_models.dart';
 import 'package:obamahome/app/models/search_models.dart';
 import 'package:obamahome/app/views/home/responsividade/home_desktop.dart';
-import 'package:obamahome/app/views/home/responsividade/home_mobile1.dart';
 import 'package:obamahome/app/views/home/responsividade/home_tablet.dart';
 import 'package:obamahome/components/loadCircle.dart';
 import 'package:obamahome/utils/responsivo.dart';
@@ -14,6 +13,7 @@ import '../../../utils/app_padding.dart';
 import '../../../utils/app_theme.dart';
 import '../../controllers/home_controllers.dart';
 import 'components/our_product_item.dart';
+import 'responsividade/home_Mobile.dart';
 
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
@@ -65,8 +65,8 @@ class HomeViewState extends ConsumerState<HomeView> {
             body: Stack(
           children: [
             Responsivo(
-                mobile: HomeMobile1(),
-                //mobile: HomeMobile( scrollController: _scrollController,),
+                // mobile: HomeMobile1(),
+                mobile: HomeMobile( scrollController: _scrollController,),
                 tablet: HomeTablet(
                   scrollController: _scrollController,
                 ),

@@ -26,7 +26,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       child: Text("Recuperação de Senha",
                           style: textTheme.titleSmall)),
                   content: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 210, maxWidth: 350),
+                    constraints: BoxConstraints(maxHeight: 250, minWidth: 300, maxWidth: 350),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

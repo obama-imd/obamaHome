@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/formations/responsividade/formations_desktop.dart';
-import 'package:obamahome/app/views/formations/responsividade/formations_mobile.dart';
-import 'package:obamahome/app/views/formations/responsividade/formations_tablet.dart';
-
-import '../../../utils/responsivo.dart';
 
 class Formacoes extends StatelessWidget {
   const Formacoes({super.key});
@@ -29,10 +25,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          body: Responsivo(
-              mobile: FormacoesMobile(),
-              tablet: FormacoesTablet(),
-              desktop: FormacoesDesktop()
-        )));
+          body: FormacoesDesktop(),
+        ));
   }
 }

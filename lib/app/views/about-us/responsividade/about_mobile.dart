@@ -13,7 +13,6 @@ import '../../../../components/sectionTitle.dart';
 import '../../../../components/topbar.dart';
 import '../../../../components/youtubePlayer.dart';
 import '../../../../utils/app_padding.dart';
-import '../../../../utils/cores_personalizadas.dart';
 import '../components/staff.dart';
 
 class AboutUsMobile extends StatelessWidget {
@@ -72,137 +71,128 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               // if (MediaQuery.of(context).size.width > 1200) ...[
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 72),
-                child: ResponsiveGridRow(children: [
-                  // ResponsiveGridCol(
-                  //   lg: 6,
-                  //   sm: 12,
-                  //   child: Container(
-                  //       height: 343,
-                  //       color: const Color.fromARGB(255, 224, 220, 220),
-                  //       padding: const EdgeInsets.only(left: 40.0, top: 30.0),
-                  //       child: ListView(children: [
-                  //         const Text('O que nós Fazemos',
-                  //             style: TextStyle(fontWeight: FontWeight.bold)),
-                  //         Container(height: 15),
-                  //         const OqueFazemos()
-                  //       ])),
-                  // ),
-                  ResponsiveGridCol(
-                    lg: 12,
-                    sm: 12,
-                    child: Container(
-                        decoration: const BoxDecoration(
-                            color: const Color.fromARGB(255, 224, 220, 220),
-                            border: Border(
-                                bottom: BorderSide(
-                              color: Colors.blue,
-                              width: 8,
-                            ))),
-                        padding: EdgeInsets.all(swidth * .02),
-                        child: CustomVideo(urlVideo: 'oH3omNV9UUU')),
-                  )
+                padding: paddingValues("sideMainPadding", context),
+                child: Column(children: [
+                  Container(
+                      color: const Color.fromARGB(255, 224, 220, 220),
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(children: [
+                        Text(accordionItems[0].accordionTitle,
+                            style: textTheme.titleSmall),
+                        Container(height: 15),
+                        Text(
+                          accordionItems[0].accordionContent,
+                          textAlign: TextAlign.justify,
+                        )
+                      ])),
+                  Container(
+                      decoration: const BoxDecoration(
+                          color: const Color.fromARGB(255, 224, 220, 220),
+                          border: Border(
+                              bottom: BorderSide(
+                            color: Colors.blue,
+                            width: 8,
+                          ))),
+                      // padding: EdgeInsets.all(30),
+                      child: CustomVideo(urlVideo: 'oH3omNV9UUU'))
                 ]),
-              ),
-              ResponsiveGridCol(
-                lg: 8,
-                sm: 12,
-                child: Container(
-                    height: 343,
-                    color: const Color.fromARGB(255, 224, 220, 220),
-                    padding: const EdgeInsets.only(left: 40.0, top: 30.0),
-                    child: Column(children: [
-                      Text(accordionItems[0].accordionTitle,
-                          style: textTheme.titleSmall),
-                      Container(height: 15),
-                      Text(accordionItems[0].accordionContent)
-                    ])),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 100),
-                padding: paddingValues("sideMainPadding", context),
-                child: ResponsiveGridRow(children: [
-                  ResponsiveGridCol(
-                    lg: 8,
-                    sm: 12,
-                    child: Container(
-                        color: const Color.fromARGB(255, 241, 238, 238),
-                        padding: const EdgeInsets.only(top: 110, left: 90),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              SectionTitle(
-                                  'Serviços Oferecidos',
-                                  'Easy and effective way to get your device repaired.',
-                                  CrossAxisAlignment.start),
-                              Container(
-                                  padding: const EdgeInsets.only(top: 60),
-                                  child: ResponsiveGridRow(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        for (int i = 0;
-                                            i < grid1Title.length;
-                                            i++) ...{
-                                          ResponsiveGridCol(
-                                            lg: 6,
-                                            sm: 12,
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 100),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Container(
-                                                        height: 100,
-                                                        width: 100,
-                                                        decoration: BoxDecoration(
-                                                            color:
-                                                                CoresPersonalizadas
-                                                                    .azulObama,
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        100)),
-                                                        child: Icon(
-                                                            grid1Icon[i],
-                                                            size: iconSize[i],
-                                                            color: background)),
-                                                    Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 20),
-                                                        child: Text(
-                                                            grid1Title[i],
-                                                            style: textTheme
-                                                                .titleSmall)),
-                                                    Container(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .only(top: 20),
-                                                        child: Text(
-                                                            grid1Content[i],
-                                                            style: textTheme
-                                                                .bodySmall))
-                                                  ]),
-                                            ),
-                                          ),
-                                        },
-                                      ]))
-                            ])),
-                  ),
-                  if (swidth > 992) ...{
-                    ResponsiveGridCol(
-                      lg: 4,
-                      child: SizedBox(
-                          height: 865,
-                          child: Image.asset('assets/images/img2.jpg',
-                              fit: BoxFit.cover)),
-                    ),
-                  }
-                ]),
-              ),
+                  margin: const EdgeInsets.only(top: 100),
+                  padding: paddingValues("sideMainPadding", context),
+                  child: Column(children: [
+                    Text(accordionItems[1].accordionTitle,
+                        style: textTheme.titleSmall),
+                    Container(height: 15),
+                    Text(
+                      accordionItems[1].accordionContent,
+                      textAlign: TextAlign.justify,
+                    )
+                  ])),
+              // Padding(
+              //   padding: const EdgeInsets.only(top: 100),
+              //   child: ResponsiveGridRow(children: [
+              //     ResponsiveGridCol(
+              //       lg: 8,
+              //       sm: 12,
+              //       child: Container(
+              //           color: const Color.fromARGB(255, 241, 238, 238),
+              //           padding: const EdgeInsets.only(top: 110, left: 90),
+              //           child: Column(
+              //               crossAxisAlignment: CrossAxisAlignment.start,
+              //               children: [
+              //                 SectionTitle(
+              //                     'Serviços Oferecidos',
+              //                     'Easy and effective way to get your device repaired.',
+              //                     CrossAxisAlignment.start),
+              //                 Container(
+              //                     padding: const EdgeInsets.only(top: 60),
+              //                     child: ResponsiveGridRow(
+              //                         crossAxisAlignment:
+              //                             CrossAxisAlignment.start,
+              //                         children: [
+              //                           for (int i = 0;
+              //                               i < grid1Title.length;
+              //                               i++) ...{
+              //                             ResponsiveGridCol(
+              //                               lg: 6,
+              //                               sm: 12,
+              //                               child: Padding(
+              //                                 padding: const EdgeInsets.only(
+              //                                     bottom: 100),
+              //                                 child: Column(
+              //                                     crossAxisAlignment:
+              //                                         CrossAxisAlignment.start,
+              //                                     children: [
+              //                                       Container(
+              //                                           height: 100,
+              //                                           width: 100,
+              //                                           decoration: BoxDecoration(
+              //                                               color:
+              //                                                   CoresPersonalizadas
+              //                                                       .azulObama,
+              //                                               borderRadius:
+              //                                                   BorderRadius
+              //                                                       .circular(
+              //                                                           100)),
+              //                                           child: Icon(
+              //                                               grid1Icon[i],
+              //                                               size: iconSize[i],
+              //                                               color: background)),
+              //                                       Container(
+              //                                           padding:
+              //                                               const EdgeInsets
+              //                                                   .only(top: 20),
+              //                                           child: Text(
+              //                                               grid1Title[i],
+              //                                               style: textTheme
+              //                                                   .titleSmall)),
+              //                                       Container(
+              //                                           padding:
+              //                                               const EdgeInsets
+              //                                                   .only(top: 20),
+              //                                           child: Text(
+              //                                               grid1Content[i],
+              //                                               style: textTheme
+              //                                                   .bodySmall))
+              //                                     ]),
+              //                               ),
+              //                             ),
+              //                           },
+              //                         ]))
+              //               ])),
+              //     ),
+              //     if (swidth > 992) ...{
+              //       ResponsiveGridCol(
+              //         lg: 4,
+              //         child: SizedBox(
+              //             height: 865,
+              //             child: Image.asset('assets/images/img2.jpg',
+              //                 fit: BoxFit.cover)),
+              //       ),
+              //     }
+              //   ]),
+              // ),
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Container(
                   width: MediaQuery.of(context).size.width,

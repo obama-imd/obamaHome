@@ -1,19 +1,21 @@
-
 import 'package:flutter/material.dart';
 
 EdgeInsets paddingValues(String paddingName, context) {
-
   double swidth = MediaQuery.of(context).size.width;
 
   switch (paddingName) {
     case "sideMainPadding":
-      return EdgeInsets.symmetric(horizontal: swidth *.068);
+      if (swidth > 700) {
+        return EdgeInsets.symmetric(horizontal: swidth * .068);
+      } else {
+        return EdgeInsets.symmetric(horizontal: 35);
+      }
     case "sideHomePosts":
-      return EdgeInsets.symmetric(horizontal: swidth *.052);
+      return EdgeInsets.symmetric(horizontal: swidth * .052);
     case "sideHomeCards":
-      return EdgeInsets.symmetric(horizontal: (swidth*.068) - 30);
+      return EdgeInsets.symmetric(horizontal: (swidth * .068) - 30);
     case "sectionPadding":
-      if (swidth < 700 ) {
+      if (swidth < 700) {
         return EdgeInsets.only(top: 75, bottom: 65);
       } else {
         return EdgeInsets.only(top: 120, bottom: 115);
@@ -21,7 +23,7 @@ EdgeInsets paddingValues(String paddingName, context) {
     case "logo":
       return EdgeInsets.only(top: 24, bottom: 24);
     case "mainTitle":
-      if (swidth < 700 ) {
+      if (swidth < 700) {
         return EdgeInsets.only(top: 75, bottom: 65);
       } else {
         return EdgeInsets.only(top: 120, bottom: 65);
@@ -49,7 +51,7 @@ EdgeInsets paddingValues(String paddingName, context) {
     case "sectionSubTitle":
       return EdgeInsets.only(top: 15, bottom: 10);
     case "carouselTop":
-      if (swidth < 700 ) {
+      if (swidth < 700) {
         return EdgeInsets.only(top: 75);
       } else {
         return EdgeInsets.only(top: 120);
