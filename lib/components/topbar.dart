@@ -8,24 +8,43 @@ import '../utils/app_theme.dart';
 import '../utils/cores_personalizadas.dart';
 
 // ignore: must_be_immutable
-class TopBar extends StatelessWidget {
+class TopBar extends StatefulWidget {
   double swidth;
 
   TopBar(this.swidth, {super.key});
 
   @override
+  State<TopBar> createState() => _TopBarState();
+}
+
+class _TopBarState extends State<TopBar> {
+  // var user;
+
+  @override
+  void initState() {
+    // user = GoogleSignIn().isSignedIn();
+    super.initState();
+  }
+
+  void checkAuth(context) {
+    Navigator.pushNamed(context, "/login") ;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    
+
     return Column(children: [
-      if (swidth > 1150) ...[
+      if (widget.swidth > 1150) ...[
         Container(
             color: CoresPersonalizadas.azulObama,
             height: 44.0,
-            width: swidth,
+            width: widget.swidth,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                      margin: EdgeInsets.only(left: swidth * 0.068),
+                      margin: EdgeInsets.only(left: widget.swidth * 0.068),
                       child: Row(children: [
                         Container(
                             child: Row(children: [
@@ -67,7 +86,7 @@ class TopBar extends StatelessWidget {
                         SocialMedia(background),
                         Container(
                             margin: EdgeInsets.only(
-                                left: 15.0, right: swidth * 0.068),
+                                left: 15.0, right: widget.swidth * 0.068),
                             height: 45,
                             width: 160,
                             child: Material(
@@ -75,10 +94,10 @@ class TopBar extends StatelessWidget {
                               textStyle: textTheme.headlineMedium,
                               child: InkWell(
                                   onTap: () {
-                                    Navigator.pushNamed(context, "/login");
+                                    checkAuth(context);
                                   },
                                   child: SizedBox(
-                                    width: swidth * 0.154,
+                                    width: widget.swidth * 0.154,
                                     height: 45,
                                     child: Column(
                                       mainAxisAlignment:
@@ -94,19 +113,19 @@ class TopBar extends StatelessWidget {
                       ]))
                 ]))
       ],
-      if (swidth < 1150) ...[
-        if (swidth > 900) ...[
+      if (widget.swidth < 1150) ...[
+        if (widget.swidth > 900) ...[
           Container(
               color: CoresPersonalizadas.azulObama,
               height: 80.0,
-              width: swidth,
+              width: widget.swidth,
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          left: swidth * 0.04, right: swidth * 0.04),
+                          left: widget.swidth * 0.04, right: widget.swidth * 0.04),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -120,10 +139,10 @@ class TopBar extends StatelessWidget {
                                   textStyle: textTheme.headlineMedium,
                                   child: InkWell(
                                       onTap: () {
-                                        Navigator.pushNamed(context, "/login");
+                                        checkAuth(context);
                                       },
                                       child: SizedBox(
-                                        width: swidth * 0.154,
+                                        width: widget.swidth * 0.154,
                                         height: 45,
                                         child: Column(
                                           mainAxisAlignment:
@@ -141,35 +160,35 @@ class TopBar extends StatelessWidget {
                   ])),
         ],
       ],
-      if (swidth < 900) ...[
+      if (widget.swidth < 900) ...[
         Container(
           color: CoresPersonalizadas.azulObama,
-          width: swidth,
+          width: widget.swidth,
           height: 130,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: const Icon(FontAwesomeIcons.house,
-                          color: background, size: 13)),
-                  Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                      style:
-                          GoogleFonts.raleway(color: background, fontSize: 13)),
-                ]),
-                Container(
-                    child: TextButton(
-                        style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              CoresPersonalizadas.azulObama),
-                        ),
-                        onPressed: () {
-                          launchUrl(emailLaunchUri);
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Row(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.min, children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Container(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: const Icon(FontAwesomeIcons.house,
+                      color: background, size: 13)),
+              Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
+                  style: GoogleFonts.raleway(color: background, fontSize: 13)),
+            ]),
+            Container(
+                child: TextButton(
+                    style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(
+                          CoresPersonalizadas.azulObama),
+                    ),
+                    onPressed: () {
+                      launchUrl(emailLaunchUri);
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
                             Container(
                                 padding: const EdgeInsets.only(right: 10),
                                 child: const Icon(FontAwesomeIcons.envelope,
@@ -178,38 +197,38 @@ class TopBar extends StatelessWidget {
                                 style: GoogleFonts.raleway(
                                     color: background, fontSize: 13)),
                           ]),
-                        ))),
-                Padding(
-                  padding: const EdgeInsets.only(top: 13),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      // SocialMedia(background),
-                      Material(
-                        color: background,
-                        textStyle: textTheme.headlineMedium,
-                        child: InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, "/login");
-                            },
-                            child: SizedBox(
-                              width: 190,
-                              height: 45,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('Acesse',
-                                      style: textTheme.headlineSmall,
-                                      textAlign: TextAlign.center)
-                                ],
-                              ),
-                            )),
-                      )
-                    ],
-                  ),
-                ),
-              ]),
+                    ))),
+            Padding(
+              padding: const EdgeInsets.only(top: 13),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // SocialMedia(background),
+                  Material(
+                    color: background,
+                    textStyle: textTheme.headlineMedium,
+                    child: InkWell(
+                        onTap: () {
+                          checkAuth(context);
+                        },
+                        child: SizedBox(
+                          width: 190,
+                          height: 45,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Acesse',
+                                  style: textTheme.headlineSmall,
+                                  textAlign: TextAlign.center)
+                            ],
+                          ),
+                        )),
+                  )
+                ],
+              ),
+            ),
+          ]),
         )
       ],
     ]);

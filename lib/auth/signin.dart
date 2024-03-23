@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../components/bannerSuperior.dart';
 import '../components/mainButton.dart';
 import '../templates/template_basic_col.dart';
-import '../utils/app_theme.dart';
 import 'components/formFields.dart';
+import 'components/googleSignInButton.dart';
 
 List<String> passwordFields = ["Senha", "Confirmar senha"];
 
@@ -17,7 +16,7 @@ class SignInPageView extends StatefulWidget {
 }
 
 class _SignInPageViewState extends State<SignInPageView> {
-  GlobalKey loginKey = GlobalKey<FormState>();
+  GlobalKey signInKey = GlobalKey<FormState>();
   bool showPassword = true;
 
   void displayPassword() {
@@ -33,7 +32,7 @@ class _SignInPageViewState extends State<SignInPageView> {
       Padding(
         padding: const EdgeInsets.only(top: 120),
         child: Form(
-            key: loginKey,
+            key: signInKey,
             child: ConstrainedBox(
               constraints: BoxConstraints(maxWidth: 350),
               child: Column(children: [
@@ -55,25 +54,7 @@ class _SignInPageViewState extends State<SignInPageView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       mainButton(context, "Cadastrar", null, () {}),
-                      Container(
-                        height: 50,
-                        width: 170,
-                        child: ElevatedButton(
-                            onPressed: () {},
-                            style: ButtonStyle(
-                              side: MaterialStatePropertyAll(
-                                  BorderSide(width: 1, color: secondary)),
-                            ),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text("Google",
-                                      style: textTheme.headlineSmall),
-                                  SizedBox(width: 5),
-                                  Icon(FontAwesomeIcons.google,
-                                      color: Colors.red, size: 14)
-                                ])),
-                      ),
+                      GoogleSigninButton(),
                     ],
                   ),
                 ),

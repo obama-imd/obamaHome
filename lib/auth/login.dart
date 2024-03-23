@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/auth/forgotPassword.dart';
 import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
-import 'package:obamahome/utils/app_theme.dart';
 
 import 'components/formFields.dart';
+import 'components/googleSignInButton.dart';
 
 class LoginPageView extends StatefulWidget {
   const LoginPageView({super.key});
@@ -52,24 +51,7 @@ class _LoginPageViewState extends State<LoginPageView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     mainButton(context, "Entrar", null, () {}),
-                    Container(
-                      height: 50,
-                      width: 170,
-                      child: ElevatedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            side: MaterialStatePropertyAll(
-                                BorderSide(width: 1, color: secondary)),
-                          ),
-                          child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text("Google", style: textTheme.headlineSmall),
-                                SizedBox(width: 5),
-                                Icon(FontAwesomeIcons.google,
-                                    color: Colors.red, size: 14)
-                              ])),
-                    ),
+                    GoogleSigninButton(),
                   ],
                 ),
                 Padding(
