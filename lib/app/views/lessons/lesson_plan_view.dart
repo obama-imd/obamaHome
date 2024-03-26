@@ -36,8 +36,8 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
         List<LessonPlan> data = [...lessonsData];
         return TemplateColumn(
           children: [
-            BannerSuperior(context, "Planos de Aula"),
             Container(
+              constraints: BoxConstraints(maxWidth: 1200),
               margin: paddingValues("carouselTop", context),
               padding: paddingValues("sideMainPadding", context),
               child: Column(
