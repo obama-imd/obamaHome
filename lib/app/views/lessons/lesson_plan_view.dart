@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/controllers/lessons_controller.dart';
 import 'package:obamahome/app/models/lesson_plan_models.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_padding.dart';
+import 'package:obamahome/utils/app_theme.dart';
 
 class ListLessonPlan extends ConsumerStatefulWidget {
   const ListLessonPlan({super.key});
@@ -29,6 +31,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
   final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
+    double swidth = MediaQuery.of(context).size.width;
     return FutureBuilder(
       future: randomName(searchTerm, ref),
       builder: (context, snapshot) {
@@ -38,12 +41,36 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
           children: [
             Container(
               constraints: BoxConstraints(maxWidth: 1200),
+              color: borderInput,
               margin: paddingValues("carouselTop", context),
               padding: paddingValues("sideMainPadding", context),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  TextField(
-                    onSubmitted: (value) {},
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          constraints: BoxConstraints(
+                              maxWidth: 600, minWidth: 200, maxHeight: 39),
+                          filled: true,
+                          fillColor: background,
+                          hintText: "Busca",
+                          hintStyle: textTheme.bodySmall,
+                          border: InputBorder.none,
+                          suffixIcon: Icon(CupertinoIcons.search,
+                              color: secondary, size: 16)),
+                      onChanged: (value) {
+                        setState(() {
+                          searchTerm = value;
+                        });
+                      },
+                      onSubmitted: (value) {
+                        setState(() {
+                          searchTerm = value;
+                        });
+                      },
+                    ),
                   ),
                   ListView.builder(
                     shrinkWrap: true,
@@ -145,7 +172,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
   Widget _buildHeader() {
     return Material(
       child: Container(
-        color: Colors.grey,
+        color: borderInput,
         padding: const EdgeInsets.all(12.0),
         margin: const EdgeInsets.all(0.0),
         child: const Row(
