@@ -7,7 +7,7 @@ List<LessonPlan> _lessonPlans = List.generate(
   (index) {
     return LessonPlan(
       titulo:
-          'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. $index",
       autor: index % 2 == 0 ? ' J. R. R. Tolkien' : 'C. S. Lewis',
       dataPublicacao: DateTime.now(),
     );

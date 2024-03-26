@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/controllers/lessons_controller.dart';
 import 'package:obamahome/app/models/lesson_plan_models.dart';
@@ -15,52 +16,140 @@ class ListLessonPlan extends ConsumerStatefulWidget {
 
 class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
   String searchTerm = "";
+  int _currentPage = 0;
+  int _itemsPerPage = 10;
 
+  List<LessonPlan> _pagedItems(List<LessonPlan> data) {
+    int startIndex = _currentPage * _itemsPerPage;
+    int endIndex = startIndex + _itemsPerPage;
+    if (endIndex > data.length) {
+      endIndex = data.length;
+    }
+    return data.sublist(startIndex, endIndex);
+  }
+
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: randomName(searchTerm, ref),
-        builder: (context, snapshot) {
-          final lessonsData = ref.watch(lessons);
-          List<LessonPlan> data = [...lessonsData];
-          return TemplateColumn(
-            children: [
-              BannerSuperior(context, "Planos de Aula"),
-              Container(
-                  margin: paddingValues("carouselTop", context),
-                  padding: paddingValues("sideMainPadding", context),
-                  child: Column(children: [
-                    TextField(
-                      onSubmitted: (value) {},
-                    ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: data.length + 1,
-                      itemBuilder: (context, index) {
-                        if (index == 0) {
-                          return _buildHeader();
-                        } else {
-                          final lessonPlan = data[index - 1];
-                          return _buildRow(
-                            lessonPlan.titulo,
-                            lessonPlan.autor,
-                            lessonPlan.dataPublicacao.toString(),
-                          );
-                        }
-                      },
-                    ),
-                  ])),
-            ],
-          );
-        });
+      future: randomName(searchTerm, ref),
+      builder: (context, snapshot) {
+        final lessonsData = ref.watch(lessons);
+        List<LessonPlan> data = [...lessonsData];
+        return TemplateColumn(
+          children: [
+            BannerSuperior(context, "Planos de Aula"),
+            Container(
+              margin: paddingValues("carouselTop", context),
+              padding: paddingValues("sideMainPadding", context),
+              child: Column(
+                children: [
+                  TextField(
+                    onSubmitted: (value) {},
+                  ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: (_pagedItems(data).length ~/ _itemsPerPage) + 1,
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return _buildHeader();
+                      } else {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: _pagedItems(data).length,
+                          itemBuilder: (context, index) {
+                            final lessonPlan = _pagedItems(data)[index];
+                            return _buildRow(
+                              lessonPlan.titulo,
+                              lessonPlan.autor,
+                              lessonPlan.dataPublicacao.toString(),
+                            );
+                          },
+                        );
+                      }
+                    },
+                  ),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 100,
+                        padding: EdgeInsets.all(10.0),
+                        child: Scrollbar(
+                          controller: _scrollController,
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            controller: _scrollController,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: List.generate(
+                                10,
+                                (index) => Container(
+                                  width: 20,
+                                  padding: EdgeInsets.all(0.0),
+                                  margin: EdgeInsets.all(0.0),
+                                  child: TextButton(
+                                    style: ButtonStyle(
+                                      padding: MaterialStateProperty.all<
+                                          EdgeInsetsGeometry>(
+                                        EdgeInsets.symmetric(
+                                          horizontal: 0.0,
+                                        ),
+                                      ),
+                                      shape: MaterialStatePropertyAll(
+                                        RoundedRectangleBorder(
+                                          side: BorderSide.none,
+                                        ),
+                                      ),
+                                      overlayColor: MaterialStatePropertyAll(
+                                        Color(0x00000000),
+                                      ),
+                                      backgroundColor: MaterialStatePropertyAll(
+                                        Color(0x00000000),
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      setState(
+                                        () {
+                                          _currentPage = index;
+                                        },
+                                      );
+                                    },
+                                    child: Text(
+                                      (index + 1).toString(),
+                                      style: TextStyle(
+                                        fontFamily: 'Raleway',
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Widget _buildHeader() {
     return Material(
       child: Container(
-        color: Colors.blueGrey[50],
-        padding: const EdgeInsets.all(8.0),
+        color: Colors.grey,
+        padding: const EdgeInsets.all(12.0),
+        margin: const EdgeInsets.all(0.0),
         child: const Row(
           children: [
             Expanded(
@@ -117,7 +206,10 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
               children: [
                 Expanded(
                   flex: 3,
-                  child: Text(title),
+                  child: Text(
+                    title,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Expanded(
                   flex: 1,
