@@ -49,19 +49,20 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
                           if (posts.isEmpty) ...{
                             Container(
                                 padding: const EdgeInsets.only(top: 100, right: 15),
-                                width: swidth> 1200 ? 1200 *.565: swidth *.565,
+                                width: swidth> 1200 ? 1200 *.7: swidth *.565,
                                 child: Text(
                                   "Perdão, não há nenhum post a ser exibido no momento.",
                                 ))
                           } else ...{
-                            Padding(
+                            Container(
+                              width: swidth> 1200 ? 1200 *.7: swidth *.565,
                               padding: const EdgeInsets.only(top: 100),
                               child: blogListView(context, widget.key, swidth, posts),
                             ),
                           },
                           Container(
                               padding: const EdgeInsets.only(top: 100, left: 30),
-                              width: swidth> 1200 ? 1200 *.286: swidth *.286,
+                              width: swidth> 1200 ? (1200 *.3): (swidth *.3),
                               child: blogFilters(context, swidth, posts,
                                   widget.updateData, widget.titleStyle)),
                         ]),

@@ -13,13 +13,8 @@ List<String> titleCategories = [
 ];
 
 @override
-Widget blogFilters(
-  BuildContext context,
-  double swidth,
-  List<BlogModel?> datas,
-  Function(String) updateData,
-  TextStyle titleStyle
-) {
+Widget blogFilters(BuildContext context, double swidth, List<BlogModel?> datas,
+    Function(String) updateData, TextStyle titleStyle) {
   bool isHover = false;
   return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
     Container(
@@ -58,48 +53,47 @@ Widget blogFilters(
         margin: const EdgeInsets.only(bottom: 20),
         child: Text('ÚLTIMOS POSTS', style: titleStyle)),
     // if (datas.isNotEmpty) ...{
-      SizedBox(
-        height: 80 * datas.length.toDouble(),
-        child: ListView.builder(
-          itemCount: datas.length,
-          itemBuilder: (BuildContext context, int index) {
-            final item = datas[index];
-            return InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, '/blog-detalhes', arguments: index);
-              },
-              child: SizedBox(
-                  width: swidth * 0.29,
-                  height: 70,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(children: [
-                      SizedBox(
-                          width: swidth * 0.29,
-                          height: 20,
-                          child: Text(item!.title,
-                              style: textTheme.headlineSmall)),
-                      Container(
-                          width: swidth * 0.29,
-                          height: 20,
-                          margin: const EdgeInsets.only(top: 10),
-                          child: Row(children: [
-                            const Icon(FontAwesomeIcons.calendarDays,
-                                color: onPrimary, size: 15),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 2, top: 1.5),
-                              child: Text(
-                                item.publishedDate,
-                              ),
-                            )
-                          ])),
-                    ]),
-                  )),
-            );
-          },
-        ),
+    SizedBox(
+      height: 80 * datas.length.toDouble(),
+      child: ListView.builder(
+        itemCount: datas.length,
+        itemBuilder: (BuildContext context, int index) {
+          final item = datas[index];
+          return InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/blog-detalhes', arguments: index);
+            },
+            child: SizedBox(
+                height: 70,
+                child: Padding(
+                  padding: const EdgeInsets.all(10),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                            height: 20,
+                            child: Text(item!.title,
+                                style: textTheme.headlineSmall)),
+                        Container(
+                            height: 20,
+                            margin: const EdgeInsets.only(top: 10),
+                            child: Row(children: [
+                              const Icon(FontAwesomeIcons.calendarDays,
+                                  color: onPrimary, size: 15),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 2, top: 1.5),
+                                child: Text(
+                                  item.publishedDate,
+                                ),
+                              )
+                            ])),
+                      ]),
+                )),
+          );
+        },
       ),
+    ),
     // } else ...{
     //   Container(
     //       alignment: Alignment.centerLeft,

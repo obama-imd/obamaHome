@@ -159,10 +159,6 @@ class BlogHome extends ConsumerStatefulWidget {
 }
 
 class BlogHomeState extends ConsumerState<BlogHome> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -175,7 +171,8 @@ class BlogHomeState extends ConsumerState<BlogHome> {
         if (snapshot.connectionState == ConnectionState.done) {
           final blogList = ref.watch(blogPostsHome);
           List<BlogModel?> posts = [...blogList];
-          return Padding(
+          return Container(
+            constraints: BoxConstraints(maxWidth: 1200),
             padding: EdgeInsets.symmetric(horizontal: widget.swidth * .057),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
