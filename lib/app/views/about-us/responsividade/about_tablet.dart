@@ -5,7 +5,6 @@ import 'package:obamahome/utils/app_padding.dart';
 import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../../components/bannerSuperior.dart';
 import '../../../../components/carousel.dart';
 import '../../../../components/drawer.dart';
 import '../../../../components/footer.dart';
@@ -61,7 +60,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
               ],
-              BannerSuperior(context, 'Sobre Nós'),
               Padding(
                 padding: const EdgeInsets.only(top: 120.0, bottom: 65.0),
                 child: SectionTitle(

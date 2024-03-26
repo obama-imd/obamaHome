@@ -4,7 +4,6 @@ import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
-import '../../../../components/bannerSuperior.dart';
 import '../../../../components/sectionTitle.dart';
 import '../../../../components/youtubePlayer.dart';
 import '../../../../utils/app_padding.dart';
@@ -31,7 +30,6 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
-      BannerSuperior(context, 'Sobre Nós'),
       Padding(
         padding: paddingValues("sectionPadding", context),
         child: SectionTitle(
@@ -41,7 +39,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
       ),
       // if (MediaQuery.of(context).size.width > 1200) ...[
       Container(
-        height: 390,
+        constraints: BoxConstraints(maxWidth: 1200),
         color: const Color.fromARGB(255, 224, 220, 220),
         margin: paddingValues("sideMainPadding", context),
         child: ResponsiveGridRow(children: [
@@ -50,6 +48,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
             sm: 12,
             child: Container(
                 padding: const EdgeInsets.all(30.0),
+                height: 390,
                 child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -77,6 +76,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
       ),
       Container(
           margin: const EdgeInsets.only(top: 100),
+          constraints: BoxConstraints(maxWidth: 1200),
           padding: paddingValues("sideMainPadding", context),
           child: ResponsiveGridCol(
             lg: 8,
@@ -163,50 +163,53 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
       //     }
       //   ]),
       // ),
-      Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(top: 120.0, bottom: 65.0),
-          child: SectionTitle('Coordenadores', '', CrossAxisAlignment.center),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
-          child: ResponsiveGridRow(children: [
-            ResponsiveGridCol(lg: 3, child: Spacer()),
-            for (int i = 0; i < LeaderNames.length; i++) ...{
-              ResponsiveGridCol(
-                  lg: 6,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 30, left: 10, right: 10),
-                    child: StaffCard(LeaderNames[i], LeaderImgs[i], swidth),
-                  ))
-            },
-            ResponsiveGridCol(lg: 3, child: Spacer()),
-          ]),
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.only(top: 65, bottom: 65.0),
-          child: SectionTitle('Colaboradores', '', CrossAxisAlignment.center),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
-          child: ResponsiveGridRow(children: [
-            for (int i = 0; i < staffNames.length; i++) ...{
-              ResponsiveGridCol(
-                  lg: 3,
-                  md: 6,
-                  xs: 12,
-                  child: Padding(
-                    padding:
-                        const EdgeInsets.only(bottom: 30, left: 10, right: 10),
-                    child: StaffCard(staffNames[i], staffImgs[i], swidth),
-                  ))
-            }
-          ]),
-        ),
-      ])
+      Container(
+        constraints: BoxConstraints(maxWidth: 1200),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(top: 120.0, bottom: 65.0),
+            child: SectionTitle('Coordenadores', '', CrossAxisAlignment.center),
+          ),
+          Padding(
+            padding: paddingValues("sideStaff", context),
+            child: ResponsiveGridRow(children: [
+              ResponsiveGridCol(lg: 3, child: Spacer()),
+              for (int i = 0; i < LeaderNames.length; i++) ...{
+                ResponsiveGridCol(
+                    lg: 6,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(bottom: 30, left: 10, right: 10),
+                      child: StaffCard(LeaderNames[i], LeaderImgs[i], swidth),
+                    ))
+              },
+              ResponsiveGridCol(lg: 3, child: Spacer()),
+            ]),
+          ),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(top: 65, bottom: 65.0),
+            child: SectionTitle('Colaboradores', '', CrossAxisAlignment.center),
+          ),
+          Padding(
+            padding: paddingValues("sideStaff", context),
+            child: ResponsiveGridRow(children: [
+              for (int i = 0; i < staffNames.length; i++) ...{
+                ResponsiveGridCol(
+                    lg: 3,
+                    md: 6,
+                    xs: 12,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(bottom: 30, left: 10, right: 10),
+                      child: StaffCard(staffNames[i], staffImgs[i], swidth),
+                    ))
+              }
+            ]),
+          ),
+        ]),
+      )
     ]);
   }
 }

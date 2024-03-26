@@ -5,6 +5,7 @@ import '../../../../components/carousel.dart';
 import '../../../../components/footer.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
+import '../components/bannerSuperior.dart';
 import '../components/menuMobile.dart';
 
 // ignore: must_be_immutable
@@ -21,6 +22,27 @@ class TemplateColumn extends StatefulWidget {
 class TemplateColumnState extends State<TemplateColumn> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
 
+  String pageName = "";
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) => initFunction(context));
+  }
+
+  void initFunction(context) {
+    String? currentRoute = ModalRoute.of(context)?.settings.name;
+    for (var currentPage in routesList) {
+      for (var path in currentPage.path) {
+        if (currentRoute == path) {
+          setState(() {
+            pageName = currentPage.name;
+          });
+        }
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
@@ -35,9 +57,10 @@ class TemplateColumnState extends State<TemplateColumn> {
               TopBar(swidth),
               if (MediaQuery.of(context).size.width > 1360) ...[
                 Container(
+                    constraints: BoxConstraints(maxWidth: 1200),
                     width: swidth,
                     height: 125,
-                    margin:  EdgeInsets.only(
+                    margin: EdgeInsets.only(
                         left: swidth * 0.068, right: swidth * 0.058),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -51,10 +74,8 @@ class TemplateColumnState extends State<TemplateColumn> {
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
               ],
-              Column(
-                  children: [
-                    ...widget.children
-                  ]),
+              BannerSuperior(context, pageName),
+              Column(children: [...widget.children]),
               Carousel(swidth),
               Footer(swidth),
             ]))));

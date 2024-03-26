@@ -57,7 +57,7 @@ class Carousel extends StatelessWidget {
                 child: Stack(children: <Widget>[
                   Column(children: [
                     Container(
-                        width: MediaQuery.of(context).size.width,
+                        width: swidth,
                         height: 740,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
@@ -65,125 +65,131 @@ class Carousel extends StatelessWidget {
                               fit: BoxFit.cover),
                         ))
                   ]),
-                  Container(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                        Container(height: 140),
-                        Container(
-                            padding: paddingValues("sideMainPadding", context),
-                            child: Text('What Clients Say?',
-                                style: textTheme.labelLarge)),
-                        Container(
-                            padding: const EdgeInsets.only(top: 15, left: 90),
-                            child: Text(
-                              'Here are testimonials from clients..',
-                              style: textTheme.displaySmall,
-                            )),
-                        Container(height: 20),
-                        Row(children: [
-                          Container(width: 91),
-                          SizedBox(
-                              height: 5.0,
-                              width: 82.0,
-                              child: Image.asset('assets/images/img2.jpg',
-                                  fit: BoxFit.cover)),
-                        ]),
-                        SizedBox(height: 40, width: swidth),
-                        ImageSlideshow(
-                          width: 760,
-                          height: 240,
-                          initialPage: 0,
-                          indicatorColor: CoresPersonalizadas.azulObama,
-                          indicatorBackgroundColor: Colors.grey,
-                          onPageChanged: (value) {
-                          },
-                          autoPlayInterval: 3500,
-                          isLoop: true,
-                          children: [
-                            for (int i = 0; i < titleCarousel.length; i++) ...{
-                              Row(children: [
-                                Container(width: 90),
-                                Container(
-                                    height: 150,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100),
-                                        image: DecorationImage(
-                                            image: AssetImage(imageCarousel[i]),
-                                            fit: BoxFit.cover))),
-                                Container(width: 20),
-                                Container(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    height: 150,
-                                    width: 500,
-                                    child: ListView(children: [
-                                      Text(titleCarousel[i],
-                                          style: textTheme.displayMedium),
-                                      Container(height: 35),
-                                      Text(nameCarousel[i],
-                                          style: textTheme.displaySmall),
-                                      Container(height: 20),
-                                      Text(summaryCarousel[i],
-                                          style: textTheme.displaySmall)
-                                    ])),
-                              ]),
-                            },
-                          ],
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 135.0),
-                          child: Center(
-                              child: Container(
-                                  color: CoresPersonalizadas.azulObama,
-                                  height: 150,
-                                  width: swidth * 0.9 + 40,
-                                  padding: EdgeInsets.symmetric(horizontal: 30),
-                                  child: Row(children: [
-                                    const SizedBox(
-                                        width: 100,
-                                        height: 100,
-                                        child: Icon(
-                                          Icons.phone,
-                                          size: 70,
-                                          color: background,
-                                        )),
-                                    SizedBox(
-                                        height: 100,
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text('REQUEST A FREE QUOTE',
-                                                  style: textTheme.labelLarge),
-                                              Text(
-                                                  'Get answers and advice from people you want it from.',
-                                                  style:
-                                                      textTheme.displayMedium)
-                                            ])),
-                                    Spacer(),
-                                    TextButton(
-                                        style: ButtonStyle(
-                                          fixedSize: MaterialStatePropertyAll(
-                                              Size(150, 50)),
-                                          backgroundColor:
-                                              MaterialStatePropertyAll(
-                                                  onPrimary),
-                                          overlayColor:
-                                              MaterialStatePropertyAll(
-                                                  onPrimary),
-                                        ),
-                                        onPressed: () {},
-                                        child: Text('CONTACT US',
-                                            style: textTheme.labelMedium)),
-                                  ]))),
-                        ),
-                      ])),
+                  Center(
+                    child: Container(
+                        constraints: BoxConstraints(maxWidth: 1200),
+                        padding: paddingValues("sideMainPadding", context),
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Container(height: 140),
+                              Container(
+                                  child: Text('What Clients Say?',
+                                      style: textTheme.labelLarge)),
+                              Container(
+                                  padding: const EdgeInsets.only(top: 15),
+                                  child: Text(
+                                    'Here are testimonials from clients..',
+                                    style: textTheme.displaySmall,
+                                  )),
+                              Container(height: 20),
+                              SizedBox(
+                                  height: 5.0,
+                                  width: 82.0,
+                                  child: Image.asset('assets/images/img2.jpg',
+                                      fit: BoxFit.cover)),
+                              SizedBox(height: 40, width: swidth),
+                              ImageSlideshow(
+                                width: 760,
+                                height: 240,
+                                initialPage: 0,
+                                indicatorColor: CoresPersonalizadas.azulObama,
+                                indicatorBackgroundColor: Colors.grey,
+                                onPageChanged: (value) {},
+                                autoPlayInterval: 3500,
+                                isLoop: true,
+                                children: [
+                                  for (int i = 0;
+                                      i < titleCarousel.length;
+                                      i++) ...{
+                                    Row(children: [
+                                      Container(
+                                          height: 150,
+                                          width: 150,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              image: DecorationImage(
+                                                  image: AssetImage(
+                                                      imageCarousel[i]),
+                                                  fit: BoxFit.cover))),
+                                      Container(width: 20),
+                                      Container(
+                                          padding:
+                                              const EdgeInsets.only(left: 10),
+                                          height: 150,
+                                          width: 500,
+                                          child: ListView(children: [
+                                            Text(titleCarousel[i],
+                                                style: textTheme.displayMedium),
+                                            Container(height: 35),
+                                            Text(nameCarousel[i],
+                                                style: textTheme.displaySmall),
+                                            Container(height: 20),
+                                            Text(summaryCarousel[i],
+                                                style: textTheme.displaySmall)
+                                          ])),
+                                    ]),
+                                  },
+                                ],
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 135.0),
+                                child: Center(
+                                    child: Container(
+                                        color: CoresPersonalizadas.azulObama,
+                                        height: 150,
+                                        width: swidth * 0.9 + 40,
+                                        padding:
+                                            EdgeInsets.symmetric(horizontal: 30),
+                                        child: Row(children: [
+                                          const SizedBox(
+                                              width: 100,
+                                              height: 100,
+                                              child: Icon(
+                                                Icons.phone,
+                                                size: 70,
+                                                color: background,
+                                              )),
+                                          SizedBox(
+                                              height: 100,
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text('REQUEST A FREE QUOTE',
+                                                        style:
+                                                            textTheme.labelLarge),
+                                                    Text(
+                                                        'Get answers and advice from people you want it from.',
+                                                        style: textTheme
+                                                            .displayMedium)
+                                                  ])),
+                                          Spacer(),
+                                          TextButton(
+                                              style: ButtonStyle(
+                                                fixedSize:
+                                                    MaterialStatePropertyAll(
+                                                        Size(150, 50)),
+                                                backgroundColor:
+                                                    MaterialStatePropertyAll(
+                                                        onPrimary),
+                                                overlayColor:
+                                                    MaterialStatePropertyAll(
+                                                        onPrimary),
+                                              ),
+                                              onPressed: () {},
+                                              child: Text('CONTACT US',
+                                                  style: textTheme.labelMedium)),
+                                        ]))),
+                              ),
+                            ])),
+                  ),
                 ])),
-            Padding(
+            Container(
+              constraints: BoxConstraints(maxWidth: 1200),
               padding: paddingValues("sideMainPadding", context),
               child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -191,7 +197,7 @@ class Carousel extends StatelessWidget {
                     for (int i = 0; i < partnersLogo.length; i++) ...{
                       Container(
                           height: 120,
-                          width: swidth * 0.17,
+                          width: 230,
                           padding: EdgeInsets.symmetric(
                               vertical: partnersPadding[i]),
                           decoration: BoxDecoration(
@@ -210,7 +216,8 @@ class Carousel extends StatelessWidget {
             SizedBox(
                 height: 740,
                 width: swidth,
-                child: Stack( alignment: Alignment.bottomCenter, children: <Widget>[
+                child:
+                    Stack(alignment: Alignment.bottomCenter, children: <Widget>[
                   Column(children: [
                     Container(
                         width: MediaQuery.of(context).size.width,
@@ -252,8 +259,7 @@ class Carousel extends StatelessWidget {
                           initialPage: 0,
                           indicatorColor: CoresPersonalizadas.azulObama,
                           indicatorBackgroundColor: Colors.grey,
-                          onPageChanged: (value) {
-                          },
+                          onPageChanged: (value) {},
                           autoPlayInterval: 3500,
                           isLoop: true,
                           children: [
@@ -307,10 +313,8 @@ class Carousel extends StatelessWidget {
                               width: swidth * 0.7,
                               height: 100,
                               child: Column(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text('REQUEST A FREE QUOTE',
                                         style: textTheme.displayMedium),
@@ -326,8 +330,7 @@ class Carousel extends StatelessWidget {
                                   MaterialStatePropertyAll(Size(150, 50)),
                               backgroundColor:
                                   MaterialStatePropertyAll(onPrimary),
-                              overlayColor:
-                                  MaterialStatePropertyAll(onPrimary),
+                              overlayColor: MaterialStatePropertyAll(onPrimary),
                             ),
                             onPressed: () {},
                             child: Text('CONTACT US',

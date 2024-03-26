@@ -7,7 +7,6 @@ import '../../../../components/menuMobile.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../../../../utils/app_theme.dart';
-import '../utils/app_padding.dart';
 
 class TemplateHome extends StatefulWidget {
   final List<Widget> children;
@@ -49,22 +48,21 @@ class _HomeDesktopState extends State<TemplateHome> {
             child: Column(children: <Widget>[
               TopBar(swidth),
               if (swidth >= 1360) ...[
-                Padding(
-                  padding: EdgeInsets.only(
-                      left: swidth * 0.068, right: swidth * 0.058),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: paddingValues("logo", context),
-                          child: SizedBox(
+                Container(
+                    constraints: BoxConstraints(maxWidth: 1200),
+                    width: swidth,
+                    height: 125,
+                    margin: EdgeInsets.only(
+                        left: swidth * 0.068, right: swidth * 0.058),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
                               width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                        ),
-                        NavMenu(swidth: swidth, heightBtn: 50),
-                      ]),
-                ),
+                          NavMenu(swidth: swidth, heightBtn: 50),
+                        ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
               ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/controllers/lessons_controller.dart';
 import 'package:obamahome/app/models/lesson_plan_models.dart';
-import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_padding.dart';
 
@@ -25,8 +24,8 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
           List<LessonPlan> data = [...lessonsData];
           return TemplateColumn(
             children: [
-              BannerSuperior(context, "Planos de Aula"),
               Container(
+                  constraints: BoxConstraints(maxWidth: 1200),
                   margin: paddingValues("carouselTop", context),
                   padding: paddingValues("sideMainPadding", context),
                   child: Column(children: [

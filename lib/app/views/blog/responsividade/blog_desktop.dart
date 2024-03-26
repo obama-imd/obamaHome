@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/views/blog/components/blog-filters.dart';
-import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/templates/template_basic_row.dart';
 
 import '../../../controllers/blog_controller.dart';
@@ -16,7 +15,8 @@ class BlogDesktop extends ConsumerStatefulWidget {
   final double swidth;
   Function(String) updateData;
   final TextStyle titleStyle;
-  BlogDesktop(this.newData, this.key, this.swidth, this.updateData, this.titleStyle);
+  BlogDesktop(
+      this.newData, this.key, this.swidth, this.updateData, this.titleStyle);
   @override
   BlogDesktopState createState() => BlogDesktopState();
 }
@@ -35,39 +35,44 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
           if (snapshot.connectionState == ConnectionState.done) {
             final blogDataList = ref.watch(blogPosts);
             List<BlogModel?> posts = blogDataList;
-            return Column(
-              children: [
-                BannerSuperior(context, "Publicações"),
-                Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      if (posts.isEmpty) ...{
-                        Container(
-                            padding: const EdgeInsets.only(top: 100, right: 15),
-                            width: swidth * 0.565,
-                            child: Text(
-                              "Perdão, não há nenhum post a ser exibido no momento.",
-                            ))
-                      } else ...{
-                        Padding(
-                          padding: const EdgeInsets.only(top: 100),
-                          child:
-                              blogListView(context, widget.key, swidth, posts),
-                        ),
-                      },
-                      Container(
-                          padding: const EdgeInsets.only(top: 100, left: 30),
-                          width: swidth * .286,
-                          child: blogFilters(
-                              context, swidth, posts, widget.updateData, widget.titleStyle)),
-                    ]),
-              ],
+            return SizedBox(
+              width: swidth,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    constraints: BoxConstraints(maxWidth: 1200),
+                    child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (posts.isEmpty) ...{
+                            Container(
+                                padding: const EdgeInsets.only(top: 100, right: 15),
+                                width: swidth> 1200 ? 1200 *.565: swidth *.565,
+                                child: Text(
+                                  "Perdão, não há nenhum post a ser exibido no momento.",
+                                ))
+                          } else ...{
+                            Padding(
+                              padding: const EdgeInsets.only(top: 100),
+                              child: blogListView(context, widget.key, swidth, posts),
+                            ),
+                          },
+                          Container(
+                              padding: const EdgeInsets.only(top: 100, left: 30),
+                              width: swidth> 1200 ? 1200 *.286: swidth *.286,
+                              child: blogFilters(context, swidth, posts,
+                                  widget.updateData, widget.titleStyle)),
+                        ]),
+                  ),
+                ],
+              ),
             );
           } else if (snapshot.hasError) {
             Container(
                 padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-                width: swidth * 0.67,
+                width: swidth> 1200 ? 1200 *.565: swidth *.565,
                 child: Text(
                   "Perdão, ocorreu um erro interno.",
                 ));

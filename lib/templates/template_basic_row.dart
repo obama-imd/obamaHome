@@ -5,6 +5,7 @@ import '../../../../components/carousel.dart';
 import '../../../../components/footer.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
+import '../components/bannerSuperior.dart';
 import '../components/menuMobile.dart';
 
 class TemplateRow extends StatefulWidget {
@@ -19,6 +20,27 @@ class TemplateRow extends StatefulWidget {
 
 class TemplateRowState extends State<TemplateRow> {
   var scaffoldKey = GlobalKey<ScaffoldState>();
+
+  String pageName = "";
+
+  @override
+  void initState() {
+    super.initState();
+     WidgetsBinding.instance.addPostFrameCallback((_) => initFunction(context));
+  }
+
+  void initFunction(context) {
+    String? currentRoute = ModalRoute.of(context)?.settings.name;
+    for (var currentPage in routesList) {
+      for (var path in currentPage.path) {
+        if (currentRoute == path) {
+          setState(() {
+            pageName = currentPage.name;
+          });
+        }
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +57,9 @@ class TemplateRowState extends State<TemplateRow> {
               if (MediaQuery.of(context).size.width > 1360) ...[
                 Container(
                     width: swidth,
+                    constraints: BoxConstraints(maxWidth: 1200),
                     height: 125,
-                    margin:  EdgeInsets.only(
+                    margin: EdgeInsets.only(
                         left: swidth * 0.068, right: swidth * 0.058),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,12 +73,11 @@ class TemplateRowState extends State<TemplateRow> {
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
               ],
+              BannerSuperior(context, pageName),
               Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ...widget.children
-                  ]),
+                  children: [...widget.children]),
               Carousel(swidth),
               Footer(swidth),
             ]))));

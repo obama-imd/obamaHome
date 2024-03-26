@@ -151,8 +151,7 @@ class OAFilterState extends State<OAFilters> {
                         .map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Container(
-                            width: swidth * .21, child: Text(value)),
+                        child: Container(child: Text(value)),
                       );
                     }).toList())),
           },

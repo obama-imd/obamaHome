@@ -5,15 +5,33 @@ EdgeInsets paddingValues(String paddingName, context) {
 
   switch (paddingName) {
     case "sideMainPadding":
-      if (swidth > 700) {
+      if (swidth > 1200) {
+        return EdgeInsets.zero;
+      } else if (swidth > 700 && swidth <= 1200) {
         return EdgeInsets.symmetric(horizontal: swidth * .068);
       } else {
         return EdgeInsets.symmetric(horizontal: 35);
       }
+    case "sideStaff":
+      if (swidth > 1200) {
+        return EdgeInsets.zero;
+      } else {
+        return EdgeInsets.symmetric(horizontal: swidth * 0.06);
+      }
     case "sideHomePosts":
-      return EdgeInsets.symmetric(horizontal: swidth * .052);
+      if (swidth > 1200) {
+        return EdgeInsets.zero;
+      } else {
+        return EdgeInsets.symmetric(horizontal: swidth * .052);
+      }
+
     case "sideHomeCards":
-      return EdgeInsets.symmetric(horizontal: (swidth * .068) - 30);
+      if (swidth > 1200) {
+        return EdgeInsets.zero;
+      } else {
+        return EdgeInsets.symmetric(horizontal: (swidth * .068) - 30);
+      }
+
     case "sectionPadding":
       if (swidth < 700) {
         return EdgeInsets.only(top: 75, bottom: 65);

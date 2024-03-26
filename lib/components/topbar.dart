@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
+import 'package:obamahome/utils/app_padding.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/app_theme.dart';
@@ -27,25 +28,25 @@ class _TopBarState extends State<TopBar> {
   }
 
   void checkAuth(context) {
-    Navigator.pushNamed(context, "/login") ;
+    Navigator.pushNamed(context, "/login");
   }
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Column(children: [
       if (widget.swidth > 1150) ...[
         Container(
             color: CoresPersonalizadas.azulObama,
+            padding: paddingValues("sideMainPadding", context),
             height: 44.0,
             width: widget.swidth,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      margin: EdgeInsets.only(left: widget.swidth * 0.068),
-                      child: Row(children: [
+            child: Center(
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 1200),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(children: [
                         Container(
                             child: Row(children: [
                           Container(
@@ -77,41 +78,40 @@ class _TopBarState extends State<TopBar> {
                                         color: background, fontSize: 13)),
                               ]),
                             ))
-                      ])),
-                  const Spacer(),
-                  Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                        SocialMedia(background),
-                        Container(
-                            margin: EdgeInsets.only(
-                                left: 15.0, right: widget.swidth * 0.068),
-                            height: 45,
-                            width: 160,
-                            child: Material(
-                              color: background,
-                              textStyle: textTheme.headlineMedium,
-                              child: InkWell(
-                                  onTap: () {
-                                    checkAuth(context);
-                                  },
-                                  child: SizedBox(
-                                    width: widget.swidth * 0.154,
-                                    height: 45,
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text('Acesse',
-                                            style: textTheme.headlineSmall,
-                                            textAlign: TextAlign.center)
-                                      ],
-                                    ),
-                                  )),
-                            ))
-                      ]))
-                ]))
+                      ]),
+                      Container(
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                            SocialMedia(background),
+                            Container(
+                                height: 45,
+                                width: 160,
+                                child: Material(
+                                  color: background,
+                                  textStyle: textTheme.headlineMedium,
+                                  child: InkWell(
+                                      onTap: () {
+                                        checkAuth(context);
+                                      },
+                                      child: SizedBox(
+                                        width: widget.swidth * 0.154,
+                                        height: 45,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text('Acesse',
+                                                style: textTheme.headlineSmall,
+                                                textAlign: TextAlign.center)
+                                          ],
+                                        ),
+                                      )),
+                                ))
+                          ]))
+                    ]),
+              ),
+            ))
       ],
       if (widget.swidth < 1150) ...[
         if (widget.swidth > 900) ...[
@@ -125,7 +125,8 @@ class _TopBarState extends State<TopBar> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          left: widget.swidth * 0.04, right: widget.swidth * 0.04),
+                          left: widget.swidth * 0.04,
+                          right: widget.swidth * 0.04),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.center,

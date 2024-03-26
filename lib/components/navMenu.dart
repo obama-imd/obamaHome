@@ -22,42 +22,42 @@ class ItemValue {
 
 final List<ItemValue> itemValues = [
   ItemValue(
-    name: "HOME",
+    name: "Home",
     path: ['/'],
     subItems: [],
     itemHover: false,
     subItemHover: List.generate(1, (index) => false),
   ),
   ItemValue(
-    name: "SOBRE",
+    name: "Sobre",
     path: ['/sobre'],
     subItems: [],
     itemHover: false,
     subItemHover: List.generate(1, (index) => false),
   ),
   ItemValue(
-    name: "SERVIÇOS",
+    name: "Serviços",
     path: ['/servicos', '/trilhas', '/manuais'],
     subItems: ["OA", "Trilhas", "Manuais"],
     itemHover: false,
     subItemHover: List.generate(3, (index) => false),
   ),
   ItemValue(
-    name: "PUBLICAÇÕES",
+    name: "Publicações",
     path: ['/blog', '/blog-detalhes'],
     subItems: ["Lista de Posts", "Último post"],
     itemHover: false,
     subItemHover: List.generate(2, (index) => false),
   ),
   ItemValue(
-    name: "FORMAÇÕES",
+    name: "Formações",
     path: ['/formacoes'],
     subItems: [],
     itemHover: false,
     subItemHover: List.generate(1, (index) => false),
   ),
   ItemValue(
-    name: "PLANOS DE AULA",
+    name: "Planos de Aula",
     path: ['/planos-aulas'],
     subItems: [],
     itemHover: false,
@@ -124,7 +124,7 @@ class _NavMenuState extends State<NavMenu> {
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(itemValues[i].name,
+                        child: Text(itemValues[i].name.toUpperCase(),
                             style: GoogleFonts.raleway(
                                 fontWeight: FontWeight.bold,
                                 color: itemValues[i].path[0] == currentRoute
@@ -203,7 +203,7 @@ class _NavMenuState extends State<NavMenu> {
                     }
                   }
                 ],
-                child: MenuAcceleratorLabel(itemValues[i].name),
+                child: MenuAcceleratorLabel(itemValues[i].name.toUpperCase()),
               )),
         }
       },

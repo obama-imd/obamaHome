@@ -46,7 +46,8 @@ class _HomeDesktopState extends State<HomeDesktop> {
             CrossAxisAlignment.center),
       ),
       Container(
-          margin: paddingValues("sideMainPadding", context),
+          constraints: BoxConstraints(maxWidth: 1200),
+          padding: paddingValues("sideMainPadding", context),
           child: ResponsiveGridRow(
             children: [
               for (int i = 0; i < sectionTitle.length; i++) ...{
@@ -63,114 +64,38 @@ class _HomeDesktopState extends State<HomeDesktop> {
               }
             ],
           )),
-      Container(
-        margin: paddingValues("sectionPadding", context),
-        color: CoresPersonalizadas.azulObama,
-        child: ResponsiveGridRow(children: [
-          ResponsiveGridCol(
-            lg: 8,
-            sm: 12,
-            child: Container(
-                color: const Color.fromARGB(255, 241, 238, 238),
-                padding: paddingValues("sideMainPadding", context),
-                child: Padding(
-                  padding: paddingValues("sectionPadding", context),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SectionTitle(
-                            'ABOUT SERVICE',
-                            'Easy and effective way to get your device repaired.',
-                            CrossAxisAlignment.start),
-                        Container(
-                            padding: const EdgeInsets.only(top: 60),
-                            child: ResponsiveGridRow(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for (int i = 0;
-                                      i < grid1Title.length;
-                                      i++) ...{
-                                    ResponsiveGridCol(
-                                      lg: 6,
-                                      sm: 12,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 100),
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                  height: 100,
-                                                  width: 100,
-                                                  decoration: BoxDecoration(
-                                                      color: Theme.of(context)
-                                                          .primaryColor,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              100)),
-                                                  child: Icon(grid1Icon[i],
-                                                      size: iconSize2[i],
-                                                      color: background)),
-                                              Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                  child: Text(grid1Title[i],
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .titleSmall!)),
-                                              Container(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          top: 20),
-                                                  child: Text(grid1Content[i],
-                                                      style:
-                                                          textTheme.bodySmall))
-                                            ]),
-                                      ),
-                                    ),
-                                  },
-                                ]))
-                      ]),
-                )),
-          ),
-        ]),
-      ),
-      OAHome(swidth),
       Padding(
-        padding: paddingValues("carouselTop", context),
-        child: Container(
-          color: CoresPersonalizadas.azulObama,
-          child: ResponsiveGridRow(children: [
-            if (swidth > 992) ...{
-              ResponsiveGridCol(
-                lg: 4,
-                child: Container(),
-              ),
-            },
-            ResponsiveGridCol(
-              lg: 8,
-              sm: 12,
+        padding: paddingValues("sectionPadding", context),
+        child: Stack(
+          children: [
+            Container(
+                width: swidth,
+                height: 900,
+                color: CoresPersonalizadas.azulObama),
+            Container(
+                width: swidth * .7,
+                height: 900,
+                color: const Color.fromARGB(255, 241, 238, 238)),
+            Center(
               child: Container(
-                  color: const Color.fromARGB(255, 241, 238, 238),
+                  constraints: BoxConstraints(maxWidth: 1200),
                   padding: paddingValues("sideMainPadding", context),
                   child: Padding(
                     padding: paddingValues("sectionPadding", context),
                     child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SectionTitle(
-                              'OUR FEEDBACK',
+                              'ABOUT SERVICE',
                               'Easy and effective way to get your device repaired.',
-                              CrossAxisAlignment.end),
+                              CrossAxisAlignment.start),
                           Container(
                               padding: const EdgeInsets.only(top: 60),
                               child: ResponsiveGridRow(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     for (int i = 0;
-                                        i < grid2Title.length;
+                                        i < grid1Title.length;
                                         i++) ...{
                                       ResponsiveGridCol(
                                         lg: 6,
@@ -180,7 +105,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                                               bottom: 100),
                                           child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
+                                                  CrossAxisAlignment.start,
                                               children: [
                                                 Container(
                                                     height: 100,
@@ -191,21 +116,22 @@ class _HomeDesktopState extends State<HomeDesktop> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100)),
-                                                    child: Icon(grid2Icon[i],
+                                                    child: Icon(grid1Icon[i],
                                                         size: iconSize2[i],
                                                         color: background)),
                                                 Container(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             top: 20),
-                                                    child: Text(grid2Title[i],
-                                                        style: textTheme
+                                                    child: Text(grid1Title[i],
+                                                        style: Theme.of(context)
+                                                            .textTheme
                                                             .titleSmall!)),
                                                 Container(
                                                     padding:
                                                         const EdgeInsets.only(
                                                             top: 20),
-                                                    child: Text(grid2Content[i],
+                                                    child: Text(grid1Content[i],
                                                         style: textTheme
                                                             .bodySmall))
                                               ]),
@@ -216,7 +142,87 @@ class _HomeDesktopState extends State<HomeDesktop> {
                         ]),
                   )),
             ),
-          ]),
+          ],
+        ),
+      ),
+      OAHome(swidth),
+      Padding(
+        padding: paddingValues("carouselTop", context),
+        child: Stack(
+          children: [
+            Container(
+                width: swidth,
+                height: 900,
+                color: CoresPersonalizadas.azulObama),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Container(
+                    width: swidth * .7,
+                    height: 900,
+                    color: const Color.fromARGB(255, 241, 238, 238),
+                    padding: paddingValues("sideMainPadding", context)),
+              ],
+            ),
+            Center(
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 1200),
+                padding: paddingValues("sectionPadding", context),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SectionTitle(
+                          'OUR FEEDBACK',
+                          'Easy and effective way to get your device repaired.',
+                          CrossAxisAlignment.end),
+                      Container(
+                          padding: const EdgeInsets.only(top: 60),
+                          child: ResponsiveGridRow(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                for (int i = 0; i < grid2Title.length; i++) ...{
+                                  ResponsiveGridCol(
+                                    lg: 6,
+                                    sm: 12,
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 100),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.end,
+                                          children: [
+                                            Container(
+                                                height: 100,
+                                                width: 100,
+                                                decoration: BoxDecoration(
+                                                    color: Theme.of(context)
+                                                        .primaryColor,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100)),
+                                                child: Icon(grid2Icon[i],
+                                                    size: iconSize2[i],
+                                                    color: background)),
+                                            Container(
+                                                padding: const EdgeInsets.only(
+                                                    top: 20),
+                                                child: Text(grid2Title[i],
+                                                    style:
+                                                        textTheme.titleSmall!)),
+                                            Container(
+                                                padding: const EdgeInsets.only(
+                                                    top: 20),
+                                                child: Text(grid2Content[i],
+                                                    style: textTheme.bodySmall))
+                                          ]),
+                                    ),
+                                  ),
+                                },
+                              ]))
+                    ]),
+              ),
+            ),
+          ],
         ),
       ),
       BlogHome(swidth)

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/utils/app_padding.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
@@ -23,80 +22,99 @@ class _MyStatefulWidgetState extends State<TrilhasDesktop> {
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
-      BannerSuperior(context, "Trilhas de Aprendizagem"),
-      Container(
-          margin: const EdgeInsets.only(top: 120),
-          width: swidth,
-          color: CoresPersonalizadas.azulObama,
-          child: ResponsiveGridRow(children: [
-            ResponsiveGridCol(
-              lg: 8,
-              sm: 12,
+      Padding(
+        padding: const EdgeInsets.only(top: 120),
+        child: Stack(
+          children: [
+            Container(
+                width: swidth,
+                height: 1200,
+                color: CoresPersonalizadas.azulObama),
+            Container(
+                width: swidth * .7,
+                height: 1200,
+                color: const Color.fromARGB(255, 241, 238, 238),
+                padding: paddingValues("sideMainPadding", context)),
+            Center(
               child: Container(
-                  color: const Color.fromARGB(255, 241, 238, 238),
-                  padding: paddingValues("sideMainPadding", context),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: paddingValues("sectionPadding", context),
-                          child: SectionTitle(
-                              'Trilhas de aprendizagem',
-                              'Como o nome já diz, as trilhas que você acessará aqui são dicas para seguir um caminho e conhecer as principais funcionalidades das mais importantes ferramentas do Google que podem te auxiliar no processo de ensino remoto. Ah, e nós já trilhamos o caminho das pedras por você. Então agora basta você ir respondendo às perguntas, quando houver, e seguir as instruções. Bons estudos!',
-                              CrossAxisAlignment.start),
-                        ),
-                        Container(
-                            padding: paddingValues("fullGrid", context),
-                            child: ResponsiveGridRow(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  for (int i = 0;
-                                      i < sectionImage.length;
-                                      i++) ...{
-                                    ResponsiveGridCol(
-                                      lg: 6,
-                                      sm: 12,
-                                      child: Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 100),
-                                        child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    bottom: 25),
-                                                child: ClipOval(
-                                                    child: Container(
-                                                  color: background,
-                                                  padding:
-                                                      const EdgeInsets.all(20),
-                                                  child: Image.asset(
-                                                    "assets/images/" +
-                                                        sectionImage[i],
-                                                    fit: BoxFit.contain,
-                                                    width: 130,
-                                                    height: 130,
-                                                  ),
-                                                )),
-                                              ),
-                                              // Image.asset(
-                                              //     "assets/images/" +
-                                              //         sectionImage[i],
-                                              //     width: 200, height: 200, ),
-                                              mainButton(
-                                                  context,
-                                                  "Acessar Trilha",
-                                                  sectionLinks[i],
-                                                  null)
-                                            ]),
+                constraints: BoxConstraints(maxWidth: 1200),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            constraints: BoxConstraints(maxWidth: 900),
+                            padding: paddingValues("sectionPadding", context),
+                            child: SectionTitle(
+                                'Trilhas de aprendizagem',
+                                'Como o nome já diz, as trilhas que você acessará aqui são dicas para seguir um caminho e conhecer as principais funcionalidades das mais importantes ferramentas do Google que podem te auxiliar no processo de ensino remoto. Ah, e nós já trilhamos o caminho das pedras por você. Então agora basta você ir respondendo às perguntas, quando houver, e seguir as instruções. Bons estudos!',
+                                CrossAxisAlignment.start),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                              constraints: BoxConstraints(maxWidth: 900),
+                              padding: paddingValues("fullGrid", context),
+                              child: ResponsiveGridRow(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    for (int i = 0;
+                                        i < sectionImage.length;
+                                        i++) ...{
+                                      ResponsiveGridCol(
+                                        lg: 6,
+                                        sm: 12,
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(bottom: 100),
+                                          child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.only(
+                                                      bottom: 25),
+                                                  child: ClipOval(
+                                                      child: Container(
+                                                    color: background,
+                                                    padding:
+                                                        const EdgeInsets.all(20),
+                                                    child: Image.asset(
+                                                      "assets/images/" +
+                                                          sectionImage[i],
+                                                      fit: BoxFit.contain,
+                                                      width: 130,
+                                                      height: 130,
+                                                    ),
+                                                  )),
+                                                ),
+                                                // Image.asset(
+                                                //     "assets/images/" +
+                                                //         sectionImage[i],
+                                                //     width: 200, height: 200, ),
+                                                mainButton(
+                                                    context,
+                                                    "Acessar Trilha",
+                                                    sectionLinks[i],
+                                                    null)
+                                              ]),
+                                        ),
                                       ),
-                                    ),
-                                  },
-                                ]))
-                      ])),
+                                    },
+                                  ])),
+                        ],
+                      )
+                    ]),
+              ),
             ),
-          ]))
+          ],
+        ),
+      )
     ]);
   }
 }

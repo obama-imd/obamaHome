@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
-import '../../../../components/bannerSuperior.dart';
 import '../../../../utils/app_padding.dart';
 import '../components/advancedSearchOA.dart';
 
@@ -35,7 +34,6 @@ class _SearchTabletState extends State<SearchTablet> {
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
-      BannerSuperior(context, 'Objetos de Aprendizagem'),
       Container(
         margin: paddingValues("sectionPadding", context),
         padding: paddingValues("sideMainPadding", context),

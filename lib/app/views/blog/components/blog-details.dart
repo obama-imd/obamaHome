@@ -4,7 +4,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_network/image_network.dart';
 import 'package:obamahome/templates/template_basic_row.dart';
 
-import '../../../../components/bannerSuperior.dart';
 import '../../../../components/loadCircle.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/blog_controller.dart';
@@ -87,7 +86,6 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
                 final blogDataList = ref.watch(blogPosts);
                 List<BlogModel?> datas = [...blogDataList];
                 return Column(children: [
-                  BannerSuperior(context, 'Publicações'),
                   Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
                     blogPageView(context, swidth, _pageController, datas),
                     Container(

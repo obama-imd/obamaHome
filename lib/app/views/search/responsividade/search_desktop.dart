@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
-import '../../../../components/bannerSuperior.dart';
 import '../../../../utils/app_padding.dart';
 import '../components/advancedSearchOA.dart';
 
@@ -35,42 +34,44 @@ class _SearchDesktopState extends State<SearchDesktop> {
     return TemplateColumn(children: [
       Padding(
         padding: EdgeInsets.only(bottom: 100),
-        child: BannerSuperior(context, 'Objetos de Aprendizagem'),
       ),
-      Padding(
-        padding: paddingValues("sideMainPadding", context),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: (swidth * .61),
-              child: Column(
-                children: [
-                  SearchPageView(
-                      widget.termSearched,
-                      swidth,
-                      widget.selectedPageIndex,
-                      widget.updateData,
-                      widget.selectedPage),
-                ],
+      Center(
+        child: Container(
+          constraints: BoxConstraints(maxWidth: 1200),
+          padding: paddingValues("sideMainPadding", context),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: swidth > 1200 ? (1200 * .7) : (swidth * .7),
+                child: Column(
+                  children: [
+                    SearchPageView(
+                        widget.termSearched,
+                        swidth,
+                        widget.selectedPageIndex,
+                        widget.updateData,
+                        widget.selectedPage),
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 30),
-              child: SizedBox(
-                width: (swidth * .25) - 30,
-                child: OAFilters(
+              Padding(
+                padding: const EdgeInsets.only(left: 30),
+                child: SizedBox(
+                  width: swidth > 1200 ? (1200 * .3) - 30 : (swidth * .3) - 30,
+                  child: OAFilters(
                     swidth: swidth,
                     data: widget.termSearched,
                     updateData: widget.updateData,
                     titleStyle: widget.titleStyle,
-                    ),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     ]);
   }
 }
-

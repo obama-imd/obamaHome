@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/auth/forgotPassword.dart';
-import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
@@ -27,7 +26,6 @@ class _LoginPageViewState extends State<LoginPageView> {
   @override
   Widget build(BuildContext context) {
     return TemplateColumn(children: [
-      BannerSuperior(context, "Login"),
       Padding(
         padding: const EdgeInsets.only(top: 120),
         child: Form(

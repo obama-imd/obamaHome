@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/views/blog/components/blog-filters.dart';
-import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/utils/app_padding.dart';
 
 import '../../../../templates/template_basic_col.dart';
@@ -37,7 +36,6 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
             List<BlogModel?> posts = blogDataList;
             return Column(
               children: [
-                BannerSuperior(context, "Publicações"),
                 Container(
                   margin: paddingValues("carouselTop", context),
                   padding: paddingValues("sideMainPadding", context),

@@ -25,13 +25,13 @@ class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
       width: 170,
       child: ElevatedButton(
           onPressed: () async {
-            var user = await LoginAPI.login();
-            final newData = ref.read(googleSignInData);
+            await LoginAPI.login();
+            // final newData = ref.read(googleSignInData);
             // newData.clear();
-            var nameUser = newData!.displayName;
-            var emailUser = newData.email;
+            // var nameUser = newData!.displayName;
+            // var emailUser = newData.email;
 
-            print(" userData => $user, $nameUser, $emailUser");
+            // print(" userData => $user, $nameUser, $emailUser");
           },
           style: ButtonStyle(
             side: MaterialStatePropertyAll(

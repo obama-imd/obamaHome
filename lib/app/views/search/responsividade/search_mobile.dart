@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_padding.dart';
 
-import '../../../../components/bannerSuperior.dart';
 import '../components/advancedSearchOA.dart';
 import '../searchOA_view.dart';
 
@@ -34,7 +33,6 @@ class _SearchMobileState extends State<SearchMobile> {
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
-      BannerSuperior(context, 'Objetos de Aprendizagem'),
       Container(
         margin: paddingValues("sectionPadding", context),
         padding: paddingValues("sideMainPadding", context),

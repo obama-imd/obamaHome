@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/formations/constants.dart';
-import 'package:obamahome/components/bannerSuperior.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import '../../../../components/dropdown_with_video.dart';
@@ -29,8 +28,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
-      BannerSuperior(context, "Formações"),
       Container(
+        constraints: BoxConstraints(maxWidth: 1200),
         padding: paddingValues("carouselTop", context),
         child: DropdownFormations(accordionContent: accordionContent),
       ),

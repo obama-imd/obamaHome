@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../components/bannerSuperior.dart';
 import '../components/mainButton.dart';
 import '../templates/template_basic_col.dart';
 import 'components/formFields.dart';
@@ -28,7 +27,6 @@ class _SignInPageViewState extends State<SignInPageView> {
   @override
   Widget build(BuildContext context) {
     return TemplateColumn(children: [
-      BannerSuperior(context, "Cadastro"),
       Padding(
         padding: const EdgeInsets.only(top: 120),
         child: Form(

@@ -99,7 +99,8 @@ class OAHomeState extends ConsumerState<OAHome> {
           final searchList = ref.watch(searchListHome);
           List<SearchModel?> data = [...searchList];
           return Column(children: [
-            Padding(
+            Container(
+              constraints: BoxConstraints(maxWidth: 1200),
               padding: paddingValues("sideHomePosts", context),
               child: Column(
                 children: [
@@ -135,6 +136,7 @@ class OAHomeState extends ConsumerState<OAHome> {
           ]);
         } else if (snapshot.hasError) {
           Container(
+              constraints: BoxConstraints(maxWidth: 1200),
               padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
               width: widget.swidth * 0.67,
               child: Text(
