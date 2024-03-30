@@ -3,16 +3,17 @@
  */
 package org.example;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.io.FileWriter;
-import java.nio.file.Files;
-import org.gradle.testkit.runner.GradleRunner;
+
 import org.gradle.testkit.runner.BuildResult;
+import org.gradle.testkit.runner.GradleRunner;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * A simple functional test for the 'org.example.greeting' plugin.

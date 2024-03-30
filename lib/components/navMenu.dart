@@ -58,10 +58,10 @@ final List<ItemValue> itemValues = [
   ),
   ItemValue(
     name: "Planos de Aula",
-    path: ['/planos-aulas'],
-    subItems: [],
+    path: ['/planos-aulas/lista', '/planos-aulas/criar'],
+    subItems: ['Lista', 'Criar um novo'],
     itemHover: false,
-    subItemHover: List.generate(1, (index) => false),
+    subItemHover: List.generate(2, (index) => false),
   ),
 ];
 

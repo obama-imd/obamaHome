@@ -74,10 +74,16 @@ class TemplateColumnState extends State<TemplateColumn> {
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
               ],
-              BannerSuperior(context, pageName),
+              if (ModalRoute.of(context)?.settings.name !=
+                  '/planos-aulas/criar') ...{
+                BannerSuperior(context, pageName),
+              },
               Column(children: [...widget.children]),
-              Carousel(swidth),
-              Footer(swidth),
+              if (ModalRoute.of(context)?.settings.name !=
+                  '/planos-aulas/criar') ...{
+                Carousel(swidth),
+                Footer(swidth),
+              }
             ]))));
   }
 }

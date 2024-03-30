@@ -179,7 +179,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                             return Container(
                                 alignment: Alignment(0, 0),
                                 child: OurProductItem(
-                                    title: post!.nome, image: post!.url));
+                                    title: post!.nome, image: post.url));
                           }).toList());
                     },
                   ),

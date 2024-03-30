@@ -9,6 +9,7 @@ import '../app/views/blog/blog_view.dart';
 import '../app/views/blog/components/blog-details.dart';
 import '../app/views/formations/formacoes_view.dart';
 import '../app/views/home/home_view.dart';
+import '../app/views/lessons/lesson_plan_new.dart';
 import '../app/views/manual/manual_view.dart';
 import '../app/views/search/searchOA_view.dart';
 import '../app/views/trilhas/trilhas_view.dart';
@@ -127,7 +128,8 @@ final MaterialApp AppMaterial = MaterialApp(
             ModalRoute.of(context)?.settings.arguments as String? ?? ''),
     '/trilhas': (context) => TrilhasPage(),
     '/manuais': (context) => ManuaisPage(),
-    '/planos-aulas': (context) => ListLessonPlan(),
+    '/planos-aulas/lista': (context) => ListLessonPlan(),
+    '/planos-aulas/criar': (context) => NewLessonPlan(),
     '/login': (context) => LoginPageView(),
     '/cadastro': (context) => SignInPageView(),
     // '/esqueciMinhaSenha': (context) => ForgotPasswordView()
