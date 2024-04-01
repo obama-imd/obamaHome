@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:obamahome/components/topbar.dart';
 import 'package:pdf/pdf.dart' as p;
 import 'package:pdf/widgets.dart' as pw;
 
 import '../../../utils/app_theme.dart';
+import 'components/initialText.dart';
 import 'components/save_file_mobile.dart'
     if (dart.library.html) 'components/save_file_web.dart';
 
@@ -23,11 +25,19 @@ class NewLessonPlan extends StatefulWidget {
 class _NewLessonPlanState extends State<NewLessonPlan> {
   QuillController _controller = QuillController.basic();
 
+  String imageUrl = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _initController(_controller);
+  }
+
   Future<void> saveAsPDF() async {
     final pdf = pw.Document();
     pdf.addPage(pw.Page(
         pageFormat: p.PdfPageFormat.a4,
-        margin: pw.EdgeInsets.all(35),
+        margin: pw.EdgeInsets.symmetric(horizontal: 91, vertical: 72),
         build: (pw.Context context) {
           var delta = _controller.document.toDelta().toList();
           DeltaToPDF dpdf = DeltaToPDF();
@@ -40,12 +50,79 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
     await saveAndLaunchFile(fileInts, 'plano_aula.pdf');
   }
 
+   Future<void> savePDF() async {
+    // final pdfWidgets = _controller.document.toDelta().toPdf();
+
+    // var savedFile = await pdf.save();
+    // List<int> fileInts = List.from(savedFile);
+
+    // await saveAndLaunchFile(fileInts, 'plano_aula.pdf');
+  }
+
   void composeImage(imageDelta) {
     _controller.compose(
       imageDelta,
       TextSelection.collapsed(offset: imageDelta.length),
       ChangeSource.local,
     );
+  }
+
+  void _pickImageURL() {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                TextField(
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: secondary),
+                    decoration: InputDecoration(
+                        contentPadding: EdgeInsets.only(bottom: 20),
+                        hintText: "Link da imagem",
+                        hintStyle: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: secondary,
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: secondary))),
+                    onChanged: (value) => setState(() {
+                          imageUrl = value;
+                        }),
+                    onSubmitted: (value) {
+                      setState(() {
+                        imageUrl = value;
+                      });
+                    }),
+                SizedBox(height: 15),
+                TextButton(
+                    style: ButtonStyle(
+                        fixedSize: MaterialStatePropertyAll(Size(250, 50))),
+                    child: Text("Enviar url", style: textTheme.displaySmall),
+                    onPressed: () {
+                      setState(() {
+                        imageUrl = imageUrl;
+                      });
+                      Navigator.of(context).pop();
+                      sendImageURL();
+                    }),
+              ]));
+        });
+  }
+
+  void sendImageURL() {
+    final Delta imageDelta = Delta()
+      ..insert("\n")
+      ..insert({
+        'image': imageUrl,
+      })
+      ..insert("\n");
+    composeImage(imageDelta);
   }
 
   Future<void> _pickImage() async {
@@ -81,51 +158,152 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
+    double logoWidth = 250;
+
+    if (swidth < 700) {
+      logoWidth = 180;
+    }
     return QuillProvider(
       configurations: QuillConfigurations(
         controller: _controller,
-        sharedConfigurations: const QuillSharedConfigurations(
+        sharedConfigurations: QuillSharedConfigurations(
           locale: Locale('pt', 'BR'),
         ),
       ),
-      child: Column(
-        children: [
-          Row(children: [
-            IconButton(
-                onPressed: () => Navigator.of(context).pop(),
-                icon: Icon(Icons.arrow_back)),
-            TextButton(
-                onPressed: () {
-                  saveAsPDF();
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text("Salvar como PDF", style: textTheme.displaySmall),
-                ))
-          ]),
-          QuillToolbar(
-            configurations: QuillToolbarConfigurations(
-                embedButtons: FlutterQuillEmbeds.toolbarButtons(),
-                customButtons: [
-                  QuillToolbarCustomButtonOptions(
-                    controller: _controller,
-                    icon: const Icon(Icons.image),
-                    onPressed: _pickImage,
-                  ),
-                ]),
-          ),
-          Expanded(
-            child: QuillEditor.basic(
-              configurations: QuillEditorConfigurations(
-                readOnly: false,
-                embedBuilders: kIsWeb
-                    ? FlutterQuillEmbeds.editorWebBuilders()
-                    : FlutterQuillEmbeds.editorBuilders(),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            TopBar(swidth),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: swidth * .1),
+              padding: const EdgeInsets.only(top: 35, bottom: 15),
+              constraints: BoxConstraints(maxWidth: 1200),
+              child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Material(
+                      child: TextButton(
+                          onPressed: () => Navigator.of(context).pop(),
+                          child: Row(
+                            children: [
+                              Icon(Icons.arrow_back, size: 16),
+                              if (swidth > 800) ...{Text("Voltar")}
+                            ],
+                          )),
+                    ),
+                    Image.asset("assets/images/logo.png", width: logoWidth),
+                    TextButton(
+                        onPressed: () {
+                          // saveAsPDF();
+                          savePDF();
+                          // print("document => ${_controller.document.toDelta().toJson()}");
+                        },
+                        child: Row(
+                          children: [
+                            if (swidth > 800) ...{
+                              Text("Salvar como PDF")
+                            } else ...{
+                              Icon(Icons.save_as, size: 16),
+                              SizedBox(width: 3),
+                              Text("PDF")
+                            }
+                          ],
+                        ))
+                  ]),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Divider(thickness: 1, color: secondary),
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: swidth * .1),
+              child: QuillToolbar(
+                configurations: QuillToolbarConfigurations(
+                    // embedButtons: FlutterQuillEmbeds.toolbarButtons(),
+                    customButtons: [
+                      QuillToolbarCustomButtonOptions(
+                        controller: _controller,
+                        tooltip: "Inserir imagem",
+                        icon: const Icon(Icons.image),
+                        onPressed: () {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                    content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                      TextButton(
+                                        style: ButtonStyle(
+                                            fixedSize: MaterialStatePropertyAll(
+                                                Size(250, 50))),
+                                        child: Text(
+                                            "Inserir imagem da sua galeria",
+                                            style: textTheme.displaySmall),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          _pickImage();
+                                        },
+                                      ),
+                                      SizedBox(height: 15),
+                                      TextButton(
+                                        style: ButtonStyle(
+                                            fixedSize: MaterialStatePropertyAll(
+                                                Size(250, 50))),
+                                        child: Text("Inserir url",
+                                            style: textTheme.displaySmall),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                          _pickImageURL();
+                                        },
+                                      )
+                                    ]));
+                              });
+                        },
+                      ),
+                    ]),
               ),
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.only(top: 15, bottom: 30),
+              child: Divider(thickness: 1, color: secondary),
+            ),
+            Container(
+              margin: EdgeInsets.only(bottom: 80),
+              padding: EdgeInsets.symmetric(vertical: 72, horizontal: 91),
+              decoration: BoxDecoration(color: background, boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 0.8,
+                  blurRadius: 5.0,
+                  offset: Offset(0.0, 3.0),
+                ),
+              ]),
+              constraints: BoxConstraints(maxWidth: 900),
+              child: AspectRatio(
+                aspectRatio: 3 / 4,
+                child: Expanded(
+                  child: QuillEditor.basic(
+                    scrollController: ScrollController(),
+                    configurations: QuillEditorConfigurations(
+                      embedBuilders: kIsWeb
+                          ? FlutterQuillEmbeds.editorWebBuilders()
+                          : FlutterQuillEmbeds.editorBuilders(),
+                    ),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
+}
+
+void _initController(QuillController controller) {
+  initText(controller);
 }

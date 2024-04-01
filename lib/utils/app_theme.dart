@@ -84,8 +84,11 @@ final MaterialApp AppMaterial = MaterialApp(
               shape: MaterialStatePropertyAll(
                   BeveledRectangleBorder(borderRadius: BorderRadius.zero)))),
       textButtonTheme: TextButtonThemeData(
-          style: const ButtonStyle(
+          style: ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(primary),
+        foregroundColor: MaterialStatePropertyAll(background),
+        padding: MaterialStatePropertyAll(EdgeInsets.all(10)),
+        textStyle: MaterialStatePropertyAll(textTheme.displaySmall),
         overlayColor: MaterialStatePropertyAll(Colors.lightBlue),
       )),
       iconButtonTheme: IconButtonThemeData(
