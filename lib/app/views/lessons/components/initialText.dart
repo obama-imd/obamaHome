@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 
 void initText(QuillController _controller) {
   try {
@@ -7,7 +8,7 @@ void initText(QuillController _controller) {
       ..insert("Objetivo geral")
       ..insert("\n", {"list": "bullet"})
       ..insert(
-          "Ao final desta aula espera-se que o(s) aluno(s) esteja(m) apto(s) a…")
+          "Ao final desta aula espera-se que o(s) aluno(s) esteja(m) apto(s) a...")
       ..insert("\n", {"list": "bullet", "indent": 1})
       ..insert("Objetivos especificos")
       ..insert(
