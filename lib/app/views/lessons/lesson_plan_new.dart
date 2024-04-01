@@ -12,7 +12,8 @@ import 'package:quill_pdf_converter/quill_pdf_converter.dart';
 
 import '../../../utils/app_theme.dart';
 import 'components/initialText.dart';
-import 'components/save_file_web.dart';
+import 'components/save_file_mobile.dart'
+    if (dart.library.html) 'components/save_file_web.dart';
 
 class NewLessonPlan extends StatefulWidget {
   const NewLessonPlan({super.key});
