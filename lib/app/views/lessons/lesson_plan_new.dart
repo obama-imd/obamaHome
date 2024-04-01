@@ -183,6 +183,10 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
             margin: EdgeInsets.symmetric(horizontal: swidth * .1),
             child: QuillToolbar.simple(
               configurations: QuillSimpleToolbarConfigurations(
+                showAlignmentButtons: true,
+                showHeaderStyle: false,
+                showIndent: false,
+                showListCheck: false,
                 // embedButtons: FlutterQuillEmbeds.toolbarButtons(),
                 controller: _controller,
                 sharedConfigurations: QuillSharedConfigurations(
@@ -255,6 +259,8 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                   scrollController: ScrollController(),
                   configurations: QuillEditorConfigurations(
                     controller: _controller,
+                    maxHeight: 1200,
+                    customStyles: DefaultStyles(color: onPrimary),
                     embedBuilders: kIsWeb
                         ? FlutterQuillEmbeds.editorWebBuilders()
                         : FlutterQuillEmbeds.editorBuilders(),
