@@ -125,7 +125,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
 
   @override
   Widget build(BuildContext context) {
-    double paddingCard = MediaQuery.of(context).size.width * .02;
+    // double paddingCard = MediaQuery.of(context).size.width * .02;
     PageController _pageController = PageController();
 
     return FutureBuilder<void>(

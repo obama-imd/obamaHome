@@ -60,6 +60,7 @@ dependencies:
   flutter_quill_extensions: ^9.3.3
   quill_html_converter: ^9.3.3
   quill_pdf_converter: ^9.3.3
+  syncfusion_flutter_pdf: ^25.1.39
 dev_dependencies:
   flutter_test:
     sdk: flutter

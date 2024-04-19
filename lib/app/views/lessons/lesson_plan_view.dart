@@ -31,7 +31,6 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
   final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
-    double swidth = MediaQuery.of(context).size.width;
     return FutureBuilder(
       future: randomName(searchTerm, ref),
       builder: (context, snapshot) {

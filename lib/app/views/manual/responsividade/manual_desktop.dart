@@ -18,7 +18,6 @@ class _MyStatefulWidgetState extends State<ManuaisDesktop> {
 
   @override
   Widget build(BuildContext context) {
-    double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
       // BannerSuperior(context, 'Manuais'),
       Container(
