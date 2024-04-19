@@ -7,6 +7,7 @@ import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:obamahome/components/topbar.dart';
+import 'package:quill_html_converter/quill_html_converter.dart';
 // import 'package:pdf/pdf.dart';
 // import 'package:pdf/widgets.dart' as pw;
 import 'package:quill_pdf_converter/quill_pdf_converter.dart';
@@ -39,23 +40,11 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
     var archive = _controller.document;
     var deltaToPDF = await _controller.document.toDelta().toPdf();
     var pdfHeight = archive.length.toDouble();
-    // final pdf = pw.Document();
-
-    // List<pw.Widget> widgets = [];
 
     if (pdfHeight > 1200) {
       archive.queryChild(0);
     }
 
-    // pdf.addPage(pw.MultiPage(
-    //     pageFormat: PdfPageFormat.a4,
-    //     margin: pw.EdgeInsets.symmetric(vertical: 72, horizontal: 91),
-    //     build: (pw.Context context) {
-    //       return deltaToPDF;
-    //     }));
-    // var savedFile = await pdf.save();
-    // List<int> fileInts = List.from(savedFile);
-    // await saveAndLaunchFile(fileInts, 'plano_aula.pdf');
   }
 
   void _pickImageURL() {
@@ -167,45 +156,9 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                   Image.asset("assets/images/logo.png", width: logoWidth),
                   TextButton(
                       onPressed: () async {
-                        // saveAsPDF();
                         // savePDF();
-                        var archive = _controller.document.toDelta().toList().toString();
-
-                        PdfDocument document = PdfDocument();
-                        // document.pageSettings
-                        document.pageSettings.margins.all = 72; 
-                        // document.pageSettings.margins.top = 72; 
-                        // document.pageSettings.margins.right = 72; 
-                        // document.pageSettings.margins.bottom = 72;
-                        // document.pageSettings.size = 1
-                        PdfFont font =
-                            PdfStandardFont(PdfFontFamily.timesRoman, 12);
-
-                        Size size = font.measureString(archive);
-
-                        document.pages.add().graphics.drawString(archive, font,
-                            bounds:
-                                Rect.fromLTWH(0, 0, size.width, size.height));
-
-                        var savedFile = await document.save();
-
-                        List<int> fileInts = List.from(savedFile);
-                        await saveAndLaunchFile(fileInts, 'plano_aula.pdf');
-
-                        // File('Output.pdf').writeAsBytes(await document.save());
-
-                        document.dispose();
-
-                        // List<pw.Widget> widgets = [];
-
-                        // if (pdfHeight > 1200) {
-                        // var archivePdf = archive.length.toDouble();
-                        // var pagesNumber = (archivePdf/1200).truncate();
-
-                        // }
-
-                        print("document => ${size}");
-                        print("document => ${archive}");
+                        var doc = _controller.document.toDelta().toHtml(); //salvar como html
+                        print("archive => ${doc}");
                       },
                       child: Row(
                         children: [
