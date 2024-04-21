@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:obamahome/utils/app_padding.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -53,10 +52,13 @@ class _TopBarState extends State<TopBar> {
                               padding: const EdgeInsets.only(right: 10),
                               child: const Icon(FontAwesomeIcons.house,
                                   color: background, size: 13)),
-                          Text(
-                              'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                              style: GoogleFonts.raleway(
-                                  color: background, fontSize: 13)),
+                          Material(
+                            color: CoresPersonalizadas.azulObama,
+                            child: Text(
+                                'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
+                                style: TextStyle(
+                                    color: background, fontSize: 13)),
+                          ),
                         ])),
                         Container(
                             margin: const EdgeInsets.only(left: 20),
@@ -74,7 +76,7 @@ class _TopBarState extends State<TopBar> {
                                     child: const Icon(FontAwesomeIcons.envelope,
                                         color: background, size: 16)),
                                 Text('obama@imd.ufrn.br',
-                                    style: GoogleFonts.raleway(
+                                    style: TextStyle(
                                         color: background, fontSize: 13)),
                               ]),
                             ))
@@ -173,7 +175,7 @@ class _TopBarState extends State<TopBar> {
                   child: const Icon(FontAwesomeIcons.house,
                       color: background, size: 13)),
               Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                  style: GoogleFonts.raleway(color: background, fontSize: 13)),
+                  style: TextStyle(color: background, fontSize: 13)),
             ]),
             Container(
                 child: TextButton(
@@ -195,7 +197,7 @@ class _TopBarState extends State<TopBar> {
                                 child: const Icon(FontAwesomeIcons.envelope,
                                     color: background, size: 16)),
                             Text('obama@imd.ufrn.br',
-                                style: GoogleFonts.raleway(
+                                style: TextStyle(
                                     color: background, fontSize: 13)),
                           ]),
                     ))),

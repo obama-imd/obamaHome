@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
@@ -64,7 +63,7 @@ class ErrorPage extends StatelessWidget {
                                     padding: const EdgeInsets.only(top: 40),
                                     child: Text("404",
                                         textAlign: TextAlign.center,
-                                        style: GoogleFonts.raleway(
+                                        style: TextStyle(
                                             fontSize: 60, color: background))),
                                 Padding(
                                   padding: const EdgeInsets.only(bottom: 20),

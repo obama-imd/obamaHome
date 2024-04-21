@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/components/modalSearch.dart';
 
 import '../app/views/search/searchOA_view.dart';
@@ -125,7 +124,7 @@ class _NavMenuState extends State<NavMenu> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(itemValues[i].name.toUpperCase(),
-                            style: GoogleFonts.raleway(
+                            style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: itemValues[i].path[0] == currentRoute
                                     ? primary

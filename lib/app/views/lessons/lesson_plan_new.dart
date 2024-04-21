@@ -2,21 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_quill/extensions.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:obamahome/components/topbar.dart';
 import 'package:quill_html_converter/quill_html_converter.dart';
+
 // import 'package:pdf/pdf.dart';
 // import 'package:pdf/widgets.dart' as pw;
-import 'package:quill_pdf_converter/quill_pdf_converter.dart';
-import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 import '../../../utils/app_theme.dart';
 import 'components/initialText.dart';
-import 'components/save_file_mobile.dart'
-    if (dart.library.html) 'components/save_file_web.dart';
 
 class NewLessonPlan extends StatefulWidget {
   const NewLessonPlan({super.key});
@@ -36,16 +32,16 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
     _initController(_controller);
   }
 
-  Future<void> savePDF() async {
-    var archive = _controller.document;
-    var deltaToPDF = await _controller.document.toDelta().toPdf();
-    var pdfHeight = archive.length.toDouble();
+  // Future<void> savePDF() async {
+  //   var archive = _controller.document;
+  //   var deltaToPDF = await _controller.document.toDelta().toPdf();
+  //   var pdfHeight = archive.length.toDouble();
 
-    if (pdfHeight > 1200) {
-      archive.queryChild(0);
-    }
+  //   if (pdfHeight > 1200) {
+  //     archive.queryChild(0);
+  //   }
 
-  }
+  // }
 
   void _pickImageURL() {
     showDialog(
@@ -56,6 +52,10 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10, bottom: 20),
+                  child: Text("Cole abaixo o link da sua imagem"),
+                ),
                 TextField(
                     style: TextStyle(
                         fontSize: 18,
@@ -157,8 +157,10 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                   TextButton(
                       onPressed: () async {
                         // savePDF();
-                        var doc = _controller.document.toDelta().toHtml(); //salvar como html
-                        print("archive => ${doc}");
+                        var doc = _controller.document
+                            .toDelta()
+                            .toHtml(); //salvar como html
+                        // print("archive => ${doc}");
                       },
                       child: Row(
                         children: [
@@ -203,6 +205,12 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 10, bottom: 20),
+                                    child: Text(
+                                        "Insira imagens do seu dispositivo ou da internet"),
+                                  ),
                                   TextButton(
                                     style: ButtonStyle(
                                         fixedSize: MaterialStatePropertyAll(
@@ -219,7 +227,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                                     style: ButtonStyle(
                                         fixedSize: MaterialStatePropertyAll(
                                             Size(250, 50))),
-                                    child: Text("Inserir url",
+                                    child: Text("Inserir link da internet",
                                         style: textTheme.displaySmall),
                                     onPressed: () {
                                       Navigator.of(context).pop();
@@ -258,7 +266,6 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                   configurations: QuillEditorConfigurations(
                     controller: _controller,
                     maxHeight: 1200,
-                    customStyles: DefaultStyles(color: onPrimary),
                     embedBuilders: kIsWeb
                         ? FlutterQuillEmbeds.editorWebBuilders()
                         : FlutterQuillEmbeds.editorBuilders(),

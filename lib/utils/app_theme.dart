@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
 import 'package:obamahome/auth/login.dart';
 
@@ -36,21 +35,21 @@ const LinearGradient gradientColor = LinearGradient(
     colors: [Color.fromARGB(255, 150, 144, 144), Colors.blue]);
 
 final TextTheme textTheme = TextTheme(
-  titleLarge: GoogleFonts.raleway(
+  titleLarge: TextStyle(fontFamily: 'Raleway', 
     fontSize: 35,
     fontWeight: FontWeight.bold,
   ),
-  titleMedium: GoogleFonts.raleway(color: Colors.grey, fontSize: 20),
-  titleSmall: GoogleFonts.raleway(
-      color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-  headlineLarge: GoogleFonts.raleway(
-      color: primary, fontSize: 14, fontWeight: FontWeight.bold),
-  headlineMedium: GoogleFonts.raleway(color: Colors.black, fontSize: 16),
-  headlineSmall: GoogleFonts.raleway(
-      color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
-  labelLarge: GoogleFonts.raleway(
-      color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
-  labelMedium: GoogleFonts.raleway(
+  titleMedium: TextStyle(fontFamily: 'Raleway', color: Colors.grey, fontSize: 20),
+  titleSmall:
+      TextStyle(fontFamily: 'Raleway', color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+  headlineLarge:
+      TextStyle(fontFamily: 'Raleway', color: primary, fontSize: 14, fontWeight: FontWeight.bold),
+  headlineMedium: TextStyle(fontFamily: 'Raleway', color: Colors.black, fontSize: 16),
+  headlineSmall:
+      TextStyle(fontFamily: 'Raleway', color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+  labelLarge:
+      TextStyle(fontFamily: 'Raleway', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
+  labelMedium: TextStyle(fontFamily: 'Raleway', 
     color: Colors.white,
     fontSize: 14,
     shadows: [
@@ -60,18 +59,19 @@ final TextTheme textTheme = TextTheme(
       )
     ],
   ),
-  labelSmall: GoogleFonts.raleway(color: primary, fontSize: 14),
-  bodyLarge: GoogleFonts.raleway(
-      color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-  bodyMedium: GoogleFonts.raleway(color: Colors.black, fontSize: 14),
-  bodySmall: GoogleFonts.raleway(color: Colors.grey, fontSize: 14),
-  displayLarge: GoogleFonts.raleway(fontSize: 30, color: Colors.white),
-  displayMedium: GoogleFonts.raleway(fontSize: 20, color: Colors.white),
-  displaySmall: GoogleFonts.raleway(color: Colors.white, fontSize: 14),
+  labelSmall: TextStyle(fontFamily: 'Raleway', color: primary, fontSize: 14),
+  bodyLarge:
+      TextStyle(fontFamily: 'Raleway', color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+  bodyMedium: TextStyle(fontFamily: 'Raleway', color: Colors.black, fontSize: 14),
+  bodySmall: TextStyle(fontFamily: 'Raleway', color: Colors.grey, fontSize: 14),
+  displayLarge: TextStyle(fontFamily: 'Raleway', fontSize: 30, color: Colors.white),
+  displayMedium: TextStyle(fontFamily: 'Raleway', fontSize: 20, color: Colors.white),
+  displaySmall: TextStyle(fontFamily: 'Raleway', color: Colors.white, fontSize: 14),
 );
 
 final MaterialApp AppMaterial = MaterialApp(
   theme: ThemeData(
+      fontFamily: 'Raleway',
       menuButtonTheme: MenuButtonThemeData(
           style: ButtonStyle(
         overlayColor: MaterialStatePropertyAll(background),
@@ -116,7 +116,6 @@ final MaterialApp AppMaterial = MaterialApp(
       ),
       textTheme: textTheme),
   debugShowCheckedModeBanner: false,
-  title: 'Home',
   home: const HomeView(),
   initialRoute: '/',
   routes: {
