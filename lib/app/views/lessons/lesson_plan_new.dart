@@ -165,11 +165,9 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                       child: Row(
                         children: [
                           if (swidth > 800) ...{
-                            Text("Salvar como PDF")
+                            Text("Salvar")
                           } else ...{
-                            Icon(Icons.save_as, size: 16),
-                            SizedBox(width: 3),
-                            Text("PDF")
+                            Icon(Icons.save_as, size: 16)
                           }
                         ],
                       ))
@@ -258,18 +256,21 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
               ),
             ]),
             constraints: BoxConstraints(maxWidth: 900),
-            child: AspectRatio(
-              aspectRatio: 3 / 4,
-              child: Expanded(
-                child: QuillEditor.basic(
-                  scrollController: ScrollController(),
-                  configurations: QuillEditorConfigurations(
-                    controller: _controller,
-                    maxHeight: 1200,
-                    embedBuilders: kIsWeb
-                        ? FlutterQuillEmbeds.editorWebBuilders()
-                        : FlutterQuillEmbeds.editorBuilders(),
+            child: Expanded(
+              child: QuillEditor.basic(
+                scrollController: ScrollController(),
+                configurations: QuillEditorConfigurations(
+                  controller: _controller,
+                  customStyles: DefaultStyles(
+                    color: onPrimary
                   ),
+                  minHeight: 1200,
+                  sharedConfigurations: QuillSharedConfigurations(
+                    locale: Locale('pt', 'BR'),
+                  ),
+                  embedBuilders: kIsWeb
+                      ? FlutterQuillEmbeds.editorWebBuilders()
+                      : FlutterQuillEmbeds.editorBuilders(),
                 ),
               ),
             ),

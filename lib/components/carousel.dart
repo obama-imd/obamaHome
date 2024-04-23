@@ -75,7 +75,7 @@ class Carousel extends StatelessWidget {
                               Container(height: 140),
                               Container(
                                   child: Text('What Clients Say?',
-                                      style: textTheme.labelLarge)),
+                                      style: textTheme.labelMedium)),
                               Container(
                                   padding: const EdgeInsets.only(top: 15),
                                   child: Text(
@@ -161,7 +161,7 @@ class Carousel extends StatelessWidget {
                                                   children: [
                                                     Text('REQUEST A FREE QUOTE',
                                                         style:
-                                                            textTheme.labelLarge),
+                                                            textTheme.labelMedium),
                                                     Text(
                                                         'Get answers and advice from people you want it from.',
                                                         style: textTheme
@@ -182,7 +182,16 @@ class Carousel extends StatelessWidget {
                                               ),
                                               onPressed: () {},
                                               child: Text('CONTACT US',
-                                                  style: textTheme.labelMedium)),
+                                                  style: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    shadows: [
+      Shadow(
+        offset: Offset(1, 1),
+        color: Color.fromRGBO(0, 0, 0, 0.5),
+      )
+    ],
+  ),)),
                                         ]))),
                               ),
                             ])),
@@ -334,7 +343,16 @@ class Carousel extends StatelessWidget {
                             ),
                             onPressed: () {},
                             child: Text('CONTACT US',
-                                style: textTheme.labelMedium)),
+                                style: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    shadows: [
+      Shadow(
+        offset: Offset(1, 1),
+        color: Color.fromRGBO(0, 0, 0, 0.5),
+      )
+    ],
+  ),)),
                       ])),
                 ])),
             SizedBox(width: swidth * 0.9, height: 40),
