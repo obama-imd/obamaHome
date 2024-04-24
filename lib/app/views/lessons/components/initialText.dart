@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
-void initText(QuillController _controller) {
+String initText(QuillController _controller) {
   try {
     var initialText = new Delta()
       ..insert("Objetivo geral")
@@ -11,6 +11,7 @@ void initText(QuillController _controller) {
           "Ao final desta aula espera-se que o(s) aluno(s) esteja(m) apto(s) a...")
       ..insert("\n", {"list": "bullet", "indent": 1})
       ..insert("Objetivos especificos")
+      ..insert("\n", {"list": "bullet"})
       ..insert(
           "Para alcançar o objetivo geral, o(s) aluno(s) deve(m) aprender a ou sobre...")
       ..insert("\n", {"list": "bullet", "indent": 1})
@@ -38,8 +39,11 @@ void initText(QuillController _controller) {
         initialText,
         TextSelection.collapsed(offset: initialText.length),
         ChangeSource.local);
+
+    return _controller.document.toPlainText();
   } catch (err, st) {
     print('Cannot read welcome.json: $err\n$st');
     _controller = _controller;
+    return '';
   }
 }

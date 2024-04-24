@@ -29,7 +29,8 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
   @override
   void initState() {
     super.initState();
-    _initController(_controller);
+    // _initController(_controller);
+    // print(_controller.document.toDelta().toHtml());
   }
 
   // Future<void> savePDF() async {
@@ -164,11 +165,11 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                       },
                       child: Row(
                         children: [
+                          Icon(Icons.save_as, size: 16),
                           if (swidth > 800) ...{
+                            SizedBox(width: 5),
                             Text("Salvar")
-                          } else ...{
-                            Icon(Icons.save_as, size: 16)
-                          }
+                          } 
                         ],
                       ))
                 ]),
@@ -261,8 +262,9 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                 scrollController: ScrollController(),
                 configurations: QuillEditorConfigurations(
                   controller: _controller,
+                  placeholder: initText(_controller),
                   customStyles: DefaultStyles(
-                    color: onPrimary
+                    paragraph: DefaultTextBlockStyle(TextStyle(color: onPrimary, fontSize: 14), VerticalSpacing(0, 0), VerticalSpacing(0, 0), BoxDecoration()),
                   ),
                   minHeight: 1200,
                   sharedConfigurations: QuillSharedConfigurations(
@@ -281,6 +283,6 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
   }
 }
 
-void _initController(QuillController controller) {
-  initText(controller);
-}
+// String _initController(QuillController controller) {
+//   return initText(controller);
+// }
