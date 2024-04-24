@@ -155,7 +155,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
             return Column(children: [
               if (searchResult.isNotEmpty) ...{
                 Container(
-                  height: (450 * rowNumbers),
+                  height: (450 * (rowNumbers + 1)),
                   child: PageView.builder(
                     itemCount: totalPages,
                     physics: NeverScrollableScrollPhysics(),
