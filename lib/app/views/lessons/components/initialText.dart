@@ -6,7 +6,7 @@ String initText(QuillController _controller) {
   try {
     var initialText = new Delta()
       ..insert("Objetivo geral")
-      ..insert("\n", {"list": "bullet"})
+      ..insert("\n", {"list": "bullet", "color": "black"})
       ..insert(
           "Ao final desta aula espera-se que o(s) aluno(s) esteja(m) apto(s) a...")
       ..insert("\n", {"list": "bullet", "indent": 1})

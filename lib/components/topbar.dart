@@ -1,33 +1,68 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:obamahome/utils/app_padding.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../auth/components/googleAuth.dart';
+import '../auth/components/googleSignInButton.dart';
 import '../utils/app_theme.dart';
 import '../utils/cores_personalizadas.dart';
 
-// ignore: must_be_immutable
-class TopBar extends StatefulWidget {
+class TopBar extends ConsumerStatefulWidget {
   double swidth;
 
   TopBar(this.swidth, {super.key});
 
   @override
-  State<TopBar> createState() => _TopBarState();
+  _TopBarState createState() => _TopBarState();
 }
 
-class _TopBarState extends State<TopBar> {
-  // var user;
+class _TopBarState extends ConsumerState<TopBar> {
+  bool userLogged = false;
 
   @override
   void initState() {
-    // user = GoogleSignIn().isSignedIn();
+    // final newDataList = ref.watch(googleSignInData);
     super.initState();
+    // checkSignIn();
   }
+
+  // void checkSignIn() async {
+  //   bool user = await GoogleSignIn().isSignedIn();
+  //   setState(() {
+  //     userLogged = user;
+  //   });
+  // }
 
   void checkAuth(context) {
     Navigator.pushNamed(context, "/login");
+  }
+
+  loginButton(context) {
+    final googleUserName = ref.watch(googleName);
+    final googleUserBool = ref.watch(googleBool);
+
+    List<String?> userName = [...googleUserName];
+    List<bool> userLogged = [...googleUserBool];
+    return InkWell(
+        onTap: () {
+          checkAuth(context);
+          // print("teste => $userLogged, $userName");
+        },
+        child: SizedBox(
+          width: widget.swidth * 0.154,
+          height: 45,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(userLogged.first? 'Olá, ${userName.first}' : 'Acesse',
+                  style: textTheme.headlineSmall, textAlign: TextAlign.center)
+            ],
+          ),
+        ));
   }
 
   @override
@@ -56,8 +91,8 @@ class _TopBarState extends State<TopBar> {
                             color: CoresPersonalizadas.azulObama,
                             child: Text(
                                 'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                                style: TextStyle(
-                                    color: background, fontSize: 13)),
+                                style:
+                                    TextStyle(color: background, fontSize: 13)),
                           ),
                         ])),
                         Container(
@@ -90,26 +125,9 @@ class _TopBarState extends State<TopBar> {
                                 height: 45,
                                 width: 160,
                                 child: Material(
-                                  color: background,
-                                  textStyle: textTheme.headlineMedium,
-                                  child: InkWell(
-                                      onTap: () {
-                                        checkAuth(context);
-                                      },
-                                      child: SizedBox(
-                                        width: widget.swidth * 0.154,
-                                        height: 45,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text('Acesse',
-                                                style: textTheme.headlineSmall,
-                                                textAlign: TextAlign.center)
-                                          ],
-                                        ),
-                                      )),
-                                ))
+                                    color: background,
+                                    textStyle: textTheme.headlineMedium,
+                                    child: loginButton(context)))
                           ]))
                     ]),
               ),
@@ -138,26 +156,9 @@ class _TopBarState extends State<TopBar> {
                                 height: 45,
                                 width: 160,
                                 child: Material(
-                                  color: background,
-                                  textStyle: textTheme.headlineMedium,
-                                  child: InkWell(
-                                      onTap: () {
-                                        checkAuth(context);
-                                      },
-                                      child: SizedBox(
-                                        width: widget.swidth * 0.154,
-                                        height: 45,
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text('Acesse',
-                                                style: textTheme.headlineSmall,
-                                                textAlign: TextAlign.center)
-                                          ],
-                                        ),
-                                      )),
-                                ))
+                                    color: background,
+                                    textStyle: textTheme.headlineMedium,
+                                    child: loginButton(context)))
                           ]),
                     )
                   ])),
@@ -197,8 +198,8 @@ class _TopBarState extends State<TopBar> {
                                 child: const Icon(FontAwesomeIcons.envelope,
                                     color: background, size: 16)),
                             Text('obama@imd.ufrn.br',
-                                style: TextStyle(
-                                    color: background, fontSize: 13)),
+                                style:
+                                    TextStyle(color: background, fontSize: 13)),
                           ]),
                     ))),
             Padding(
@@ -209,25 +210,9 @@ class _TopBarState extends State<TopBar> {
                 children: [
                   // SocialMedia(background),
                   Material(
-                    color: background,
-                    textStyle: textTheme.headlineMedium,
-                    child: InkWell(
-                        onTap: () {
-                          checkAuth(context);
-                        },
-                        child: SizedBox(
-                          width: 190,
-                          height: 45,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text('Acesse',
-                                  style: textTheme.headlineSmall,
-                                  textAlign: TextAlign.center)
-                            ],
-                          ),
-                        )),
-                  )
+                      color: background,
+                      textStyle: textTheme.headlineMedium,
+                      child: loginButton(context))
                 ],
               ),
             ),

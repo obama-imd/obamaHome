@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:obamahome/auth/components/googleAuth.dart';
 
 import '../../utils/app_theme.dart';
 
-final googleSignInData = StateProvider<GoogleSignInAccount?>((ref) {
-  return null;
-});
+class GoogleUser {
+  String userName;
+  String userEmail;
+
+  GoogleUser({required this.userName, required this.userEmail});
+}
 
 class GoogleSigninButton extends ConsumerStatefulWidget {
   const GoogleSigninButton({super.key});
@@ -25,13 +27,8 @@ class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
       width: 170,
       child: ElevatedButton(
           onPressed: () async {
-            await LoginAPI.login();
-            // final newData = ref.read(googleSignInData);
-            // newData.clear();
-            // var nameUser = newData!.displayName;
-            // var emailUser = newData.email;
-
-            // print(" userData => $user, $nameUser, $emailUser");
+            await LoginAPI.login(ref);
+            // print(" userData => $user");
           },
           style: ButtonStyle(
             side: MaterialStatePropertyAll(
