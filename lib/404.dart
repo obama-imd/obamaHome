@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/components/menuClass.dart';
 
 import '../../../components/bannerSuperior.dart';
 import '../../../components/carousel.dart';
@@ -41,7 +42,7 @@ class ErrorPage extends StatelessWidget {
                               width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50, itemValues: itemValues, searchAvailable: true),
                         ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),

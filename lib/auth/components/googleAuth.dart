@@ -11,7 +11,7 @@ final googleEmail = StateProvider<List<String?>>((ref) {
   return [];
 });
 final googleBool = StateProvider<List<bool>>((ref) {
-  return [false];
+  return [];
 });
 
 class LoginAPI {

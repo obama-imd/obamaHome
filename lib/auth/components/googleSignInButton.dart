@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:obamahome/auth/components/googleAuth.dart';
 
 import '../../utils/app_theme.dart';
@@ -20,6 +21,7 @@ class GoogleSigninButton extends ConsumerStatefulWidget {
 }
 
 class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,6 +30,8 @@ class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
       child: ElevatedButton(
           onPressed: () async {
             await LoginAPI.login(ref);
+            bool boolLog = await GoogleSignIn().isSignedIn();
+            // () => widget.isLogged(boolLog);
             // print(" userData => $user");
           },
           style: ButtonStyle(

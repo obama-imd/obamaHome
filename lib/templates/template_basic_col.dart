@@ -6,6 +6,7 @@ import '../../../../components/footer.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../components/bannerSuperior.dart';
+import '../components/menuClass.dart';
 import '../components/menuMobile.dart';
 
 // ignore: must_be_immutable
@@ -69,7 +70,7 @@ class TemplateColumnState extends State<TemplateColumn> {
                               width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50, itemValues: itemValues, searchAvailable: true),
                         ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),

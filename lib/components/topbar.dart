@@ -30,13 +30,6 @@ class _TopBarState extends ConsumerState<TopBar> {
     // checkSignIn();
   }
 
-  // void checkSignIn() async {
-  //   bool user = await GoogleSignIn().isSignedIn();
-  //   setState(() {
-  //     userLogged = user;
-  //   });
-  // }
-
   void checkAuth(context) {
     Navigator.pushNamed(context, "/login");
   }
@@ -50,7 +43,8 @@ class _TopBarState extends ConsumerState<TopBar> {
     return InkWell(
         onTap: () {
           checkAuth(context);
-          // print("teste => $userLogged, $userName");
+          // checkSignIn();
+          // print("teste => ${userLogged[0]}, ${userName[0]}");
         },
         child: SizedBox(
           width: widget.swidth * 0.154,
@@ -58,7 +52,7 @@ class _TopBarState extends ConsumerState<TopBar> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(userLogged.first? 'Olá, ${userName.first}' : 'Acesse',
+              Text(userLogged.isNotEmpty ? 'Olá, ${userName.first}' : 'Acesse',
                   style: textTheme.headlineSmall, textAlign: TextAlign.center)
             ],
           ),

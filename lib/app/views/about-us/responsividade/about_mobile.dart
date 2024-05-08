@@ -8,6 +8,7 @@ import '../../../../components/bannerSuperior.dart';
 import '../../../../components/carousel.dart';
 import '../../../../components/drawer.dart';
 import '../../../../components/footer.dart';
+import '../../../../components/menuClass.dart';
 import '../../../../components/menuMobile.dart';
 import '../../../../components/sectionTitle.dart';
 import '../../../../components/topbar.dart';
@@ -56,7 +57,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50, itemValues: itemValues, searchAvailable: true),
                         ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),

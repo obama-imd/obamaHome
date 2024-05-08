@@ -6,6 +6,7 @@ import '../../../../components/footer.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../components/bannerSuperior.dart';
+import '../components/menuClass.dart';
 import '../components/menuMobile.dart';
 
 class TemplateRow extends StatefulWidget {
@@ -68,7 +69,7 @@ class TemplateRowState extends State<TemplateRow> {
                               width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50),
+                          NavMenu(swidth: swidth, heightBtn: 50, itemValues: itemValues, searchAvailable: true),
                         ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),

@@ -4,33 +4,50 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/components/topbar.dart';
-import 'package:quill_html_converter/quill_html_converter.dart';
 
 // import 'package:pdf/pdf.dart';
 // import 'package:pdf/widgets.dart' as pw;
 
 import '../../../utils/app_theme.dart';
+import '../../controllers/search_controller.dart';
+import '../../models/search_models.dart';
 import 'components/initialText.dart';
+import 'components/textEditorClass.dart';
 
-class NewLessonPlan extends StatefulWidget {
+class NewLessonPlan extends ConsumerStatefulWidget {
   const NewLessonPlan({super.key});
 
   @override
-  State<NewLessonPlan> createState() => _NewLessonPlanState();
+  _NewLessonPlanState createState() => _NewLessonPlanState();
 }
 
-class _NewLessonPlanState extends State<NewLessonPlan> {
+class _NewLessonPlanState extends ConsumerState<NewLessonPlan> {
   QuillController _controller = QuillController.basic();
 
   String imageUrl = "";
+  List<SearchModel?> searchData = [];
 
   @override
   void initState() {
     super.initState();
+    getData();
     // _initController(_controller);
     // print(_controller.document.toDelta().toHtml());
+  }
+
+  void getData() async {
+    dynamic fetchedData = await fetchDataAndUpdateState("", ref);
+    // final fetchedData = ref.watch(searchPagination);
+    // searchData = [...fetchedData];
+    SearchResponse pagination = fetchedData.$1;
+    List<SearchModel?> newPagination = pagination!.content;
+    setState(() {
+      searchData = newPagination;
+    });
   }
 
   // Future<void> savePDF() async {
@@ -110,7 +127,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
     if (pickedImage != null) {
       final String imagePath = pickedImage.path;
       final File file = File(imagePath);
-      print(" imagePath => $imagePath");
+      // print(" imagePath => $imagePath");
 
       if (kIsWeb) {
         _controller.insertImageBlock(
@@ -144,34 +161,35 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Material(
-                    child: TextButton(
-                        onPressed: () => Navigator.of(context).pop(),
-                        child: Row(
-                          children: [
-                            Icon(Icons.arrow_back, size: 16),
-                            if (swidth > 800) ...{Text("Voltar")}
-                          ],
-                        )),
-                  ),
+                  // Material(
+                  //   child: TextButton(
+                  //       onPressed: () => Navigator.of(context).pop(),
+                  //       child: Row(
+                  //         children: [
+                  //           Icon(Icons.arrow_back, size: 16),
+                  //           if (swidth > 800) ...{Text("Voltar")}
+                  //         ],
+                  //       )),
+                  // ),
                   Image.asset("assets/images/logo.png", width: logoWidth),
-                  TextButton(
-                      onPressed: () async {
-                        // savePDF();
-                        var doc = _controller.document
-                            .toDelta()
-                            .toHtml(); //salvar como html
-                        // print("archive => ${doc}");
-                      },
-                      child: Row(
-                        children: [
-                          Icon(Icons.save_as, size: 16),
-                          if (swidth > 800) ...{
-                            SizedBox(width: 5),
-                            Text("Salvar")
-                          } 
-                        ],
-                      ))
+                  NavMenu(swidth: swidth, heightBtn: 50, itemValues: editorValues, searchAvailable: false,)
+                  // TextButton(
+                  //     onPressed: () async {
+                  //       // savePDF();
+                  //       var doc = _controller.document
+                  //           .toDelta()
+                  //           .toHtml(); //salvar como html
+                  //       // print("archive => ${doc}");
+                  //     },
+                  //     child: Row(
+                  //       children: [
+                  //         Icon(Icons.save_as, size: 16),
+                  //         if (swidth > 800) ...{
+                  //           SizedBox(width: 5),
+                  //           Text("Salvar")
+                  //         } 
+                  //       ],
+                  //     ))
                 ]),
           ),
           Padding(
@@ -186,7 +204,9 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                 showHeaderStyle: false,
                 showIndent: false,
                 showListCheck: false,
-                // embedButtons: FlutterQuillEmbeds.toolbarButtons(),
+                showQuote: false,
+                showInlineCode: false,
+                showCodeBlock: false,
                 controller: _controller,
                 sharedConfigurations: QuillSharedConfigurations(
                   locale: Locale('pt', 'BR'),
@@ -235,8 +255,24 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                                   )
                                 ]));
                           });
+
                     },
-                  )
+                  ),
+                  QuillToolbarCustomButtonOptions(
+                    icon: Icon(Icons.games),
+                    onPressed: () {
+                      // showDialog(context: context, builder:(context) {
+                      //   return AlertDialog(
+                      //     content: Column(children: [
+                            for (var search in searchData){
+                              debugPrint(search!.nome);
+                              // Text(search!.nome),
+                            }
+                      //     ]),
+                      //   );
+                      // });
+                    },
+                  )               
                 ],
               ),
             ),
