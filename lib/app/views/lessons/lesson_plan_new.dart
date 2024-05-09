@@ -8,6 +8,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/components/topbar.dart';
+import 'package:obamahome/utils/cores_personalizadas.dart';
 
 // import 'package:pdf/pdf.dart';
 // import 'package:pdf/widgets.dart' as pw;
@@ -40,11 +41,12 @@ class _NewLessonPlanState extends ConsumerState<NewLessonPlan> {
   }
 
   void getData() async {
-    dynamic fetchedData = await fetchDataAndUpdateState("", ref);
+    SearchResponse fetchedData = await fetchDataAndUpdateState("", ref);
     // final fetchedData = ref.watch(searchPagination);
     // searchData = [...fetchedData];
-    SearchResponse pagination = fetchedData.$1;
-    List<SearchModel?> newPagination = pagination!.content;
+    SearchResponse pagination = fetchedData;
+    List<SearchModel?> newPagination = pagination.content;
+    // debugPrint(newPagination.first?.nome);
     setState(() {
       searchData = newPagination;
     });
@@ -65,51 +67,59 @@ class _NewLessonPlanState extends ConsumerState<NewLessonPlan> {
     showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
-              content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 20),
-                  child: Text("Cole abaixo o link da sua imagem"),
-                ),
-                TextField(
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: secondary),
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.only(bottom: 20),
-                        hintText: "Link da imagem",
-                        hintStyle: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: secondary,
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: secondary))),
-                    onChanged: (value) => setState(() {
-                          imageUrl = value;
+          return Dialog(
+              child: Container(
+            constraints: BoxConstraints(maxWidth: 450, maxHeight: 400),
+            padding: const EdgeInsets.symmetric(vertical: 25),
+            child: Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("Cole abaixo o link da sua imagem"),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Divider(color: Colors.black38),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: TextField(
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: secondary),
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.only(bottom: 20),
+                            hintText: "Link da imagem",
+                            hintStyle: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: secondary,
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                                borderSide: BorderSide(color: secondary))),
+                        onChanged: (value) => setState(() {
+                              imageUrl = value;
+                            }),
+                        onSubmitted: (value) {
+                          setState(() {
+                            imageUrl = value;
+                          });
                         }),
-                    onSubmitted: (value) {
-                      setState(() {
-                        imageUrl = value;
-                      });
-                    }),
-                SizedBox(height: 15),
-                TextButton(
-                    style: ButtonStyle(
-                        fixedSize: MaterialStatePropertyAll(Size(250, 50))),
-                    child: Text("Enviar url", style: textTheme.displaySmall),
-                    onPressed: () {
-                      setState(() {
-                        imageUrl = imageUrl;
-                      });
-                      Navigator.of(context).pop();
-                      sendImageURL();
-                    }),
-              ]));
+                  ),
+                  SizedBox(height: 15),
+                  TextButton(
+                      style: ButtonStyle(
+                          fixedSize: MaterialStatePropertyAll(Size(250, 50))),
+                      child: Text("Enviar url", style: textTheme.displaySmall),
+                      onPressed: () {
+                        setState(() {
+                          imageUrl = imageUrl;
+                        });
+                        Navigator.of(context).pop();
+                        sendImageURL();
+                      }),
+                ]),
+          ));
         });
   }
 
@@ -172,7 +182,12 @@ class _NewLessonPlanState extends ConsumerState<NewLessonPlan> {
                   //       )),
                   // ),
                   Image.asset("assets/images/logo.png", width: logoWidth),
-                  NavMenu(swidth: swidth, heightBtn: 50, itemValues: editorValues, searchAvailable: false,)
+                  NavMenu(
+                    swidth: swidth,
+                    heightBtn: 50,
+                    itemValues: editorValues,
+                    searchAvailable: false,
+                  )
                   // TextButton(
                   //     onPressed: () async {
                   //       // savePDF();
@@ -187,7 +202,7 @@ class _NewLessonPlanState extends ConsumerState<NewLessonPlan> {
                   //         if (swidth > 800) ...{
                   //           SizedBox(width: 5),
                   //           Text("Salvar")
-                  //         } 
+                  //         }
                   //       ],
                   //     ))
                 ]),
@@ -219,60 +234,113 @@ class _NewLessonPlanState extends ConsumerState<NewLessonPlan> {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
-                                content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 10, bottom: 20),
-                                    child: Text(
+                            return Dialog(
+                                child: Container(
+                              constraints:
+                                  BoxConstraints(maxWidth: 450, maxHeight: 400),
+                              padding: const EdgeInsets.symmetric(vertical: 25),
+                              child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
                                         "Insira imagens do seu dispositivo ou da internet"),
-                                  ),
-                                  TextButton(
-                                    style: ButtonStyle(
-                                        fixedSize: MaterialStatePropertyAll(
-                                            Size(250, 50))),
-                                    child: Text("Inserir imagem da sua galeria",
-                                        style: textTheme.displaySmall),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      _pickImage();
-                                    },
-                                  ),
-                                  SizedBox(height: 15),
-                                  TextButton(
-                                    style: ButtonStyle(
-                                        fixedSize: MaterialStatePropertyAll(
-                                            Size(250, 50))),
-                                    child: Text("Inserir link da internet",
-                                        style: textTheme.displaySmall),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                      _pickImageURL();
-                                    },
-                                  )
-                                ]));
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 8.0),
+                                      child: Divider(color: Colors.black38),
+                                    ),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                          fixedSize: MaterialStatePropertyAll(
+                                              Size(250, 50))),
+                                      child: Text(
+                                          "Inserir imagem da sua galeria",
+                                          style: textTheme.displaySmall),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        _pickImage();
+                                      },
+                                    ),
+                                    SizedBox(height: 15),
+                                    TextButton(
+                                      style: ButtonStyle(
+                                          fixedSize: MaterialStatePropertyAll(
+                                              Size(250, 50))),
+                                      child: Text("Inserir link da internet",
+                                          style: textTheme.displaySmall),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                        _pickImageURL();
+                                      },
+                                    )
+                                  ]),
+                            ));
                           });
-
                     },
                   ),
                   QuillToolbarCustomButtonOptions(
-                    icon: Icon(Icons.games),
+                    tooltip: "Adicionar Objetos de Aprendizagem",
+                    icon: Icon(Icons.gamepad),
                     onPressed: () {
-                      // showDialog(context: context, builder:(context) {
-                      //   return AlertDialog(
-                      //     content: Column(children: [
-                            for (var search in searchData){
-                              debugPrint(search!.nome);
-                              // Text(search!.nome),
-                            }
-                      //     ]),
-                      //   );
-                      // });
+                      showDialog(
+                          context: context,
+                          builder: (context) {
+                            return Dialog(
+                              child: Container(
+                                constraints: BoxConstraints(
+                                    maxWidth: 900, maxHeight: 600),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: Column(children: [
+                                  Text("Escolha os OAs"),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                                    child: Divider(color: Colors.black38),
+                                  ),
+                                  for (var i = 0;
+                                      i < searchData.length;
+                                      i++) ...{
+                                    // print(search?.nome);
+                                    Container(
+                                        height: 40,
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 25),
+                                        color: i % 2 == 0
+                                            ? Colors.white
+                                            : Colors.black12,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(searchData[i]!.nome),
+                                            Row(
+                                              children: [
+                                                InkWell(
+                                                    onTap: () {},
+                                                    child: Icon(
+                                                        Icons.add_circle,
+                                                        color:
+                                                            CoresPersonalizadas
+                                                                .azulObama)),
+                                                InkWell(
+                                                    onTap: () {},
+                                                    child: Icon(
+                                                        Icons.remove_circle,
+                                                        color:
+                                                            CoresPersonalizadas
+                                                                .azulObama)),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                  }
+                                ]),
+                              ),
+                            );
+                          });
                     },
-                  )               
+                  )
                 ],
               ),
             ),
@@ -300,7 +368,11 @@ class _NewLessonPlanState extends ConsumerState<NewLessonPlan> {
                   controller: _controller,
                   placeholder: initText(_controller),
                   customStyles: DefaultStyles(
-                    paragraph: DefaultTextBlockStyle(TextStyle(color: onPrimary, fontSize: 14), VerticalSpacing(0, 0), VerticalSpacing(0, 0), BoxDecoration()),
+                    paragraph: DefaultTextBlockStyle(
+                        TextStyle(color: onPrimary, fontSize: 14),
+                        VerticalSpacing(0, 0),
+                        VerticalSpacing(0, 0),
+                        BoxDecoration()),
                   ),
                   minHeight: 1200,
                   sharedConfigurations: QuillSharedConfigurations(

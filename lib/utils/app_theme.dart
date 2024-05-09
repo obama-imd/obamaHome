@@ -108,7 +108,7 @@ final MaterialApp AppMaterial = MaterialApp(
       ),
       textTheme: textTheme),
   debugShowCheckedModeBanner: false,
-  title: 'Home',
+  title: 'OBAMA',
   home: const HomeView(),
   initialRoute: '/',
   routes: {
