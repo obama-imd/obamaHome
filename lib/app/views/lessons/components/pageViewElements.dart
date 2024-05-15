@@ -93,7 +93,7 @@ class PageViewThird extends ConsumerStatefulWidget {
 
 class _PageViewThirdState extends ConsumerState<PageViewThird> {
   List<SearchModel?> searchData = [];
-  List<String>? selectedOA = [];
+  List<String> selectedOA = [];
   List<String>? cachedObjects = [];
 
   @override
@@ -116,7 +116,7 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? items = prefs.getStringList('objects');
     setState(() {
-      selectedOA = items;
+      selectedOA = items!;
       cachedObjects = items;
     });
   }
@@ -191,33 +191,33 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
                       Text("OA selecionados"),
                     ],
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.end,
-                  //   children: [
-                  //     Tooltip(
-                  //       message: "Remover tudo",
-                  //       child: InkWell(
-                  //         onTap: () async {
-                  //           final SharedPreferences prefs =
-                  //               await SharedPreferences.getInstance();
-                  //           await prefs.remove('objects');
-                  //         },
-                  //         child: SizedBox(
-                  //           width: 20,
-                  //           height: 20,
-                  //           child: Center(child: Icon(Icons.clear, size: 18, color: onError)),
-                  //         ),
-                  //       ),
-                  //     )
-                  //   ],
-                  // )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Tooltip(
+                        message: "Remover tudo",
+                        child: InkWell(
+                          onTap: () async {
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            await prefs.remove('objects');
+                          },
+                          child: SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: Center(child: Icon(Icons.clear, size: 18, color: onError)),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
                 ],
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
                 child: Divider(color: Colors.black38),
               ),
-              if (cachedObjects == null) ...{
+              if (cachedObjects == null || cachedObjects!.isEmpty) ...{
                 Text("Sua lista de OA está vazia")
               } else ...{
                 for (var cacheObject in cachedObjects!) ...{Text(cacheObject)}
