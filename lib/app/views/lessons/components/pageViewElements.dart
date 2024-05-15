@@ -7,12 +7,12 @@ import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
 import '../../../models/search_models.dart';
 import 'initialText.dart';
-
 
 List<String> pageHints = [
   'Qual o nome da instituição a que se destina esse plano de aula?*',
@@ -69,16 +69,15 @@ class _PageViewFirstState extends State<PageViewFirst> {
                         // updateData(value);
                       },
                       decoration: InputDecoration(
-                          border: UnderlineInputBorder(
-                              borderSide: BorderSide(width: 1)),
-                          hintText: pageHints[i],
-                          hintStyle: textTheme.bodySmall,
-                          contentPadding:
-                              const EdgeInsets.symmetric(horizontal: 15),
-                          filled: true,
-                          // fillColor: Colors.grey.shade100
-                          )
-                          )),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(width: 1)),
+                        hintText: pageHints[i],
+                        hintStyle: textTheme.bodySmall,
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 15),
+                        filled: true,
+                        // fillColor: Colors.grey.shade100
+                      ))),
             }
           },
         ]));
@@ -94,10 +93,13 @@ class PageViewThird extends ConsumerStatefulWidget {
 
 class _PageViewThirdState extends ConsumerState<PageViewThird> {
   List<SearchModel?> searchData = [];
+  List<String>? selectedOA = [];
+  List<String>? cachedObjects = [];
 
   @override
   void initState() {
     getData();
+    getObjects();
     super.initState();
   }
 
@@ -110,8 +112,24 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
     });
   }
 
+  void getObjects() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? items = prefs.getStringList('objects');
+    setState(() {
+      selectedOA = items;
+      cachedObjects = items;
+    });
+  }
+
+  void addObjects() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('objects', selectedOA!);
+    getObjects();
+  }
+
   @override
   Widget build(BuildContext context) {
+    double swidth = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
@@ -119,38 +137,95 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
       ),
       constraints: BoxConstraints(maxWidth: 1200, maxHeight: 600),
       padding: const EdgeInsets.symmetric(vertical: 25),
-      child: Column(children: [
-        Text("Escolha os OAs"),
-        Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Divider(color: Colors.black38),
-        ),
-        for (var i = 0; i < searchData.length; i++) ...{
-          // print(search?.nome);
+      child: Wrap(
+        children: [
           Container(
-              height: 40,
-              padding: EdgeInsets.symmetric(horizontal: 25),
-              color: i % 2 == 0 ? Colors.white : Colors.black12,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            width: swidth > 1200 ? 1200 * .6 : swidth * .6,
+            child: Column(children: [
+              Text("Escolha os OA"),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Divider(color: Colors.black38),
+              ),
+              for (var i = 0; i < searchData.length; i++) ...{
+                // print(search?.nome);
+                Container(
+                    height: 40,
+                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    color: i % 2 == 0 ? Colors.white : Colors.black12,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(searchData[i]!.nome),
+                        Row(
+                          children: [
+                            InkWell(
+                                onTap: () {
+                                  selectedOA!.add(searchData[i]!.nome);
+                                  addObjects();
+                                },
+                                child: Icon(Icons.add_circle,
+                                    color: CoresPersonalizadas.azulObama)),
+                            InkWell(
+                                onTap: () {
+                                  selectedOA!.remove(searchData[i]!.nome);
+                                  addObjects();
+                                },
+                                child: Icon(Icons.remove_circle,
+                                    color: CoresPersonalizadas.azulObama)),
+                          ],
+                        ),
+                      ],
+                    )),
+              }
+            ]),
+          ),
+          Container(
+            width: swidth > 1200 ? 1200 * .4 : swidth * .4,
+            child: Column(children: [
+              Stack(
                 children: [
-                  Text(searchData[i]!.nome),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      InkWell(
-                          onTap: () {},
-                          child: Icon(Icons.add_circle,
-                              color: CoresPersonalizadas.azulObama)),
-                      InkWell(
-                          onTap: () {},
-                          child: Icon(Icons.remove_circle,
-                              color: CoresPersonalizadas.azulObama)),
+                      Text("OA selecionados"),
                     ],
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: [
+                  //     Tooltip(
+                  //       message: "Remover tudo",
+                  //       child: InkWell(
+                  //         onTap: () async {
+                  //           final SharedPreferences prefs =
+                  //               await SharedPreferences.getInstance();
+                  //           await prefs.remove('objects');
+                  //         },
+                  //         child: SizedBox(
+                  //           width: 20,
+                  //           height: 20,
+                  //           child: Center(child: Icon(Icons.clear, size: 18, color: onError)),
+                  //         ),
+                  //       ),
+                  //     )
+                  //   ],
+                  // )
                 ],
-              )),
-        }
-      ]),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Divider(color: Colors.black38),
+              ),
+              if (cachedObjects == null) ...{
+                Text("Sua lista de OA está vazia")
+              } else ...{
+                for (var cacheObject in cachedObjects!) ...{Text(cacheObject)}
+              }
+            ]),
+          )
+        ],
+      ),
     );
   }
 }
