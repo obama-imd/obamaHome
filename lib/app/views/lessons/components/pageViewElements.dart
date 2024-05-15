@@ -123,7 +123,7 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
 
   void addObjects() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('objects', selectedOA!);
+    await prefs.setStringList('objects', selectedOA);
     getObjects();
   }
 
@@ -161,14 +161,18 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
                           children: [
                             InkWell(
                                 onTap: () {
-                                  selectedOA!.add(searchData[i]!.nome);
-                                  addObjects();
+                                  bool itemExists =
+                                      selectedOA.contains(searchData[i]!.nome);
+                                  if (!itemExists) {
+                                    selectedOA.add(searchData[i]!.nome);
+                                    addObjects();
+                                  }
                                 },
                                 child: Icon(Icons.add_circle,
                                     color: CoresPersonalizadas.azulObama)),
                             InkWell(
                                 onTap: () {
-                                  selectedOA!.remove(searchData[i]!.nome);
+                                  selectedOA.remove(searchData[i]!.nome);
                                   addObjects();
                                 },
                                 child: Icon(Icons.remove_circle,
@@ -194,21 +198,28 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Tooltip(
-                        message: "Remover tudo",
-                        child: InkWell(
-                          onTap: () async {
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            await prefs.remove('objects');
-                          },
-                          child: SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: Center(child: Icon(Icons.clear, size: 18, color: onError)),
-                          ),
-                        ),
-                      )
+                      cachedObjects == null || cachedObjects!.isEmpty
+                          ? SizedBox()
+                          : Tooltip(
+                              message: "Remover tudo",
+                              child: InkWell(
+                                onTap: () async {
+                                  final SharedPreferences prefs =
+                                      await SharedPreferences.getInstance();
+                                  await prefs.remove('objects');
+                                  setState(() {
+                                    selectedOA = [];
+                                    cachedObjects = [];
+                                  });
+                                },
+                                child: SizedBox(
+                                  width: 20,
+                                  height: 20,
+                                  child: Center(
+                                      child: Icon(Icons.clear,
+                                          size: 18, color: onError)),
+                                ),
+                              )),
                     ],
                   )
                 ],
