@@ -122,7 +122,7 @@ class _OurProductItemState extends State<OurProductItem> {
                                 prefs.getStringList('objects');
                             bool itemExists = items!.contains(widget.title);
                             if (!itemExists) {
-                              items!.add(widget.title);
+                              items.add(widget.title);
                               addObjects(items, prefs);
                               showModalBottomSheet<void>(
                                   context: context,

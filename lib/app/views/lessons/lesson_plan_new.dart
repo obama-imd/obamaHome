@@ -52,12 +52,6 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
       logoWidth = 180;
     }
 
-    List<Widget> paveViewContent = [
-      PageViewFirst(),
-      PageViewSecond(),
-      PageViewThird(),
-    ];
-
     return SingleChildScrollView(
       child: Column(
         children: [

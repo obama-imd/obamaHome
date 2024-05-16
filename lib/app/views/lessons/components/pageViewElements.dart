@@ -22,6 +22,12 @@ List<String> pageHints = [
 ];
 List<String> options = <String>['Todos'];
 
+List<Widget> paveViewContent = [
+  PageViewFirst(),
+  PageViewSecond(),
+  PageViewThird(),
+];
+
 class PageViewFirst extends StatefulWidget {
   const PageViewFirst({super.key});
 
