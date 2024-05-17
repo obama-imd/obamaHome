@@ -13,8 +13,9 @@ class NavMenu extends StatefulWidget {
 
   const NavMenu({
     required this.swidth,
-    required this.heightBtn, 
-    required this.itemValues, required this.searchAvailable,
+    required this.heightBtn,
+    required this.itemValues,
+    required this.searchAvailable,
   });
 
   @override
@@ -57,24 +58,29 @@ class _NavMenuState extends State<NavMenu> {
                     child: InkWell(
                       onHover: (value) {
                         setState(() {
+                          widget.itemValues.forEach((element) {
+                            element.itemHover = false;
+                          });
                           widget.itemValues[i].itemHover = value;
                         });
                       },
                       hoverColor: background,
                       highlightColor: background,
                       onTap: () {
-                        Navigator.pushNamed(context, widget.itemValues[i].path[0]);
+                        Navigator.pushNamed(
+                            context, widget.itemValues[i].path[0]);
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 8.0),
                         child: Text(widget.itemValues[i].name.toUpperCase(),
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: widget.itemValues[i].path[0] == currentRoute
-                                    ? primary
-                                    : widget.itemValues[i].itemHover
+                                color:
+                                    widget.itemValues[i].path[0] == currentRoute
                                         ? primary
-                                        : onPrimary)),
+                                        : widget.itemValues[i].itemHover
+                                            ? primary
+                                            : onPrimary)),
                       ),
                     ),
                   ))),
@@ -84,6 +90,9 @@ class _NavMenuState extends State<NavMenu> {
               child: SubmenuButton(
                 onHover: (value) {
                   setState(() {
+                    widget.itemValues.forEach((element) {
+                      element.itemHover = false;
+                    });
                     widget.itemValues[i].itemHover = value;
                   });
                 },
@@ -102,7 +111,9 @@ class _NavMenuState extends State<NavMenu> {
                 ),
                 menuChildren: <Widget>[
                   if (i >= 0 && i < widget.itemValues.length) ...{
-                    for (var j = 0; j < widget.itemValues[i].subItems.length; j++) ...{
+                    for (var j = 0;
+                        j < widget.itemValues[i].subItems.length;
+                        j++) ...{
                       Container(
                         decoration: BoxDecoration(
                             // color: background,
@@ -113,6 +124,12 @@ class _NavMenuState extends State<NavMenu> {
                         child: MenuItemButton(
                           onHover: (value) {
                             setState(() {
+                              widget.itemValues.forEach((element) {
+                                element.itemHover = false;
+                                element.subItemHover.forEach((subItem) {
+                                  subItem = false;
+                                });
+                              });
                               widget.itemValues[i].itemHover = value;
                               widget.itemValues[i].subItemHover[j] = value;
                             });
@@ -133,32 +150,39 @@ class _NavMenuState extends State<NavMenu> {
                                 textTheme.displaySmall),
                           ),
                           onPressed: () {
-                            Navigator.pushNamed(context, widget.itemValues[i].path[j],
-                                arguments:
-                                    widget.itemValues[i].path[j] == '/blog-detalhes'
-                                        ? 0
-                                        : searchText);
+                            widget.itemValues[i].subItemHover[j] = false;
+                            Navigator.pushNamed(
+                                context, widget.itemValues[i].path[j],
+                                arguments: widget.itemValues[i].path[j] ==
+                                        '/blog-detalhes'
+                                    ? 0
+                                    : searchText);
                           },
-                          child:
-                              MenuAcceleratorLabel(widget.itemValues[i].subItems[j]!),
+                          child: MenuAcceleratorLabel(
+                              widget.itemValues[i].subItems[j]!),
                         ),
                       )
                     }
                   }
                 ],
-                child: MenuAcceleratorLabel(widget.itemValues[i].name.toUpperCase()),
+                child: MenuAcceleratorLabel(
+                    widget.itemValues[i].name.toUpperCase()),
               )),
         }
       },
-      widget.searchAvailable ? Padding(
-        padding: const EdgeInsets.only(left: 18),
-        child: SizedBox(
-          width: 36,
-          height: 40,
-          child: SearchDialog(
-              swidth: swidth, searchText: searchText, isHovered: isHovered),
-        ),
-      ): SizedBox(),
+      widget.searchAvailable
+          ? Padding(
+              padding: const EdgeInsets.only(left: 18),
+              child: SizedBox(
+                width: 36,
+                height: 40,
+                child: SearchDialog(
+                    swidth: swidth,
+                    searchText: searchText,
+                    isHovered: isHovered),
+              ),
+            )
+          : SizedBox(),
     ]);
   }
 }

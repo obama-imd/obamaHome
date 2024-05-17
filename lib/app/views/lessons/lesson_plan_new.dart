@@ -565,7 +565,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
         ),
         Container(
           //Folha do texto
-          margin: EdgeInsets.only(bottom: 50),
+          margin: EdgeInsets.only(bottom: 30),
           padding: EdgeInsets.symmetric(vertical: 72, horizontal: 91),
           decoration: BoxDecoration(color: background, boxShadow: [
             BoxShadow(
