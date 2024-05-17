@@ -118,7 +118,6 @@ class SearchPageView extends ConsumerStatefulWidget {
 
 class SearchDesktopState extends ConsumerState<SearchPageView> {
   final TextEditingController _searchController = TextEditingController();
-
   Key key = UniqueKey();
   int startValue = 0;
   int endValue = 2;
