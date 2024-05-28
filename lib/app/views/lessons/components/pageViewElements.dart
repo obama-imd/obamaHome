@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
+import 'package:flutter_quill/quill_delta.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -125,6 +126,32 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
       selectedOA = items!;
       cachedObjects = items;
     });
+    // listOAText(_controller);
+  }
+
+  List<String> listOAText(QuillController _controller) {
+    List<String> allSelectedOA = [];
+
+    for (var selected in selectedOA) {
+      try {
+        var mainList = new Delta()
+          ..insert(selected)
+          ..insert("\n", {"list": "bullet"});
+
+        _controller.compose(
+            mainList,
+            TextSelection.collapsed(offset: mainList.length),
+            ChangeSource.local);
+
+        String plainText = _controller.document.toPlainText();
+        allSelectedOA.add(plainText);
+      } catch (err, st) {
+        print('Cannot read welcome.json: $err\n$st');
+        _controller = _controller;
+        return [];
+      }
+    }
+    return allSelectedOA;
   }
 
   void addObjects() async {
