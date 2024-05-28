@@ -409,6 +409,18 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
               sharedConfigurations: QuillSharedConfigurations(
                 locale: Locale('pt', 'BR'),
               ),
+              // buttonOptions: QuillSimpleToolbarButtonOptions(
+              //   fontSize: QuillToolbarFontSizeButtonOptions(
+              //     childBuilder: (options, extraOptions) {
+              //       return Column(children: [
+              //         Text("10"),
+              //         Text("12"),
+              //         Text("14"),
+              //         Text("16"),
+              //       ]);
+              //     },
+              //   )
+              // ),
               customButtons: [
                 QuillToolbarCustomButtonOptions(
                   tooltip: "Inserir imagem",
