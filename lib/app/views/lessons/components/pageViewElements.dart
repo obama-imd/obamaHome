@@ -289,6 +289,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   @override
   void initState() {
     getData();
+    _initController(_controller);
     super.initState();
   }
 
@@ -549,6 +550,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
         Container(
           //Folha do texto
           margin: EdgeInsets.only(bottom: 50),
+          height: 1200,
           padding: EdgeInsets.symmetric(vertical: 72, horizontal: 91),
           decoration: BoxDecoration(color: background, boxShadow: [
             BoxShadow(
@@ -559,31 +561,32 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
             ),
           ]),
           constraints: BoxConstraints(maxWidth: 900),
-          child: Expanded(
-            child: QuillEditor.basic(
-              scrollController: ScrollController(),
-              configurations: QuillEditorConfigurations(
-                controller: _controller,
-                placeholder: initText(_controller),
-                customStyles: DefaultStyles(
-                  paragraph: DefaultTextBlockStyle(
-                      TextStyle(color: onPrimary, fontSize: 14),
-                      VerticalSpacing(0, 0),
-                      VerticalSpacing(0, 0),
-                      BoxDecoration()),
-                ),
-                minHeight: 1200,
-                sharedConfigurations: QuillSharedConfigurations(
-                  locale: Locale('pt', 'BR'),
-                ),
-                embedBuilders: kIsWeb
-                    ? FlutterQuillEmbeds.editorWebBuilders()
-                    : FlutterQuillEmbeds.editorBuilders(),
+          child: QuillEditor.basic(
+            scrollController: ScrollController(),
+            configurations: QuillEditorConfigurations(
+              controller: _controller,
+              // placeholder: initText(_controller),
+              customStyles: DefaultStyles(
+                paragraph: DefaultTextBlockStyle(
+                    TextStyle(color: onPrimary, fontSize: 14),
+                    VerticalSpacing(0, 0),
+                    VerticalSpacing(0, 0),
+                    BoxDecoration()),
               ),
+              sharedConfigurations: QuillSharedConfigurations(
+                locale: Locale('pt', 'BR'),
+              ),
+              embedBuilders: kIsWeb
+                  ? FlutterQuillEmbeds.editorWebBuilders()
+                  : FlutterQuillEmbeds.editorBuilders(),
             ),
           ),
         )
       ],
     );
   }
+}
+
+void _initController(QuillController controller) {
+  initText(controller);
 }
