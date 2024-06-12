@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
-String initText(QuillController _controller) {
+String initText(QuillController _controller, List<String>? cachedObjects) {
   try {
     var mainText = new Delta()
       ..insert("PLANO DE AULA INCLUSIVO", {
@@ -90,6 +90,14 @@ String initText(QuillController _controller) {
       })
       ..insert("(   ) Sim ")
       ..insert("(   ) Não")
+      ..insert("\n")
+      ..insert("\n")
+      ..insert("Materiais: ", {
+        "bold": "true",
+      })
+      ..insert("\n")
+      ..insert("\n")
+      ..insert("-")
       ..insert("\n")
       ..insert("\n")
       ..insert("Estratégias de promoção da aprendizagem em sala de aula: ", {
@@ -371,8 +379,27 @@ String initText(QuillController _controller) {
     //       "Para que outro professor possa se preparar para executar sua proposta de aula, nos diga: De onde você tirou toda sua inspiração? (livros, revistas, sites, outros planos de aula)")
     //   ..insert("\n", {"list": "bullet", "indent": 1});
 
-    _controller.compose(mainText,
-        TextSelection.collapsed(offset: mainText.length), ChangeSource.local);
+    // _controller.compose(mainText,
+    //     TextSelection.collapsed(offset: mainText.length), ChangeSource.local);
+
+    _controller.setContents(mainText);
+
+    // var otherText;
+    // List<Delta> textList = [];
+
+    Delta otherText = Delta();
+
+    for (String object in cachedObjects!) {
+      otherText
+        ..insert("object")
+        ..insert("\n")
+        ..insert("\n");
+    }
+
+    print(otherText);
+    
+    _controller.replaceText(513, otherText.length, otherText,
+        TextSelection.fromPosition(TextPosition(offset: 513)));
 
     return _controller.document.toPlainText();
   } catch (err, st) {

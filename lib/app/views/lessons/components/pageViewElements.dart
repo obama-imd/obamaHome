@@ -285,11 +285,16 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   QuillController _controller = QuillController.basic();
   String imageUrl = "";
   List<SearchModel?> searchData = [];
+  List<String>? cachedObjects = [];
 
   @override
   void initState() {
-    getData();
-    _initController(_controller);
+    // getData();
+    getObjects();
+    _initController(
+      _controller,
+      cachedObjects
+    );
     super.initState();
   }
 
@@ -299,6 +304,14 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
     List<SearchModel?> newPagination = pagination.content;
     setState(() {
       searchData = newPagination;
+    });
+  }
+
+  void getObjects() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    List<String>? items = prefs.getStringList('objects');
+    setState(() {
+      cachedObjects = items;
     });
   }
 
@@ -485,6 +498,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                     showDialog(
                         context: context,
                         builder: (context) {
+                          getData();
                           return Dialog(
                             child: Container(
                               decoration: BoxDecoration(
@@ -587,6 +601,6 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   }
 }
 
-void _initController(QuillController controller) {
-  initText(controller);
+void _initController(QuillController controller, List<String>? cachedObjects) {
+  initText(controller, cachedObjects);
 }
