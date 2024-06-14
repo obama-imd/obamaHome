@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -291,10 +292,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   void initState() {
     // getData();
     getObjects();
-    _initController(
-      _controller,
-      cachedObjects
-    );
+    _initController(_controller, cachedObjects);
     super.initState();
   }
 
@@ -402,6 +400,55 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
     }
   }
 
+  Future<void> _addEditNote(BuildContext context, {Document? document}) async {
+    final isEditing = document != null;
+    final quillEditorController = QuillController(
+      document: document ?? Document(),
+      selection: const TextSelection.collapsed(offset: 0),
+    );
+
+    await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        titlePadding: const EdgeInsets.only(left: 16, top: 8),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text('${isEditing ? 'Edit' : 'Add'} note'),
+            IconButton(
+              onPressed: () => Navigator.of(context).pop(),
+              icon: const Icon(Icons.close),
+            )
+          ],
+        ),
+        content: QuillEditor.basic(
+          configurations: QuillEditorConfigurations(
+            controller: quillEditorController,
+            readOnly: false,
+          ),
+        ),
+      ),
+    );
+
+    if (quillEditorController.document.isEmpty()) return;
+
+    final block = BlockEmbed.custom(
+      NotesBlockEmbed.fromDocument(quillEditorController.document),
+    );
+    final controller = _controller;
+    final index = controller.selection.baseOffset;
+    final length = controller.selection.extentOffset - index;
+
+    if (isEditing) {
+      final offset =
+          getEmbedNode(controller, controller.selection.start).offset;
+      controller.replaceText(
+          offset, 1, block, TextSelection.collapsed(offset: offset));
+    } else {
+      controller.replaceText(index, length, block, null);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
@@ -420,21 +467,14 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
               showInlineCode: false,
               showCodeBlock: false,
               controller: _controller,
-              sharedConfigurations: QuillSharedConfigurations(
-                locale: Locale('pt', 'BR'),
-              ),
-              // buttonOptions: QuillSimpleToolbarButtonOptions(
-              //   fontSize: QuillToolbarFontSizeButtonOptions(
-              //     childBuilder: (options, extraOptions) {
-              //       return Column(children: [
-              //         Text("10"),
-              //         Text("12"),
-              //         Text("14"),
-              //         Text("16"),
-              //       ]);
-              //     },
-              //   )
-              // ),
+              fontSizesValues: const {
+                '10': '10',
+                '12': '12',
+                '14': '14',
+                '16': '16'
+              },
+              sharedConfigurations:
+                  QuillSharedConfigurations(locale: Locale('pt', 'BR')),
               customButtons: [
                 QuillToolbarCustomButtonOptions(
                   tooltip: "Inserir imagem",
@@ -495,62 +535,63 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                   tooltip: "Adicionar Objetos de Aprendizagem",
                   icon: Icon(Icons.gamepad),
                   onPressed: () {
-                    showDialog(
-                        context: context,
-                        builder: (context) {
-                          getData();
-                          return Dialog(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: background,
-                              ),
-                              constraints:
-                                  BoxConstraints(maxWidth: 900, maxHeight: 600),
-                              padding: const EdgeInsets.symmetric(vertical: 25),
-                              child: Column(children: [
-                                Text("Escolha os OAs"),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Divider(color: Colors.black38),
-                                ),
-                                for (var i = 0; i < searchData.length; i++) ...{
-                                  // print(search?.nome);
-                                  Container(
-                                      height: 40,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 25),
-                                      color: i % 2 == 0
-                                          ? Colors.white
-                                          : Colors.black12,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(searchData[i]!.nome),
-                                          Row(
-                                            children: [
-                                              InkWell(
-                                                  onTap: () {},
-                                                  child: Icon(Icons.add_circle,
-                                                      color: CoresPersonalizadas
-                                                          .azulObama)),
-                                              InkWell(
-                                                  onTap: () {},
-                                                  child: Icon(
-                                                      Icons.remove_circle,
-                                                      color: CoresPersonalizadas
-                                                          .azulObama)),
-                                            ],
-                                          ),
-                                        ],
-                                      )),
-                                }
-                              ]),
-                            ),
-                          );
-                        });
+                    _addEditNote(context, document: _controller.document);
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (context) {
+                    //       getData();
+                    //       return Dialog(
+                    //         child: Container(
+                    //           decoration: BoxDecoration(
+                    //             borderRadius: BorderRadius.circular(20),
+                    //             color: background,
+                    //           ),
+                    //           constraints:
+                    //               BoxConstraints(maxWidth: 900, maxHeight: 600),
+                    //           padding: const EdgeInsets.symmetric(vertical: 25),
+                    //           child: Column(children: [
+                    //             Text("Escolha os OAs"),
+                    //             Padding(
+                    //               padding:
+                    //                   const EdgeInsets.symmetric(vertical: 8.0),
+                    //               child: Divider(color: Colors.black38),
+                    //             ),
+                    //             for (var i = 0; i < searchData.length; i++) ...{
+                    //               // print(search?.nome);
+                    //               Container(
+                    //                   height: 40,
+                    //                   padding:
+                    //                       EdgeInsets.symmetric(horizontal: 25),
+                    //                   color: i % 2 == 0
+                    //                       ? Colors.white
+                    //                       : Colors.black12,
+                    //                   child: Row(
+                    //                     mainAxisAlignment:
+                    //                         MainAxisAlignment.spaceBetween,
+                    //                     children: [
+                    //                       Text(searchData[i]!.nome),
+                    //                       Row(
+                    //                         children: [
+                    //                           InkWell(
+                    //                               onTap: () {},
+                    //                               child: Icon(Icons.add_circle,
+                    //                                   color: CoresPersonalizadas
+                    //                                       .azulObama)),
+                    //                           InkWell(
+                    //                               onTap: () {},
+                    //                               child: Icon(
+                    //                                   Icons.remove_circle,
+                    //                                   color: CoresPersonalizadas
+                    //                                       .azulObama)),
+                    //                         ],
+                    //                       ),
+                    //                     ],
+                    //                   )),
+                    //             }
+                    //           ]),
+                    //         ),
+                    //       );
+                        // });
                   },
                 )
               ],
@@ -603,4 +644,53 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
 
 void _initController(QuillController controller, List<String>? cachedObjects) {
   initText(controller, cachedObjects);
+}
+
+class NotesBlockEmbed extends CustomBlockEmbed {
+  const NotesBlockEmbed(String value) : super(noteType, value);
+
+  static const String noteType = 'notes';
+
+  static NotesBlockEmbed fromDocument(Document document) =>
+      NotesBlockEmbed(jsonEncode(document.toDelta().toJson()));
+
+  Document get document => Document.fromJson(jsonDecode(data));
+}
+
+class NotesEmbedBuilder extends EmbedBuilder {
+  NotesEmbedBuilder({required this.addEditNote});
+
+  Future<void> Function(BuildContext context, {Document? document}) addEditNote;
+
+  @override
+  String get key => 'notes';
+
+  @override
+  Widget build(
+    BuildContext context,
+    QuillController controller,
+    Embed node,
+    bool readOnly,
+    bool inline,
+    TextStyle textStyle,
+  ) {
+    final notes = NotesBlockEmbed(node.value.data).document;
+
+    return Material(
+      color: Colors.transparent,
+      child: ListTile(
+        title: Text(
+          notes.toPlainText().replaceAll('\n', ' '),
+          maxLines: 3,
+          overflow: TextOverflow.ellipsis,
+        ),
+        leading: const Icon(Icons.notes),
+        onTap: () => addEditNote(context, document: notes),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+          side: const BorderSide(color: Colors.grey),
+        ),
+      ),
+    );
+  }
 }

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
@@ -387,19 +386,19 @@ String initText(QuillController _controller, List<String>? cachedObjects) {
     // var otherText;
     // List<Delta> textList = [];
 
-    Delta otherText = Delta();
+    // Delta otherText = Delta();
 
-    for (String object in cachedObjects!) {
-      otherText
-        ..insert("object")
-        ..insert("\n")
-        ..insert("\n");
-    }
+    // for (String object in cachedObjects!) {
+    //   otherText
+    //     ..insert("object")
+    //     ..insert("\n")
+    //     ..insert("\n");
+    // }
 
-    print(otherText);
+    // print(otherText);
     
-    _controller.replaceText(513, otherText.length, otherText,
-        TextSelection.fromPosition(TextPosition(offset: 513)));
+    // _controller.replaceText(513, otherText.length, otherText,
+    //     TextSelection.fromPosition(TextPosition(offset: 513)));
 
     return _controller.document.toPlainText();
   } catch (err, st) {

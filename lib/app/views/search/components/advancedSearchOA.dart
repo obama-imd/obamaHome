@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
+import '../../../controllers/search_controller.dart';
 
 const List<String> nivelEnsino = <String>['Todos'];
 const List<String> temaCurricular = <String>['Todos'];
@@ -50,6 +51,19 @@ class OAFilterState extends State<OAFilters> {
     required this.updateData,
     required this.titleStyle
   });
+
+  var setLevel = [];
+
+  @override
+  void initState() {
+    super.initState();
+    getLevels();
+  }
+
+  void getLevels() async {
+    var levels = await fetchLevels();
+    print(levels);
+  }
 
   @override
   Widget build(BuildContext context) {
