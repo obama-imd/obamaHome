@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
-import '../../../controllers/search_controller.dart';
 
 const List<String> nivelEnsino = <String>['Todos'];
 const List<String> temaCurricular = <String>['Todos'];
@@ -24,19 +23,18 @@ class OAFilters extends StatefulWidget {
   final String data;
   final Function(String) updateData;
   final TextStyle titleStyle;
-  const OAFilters({
-    required this.swidth,
-    required this.data,
-    required this.updateData,
-    required this.titleStyle});
+  const OAFilters(
+      {required this.swidth,
+      required this.data,
+      required this.updateData,
+      required this.titleStyle});
 
   @override
   State<OAFilters> createState() => OAFilterState(
-        swidth: swidth,
-        data: data,
-        updateData: updateData,
-        titleStyle: titleStyle
-      );
+      swidth: swidth,
+      data: data,
+      updateData: updateData,
+      titleStyle: titleStyle);
 }
 
 class OAFilterState extends State<OAFilters> {
@@ -45,25 +43,29 @@ class OAFilterState extends State<OAFilters> {
   final Function(String) updateData;
   final TextStyle titleStyle;
 
-  OAFilterState({
-    required this.swidth,
-    required this.data,
-    required this.updateData,
-    required this.titleStyle
-  });
+  OAFilterState(
+      {required this.swidth,
+      required this.data,
+      required this.updateData,
+      required this.titleStyle});
 
   var setLevel = [];
 
-  @override
-  void initState() {
-    super.initState();
-    getLevels();
-  }
+  // void getLevels() async {
+  //   try {
+  //     final levels = await fetchLevels(); // Wait for the future to complete
+  //     print(levels); // Now you can access the list of levels
+  //   } catch (e) {
+  //     // Handle any errors that occurred during the fetch
+  //     print('Error in getLevels: $e');
+  //   }
+  // }
 
-  void getLevels() async {
-    var levels = await fetchLevels();
-    print(levels);
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   getLevels();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -161,8 +163,8 @@ class OAFilterState extends State<OAFilters> {
                       //   dropdownValue = value!;
                       // });
                     },
-                    items: descritor
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items:
+                        descritor.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Container(child: Text(value)),

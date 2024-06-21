@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'utils/app_theme.dart';
 
+// flutter run -d chrome --web-browser-flag "--disable-web-security"
+
 void main() {
   runApp(
     ProviderScope(

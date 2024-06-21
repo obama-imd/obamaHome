@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/search_models.dart';
-import '../models/study_level.dart';
 
 Future<(List<Map<String, dynamic>>, Object?, Object?, Object?, Object?)>
     fetchData(String searchTerm) async {
@@ -185,25 +184,50 @@ Future<SearchResponse> fetchDataAndUpdateState(
 }
 // }
 
+const apiUrl = 'http://localhost:8081/v1/nivelensino';
+
 Future<List<dynamic>> fetchLevels() async {
-  final response =
-      await http.get(Uri.parse('http://localhost:8081/v1/nivelensino'));
+  // final headers = {
+  //   'Access-Control-Allow-Origin': '*',
+  //   'Content-Type': 'application/json',
+  // };
 
-  if (response.statusCode == 200) {
-    final jsonData = jsonDecode(response.body);
-    final posts = jsonData
-        .map<StudyLevelModel>((item) => StudyLevelModel(
-              id: item['id'],
-              nome: item['nome'],
-            ))
-        .toList() as List<StudyLevelModel>;
+  try {
+    final response = await http.get(Uri.parse(apiUrl));
 
-    // final newPosts = ref.read(blogPostsHome);
-    // newPosts.clear();
-    // newPosts.addAll(posts);
-
-    return posts;
-  } else {
-    return [];
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(response.body) as List<dynamic>;
+      print("jsonData => $jsonData");
+      return jsonData;
+      // print("")
+    } else {
+      throw Exception(
+          'Failed to fetch API data. Status code: ${response.statusCode}');
+    }
+  } catch (e) {
+    print('Error fetching data: $e');
+    throw e;
   }
 }
+
+
+// Future<List<dynamic>> fetchLevels() async {
+//   final response =
+//       await http.get(Uri.parse('http://localhost:8081/v1/nivelensino'));
+
+//   if (response.statusCode == 200) {
+//     final jsonData = jsonDecode(response.body);
+//     final posts = jsonData
+//         .map<StudyLevelModel>((item) => StudyLevelModel(
+//               id: item['id'],
+//               nome: item['nome'],
+//             ))
+//         .toList() as List<StudyLevelModel>;
+
+//     // print(response);
+
+//     return posts;
+//   } else {
+//     return [];
+//   }
+// }

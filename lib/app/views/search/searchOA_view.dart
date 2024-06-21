@@ -51,6 +51,17 @@ class SearchPageState extends ConsumerState<SearchPage> {
     super.initState();
     activateLoad();
     waitData();
+    getLevels();
+  }
+
+  void getLevels() async {
+    try {
+      final levels = await fetchLevels(); // Wait for the future to complete
+      print(levels); // Now you can access the list of levels
+    } catch (e) {
+      // Handle any errors that occurred during the fetch
+      print('Error in getLevels: $e');
+    }
   }
 
   void activateLoad() {
