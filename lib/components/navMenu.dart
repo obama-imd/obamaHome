@@ -70,17 +70,24 @@ class _NavMenuState extends State<NavMenu> {
                         Navigator.pushNamed(
                             context, widget.itemValues[i].path[0]);
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(widget.itemValues[i].name.toUpperCase(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color:
-                                    widget.itemValues[i].path[0] == currentRoute
-                                        ? primary
-                                        : widget.itemValues[i].itemHover
-                                            ? primary
-                                            : onPrimary)),
+                      // teste tooltip
+                      child: Tooltip(
+                        richMessage: WidgetSpan(
+                            child: Container(
+                                child: Image.network(
+                                    'https://th.bing.com/th/id/R.271c94354b33351d0ba70b4141279cba?rik=QMkddJRh815iEw&riu=http%3a%2f%2f24.media.tumblr.com%2ftumblr_m0kxkrtQfJ1rrnvqio1_500.gif&ehk=JJa9MQXGTx4ZUw47A4KUrftSaCyLL%2bPBuXVmaBfR%2bv0%3d&risl=&pid=ImgRaw&r=0'))),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(widget.itemValues[i].name.toUpperCase(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: widget.itemValues[i].path[0] ==
+                                          currentRoute
+                                      ? primary
+                                      : widget.itemValues[i].itemHover
+                                          ? primary
+                                          : onPrimary)),
+                        ),
                       ),
                     ),
                   ))),
