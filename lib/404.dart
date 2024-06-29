@@ -42,7 +42,11 @@ class ErrorPage extends StatelessWidget {
                               width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50, itemValues: itemValues, searchAvailable: true),
+                          NavMenu(
+                              swidth: swidth,
+                              heightBtn: 50,
+                              itemValues: itemValues,
+                              searchAvailable: true),
                         ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
