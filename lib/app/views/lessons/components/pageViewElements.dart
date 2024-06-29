@@ -424,7 +424,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
         content: QuillEditor.basic(
           configurations: QuillEditorConfigurations(
             controller: quillEditorController,
-            readOnly: false,
+            // readOnly: false,
           ),
         ),
       ),

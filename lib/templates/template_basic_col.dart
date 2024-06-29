@@ -6,6 +6,7 @@ import '../../../../components/footer.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../components/bannerSuperior.dart';
+import '../components/librasButton.dart';
 import '../components/menuClass.dart';
 import '../components/menuMobile.dart';
 
@@ -48,6 +49,7 @@ class TemplateColumnState extends State<TemplateColumn> {
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
+        floatingActionButton: LibrasButton(),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Container(

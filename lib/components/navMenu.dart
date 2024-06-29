@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/components/librasTooltip.dart';
 import 'package:obamahome/components/menuClass.dart';
 import 'package:obamahome/components/modalSearch.dart';
 
@@ -71,12 +72,8 @@ class _NavMenuState extends State<NavMenu> {
                             context, widget.itemValues[i].path[0]);
                       },
                       // teste tooltip
-                      child: Tooltip(
-                        richMessage: WidgetSpan(
-                            child: Container(
-                                child: Image.network(
-                                    'https://th.bing.com/th/id/R.271c94354b33351d0ba70b4141279cba?rik=QMkddJRh815iEw&riu=http%3a%2f%2f24.media.tumblr.com%2ftumblr_m0kxkrtQfJ1rrnvqio1_500.gif&ehk=JJa9MQXGTx4ZUw47A4KUrftSaCyLL%2bPBuXVmaBfR%2bv0%3d&risl=&pid=ImgRaw&r=0'))),
-                        child: Padding(
+                      child: LibrasTooltip(
+                        content: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(widget.itemValues[i].name.toUpperCase(),
                               style: TextStyle(
@@ -92,89 +89,92 @@ class _NavMenuState extends State<NavMenu> {
                     ),
                   ))),
         } else ...{
-          Padding(
-              padding: EdgeInsets.only(left: 18),
-              child: SubmenuButton(
-                onHover: (value) {
-                  setState(() {
-                    widget.itemValues.forEach((element) {
-                      element.itemHover = false;
+          LibrasTooltip(
+            content: Padding(
+                padding: EdgeInsets.only(left: 18),
+                child: SubmenuButton(
+                  onHover: (value) {
+                    setState(() {
+                      widget.itemValues.forEach((element) {
+                        element.itemHover = false;
+                      });
+                      widget.itemValues[i].itemHover = value;
                     });
-                    widget.itemValues[i].itemHover = value;
-                  });
-                },
-                menuStyle: MenuStyle(
-                  backgroundColor: MaterialStateProperty.all(background),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(background),
-                  foregroundColor: MaterialStateProperty.all(
-                      widget.itemValues[i].path.contains(currentRoute)
-                          ? primary
-                          : widget.itemValues[i].itemHover
-                              ? primary
-                              : onPrimary),
-                  textStyle: MaterialStateProperty.all(textTheme.headlineSmall),
-                ),
-                menuChildren: <Widget>[
-                  if (i >= 0 && i < widget.itemValues.length) ...{
-                    for (var j = 0;
-                        j < widget.itemValues[i].subItems.length;
-                        j++) ...{
-                      Container(
-                        decoration: BoxDecoration(
-                            // color: background,
-                            border: j == 0
-                                ? Border(
-                                    top: BorderSide(color: surface, width: 3))
-                                : Border(top: BorderSide.none)),
-                        child: MenuItemButton(
-                          onHover: (value) {
-                            setState(() {
-                              widget.itemValues.forEach((element) {
-                                element.itemHover = false;
-                                element.subItemHover.forEach((subItem) {
-                                  subItem = false;
+                  },
+                  menuStyle: MenuStyle(
+                    backgroundColor: MaterialStateProperty.all(background),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(background),
+                    foregroundColor: MaterialStateProperty.all(
+                        widget.itemValues[i].path.contains(currentRoute)
+                            ? primary
+                            : widget.itemValues[i].itemHover
+                                ? primary
+                                : onPrimary),
+                    textStyle:
+                        MaterialStateProperty.all(textTheme.headlineSmall),
+                  ),
+                  menuChildren: <Widget>[
+                    if (i >= 0 && i < widget.itemValues.length) ...{
+                      for (var j = 0;
+                          j < widget.itemValues[i].subItems.length;
+                          j++) ...{
+                        Container(
+                          decoration: BoxDecoration(
+                              // color: background,
+                              border: j == 0
+                                  ? Border(
+                                      top: BorderSide(color: surface, width: 3))
+                                  : Border(top: BorderSide.none)),
+                          child: MenuItemButton(
+                            onHover: (value) {
+                              setState(() {
+                                widget.itemValues.forEach((element) {
+                                  element.itemHover = false;
+                                  element.subItemHover.forEach((subItem) {
+                                    subItem = false;
+                                  });
                                 });
+                                widget.itemValues[i].itemHover = value;
+                                widget.itemValues[i].subItemHover[j] = value;
                               });
-                              widget.itemValues[i].itemHover = value;
-                              widget.itemValues[i].subItemHover[j] = value;
-                            });
-                          },
-                          style: ButtonStyle(
-                            padding: MaterialStatePropertyAll(
-                                EdgeInsets.symmetric(horizontal: 20)),
-                            minimumSize:
-                                MaterialStatePropertyAll(Size(250, 44)),
-                            backgroundColor:
-                                MaterialStateProperty.all(background),
-                            overlayColor: MaterialStateProperty.all(primary),
-                            foregroundColor: MaterialStateProperty.all(
-                                widget.itemValues[i].subItemHover[j]
-                                    ? background
-                                    : onPrimary),
-                            textStyle: MaterialStateProperty.all(
-                                textTheme.displaySmall),
+                            },
+                            style: ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                  EdgeInsets.symmetric(horizontal: 20)),
+                              minimumSize:
+                                  MaterialStatePropertyAll(Size(250, 44)),
+                              backgroundColor:
+                                  MaterialStateProperty.all(background),
+                              overlayColor: MaterialStateProperty.all(primary),
+                              foregroundColor: MaterialStateProperty.all(
+                                  widget.itemValues[i].subItemHover[j]
+                                      ? background
+                                      : onPrimary),
+                              textStyle: MaterialStateProperty.all(
+                                  textTheme.displaySmall),
+                            ),
+                            onPressed: () {
+                              widget.itemValues[i].subItemHover[j] = false;
+                              Navigator.pushNamed(
+                                  context, widget.itemValues[i].path[j],
+                                  arguments: widget.itemValues[i].path[j] ==
+                                          '/blog-detalhes'
+                                      ? 0
+                                      : searchText);
+                            },
+                            child: MenuAcceleratorLabel(
+                                widget.itemValues[i].subItems[j]!),
                           ),
-                          onPressed: () {
-                            widget.itemValues[i].subItemHover[j] = false;
-                            Navigator.pushNamed(
-                                context, widget.itemValues[i].path[j],
-                                arguments: widget.itemValues[i].path[j] ==
-                                        '/blog-detalhes'
-                                    ? 0
-                                    : searchText);
-                          },
-                          child: MenuAcceleratorLabel(
-                              widget.itemValues[i].subItems[j]!),
-                        ),
-                      )
+                        )
+                      }
                     }
-                  }
-                ],
-                child: MenuAcceleratorLabel(
-                    widget.itemValues[i].name.toUpperCase()),
-              )),
+                  ],
+                  child: MenuAcceleratorLabel(
+                      widget.itemValues[i].name.toUpperCase()),
+                )),
+          ),
         }
       },
       widget.searchAvailable
