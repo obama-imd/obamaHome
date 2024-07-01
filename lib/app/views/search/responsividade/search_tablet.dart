@@ -5,7 +5,6 @@ import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import '../../../../utils/app_padding.dart';
-import '../components/advancedSearchOA.dart';
 
 class SearchTablet extends StatefulWidget {
   String termSearched;
@@ -38,15 +37,15 @@ class _SearchTabletState extends State<SearchTablet> {
         margin: paddingValues("sectionPadding", context),
         padding: paddingValues("sideMainPadding", context),
         child: ExpansionTile(title: Text("Busca Avançada"), children: [
-          Padding(
-            padding: paddingValues("fullGrid", context),
-            child: OAFilters(
-              swidth: swidth,
-              data: widget.termSearched,
-              updateData: widget.updateData,
-              titleStyle: widget.titleStyle,
-            ),
-          ),
+          // Padding(
+          //   padding: paddingValues("fullGrid", context),
+          //   child: OAFilters(
+          //     swidth: swidth,
+          //     data: widget.termSearched,
+          //     updateData: widget.updateData,
+          //     titleStyle: widget.titleStyle,
+          //   ),
+          // ),
         ]),
       ),
       SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,

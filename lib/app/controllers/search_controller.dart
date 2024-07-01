@@ -187,33 +187,29 @@ Future<SearchResponse> fetchDataAndUpdateState(
 const apiUrl = 'http://localhost:8081/v1/nivelensino';
 
 Future<List<dynamic>> fetchLevels() async {
-  // final headers = {
-  //   'Access-Control-Allow-Origin': '*',
-  //   'Content-Type': 'application/json',
-  // };
-
-  try {
+  // try {
     final response = await http.get(Uri.parse(apiUrl));
 
     if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body) as List<dynamic>;
+      List<dynamic> jsonData = jsonDecode(response.body);
       print("jsonData => $jsonData");
       return jsonData;
       // print("")
     } else {
-      throw Exception(
-          'Failed to fetch API data. Status code: ${response.statusCode}');
+      // throw Exception(
+      //     'Failed to fetch API data. Status code: ${response.statusCode}');
+      return [];
     }
-  } catch (e) {
-    print('Error fetching data: $e');
-    throw e;
-  }
+  // } catch (e) {
+  //   print('Error fetching data: $e');
+  //   throw Exception('Failed to fetch API data. Status code: ${e}');
+  // }
 }
 
 
-// Future<List<dynamic>> fetchLevels() async {
+// Future<List<StudyLevelModel>> fetchLevels() async {
 //   final response =
-//       await http.get(Uri.parse('http://localhost:8081/v1/nivelensino'));
+//       await http.get(Uri.parse(apiUrl));
 
 //   if (response.statusCode == 200) {
 //     final jsonData = jsonDecode(response.body);
@@ -224,7 +220,7 @@ Future<List<dynamic>> fetchLevels() async {
 //             ))
 //         .toList() as List<StudyLevelModel>;
 
-//     // print(response);
+//     print("nivel => $posts");
 
 //     return posts;
 //   } else {
