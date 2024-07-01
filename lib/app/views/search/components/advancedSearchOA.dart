@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
+import '../../../controllers/search_controller.dart';
 
 // List<String> nivelEnsino = <String>['Todos'];
 List<String> temaCurricular = <String>['Todos'];
@@ -54,26 +55,27 @@ class OAFilterState extends State<OAFilters> {
 
   var setLevel = [];
 
-  void getLevels() async {
+  Future<void> getLevels() async {
     List<String> levels = [];
-    for (var level in widget.learningLevels) {
+    List<dynamic> learnLevels = await fetchLevels();
+    for (var level in learnLevels) {
       print("nivel1 => $level");
-      levels.add(level);
+      levels.add(level.name);
     }
     // try {
-      setState(() {
-        nivelEnsino = levels;
-      });
-      print("nivel2 => $nivelEnsino");
+      // setState(() {
+      //   nivelEnsino = levels;
+      // });
+      print("nivel2 => $learnLevels");
     // } catch (e) {
     //   print('Error in getLevels: $e');
     // }
   }
 
   @override
-  void initState() {
+  void initState() async {
+    await getLevels();
     super.initState();
-    getLevels();
   }
 
   @override

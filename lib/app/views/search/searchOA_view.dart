@@ -47,26 +47,28 @@ class SearchPageState extends ConsumerState<SearchPage> {
     }
   }
 
-  Future<void> getLevels() async {
-    // try {
-      // print("Iniciando getLevels");
-      List<dynamic> levels = await fetchLevels();
-      setState() {
-        learningLevels = levels;
-      };
-      print("Níveis recebidos: $learningLevels");
-    // } catch (e) {
-    //   print('Erro em getLevels: $e');
-    // }
-  }
+  // void getLevels() async {
+  //   // try {
+  //     // print("Iniciando getLevels");
+  //     List<dynamic> levels = await fetchLevels();
+  //     setState() {
+  //       learningLevels = levels;
+  //     };
+  //     print("Níveis recebidos: $learningLevels");
+  //   // } catch (e) {
+  //   //   print('Erro em getLevels: $e');
+  //   // }
+  // }
 
   @override
   void initState() {
     super.initState();
     waitData();
-    getLevels();
+    // getLevels();
     activateLoad();
   }
+
+
 
   // @override
   // void initState() {

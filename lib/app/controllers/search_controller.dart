@@ -194,7 +194,6 @@ Future<List<dynamic>> fetchLevels() async {
       List<dynamic> jsonData = jsonDecode(response.body);
       print("jsonData => $jsonData");
       return jsonData;
-      // print("")
     } else {
       // throw Exception(
       //     'Failed to fetch API data. Status code: ${response.statusCode}');
