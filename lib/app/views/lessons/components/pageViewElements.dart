@@ -1,10 +1,8 @@
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
-import 'package:flutter_quill/quill_delta.dart';
 import 'package:flutter_quill_extensions/flutter_quill_extensions.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -128,31 +126,6 @@ class _PageViewThirdState extends ConsumerState<PageViewThird> {
       cachedObjects = items;
     });
     // listOAText(_controller);
-  }
-
-  List<String> listOAText(QuillController _controller) {
-    List<String> allSelectedOA = [];
-
-    for (var selected in selectedOA) {
-      try {
-        var mainList = new Delta()
-          ..insert(selected)
-          ..insert("\n", {"list": "bullet"});
-
-        _controller.compose(
-            mainList,
-            TextSelection.collapsed(offset: mainList.length),
-            ChangeSource.local);
-
-        String plainText = _controller.document.toPlainText();
-        allSelectedOA.add(plainText);
-      } catch (err, st) {
-        print('Cannot read welcome.json: $err\n$st');
-        _controller = _controller;
-        return [];
-      }
-    }
-    return allSelectedOA;
   }
 
   void addObjects() async {
@@ -286,13 +259,16 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   QuillController _controller = QuillController.basic();
   String imageUrl = "";
   List<SearchModel?> searchData = [];
-  List<String>? cachedObjects = [];
+
+  void _initController(
+      QuillController controller, List<String>? cachedObjects) {
+    initText(controller, cachedObjects);
+  }
 
   @override
   void initState() {
     // getData();
     getObjects();
-    _initController(_controller, cachedObjects);
     super.initState();
   }
 
@@ -308,9 +284,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   void getObjects() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? items = prefs.getStringList('objects');
-    setState(() {
-      cachedObjects = items;
-    });
+    _initController(_controller, items);
   }
 
   void _pickImageURL() {
@@ -400,54 +374,25 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
     }
   }
 
-  Future<void> _addEditNote(BuildContext context, {Document? document}) async {
-    final isEditing = document != null;
-    final quillEditorController = QuillController(
-      document: document ?? Document(),
-      selection: const TextSelection.collapsed(offset: 0),
-    );
+  // void listOAText(QuillController _controller) {
+  //   for (var selected in cachedObjects!) {
+  //     try {
+  //       var mainList = new Delta()
+  //         ..insert(selected)
+  //         ..insert("\n", {"list": "bullet"});
 
-    await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        titlePadding: const EdgeInsets.only(left: 16, top: 8),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text('${isEditing ? 'Edit' : 'Add'} note'),
-            IconButton(
-              onPressed: () => Navigator.of(context).pop(),
-              icon: const Icon(Icons.close),
-            )
-          ],
-        ),
-        content: QuillEditor.basic(
-          configurations: QuillEditorConfigurations(
-            controller: quillEditorController,
-            // readOnly: false,
-          ),
-        ),
-      ),
-    );
-
-    if (quillEditorController.document.isEmpty()) return;
-
-    final block = BlockEmbed.custom(
-      NotesBlockEmbed.fromDocument(quillEditorController.document),
-    );
-    final controller = _controller;
-    final index = controller.selection.baseOffset;
-    final length = controller.selection.extentOffset - index;
-
-    if (isEditing) {
-      final offset =
-          getEmbedNode(controller, controller.selection.start).offset;
-      controller.replaceText(
-          offset, 1, block, TextSelection.collapsed(offset: offset));
-    } else {
-      controller.replaceText(index, length, block, null);
-    }
-  }
+  //       _controller.compose(
+  //           mainList,
+  //           TextSelection.collapsed(offset: mainList.length),
+  //           ChangeSource.local);
+  //     } catch (err, st) {
+  //       print('Cannot read welcome.json: $err\n$st');
+  //       _controller = _controller;
+  //       // return [];
+  //     }
+  //   }
+  //   // return allSelectedOA;
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -535,7 +480,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                   tooltip: "Adicionar Objetos de Aprendizagem",
                   icon: Icon(Icons.gamepad),
                   onPressed: () {
-                    _addEditNote(context, document: _controller.document);
+                    // listOAText(_controller);
                     // showDialog(
                     //     context: context,
                     //     builder: (context) {
@@ -591,7 +536,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                     //           ]),
                     //         ),
                     //       );
-                        // });
+                    // });
                   },
                 )
               ],
@@ -638,59 +583,6 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
           ),
         )
       ],
-    );
-  }
-}
-
-void _initController(QuillController controller, List<String>? cachedObjects) {
-  initText(controller, cachedObjects);
-}
-
-class NotesBlockEmbed extends CustomBlockEmbed {
-  const NotesBlockEmbed(String value) : super(noteType, value);
-
-  static const String noteType = 'notes';
-
-  static NotesBlockEmbed fromDocument(Document document) =>
-      NotesBlockEmbed(jsonEncode(document.toDelta().toJson()));
-
-  Document get document => Document.fromJson(jsonDecode(data));
-}
-
-class NotesEmbedBuilder extends EmbedBuilder {
-  NotesEmbedBuilder({required this.addEditNote});
-
-  Future<void> Function(BuildContext context, {Document? document}) addEditNote;
-
-  @override
-  String get key => 'notes';
-
-  @override
-  Widget build(
-    BuildContext context,
-    QuillController controller,
-    Embed node,
-    bool readOnly,
-    bool inline,
-    TextStyle textStyle,
-  ) {
-    final notes = NotesBlockEmbed(node.value.data).document;
-
-    return Material(
-      color: Colors.transparent,
-      child: ListTile(
-        title: Text(
-          notes.toPlainText().replaceAll('\n', ' '),
-          maxLines: 3,
-          overflow: TextOverflow.ellipsis,
-        ),
-        leading: const Icon(Icons.notes),
-        onTap: () => addEditNote(context, document: notes),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-          side: const BorderSide(color: Colors.grey),
-        ),
-      ),
     );
   }
 }

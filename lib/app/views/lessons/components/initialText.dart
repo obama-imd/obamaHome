@@ -1,9 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
 String initText(QuillController _controller, List<String>? cachedObjects) {
+  print("selected => ${cachedObjects}");
+
   try {
-    var mainText = new Delta()
+    var startText = new Delta()
       ..insert("PLANO DE AULA INCLUSIVO", {
         "bold": "true",
       })
@@ -94,10 +97,11 @@ String initText(QuillController _controller, List<String>? cachedObjects) {
       ..insert("Materiais: ", {
         "bold": "true",
       })
-      ..insert("\n")
-      ..insert("\n")
-      ..insert("-")
-      ..insert("\n")
+      ..insert("\n");
+
+    var endText = new Delta()
+      // ..insert("\n")
+      // ..insert("-")
       ..insert("\n")
       ..insert("Estratégias de promoção da aprendizagem em sala de aula: ", {
         "bold": "true",
@@ -347,58 +351,34 @@ String initText(QuillController _controller, List<String>? cachedObjects) {
       ..insert("\n")
       ..insert("\n");
 
-    // var initialText = new Delta()
-    //   ..insert("Objetivo geral")
-    //   ..insert("\n", {"list": "bullet", "color": "black"})
-    //   ..insert(
-    //       "Ao final desta aula espera-se que o (s) aluno (s) esteja(m) apto (s) a...")
-    //   ..insert("\n", {"list": "bullet", "indent": 1})
-    //   ..insert("Objetivos especificos")
-    //   ..insert("\n", {"list": "bullet"})
-    //   ..insert(
-    //       "Para alcançar o objetivo geral, o (s) aluno (s) deve(m) aprender a ou sobre...")
-    //   ..insert("\n", {"list": "bullet", "indent": 1})
-    //   ..insert("Metodologia")
-    //   ..insert("\n", {"list": "bullet"})
-    //   ..insert(
-    //       "Descreva detalhadamente como executar os objetivos específicos (como se fosse um manual de instruções). Explicite quais recursos utilizar e como utilizá-los.")
-    //   ..insert("\n", {"list": "bullet", "indent": 1})
-    //   ..insert("Avaliação")
-    //   ..insert("\n", {"list": "bullet"})
-    //   ..insert(
-    //       "Como você pretende avaliar/verificar se o (s) aluno (s) alcançou(aram) o objetivo específico?")
-    //   ..insert("\n", {"list": "bullet", "indent": 1})
-    //   ..insert("Recursos")
-    //   ..insert("\n", {"list": "bullet"})
-    //   ..insert("Quais os materiais você vai precisar para executar sua aula?")
-    //   ..insert("\n", {"list": "bullet", "indent": 1})
-    //   ..insert("Referências")
-    //   ..insert("\n", {"list": "bullet"})
-    //   ..insert(
-    //       "Para que outro professor possa se preparar para executar sua proposta de aula, nos diga: De onde você tirou toda sua inspiração? (livros, revistas, sites, outros planos de aula)")
-    //   ..insert("\n", {"list": "bullet", "indent": 1});
+    // _controller.setContents(endText);
+    // _controller.setContents(startText);
 
-    // _controller.compose(mainText,
-    //     TextSelection.collapsed(offset: mainText.length), ChangeSource.local);
+    _controller.compose(endText,
+        TextSelection.collapsed(offset: endText.length), ChangeSource.local);
+    if (cachedObjects != null) {
+      for (var selected in cachedObjects!) {
+        // print("selected => $selected");
+        var mainList = new Delta()
+          ..insert(selected, { "size": "14"})
+          ..insert("\n", {"list": "bullet" });
 
-    _controller.setContents(mainText);
+        _controller.compose(
+            mainList,
+            TextSelection.collapsed(offset: mainList.length),
+            ChangeSource.local);
+      }
+    } else {
+      var mainList = new Delta()
+        ..insert("\n")
+        ..insert("-")
+        ..insert("\n");
 
-    // var otherText;
-    // List<Delta> textList = [];
-
-    // Delta otherText = Delta();
-
-    // for (String object in cachedObjects!) {
-    //   otherText
-    //     ..insert("object")
-    //     ..insert("\n")
-    //     ..insert("\n");
-    // }
-
-    // print(otherText);
-    
-    // _controller.replaceText(513, otherText.length, otherText,
-    //     TextSelection.fromPosition(TextPosition(offset: 513)));
+      _controller.compose(mainList,
+          TextSelection.collapsed(offset: mainList.length), ChangeSource.local);
+    }
+    _controller.compose(startText,
+        TextSelection.collapsed(offset: startText.length), ChangeSource.local);
 
     return _controller.document.toPlainText();
   } catch (err, st) {
