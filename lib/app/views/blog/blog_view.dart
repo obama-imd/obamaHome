@@ -72,15 +72,17 @@ class _BlogPageState extends State<BlogPage> {
             body: Stack(
           children: [
             Responsivo(
-                mobile: BlogMobile(newData, key, swidth, updateData, textTheme.titleSmall!),
-                tablet: BlogTablet(newData, key, swidth, updateData, textTheme.headlineSmall!),
-                desktop: BlogDesktop(newData, key, swidth, updateData, textTheme.headlineSmall!)),
+                mobile: BlogMobile(
+                    newData, key, swidth, updateData, textTheme.titleSmall!),
+                tablet: BlogTablet(
+                    newData, key, swidth, updateData, textTheme.headlineSmall!),
+                desktop: BlogDesktop(newData, key, swidth, updateData,
+                    textTheme.headlineSmall!)),
             if (loadPosts) ...{circleLoadSpinner(context)}
           ],
         )));
   }
 }
-
 
 @override
 Widget blogListView(BuildContext context, key, swidth, posts) {
@@ -150,7 +152,16 @@ Widget blogListView(BuildContext context, key, swidth, posts) {
                           children: [
                             Text(
                               'VER MAIS >',
-                              style: textTheme.labelMedium,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                shadows: [
+                                  Shadow(
+                                    offset: Offset(1, 1),
+                                    color: Color.fromRGBO(0, 0, 0, 0.5),
+                                  )
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -191,4 +202,3 @@ Widget blogListView(BuildContext context, key, swidth, posts) {
     ]),
   );
 }
-

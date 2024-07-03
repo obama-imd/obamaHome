@@ -31,6 +31,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
   bool loadObjects = false;
   late TextStyle titleStyle;
+  List<dynamic> learningLevels = [];
 
   void updateData(newData) {
     setState(() {
@@ -46,12 +47,36 @@ class SearchPageState extends ConsumerState<SearchPage> {
     }
   }
 
+  // void getLevels() async {
+  //   // try {
+  //     // print("Iniciando getLevels");
+  //     List<dynamic> levels = await fetchLevels();
+  //     setState() {
+  //       learningLevels = levels;
+  //     };
+  //     print("Níveis recebidos: $learningLevels");
+  //   // } catch (e) {
+  //   //   print('Erro em getLevels: $e');
+  //   // }
+  // }
+
   @override
   void initState() {
     super.initState();
-    activateLoad();
     waitData();
+    // getLevels();
+    activateLoad();
   }
+
+
+
+  // @override
+  // void initState() {
+  //   activateLoad();
+  //   // waitData();
+  //   getLevels();
+  //   super.initState();
+  // }
 
   void activateLoad() {
     setState(() {
@@ -81,8 +106,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
                     selectedPage: selectedPage,
-                    titleStyle: textTheme.headlineSmall!
-                    ),
+                    titleStyle: textTheme.headlineSmall!),
                 tablet: SearchTablet(
                     termSearched: widget.termSearched,
                     selectedPageIndex: selectedPageIndex,
@@ -94,8 +118,8 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
                     selectedPage: selectedPage,
-                    titleStyle: textTheme.titleSmall!
-                    )),
+                    learningLevels: learningLevels,
+                    titleStyle: textTheme.titleSmall!)),
             if (loadObjects) ...{circleLoadSpinner(context)}
           ],
         )));
@@ -118,7 +142,6 @@ class SearchPageView extends ConsumerStatefulWidget {
 
 class SearchDesktopState extends ConsumerState<SearchPageView> {
   final TextEditingController _searchController = TextEditingController();
-
   Key key = UniqueKey();
   int startValue = 0;
   int endValue = 2;

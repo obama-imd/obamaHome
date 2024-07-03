@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
+import '../../../controllers/search_controller.dart';
 
-const List<String> nivelEnsino = <String>['Todos'];
-const List<String> temaCurricular = <String>['Todos'];
-const List<String> tipo = <String>['Todos'];
-const List<String> descritor = <String>['Todos'];
+// List<String> nivelEnsino = <String>['Todos'];
+List<String> temaCurricular = <String>['Todos'];
+List<String> tipo = <String>['Todos'];
+List<String> descritor = <String>['Todos'];
 
 const List<String> tileTitle = <String>[
   'Selecione o nível de ensino',
@@ -23,19 +24,20 @@ class OAFilters extends StatefulWidget {
   final String data;
   final Function(String) updateData;
   final TextStyle titleStyle;
-  const OAFilters({
-    required this.swidth,
-    required this.data,
-    required this.updateData,
-    required this.titleStyle});
+  List<dynamic> learningLevels;
+  OAFilters(
+      {required this.swidth,
+      required this.data,
+      required this.updateData,
+      required this.learningLevels,
+      required this.titleStyle});
 
   @override
   State<OAFilters> createState() => OAFilterState(
-        swidth: swidth,
-        data: data,
-        updateData: updateData,
-        titleStyle: titleStyle
-      );
+      swidth: swidth,
+      data: data,
+      updateData: updateData,
+      titleStyle: titleStyle);
 }
 
 class OAFilterState extends State<OAFilters> {
@@ -43,13 +45,38 @@ class OAFilterState extends State<OAFilters> {
   final String data;
   final Function(String) updateData;
   final TextStyle titleStyle;
+  List<String> nivelEnsino = [];
 
-  OAFilterState({
-    required this.swidth,
-    required this.data,
-    required this.updateData,
-    required this.titleStyle
-  });
+  OAFilterState(
+      {required this.swidth,
+      required this.data,
+      required this.updateData,
+      required this.titleStyle});
+
+  var setLevel = [];
+
+  Future<void> getLevels() async {
+    List<String> levels = [];
+    List<dynamic> learnLevels = await fetchLevels();
+    for (var level in learnLevels) {
+      print("nivel1 => $level");
+      levels.add(level.name);
+    }
+    // try {
+      // setState(() {
+      //   nivelEnsino = levels;
+      // });
+      print("nivel2 => $learnLevels");
+    // } catch (e) {
+    //   print('Error in getLevels: $e');
+    // }
+  }
+
+  @override
+  void initState() async {
+    await getLevels();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +164,7 @@ class OAFilterState extends State<OAFilters> {
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.only(bottom: 4),
                 child: DropdownButton<String>(
-                    value: descritor.first,
+                    value: nivelEnsino.first,
                     icon: const Icon(Icons.arrow_drop_down),
                     elevation: 5,
                     style: textTheme.bodySmall,
@@ -147,8 +174,8 @@ class OAFilterState extends State<OAFilters> {
                       //   dropdownValue = value!;
                       // });
                     },
-                    items: descritor
-                        .map<DropdownMenuItem<String>>((String value) {
+                    items:
+                        nivelEnsino.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Container(child: Text(value)),

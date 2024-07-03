@@ -7,7 +7,8 @@
         {
             "name": "obamaHome",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": ["-d", "chrome","--web-port", "4040"],
         },
         {
             "name": "obamaHome (profile mode)",

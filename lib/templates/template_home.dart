@@ -7,6 +7,8 @@ import '../../../../components/menuMobile.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../../../../utils/app_theme.dart';
+import '../components/librasButton.dart';
+import '../components/menuClass.dart';
 
 class TemplateHome extends StatefulWidget {
   final List<Widget> children;
@@ -43,6 +45,7 @@ class _HomeDesktopState extends State<TemplateHome> {
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
+        floatingActionButton: LibrasButton(),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(children: <Widget>[
@@ -61,7 +64,11 @@ class _HomeDesktopState extends State<TemplateHome> {
                               width: 240,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50),
+                          NavMenu(
+                              swidth: swidth,
+                              heightBtn: 50,
+                              itemValues: itemValues,
+                              searchAvailable: true),
                         ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),

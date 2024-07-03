@@ -1,76 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/components/librasTooltip.dart';
+import 'package:obamahome/components/menuClass.dart';
 import 'package:obamahome/components/modalSearch.dart';
 
 import '../app/views/search/searchOA_view.dart';
 import '../utils/app_theme.dart';
 
-class ItemValue {
-  List<String?> subItems;
-  final List<bool> subItemHover;
-  bool itemHover;
-  final String name;
-  final List<String> path;
-
-  ItemValue(
-      {required this.subItems,
-      required this.subItemHover,
-      required this.name,
-      required this.itemHover,
-      required this.path});
-}
-
-final List<ItemValue> itemValues = [
-  ItemValue(
-    name: "Home",
-    path: ['/'],
-    subItems: [],
-    itemHover: false,
-    subItemHover: List.generate(1, (index) => false),
-  ),
-  ItemValue(
-    name: "Sobre",
-    path: ['/sobre'],
-    subItems: [],
-    itemHover: false,
-    subItemHover: List.generate(1, (index) => false),
-  ),
-  ItemValue(
-    name: "Serviços",
-    path: ['/servicos', '/trilhas', '/manuais'],
-    subItems: ["OA", "Trilhas", "Manuais"],
-    itemHover: false,
-    subItemHover: List.generate(3, (index) => false),
-  ),
-  ItemValue(
-    name: "Publicações",
-    path: ['/blog', '/blog-detalhes'],
-    subItems: ["Lista de Posts", "Último post"],
-    itemHover: false,
-    subItemHover: List.generate(2, (index) => false),
-  ),
-  ItemValue(
-    name: "Formações",
-    path: ['/formacoes'],
-    subItems: [],
-    itemHover: false,
-    subItemHover: List.generate(1, (index) => false),
-  ),
-  ItemValue(
-    name: "Planos de Aula",
-    path: ['/planos-aulas/lista', '/planos-aulas/criar'],
-    subItems: ['Lista', 'Criar um novo'],
-    itemHover: false,
-    subItemHover: List.generate(2, (index) => false),
-  ),
-];
-
 class NavMenu extends StatefulWidget {
   final double swidth;
   final double heightBtn;
+  final List<ItemValue> itemValues;
+  final bool searchAvailable;
 
   const NavMenu({
     required this.swidth,
     required this.heightBtn,
+    required this.itemValues,
+    required this.searchAvailable,
   });
 
   @override
@@ -102,8 +48,8 @@ class _NavMenuState extends State<NavMenu> {
     double swidth = MediaQuery.of(context).size.width;
 
     return MenuBar(children: [
-      for (int i = 0; i < itemValues.length; i++) ...{
-        if (itemValues[i].subItems.isEmpty) ...{
+      for (int i = 0; i < widget.itemValues.length; i++) ...{
+        if (widget.itemValues[i].subItems.isEmpty) ...{
           Center(
               child: Container(
                   height: 20,
@@ -113,108 +59,137 @@ class _NavMenuState extends State<NavMenu> {
                     child: InkWell(
                       onHover: (value) {
                         setState(() {
-                          itemValues[i].itemHover = value;
+                          widget.itemValues.forEach((element) {
+                            element.itemHover = false;
+                          });
+                          widget.itemValues[i].itemHover = value;
                         });
                       },
                       hoverColor: background,
                       highlightColor: background,
                       onTap: () {
-                        Navigator.pushNamed(context, itemValues[i].path[0]);
+                        Navigator.pushNamed(
+                            context, widget.itemValues[i].path[0]);
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text(itemValues[i].name.toUpperCase(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: itemValues[i].path[0] == currentRoute
-                                    ? primary
-                                    : itemValues[i].itemHover
-                                        ? primary
-                                        : onPrimary)),
+                      // teste tooltip
+                      child: LibrasTooltip(
+                        content: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(widget.itemValues[i].name.toUpperCase(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: widget.itemValues[i].path[0] ==
+                                          currentRoute
+                                      ? primary
+                                      : widget.itemValues[i].itemHover
+                                          ? primary
+                                          : onPrimary)),
+                        ),
                       ),
                     ),
                   ))),
         } else ...{
-          Padding(
-              padding: EdgeInsets.only(left: 18),
-              child: SubmenuButton(
-                onHover: (value) {
-                  setState(() {
-                    itemValues[i].itemHover = value;
-                  });
-                },
-                menuStyle: MenuStyle(
-                  backgroundColor: MaterialStateProperty.all(background),
-                ),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(background),
-                  foregroundColor: MaterialStateProperty.all(
-                      itemValues[i].path.contains(currentRoute)
-                          ? primary
-                          : itemValues[i].itemHover
-                              ? primary
-                              : onPrimary),
-                  textStyle: MaterialStateProperty.all(textTheme.headlineSmall),
-                ),
-                menuChildren: <Widget>[
-                  if (i >= 0 && i < itemValues.length) ...{
-                    for (var j = 0; j < itemValues[i].subItems.length; j++) ...{
-                      Container(
-                        decoration: BoxDecoration(
-                            // color: background,
-                            border: j == 0
-                                ? Border(
-                                    top: BorderSide(color: surface, width: 3))
-                                : Border(top: BorderSide.none)),
-                        child: MenuItemButton(
-                          onHover: (value) {
-                            setState(() {
-                              itemValues[i].itemHover = value;
-                              itemValues[i].subItemHover[j] = value;
-                            });
-                          },
-                          style: ButtonStyle(
-                            padding: MaterialStatePropertyAll(
-                                EdgeInsets.symmetric(horizontal: 20)),
-                            minimumSize:
-                                MaterialStatePropertyAll(Size(250, 44)),
-                            backgroundColor:
-                                MaterialStateProperty.all(background),
-                            overlayColor: MaterialStateProperty.all(primary),
-                            foregroundColor: MaterialStateProperty.all(
-                                itemValues[i].subItemHover[j]
-                                    ? background
-                                    : onPrimary),
-                            textStyle: MaterialStateProperty.all(
-                                textTheme.displaySmall),
+          LibrasTooltip(
+            content: Padding(
+                padding: EdgeInsets.only(left: 18),
+                child: SubmenuButton(
+                  onHover: (value) {
+                    setState(() {
+                      widget.itemValues.forEach((element) {
+                        element.itemHover = false;
+                      });
+                      widget.itemValues[i].itemHover = value;
+                    });
+                  },
+                  menuStyle: MenuStyle(
+                    backgroundColor: MaterialStateProperty.all(background),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(background),
+                    foregroundColor: MaterialStateProperty.all(
+                        widget.itemValues[i].path.contains(currentRoute)
+                            ? primary
+                            : widget.itemValues[i].itemHover
+                                ? primary
+                                : onPrimary),
+                    textStyle:
+                        MaterialStateProperty.all(textTheme.headlineSmall),
+                  ),
+                  menuChildren: <Widget>[
+                    if (i >= 0 && i < widget.itemValues.length) ...{
+                      for (var j = 0;
+                          j < widget.itemValues[i].subItems.length;
+                          j++) ...{
+                        Container(
+                          decoration: BoxDecoration(
+                              // color: background,
+                              border: j == 0
+                                  ? Border(
+                                      top: BorderSide(color: surface, width: 3))
+                                  : Border(top: BorderSide.none)),
+                          child: MenuItemButton(
+                            onHover: (value) {
+                              setState(() {
+                                widget.itemValues.forEach((element) {
+                                  element.itemHover = false;
+                                  element.subItemHover.forEach((subItem) {
+                                    subItem = false;
+                                  });
+                                });
+                                widget.itemValues[i].itemHover = value;
+                                widget.itemValues[i].subItemHover[j] = value;
+                              });
+                            },
+                            style: ButtonStyle(
+                              padding: MaterialStatePropertyAll(
+                                  EdgeInsets.symmetric(horizontal: 20)),
+                              minimumSize:
+                                  MaterialStatePropertyAll(Size(250, 44)),
+                              backgroundColor:
+                                  MaterialStateProperty.all(background),
+                              overlayColor: MaterialStateProperty.all(primary),
+                              foregroundColor: MaterialStateProperty.all(
+                                  widget.itemValues[i].subItemHover[j]
+                                      ? background
+                                      : onPrimary),
+                              textStyle: MaterialStateProperty.all(
+                                  textTheme.displaySmall),
+                            ),
+                            onPressed: () {
+                              widget.itemValues[i].subItemHover[j] = false;
+                              Navigator.pushNamed(
+                                  context, widget.itemValues[i].path[j],
+                                  arguments: widget.itemValues[i].path[j] ==
+                                          '/blog-detalhes'
+                                      ? 0
+                                      : searchText);
+                            },
+                            child: MenuAcceleratorLabel(
+                                widget.itemValues[i].subItems[j]!),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, itemValues[i].path[j],
-                                arguments:
-                                    itemValues[i].path[j] == '/blog-detalhes'
-                                        ? 0
-                                        : searchText);
-                          },
-                          child:
-                              MenuAcceleratorLabel(itemValues[i].subItems[j]!),
-                        ),
-                      )
+                        )
+                      }
                     }
-                  }
-                ],
-                child: MenuAcceleratorLabel(itemValues[i].name.toUpperCase()),
-              )),
+                  ],
+                  child: MenuAcceleratorLabel(
+                      widget.itemValues[i].name.toUpperCase()),
+                )),
+          ),
         }
       },
-      Padding(
-        padding: const EdgeInsets.only(left: 18),
-        child: SizedBox(
-          width: 36,
-          height: 40,
-          child: SearchDialog(
-              swidth: swidth, searchText: searchText, isHovered: isHovered),
-        ),
-      ),
+      widget.searchAvailable
+          ? Padding(
+              padding: const EdgeInsets.only(left: 18),
+              child: SizedBox(
+                width: 36,
+                height: 40,
+                child: SearchDialog(
+                    swidth: swidth,
+                    searchText: searchText,
+                    isHovered: isHovered),
+              ),
+            )
+          : SizedBox(),
     ]);
   }
 }

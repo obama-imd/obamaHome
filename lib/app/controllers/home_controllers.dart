@@ -16,14 +16,14 @@ Future<List<dynamic>> fetchPosts(WidgetRef ref) async {
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(response.body);
     final posts = jsonData
-    .map<BlogModel>((item) => BlogModel(
-          title: item['title'],
-          text: item['text'],
-          summary: extractSummaryPath(item['summary']),
-          publishedDate: convertDate(item['published_date']),
-          imagePath: extractImagePath(item['content']),
-        ))
-    .toList() as List<BlogModel>;
+        .map<BlogModel>((item) => BlogModel(
+              title: item['title'],
+              text: item['text'],
+              summary: extractSummaryPath(item['summary']),
+              publishedDate: convertDate(item['published_date']),
+              imagePath: extractImagePath(item['content']),
+            ))
+        .toList() as List<BlogModel>;
 
     final newPosts = ref.read(blogPostsHome);
     newPosts.clear();
@@ -40,7 +40,7 @@ final searchListHome = StateProvider<List<SearchModel?>>((ref) {
 });
 
 Future<List<dynamic>> fetchObjects(WidgetRef ref) async {
-  // final response = await http.get(Uri.parse('http://localhost:3000/dados'));
+  // final response = await http.get(Uri.parse('http://localhost:8081/v1/oa'));
 
   final result = {
     "content": [
@@ -134,7 +134,9 @@ Future<List<dynamic>> fetchObjects(WidgetRef ref) async {
 
   // if (response.statusCode == 200) {
   // final jsonData = jsonDecode(response.body);
+
   List<dynamic> jsonData = result['content'] as List<dynamic>;
+
   final posts = jsonData
       .map((item) => SearchModel(
             id: item['id'],
@@ -149,4 +151,7 @@ Future<List<dynamic>> fetchObjects(WidgetRef ref) async {
   newPosts.addAll(posts);
 
   return posts;
-}
+} 
+  // else {
+  //   return [];
+  // }

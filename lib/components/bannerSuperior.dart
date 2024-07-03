@@ -87,7 +87,7 @@ Widget BannerSuperior(context, String pageName) {
               children: [
                 Text(
                   pageName,
-                  style: textTheme.labelLarge,
+                  style: textTheme.labelMedium,
                 ),
                 Container(
                     child: Row(children: [

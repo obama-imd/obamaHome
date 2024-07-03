@@ -35,43 +35,34 @@ const LinearGradient gradientColor = LinearGradient(
     colors: [Color.fromARGB(255, 150, 144, 144), Colors.blue]);
 
 final TextTheme textTheme = TextTheme(
-  titleLarge: TextStyle(fontFamily: 'Raleway', 
+  titleLarge: TextStyle(
     fontSize: 35,
     fontWeight: FontWeight.bold,
   ),
-  titleMedium: TextStyle(fontFamily: 'Raleway', color: Colors.grey, fontSize: 20),
-  titleSmall:
-      TextStyle(fontFamily: 'Raleway', color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-  headlineLarge:
-      TextStyle(fontFamily: 'Raleway', color: primary, fontSize: 14, fontWeight: FontWeight.bold),
-  headlineMedium: TextStyle(fontFamily: 'Raleway', color: Colors.black, fontSize: 16),
-  headlineSmall:
-      TextStyle(fontFamily: 'Raleway', color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
-  labelLarge:
-      TextStyle(fontFamily: 'Raleway', color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
-  labelMedium: TextStyle(fontFamily: 'Raleway', 
-    color: Colors.white,
-    fontSize: 14,
-    shadows: [
-      Shadow(
-        offset: Offset(1, 1),
-        color: Color.fromRGBO(0, 0, 0, 0.5),
-      )
-    ],
-  ),
-  labelSmall: TextStyle(fontFamily: 'Raleway', color: primary, fontSize: 14),
-  bodyLarge:
-      TextStyle(fontFamily: 'Raleway', color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-  bodyMedium: TextStyle(fontFamily: 'Raleway', color: Colors.black, fontSize: 14),
-  bodySmall: TextStyle(fontFamily: 'Raleway', color: Colors.grey, fontSize: 14),
-  displayLarge: TextStyle(fontFamily: 'Raleway', fontSize: 30, color: Colors.white),
-  displayMedium: TextStyle(fontFamily: 'Raleway', fontSize: 20, color: Colors.white),
-  displaySmall: TextStyle(fontFamily: 'Raleway', color: Colors.white, fontSize: 14),
+  titleMedium: TextStyle(color: Colors.grey, fontSize: 20),
+  titleSmall: TextStyle(
+      color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+  headlineLarge: TextStyle(
+      color: primary, fontSize: 14, fontWeight: FontWeight.bold),
+  headlineMedium: TextStyle(color: Colors.black, fontSize: 16),
+  headlineSmall: TextStyle(
+      color: Colors.black, fontSize: 14, fontWeight: FontWeight.bold),
+  labelLarge: TextStyle(
+      color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16),
+  labelMedium: TextStyle(
+      color: Colors.white, fontWeight: FontWeight.bold, fontSize: 36),
+  labelSmall: TextStyle(color: primary, fontSize: 14),
+  bodyLarge: TextStyle(
+      color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
+  bodyMedium: TextStyle(color: Colors.black, fontSize: 14),
+  bodySmall: TextStyle(color: Colors.grey, fontSize: 14),
+  displayLarge: TextStyle(fontSize: 30, color: Colors.white),
+  displayMedium: TextStyle(fontSize: 20, color: Colors.white),
+  displaySmall: TextStyle(color: Colors.white, fontSize: 14),
 );
 
 final MaterialApp AppMaterial = MaterialApp(
   theme: ThemeData(
-      fontFamily: 'Raleway',
       menuButtonTheme: MenuButtonThemeData(
           style: ButtonStyle(
         overlayColor: MaterialStatePropertyAll(background),
@@ -100,6 +91,7 @@ final MaterialApp AppMaterial = MaterialApp(
       primaryColor: CoresPersonalizadas.azulObama,
       splashColor: background,
       disabledColor: secondary,
+      fontFamily: 'Raleway',
       // hoverColor: Colors.black,
       colorScheme: ColorScheme(
         brightness: Brightness.light,
@@ -116,6 +108,7 @@ final MaterialApp AppMaterial = MaterialApp(
       ),
       textTheme: textTheme),
   debugShowCheckedModeBanner: false,
+  title: 'OBAMA',
   home: const HomeView(),
   initialRoute: '/',
   routes: {

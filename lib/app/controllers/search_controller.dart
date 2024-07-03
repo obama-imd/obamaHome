@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 import '../models/search_models.dart';
 
@@ -147,41 +150,79 @@ final searchPagination = StateProvider<List<SearchResponse>>((ref) {
 });
 
 // class SearchOAController {
-  Future<SearchResponse> fetchDataAndUpdateState(
-      String item, WidgetRef ref) async {
-    (
-      List<Map<String, dynamic>>,
-      Object?,
-      Object?,
-      Object?,
-      Object?
-    ) fetchedData = await fetchData(item);
+Future<SearchResponse> fetchDataAndUpdateState(
+    String item, WidgetRef ref) async {
+  (List<Map<String, dynamic>>, Object?, Object?, Object?, Object?) fetchedData =
+      await fetchData(item);
 
-    List<Map<String, dynamic>> searchResult = fetchedData.$1;
+  List<Map<String, dynamic>> searchResult = fetchedData.$1;
 
-    final updatedSearch = searchResult
-        .map((searchData) => SearchModel(
-              id: searchData['id'],
-              nome: searchData['nome'],
-              url: searchData['url'],
-            ))
-        .toList();
+  final updatedSearch = searchResult
+      .map((searchData) => SearchModel(
+            id: searchData['id'],
+            nome: searchData['nome'],
+            url: searchData['url'],
+          ))
+      .toList();
 
-    final paginationInfo = SearchResponse(
-        content: updatedSearch,
-        totalPages: convertToInt(fetchedData.$2!),
-        totalElements: convertToInt(fetchedData.$3!),
-        currentPage: convertToInt(fetchedData.$4!),
-        itemsPerPage: convertToInt(fetchedData.$5!),
-        last: null,
-        size: null,
-        number: null,
-        first: null,
-        empty: null);
+  final paginationInfo = SearchResponse(
+      content: updatedSearch,
+      totalPages: convertToInt(fetchedData.$2!),
+      totalElements: convertToInt(fetchedData.$3!),
+      currentPage: convertToInt(fetchedData.$4!),
+      itemsPerPage: convertToInt(fetchedData.$5!),
+      last: null,
+      size: null,
+      number: null,
+      first: null,
+      empty: null);
 
-    final pagination = ref.read(searchPagination);
-    pagination.clear();
-    pagination.add(paginationInfo);
-    return paginationInfo;
-  }
+  final pagination = ref.read(searchPagination);
+  pagination.clear();
+  pagination.add(paginationInfo);
+  return paginationInfo;
+}
+// }
+
+const apiUrl = 'http://localhost:8081/v1/nivelensino';
+
+Future<List<dynamic>> fetchLevels() async {
+  // try {
+    final response = await http.get(Uri.parse(apiUrl));
+
+    if (response.statusCode == 200) {
+      List<dynamic> jsonData = jsonDecode(response.body);
+      print("jsonData => $jsonData");
+      return jsonData;
+    } else {
+      // throw Exception(
+      //     'Failed to fetch API data. Status code: ${response.statusCode}');
+      return [];
+    }
+  // } catch (e) {
+  //   print('Error fetching data: $e');
+  //   throw Exception('Failed to fetch API data. Status code: ${e}');
+  // }
+}
+
+
+// Future<List<StudyLevelModel>> fetchLevels() async {
+//   final response =
+//       await http.get(Uri.parse(apiUrl));
+
+//   if (response.statusCode == 200) {
+//     final jsonData = jsonDecode(response.body);
+//     final posts = jsonData
+//         .map<StudyLevelModel>((item) => StudyLevelModel(
+//               id: item['id'],
+//               nome: item['nome'],
+//             ))
+//         .toList() as List<StudyLevelModel>;
+
+//     print("nivel => $posts");
+
+//     return posts;
+//   } else {
+//     return [];
+//   }
 // }
