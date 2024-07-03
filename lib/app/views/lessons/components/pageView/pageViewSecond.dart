@@ -28,6 +28,8 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   List<SearchModel?> searchData = [];
   List<String> selectedOA = [];
   List<String> firstStep = [];
+  bool addedOrRemovedOA = false;
+  String textValue = "";
 
   void _initController(
       QuillController controller, List<String>? cachedObjects) {
@@ -64,6 +66,14 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('objects', selectedOA);
     getObjects();
+  }
+
+  void hideMessage() {
+    Future.delayed(Duration(seconds: 3)).then((value) {
+      setState(() {
+        textValue = "";
+      });
+    });
   }
 
   void _pickImageURL() {
@@ -308,6 +318,11 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                                           searchData[i]!.nome);
                                                       addObjects();
                                                     }
+                                                    setState(() {
+                                                      addedOrRemovedOA = true;
+                                                      textValue =
+                                                          "OA adicionado";
+                                                    });
                                                   },
                                                   child: Icon(Icons.add_circle,
                                                       color: CoresPersonalizadas
@@ -317,6 +332,10 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                                     selectedOA.remove(
                                                         searchData[i]!.nome);
                                                     addObjects();
+                                                    setState(() {
+                                                      addedOrRemovedOA = true;
+                                                      textValue = "OA removido";
+                                                    });
                                                   },
                                                   child: Icon(
                                                       Icons.remove_circle,
@@ -327,6 +346,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                         ],
                                       )),
                                 },
+                                if (textValue != "") ...{Text(textValue, style: textTheme.headlineSmall)},
                               ]),
                             ),
                           );
