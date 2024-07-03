@@ -4,8 +4,28 @@ import 'package:obamahome/components/topbar.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 
 import '../../../utils/app_theme.dart';
-import 'components/pageViewElements.dart';
+import 'components/pageView/pageViewFirst.dart';
+import 'components/pageView/pageViewSecond.dart';
+import 'components/pageView/pageViewThird.dart';
 import 'components/textEditorClass.dart';
+
+List<String> pageHints = [
+  'Qual o nome da instituição a que se destina esse plano de aula?*',
+  'Escreva uma frase curta que defina sua aula.*',
+  'A qual ano de ensino esta proposta de aula melhor se aplica?*',
+  'Quanto tempo (em minutos) você acha necessário para a aplicação deste plano de aula?*'
+];
+
+List<String> options = <String>[
+  'Infantil - EDUCAÇÃO INFANTIL',
+  '1º Ano - ANOS INICIAIS',
+  '2º Ano - ANOS INICIAIS',
+  '3º Ano - ANOS INICIAIS',
+  '4º Ano - ANOS INICIAIS',
+  '5º Ano - ANOS INICIAIS',
+  '6º Ano - ANOS FINAIS',
+  '7º ano - ANOS FINAIS'
+];
 
 class NewLessonPlan extends StatefulWidget {
   const NewLessonPlan({super.key});
@@ -16,16 +36,19 @@ class NewLessonPlan extends StatefulWidget {
 
 class _NewLessonPlanState extends State<NewLessonPlan> {
   late PageController _pageViewController;
-  // late TabController _tabController;
   int stepSelected = 0;
 
   @override
   void initState() {
     super.initState();
     _pageViewController = PageController();
-    // _initController(_controller);
-    // print(_controller.document.toDelta().toHtml());
   }
+
+  List<Widget> paveViewContent = [
+    PageViewFirst(),
+    PageViewSecond(),
+    PageViewThird(),
+  ];
 
   void _updateCurrentPageIndex(int index) {
     // _tabController.index = index;
@@ -40,7 +63,6 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
   void dispose() {
     super.dispose();
     _pageViewController.dispose();
-    // _tabController.dispose();
   }
 
   @override
