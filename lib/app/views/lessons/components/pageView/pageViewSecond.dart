@@ -69,9 +69,10 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   }
 
   void hideMessage() {
-    Future.delayed(Duration(seconds: 3)).then((value) {
+    Future.delayed(Duration(seconds: 3)).whenComplete(() {
       setState(() {
         textValue = "";
+        addedOrRemovedOA = true;
       });
     });
   }
@@ -323,6 +324,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                                       textValue =
                                                           "OA adicionado";
                                                     });
+                                                    hideMessage();
                                                   },
                                                   child: Icon(Icons.add_circle,
                                                       color: CoresPersonalizadas
@@ -336,6 +338,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                                       addedOrRemovedOA = true;
                                                       textValue = "OA removido";
                                                     });
+                                                    hideMessage();
                                                   },
                                                   child: Icon(
                                                       Icons.remove_circle,
@@ -346,7 +349,11 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                         ],
                                       )),
                                 },
-                                if (textValue != "") ...{Text(textValue, style: textTheme.headlineSmall)},
+                                if (addedOrRemovedOA) ...{
+                                  Container(
+                                      child: Text(textValue,
+                                          style: textTheme.headlineSmall))
+                                },
                               ]),
                             ),
                           );
