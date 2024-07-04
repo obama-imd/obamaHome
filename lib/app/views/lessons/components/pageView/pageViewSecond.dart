@@ -40,9 +40,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
 
   @override
   void initState() {
-    getData();
     getObjects();
-    // _initController(_controller, cachedObjects);
     super.initState();
   }
 
@@ -257,178 +255,199 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                   tooltip: "Adicionar Objetos de Aprendizagem",
                   icon: Icon(Icons.gamepad),
                   onPressed: () {
-                    // listOAText(_controller);
+                    getData();
                     showDialog(
                         context: context,
-                        builder: (context) {
-                          getData();
-                          return Dialog(
-                            child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20),
-                                  color: background,
-                                ),
-                                constraints: BoxConstraints(
-                                    maxWidth: 900, maxHeight: 600),
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 25),
+                        builder: (context) =>
+                            StatefulBuilder(builder: (context, setState) {
+                              return Dialog(
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: background,
-                                  ),
-                                  constraints: BoxConstraints(
-                                      maxWidth: 1200, maxHeight: 600),
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 25),
-                                  child: Wrap(
-                                    children: [
-                                      Container(
-                                        width: swidth > 900
-                                            ? 900 * .7
-                                            : swidth * .7,
-                                        child: Column(children: [
-                                          Text("Escolha os OA"),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 8.0),
-                                            child:
-                                                Divider(color: Colors.black38),
-                                          ),
-                                          for (var i = 0;
-                                              i < searchData.length;
-                                              i++) ...{
-                                            // print(search?.nome);
-                                            Container(
-                                                height: 40,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 25),
-                                                color: i % 2 == 0
-                                                    ? Colors.white
-                                                    : Colors.black12,
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(searchData[i]!.nome),
-                                                    Row(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(20),
+                                      color: background,
+                                    ),
+                                    constraints: BoxConstraints(
+                                        maxWidth: 900, maxHeight: 600),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 25),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(20),
+                                        color: background,
+                                      ),
+                                      constraints: BoxConstraints(
+                                          maxWidth: 1200, maxHeight: 600),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 25),
+                                      child: Wrap(
+                                        children: [
+                                          Container(
+                                            width: swidth > 900
+                                                ? 900 * .7
+                                                : swidth * .7,
+                                            child: Column(children: [
+                                              Text("Escolha os OA"),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8.0),
+                                                child: Divider(
+                                                    color: Colors.black38),
+                                              ),
+                                              for (var i = 0;
+                                                  i < searchData.length;
+                                                  i++) ...{
+                                                // print(search?.nome);
+                                                Container(
+                                                    height: 40,
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 25),
+                                                    color: i % 2 == 0
+                                                        ? Colors.white
+                                                        : Colors.black12,
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
                                                       children: [
-                                                        InkWell(
-                                                            onTap: () {
-                                                              bool itemExists =
-                                                                  selectedOA.contains(
+                                                        Text(searchData[i]!
+                                                            .nome),
+                                                        Row(
+                                                          children: [
+                                                            InkWell(
+                                                                onTap: () {
+                                                                  bool
+                                                                      itemExists =
+                                                                      selectedOA
+                                                                          .contains(
+                                                                              searchData[i]!.nome);
+                                                                  if (!itemExists) {
+                                                                    selectedOA.add(
+                                                                        searchData[i]!
+                                                                            .nome);
+                                                                    addObjects();
+                                                                  }
+                                                                  getObjects();
+                                                                },
+                                                                child: Icon(
+                                                                    Icons
+                                                                        .add_circle,
+                                                                    color: CoresPersonalizadas
+                                                                        .azulObama)),
+                                                            InkWell(
+                                                                onTap: () {
+                                                                  selectedOA.remove(
                                                                       searchData[
                                                                               i]!
                                                                           .nome);
-                                                              if (!itemExists) {
-                                                                selectedOA.add(
-                                                                    searchData[
-                                                                            i]!
-                                                                        .nome);
-                                                                addObjects();
-                                                              }
-                                                            },
-                                                            child: Icon(
-                                                                Icons
-                                                                    .add_circle,
-                                                                color: CoresPersonalizadas
-                                                                    .azulObama)),
-                                                        InkWell(
-                                                            onTap: () {
-                                                              selectedOA.remove(
-                                                                  searchData[i]!
-                                                                      .nome);
-                                                              addObjects();
-                                                            },
-                                                            child: Icon(
-                                                                Icons
-                                                                    .remove_circle,
-                                                                color: CoresPersonalizadas
-                                                                    .azulObama)),
+                                                                  addObjects();
+                                                                  getObjects();
+                                                                },
+                                                                child: Icon(
+                                                                    Icons
+                                                                        .remove_circle,
+                                                                    color: CoresPersonalizadas
+                                                                        .azulObama)),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    )),
+                                              }
+                                            ]),
+                                          ),
+                                          Container(
+                                            width: swidth > 900
+                                                ? 900 * .3
+                                                : swidth * .3,
+                                            child: Column(children: [
+                                              Stack(
+                                                children: [
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text("OA selecionados"),
+                                                    ],
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 10.0),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment.end,
+                                                      children: [
+                                                        cachedObjects == null ||
+                                                                cachedObjects!
+                                                                    .isEmpty
+                                                            ? SizedBox()
+                                                            : Tooltip(
+                                                                message:
+                                                                    "Remover tudo",
+                                                                child: InkWell(
+                                                                  onTap:
+                                                                      () async {
+                                                                    final SharedPreferences
+                                                                        prefs =
+                                                                        await SharedPreferences
+                                                                            .getInstance();
+                                                                    await prefs
+                                                                        .remove(
+                                                                            'objects');
+                                                                    setState(
+                                                                        () {
+                                                                      selectedOA =
+                                                                          [];
+                                                                      cachedObjects =
+                                                                          [];
+                                                                    });
+                                                                    getObjects();
+                                                                  },
+                                                                  child:
+                                                                      SizedBox(
+                                                                    width: 20,
+                                                                    height: 20,
+                                                                    child: Center(
+                                                                        child: Icon(
+                                                                            Icons
+                                                                                .clear,
+                                                                            size:
+                                                                                18,
+                                                                            color:
+                                                                                onError)),
+                                                                  ),
+                                                                )),
                                                       ],
                                                     ),
-                                                  ],
-                                                )),
-                                          }
-                                        ]),
-                                      ),
-                                      Container(
-                                        width: swidth > 900
-                                            ? 900 * .3
-                                            : swidth * .3,
-                                        child: Column(children: [
-                                          Stack(
-                                            children: [
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text("OA selecionados"),
+                                                  )
                                                 ],
                                               ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  cachedObjects == null ||
-                                                          cachedObjects!.isEmpty
-                                                      ? SizedBox()
-                                                      : Tooltip(
-                                                          message:
-                                                              "Remover tudo",
-                                                          child: InkWell(
-                                                            onTap: () async {
-                                                              final SharedPreferences
-                                                                  prefs =
-                                                                  await SharedPreferences
-                                                                      .getInstance();
-                                                              await prefs.remove(
-                                                                  'objects');
-                                                              setState(() {
-                                                                selectedOA = [];
-                                                                cachedObjects =
-                                                                    [];
-                                                              });
-                                                            },
-                                                            child: SizedBox(
-                                                              width: 20,
-                                                              height: 20,
-                                                              child: Center(
-                                                                  child: Icon(
-                                                                      Icons
-                                                                          .clear,
-                                                                      size: 18,
-                                                                      color:
-                                                                          onError)),
-                                                            ),
-                                                          )),
-                                                ],
-                                              )
-                                            ],
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 8.0),
-                                            child:
-                                                Divider(color: Colors.black38),
-                                          ),
-                                          if (cachedObjects == null ||
-                                              cachedObjects!.isEmpty) ...{
-                                            Text("Sua lista de OA está vazia")
-                                          } else ...{
-                                            for (var cacheObject
-                                                in cachedObjects!) ...{
-                                              Text(cacheObject)
-                                            }
-                                          }
-                                        ]),
-                                      )
-                                    ],
-                                  ),
-                                )),
-                          );
-                        });
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8.0),
+                                                child: Divider(
+                                                    color: Colors.black38),
+                                              ),
+                                              if (cachedObjects == null ||
+                                                  cachedObjects!.isEmpty) ...{
+                                                Text(
+                                                    "Sua lista de OA está vazia")
+                                              } else ...{
+                                                for (var cacheObject
+                                                    in cachedObjects!) ...{
+                                                  Text(cacheObject)
+                                                }
+                                              }
+                                            ]),
+                                          )
+                                        ],
+                                      ),
+                                    )),
+                              );
+                            }));
                   },
                 )
               ],
@@ -472,7 +491,8 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                         scrollController: ScrollController(),
                         configurations: QuillEditorConfigurations(
                           controller: _controller,
-                          placeholder: initText(_controller, cachedObjects, dataList),
+                          placeholder:
+                              initText(_controller, cachedObjects, dataList),
                           customStyles: DefaultStyles(
                             paragraph: DefaultTextBlockStyle(
                                 TextStyle(color: onPrimary, fontSize: 14),
