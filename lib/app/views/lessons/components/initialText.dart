@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_quill/quill_delta.dart';
 
-String initText(QuillController _controller, List<String>? cachedObjects) {
+String initText(QuillController _controller, List<String>? cachedObjects, List<String> dataList) {
   print("selected => ${cachedObjects}");
 
   try {
@@ -22,7 +22,7 @@ String initText(QuillController _controller, List<String>? cachedObjects) {
       ..insert("Escola: ", {
         "bold": "true",
       })
-      ..insert("XXXX")
+      ..insert(dataList[0])
       ..insert("\n")
       ..insert("\n")
       ..insert("Professor (a): ", {
@@ -37,16 +37,28 @@ String initText(QuillController _controller, List<String>? cachedObjects) {
       ..insert("ENSINO DE LIBRAS")
       ..insert("\n")
       ..insert("\n")
+      ..insert("Resumo: ", {
+        "bold": "true",
+      })
+      ..insert(dataList[1])
+      ..insert("\n")
+      ..insert("\n")
       ..insert("Ano: ", {
         "bold": "true",
       })
-      ..insert("4º ANO")
+      ..insert(dataList[2])
       ..insert("\n")
       ..insert("\n")
       ..insert("Turno: ", {
         "bold": "true",
       })
       ..insert("TARDE")
+      ..insert("\n")
+      ..insert("\n")
+      ..insert("Duração: ", {
+        "bold": "true",
+      })
+      ..insert(dataList[3])
       ..insert("\n")
       ..insert("\n")
       ..insert("Aluno (a) incluído (a): ", {
@@ -350,9 +362,6 @@ String initText(QuillController _controller, List<String>? cachedObjects) {
           "BRASIL. Base Nacional Comum Curricular (BNCC). Educação é a Base. Brasília, MEC/CONSED/UNDIME, 2017. Disponível em: <http://basenacionalcomum.mec.gov.br/images/BNCC_EI_EF_110518_versaofinal_site.pdf>. Acesso em 24/07/2020.")
       ..insert("\n")
       ..insert("\n");
-
-    // _controller.setContents(endText);
-    // _controller.setContents(startText);
 
     _controller.compose(endText,
         TextSelection.collapsed(offset: endText.length), ChangeSource.local);

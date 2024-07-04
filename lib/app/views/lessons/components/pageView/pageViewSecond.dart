@@ -24,22 +24,25 @@ class PageViewSecond extends ConsumerStatefulWidget {
 
 class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   QuillController _controller = QuillController.basic();
+  final ScrollController controllerOne = ScrollController();
   String imageUrl = "";
   List<SearchModel?> searchData = [];
   List<String> selectedOA = [];
   List<String> firstStep = [];
   bool addedOrRemovedOA = false;
   String textValue = "";
+  List<String>? cachedObjects = [];
 
-  void _initController(
-      QuillController controller, List<String>? cachedObjects) {
-    initText(controller, cachedObjects);
-  }
+  // void _initController(
+  //     QuillController controller, List<String>? cachedObjects) {
+  //   initText(controller, cachedObjects);
+  // }
 
   @override
   void initState() {
     getData();
     getObjects();
+    // _initController(_controller, cachedObjects);
     super.initState();
   }
 
@@ -55,11 +58,11 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   void getObjects() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? items = prefs.getStringList('objects');
-    _initController(_controller, items);
     setState(() {
       selectedOA = items!;
-      // cachedObjects = items;
+      cachedObjects = items;
     });
+    // listOAText(_controller);
   }
 
   void addObjects() async {
@@ -72,7 +75,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
     Future.delayed(Duration(seconds: 3)).whenComplete(() {
       setState(() {
         textValue = "";
-        addedOrRemovedOA = true;
+        addedOrRemovedOA = false;
       });
     });
   }
@@ -167,33 +170,15 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   @override
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
-    final blogDataList = ref.watch(firstStepData);
+    final dataList = ref.watch(firstStepData);
     // firstStep = blogDataList;
     return Column(
       mainAxisSize: MainAxisSize.max,
       children: [
         Container(
-          constraints: BoxConstraints(maxWidth: 1200),
-          padding: EdgeInsets.only(left: 15),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  for (var text in blogDataList) ...{
-                    if (text != "") ...{
-                      Text(text, style: TextStyle(fontWeight: FontWeight.bold)),
-                    }
-                  },
-                ],
-              ),
-            ],
-          ),
-        ),
-        Container(
           //Barra de edição
           margin: EdgeInsets.symmetric(horizontal: swidth * .1),
+          padding: EdgeInsets.only(top: 15),
           child: QuillToolbar.simple(
             configurations: QuillSimpleToolbarConfigurations(
               showAlignmentButtons: true,
@@ -279,83 +264,169 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                           getData();
                           return Dialog(
                             child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: background,
-                              ),
-                              constraints:
-                                  BoxConstraints(maxWidth: 900, maxHeight: 600),
-                              padding: const EdgeInsets.symmetric(vertical: 25),
-                              child: Column(children: [
-                                Text("Escolha os OAs"),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 8.0),
-                                  child: Divider(color: Colors.black38),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: background,
                                 ),
-                                for (var i = 0; i < searchData.length; i++) ...{
-                                  // print(search?.nome);
-                                  Container(
-                                      height: 40,
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 25),
-                                      color: i % 2 == 0
-                                          ? Colors.white
-                                          : Colors.black12,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(searchData[i]!.nome),
-                                          Row(
+                                constraints: BoxConstraints(
+                                    maxWidth: 900, maxHeight: 600),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 25),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: background,
+                                  ),
+                                  constraints: BoxConstraints(
+                                      maxWidth: 1200, maxHeight: 600),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 25),
+                                  child: Wrap(
+                                    children: [
+                                      Container(
+                                        width: swidth > 900
+                                            ? 900 * .7
+                                            : swidth * .7,
+                                        child: Column(children: [
+                                          Text("Escolha os OA"),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8.0),
+                                            child:
+                                                Divider(color: Colors.black38),
+                                          ),
+                                          for (var i = 0;
+                                              i < searchData.length;
+                                              i++) ...{
+                                            // print(search?.nome);
+                                            Container(
+                                                height: 40,
+                                                padding: EdgeInsets.symmetric(
+                                                    horizontal: 25),
+                                                color: i % 2 == 0
+                                                    ? Colors.white
+                                                    : Colors.black12,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(searchData[i]!.nome),
+                                                    Row(
+                                                      children: [
+                                                        InkWell(
+                                                            onTap: () {
+                                                              bool itemExists =
+                                                                  selectedOA.contains(
+                                                                      searchData[
+                                                                              i]!
+                                                                          .nome);
+                                                              if (!itemExists) {
+                                                                selectedOA.add(
+                                                                    searchData[
+                                                                            i]!
+                                                                        .nome);
+                                                                addObjects();
+                                                              }
+                                                            },
+                                                            child: Icon(
+                                                                Icons
+                                                                    .add_circle,
+                                                                color: CoresPersonalizadas
+                                                                    .azulObama)),
+                                                        InkWell(
+                                                            onTap: () {
+                                                              selectedOA.remove(
+                                                                  searchData[i]!
+                                                                      .nome);
+                                                              addObjects();
+                                                            },
+                                                            child: Icon(
+                                                                Icons
+                                                                    .remove_circle,
+                                                                color: CoresPersonalizadas
+                                                                    .azulObama)),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                )),
+                                          }
+                                        ]),
+                                      ),
+                                      Container(
+                                        width: swidth > 900
+                                            ? 900 * .3
+                                            : swidth * .3,
+                                        child: Column(children: [
+                                          Stack(
                                             children: [
-                                              InkWell(
-                                                  onTap: () {
-                                                    bool itemExists = selectedOA
-                                                        .contains(searchData[i]!
-                                                            .nome);
-                                                    if (!itemExists) {
-                                                      selectedOA.add(
-                                                          searchData[i]!.nome);
-                                                      addObjects();
-                                                    }
-                                                    setState(() {
-                                                      addedOrRemovedOA = true;
-                                                      textValue =
-                                                          "OA adicionado";
-                                                    });
-                                                    hideMessage();
-                                                  },
-                                                  child: Icon(Icons.add_circle,
-                                                      color: CoresPersonalizadas
-                                                          .azulObama)),
-                                              InkWell(
-                                                  onTap: () {
-                                                    selectedOA.remove(
-                                                        searchData[i]!.nome);
-                                                    addObjects();
-                                                    setState(() {
-                                                      addedOrRemovedOA = true;
-                                                      textValue = "OA removido";
-                                                    });
-                                                    hideMessage();
-                                                  },
-                                                  child: Icon(
-                                                      Icons.remove_circle,
-                                                      color: CoresPersonalizadas
-                                                          .azulObama)),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text("OA selecionados"),
+                                                ],
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: [
+                                                  cachedObjects == null ||
+                                                          cachedObjects!.isEmpty
+                                                      ? SizedBox()
+                                                      : Tooltip(
+                                                          message:
+                                                              "Remover tudo",
+                                                          child: InkWell(
+                                                            onTap: () async {
+                                                              final SharedPreferences
+                                                                  prefs =
+                                                                  await SharedPreferences
+                                                                      .getInstance();
+                                                              await prefs.remove(
+                                                                  'objects');
+                                                              setState(() {
+                                                                selectedOA = [];
+                                                                cachedObjects =
+                                                                    [];
+                                                              });
+                                                            },
+                                                            child: SizedBox(
+                                                              width: 20,
+                                                              height: 20,
+                                                              child: Center(
+                                                                  child: Icon(
+                                                                      Icons
+                                                                          .clear,
+                                                                      size: 18,
+                                                                      color:
+                                                                          onError)),
+                                                            ),
+                                                          )),
+                                                ],
+                                              )
                                             ],
                                           ),
-                                        ],
-                                      )),
-                                },
-                                if (addedOrRemovedOA) ...{
-                                  Container(
-                                      child: Text(textValue,
-                                          style: textTheme.headlineSmall))
-                                },
-                              ]),
-                            ),
+                                          Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                vertical: 8.0),
+                                            child:
+                                                Divider(color: Colors.black38),
+                                          ),
+                                          if (cachedObjects == null ||
+                                              cachedObjects!.isEmpty) ...{
+                                            Text("Sua lista de OA está vazia")
+                                          } else ...{
+                                            for (var cacheObject
+                                                in cachedObjects!) ...{
+                                              Text(cacheObject)
+                                            }
+                                          }
+                                        ]),
+                                      )
+                                    ],
+                                  ),
+                                )),
                           );
                         });
                   },
@@ -365,43 +436,65 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 15, bottom: 30),
+          padding: const EdgeInsets.only(top: 5),
           child: Divider(thickness: 1, color: secondary),
         ),
         Container(
-          //Folha do texto
-          // margin: EdgeInsets.only(bottom: 50),
-          padding: EdgeInsets.symmetric(vertical: 72, horizontal: 91),
-          decoration: BoxDecoration(color: background, boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              spreadRadius: 0.8,
-              blurRadius: 5.0,
-              offset: Offset(0.0, 3.0),
-            ),
-          ]),
-          constraints: BoxConstraints(maxWidth: 900),
-          child: QuillEditor.basic(
-            scrollController: ScrollController(),
-            configurations: QuillEditorConfigurations(
-              controller: _controller,
-              // placeholder: initText(_controller),
-              customStyles: DefaultStyles(
-                paragraph: DefaultTextBlockStyle(
-                    TextStyle(color: onPrimary, fontSize: 14),
-                    VerticalSpacing(0, 0),
-                    VerticalSpacing(0, 0),
-                    BoxDecoration()),
+          height: MediaQuery.of(context).size.height - 125,
+          padding: const EdgeInsets.only(top: 20),
+          // color: Colors.grey.withOpacity(0.1),
+          width: 1100,
+          child: Expanded(
+            child: Scrollbar(
+              controller: controllerOne,
+              thumbVisibility: true,
+              trackVisibility: true,
+              thickness: 8,
+              child: SingleChildScrollView(
+                controller: controllerOne,
+                child: Column(
+                  children: [
+                    Container(
+                      // Folha do texto
+                      // margin: EdgeInsets.only(bottom: 50),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 72, horizontal: 91),
+                      decoration: BoxDecoration(color: background, boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 0.8,
+                          blurRadius: 5.0,
+                          offset: Offset(0.0, 3.0),
+                        ),
+                      ]),
+                      constraints: BoxConstraints(maxWidth: 900),
+                      child: QuillEditor.basic(
+                        scrollController: ScrollController(),
+                        configurations: QuillEditorConfigurations(
+                          controller: _controller,
+                          placeholder: initText(_controller, cachedObjects, dataList),
+                          customStyles: DefaultStyles(
+                            paragraph: DefaultTextBlockStyle(
+                                TextStyle(color: onPrimary, fontSize: 14),
+                                VerticalSpacing(0, 0),
+                                VerticalSpacing(0, 0),
+                                BoxDecoration()),
+                          ),
+                          sharedConfigurations: QuillSharedConfigurations(
+                            locale: Locale('pt', 'BR'),
+                          ),
+                          embedBuilders: kIsWeb
+                              ? FlutterQuillEmbeds.editorWebBuilders()
+                              : FlutterQuillEmbeds.editorBuilders(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              sharedConfigurations: QuillSharedConfigurations(
-                locale: Locale('pt', 'BR'),
-              ),
-              embedBuilders: kIsWeb
-                  ? FlutterQuillEmbeds.editorWebBuilders()
-                  : FlutterQuillEmbeds.editorBuilders(),
             ),
           ),
-        )
+        ),
       ],
     );
   }
