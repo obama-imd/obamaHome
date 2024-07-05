@@ -49,7 +49,7 @@ class TemplateColumnState extends State<TemplateColumn> {
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
-        floatingActionButton: LibrasButton(),
+        floatingActionButton: LibrasButton(swidth: swidth),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Container(

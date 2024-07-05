@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:obamahome/utils/app_padding.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../auth/components/googleAuth.dart';
-import '../auth/components/googleSignInButton.dart';
 import '../utils/app_theme.dart';
 import '../utils/cores_personalizadas.dart';
 
@@ -47,7 +45,7 @@ class _TopBarState extends ConsumerState<TopBar> {
           // print("teste => ${userLogged[0]}, ${userName[0]}");
         },
         child: SizedBox(
-          width: widget.swidth * 0.154,
+          width: 200,
           height: 45,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

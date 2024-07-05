@@ -71,12 +71,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                     CrossAxisAlignment.center),
               ),
               // if (MediaQuery.of(context).size.width > 1200) ...[
-              Container(
-                padding: paddingValues("sideMainPadding", context),
-                child: Column(children: [
-                  Container(
-                      color: const Color.fromARGB(255, 224, 220, 220),
-                      padding: const EdgeInsets.all(20.0),
+              Column(children: [
+                Container(
+                    color: const Color.fromARGB(255, 224, 220, 220),
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
+                    child: Padding(
+                      padding: paddingValues("sideMainPadding", context),
                       child: Column(children: [
                         Text(accordionItems[0].accordionTitle,
                             style: textTheme.titleSmall),
@@ -85,19 +85,19 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           accordionItems[0].accordionContent,
                           textAlign: TextAlign.justify,
                         )
-                      ])),
-                  Container(
-                      decoration: const BoxDecoration(
-                          color: const Color.fromARGB(255, 224, 220, 220),
-                          border: Border(
-                              bottom: BorderSide(
-                            color: Colors.blue,
-                            width: 8,
-                          ))),
-                      // padding: EdgeInsets.all(30),
-                      child: CustomVideo(urlVideo: 'oH3omNV9UUU'))
-                ]),
-              ),
+                      ]),
+                    )),
+                Container(
+                    decoration: const BoxDecoration(
+                        color: const Color.fromARGB(255, 224, 220, 220),
+                        border: Border(
+                            bottom: BorderSide(
+                          color: Colors.blue,
+                          width: 8,
+                        ))),
+                    // padding: EdgeInsets.all(30),
+                    child: CustomVideo(urlVideo: 'oH3omNV9UUU'))
+              ]),
               Container(
                   margin: const EdgeInsets.only(top: 100),
                   padding: paddingValues("sideMainPadding", context),

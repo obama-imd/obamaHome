@@ -10,18 +10,30 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double swidth = MediaQuery.of(context).size.width;
     return Column(
-      crossAxisAlignment: crossAlignment,
+      crossAxisAlignment:
+          swidth > 1024 ? crossAlignment : CrossAxisAlignment.center,
       children: [
         Container(
             padding: const EdgeInsets.only(bottom: 12.0),
-            child: Text(title.toUpperCase(),
-                style: Theme.of(context).textTheme.titleLarge!)),
+            child: Text(
+              title.toUpperCase(),
+              style: swidth > 1024
+                  ? Theme.of(context).textTheme.titleLarge!
+                  : TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+            )),
         if (subtitle != '') ...{
           Padding(
-            padding: EdgeInsets.only(bottom: 22.0),
-            child: Text(subtitle, textAlign: TextAlign.justify,
-              style: Theme.of(context).textTheme.titleMedium!)),
+              padding: EdgeInsets.only(bottom: 22.0),
+              child: Text(subtitle,
+                  textAlign: TextAlign.justify,
+                  style: swidth > 1024
+                      ? Theme.of(context).textTheme.titleMedium!
+                      : TextStyle(color: Colors.grey, fontSize: 16))),
         },
         Container(
             height: 5.0,

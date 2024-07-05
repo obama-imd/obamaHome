@@ -45,7 +45,7 @@ class _HomeDesktopState extends State<TemplateHome> {
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
-        floatingActionButton: LibrasButton(),
+        floatingActionButton: LibrasButton(swidth: swidth),
         body: SingleChildScrollView(
             physics: const BouncingScrollPhysics(),
             child: Column(children: <Widget>[
