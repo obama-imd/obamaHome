@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/advanced_search/application/study_level_service.dart';
+import 'package:obamahome/advanced_search/data/study_levels_controller.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/loadCircle.dart';
@@ -122,7 +124,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     titleStyle: textTheme.titleSmall!)),
             if (loadObjects) ...{circleLoadSpinner(context)}
           ],
-        )));
+        ),),);
   }
 }
 

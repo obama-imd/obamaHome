@@ -9,7 +9,8 @@ class StudyLevelService {
   final Ref ref;
   
   Future<List<StudyLevelModel>> fetchAll() async {
-    return await ref.read(studyLevelProvider).findAll();
+    final levels = await ref.read(studyLevelProvider).findAll();
+    return levels;
   }
 }
 

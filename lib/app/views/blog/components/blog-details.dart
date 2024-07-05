@@ -85,28 +85,38 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
               if (snapshot.connectionState == ConnectionState.done) {
                 final blogDataList = ref.watch(blogPosts);
                 List<BlogModel?> datas = [...blogDataList];
-                return Column(children: [
-                  Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                    blogPageView(context, swidth, _pageController, datas),
-                    Container(
-                        padding: const EdgeInsets.only(top: 85.0, left: 15),
-                        width: swidth * .295,
-                        child: blogFilters(context, swidth, datas, updateData, textTheme.titleSmall!)),
-                  ])
-                ]);
-              } else if (snapshot.hasError) {
-                Container(
-                    padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+                  return Column(
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          blogPageView(context, swidth, _pageController, datas),
+                          Container(
+                              padding:
+                                  const EdgeInsets.only(top: 85.0, left: 15),
+                              width: swidth * .295,
+                              child: blogFilters(context, swidth, datas,
+                                  updateData, textTheme.titleSmall!)),
+                        ],
+                      ),
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  Container(
+                    padding:
+                        const EdgeInsets.only(top: 100, left: 90, right: 15),
                     width: swidth * 0.67,
                     child: Text(
                       "Perdão, não há nenhum post a ser exibido no momento.",
-                    ));
-              }
-              return Container();
-              // return circleLoadSpinner(context);
-            },
-          ),
-        ]),
+                    ),
+                  );
+                }
+                return Container();
+                // return circleLoadSpinner(context);
+              },
+            ),
+          ],
+        ),
         if (loadPosts) ...{circleLoadSpinner(context)}
       ],
     );

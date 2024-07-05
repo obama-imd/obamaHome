@@ -5,26 +5,22 @@ import 'package:obamahome/advanced_search/utils.dart';
 import 'package:obamahome/components/mainButton.dart';
 import '../../../../utils/app_theme.dart';
 
-class OAFilters extends ConsumerStatefulWidget {
+class OAadvanced extends ConsumerStatefulWidget {
   final double swidth;
   final String data;
   final Function(String) updateData;
-  final TextStyle titleStyle;
-  List<dynamic> learningLevels;
 
-  OAFilters({
+  OAadvanced({
     required this.swidth,
     required this.data,
     required this.updateData,
-    required this.learningLevels,
-    required this.titleStyle,
   });
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _OAFiltersState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _OAadvancedState();
 }
 
-class _OAFiltersState extends ConsumerState<OAFilters> {
+class _OAadvancedState extends ConsumerState<OAadvanced> {
   @override
   void initState() {
     super.initState();
@@ -33,10 +29,13 @@ class _OAFiltersState extends ConsumerState<OAFilters> {
   @override
   Widget build(BuildContext context) {
     final studyLevelsController = ref.watch(allStudyLevelProvider);
+    print('${studyLevelsController.hasValue} + tem valor??');
+    print('${studyLevelsController.isLoading} + tem valor 2??');
 
-    if (!studyLevelsController.hasValue || studyLevelsController.isLoading) {
+    if (studyLevelsController.isLoading || !studyLevelsController.hasValue) {
       return CircularProgressIndicator();
     } else {
+      print('${studyLevelsController.asData!.value.toString()} ===========++++++=========');
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -175,6 +174,19 @@ class _OAFiltersState extends ConsumerState<OAFilters> {
                   ],
                 ),
               ),
+              // Container(
+              //   height: 40,
+              //   child: ListView.builder(
+              //     itemCount: studyLevelsController.asData!.value.length,
+              //     itemBuilder: (context, index) {
+              //       final level = studyLevelsController.asData!.value[index];
+              //       return ListTile(
+              //         title: Text('ID: ${level.id}', style: TextStyle(color: Colors.black),),
+              //         subtitle: Text('Nome: ${level.nome}'),
+              //       );
+              //     },
+              //   ),
+              // ),
             ],
           ),
         ],
