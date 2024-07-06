@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
-import '../../../controllers/search_controller.dart';
 
-// List<String> nivelEnsino = <String>['Todos'];
+List<String> nivelEnsino = <String>['Todos'];
 List<String> temaCurricular = <String>['Todos'];
 List<String> tipo = <String>['Todos'];
 List<String> descritor = <String>['Todos'];
@@ -33,50 +32,35 @@ class OAFilters extends StatefulWidget {
       required this.titleStyle});
 
   @override
-  State<OAFilters> createState() => OAFilterState(
-      swidth: swidth,
-      data: data,
-      updateData: updateData,
-      titleStyle: titleStyle);
+  State<OAFilters> createState() => OAFilterState();
 }
 
 class OAFilterState extends State<OAFilters> {
-  final double swidth;
-  final String data;
-  final Function(String) updateData;
-  final TextStyle titleStyle;
-  List<String> nivelEnsino = [];
-
-  OAFilterState(
-      {required this.swidth,
-      required this.data,
-      required this.updateData,
-      required this.titleStyle});
 
   var setLevel = [];
 
-  Future<void> getLevels() async {
-    List<String> levels = [];
-    List<dynamic> learnLevels = await fetchLevels();
-    for (var level in learnLevels) {
-      print("nivel1 => $level");
-      levels.add(level.name);
-    }
-    // try {
-      // setState(() {
-      //   nivelEnsino = levels;
-      // });
-      print("nivel2 => $learnLevels");
-    // } catch (e) {
-    //   print('Error in getLevels: $e');
-    // }
-  }
+  // Future<void> getLevels() async {
+  //   List<String> levels = [];
+  //   List<dynamic> learnLevels = await fetchLevels();
+  //   for (var level in learnLevels) {
+  //     // print("nivel1 => $level");
+  //     levels.add(level.name);
+  //   }
+  //   try {
+  //     setState(() {
+  //       nivelEnsino = levels;
+  //     });
+  //     print("nivel2 => $learnLevels");
+  //   } catch (e) {
+  //     print('Error in getLevels: $e');
+  //   }
+  // }
 
-  @override
-  void initState() async {
-    await getLevels();
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   getLevels();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -84,13 +68,13 @@ class OAFilterState extends State<OAFilters> {
       Container(
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(bottom: 30),
-          child: Text('BUSCA', style: titleStyle)),
+          child: Text('BUSCA', style: widget.titleStyle)),
       Container(
           height: 50,
           margin: const EdgeInsets.only(bottom: 50),
           child: TextField(
               onSubmitted: (value) async {
-                updateData(value);
+                widget.updateData(value);
               },
               decoration: InputDecoration(
                   border: OutlineInputBorder(
@@ -158,7 +142,7 @@ class OAFilterState extends State<OAFilters> {
             Container(
                 alignment: Alignment.centerLeft,
                 margin: EdgeInsets.only(top: 40, bottom: 20),
-                child: Text(lista, style: titleStyle)),
+                child: Text(lista, style: widget.titleStyle)),
             Container(
                 height: 40,
                 alignment: Alignment.centerLeft,
