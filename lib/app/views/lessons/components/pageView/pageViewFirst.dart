@@ -12,7 +12,7 @@ class PageViewFirst extends ConsumerStatefulWidget {
 }
 
 final firstStepData = StateProvider<List<String>>((ref) {
-  return [];
+  return ["", "", "", ""];
 });
 
 void saveFirstStepData(ref, arrayData) {

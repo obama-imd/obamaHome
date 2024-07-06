@@ -6,7 +6,6 @@ import 'package:obamahome/utils/cores_personalizadas.dart';
 import '../../../utils/app_theme.dart';
 import 'components/pageView/pageViewFirst.dart';
 import 'components/pageView/pageViewSecond.dart';
-import 'components/pageView/pageViewThird.dart';
 import 'components/textEditorClass.dart';
 
 List<String> pageHints = [
@@ -44,20 +43,16 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
     _pageViewController = PageController();
   }
 
-  List<Widget> paveViewContent = [
-    PageViewFirst(),
-    PageViewSecond(),
-    PageViewThird(),
-  ];
+  List<Widget> paveViewContent = [PageViewFirst(), PageViewSecond()];
 
-  void _updateCurrentPageIndex(int index) {
-    // _tabController.index = index;
-    _pageViewController.animateToPage(
-      index,
-      duration: const Duration(milliseconds: 400),
-      curve: Curves.easeInOut,
-    );
-  }
+  // void _updateCurrentPageIndex(int index) {
+  //   // _tabController.index = index;
+  //   _pageViewController.animateToPage(
+  //     index,
+  //     duration: const Duration(milliseconds: 400),
+  //     curve: Curves.easeInOut,
+  //   );
+  // }
 
   @override
   void dispose() {
@@ -86,7 +81,14 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset("assets/images/logo.png", width: logoWidth),
+                  if (swidth > 1024) ...{
+                    Image.asset("assets/images/logo.png", width: logoWidth),
+                  } else ...{
+                    Container(
+                      width: 100,
+                      child: Image.asset("assets/images/icone.png"),
+                    )
+                  },
                   NavMenu(
                     swidth: swidth,
                     heightBtn: 50,
@@ -99,11 +101,11 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
             width: swidth,
             padding: EdgeInsets.only(top: 15),
             child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              for (var i = 0; i < 3; i++) ...{
+              for (var i = 0; i < 2; i++) ...{
                 Material(
                   child: InkWell(
                     child: Container(
-                      width: swidth > 1200 ? 1200 * .33 : swidth * .33,
+                      width: swidth > 1200 ? 1200 * .5 : swidth * .5,
                       height: 50,
                       decoration: BoxDecoration(
                           border: Border(
@@ -140,19 +142,19 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
               }
             ]),
           ),
-          Container(
-            width: swidth,
-            height: 1500,
+          Padding(
             padding: EdgeInsets.only(top: 25),
-            child: PageView.builder(
-              controller: _pageViewController,
-              itemCount: 3,
-              itemBuilder: (BuildContext context, int index) {
-                // for (var i = 1; i<=3; i++) {
-                return Material(
-                    child: Column(children: [paveViewContent[index]]));
-                // }
-              },
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              child: PageView.builder(
+                controller: _pageViewController,
+                itemCount: 2,
+                itemBuilder: (BuildContext context, int index) {
+                  return Material(
+                    child: Column(children: [paveViewContent[index]]),
+                  );
+                },
+              ),
             ),
           ),
         ],

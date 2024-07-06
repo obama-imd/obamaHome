@@ -12,7 +12,8 @@ void SetLibrasModeActive(WidgetRef ref, bool isLibrasModeActive) {
 }
 
 class LibrasButton extends ConsumerStatefulWidget {
-  const LibrasButton({super.key});
+  double swidth;
+  LibrasButton({super.key, required this.swidth});
 
   @override
   _LibrasButtonState createState() => _LibrasButtonState();
@@ -22,13 +23,26 @@ class _LibrasButtonState extends ConsumerState<LibrasButton> {
   @override
   Widget build(BuildContext context) {
     bool isActive = ref.watch(librasMode);
-    return FloatingActionButton(
-      tooltip: "Ativar/Desativar ferramenta de Libras",
-      backgroundColor: isActive ? onPrimary : CoresPersonalizadas.azulObama,
-      onPressed: () {
-        SetLibrasModeActive(ref, isActive);
-      },
-      child: Icon(Icons.sign_language, color: background),
+    return Column(
+      mainAxisSize: MainAxisSize.max,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Column(
+          children: [
+            if (widget.swidth > 1024) ...{
+              FloatingActionButton(
+                tooltip: "Ativar/Desativar ferramenta de Libras",
+                backgroundColor:
+                    isActive ? onPrimary : CoresPersonalizadas.azulObama,
+                onPressed: () {
+                  SetLibrasModeActive(ref, isActive);
+                },
+                child: Icon(Icons.sign_language, color: background),
+              ),
+            }
+          ],
+        ),
+      ],
     );
   }
 }
