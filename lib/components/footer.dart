@@ -39,6 +39,7 @@ class _FooterState extends State<Footer> {
 
   List<String> additionalCategories = [
     "> Sobre Nós",
+    "> Manuais",
     // "> Terms and conditions",
     // "> Privacy policy",
     // "> News",
@@ -46,7 +47,7 @@ class _FooterState extends State<Footer> {
   ];
   List<String> additionalPaths = [
     '/sobre',
-    //  '',
+    '/manuais',
     //  '',
     //  '',
     //   ''
@@ -54,23 +55,15 @@ class _FooterState extends State<Footer> {
 
   Widget footerList(BuildContext context, List<String> categories,
       List<String> links, int index) {
-    return Container(
-        height: 7.5 * (categories.length).toDouble(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, links[index]);
-              },
-              child: Text(
-                categories[index],
-                style: textTheme.bodySmall,
-              ),
-            ),
-            Container(height: 5),
-          ],
-        ));
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, links[index]);
+      },
+      child: Text(
+        categories[index],
+        style: textTheme.bodySmall,
+      ),
+    );
   }
 
   @override
@@ -190,7 +183,7 @@ class _FooterState extends State<Footer> {
               width: widget.swidth,
               child: flutterMapArea(context)),
           Container(
-            height: 1150,
+            height: 750,
             width: widget.swidth,
             color: onPrimary,
             padding: const EdgeInsets.only(left: 40, top: 60),
@@ -214,6 +207,10 @@ class _FooterState extends State<Footer> {
               Container(height: 15),
               Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
+              for (int i = 0; i < additionalCategories.length; i++) ...{
+                footerList(context, additionalCategories, additionalPaths, i),
+              },
+              Container(height: 35),
               SizedBox(
                   height: 60,
                   width: 300,
@@ -255,17 +252,17 @@ class _FooterState extends State<Footer> {
                               color: background, size: 16.0))),
                 ],
               ),
-              Container(
-                  height: 50,
-                  width: widget.swidth,
-                  color: CoresPersonalizadas.azulObama,
-                  child: Center(
-                      child: Text('Obama © Copyright 2024',
-                          style: textTheme.displaySmall)))
             ]),
           ),
+          Container(
+              height: 50,
+              width: widget.swidth,
+              color: CoresPersonalizadas.azulObama,
+              child: Center(
+                  child: Text('Obama © Copyright 2024',
+                      style: textTheme.displaySmall)))
         ])
-      ]
+      ],
     ]);
   }
 }
