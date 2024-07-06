@@ -43,10 +43,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
     _pageViewController = PageController();
   }
 
-  List<Widget> paveViewContent = [
-    PageViewFirst(),
-    PageViewSecond()
-  ];
+  List<Widget> paveViewContent = [PageViewFirst(), PageViewSecond()];
 
   // void _updateCurrentPageIndex(int index) {
   //   // _tabController.index = index;
@@ -84,7 +81,14 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Image.asset("assets/images/logo.png", width: logoWidth),
+                  if (swidth > 1024) ...{
+                    Image.asset("assets/images/logo.png", width: logoWidth),
+                  } else ...{
+                    Container(
+                      width: 100,
+                      child: Image.asset("assets/images/icone.png"),
+                    )
+                  },
                   NavMenu(
                     swidth: swidth,
                     heightBtn: 50,
