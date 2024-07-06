@@ -179,7 +179,7 @@ class _FooterState extends State<Footer> {
                 width: widget.swidth * 0.7,
                 color: CoresPersonalizadas.azulObama,
                 child: Center(
-                    child: Text('Obama © Copyright 2022',
+                    child: Text('Obama © Copyright 2024',
                         style: textTheme.displaySmall)))
           ])
         ]))
