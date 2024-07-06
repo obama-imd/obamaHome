@@ -351,94 +351,113 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                     width: swidth,
                     height: MediaQuery.of(context).size.height,
                     color: background),
-                Container(
-                    height: MediaQuery.of(context).size.height,
-                    constraints: BoxConstraints(maxWidth: 900, maxHeight: 600),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: background,
-                      ),
-                      constraints:
-                          BoxConstraints(maxWidth: 1200, maxHeight: 600),
-                      padding: const EdgeInsets.symmetric(vertical: 25),
-                      child: Wrap(runSpacing: 20, children: [
-                        Container(
-                          width: swidth > 900 ? 900 * .7 : swidth,
-                          child: Column(children: [
-                            Text("Escolha os OA",
-                                style: TextStyle(fontWeight: FontWeight.bold)),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 8.0),
-                              child: Divider(color: Colors.black38),
-                            ),
-                            for (var i = 0; i < searchData.length; i++) ...{
-                              Container(
-                                  height: 40,
-                                  padding: EdgeInsets.symmetric(horizontal: 25),
-                                  color: i % 2 == 0
-                                      ? Colors.white
-                                      : Colors.black12,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(searchData[i]!.nome),
-                                      Row(
-                                        children: [
-                                          InkWell(
-                                              onTap: () {
-                                                bool itemExists =
-                                                    selectedOA.contains(
-                                                        searchData[i]!.nome);
-                                                if (!itemExists) {
-                                                  selectedOA
-                                                      .add(searchData[i]!.nome);
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        height: MediaQuery.of(context).size.height,
+                        constraints:
+                            BoxConstraints(maxWidth: 1200, maxHeight: 600),
+                        child: Column(children: [
+                          Container(
+                            width: swidth > 1200 ? 1200 : swidth,
+                            child: Column(children: [
+                              Text("Escolha os OA",
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.bold)),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8.0),
+                                child: Divider(color: Colors.black38),
+                              ),
+                              for (var i = 0; i < searchData.length; i++) ...{
+                                Container(
+                                    height: 40,
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 25),
+                                    color: i % 2 == 0
+                                        ? Colors.white
+                                        : Colors.black12,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(searchData[i]!.nome),
+                                        Row(
+                                          children: [
+                                            if (selectedOA.contains(
+                                                searchData[i]!.nome)) ...{
+                                              InkWell(
+                                                  onTap: () {
+                                                    bool itemExists = selectedOA
+                                                        .contains(searchData[i]!
+                                                            .nome);
+                                                    if (!itemExists) {
+                                                      selectedOA.add(
+                                                          searchData[i]!.nome);
+                                                      addObjects();
+                                                    }
+                                                  },
+                                                  child: Icon(Icons.add_circle,
+                                                      color: CoresPersonalizadas
+                                                          .azulObama)),InkWell(
+                                                onTap: () {
+                                                  selectedOA.remove(
+                                                      searchData[i]!.nome);
                                                   addObjects();
-                                                }
-                                              },
-                                              child: Icon(Icons.add_circle,
-                                                  color: CoresPersonalizadas
-                                                      .azulObama)),
-                                          InkWell(
-                                              onTap: () {
-                                                selectedOA.remove(
-                                                    searchData[i]!.nome);
-                                                addObjects();
-                                              },
-                                              child: Icon(Icons.remove_circle,
-                                                  color: CoresPersonalizadas
-                                                      .azulObama)),
-                                        ],
-                                      ),
-                                    ],
-                                  )),
-                            }
-                          ]),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.symmetric(vertical: 20),
-                              child: ElevatedButton(
-                                  style: ButtonStyle(
-                                      backgroundColor: MaterialStatePropertyAll(
-                                          CoresPersonalizadas.azulObama),
-                                      foregroundColor:
-                                          MaterialStatePropertyAll(background)),
-                                  onPressed: () {
-                                    setState(() {
-                                      addedOrRemovedOA = false;
-                                    });
-                                  },
-                                  child: Text("Fechar")),
-                            ),
-                          ],
-                        )
-                      ]),
-                    ))
+                                                },
+                                                child: Icon(Icons.remove_circle,
+                                                    color: CoresPersonalizadas
+                                                        .azulObama)),
+                                            } else ...{
+                                              Padding( padding: EdgeInsets.only(right: 2), child: Container(
+                                                  width: 20,
+                                                  height: 20,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    color: Colors.green,
+                                                  ),
+                                                  child: Icon(Icons.check,
+                                                      color: background,
+                                                      size: 15)))
+                                            },
+                                            
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                              }
+                            ]),
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                margin:
+                                    const EdgeInsets.symmetric(vertical: 20),
+                                child: ElevatedButton(
+                                    style: ButtonStyle(
+                                        backgroundColor:
+                                            MaterialStatePropertyAll(
+                                                CoresPersonalizadas.azulObama),
+                                        foregroundColor:
+                                            MaterialStatePropertyAll(
+                                                background)),
+                                    onPressed: () {
+                                      setState(() {
+                                        addedOrRemovedOA = false;
+                                      });
+                                    },
+                                    child: Text("Fechar")),
+                              ),
+                            ],
+                          )
+                        ])),
+                  ],
+                )
               }
             ],
           );
