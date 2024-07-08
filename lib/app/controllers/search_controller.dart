@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:obamahome/app/models/study_level.dart';
 
 import '../models/search_models.dart';
 
@@ -184,21 +186,36 @@ Future<SearchResponse> fetchDataAndUpdateState(
 }
 // }
 
-const apiUrl = 'http://localhost:8081/v1/nivelensino';
+const apiUrl = 'http://hobama.imd.ufrn.br/v1/nivelensino';
 
-Future<List<dynamic>> fetchLevels() async {
+final searchLevels = StateProvider<List<String>>((ref) {
+  return [];
+});
+
+Future<List<String>> fetchLevels(ref) async {
   // try {
-    final response = await http.get(Uri.parse(apiUrl));
+  final response = await http.get(Uri.parse(apiUrl), headers: {
+    HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
+  });
 
-    if (response.statusCode == 200) {
-      List<dynamic> jsonData = jsonDecode(response.body);
-      print("jsonData => $jsonData");
-      return jsonData;
-    } else {
-      // throw Exception(
-      //     'Failed to fetch API data. Status code: ${response.statusCode}');
-      return [];
+  if (response.statusCode == 200) {
+    List<dynamic> jsonData = jsonDecode(response.body);
+    List<String> setLevels = [];
+    List<StudyLevelModel> studyLevels = jsonData.map((level) => StudyLevelModel(id: level["id"], nome: level["nome"])).toList();
+    // print("jsonData => $studyLevels");
+
+    for (var level in studyLevels) {
+      setLevels.add(level.nome);
     }
+
+    final studyList = ref.read(searchLevels);
+    studyList.addAll(setLevels);
+    return studyList;
+  } else {
+    // throw Exception(
+    //     'Failed to fetch API data. Status code: ${response.statusCode}');
+    return [];
+  }
   // } catch (e) {
   //   print('Error fetching data: $e');
   //   throw Exception('Failed to fetch API data. Status code: ${e}');

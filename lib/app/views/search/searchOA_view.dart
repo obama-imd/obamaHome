@@ -31,7 +31,6 @@ class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
   bool loadObjects = false;
   late TextStyle titleStyle;
-  List<dynamic> learningLevels = [];
 
   void updateData(newData) {
     setState(() {
@@ -47,14 +46,17 @@ class SearchPageState extends ConsumerState<SearchPage> {
     }
   }
 
-  // void getLevels() async {
+  // Future<List<dynamic>> getLevels() async {
   //   // try {
-  //     // print("Iniciando getLevels");
-  //     List<dynamic> levels = await fetchLevels();
-  //     setState() {
-  //       learningLevels = levels;
-  //     };
-  //     print("Níveis recebidos: $learningLevels");
+  //   // print("Iniciando getLevels");
+  //   List<dynamic> levels = await fetchLevels();
+  //   setState() {
+  //     learningLevels = levels;
+  //   }
+
+  //   print("Níveis recebidos: $learningLevels");
+  //   return levels;
+
   //   // } catch (e) {
   //   //   print('Erro em getLevels: $e');
   //   // }
@@ -67,16 +69,6 @@ class SearchPageState extends ConsumerState<SearchPage> {
     // getLevels();
     activateLoad();
   }
-
-
-
-  // @override
-  // void initState() {
-  //   activateLoad();
-  //   // waitData();
-  //   getLevels();
-  //   super.initState();
-  // }
 
   void activateLoad() {
     setState(() {
@@ -118,7 +110,6 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
                     selectedPage: selectedPage,
-                    learningLevels: learningLevels,
                     titleStyle: textTheme.titleSmall!)),
             if (loadObjects) ...{circleLoadSpinner(context)}
           ],

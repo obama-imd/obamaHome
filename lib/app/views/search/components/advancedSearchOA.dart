@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obamahome/app/models/study_level.dart';
 import 'package:obamahome/components/mainButton.dart';
 
+import '../../../../components/loadCircle.dart';
 import '../../../../utils/app_theme.dart';
+import '../../../controllers/search_controller.dart';
 
 List<String> nivelEnsino = <String>['Todos'];
 List<String> temaCurricular = <String>['Todos'];
@@ -15,168 +19,201 @@ const List<String> tileTitle = <String>[
   'Selecione o descritor',
 ];
 
-bool pcnCheck = false;
-bool bnccCheck = false;
+// bool pcnCheck = false;
+// bool bnccCheck = false;
 
-class OAFilters extends StatefulWidget {
+class OAFilters extends ConsumerStatefulWidget {
   final double swidth;
   final String data;
   final Function(String) updateData;
   final TextStyle titleStyle;
-  List<dynamic> learningLevels;
   OAFilters(
       {required this.swidth,
       required this.data,
       required this.updateData,
-      required this.learningLevels,
       required this.titleStyle});
 
   @override
-  State<OAFilters> createState() => OAFilterState();
+  OAFilterState createState() => OAFilterState();
 }
 
-class OAFilterState extends State<OAFilters> {
+class OAFilterState extends ConsumerState<OAFilters> {
+  // List<String> learningLevels = [];
+  // late List<String> learningLevels;
 
-  var setLevel = [];
+  // List<String> getLevels() {
+  //   // try {
+  //   // print("Iniciando getLevels");
+  //   List<String> setLevels = [];
+  //   List<String> levels = ref.watch(searchLevels);
 
-  // Future<void> getLevels() async {
-  //   List<String> levels = [];
-  //   List<dynamic> learnLevels = await fetchLevels();
-  //   for (var level in learnLevels) {
-  //     // print("nivel1 => $level");
-  //     levels.add(level.name);
+  //   print("jsonData: $levels");
+  //   for (var level in levels) {
+  //     setLevels.add(level.nome);
   //   }
-  //   try {
-  //     setState(() {
-  //       nivelEnsino = levels;
-  //     });
-  //     print("nivel2 => $learnLevels");
-  //   } catch (e) {
-  //     print('Error in getLevels: $e');
-  //   }
-  // }
+  //   // levels.map((level) {
+  //   //   setLevels.add(level.nome);
+  //   // });
 
-  // @override
-  // void initState() {
-  //   getLevels();
-  //   super.initState();
+  //   setState() {
+  //     learningLevels = setLevels;
+  //   }
+
+  //   return learningLevels;
+
+  //   // } catch (e) {
+  //   //   print('Erro em getLevels: $e');
+  //   // }
   // }
 
   @override
+  void initState() {
+    // learningLevels = getLevels();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-      Container(
-          alignment: Alignment.centerLeft,
-          margin: const EdgeInsets.only(bottom: 30),
-          child: Text('BUSCA', style: widget.titleStyle)),
-      Container(
-          height: 50,
-          margin: const EdgeInsets.only(bottom: 50),
-          child: TextField(
-              onSubmitted: (value) async {
-                widget.updateData(value);
-              },
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                      borderRadius: BorderRadius.circular(100)),
-                  hintText: 'Buscar',
-                  hintStyle: textTheme.bodySmall,
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 15),
-                  filled: true,
-                  fillColor: const Color.fromARGB(255, 218, 216, 216),
-                  suffixIcon: const Icon(Icons.search)))),
-      Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              Row(
-                children: [
-                  Checkbox(
-                    tristate: true,
-                    value: pcnCheck,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        if (value == null) {
-                          pcnCheck = false;
-                        } else {
-                          pcnCheck = !pcnCheck;
-                          bnccCheck = false;
-                        }
-                      });
-                    },
-                  ),
-                  Text(
-                    "PCN",
-                  )
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0),
-                child: Row(
+    return FutureBuilder<void>(
+      future: fetchLevels(ref), // Chama a função getLevels
+      builder: (BuildContext context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.done) {
+          final studyLevelData = ref.watch(searchLevels);
+          // List<String> studyLevel = [...studyLevelData];
+
+          // for (var level in studyLevelData) {
+          //   studyLevels.add(level.nome);
+          // }
+
+          print("jsonData => $studyLevelData");
+
+          return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                    alignment: Alignment.centerLeft,
+                    margin: const EdgeInsets.only(bottom: 30),
+                    child: Text('BUSCA', style: widget.titleStyle)),
+                Container(
+                    height: 50,
+                    margin: const EdgeInsets.only(bottom: 50),
+                    child: TextField(
+                        onSubmitted: (value) async {
+                          widget.updateData(value);
+                        },
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide.none,
+                                borderRadius: BorderRadius.circular(100)),
+                            hintText: 'Buscar',
+                            hintStyle: textTheme.bodySmall,
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 15),
+                            filled: true,
+                            fillColor: const Color.fromARGB(255, 218, 216, 216),
+                            suffixIcon: const Icon(Icons.search)))),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Checkbox(
-                      tristate: true,
-                      value: bnccCheck,
-                      onChanged: (bool? value) {
-                        setState(() {
-                          if (value == null) {
-                            bnccCheck = false;
-                          } else {
-                            bnccCheck = !bnccCheck;
-                            pcnCheck = false;
-                          }
-                        });
-                      },
+                    // Row(
+                    //   children: [
+                    //     Row(
+                    //       children: [
+                    //         Checkbox(
+                    //           tristate: true,
+                    //           value: pcnCheck,
+                    //           onChanged: (bool? value) {
+                    //             setState(() {
+                    //               if (value == null) {
+                    //                 pcnCheck = false;
+                    //               } else {
+                    //                 pcnCheck = !pcnCheck;
+                    //                 bnccCheck = false;
+                    //               }
+                    //             });
+                    //           },
+                    //         ),
+                    //         Text(
+                    //           "PCN",
+                    //         )
+                    //       ],
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.only(left: 8.0),
+                    //       child: Row(
+                    //         children: [
+                    //           Checkbox(
+                    //             tristate: true,
+                    //             value: bnccCheck,
+                    //             onChanged: (bool? value) {
+                    //               setState(() {
+                    //                 if (value == null) {
+                    //                   bnccCheck = false;
+                    //                 } else {
+                    //                   bnccCheck = !bnccCheck;
+                    //                   pcnCheck = false;
+                    //                 }
+                    //               });
+                    //             },
+                    //           ),
+                    //           Text(
+                    //             "BNCC",
+                    //           )
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
+                    for (var lista in tileTitle) ...{
+                      Container(
+                          alignment: Alignment.centerLeft,
+                          margin: EdgeInsets.only(top: 40, bottom: 20),
+                          child: Text(lista, style: widget.titleStyle)),
+                      Container(
+                          height: 40,
+                          alignment: Alignment.centerLeft,
+                          margin: EdgeInsets.only(bottom: 4),
+                          child: DropdownButton<String>(
+                              value: studyLevelData.first,
+                              icon: const Icon(Icons.arrow_drop_down),
+                              elevation: 5,
+                              style: textTheme.bodySmall,
+                              onChanged: (String? value) {
+                                // This is called when the user selects an item.
+                                // setState(() {
+                                //   dropdownValue = value!;
+                                // });
+                              },
+                              items: studyLevelData.map<DropdownMenuItem<String>>(
+                                  (String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Container(child: Text(value)),
+                                );
+                              }).toList())),
+                    },
+                    Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          mainButton(context, 'Busca Avançada', null, null),
+                        ],
+                      ),
                     ),
-                    Text(
-                      "BNCC",
-                    )
                   ],
                 ),
-              ),
-            ],
-          ),
-          for (var lista in tileTitle) ...{
-            Container(
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(top: 40, bottom: 20),
-                child: Text(lista, style: widget.titleStyle)),
-            Container(
-                height: 40,
-                alignment: Alignment.centerLeft,
-                margin: EdgeInsets.only(bottom: 4),
-                child: DropdownButton<String>(
-                    value: nivelEnsino.first,
-                    icon: const Icon(Icons.arrow_drop_down),
-                    elevation: 5,
-                    style: textTheme.bodySmall,
-                    onChanged: (String? value) {
-                      // This is called when the user selects an item.
-                      // setState(() {
-                      //   dropdownValue = value!;
-                      // });
-                    },
-                    items:
-                        nivelEnsino.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Container(child: Text(value)),
-                      );
-                    }).toList())),
-          },
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                mainButton(context, 'Busca Avançada', null, null),
-              ],
-            ),
-          ),
-        ],
-      ),
-    ]);
+              ]);
+        } else if (snapshot.hasError) {
+          Container(
+              padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+              width: widget.swidth * 0.67,
+              child: Text(
+                "Perdão, não há nenhum item a ser exibido no momento.",
+              ));
+        }
+        return circleLoadSpinner(context);
+      },
+    );
   }
 }

@@ -13,7 +13,6 @@ class SearchDesktop extends StatefulWidget {
   Function(void) updateData;
   void Function(int) selectedPage;
   TextStyle titleStyle;
-  List<dynamic> learningLevels;
 
   SearchDesktop(
       {Key? key,
@@ -21,7 +20,6 @@ class SearchDesktop extends StatefulWidget {
       required this.selectedPageIndex,
       required this.updateData,
       required this.selectedPage,
-      required this.learningLevels,
       required this.titleStyle})
       : super(key: key);
 
@@ -67,7 +65,6 @@ class _SearchDesktopState extends State<SearchDesktop> {
                     data: widget.termSearched,
                     updateData: widget.updateData,
                     titleStyle: widget.titleStyle,
-                    learningLevels: widget.learningLevels
                   ),
                 ),
               ),
