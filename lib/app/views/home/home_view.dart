@@ -79,7 +79,9 @@ class HomeViewState extends ConsumerState<HomeView> {
   }
 }
 
-class OAHome extends ConsumerStatefulWidget {
+//Sarah - Lembre de comentar o código abaixo, não apagar, importante deixar comentado pra se a gente precisar no futuro, só reutilizar, ok?
+
+class OAHome extends ConsumerStatefulWidget { // CLasse do antigo componente de OA, recomendo colocar o mesmo nome no novo componente
   final double swidth;
   const OAHome(this.swidth, {super.key});
 
@@ -92,10 +94,10 @@ class OAHomeState extends ConsumerState<OAHome> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: fetchObjects(ref),
+    return FutureBuilder( // Builder para funções assíncronas, só carrega o conteúdo quando recebe dados do backend, você não vai precisar disso no novo componente
+      future: fetchObjects(ref), // Função que está puxando dados do backend, você não vai precisar disso no novo componente
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
+        if (snapshot.connectionState == ConnectionState.done) { 
           final searchList = ref.watch(searchListHome);
           List<SearchModel?> data = [...searchList];
           return Column(children: [
@@ -112,21 +114,21 @@ class OAHomeState extends ConsumerState<OAHome> {
                         Padding(
                           padding: EdgeInsets.symmetric(
                               horizontal: widget.swidth * .016),
-                          child: SectionTitle('Objetos de Aprendizagem', '',
+                          child: SectionTitle('Objetos de Aprendizagem', '', //WIdget que monta o título das seções
                               CrossAxisAlignment.start),
                         ),
                       ],
                     ),
                   ),
-                  ResponsiveGridList(
+                  ResponsiveGridList( // Sarah - Widget que monta exibição em grid, copiar essa widget e colocar o novo componente dentro
                       physics: NeverScrollableScrollPhysics(),
                       scroll: false,
                       desiredItemWidth: 237.5,
                       minSpacing: widget.swidth * .016,
-                      children: data.map((post) {
+                      children: data.map((post) { //Loop que opera em cima da lista de dados recebidos
                         return Container(
                           alignment: Alignment(0, 0),
-                          child: OurProductItem(
+                          child: OurProductItem( //Card do Objeto de Aprendizagem, aqui é onde dever ser inserido novo componente
                               title: post!.nome, image: post.url),
                         );
                       }).toList()),
