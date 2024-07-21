@@ -5,7 +5,6 @@ import 'package:image_network/image_network.dart';
 import 'package:obamahome/templates/template_basic_row.dart';
 
 import '../../../../components/loadCircle.dart';
-import '../../../../utils/app_padding.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
@@ -86,104 +85,38 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
               if (snapshot.connectionState == ConnectionState.done) {
                 final blogDataList = ref.watch(blogPosts);
                 List<BlogModel?> datas = [...blogDataList];
-                return Column(children: [
-                  if (swidth > 1024) ...{
-                    Row(
+                  return Column(
+                    children: [
+                      Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Column(children: [
-                            if (datas.isEmpty) ...{
-                              Container(
-                                  padding:
-                                      paddingValues("sideMainPadding", context),
-                                  margin: const EdgeInsets.only(top: 100, right: 15),
-                                  width: swidth*0.565,
-                                  child: Center(
-                                      child: Text(
-                                    "Perdão, não há nenhum post a ser exibido no momento.",
-                                  )))
-                            } else ...{
-                              Padding(
-                                padding: const EdgeInsets.only(top: 100, right: 15),
-                                child: blogPageView(
-                                    context, swidth, _pageController, datas),
-                              ),
-                            },
-                          ],),
+                          blogPageView(context, swidth, _pageController, datas),
                           Container(
                               padding:
                                   const EdgeInsets.only(top: 85.0, left: 15),
                               width: swidth * .295,
                               child: blogFilters(context, swidth, datas,
                                   updateData, textTheme.titleSmall!)),
-                        ])
-                  } else ...{
-                    Container(
-                        margin: paddingValues("carouselTop", context),
-                        child: Column(
-                          children: [
-                            Container(
-                                // padding: paddingValues(paddingName, context)
-                                width: swidth,
-                                child: ExpansionTile(
-                                    title: Text("Busca Avançada"),
-                                    children: [
-                                      Padding(
-                                          padding: paddingValues(
-                                              "fullGrid", context),
-                                          child: blogFilters(
-                                              context,
-                                              swidth,
-                                              datas,
-                                              updateData,
-                                              textTheme.titleSmall!)),
-                                    ])),
-                            if (datas.isEmpty) ...{
-                              Container(
-                                  padding:
-                                      paddingValues("sideMainPadding", context),
-                                  margin: const EdgeInsets.only(top: 65),
-                                  width: swidth,
-                                  child: Center(
-                                      child: Text(
-                                    "Perdão, não há nenhum post a ser exibido no momento.",
-                                  )))
-                            } else ...{
-                              Padding(
-                                padding: const EdgeInsets.only(top: 65),
-                                child: blogPageView(
-                                    context, swidth, _pageController, datas),
-                              ),
-                            },
-                          ],
-                        )),
-                  }
-                ]);
-              } else if (snapshot.hasError) {
-                Container(
+                        ],
+                      ),
+                    ],
+                  );
+                } else if (snapshot.hasError) {
+                  Container(
                     padding:
                         const EdgeInsets.only(top: 100, left: 90, right: 15),
                     width: swidth * 0.67,
                     child: Text(
                       "Perdão, não há nenhum post a ser exibido no momento.",
-                    ));
-              }
-              // return Container();
-              return SizedBox(
-                width: swidth,
-                height: 100,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CircularProgressIndicator(),
-                  ],
-                ),
-              );
-            },
-          ),
-        ]),
+                    ),
+                  );
+                }
+                return Container();
+                // return circleLoadSpinner(context);
+              },
+            ),
+          ],
+        ),
         if (loadPosts) ...{circleLoadSpinner(context)}
       ],
     );

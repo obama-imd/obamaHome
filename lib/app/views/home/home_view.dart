@@ -51,31 +51,40 @@ class HomeViewState extends ConsumerState<HomeView> {
   void waitData(ref) {
     Future.wait([fetchPosts(ref), fetchObjects(ref)])
         .timeout(Duration(seconds: 5))
-        .whenComplete(() => setState(() {
+        .whenComplete(
+          () => setState(
+            () {
               loadPosts = false;
               loadObjects = false;
-            }));
+            },
+          ),
+        );
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-            body: Stack(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: Stack(
           children: [
             Responsivo(
-                // mobile: HomeMobile1(),
-                mobile: HomeMobile( scrollController: _scrollController,),
-                tablet: HomeTablet(
-                  scrollController: _scrollController,
-                ),
-                desktop: HomeDesktop(
-                  scrollController: _scrollController,
-                )),
+              // mobile: HomeMobile1(),
+              mobile: HomeMobile(
+                scrollController: _scrollController,
+              ),
+              tablet: HomeTablet(
+                scrollController: _scrollController,
+              ),
+              desktop: HomeDesktop(
+                scrollController: _scrollController,
+              ),
+            ),
             if (loadPosts || loadObjects) ...{circleLoadSpinner(context)}
           ],
-        )));
+        ),
+      ),
+    );
   }
 }
 
@@ -98,50 +107,53 @@ class OAHomeState extends ConsumerState<OAHome> {
         if (snapshot.connectionState == ConnectionState.done) {
           final searchList = ref.watch(searchListHome);
           List<SearchModel?> data = [...searchList];
-          return Column(children: [
-            Container(
-              constraints: BoxConstraints(maxWidth: 1200),
-              padding: paddingValues("sideHomePosts", context),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: paddingValues("mainTitleBottom", context),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: widget.swidth * .016),
-                          child: SectionTitle('Objetos de Aprendizagem', '',
-                              CrossAxisAlignment.start),
-                        ),
-                      ],
+          return Column(
+            children: [
+              Container(
+                constraints: BoxConstraints(maxWidth: 1200),
+                padding: paddingValues("sideHomePosts", context),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: paddingValues("mainTitleBottom", context),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: widget.swidth * .016),
+                            child: SectionTitle('Objetos de Aprendizagem', '',
+                                CrossAxisAlignment.start),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  ResponsiveGridList(
-                      physics: NeverScrollableScrollPhysics(),
-                      scroll: false,
-                      desiredItemWidth: 237.5,
-                      minSpacing: widget.swidth * .016,
-                      children: data.map((post) {
-                        return Container(
-                          alignment: Alignment(0, 0),
-                          child: OurProductItem(
-                              title: post!.nome, image: post.url),
-                        );
-                      }).toList()),
-                ],
-              ),
-            )
-          ]);
+                    ResponsiveGridList(
+                        physics: NeverScrollableScrollPhysics(),
+                        scroll: false,
+                        desiredItemWidth: 237.5,
+                        minSpacing: widget.swidth * .016,
+                        children: data.map((post) {
+                          return Container(
+                            alignment: Alignment(0, 0),
+                            child: OurProductItem(
+                                title: post!.nome, image: post.url),
+                          );
+                        }).toList()),
+                  ],
+                ),
+              )
+            ],
+          );
         } else if (snapshot.hasError) {
           Container(
-              constraints: BoxConstraints(maxWidth: 1200),
-              padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-              width: widget.swidth * 0.67,
-              child: Text(
-                "Perdão, tivemos um problema, tente mais tarde.",
-              ));
+            constraints: BoxConstraints(maxWidth: 1200),
+            padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+            width: widget.swidth * 0.67,
+            child: Text(
+              "Perdão, tivemos um problema, tente mais tarde.",
+            ),
+          );
         }
         return Container();
         // return circleLoadSpinner(context);
@@ -159,7 +171,6 @@ class BlogHome extends ConsumerStatefulWidget {
 }
 
 class BlogHomeState extends ConsumerState<BlogHome> {
-
   @override
   Widget build(BuildContext context) {
     double imageWidth = widget.swidth * .3;
@@ -174,70 +185,78 @@ class BlogHomeState extends ConsumerState<BlogHome> {
           return Container(
             constraints: BoxConstraints(maxWidth: 1200),
             padding: EdgeInsets.symmetric(horizontal: widget.swidth * .057),
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              if (posts.isNotEmpty) ...{
-                Padding(
-                  padding: paddingValues("mainTitle", context),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (posts.isNotEmpty) ...{
+                  Padding(
+                    padding: paddingValues("mainTitle", context),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: widget.swidth * .01),
+                          child: SectionTitle('Últimos posts do blog', '',
+                              CrossAxisAlignment.start),
+                        ),
+                      ],
+                    ),
+                  ),
+                  ResponsiveGridRow(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: widget.swidth * .01),
-                        child: SectionTitle('Últimos posts do blog', '',
-                            CrossAxisAlignment.start),
-                      ),
+                      for (var item in posts) ...{
+                        ResponsiveGridCol(
+                          lg: 4,
+                          md: 8,
+                          sm: 12,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: widget.swidth * .01),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Image.network(item!.imagePath,
+                                    height: imageHeight,
+                                    width: imageWidth,
+                                    fit: BoxFit.cover),
+                                Padding(
+                                  padding:
+                                      paddingValues("blogPostDate", context),
+                                  child: Row(
+                                    children: [
+                                      const Icon(Icons.access_time, size: 16),
+                                      Text(item.publishedDate),
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  margin:
+                                      paddingValues("blogHomeTitle", context),
+                                  child: Text(item.title,
+                                      style: textTheme.titleSmall!),
+                                ),
+                                Text(item.text, maxLines: 4),
+                              ],
+                            ),
+                          ),
+                        ),
+                      }
                     ],
                   ),
-                ),
-                ResponsiveGridRow(children: [
-                  for (var item in posts) ...{
-                    ResponsiveGridCol(
-                      lg: 4,
-                      md: 8,
-                      sm: 12,
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: widget.swidth * .01),
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Image.network(item!.imagePath,
-                                  height: imageHeight,
-                                  width: imageWidth,
-                                  fit: BoxFit.cover),
-                              Padding(
-                                padding: paddingValues("blogPostDate", context),
-                                child: Row(
-                                  children: [
-                                    const Icon(Icons.access_time, size: 16),
-                                    Text(item.publishedDate),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: paddingValues("blogHomeTitle", context),
-                                child: Text(item.title,
-                                    style: textTheme.titleSmall!),
-                              ),
-                              Text(item.text, maxLines: 4),
-                            ]),
-                      ),
-                    )
-                  }
-                ])
-              } else
-                ...{}
-            ]),
+                } else
+                  ...{}
+              ],
+            ),
           );
         } else if (snapshot.hasError) {
           Container(
-              padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-              width: widget.swidth,
-              child: Text(
-                "Perdão, tivemos um problema, tente mais tarde.",
-              ));
+            padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+            width: widget.swidth,
+            child: Text(
+              "Perdão, tivemos um problema, tente mais tarde.",
+            ),
+          );
         }
         return circleLoadSpinner(context);
       },
