@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:obamahome/advanced_search/data/study_levels_controller.dart';
 import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
 import 'package:obamahome/auth/login.dart';
 
@@ -117,15 +116,15 @@ class MyAppMaterial extends MaterialApp {
           theme: ThemeData(
             menuButtonTheme: MenuButtonThemeData(
               style: ButtonStyle(
-                overlayColor: WidgetStatePropertyAll(background),
+                overlayColor: MaterialStatePropertyAll(background),
               ),
             ),
             menuBarTheme: MenuBarThemeData(
               style: MenuStyle(
                 // padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 18, vertical: 15)),
-                elevation: WidgetStatePropertyAll(0),
-                backgroundColor: WidgetStatePropertyAll(background),
-                shape: WidgetStatePropertyAll(
+                elevation: MaterialStatePropertyAll(0),
+                backgroundColor: MaterialStatePropertyAll(background),
+                shape: MaterialStatePropertyAll(
                   BeveledRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
@@ -134,22 +133,22 @@ class MyAppMaterial extends MaterialApp {
             ),
             textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
-                backgroundColor: WidgetStatePropertyAll(primary),
-                foregroundColor: WidgetStatePropertyAll(background),
-                padding: WidgetStatePropertyAll(
+                backgroundColor: MaterialStatePropertyAll(primary),
+                foregroundColor: MaterialStatePropertyAll(background),
+                padding: MaterialStatePropertyAll(
                   EdgeInsets.all(10),
                 ),
-                textStyle: WidgetStatePropertyAll(
+                textStyle: MaterialStatePropertyAll(
                   textTheme.displaySmall,
                 ),
-                overlayColor: WidgetStatePropertyAll(
+                overlayColor: MaterialStatePropertyAll(
                   Colors.lightBlue,
                 ),
               ),
             ),
             iconButtonTheme: IconButtonThemeData(
               style: ButtonStyle(
-                shape: WidgetStatePropertyAll(
+                shape: MaterialStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
