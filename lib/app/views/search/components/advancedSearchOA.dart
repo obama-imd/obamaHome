@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:obamahome/app/models/study_level.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/loadCircle.dart';
@@ -79,11 +78,11 @@ class OAFilterState extends ConsumerState<OAFilters> {
       builder: (BuildContext context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           final studyLevelData = ref.watch(searchLevels);
-          // List<String> studyLevel = [...studyLevelData];
+          List<String> studyLevels = [];
 
-          // for (var level in studyLevelData) {
-          //   studyLevels.add(level.nome);
-          // }
+          for (var level in studyLevelData) {
+            studyLevels.add(level.nome);
+          }
 
           print("jsonData => $studyLevelData");
 
@@ -174,7 +173,7 @@ class OAFilterState extends ConsumerState<OAFilters> {
                           alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(bottom: 4),
                           child: DropdownButton<String>(
-                              value: studyLevelData.first,
+                              value: studyLevels.first,
                               icon: const Icon(Icons.arrow_drop_down),
                               elevation: 5,
                               style: textTheme.bodySmall,
@@ -184,7 +183,7 @@ class OAFilterState extends ConsumerState<OAFilters> {
                                 //   dropdownValue = value!;
                                 // });
                               },
-                              items: studyLevelData.map<DropdownMenuItem<String>>(
+                              items: studyLevels.map<DropdownMenuItem<String>>(
                                   (String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,

@@ -64,10 +64,6 @@ class _SearchDesktopState extends State<SearchDesktop> {
                     swidth: swidth,
                     data: widget.termSearched,
                     updateData: widget.updateData,
-<<<<<<< HEAD
-=======
-                    titleStyle: widget.titleStyle,
->>>>>>> 5234cab1d9dc06dbbe9323d0b1a0bbd65d56d83e
                   ),
                 ),
               ),

@@ -1,5 +1,5 @@
 // List<String> nivelEnsino = <String>['Todos'];
-import 'package:obamahome/app/controllers/search_controller.dart';
+
 
 List<String> temaCurricular = <String>['Todos'];
 List<String> tipo = <String>['Todos'];
@@ -16,19 +16,19 @@ bool pcnCheck = false;
 bool bnccCheck = false;
 
 var setLevel = [];
-Future<void> getLevels() async {
-  List<String> levels = [];
-  List<dynamic> learnLevels = await fetchLevels();
-  for (var level in learnLevels) {
-    print("nivel1 => $level");
-    levels.add(level.name);
-  }
-  // try {
-  // setState(() {
-  //   nivelEnsino = levels;
-  // });
-  print("nivel2 => $learnLevels");
-  // } catch (e) {
-  //   print('Error in getLevels: $e');
-  // }
-}
+// Future<void> getLevels() async {
+//   List<String> levels = [];
+//   List<dynamic> learnLevels = await fetchLevels();
+//   for (var level in learnLevels) {
+//     print("nivel1 => $level");
+//     levels.add(level.name);
+//   }
+//   // try {
+//   // setState(() {
+//   //   nivelEnsino = levels;
+//   // });
+//   print("nivel2 => $learnLevels");
+//   // } catch (e) {
+//   //   print('Error in getLevels: $e');
+//   // }
+// }

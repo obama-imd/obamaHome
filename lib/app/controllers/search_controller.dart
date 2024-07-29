@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:obamahome/advanced_search/domain/study_level.dart';
 
 import '../models/search_models.dart';
 
@@ -171,6 +172,11 @@ final searchPagination = StateProvider<List<SearchResponse>>((ref) {
   return [];
 });
 
+final searchLevels = StateProvider<List<StudyLevelModel>>((ref) {
+  return [];
+});
+
+
 // class SearchOAController {
 Future<SearchResponse> fetchDataAndUpdateState(
     String item, WidgetRef ref) async {
@@ -215,7 +221,7 @@ Future<SearchResponse> fetchDataAndUpdateState(
 }
 // }
 
-Future<List<String>> fetchLevels(ref) async {
+Future<List> fetchLevels(ref) async {
   // try {
   final response = await http.get(Uri.parse("${apiUrl}/nivelensino"));
 
