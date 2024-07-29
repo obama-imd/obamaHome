@@ -215,7 +215,7 @@ Future<SearchResponse> fetchDataAndUpdateState(
 }
 // }
 
-Future<List<dynamic>> fetchLevels() async {
+Future<List<String>> fetchLevels(ref) async {
   // try {
   final response = await http.get(Uri.parse("${apiUrl}/nivelensino"));
 
