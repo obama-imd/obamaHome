@@ -38,54 +38,13 @@ class OAFilters extends ConsumerStatefulWidget {
 }
 
 class OAFilterState extends ConsumerState<OAFilters> {
-  // List<String> learningLevels = [];
-  // late List<String> learningLevels;
-
-  // List<String> getLevels() {
-  //   // try {
-  //   // print("Iniciando getLevels");
-  //   List<String> setLevels = [];
-  //   List<String> levels = ref.watch(searchLevels);
-
-  //   print("jsonData: $levels");
-  //   for (var level in levels) {
-  //     setLevels.add(level.nome);
-  //   }
-  //   // levels.map((level) {
-  //   //   setLevels.add(level.nome);
-  //   // });
-
-  //   setState() {
-  //     learningLevels = setLevels;
-  //   }
-
-  //   return learningLevels;
-
-  //   // } catch (e) {
-  //   //   print('Erro em getLevels: $e');
-  //   // }
-  // }
-
-  @override
-  void initState() {
-    // learningLevels = getLevels();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-      future: fetchLevels(ref), // Chama a função getLevels
+      future: fetchLevels(ref),
       builder: (BuildContext context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final studyLevelData = ref.watch(searchLevels);
-          // List<String> studyLevel = [...studyLevelData];
-
-          // for (var level in studyLevelData) {
-          //   studyLevels.add(level.nome);
-          // }
-
-          print("jsonData => $studyLevelData");
+          final studyLevelData = ref.watch(studyLevelsProvider);
 
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,83 +74,32 @@ class OAFilterState extends ConsumerState<OAFilters> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Row(
-                    //   children: [
-                    //     Row(
-                    //       children: [
-                    //         Checkbox(
-                    //           tristate: true,
-                    //           value: pcnCheck,
-                    //           onChanged: (bool? value) {
-                    //             setState(() {
-                    //               if (value == null) {
-                    //                 pcnCheck = false;
-                    //               } else {
-                    //                 pcnCheck = !pcnCheck;
-                    //                 bnccCheck = false;
-                    //               }
-                    //             });
-                    //           },
-                    //         ),
-                    //         Text(
-                    //           "PCN",
-                    //         )
-                    //       ],
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(left: 8.0),
-                    //       child: Row(
-                    //         children: [
-                    //           Checkbox(
-                    //             tristate: true,
-                    //             value: bnccCheck,
-                    //             onChanged: (bool? value) {
-                    //               setState(() {
-                    //                 if (value == null) {
-                    //                   bnccCheck = false;
-                    //                 } else {
-                    //                   bnccCheck = !bnccCheck;
-                    //                   pcnCheck = false;
-                    //                 }
-                    //               });
-                    //             },
-                    //           ),
-                    //           Text(
-                    //             "BNCC",
-                    //           )
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    for (var lista in tileTitle) ...{
-                      Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.only(top: 40, bottom: 20),
-                          child: Text(lista, style: widget.titleStyle)),
-                      Container(
-                          height: 40,
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.only(bottom: 4),
-                          child: DropdownButton<String>(
-                              value: studyLevelData.first,
-                              icon: const Icon(Icons.arrow_drop_down),
-                              elevation: 5,
-                              style: textTheme.bodySmall,
-                              onChanged: (String? value) {
-                                // This is called when the user selects an item.
-                                // setState(() {
-                                //   dropdownValue = value!;
-                                // });
-                              },
-                              items: studyLevelData.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Container(child: Text(value)),
-                                );
-                              }).toList())),
-                    },
+                    Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(top: 40, bottom: 20),
+                        child: Text(tileTitle[3], style: widget.titleStyle)),
+                    Container(
+                        height: 40,
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(bottom: 4),
+                        child: DropdownButton<String>(
+                            value: studyLevelData.isNotEmpty ? studyLevelData.first : null,
+                            icon: const Icon(Icons.arrow_drop_down),
+                            elevation: 5,
+                            style: textTheme.bodySmall,
+                            onChanged: (String? value) {
+                              // This is called when the user selects an item.
+                              // setState(() {
+                              //   dropdownValue = value!;
+                              // });
+                            },
+                            items: studyLevelData
+                                .map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Container(child: Text(value)),
+                              );
+                            }).toList())),
                     Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: Row(
