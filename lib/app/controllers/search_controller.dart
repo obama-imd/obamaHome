@@ -8,38 +8,39 @@ import 'package:obamahome/app/models/study_level.dart';
 import '../models/pagination_model.dart';
 import '../models/search_models.dart';
 
-List<dynamic> filtrarOA(List<dynamic> jsonData, String searchTerm) {
+PaginationResponse filtrarOA(PaginationResponse jsonData, String searchTerm) {
   if (searchTerm.isEmpty) {
     return jsonData;
   }
 
-  List<dynamic> comparingData = jsonData.where((item) {
-    final id = item['id'].toString().toLowerCase();
-    final nome = item['nome'].toString().toLowerCase();
+  List<Content> comparingData = jsonData.content.where((item) {
+    var nome = item.nome.toLowerCase();
 
-    return nome.contains(searchTerm.toLowerCase()) ||
-        id.contains(searchTerm.toLowerCase());
+    return nome.contains(searchTerm.toLowerCase());
   }).toList();
 
+  jsonData.content = comparingData;
+
   if (comparingData.isEmpty) {
-    return <dynamic>[];
+    return jsonData;
   } else {
-    return comparingData;
+    return jsonData;
   }
 }
 
-Future<void> fetchData(String searchTerm, ref) async {
-  const apiUrl = 'http://hobama.imd.ufrn.br/v1/oa?page=0&size=10&sort=id';
+Future<void> fetchData(String searchTerm, ref, page) async {
+  var apiUrl = 'http://hobama.imd.ufrn.br/v1/oa?page=${page}&size=12&sort=id';
 
   final response = await http.get(Uri.parse(apiUrl), headers: {
     HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
   });
 
   if (response.statusCode == 200) {
+    // final jsonData = filtrarOA(jsonDecode(response.body), searchTerm);
     final jsonData = jsonDecode(response.body);
 
     PaginationResponse paginationResponse =
-        PaginationResponse.fromJson(jsonData);
+        PaginationResponse.fromJson(jsonData as Map<String, dynamic>);
 
     ref.read(searchPagination.notifier).state = paginationResponse;
   } else {

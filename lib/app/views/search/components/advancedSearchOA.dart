@@ -4,6 +4,7 @@ import 'package:obamahome/app/models/study_level.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/loadCircle.dart';
+import '../../../../components/searchDropdown.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
 
@@ -74,32 +75,7 @@ class OAFilterState extends ConsumerState<OAFilters> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                        alignment: Alignment.centerLeft,
-                        margin: EdgeInsets.only(top: 40, bottom: 20),
-                        child: Text(tileTitle[3], style: widget.titleStyle)),
-                    Container(
-                        height: 40,
-                        alignment: Alignment.centerLeft,
-                        margin: EdgeInsets.only(bottom: 4),
-                        child: DropdownButton<String>(
-                            value: studyLevelData.isNotEmpty ? studyLevelData.first : null,
-                            icon: const Icon(Icons.arrow_drop_down),
-                            elevation: 5,
-                            style: textTheme.bodySmall,
-                            onChanged: (String? value) {
-                              // This is called when the user selects an item.
-                              // setState(() {
-                              //   dropdownValue = value!;
-                              // });
-                            },
-                            items: studyLevelData
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Container(child: Text(value)),
-                              );
-                            }).toList())),
+                    searchDropdown(context, tileTitle[3], studyLevelData, widget.titleStyle),
                     Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: Row(

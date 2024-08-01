@@ -107,6 +107,7 @@ class _OurProductItemState extends State<OurProductItem> {
               flex: 1,
               child: Container(
                 color: background,
+                padding: EdgeInsets.symmetric(horizontal: 13),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,

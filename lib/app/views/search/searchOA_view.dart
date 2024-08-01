@@ -78,7 +78,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
   }
 
   void waitData() async {
-    Future.wait([fetchData("", ref)])
+    Future.wait([fetchData("", ref, 0)])
         .timeout(Duration(seconds: 5))
         .whenComplete(() => setState(() {
               loadObjects = false;
@@ -137,6 +137,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
   Key key = UniqueKey();
   int startValue = 0;
   int endValue = 2;
+  int actualPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +145,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
     PageController _pageController = PageController();
 
     return FutureBuilder<void>(
-        future: fetchData(widget.termSearched, ref),
+        future: fetchData(widget.termSearched, ref, actualPage),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final paginationData = ref.watch(searchPagination);
@@ -153,8 +154,13 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
               return Center(child: Text("No data available"));
             }
 
-            List<Content?> searchResult = paginationData.content;
+            List<Content?> searchResult = [...paginationData.content];
             PaginationInfo pagination = paginationData.paginationInfo;
+            ;
+
+            // for (var bla in searchResult) {
+            //   print("json4 => ${bla!.nome}");
+            // }
 
             int? totalPages = pagination.totalPages;
             int? currentPage = pagination.pageable.pageNumber;
@@ -165,45 +171,33 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
             double rowNumbers = 0;
 
             if (widget.swidth < 360) {
-              rowNumbers = searchResult.length / 1.28;
+              rowNumbers = 12;
             } else if (widget.swidth >= 460 && widget.swidth < 680) {
-              rowNumbers = searchResult.length / 1.5;
+              rowNumbers = 8;
             } else {
-              rowNumbers = searchResult.length / 3;
+              rowNumbers = 4;
             }
 
             return Column(
               children: [
                 if (searchResult.isNotEmpty) ...{
                   Container(
-                    height: (450 * (rowNumbers + 1)),
-                    child: PageView.builder(
-                      itemCount: totalPages,
-                      physics: NeverScrollableScrollPhysics(),
-                      onPageChanged: (index) {
-                        setState(() {
-                          widget.selectedPageIndex = index;
-                        });
-                      },
-                      itemBuilder: (context, index) {
-                        return ResponsiveGridList(
-                          physics: NeverScrollableScrollPhysics(),
-                          scroll: false,
-                          desiredItemWidth: 200,
-                          minSpacing: 20,
-                          children: searchResult.map((post) {
-                            return Container(
-                              alignment: Alignment.center,
-                              child: OurProductItem(
-                                title: post!.nome,
-                                image: post.caminhoImagem,
-                              ),
-                            );
-                          }).toList(),
-                        );
-                      },
-                    ),
-                  ),
+                      height: (360 * (rowNumbers)),
+                      child: ResponsiveGridList(
+                        physics: NeverScrollableScrollPhysics(),
+                        scroll: false,
+                        desiredItemWidth: 200,
+                        minSpacing: 20,
+                        children: searchResult.map((result) {
+                          return Container(
+                            alignment: Alignment.center,
+                            child: OurProductItem(
+                              title: result!.nome,
+                              image: result.caminhoImagem ?? "",
+                            ),
+                          );
+                        }).toList(),
+                      )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -220,12 +214,12 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                           ),
                           child: InkWell(
                             child: Icon(Icons.navigate_before),
-                            onTap: currentPage! > 0
+                            onTap: currentPage > 0
                                 ? () {
-                                    _pageController.previousPage(
-                                      duration: Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                    );
+                                    // _pageController.previousPage(
+                                    //   duration: Duration(milliseconds: 300),
+                                    //   curve: Curves.easeInOut,
+                                    // );
                                     widget.selectedPage(
                                       currentPage - 1,
                                     );
@@ -233,6 +227,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                                       if (currentPage > 0) {
                                         startValue--;
                                         endValue--;
+                                        actualPage--;
                                       }
                                     });
                                   }
@@ -263,11 +258,12 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                               ),
                               onTap: () {
                                 if ((i) != currentPage) {
-                                  _pageController.jumpToPage(i);
+                                  // _pageController.jumpToPage(i);
                                   widget.selectedPage(i);
                                   setState(() {
-                                    if (i > 0 && i < totalPages! - 1) {
+                                    if (i > 0 && i < totalPages - 1) {
                                       startValue = i - 1;
+                                      actualPage = i;
                                       endValue = i + 1;
                                     }
                                   });
@@ -288,18 +284,19 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                           ),
                           child: InkWell(
                             child: Icon(Icons.navigate_next),
-                            onTap: currentPage! < totalPages! - 1
+                            onTap: currentPage < totalPages - 1
                                 ? () {
-                                    _pageController.nextPage(
-                                      duration: Duration(milliseconds: 300),
-                                      curve: Curves.easeInOut,
-                                    );
+                                    // _pageController.nextPage(
+                                    //   duration: Duration(milliseconds: 300),
+                                    //   curve: Curves.easeInOut,
+                                    // );
                                     widget.selectedPage(
                                       currentPage + 1,
                                     );
                                     setState(() {
                                       if (endValue < totalPages - 1) {
                                         startValue++;
+                                        actualPage++;
                                         endValue++;
                                       }
                                     });
@@ -311,7 +308,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                     ],
                   ),
                 } else ...{
-                  Center(child: Text("No items found")),
+                  Center(child: Text("Nada a exibir no momento")),
                 },
               ],
             );

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
@@ -71,6 +72,9 @@ class _SearchDesktopState extends State<SearchDesktop> {
             ],
           ),
         ),
+      ),
+      SizedBox(
+        height: 65,
       ),
     ]);
   }
