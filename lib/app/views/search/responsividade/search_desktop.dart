@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:obamahome/advanced_search/presentation/advanced_search_page.dart';
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import '../../../../utils/app_padding.dart';
-import '../components/advancedSearchOA.dart';
 
 class SearchDesktop extends StatefulWidget {
   String termSearched;
@@ -60,11 +60,10 @@ class _SearchDesktopState extends State<SearchDesktop> {
                 padding: const EdgeInsets.only(left: 30),
                 child: SizedBox(
                   width: swidth > 1200 ? (1200 * .3) - 30 : (swidth * .3) - 30,
-                  child: OAFilters(
+                  child: OAadvanced(
                     swidth: swidth,
                     data: widget.termSearched,
                     updateData: widget.updateData,
-                    titleStyle: widget.titleStyle,
                   ),
                 ),
               ),

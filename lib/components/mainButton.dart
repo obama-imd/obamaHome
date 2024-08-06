@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../utils/app_theme.dart';
-
 Widget mainButton(
     context, String content, String? urlValue, void Function()? onPressed) {
   _launchURL(link) async {
@@ -27,5 +25,14 @@ Widget mainButton(
             } else {
             }
           },
-          child: Text(content, style: textTheme.labelMedium)));
+          child: Text(content, style: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    shadows: [
+      Shadow(
+        offset: Offset(1, 1),
+        color: Color.fromRGBO(0, 0, 0, 0.5),
+      )
+    ],
+  ),)));
 }

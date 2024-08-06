@@ -32,39 +32,38 @@ class _FooterState extends State<Footer> {
   List<String> servicePaths = [
     '/formacoes',
     '/servicos',
-    '/loja',
+    '/planos-aulas/lista',
     '/blog',
-    "/"
+    "/trilhas"
   ];
 
   List<String> additionalCategories = [
     "> Sobre Nós",
-    "> Terms and conditions",
-    "> Privacy policy",
-    "> News",
-    "> Contact us",
+    "> Manuais",
+    // "> Terms and conditions",
+    // "> Privacy policy",
+    // "> News",
+    // "> Contact us",
   ];
-  List<String> additionalPaths = ['/sobre', '', '', '', ''];
+  List<String> additionalPaths = [
+    '/sobre',
+    '/manuais',
+    //  '',
+    //  '',
+    //   ''
+  ];
 
   Widget footerList(BuildContext context, List<String> categories,
       List<String> links, int index) {
-    return Container(
-        height: 7.5 * (categories.length).toDouble(),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.pushNamed(context, links[index]);
-              },
-              child: Text(
-                categories[index],
-                style: textTheme.bodySmall,
-              ),
-            ),
-            Container(height: 5),
-          ],
-        ));
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(context, links[index]);
+      },
+      child: Text(
+        categories[index],
+        style: textTheme.bodySmall,
+      ),
+    );
   }
 
   @override
@@ -99,31 +98,24 @@ class _FooterState extends State<Footer> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('OBAMA', style: textTheme.displaySmall),
-                              Container(height: 15),
-                              Container(
-                                  height: 4, width: 35, color: Colors.blue),
-                              Container(height: 20),
-                              SizedBox(
-                                  height: 100,
-                                  child: Text('Texto',
-                                      style: textTheme.bodySmall)),
-                              Container(height: 20),
-                              SocialMedia(Colors.grey),
-                              Container(height: 35),
-                              Text('NOSSOS SERVIÇOS',
-                                  style: textTheme.displaySmall),
-                              Container(height: 15),
-                              Container(
-                                  height: 4, width: 35, color: Colors.blue),
-                              Container(height: 20),
-                              for (int i = 0;
-                                  i < serviceCategories.length;
-                                  i++) ...{
-                                footerList(context, serviceCategories,
-                                    servicePaths, i),
-                              }
-                            ])),
+                          Text('OBAMA', style: textTheme.displaySmall),
+                          Container(height: 15),
+                          Container(height: 4, width: 35, color: Colors.blue),
+                          Container(height: 20),
+                          SocialMedia(Colors.grey),
+                          Container(height: 35),
+                          Text('NOSSOS SERVIÇOS',
+                              style: textTheme.displaySmall),
+                          Container(height: 15),
+                          Container(height: 4, width: 35, color: Colors.blue),
+                          Container(height: 20),
+                          for (int i = 0;
+                              i < serviceCategories.length;
+                              i++) ...{
+                            footerList(
+                                context, serviceCategories, servicePaths, i),
+                          }
+                        ])),
                   ),
                   ResponsiveGridCol(
                     sm: 6,
@@ -131,60 +123,48 @@ class _FooterState extends State<Footer> {
                         child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('LINKS ADICIONAIS',
-                                  style: textTheme.displaySmall),
-                              Container(height: 15),
-                              Container(height: 4, width: 35, color: Colors.blue),
-                              Container(height: 20),
-                              for (int i = 0;
-                                  i < additionalCategories.length;
-                                  i++) ...{
-                                footerList(context, additionalCategories,
-                                    additionalPaths, i),
-                              },
-                              Container(height: 35),
-                              Text('FALE CONOSCO', style: textTheme.displaySmall),
-                              Container(height: 15),
-                              Container(height: 4, width: 35, color: Colors.blue),
-                              Container(height: 20),
-                              SizedBox(
-                                  height: 60,
-                                  width: 300,
-                                  child: Text(
-                                      'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
-                                      style: textTheme.bodySmall)),
-                              Container(height: 20),
-                              SizedBox(
-                                  height: 40,
-                                  width: 300,
-                                  child: TextField(
-                                      onChanged: (value) {
-                                        setState(() {
-                                          emailText = value;
-                                        });
-                                      },
-                                      onSubmitted: (value) {
-                                        launchUrl(emailLaunchUri);
-                                      },
-                                      decoration: InputDecoration(
-                                          border: OutlineInputBorder(
-                                              borderSide: BorderSide.none),
-                                          hintText: 'E-mail',
-                                          hintStyle: textTheme.bodySmall,
-                                          contentPadding: EdgeInsets.all(5.0),
-                                          filled: true,
-                                          fillColor: background))),
-                              Container(
-                                  height: 40,
-                                  width: 40,
-                                  color: CoresPersonalizadas.azulObama,
-                                  child: IconButton(
-                                      onPressed: () {
-                                        launchUrl(emailLaunchUri);
-                                      },
-                                      icon: const Icon(Icons.mail,
-                                          color: background, size: 16.0)))
-                            ])),
+                          Text('FALE CONOSCO', style: textTheme.displaySmall),
+                          Container(height: 15),
+                          Container(height: 4, width: 35, color: Colors.blue),
+                          Container(height: 20),
+                          SizedBox(
+                              height: 60,
+                              width: 300,
+                              child: Text(
+                                  'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
+                                  style: textTheme.bodySmall)),
+                          Container(height: 20),
+                          SizedBox(
+                              height: 40,
+                              width: 300,
+                              child: TextField(
+                                  onChanged: (value) {
+                                    setState(() {
+                                      emailText = value;
+                                    });
+                                  },
+                                  onSubmitted: (value) {
+                                    launchUrl(emailLaunchUri);
+                                  },
+                                  decoration: InputDecoration(
+                                      border: OutlineInputBorder(
+                                          borderSide: BorderSide.none),
+                                      hintText: 'E-mail',
+                                      hintStyle: textTheme.bodySmall,
+                                      contentPadding: EdgeInsets.all(5.0),
+                                      filled: true,
+                                      fillColor: background))),
+                          Container(
+                              height: 40,
+                              width: 40,
+                              color: CoresPersonalizadas.azulObama,
+                              child: IconButton(
+                                  onPressed: () {
+                                    launchUrl(emailLaunchUri);
+                                  },
+                                  icon: const Icon(Icons.mail,
+                                      color: background, size: 16.0)))
+                        ])),
                   )
                 ])),
             Container(
@@ -192,7 +172,7 @@ class _FooterState extends State<Footer> {
                 width: widget.swidth * 0.7,
                 color: CoresPersonalizadas.azulObama,
                 child: Center(
-                    child: Text('Obama © Copyright 2022',
+                    child: Text('Obama © Copyright 2024',
                         style: textTheme.displaySmall)))
           ])
         ]))
@@ -203,19 +183,15 @@ class _FooterState extends State<Footer> {
               width: widget.swidth,
               child: flutterMapArea(context)),
           Container(
-            height: 1150,
+            height: 750,
             width: widget.swidth,
             color: onPrimary,
             padding: const EdgeInsets.only(left: 40, top: 60),
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text('OBAMA THEME', style: textTheme.displaySmall),
+              Text('OBAMA', style: textTheme.displaySmall),
               Container(height: 15),
               Container(height: 4, width: 35, color: Colors.blue),
-              Container(height: 20),
-              SizedBox(
-                  height: 100,
-                  child: Text('Texto', style: textTheme.bodySmall)),
               Container(height: 20),
               SocialMedia(Colors.grey),
               Container(height: 45),
@@ -227,7 +203,7 @@ class _FooterState extends State<Footer> {
                 footerList(context, serviceCategories, servicePaths, i),
               },
               Container(height: 35),
-              Text('LINKS ADICIONAIS', style: textTheme.displaySmall),
+              Text('FALE CONOSCO', style: textTheme.displaySmall),
               Container(height: 15),
               Container(height: 4, width: 35, color: Colors.blue),
               Container(height: 20),
@@ -235,10 +211,6 @@ class _FooterState extends State<Footer> {
                 footerList(context, additionalCategories, additionalPaths, i),
               },
               Container(height: 35),
-              Text('FALE CONOSCO', style: textTheme.displaySmall),
-              Container(height: 15),
-              Container(height: 4, width: 35, color: Colors.blue),
-              Container(height: 20),
               SizedBox(
                   height: 60,
                   width: 300,
@@ -290,7 +262,7 @@ class _FooterState extends State<Footer> {
                   child: Text('Obama © Copyright 2024',
                       style: textTheme.displaySmall)))
         ])
-      ]
+      ],
     ]);
   }
 }

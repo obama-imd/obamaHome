@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:obamahome/auth/forgotPassword.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
@@ -16,10 +17,17 @@ class LoginPageView extends StatefulWidget {
 class _LoginPageViewState extends State<LoginPageView> {
   GlobalKey loginKey = GlobalKey<FormState>();
   bool showPassword = true;
+  bool logged = false;
 
   void displayPassword() {
     setState(() {
       showPassword = !showPassword;
+    });
+  }
+
+  Future<void> isLogged(bool setLog) async {
+    setState(() {
+      logged = setLog;
     });
   }
 

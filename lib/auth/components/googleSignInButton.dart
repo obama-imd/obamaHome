@@ -6,9 +6,12 @@ import 'package:obamahome/auth/components/googleAuth.dart';
 
 import '../../utils/app_theme.dart';
 
-final googleSignInData = StateProvider<GoogleSignInAccount?>((ref) {
-  return null;
-});
+class GoogleUser {
+  String userName;
+  String userEmail;
+
+  GoogleUser({required this.userName, required this.userEmail});
+}
 
 class GoogleSigninButton extends ConsumerStatefulWidget {
   const GoogleSigninButton({super.key});
@@ -18,6 +21,7 @@ class GoogleSigninButton extends ConsumerStatefulWidget {
 }
 
 class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,13 +29,10 @@ class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
       width: 170,
       child: ElevatedButton(
           onPressed: () async {
-            await LoginAPI.login();
-            // final newData = ref.read(googleSignInData);
-            // newData.clear();
-            // var nameUser = newData!.displayName;
-            // var emailUser = newData.email;
-
-            // print(" userData => $user, $nameUser, $emailUser");
+            await LoginAPI.login(ref);
+            bool boolLog = await GoogleSignIn().isSignedIn();
+            // () => widget.isLogged(boolLog);
+            // print(" userData => $user");
           },
           style: ButtonStyle(
             side: MaterialStatePropertyAll(

@@ -6,6 +6,8 @@ import '../../../../components/footer.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
 import '../components/bannerSuperior.dart';
+import '../components/librasButton.dart';
+import '../components/menuClass.dart';
 import '../components/menuMobile.dart';
 
 class TemplateRow extends StatefulWidget {
@@ -26,7 +28,7 @@ class TemplateRowState extends State<TemplateRow> {
   @override
   void initState() {
     super.initState();
-     WidgetsBinding.instance.addPostFrameCallback((_) => initFunction(context));
+    WidgetsBinding.instance.addPostFrameCallback((_) => initFunction(context));
   }
 
   void initFunction(context) {
@@ -49,37 +51,44 @@ class TemplateRowState extends State<TemplateRow> {
     return Scaffold(
         key: scaffoldKey,
         drawer: const drawermenu(),
-        body: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Container(
-                child: Column(children: <Widget>[
-              TopBar(swidth),
-              if (MediaQuery.of(context).size.width > 1360) ...[
-                Container(
-                    width: swidth,
-                    constraints: BoxConstraints(maxWidth: 1200),
-                    height: 125,
-                    margin: EdgeInsets.only(
-                        left: swidth * 0.068, right: swidth * 0.058),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                              width: 240,
-                              child: Image.asset('assets/images/logo.png',
-                                  fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50),
-                        ])),
-              ] else ...[
-                menuMobile(context, scaffoldKey, swidth),
-              ],
-              BannerSuperior(context, pageName),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [...widget.children]),
-              Carousel(swidth),
-              Footer(swidth),
-            ]))));
+        floatingActionButton: LibrasButton(swidth: swidth),
+        body: SafeArea(
+          child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Container(
+                  child: Column(children: <Widget>[
+                TopBar(swidth),
+                if (MediaQuery.of(context).size.width > 1360) ...[
+                  Container(
+                      width: swidth,
+                      constraints: BoxConstraints(maxWidth: 1200),
+                      height: 125,
+                      margin: EdgeInsets.only(
+                          left: swidth * 0.068, right: swidth * 0.058),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                                width: 240,
+                                child: Image.asset('assets/images/logo.png',
+                                    fit: BoxFit.fitHeight)),
+                            NavMenu(
+                                swidth: swidth,
+                                heightBtn: 50,
+                                itemValues: itemValues,
+                                searchAvailable: true),
+                          ])),
+                ] else ...[
+                  menuMobile(context, scaffoldKey, swidth),
+                ],
+                BannerSuperior(context, pageName),
+                Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [...widget.children]),
+                Carousel(swidth),
+                Footer(swidth),
+              ]))),
+        ));
   }
 }

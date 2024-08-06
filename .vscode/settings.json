@@ -22,5 +22,6 @@
     "cSpell.words": [
         "swidth"
     ],
-    "dart.flutterSdkPath": "~/Downloads/flutter_windows_3.0.5-stable/flutter"
+    "dart.flutterSdkPath": "~/Downloads/flutter_windows_3.0.5-stable/flutter",
+    "java.compile.nullAnalysis.mode": "automatic"
 }

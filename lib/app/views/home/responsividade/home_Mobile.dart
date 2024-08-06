@@ -81,7 +81,7 @@ class _HomeMobileState extends State<HomeMobile> {
                         Container(
                             padding: const EdgeInsets.only(top: 60),
                             child: ResponsiveGridRow(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   for (int i = 0;
                                       i < grid1Title.length;
@@ -94,7 +94,7 @@ class _HomeMobileState extends State<HomeMobile> {
                                             const EdgeInsets.only(bottom: 100),
                                         child: Column(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                                CrossAxisAlignment.center,
                                             children: [
                                               Container(
                                                   height: 100,
@@ -154,7 +154,7 @@ class _HomeMobileState extends State<HomeMobile> {
                   child: Padding(
                     padding: paddingValues("sectionPadding", context),
                     child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           SectionTitle(
                               'OUR FEEDBACK',
@@ -163,7 +163,7 @@ class _HomeMobileState extends State<HomeMobile> {
                           Container(
                               padding: const EdgeInsets.only(top: 60),
                               child: ResponsiveGridRow(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     for (int i = 0;
                                         i < grid2Title.length;
@@ -176,7 +176,7 @@ class _HomeMobileState extends State<HomeMobile> {
                                               bottom: 100),
                                           child: Column(
                                               crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
+                                                  CrossAxisAlignment.center,
                                               children: [
                                                 Container(
                                                     height: 100,

@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
@@ -37,6 +38,11 @@ final shadowNoHouver = [
 
 class _OurProductItemState extends State<OurProductItem> {
   bool houver = false;
+
+  void addObjects(selectedOA, prefs) async {
+    await prefs.setStringList('objects', selectedOA);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
@@ -91,7 +97,8 @@ class _OurProductItemState extends State<OurProductItem> {
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
-                    return Image.asset('assets/images/nopic.jpg', fit: BoxFit.cover);
+                    return Image.asset('assets/images/nopic.jpg',
+                        fit: BoxFit.cover);
                   },
                 ),
               ),
@@ -99,11 +106,58 @@ class _OurProductItemState extends State<OurProductItem> {
             Expanded(
               flex: 1,
               child: Container(
-                alignment: Alignment.center,
-                decoration: const BoxDecoration(
-                  color: background,
+                color: background,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(widget.title, style: textTheme.headlineSmall),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: InkWell(
+                          onTap: () async {
+                            final SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            List<String>? items =
+                                prefs.getStringList('objects');
+                            bool itemExists = items!.contains(widget.title);
+                            if (!itemExists) {
+                              items.add(widget.title);
+                              addObjects(items, prefs);
+                              showModalBottomSheet<void>(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return Container(
+                                      height: 100,
+                                      child: Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            Text(
+                                                '${widget.title} foi adicionado ao seu acervo'),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: ElevatedButton(
+                                                child: const Text('x'),
+                                                onPressed: () =>
+                                                    Navigator.pop(context),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  });
+                            }
+                          },
+                          child: Icon(Icons.add_circle,
+                              color: CoresPersonalizadas.azulObama)),
+                    ),
+                  ],
                 ),
-                child: Text(widget.title, style: textTheme.headlineSmall),
               ),
             ),
           ],

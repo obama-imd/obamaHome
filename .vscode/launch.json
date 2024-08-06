@@ -5,9 +5,15 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "obamaHome",
+            "name": "obama (debug mode)",
+            "type": "dart",
             "request": "launch",
-            "type": "dart"
+            "program": "lib/main.dart",
+            "flutterMode": "debug",
+            "args": [
+                "--web-port", "4040",
+                "--web-browser-flag", "--disable-web-security"
+            ]
         },
         {
             "name": "obamaHome (profile mode)",

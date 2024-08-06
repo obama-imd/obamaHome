@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/components/menuClass.dart';
 
 import '../utils/app_theme.dart';
-import 'navMenu.dart';
 
 class drawermenu extends StatelessWidget {
   const drawermenu({super.key});
@@ -25,24 +25,27 @@ class drawermenu extends StatelessWidget {
         child: Container(
             width: drawerWidth,
             color: background,
-            padding: EdgeInsets.only(top: 25),
+            padding: EdgeInsets.only(top: 35),
             child: Column(
               children: [
                 for (var item in itemValues) ...{
                   if (item.subItems.isNotEmpty) ...{
                     ExpansionTile(
-                        title: Text(item.name, style: textTheme.headlineSmall),
+                        title: Text(item.name.toUpperCase(), style: textTheme.headlineSmall),
                         children: [
                           for (var i = 0; i < item.subItems.length; i++) ...{
                             ListTile(
-                                title: InkWell(
-                                    child: Text(
-                                      item.subItems[i]!, style: textTheme.bodyMedium,
-                                    ),
-                                    onTap: () {
-                                      Navigator.pushNamed(
-                                          context, item.path[i]);
-                                    }))
+                                title: Padding(
+                                  padding: EdgeInsets.only(left: 15),
+                                  child: InkWell(
+                                      child: Text(
+                                        item.subItems[i]!.toUpperCase(), style: textTheme.bodyMedium,
+                                      ),
+                                      onTap: () {
+                                        Navigator.pushNamed(
+                                            context, item.path[i]);
+                                      }),
+                                ))
                           }
                         ]),
                   } else ...{
@@ -56,7 +59,7 @@ class drawermenu extends StatelessWidget {
                               onTap: () {
                                 Navigator.pushNamed(context, item.path[0]);
                               },
-                              child: Text(item.name, style: textTheme.headlineSmall)),
+                              child: Text(item.name.toUpperCase(), style: textTheme.headlineSmall)),
                         ),
                       ],
                     )

@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/advanced_search/application/study_level_service.dart';
+import 'package:obamahome/advanced_search/data/study_levels_controller.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/loadCircle.dart';
@@ -46,11 +48,28 @@ class SearchPageState extends ConsumerState<SearchPage> {
     }
   }
 
+  // Future<List<dynamic>> getLevels() async {
+  //   // try {
+  //   // print("Iniciando getLevels");
+  //   List<dynamic> levels = await fetchLevels();
+  //   setState() {
+  //     learningLevels = levels;
+  //   }
+
+  //   print("Níveis recebidos: $learningLevels");
+  //   return levels;
+
+  //   // } catch (e) {
+  //   //   print('Erro em getLevels: $e');
+  //   // }
+  // }
+
   @override
   void initState() {
     super.initState();
-    activateLoad();
     waitData();
+    // getLevels();
+    activateLoad();
   }
 
   void activateLoad() {
@@ -81,8 +100,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
                     selectedPage: selectedPage,
-                    titleStyle: textTheme.headlineSmall!
-                    ),
+                    titleStyle: textTheme.headlineSmall!),
                 tablet: SearchTablet(
                     termSearched: widget.termSearched,
                     selectedPageIndex: selectedPageIndex,
@@ -94,11 +112,10 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     selectedPageIndex: selectedPageIndex,
                     updateData: updateData,
                     selectedPage: selectedPage,
-                    titleStyle: textTheme.titleSmall!
-                    )),
+                    titleStyle: textTheme.titleSmall!)),
             if (loadObjects) ...{circleLoadSpinner(context)}
           ],
-        )));
+        ),),);
   }
 }
 
@@ -118,7 +135,6 @@ class SearchPageView extends ConsumerStatefulWidget {
 
 class SearchDesktopState extends ConsumerState<SearchPageView> {
   final TextEditingController _searchController = TextEditingController();
-
   Key key = UniqueKey();
   int startValue = 0;
   int endValue = 2;
@@ -155,7 +171,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
             return Column(children: [
               if (searchResult.isNotEmpty) ...{
                 Container(
-                  height: (450 * rowNumbers),
+                  height: (450 * (rowNumbers + 1)),
                   child: PageView.builder(
                     itemCount: totalPages,
                     physics: NeverScrollableScrollPhysics(),
