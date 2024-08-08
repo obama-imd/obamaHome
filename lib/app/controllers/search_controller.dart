@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 import 'package:obamahome/app/models/study_level.dart';
 
+import '../../utils/apiURL.dart';
 import '../models/pagination_model.dart';
 import '../models/search_models.dart';
 
@@ -29,7 +30,7 @@ PaginationResponse filtrarOA(PaginationResponse jsonData, String searchTerm) {
 }
 
 Future<void> fetchData(String searchTerm, ref, page) async {
-  var apiUrl = 'http://hobama.imd.ufrn.br/v1/oa?page=${page}&size=12&sort=id';
+  var apiUrl = '${API_URL}?page=${page}&size=12&sort=id';
 
   final response = await http.get(Uri.parse(apiUrl), headers: {
     HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
@@ -77,21 +78,48 @@ final studyLevelsProvider =
 });
 
 Future<void> fetchLevels(WidgetRef ref) async {
-  const apiUrl = 'http://hobama.imd.ufrn.br/v1/nivelensino';
+  int page = 0;
+
   try {
-    final response = await http.get(Uri.parse(apiUrl), headers: {
+    final responseNivelEnsino = await http.get(Uri.parse('${API_URL}/nivelensino'), headers: {
       HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
     });
 
-    if (response.statusCode == 200) {
-      List<dynamic> jsonData = jsonDecode(response.body);
+    final responseAnoEnsinoResource = await http.get(Uri.parse('${API_URL}/anoEnsino?page=${page}&size=12&sort='), headers: {
+      HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
+    });
+
+    final responseDescritor = await http.get(Uri.parse('${API_URL}/descritor?page=${page}&size=12&sort='), headers: {
+      HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
+    });
+
+    final responseDisciplineResource = await http.get(Uri.parse('${API_URL}/disciplina?page=${page}&size=12&sort='), headers: {
+      HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
+    });
+
+    final responseHabilidadeResource = await http.get(Uri.parse('${API_URL}/habilidade?anoEnsinoId=1&temaConteudoId=1&page=${page}&size=12&sort=string'), headers: {
+      HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
+    });
+
+    final responseTemaConteudo = await http.get(Uri.parse('${API_URL}/temaConteudo?curriculo=1'), headers: {
+      HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
+    });
+
+    print(responseAnoEnsinoResource);
+    print(responseDescritor);
+    print(responseDisciplineResource);
+    print(responseHabilidadeResource);
+    print(responseTemaConteudo);
+
+    if (responseNivelEnsino.statusCode == 200) {
+      List<dynamic> jsonData = jsonDecode(responseNivelEnsino.body);
       List<String> setLevels =
           jsonData.map((level) => level["nome"] as String).toList();
 
       ref.read(studyLevelsProvider.notifier).setLevels(setLevels);
     } else {
       throw Exception(
-          'Failed to fetch API data. Status code: ${response.statusCode}');
+          'Failed to fetch API data. Status code: ${responseNivelEnsino.statusCode}');
     }
   } catch (e) {
     print('Error fetching data: $e');
