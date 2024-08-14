@@ -1,7 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 import 'package:obamahome/advanced_search/presentation/advanced_search_page.dart';
+=======
+import 'package:flutter/widgets.dart';
+>>>>>>> 684b1c21c90920a798e9fd1139d35960e06704ce
 import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
@@ -70,6 +74,9 @@ class _SearchDesktopState extends State<SearchDesktop> {
             ],
           ),
         ),
+      ),
+      SizedBox(
+        height: 65,
       ),
     ]);
   }

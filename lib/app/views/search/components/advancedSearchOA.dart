@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:obamahome/app/models/advancedSearch/study_level.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/loadCircle.dart';
+import '../../../../components/searchDropdown.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
 
-List<String> nivelEnsino = <String>['Todos'];
-List<String> temaCurricular = <String>['Todos'];
-List<String> tipo = <String>['Todos'];
-List<String> descritor = <String>['Todos'];
+// List<String> nivelEnsino = <String>['Todos'];
+// List<String> temaCurricular = <String>['Todos'];
+// List<String> tipo = <String>['Todos'];
+// List<String> descritor = <String>['Todos'];
 
 const List<String> tileTitle = <String>[
   'Selecione o nível de ensino',
-  'Selecione o tema curricular',
-  'Selecione o tipo',
+  'Selecione o ano de ensino',
   'Selecione o descritor',
+  'Selecione a disciplina',
+  'Selecione a habilidade',
 ];
 
 // bool pcnCheck = false;
@@ -37,54 +40,19 @@ class OAFilters extends ConsumerStatefulWidget {
 }
 
 class OAFilterState extends ConsumerState<OAFilters> {
-  // List<String> learningLevels = [];
-  // late List<String> learningLevels;
-
-  // List<String> getLevels() {
-  //   // try {
-  //   // print("Iniciando getLevels");
-  //   List<String> setLevels = [];
-  //   List<String> levels = ref.watch(searchLevels);
-
-  //   print("jsonData: $levels");
-  //   for (var level in levels) {
-  //     setLevels.add(level.nome);
-  //   }
-  //   // levels.map((level) {
-  //   //   setLevels.add(level.nome);
-  //   // });
-
-  //   setState() {
-  //     learningLevels = setLevels;
-  //   }
-
-  //   return learningLevels;
-
-  //   // } catch (e) {
-  //   //   print('Erro em getLevels: $e');
-  //   // }
-  // }
-
-  @override
-  void initState() {
-    // learningLevels = getLevels();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<void>(
-      future: fetchLevels(ref), // Chama a função getLevels
+      future: fetchLevels(ref),
       builder: (BuildContext context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          final studyLevelData = ref.watch(searchLevels);
-          List<String> studyLevels = [];
+          final studyLevelData = ref.watch(studyLevelsProvider);
+          final studyClassData = ref.watch(studyClassesProvider);
+          // final describerData = ref.watch(describerProvider);
+          final disciplineData = ref.watch(disciplineProvider);
+          // final abilityData = ref.watch(abilityProvider);
 
-          for (var level in studyLevelData) {
-            studyLevels.add(level.nome);
-          }
-
-          print("jsonData => $studyLevelData");
+          // print("json $describerData");
 
           return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,83 +82,23 @@ class OAFilterState extends ConsumerState<OAFilters> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Row(
-                    //   children: [
-                    //     Row(
-                    //       children: [
-                    //         Checkbox(
-                    //           tristate: true,
-                    //           value: pcnCheck,
-                    //           onChanged: (bool? value) {
-                    //             setState(() {
-                    //               if (value == null) {
-                    //                 pcnCheck = false;
-                    //               } else {
-                    //                 pcnCheck = !pcnCheck;
-                    //                 bnccCheck = false;
-                    //               }
-                    //             });
-                    //           },
-                    //         ),
-                    //         Text(
-                    //           "PCN",
-                    //         )
-                    //       ],
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.only(left: 8.0),
-                    //       child: Row(
-                    //         children: [
-                    //           Checkbox(
-                    //             tristate: true,
-                    //             value: bnccCheck,
-                    //             onChanged: (bool? value) {
-                    //               setState(() {
-                    //                 if (value == null) {
-                    //                   bnccCheck = false;
-                    //                 } else {
-                    //                   bnccCheck = !bnccCheck;
-                    //                   pcnCheck = false;
-                    //                 }
-                    //               });
-                    //             },
-                    //           ),
-                    //           Text(
-                    //             "BNCC",
-                    //           )
-                    //         ],
-                    //       ),
-                    //     ),
-                    //   ],
-                    // ),
-                    for (var lista in tileTitle) ...{
-                      Container(
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.only(top: 40, bottom: 20),
-                          child: Text(lista, style: widget.titleStyle)),
-                      Container(
-                          height: 40,
-                          alignment: Alignment.centerLeft,
-                          margin: EdgeInsets.only(bottom: 4),
-                          child: DropdownButton<String>(
-                              value: studyLevels.first,
-                              icon: const Icon(Icons.arrow_drop_down),
-                              elevation: 5,
-                              style: textTheme.bodySmall,
-                              onChanged: (String? value) {
-                                // This is called when the user selects an item.
-                                // setState(() {
-                                //   dropdownValue = value!;
-                                // });
-                              },
-                              items: studyLevels.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Container(child: Text(value)),
-                                );
-                              }).toList())),
-                    },
+                    studyLevelData.length > 0
+                        ? searchDropdown(context, tileTitle[0], studyLevelData,
+                            widget.titleStyle)
+                        : Container(),
+                    studyClassData.length > 0
+                        ? searchDropdown(context, tileTitle[1], studyClassData,
+                            widget.titleStyle)
+                        : Container(),
+                    // describerData.length > 0
+                    //     ? searchDropdown(context, tileTitle[2], describerData,
+                    //         widget.titleStyle)
+                    //     : Container(),
+                    disciplineData.length > 0
+                        ? searchDropdown(context, tileTitle[3], disciplineData,
+                            widget.titleStyle)
+                        : Container(),
+                    // searchDropdown(context, tileTitle[4], abilityData, widget.titleStyle),
                     Padding(
                       padding: const EdgeInsets.only(top: 50),
                       child: Row(
@@ -211,7 +119,18 @@ class OAFilterState extends ConsumerState<OAFilters> {
                 "Perdão, não há nenhum item a ser exibido no momento.",
               ));
         }
-        return circleLoadSpinner(context);
+        return Container(
+          child: Center(
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(
+                color: modalBackground,
+              ),
+            ),
+          ),
+        );
+        ;
       },
     );
   }

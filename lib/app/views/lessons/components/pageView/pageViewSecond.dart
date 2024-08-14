@@ -45,12 +45,12 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   }
 
   void getData() async {
-    SearchResponse fetchedData = await fetchDataAndUpdateState("", ref);
-    SearchResponse pagination = fetchedData;
-    List<SearchModel?> newPagination = pagination.content;
-    setState(() {
-      searchData = newPagination;
-    });
+    fetchData("", ref, 0);
+    // SearchResponse pagination = fetchedData;
+    // List<SearchModel?> newPagination = pagination.content;
+    // setState(() {
+    //   searchData = newPagination;
+    // });
   }
 
   Future<List<String>?> getObjects() async {
