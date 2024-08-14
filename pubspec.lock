@@ -1009,17 +1009,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_platform_interface
-<<<<<<< HEAD
-      sha256: "034650b71e73629ca08a0bd789fd1d83cc63c2d1e405946f7cef7bc37432f93a"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.4.0"
-=======
       sha256: "57cbf196c486bc2cf1f02b85784932c6094376284b3ad5779d1b1c6c6a816b80"
       url: "https://pub.dev"
     source: hosted
     version: "2.4.1"
->>>>>>> 684b1c21c90920a798e9fd1139d35960e06704ce
   shared_preferences_web:
     dependency: transitive
     description:
