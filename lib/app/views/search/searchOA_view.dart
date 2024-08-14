@@ -9,7 +9,7 @@ import '../../../components/loadCircle.dart';
 import '../../../utils/app_theme.dart';
 import '../../../utils/responsivo.dart';
 import '../../controllers/search_controller.dart';
-import '../../models/pagination_model.dart';
+import '../../models/pagination_oa_model.dart';
 import '../../models/search_models.dart';
 import '../home/components/our_product_item.dart';
 import 'responsividade/search_desktop.dart';
@@ -192,8 +192,8 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                           return Container(
                             alignment: Alignment.center,
                             child: OurProductItem(
-                              title: result!.nome,
-                              image: result.caminhoImagem ?? "",
+                              title: result?.nome ?? "",
+                              image: result?.caminhoImagem ?? "",
                             ),
                           );
                         }).toList(),

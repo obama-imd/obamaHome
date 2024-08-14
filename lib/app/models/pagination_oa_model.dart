@@ -28,13 +28,21 @@ class PaginationResponse {
 
 class Content {
   final int id;
-  final String nome;
+  final String? nome;
   final String? caminhoImagem;
+  final String? descricao;
+  final String? codigo;
+  final String? nomeTemaConteudo;
+  final String? nomeNivelEnsino;
 
   Content({
     required this.id,
-    required this.nome,
+    this.nome,
     this.caminhoImagem,
+    this.descricao,
+    this.codigo,
+    this.nomeTemaConteudo,
+    this.nomeNivelEnsino,
   });
 
   factory Content.fromJson(Map<String, dynamic> json) {
