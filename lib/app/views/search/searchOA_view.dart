@@ -11,6 +11,7 @@ import '../../../components/loadCircle.dart';
 import '../../../utils/app_theme.dart';
 import '../../../utils/responsivo.dart';
 import '../../controllers/search_controller.dart';
+import '../../models/pagination_oa_model.dart';
 import '../../models/search_models.dart';
 import '../home/components/our_product_item.dart';
 import 'responsividade/search_desktop.dart';
@@ -79,7 +80,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
   }
 
   void waitData() async {
-    Future.wait([fetchData("")])
+    Future.wait([fetchData("", ref, 0)])
         .timeout(Duration(seconds: 5))
         .whenComplete(() => setState(() {
               loadObjects = false;
@@ -138,6 +139,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
   Key key = UniqueKey();
   int startValue = 0;
   int endValue = 2;
+  int actualPage = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -145,173 +147,173 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
     PageController _pageController = PageController();
 
     return FutureBuilder<void>(
-        future: fetchDataAndUpdateState(widget.termSearched, ref),
+        future: fetchData(widget.termSearched, ref, actualPage),
         builder: (context, snapshot) {
-          final paginationData = ref.watch(searchPagination);
-          List<SearchResponse?> pagination = [...paginationData];
-          int? totalPages = pagination[0]!.totalPages;
-          int? currentPage = pagination[0]!.currentPage;
-          int? itemsPerPage = pagination[0]!.itemsPerPage;
-
-          // int? totalElements = pagination[0]!.totalElements;
-          widget.selectedPageIndex = currentPage;
-          List<SearchModel?> searchResult = pagination[0]!.content;
-
-          double rowNumbers = 0;
-
-          if (widget.swidth < 360) {
-            rowNumbers = searchResult.length / 1.28;
-          } else if (widget.swidth >= 460 && widget.swidth < 680) {
-            rowNumbers = searchResult.length / 1.5;
-          } else {
-            rowNumbers = searchResult.length / 3;
-          }
-
           if (snapshot.connectionState == ConnectionState.done) {
-            return Column(children: [
-              if (searchResult.isNotEmpty) ...{
-                Container(
-                  height: (450 * (rowNumbers + 1)),
-                  child: PageView.builder(
-                    itemCount: totalPages,
-                    physics: NeverScrollableScrollPhysics(),
-                    onPageChanged: (index) {
-                      setState(() {
-                        currentPage = index;
-                      });
-                    },
-                    itemBuilder: (context, index) {
-                      // int startIndex = index * itemsPerPage;
-                      // int endIndex = (index + 1) * itemsPerPage;
-                      // endIndex = endIndex > searchResult.length
-                      //     ? searchResult.length
-                      //     : endIndex;
-                      return ResponsiveGridList(
-                          physics: NeverScrollableScrollPhysics(),
-                          scroll: false,
-                          desiredItemWidth: 200,
-                          minSpacing: 20,
-                          children: searchResult.map((post) {
-                            return Container(
-                                alignment: Alignment(0, 0),
-                                child: OurProductItem(
-                                    title: post!.nome, image: post.url));
-                          }).toList());
-                    },
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (searchResult.length > 5) ...{
-                      Container(
-                        width: 40,
-                        height: 40,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1,
-                            color: Color.fromRGBO(225, 225, 225, 1.0),
-                          ),
-                        ),
-                        child: InkWell(
-                          child: Icon(Icons.navigate_before),
-                          onTap: currentPage! > 0
-                              ? () {
-                                  _pageController.previousPage(
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                  widget.selectedPage(
-                                    startValue + 1,
-                                  );
-                                  setState(() {
-                                    if (startValue > 0) {
-                                      startValue--;
-                                      endValue--;
-                                    }
-                                  });
-                                }
-                              : null,
-                        ),
-                      ),
-                      for (int i = startValue; i <= endValue; i++) ...{
+            final paginationData = ref.watch(searchPagination);
+
+            if (paginationData == null) {
+              return Center(child: Text("No data available"));
+            }
+
+            List<Content?> searchResult = [...paginationData.content];
+            PaginationInfo pagination = paginationData.paginationInfo;
+            ;
+
+            // for (var bla in searchResult) {
+            //   print("json4 => ${bla!.nome}");
+            // }
+
+            int? totalPages = pagination.totalPages;
+            int? currentPage = pagination.pageable.pageNumber;
+            int? itemsPerPage = pagination.pageable.pageSize;
+
+            widget.selectedPageIndex = currentPage;
+
+            double rowNumbers = 0;
+
+            if (widget.swidth < 360) {
+              rowNumbers = 12;
+            } else if (widget.swidth >= 460 && widget.swidth < 680) {
+              rowNumbers = 8;
+            } else {
+              rowNumbers = 4;
+            }
+
+            return Column(
+              children: [
+                if (searchResult.isNotEmpty) ...{
+                  Container(
+                      height: (360 * (rowNumbers)),
+                      child: ResponsiveGridList(
+                        physics: NeverScrollableScrollPhysics(),
+                        scroll: false,
+                        desiredItemWidth: 200,
+                        minSpacing: 20,
+                        children: searchResult.map((result) {
+                          return Container(
+                            alignment: Alignment.center,
+                            child: OurProductItem(
+                              title: result?.nome ?? "",
+                              image: result?.caminhoImagem ?? "",
+                            ),
+                          );
+                        }).toList(),
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (searchResult.length > 5) ...{
                         Container(
                           width: 40,
                           height: 40,
                           margin: EdgeInsets.symmetric(horizontal: 5.0),
                           decoration: BoxDecoration(
-                            color:
-                                widget.selectedPageIndex == i ? primary : null,
                             border: Border.all(
                               width: 1,
                               color: Color.fromRGBO(225, 225, 225, 1.0),
                             ),
-                            borderRadius: BorderRadius.circular(5.0),
                           ),
                           child: InkWell(
-                            child: Center(
-                              child: Text((i + 1).toString(),
-                                  style: widget.selectedPageIndex == i
-                                      ? textTheme.displaySmall
-                                      : textTheme.bodySmall),
-                            ),
-                            onTap: () {
-                              if ((i) != currentPage) {
-                                _pageController.jumpToPage(i);
-                                widget.selectedPage(i);
-                                setState(() {
-                                  if (i > 0 && i < totalPages - 1) {
-                                    startValue = i - 1;
-                                    endValue = i + 1;
+                            child: Icon(Icons.navigate_before),
+                            onTap: currentPage > 0
+                                ? () {
+                                    // _pageController.previousPage(
+                                    //   duration: Duration(milliseconds: 300),
+                                    //   curve: Curves.easeInOut,
+                                    // );
+                                    widget.selectedPage(
+                                      currentPage - 1,
+                                    );
+                                    setState(() {
+                                      if (currentPage > 0) {
+                                        startValue--;
+                                        endValue--;
+                                        actualPage--;
+                                      }
+                                    });
                                   }
-                                });
-                              }
-                            },
-                          ),
-                        )
-                      },
-                      Container(
-                        width: 40,
-                        height: 40,
-                        margin: EdgeInsets.symmetric(horizontal: 5.0),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            width: 1,
-                            color: Color.fromRGBO(225, 225, 225, 1.0),
+                                : null,
                           ),
                         ),
-                        child: InkWell(
-                          child: Icon(Icons.navigate_next),
-                          onTap: currentPage! < totalPages - 1
-                              ? () {
-                                  _pageController.nextPage(
-                                    duration: Duration(milliseconds: 300),
-                                    curve: Curves.easeInOut,
-                                  );
-                                  widget.selectedPage(
-                                    startValue + 1,
-                                  );
+                        for (int i = startValue; i <= endValue; i++) ...{
+                          Container(
+                            width: 40,
+                            height: 40,
+                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: BoxDecoration(
+                              color: widget.selectedPageIndex == i
+                                  ? primary
+                                  : null,
+                              border: Border.all(
+                                width: 1,
+                                color: Color.fromRGBO(225, 225, 225, 1.0),
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                            ),
+                            child: InkWell(
+                              child: Center(
+                                child: Text((i + 1).toString(),
+                                    style: widget.selectedPageIndex == i
+                                        ? textTheme.displaySmall
+                                        : textTheme.bodySmall),
+                              ),
+                              onTap: () {
+                                if ((i) != currentPage) {
+                                  // _pageController.jumpToPage(i);
+                                  widget.selectedPage(i);
                                   setState(() {
-                                    if (endValue < totalPages - 1) {
-                                      startValue++;
-                                      endValue++;
+                                    if (i > 0 && i < totalPages - 1) {
+                                      startValue = i - 1;
+                                      actualPage = i;
+                                      endValue = i + 1;
                                     }
                                   });
                                 }
-                              : null,
+                              },
+                            ),
+                          )
+                        },
+                        Container(
+                          width: 40,
+                          height: 40,
+                          margin: EdgeInsets.symmetric(horizontal: 5.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1,
+                              color: Color.fromRGBO(225, 225, 225, 1.0),
+                            ),
+                          ),
+                          child: InkWell(
+                            child: Icon(Icons.navigate_next),
+                            onTap: currentPage < totalPages - 1
+                                ? () {
+                                    // _pageController.nextPage(
+                                    //   duration: Duration(milliseconds: 300),
+                                    //   curve: Curves.easeInOut,
+                                    // );
+                                    widget.selectedPage(
+                                      currentPage + 1,
+                                    );
+                                    setState(() {
+                                      if (endValue < totalPages - 1) {
+                                        startValue++;
+                                        actualPage++;
+                                        endValue++;
+                                      }
+                                    });
+                                  }
+                                : null,
+                          ),
                         ),
-                      ),
-                    }
-                  ],
-                )
-              } else ...{
-                Container(
-                    child: Text(
-                  "Perdão, não há nenhum OA correspondente com a sua pesquisa.",
-                )),
-              }
-            ]);
+                      }
+                    ],
+                  ),
+                } else ...{
+                  Center(child: Text("Nada a exibir no momento")),
+                },
+              ],
+            );
           } else if (snapshot.hasError) {
             Container(
                 padding: const EdgeInsets.only(top: 100, left: 90, right: 15),

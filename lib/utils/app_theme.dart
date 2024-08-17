@@ -171,6 +171,8 @@ class MyAppMaterial extends MaterialApp {
               error: error,
               onError: onError,
               surface: background,
+              background: background,
+              onBackground: background,
               onSurface: onSurface,
             ),
             textTheme: textTheme,

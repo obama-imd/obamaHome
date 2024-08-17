@@ -8,14 +8,14 @@ class OurProductItem extends StatefulWidget {
   const OurProductItem(
       {super.key,
       required this.title,
-      required this.image,
+      this.image,
       this.width = 237.5,
       this.height = 327.5});
 
   final double height;
   final double width;
   final String title;
-  final String image;
+  final String? image;
 
   @override
   State<OurProductItem> createState() => _OurProductItemState();
@@ -93,7 +93,7 @@ class _OurProductItemState extends State<OurProductItem> {
                         ),
                 ),
                 child: Image.network(
-                  widget.image,
+                  widget.image!,
                   fit: BoxFit.cover,
                   errorBuilder: (BuildContext context, Object exception,
                       StackTrace? stackTrace) {
@@ -107,6 +107,7 @@ class _OurProductItemState extends State<OurProductItem> {
               flex: 1,
               child: Container(
                 color: background,
+                padding: EdgeInsets.symmetric(horizontal: 13),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
