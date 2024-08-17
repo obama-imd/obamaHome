@@ -137,6 +137,10 @@ flutter:
     - assets/images/forms.png
     - assets/images/sala-de-aula.png
     - assets/images/not-found.png
+    - assets/images/obama_salmao.jpg
+    - assets/images/obama_roxo.jpg
+    - assets/images/obama_verde_cana.jpg
+    - assets/images/obama_laranja.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

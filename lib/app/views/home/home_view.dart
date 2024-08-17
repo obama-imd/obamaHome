@@ -167,35 +167,41 @@ class LearningLevelsHome {
   final String title;
   final String text;
   final String path;
+  final Color color;
 
   LearningLevelsHome(
       {required this.picture,
       required this.title,
       required this.text,
+      required this.color,
       required this.path});
 }
 
 final List<LearningLevelsHome> levels = [
   LearningLevelsHome(
-      picture: "images/icone.png",
+      picture: "images/obama_laranja.jpg",
+      color: Color.fromARGB(191, 241, 134, 68),
       title: "Educação Infantil",
       text:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
       path: ""),
   LearningLevelsHome(
-      picture: "images/icone.png",
+      picture: "images/obama_verde_cana.jpg",
+      color: Color.fromARGB(187, 183, 220, 0),
       title: "Anos iniciais do Ensino Fundamental",
       text:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
       path: ""),
   LearningLevelsHome(
-      picture: "images/icone.png",
+      picture: "images/obama_roxo.jpg",
+      color: Color.fromARGB(188, 107, 78, 250),
       title: "Anos Finais do Ensino Fundamental",
       text:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
       path: ""),
   LearningLevelsHome(
-      picture: "images/icone.png",
+      picture: "images/obama_salmao.jpg",
+      color: Color.fromARGB(168, 255, 105, 133),
       title: "Ensino Médio",
       text:
           "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
@@ -259,12 +265,12 @@ class OAHomeState extends ConsumerState<OAHome> {
                                 child: Column(
                                   children: [
                                     CircleAvatar(
-                                      backgroundColor: Colors.blue,
+                                      backgroundColor: post.color,
                                       radius: 33,
                                       child: CircleAvatar(
                                         backgroundColor: background,
                                         child:
-                                            Image.asset(post.picture),
+                                            SizedBox(width: 46, height: 46, child: Image.asset(post.picture)),
                                         radius: 30,
                                       ),
                                     ),
