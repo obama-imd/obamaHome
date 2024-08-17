@@ -62,7 +62,7 @@ class _PageViewFirstState extends ConsumerState<PageViewFirst> {
                   margin: const EdgeInsets.symmetric(vertical: 20),
                   child: TextField(
                       onChanged: (value) async {
-                        arrayData[i] = value!;
+                        arrayData[i] = value;
                         print(arrayData);
                       },
                       decoration: InputDecoration(

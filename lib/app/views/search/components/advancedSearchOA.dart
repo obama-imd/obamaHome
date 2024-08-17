@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:obamahome/app/models/advancedSearch/study_level.dart';
 import 'package:obamahome/components/mainButton.dart';
 
-import '../../../../components/loadCircle.dart';
 import '../../../../components/searchDropdown.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';

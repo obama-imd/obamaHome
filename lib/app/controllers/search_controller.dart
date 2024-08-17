@@ -3,11 +3,9 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
-import 'package:obamahome/app/models/advancedSearch/study_level.dart';
 
 import '../../utils/apiURL.dart';
 import '../models/pagination_oa_model.dart';
-import '../models/search_models.dart';
 
 PaginationResponse filtrarOA(PaginationResponse jsonData, String searchTerm) {
   if (searchTerm.isEmpty) {
@@ -15,7 +13,7 @@ PaginationResponse filtrarOA(PaginationResponse jsonData, String searchTerm) {
   }
 
   List<Content> comparingData = jsonData.content.where((item) {
-    var nome = item!.nome!.toLowerCase();
+    var nome = item.nome!.toLowerCase();
 
     return nome.contains(searchTerm.toLowerCase());
   }).toList();

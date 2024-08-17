@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class PaginationResponse {
   late final List<Content> content;
   final PaginationInfo paginationInfo;

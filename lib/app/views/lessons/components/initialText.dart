@@ -365,7 +365,7 @@ String initText(QuillController _controller, List<String>? cachedObjects,
   _controller.compose(endText, TextSelection.collapsed(offset: endText.length),
       ChangeSource.local);
   if (cachedObjects != null) {
-    for (var selected in cachedObjects!) {
+    for (var selected in cachedObjects) {
       // print("selected => $selected");
       var mainList = new Delta()
         ..insert(selected, {"size": "14"})

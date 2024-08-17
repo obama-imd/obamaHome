@@ -3,8 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:obamahome/advanced_search/application/study_level_service.dart';
-import 'package:obamahome/advanced_search/data/study_levels_controller.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/loadCircle.dart';
@@ -12,7 +10,6 @@ import '../../../utils/app_theme.dart';
 import '../../../utils/responsivo.dart';
 import '../../controllers/search_controller.dart';
 import '../../models/pagination_oa_model.dart';
-import '../../models/search_models.dart';
 import '../home/components/our_product_item.dart';
 import 'responsividade/search_desktop.dart';
 import 'responsividade/search_mobile.dart';
