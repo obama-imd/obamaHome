@@ -213,7 +213,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
                             child: StaffCard(
-                                LeaderNames[i], LeaderImgs[i], swidth),
+                                LeaderNames[i], LeaderImgs[i], LeaderLink[i], swidth),
                           ))
                     },
                     ResponsiveGridCol(lg: 3, child: Spacer()),
@@ -237,7 +237,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
                             child:
-                                StaffCard(staffNames[i], staffImgs[i], swidth),
+                                StaffCard(staffNames[i], staffImgs[i], staffLinks[i], swidth),
                           ))
                     }
                   ]),

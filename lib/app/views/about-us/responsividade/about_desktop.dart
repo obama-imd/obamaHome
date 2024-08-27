@@ -181,7 +181,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
                     child: Padding(
                       padding:
                           const EdgeInsets.only(bottom: 30, left: 10, right: 10),
-                      child: StaffCard(LeaderNames[i], LeaderImgs[i], swidth),
+                      child: StaffCard(LeaderNames[i], LeaderImgs[i], LeaderLink[i], swidth),
                     ))
               },
               ResponsiveGridCol(lg: 3, child: Spacer()),
@@ -203,7 +203,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
                     child: Padding(
                       padding:
                           const EdgeInsets.only(bottom: 30, left: 10, right: 10),
-                      child: StaffCard(staffNames[i], staffImgs[i], swidth),
+                      child: StaffCard(staffNames[i], staffImgs[i], staffLinks[i], swidth),
                     ))
               }
             ]),

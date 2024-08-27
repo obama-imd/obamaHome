@@ -43,7 +43,6 @@ dependencies:
   latlong2: ^0.9.0
   html: ^0.15.4
   image_network: ^2.5.4+1
-  intl: 0.18.1
   responsive_grid: ^2.4.4
   curved_navigation_bar: ^1.0.3
   flutter_riverpod: ^2.4.8
@@ -135,8 +134,8 @@ flutter:
     - assets/images/MayaraCabral.jpg
     - assets/images/RamonJales.jpg
     - assets/images/Roberia.jpg
-    - assets/images/SaraSilva.png
-    - assets/images/SarahRibeiro.jpg
+    - assets/images/SaraSilva.jpg
+    - assets/images/SarahRibeiro.jpeg
     - assets/images/gmail.png
     - assets/images/meet.png
     - assets/images/forms.png

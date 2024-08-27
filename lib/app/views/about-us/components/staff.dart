@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
 
 List<IconData> SocialMediaLinks = [
-  (FontAwesomeIcons.facebook),
-  (FontAwesomeIcons.googlePlus),
-  (FontAwesomeIcons.twitter),
+  // (FontAwesomeIcons.facebook),
+  // (FontAwesomeIcons.googlePlus),
+  // (FontAwesomeIcons.twitter),
   (FontAwesomeIcons.linkedin),
-  (FontAwesomeIcons.instagram),
+  // (FontAwesomeIcons.instagram),
 ];
+
+_launchURL(link) async {
+  Uri url = Uri.parse(link); // Parse o link para uma URI
+  if (await canLaunchUrl(url)) {
+    await launchUrl(url);
+  } else {
+    throw 'Could not launch $link';
+  }
+}
 
 class StaffCard extends StatelessWidget {
   final String staffName;
   final String staffImg;
+  final String staffLink;
   final double swidth;
 
-  StaffCard(this.staffName, this.staffImg, this.swidth, {super.key});
+  StaffCard(this.staffName, this.staffImg, this.staffLink, this.swidth, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +68,7 @@ class StaffCard extends StatelessWidget {
                                   child: Material(
                                     color: onSecondary,
                                     child: InkWell(
-                                        onTap: () {},
+                                        onTap: () => _launchURL(staffLink),
                                         child: Icon(SocialMediaLinks[i],
                                             size: 16.0, color: onPrimary)),
                                   )),
