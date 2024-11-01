@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import "package:flutter/material.dart";
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,6 +46,14 @@ class _OurProductItemState extends State<OurProductItem> {
 
   @override
   Widget build(BuildContext context) {
+    var old_image = Image.network(
+      widget.image!,
+      fit: BoxFit.cover,
+      errorBuilder:
+          (BuildContext context, Object exception, StackTrace? stackTrace) {
+        return Image.asset('assets/images/nopic.jpg', fit: BoxFit.cover);
+      },
+    );
     return MouseRegion(
       onHover: (event) => setState(() {
         houver = true;
@@ -75,33 +84,24 @@ class _OurProductItemState extends State<OurProductItem> {
             Expanded(
               flex: 3,
               child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                alignment: Alignment.center,
-                width: widget.width,
-                decoration: BoxDecoration(
-                  color: background,
-                  border: houver
-                      ? const Border(
-                          top: BorderSide.none,
-                          bottom: BorderSide.none,
-                          left: BorderSide.none,
-                          right: BorderSide.none,
-                        )
-                      : Border.all(
-                          color: const Color(0xf3f3f3ff),
-                          width: 20.0,
-                        ),
-                ),
-                child: Image.network(
-                  widget.image!,
-                  fit: BoxFit.cover,
-                  errorBuilder: (BuildContext context, Object exception,
-                      StackTrace? stackTrace) {
-                    return Image.asset('assets/images/nopic.jpg',
-                        fit: BoxFit.cover);
-                  },
-                ),
-              ),
+                  duration: const Duration(milliseconds: 300),
+                  alignment: Alignment.center,
+                  width: widget.width,
+                  decoration: BoxDecoration(
+                    color: background,
+                    border: houver
+                        ? const Border(
+                            top: BorderSide.none,
+                            bottom: BorderSide.none,
+                            left: BorderSide.none,
+                            right: BorderSide.none,
+                          )
+                        : Border.all(
+                            color: const Color(0xf3f3f3ff),
+                            width: 20.0,
+                          ),
+                  ),
+                  child: buildImage(widget.title)),
             ),
             Expanded(
               flex: 1,
@@ -162,6 +162,26 @@ class _OurProductItemState extends State<OurProductItem> {
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+
+  final Color mycolor =
+      Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+
+  Widget buildImage(String text) {
+    return Container(
+      color: mycolor,
+      constraints: BoxConstraints.expand(),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(
+                fontFamily: 'SRF2', color: Colors.white, fontSize: 28),
+          ),
         ),
       ),
     );

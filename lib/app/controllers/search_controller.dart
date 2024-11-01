@@ -30,16 +30,15 @@ PaginationResponse filtrarOA(PaginationResponse jsonData, String searchTerm) {
 Future<void> fetchData(String searchTerm, ref, page) async {
   var apiUrl = '${API_URL}/oa?page=${page}&size=12&sort=id';
 
-  final response = await http.get(Uri.parse(apiUrl), headers: {
-    HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
-  });
+  final response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
   if (response.statusCode == 200) {
     // final jsonData = filtrarOA(jsonDecode(response.body), searchTerm);
-    final jsonData = jsonDecode(response.body);
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
     PaginationResponse paginationResponse =
-        PaginationResponse.fromJson(jsonData as Map<String, dynamic>);
+        PaginationResponse.fromJson(Map.from(jsonData));
 
     ref.read(searchPagination.notifier).state = paginationResponse;
   } else {
@@ -171,43 +170,21 @@ Future<void> fetchLevels(WidgetRef ref) async {
   int page = 0;
 
   try {
-    final responseNivelEnsino = await http
-        .get(Uri.parse('${API_URL}/nivelensino'), headers: {
-      HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
-    });
+    final responseNivelEnsino = await http.get(
+        Uri.parse('${API_URL}/nivelensino'),
+        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
     final responseAnoEnsinoResource = await http.get(
         Uri.parse('${API_URL}/anoEnsino?page=$page&size=50&sort=id'),
-        headers: {
-          HttpHeaders.accessControlAllowOriginHeader:
-              'http://hobama.imd.ufrn.br/'
-        });
+        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
     final responseDescritor = await http.get(
         Uri.parse('${API_URL}/descritor?page=$page&size=50&sort=id'),
-        headers: {
-          HttpHeaders.accessControlAllowOriginHeader:
-              'http://hobama.imd.ufrn.br/'
-        });
+        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
     final responseDisciplineResource = await http.get(
         Uri.parse('${API_URL}/disciplina?page=$page&size=50&sort=id'),
-        headers: {
-          HttpHeaders.accessControlAllowOriginHeader:
-              'http://hobama.imd.ufrn.br/'
-        });
-
-    // final responseHabilidadeResource = await http.get(
-    //     Uri.parse(
-    //         '${API_URL}/habilidade?anoEnsinoId=1&temaConteudoId=1&page=$page&size=12&sort=id'),
-    //     headers: {
-    //       HttpHeaders.accessControlAllowOriginHeader:
-    //           'http://hobama.imd.ufrn.br/'
-    //     });
-
-    // final responseTemaConteudo = await http.get(Uri.parse('${API_URL}/temaConteudo?curriculo=1'), headers: {
-    //   HttpHeaders.accessControlAllowOriginHeader: 'http://hobama.imd.ufrn.br/'
-    // });
+        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
     if (responseNivelEnsino.statusCode == 200) {
       List<dynamic> jsonData = jsonDecode(responseNivelEnsino.body);
@@ -235,21 +212,6 @@ Future<void> fetchLevels(WidgetRef ref) async {
           'Failed to fetch API data. Status code: ${responseAnoEnsinoResource.statusCode}');
     }
 
-    // if (responseDescritor.statusCode == 200) {
-    //   var jsonData = jsonDecode(responseDescritor.body);
-
-    //   PaginationResponse paginationResponse =
-    //       PaginationResponse.fromJson(jsonData as Map<String, dynamic>);
-
-    //   List<String?> setDescribers =
-    //       paginationResponse.content.map((level) => level.descricao).toList();
-
-    //   ref.read(describerProvider.notifier).setDescribers(setDescribers);
-    // } else {
-    //   throw Exception(
-    //       'Failed to fetch API data. Status code: ${responseDescritor.statusCode}');
-    // }
-
     if (responseDisciplineResource.statusCode == 200) {
       var jsonData = jsonDecode(responseDisciplineResource.body);
 
@@ -264,52 +226,8 @@ Future<void> fetchLevels(WidgetRef ref) async {
       throw Exception(
           'Failed to fetch API data. Status code: ${responseDisciplineResource.statusCode}');
     }
-
-    // if (responseHabilidadeResource.statusCode == 200) {
-    //   List<dynamic> jsonData = jsonDecode(responseHabilidadeResource.body);
-    //   List<String> setAbilities =
-    //       jsonData.map((level) => level["descricao"] as String).toList();
-
-    //   ref.read(abilityProvider.notifier).setAbilities(setAbilities);
-    // } else {
-    //   throw Exception(
-    //       'Failed to fetch API data. Status code: ${responseHabilidadeResource.statusCode}');
-    // }
-
-    // if (responseTemaConteudo.statusCode == 200) {
-    //   List<dynamic> jsonData = jsonDecode(responseTemaConteudo.body);
-    //   List<String> setTheme =
-    //       jsonData.map((level) => level["descricao"] as String).toList();
-
-    //   // ref.read(studyLevelsProvider.notifier).setLevels(setTheme);
-    // } else {
-    //   throw Exception(
-    //       'Failed to fetch API data. Status code: ${responseTemaConteudo.statusCode}');
-    // }
   } catch (e) {
     print('Error fetching data: $e');
     throw Exception('Failed to fetch API data.');
   }
 }
-
-
-// Future<List<StudyLevelModel>> fetchLevels() async {
-//   final response =
-//       await http.get(Uri.parse(apiUrl));
-
-//   if (response.statusCode == 200) {
-//     final jsonData = jsonDecode(response.body);
-//     final posts = jsonData
-//         .map<StudyLevelModel>((item) => StudyLevelModel(
-//               id: item['id'],
-//               nome: item['nome'],
-//             ))
-//         .toList() as List<StudyLevelModel>;
-
-//     print("nivel => $posts");
-
-//     return posts;
-//   } else {
-//     return [];
-//   }
-// }

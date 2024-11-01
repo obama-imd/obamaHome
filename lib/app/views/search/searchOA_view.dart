@@ -87,9 +87,9 @@ class SearchPageState extends ConsumerState<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-            body: Stack(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: Scaffold(
+        body: Stack(
           alignment: Alignment.topCenter,
           children: [
             Responsivo(
@@ -113,7 +113,9 @@ class SearchPageState extends ConsumerState<SearchPage> {
                     titleStyle: textTheme.titleSmall!)),
             if (loadObjects) ...{circleLoadSpinner(context)}
           ],
-        ),),);
+        ),
+      ),
+    );
   }
 }
 
@@ -155,11 +157,6 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
 
             List<Content?> searchResult = [...paginationData.content];
             PaginationInfo pagination = paginationData.paginationInfo;
-            ;
-
-            // for (var bla in searchResult) {
-            //   print("json4 => ${bla!.nome}");
-            // }
 
             int? totalPages = pagination.totalPages;
             int? currentPage = pagination.pageable.pageNumber;

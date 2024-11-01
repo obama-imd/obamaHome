@@ -46,11 +46,6 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
 
   void getData() async {
     fetchData("", ref, 0);
-    // SearchResponse pagination = fetchedData;
-    // List<SearchModel?> newPagination = pagination.content;
-    // setState(() {
-    //   searchData = newPagination;
-    // });
   }
 
   Future<List<String>?> getObjects() async {
@@ -401,30 +396,34 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                                   },
                                                   child: Icon(Icons.add_circle,
                                                       color: CoresPersonalizadas
-                                                          .azulObama)),InkWell(
-                                                onTap: () {
-                                                  selectedOA.remove(
-                                                      searchData[i]!.nome);
-                                                  addObjects();
-                                                },
-                                                child: Icon(Icons.remove_circle,
-                                                    color: CoresPersonalizadas
-                                                        .azulObama)),
+                                                          .azulObama)),
+                                              InkWell(
+                                                  onTap: () {
+                                                    selectedOA.remove(
+                                                        searchData[i]!.nome);
+                                                    addObjects();
+                                                  },
+                                                  child: Icon(
+                                                      Icons.remove_circle,
+                                                      color: CoresPersonalizadas
+                                                          .azulObama)),
                                             } else ...{
-                                              Padding( padding: EdgeInsets.only(right: 2), child: Container(
-                                                  width: 20,
-                                                  height: 20,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100),
-                                                    color: Colors.green,
-                                                  ),
-                                                  child: Icon(Icons.check,
-                                                      color: background,
-                                                      size: 15)))
+                                              Padding(
+                                                  padding:
+                                                      EdgeInsets.only(right: 2),
+                                                  child: Container(
+                                                      width: 20,
+                                                      height: 20,
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(100),
+                                                        color: Colors.green,
+                                                      ),
+                                                      child: Icon(Icons.check,
+                                                          color: background,
+                                                          size: 15)))
                                             },
-                                            
                                           ],
                                         ),
                                       ],

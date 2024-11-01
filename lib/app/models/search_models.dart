@@ -8,6 +8,9 @@ class SearchModel {
     required this.nome,
     required this.url,
   });
+
+  factory SearchModel.fromJson(Map<String, dynamic> json) =>
+      SearchModel(id: json["id"], nome: json["nome"], url: json["url"]);
 }
 
 class SearchResponse {
