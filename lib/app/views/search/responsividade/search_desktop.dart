@@ -11,19 +11,23 @@ import '../../../../utils/app_padding.dart';
 
 class SearchDesktop extends StatefulWidget {
   String termSearched;
+  String queryParams;
   int selectedPageIndex;
   Function(void) updateData;
+  Function(String) updateDataFromAdvancedSearchPage;
   void Function(int) selectedPage;
   TextStyle titleStyle;
 
-  SearchDesktop(
-      {Key? key,
-      required this.termSearched,
-      required this.selectedPageIndex,
-      required this.updateData,
-      required this.selectedPage,
-      required this.titleStyle})
-      : super(key: key);
+  SearchDesktop({
+    super.key,
+    required this.termSearched,
+    required this.selectedPageIndex,
+    required this.updateData,
+    required this.updateDataFromAdvancedSearchPage,
+    required this.selectedPage,
+    required this.titleStyle,
+    required this.queryParams,
+  });
 
   @override
   State<SearchDesktop> createState() => _SearchDesktopState();
@@ -53,8 +57,8 @@ class _SearchDesktopState extends State<SearchDesktop> {
                         widget.termSearched,
                         swidth,
                         widget.selectedPageIndex,
-                        widget.updateData,
-                        widget.selectedPage),
+                        widget.selectedPage,
+                        widget.queryParams),
                   ],
                 ),
               ),
@@ -65,7 +69,8 @@ class _SearchDesktopState extends State<SearchDesktop> {
                   child: OAFilters(
                     swidth: swidth,
                     data: widget.termSearched,
-                    updateData: widget.updateData, titleStyle: widget.titleStyle,
+                    updateData: widget.updateDataFromAdvancedSearchPage,
+                    titleStyle: widget.titleStyle,
                   ),
                 ),
               ),

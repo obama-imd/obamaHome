@@ -28,11 +28,15 @@ class StaffCard extends StatelessWidget {
   final String staffLink;
   final double swidth;
 
-  StaffCard(this.staffName, this.staffImg, this.staffLink, this.swidth, {super.key});
+  StaffCard(this.staffName, this.staffImg, this.staffLink, this.swidth,
+      {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      SizedBox(
+        height: 10,
+      ),
       Material(
         color: terciary,
         child: InkWell(
@@ -79,7 +83,10 @@ class StaffCard extends StatelessWidget {
             ],
           ),
         ),
-      )
+      ),
+      SizedBox(
+        height: 22,
+      ),
     ]);
   }
 }

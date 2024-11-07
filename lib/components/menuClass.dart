@@ -15,7 +15,7 @@ class ItemValue {
 
 final List<ItemValue> itemValues = [
   ItemValue(
-    name: "Home",
+    name: "Início",
     path: ['/'],
     subItems: [],
     itemHover: false,
@@ -35,13 +35,13 @@ final List<ItemValue> itemValues = [
     itemHover: false,
     subItemHover: List.generate(3, (index) => false),
   ),
-  ItemValue(
-    name: "Publicações",
-    path: ['/blog', '/blog-detalhes'],
-    subItems: ["Lista de Posts", "Último post"],
-    itemHover: false,
-    subItemHover: List.generate(2, (index) => false),
-  ),
+  // ItemValue(
+  //   name: "Publicações",
+  //   path: ['/blog', '/blog-detalhes'],
+  //   subItems: ["Lista de Posts", "Último post"],
+  //   itemHover: false,
+  //   subItemHover: List.generate(2, (index) => false),
+  // ),
   ItemValue(
     name: "Formações",
     path: ['/formacoes'],
@@ -49,11 +49,11 @@ final List<ItemValue> itemValues = [
     itemHover: false,
     subItemHover: List.generate(1, (index) => false),
   ),
-  ItemValue(
-    name: "Planos de Aula",
-    path: ['/planos-aulas/lista', '/planos-aulas/criar'],
-    subItems: ['Lista', 'Criar um novo'],
-    itemHover: false,
-    subItemHover: List.generate(2, (index) => false),
-  ),
+  // ItemValue(
+  //   name: "Planos de Aula",
+  //   path: ['/planos-aulas/lista', '/planos-aulas/criar'],
+  //   subItems: ['Lista', 'Criar um novo'],
+  //   itemHover: false,
+  //   subItemHover: List.generate(2, (index) => false),
+  // ),
 ];

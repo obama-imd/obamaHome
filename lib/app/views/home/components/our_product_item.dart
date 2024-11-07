@@ -1,18 +1,24 @@
 import 'dart:math' as math;
+import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:obamahome/app/controllers/search_controller.dart';
+import 'package:obamahome/app/models/objeto_aprendizagem.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
+import '../../../../utils/nav_key.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(
       {super.key,
+      required this.id,
       required this.title,
       this.image,
       this.width = 237.5,
       this.height = 327.5});
 
+  final int id;
   final double height;
   final double width;
   final String title;
@@ -38,28 +44,108 @@ final shadowNoHouver = [
 ];
 
 class _OurProductItemState extends State<OurProductItem> {
-  bool houver = false;
+  bool hover = false;
+  ObjetoAprendizagem? oa;
+  Widget contentItem = Container();
+  Color mycolor = Colors.white;
 
   void addObjects(selectedOA, prefs) async {
     await prefs.setStringList('objects', selectedOA);
   }
 
   @override
-  Widget build(BuildContext context) {
-    var old_image = Image.network(
-      widget.image!,
-      fit: BoxFit.cover,
-      errorBuilder:
-          (BuildContext context, Object exception, StackTrace? stackTrace) {
-        return Image.asset('assets/images/nopic.jpg', fit: BoxFit.cover);
-      },
+  void initState() {
+    super.initState();
+    mycolor =
+        Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+    contentItem = buildListItem();
+    fetchOAById(widget.id).then((result) => oa = result);
+  }
+
+  Widget buildListItem() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          flex: 3,
+          child: AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              alignment: Alignment.center,
+              width: widget.width,
+              decoration: BoxDecoration(
+                color: background,
+                border: hover
+                    ? const Border(
+                        top: BorderSide.none,
+                        bottom: BorderSide.none,
+                        left: BorderSide.none,
+                        right: BorderSide.none,
+                      )
+                    : Border.all(
+                        color: const Color(0xf3f3f3ff),
+                        width: 20.0,
+                      ),
+              ),
+              child: buildImage(widget.title)),
+        ),
+        Expanded(
+          flex: 1,
+          child: Container(
+            color: const Color(0xf3f3f3ff),
+            padding: EdgeInsets.symmetric(horizontal: 13),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: textTheme.labelLarge,
+                    ),
+                    child: const Text('Abrir'),
+                    onPressed: () async {
+                      fetchOAById(widget.id).then((result) {
+                        setState(() {
+                          oa = result;
+                        });
+                        if (oa != null) {
+                          final Uri url = Uri.parse(oa!.getLink() ?? "");
+                          launchUrl(url);
+                        }
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: textTheme.labelLarge,
+                    ),
+                    child: const Text('Detalhes'),
+                    onPressed: () {
+                      _dialogBuilder();
+                    },
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
+      ],
     );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return MouseRegion(
       onHover: (event) => setState(() {
-        houver = true;
+        hover = true;
       }),
       onExit: (event) => setState(() {
-        houver = false;
+        hover = false;
       }),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
@@ -67,9 +153,9 @@ class _OurProductItemState extends State<OurProductItem> {
         height: widget.height,
         decoration: BoxDecoration(
           color: background,
-          boxShadow: houver ? shadowHouver : shadowNoHouver,
+          boxShadow: hover ? shadowHouver : shadowNoHouver,
           border: Border(
-            bottom: houver
+            bottom: hover
                 ? const BorderSide(
                     color: CoresPersonalizadas.azulObama,
                     width: 5.0,
@@ -77,98 +163,10 @@ class _OurProductItemState extends State<OurProductItem> {
                 : BorderSide.none,
           ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              flex: 3,
-              child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  alignment: Alignment.center,
-                  width: widget.width,
-                  decoration: BoxDecoration(
-                    color: background,
-                    border: houver
-                        ? const Border(
-                            top: BorderSide.none,
-                            bottom: BorderSide.none,
-                            left: BorderSide.none,
-                            right: BorderSide.none,
-                          )
-                        : Border.all(
-                            color: const Color(0xf3f3f3ff),
-                            width: 20.0,
-                          ),
-                  ),
-                  child: buildImage(widget.title)),
-            ),
-            Expanded(
-              flex: 1,
-              child: Container(
-                color: background,
-                padding: EdgeInsets.symmetric(horizontal: 13),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(widget.title, style: textTheme.headlineSmall),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.0),
-                      child: InkWell(
-                          onTap: () async {
-                            final SharedPreferences prefs =
-                                await SharedPreferences.getInstance();
-                            List<String>? items =
-                                prefs.getStringList('objects');
-                            bool itemExists = items!.contains(widget.title);
-                            if (!itemExists) {
-                              items.add(widget.title);
-                              addObjects(items, prefs);
-                              showModalBottomSheet<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return Container(
-                                      height: 100,
-                                      child: Center(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
-                                            Text(
-                                                '${widget.title} foi adicionado ao seu acervo'),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(8.0),
-                                              child: ElevatedButton(
-                                                child: const Text('x'),
-                                                onPressed: () =>
-                                                    Navigator.pop(context),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  });
-                            }
-                          },
-                          child: Icon(Icons.add_circle,
-                              color: CoresPersonalizadas.azulObama)),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
+        child: contentItem,
       ),
     );
   }
-
-  final Color mycolor =
-      Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
 
   Widget buildImage(String text) {
     return Container(
@@ -185,5 +183,84 @@ class _OurProductItemState extends State<OurProductItem> {
         ),
       ),
     );
+  }
+
+  Future<void> _dialogBuilder() async {
+    return oa == null
+        ? showDialog<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                    'Erro ao buscar informações sobre este Objeto de Aprendizagem.'),
+                content: Container(),
+                actions: <Widget>[
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: textTheme.labelLarge,
+                    ),
+                    child: const Text('Ok'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          )
+        : showGeneralDialog<void>(
+            context: context,
+            pageBuilder: (x, y, z) {
+              return AlertDialog(
+                scrollable: true,
+                title: Text(oa!.nome),
+                content: Container(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                        child: Text("Plataforma de uso: ${oa!.getPlataforma()}",
+                            style: textTheme.headlineSmall),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                        child: Text("Descritores PCN",
+                            style: textTheme.headlineSmall),
+                      ),
+                      kIsWeb
+                          ? FittedBox(
+                              fit: BoxFit.fitHeight,
+                              child: Text(oa!.getDescritores()))
+                          : Expanded(child: Text(oa!.getDescritores())),
+                      Padding(
+                          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                          child: Text(
+                            "Habilidades BNCC",
+                            style: textTheme.headlineSmall,
+                          )),
+                      kIsWeb
+                          ? FittedBox(
+                              fit: BoxFit.fitHeight,
+                              child: Text(oa!.getHabilidades()))
+                          : Expanded(child: Text(oa!.getHabilidades()))
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      textStyle: textTheme.labelLarge,
+                    ),
+                    child: const Text('Ok'),
+                    onPressed: () {
+                      Navigator.pop(x);
+                    },
+                  ),
+                ],
+              );
+            },
+          );
   }
 }

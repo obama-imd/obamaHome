@@ -29,11 +29,14 @@ class SectionTitle extends StatelessWidget {
         if (subtitle != '') ...{
           Padding(
               padding: EdgeInsets.only(bottom: 22.0),
-              child: Text(subtitle,
-                  textAlign: TextAlign.justify,
-                  style: swidth > 1024
-                      ? Theme.of(context).textTheme.titleMedium!
-                      : TextStyle(color: Colors.grey, fontSize: 16))),
+              child: FittedBox(
+                fit: BoxFit.contain,
+                child: Text(subtitle,
+                    textAlign: TextAlign.justify,
+                    style: swidth > 1024
+                        ? Theme.of(context).textTheme.titleMedium!
+                        : TextStyle(color: Colors.grey, fontSize: 16)),
+              )),
         },
         Container(
             height: 5.0,

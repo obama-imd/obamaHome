@@ -4,17 +4,17 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 // First Component Section
 
 List<String> sectionTitle = [
-  "Data Recovery",
-  "Computer repair",
-  "Mobile service",
-  "Data Recovery",
+  "Busque",
+  "Encontre",
+  "Planeje",
+  "Compartilhe",
 ];
 
 List<String> sectionImage = [
-  "assets/images/i1.png",
-  "assets/images/i2.png",
-  "assets/images/i3.png",
-  "assets/images/i4.png",
+  "icon_search.png",
+  "icon_select.png",
+  "icon_writing.png",
+  "icon_share.png",
 ];
 
 List<String> sectionContent = [
@@ -27,26 +27,26 @@ List<String> sectionContent = [
 // First Grid Block
 
 List<String> grid1Title = [
-  "Data Recovery",
-  "Computer repair",
-  "Mobile service",
-  "Data Recovery",
+  "Objetos de Aprendizagem",
+  "Planos de aula",
+  "Formações",
+  "Produção científica",
 ];
 
 List<IconData> grid1Icon = [
-  FontAwesomeIcons.wrench,
-  Icons.settings,
-  Icons.settings_backup_restore_rounded,
-  FontAwesomeIcons.heart,
+  FontAwesomeIcons.dice,
+  FontAwesomeIcons.chalkboardUser,
+  FontAwesomeIcons.bookOpenReader,
+  FontAwesomeIcons.newspaper,
 ];
 
 List<double> iconSize = [38, 44, 46, 39];
 
 List<String> grid1Content = [
-  "nononon nono nonon non !",
-  "nononon nono nonon non !",
-  "nononon nono nonon non !",
-  "nononon nono nonon non !",
+  "Recursos interativos",
+  "Crie, consulte e compartilhe",
+  "Para professores, estudantes e curiosos",
+  "Disseminação das tecnologias\nna educação",
 ];
 
 // Second Grid Block

@@ -15,6 +15,7 @@ import '../app/views/search/searchOA_view.dart';
 import '../app/views/trilhas/trilhas_view.dart';
 import '../auth/signin.dart';
 import 'cores_personalizadas.dart';
+import 'nav_key.dart';
 
 const Color primary = Color.fromRGBO(23, 119, 242, 1);
 const Color onPrimary = Colors.black;
@@ -178,7 +179,7 @@ class MyAppMaterial extends MaterialApp {
             textTheme: textTheme,
           ),
           debugShowCheckedModeBanner: false,
-          title: 'OBAMA',
+          title: 'OBAMA - Objetos de Aprendizagem para Matemática',
           home: const HomeView(),
           initialRoute: '/',
           routes: {
@@ -194,6 +195,7 @@ class MyAppMaterial extends MaterialApp {
               return SearchPage(
                 termSearched:
                     ModalRoute.of(context)?.settings.arguments as String? ?? '',
+                queryParams: '',
               );
             },
             '/trilhas': (context) => TrilhasPage(),
@@ -222,6 +224,6 @@ class MyAppMaterial extends MaterialApp {
           onUnknownRoute: (settings) => MaterialPageRoute(
             builder: (_) => ErrorPage(),
           ),
-          navigatorKey: GlobalKey(),
+          navigatorKey: NavKey.navigatorKey,
         );
 }

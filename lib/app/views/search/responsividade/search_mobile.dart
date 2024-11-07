@@ -47,7 +47,7 @@ class _SearchMobileState extends State<SearchMobile> {
         ]),
       ),
       SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
-          widget.updateData, widget.selectedPage),
+          widget.selectedPage, null),
     ]);
   }
 }

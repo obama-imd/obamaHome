@@ -75,8 +75,8 @@ class _HomeTabletState extends State<HomeTablet> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SectionTitle(
-                            'ABOUT SERVICE',
-                            'Easy and effective way to get your device repaired.',
+                            'O QUE VOCÊ ENCONTRA AQUI',
+                            'Recursos pensados e produzidos para professores que ensinam matemática',
                             CrossAxisAlignment.start),
                         Container(
                             padding: const EdgeInsets.only(top: 60),
@@ -133,89 +133,89 @@ class _HomeTabletState extends State<HomeTablet> {
           ),
         ]),
       ),
-      OAHome(swidth),
-      Padding(
-        padding: paddingValues("carouselTop", context),
-        child: Container(
-          color: CoresPersonalizadas.azulObama,
-          child: ResponsiveGridRow(children: [
-            if (swidth > 992) ...{
-              ResponsiveGridCol(
-                lg: 4,
-                child: Container(),
-              ),
-            },
-            ResponsiveGridCol(
-              lg: 8,
-              sm: 12,
-              child: Container(
-                  color: const Color.fromARGB(255, 241, 238, 238),
-                  padding: paddingValues("sideMainPadding", context),
-                  child: Padding(
-                    padding: paddingValues("sectionPadding", context),
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          SectionTitle(
-                              'OUR FEEDBACK',
-                              'Easy and effective way to get your device repaired.',
-                              CrossAxisAlignment.end),
-                          Container(
-                              padding: const EdgeInsets.only(top: 60),
-                              child: ResponsiveGridRow(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    for (int i = 0;
-                                        i < grid2Title.length;
-                                        i++) ...{
-                                      ResponsiveGridCol(
-                                        lg: 6,
-                                        sm: 12,
-                                        child: Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 100),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                Container(
-                                                    height: 100,
-                                                    width: 100,
-                                                    decoration: BoxDecoration(
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(100)),
-                                                    child: Icon(grid2Icon[i],
-                                                        size: iconSize2[i],
-                                                        color: background)),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
-                                                    child: Text(grid2Title[i],
-                                                        style: textTheme
-                                                            .titleSmall!)),
-                                                Container(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 20),
-                                                    child: Text(grid2Content[i],
-                                                        style: textTheme
-                                                            .bodySmall))
-                                              ]),
-                                        ),
-                                      ),
-                                    },
-                                  ]))
-                        ]),
-                  )),
-            ),
-          ]),
-        ),
-      ),
-      BlogHome(swidth)
+      // OAHome(swidth),
+      // Padding(
+      //   padding: paddingValues("carouselTop", context),
+      //   child: Container(
+      //     color: CoresPersonalizadas.azulObama,
+      //     child: ResponsiveGridRow(children: [
+      //       if (swidth > 992) ...{
+      //         ResponsiveGridCol(
+      //           lg: 4,
+      //           child: Container(),
+      //         ),
+      //       },
+      //       ResponsiveGridCol(
+      //         lg: 8,
+      //         sm: 12,
+      //         child: Container(
+      //             color: const Color.fromARGB(255, 241, 238, 238),
+      //             padding: paddingValues("sideMainPadding", context),
+      //             child: Padding(
+      //               padding: paddingValues("sectionPadding", context),
+      //               child: Column(
+      //                   crossAxisAlignment: CrossAxisAlignment.end,
+      //                   children: [
+      //                     SectionTitle(
+      //                         'OUR FEEDBACK',
+      //                         'Easy and effective way to get your device repaired.',
+      //                         CrossAxisAlignment.end),
+      //                     Container(
+      //                         padding: const EdgeInsets.only(top: 60),
+      //                         child: ResponsiveGridRow(
+      //                             crossAxisAlignment: CrossAxisAlignment.start,
+      //                             children: [
+      //                               for (int i = 0;
+      //                                   i < grid2Title.length;
+      //                                   i++) ...{
+      //                                 ResponsiveGridCol(
+      //                                   lg: 6,
+      //                                   sm: 12,
+      //                                   child: Padding(
+      //                                     padding: const EdgeInsets.only(
+      //                                         bottom: 100),
+      //                                     child: Column(
+      //                                         crossAxisAlignment:
+      //                                             CrossAxisAlignment.end,
+      //                                         children: [
+      //                                           Container(
+      //                                               height: 100,
+      //                                               width: 100,
+      //                                               decoration: BoxDecoration(
+      //                                                   color: Theme.of(context)
+      //                                                       .primaryColor,
+      //                                                   borderRadius:
+      //                                                       BorderRadius
+      //                                                           .circular(100)),
+      //                                               child: Icon(grid2Icon[i],
+      //                                                   size: iconSize2[i],
+      //                                                   color: background)),
+      //                                           Container(
+      //                                               padding:
+      //                                                   const EdgeInsets.only(
+      //                                                       top: 20),
+      //                                               child: Text(grid2Title[i],
+      //                                                   style: textTheme
+      //                                                       .titleSmall!)),
+      //                                           Container(
+      //                                               padding:
+      //                                                   const EdgeInsets.only(
+      //                                                       top: 20),
+      //                                               child: Text(grid2Content[i],
+      //                                                   style: textTheme
+      //                                                       .bodySmall))
+      //                                         ]),
+      //                                   ),
+      //                                 ),
+      //                               },
+      //                             ]))
+      //                   ]),
+      //             )),
+      //       ),
+      //     ]),
+      //   ),
+      // ),
+      // BlogHome(swidth)
     ]);
   }
 }

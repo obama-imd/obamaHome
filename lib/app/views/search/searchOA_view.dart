@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/app/models/objeto_aprendizagem.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/loadCircle.dart';
@@ -17,10 +18,12 @@ import 'responsividade/search_tablet.dart';
 
 class SearchPage extends ConsumerStatefulWidget {
   String termSearched;
+  String? queryParams;
 
   SearchPage({
     Key? key,
     required this.termSearched,
+    required this.queryParams,
   }) : super(key: key);
 
   @override
@@ -31,10 +34,20 @@ class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
   bool loadObjects = false;
   late TextStyle titleStyle;
+  String nivelEnsinoSelected = '0';
+  String temaConteudoSelected = '0';
+
+  List<NivelEnsino> niveisEnsino = [];
 
   void updateData(newData) {
     setState(() {
-      widget.termSearched = newData;
+      widget.termSearched = '$newData';
+    });
+  }
+
+  void updateDataFromAdvancedSearchPage(newData) {
+    setState(() {
+      widget.queryParams = newData;
     });
   }
 
@@ -46,27 +59,10 @@ class SearchPageState extends ConsumerState<SearchPage> {
     }
   }
 
-  // Future<List<dynamic>> getLevels() async {
-  //   // try {
-  //   // print("Iniciando getLevels");
-  //   List<dynamic> levels = await fetchLevels();
-  //   setState() {
-  //     learningLevels = levels;
-  //   }
-
-  //   print("Níveis recebidos: $learningLevels");
-  //   return levels;
-
-  //   // } catch (e) {
-  //   //   print('Erro em getLevels: $e');
-  //   // }
-  // }
-
   @override
   void initState() {
     super.initState();
     waitData();
-    // getLevels();
     activateLoad();
   }
 
@@ -77,7 +73,15 @@ class SearchPageState extends ConsumerState<SearchPage> {
   }
 
   void waitData() async {
-    Future.wait([fetchData("", ref, 0)])
+    Future.wait([fetchData("", 0, null)])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadObjects = false;
+            }));
+    Future.wait([fetchNivelEnsino()])
+        .then((data) => setState(() {
+              niveisEnsino = data.first;
+            }))
         .timeout(Duration(seconds: 5))
         .whenComplete(() => setState(() {
               loadObjects = false;
@@ -86,55 +90,54 @@ class SearchPageState extends ConsumerState<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        body: Stack(
-          alignment: Alignment.topCenter,
-          children: [
-            Responsivo(
-                mobile: SearchMobile(
-                    termSearched: widget.termSearched,
-                    selectedPageIndex: selectedPageIndex,
-                    updateData: updateData,
-                    selectedPage: selectedPage,
-                    titleStyle: textTheme.headlineSmall!),
-                tablet: SearchTablet(
-                    termSearched: widget.termSearched,
-                    selectedPageIndex: selectedPageIndex,
-                    updateData: updateData,
-                    selectedPage: selectedPage,
-                    titleStyle: textTheme.headlineSmall!),
-                desktop: SearchDesktop(
-                    termSearched: widget.termSearched,
-                    selectedPageIndex: selectedPageIndex,
-                    updateData: updateData,
-                    selectedPage: selectedPage,
-                    titleStyle: textTheme.titleSmall!)),
-            if (loadObjects) ...{circleLoadSpinner(context)}
-          ],
-        ),
+    return Scaffold(
+      body: Stack(
+        alignment: Alignment.topCenter,
+        children: [
+          Responsivo(
+              mobile: SearchMobile(
+                  termSearched: widget.termSearched,
+                  selectedPageIndex: selectedPageIndex,
+                  updateData: updateData,
+                  selectedPage: selectedPage,
+                  titleStyle: textTheme.headlineSmall!),
+              tablet: SearchTablet(
+                  termSearched: widget.termSearched,
+                  selectedPageIndex: selectedPageIndex,
+                  updateData: updateData,
+                  selectedPage: selectedPage,
+                  titleStyle: textTheme.headlineSmall!),
+              desktop: SearchDesktop(
+                  termSearched: widget.termSearched,
+                  selectedPageIndex: selectedPageIndex,
+                  updateData: updateData,
+                  queryParams: widget.queryParams ?? '',
+                  updateDataFromAdvancedSearchPage:
+                      updateDataFromAdvancedSearchPage,
+                  selectedPage: selectedPage,
+                  titleStyle: textTheme.titleSmall!)),
+          if (loadObjects) ...{circleLoadSpinner(context)}
+        ],
       ),
     );
   }
 }
 
-class SearchPageView extends ConsumerStatefulWidget {
+class SearchPageView extends StatefulWidget {
   String termSearched;
+  final String? queryParam;
   final double swidth;
   int selectedPageIndex;
-  Function(void) updateData;
   void Function(int) selectedPage;
 
   SearchPageView(this.termSearched, this.swidth, this.selectedPageIndex,
-      this.updateData, this.selectedPage);
+      this.selectedPage, this.queryParam);
 
   @override
   SearchDesktopState createState() => SearchDesktopState();
 }
 
-class SearchDesktopState extends ConsumerState<SearchPageView> {
-  final TextEditingController _searchController = TextEditingController();
+class SearchDesktopState extends State<SearchPageView> {
   Key key = UniqueKey();
   int startValue = 0;
   int endValue = 2;
@@ -142,14 +145,11 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
 
   @override
   Widget build(BuildContext context) {
-    // double paddingCard = MediaQuery.of(context).size.width * .02;
-    PageController _pageController = PageController();
-
-    return FutureBuilder<void>(
-        future: fetchData(widget.termSearched, ref, actualPage),
+    return FutureBuilder<PaginationResponse?>(
+        future: fetchData(widget.termSearched, actualPage, widget.queryParam),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            final paginationData = ref.watch(searchPagination);
+            final paginationData = snapshot.data;
 
             if (paginationData == null) {
               return Center(child: Text("No data available"));
@@ -160,7 +160,6 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
 
             int? totalPages = pagination.totalPages;
             int? currentPage = pagination.pageable.pageNumber;
-            int? itemsPerPage = pagination.pageable.pageSize;
 
             widget.selectedPageIndex = currentPage;
 
@@ -188,6 +187,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                           return Container(
                             alignment: Alignment.center,
                             child: OurProductItem(
+                              id: result?.id ?? -1,
                               title: result?.nome ?? "",
                               image: result?.caminhoImagem ?? "",
                             ),
@@ -212,10 +212,6 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                             child: Icon(Icons.navigate_before),
                             onTap: currentPage > 0
                                 ? () {
-                                    // _pageController.previousPage(
-                                    //   duration: Duration(milliseconds: 300),
-                                    //   curve: Curves.easeInOut,
-                                    // );
                                     widget.selectedPage(
                                       currentPage - 1,
                                     );
@@ -254,7 +250,6 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                               ),
                               onTap: () {
                                 if ((i) != currentPage) {
-                                  // _pageController.jumpToPage(i);
                                   widget.selectedPage(i);
                                   setState(() {
                                     if (i > 0 && i < totalPages - 1) {
@@ -282,10 +277,6 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                             child: Icon(Icons.navigate_next),
                             onTap: currentPage < totalPages - 1
                                 ? () {
-                                    // _pageController.nextPage(
-                                    //   duration: Duration(milliseconds: 300),
-                                    //   curve: Curves.easeInOut,
-                                    // );
                                     widget.selectedPage(
                                       currentPage + 1,
                                     );

@@ -69,13 +69,7 @@ class _FooterState extends State<Footer> {
   @override
   Widget build(BuildContext context) {
     String emailText = "";
-    final Uri emailLaunchUri = Uri(
-      scheme: 'mailto',
-      path: 'obama@imd.ufrn.br',
-      query: encodeQueryParameters(<String, String>{
-        'subject': emailText,
-      }),
-    );
+    final Uri emailLaunchUri = Uri.parse('https://forms.gle/9bZ8sGSiSERTZXeU9');
 
     return Column(children: [
       if (widget.swidth > 800) ...[
@@ -134,26 +128,6 @@ class _FooterState extends State<Footer> {
                                   'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
                                   style: textTheme.bodySmall)),
                           Container(height: 20),
-                          SizedBox(
-                              height: 40,
-                              width: 300,
-                              child: TextField(
-                                  onChanged: (value) {
-                                    setState(() {
-                                      emailText = value;
-                                    });
-                                  },
-                                  onSubmitted: (value) {
-                                    launchUrl(emailLaunchUri);
-                                  },
-                                  decoration: InputDecoration(
-                                      border: OutlineInputBorder(
-                                          borderSide: BorderSide.none),
-                                      hintText: 'E-mail',
-                                      hintStyle: textTheme.bodySmall,
-                                      contentPadding: EdgeInsets.all(5.0),
-                                      filled: true,
-                                      fillColor: background))),
                           Container(
                               height: 40,
                               width: 40,
@@ -172,7 +146,7 @@ class _FooterState extends State<Footer> {
                 width: widget.swidth * 0.7,
                 color: CoresPersonalizadas.azulObama,
                 child: Center(
-                    child: Text('Obama © Copyright 2024',
+                    child: Text('Obama/IMD - UFRN 2024',
                         style: textTheme.displaySmall)))
           ])
         ]))
@@ -259,7 +233,7 @@ class _FooterState extends State<Footer> {
               width: widget.swidth,
               color: CoresPersonalizadas.azulObama,
               child: Center(
-                  child: Text('Obama © Copyright 2024',
+                  child: Text('Obama/IMD - UFRN 2024',
                       style: textTheme.displaySmall)))
         ])
       ],

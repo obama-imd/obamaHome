@@ -1,1 +1,1 @@
-const String API_URL = "http://obama.imd.ufrn.br/api/v1/";
+const String API_URL = "https://obama.imd.ufrn.br/api/v1/";

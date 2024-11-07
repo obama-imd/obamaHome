@@ -86,82 +86,6 @@ class HomeViewState extends ConsumerState<HomeView> {
   }
 }
 
-/*class OAHome extends ConsumerStatefulWidget {
-  final double swidth;
-  const OAHome(this.swidth, {super.key});
-
-  @override
-  OAHomeState createState() => OAHomeState();
-}
-
-class OAHomeState extends ConsumerState<OAHome> {
-  Key key = UniqueKey();
-
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Builder para funções assíncronas, só carrega o conteúdo quando recebe dados do backend, você não vai precisar disso no novo componente
-      future: fetchObjects(
-          ref), // Função que está puxando dados do backend, você não vai precisar disso no novo componente
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final searchList = ref.watch(searchListHome);
-          List<SearchModel?> data = [...searchList];
-          return Column(
-            children: [
-              Container(
-                constraints: BoxConstraints(maxWidth: 1200),
-                padding: paddingValues("sideHomePosts", context),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: paddingValues("mainTitleBottom", context),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: widget.swidth * .016),
-                            child: SectionTitle('Objetos de Aprendizagem', '',
-                                CrossAxisAlignment.start),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ResponsiveGridList(
-                        physics: NeverScrollableScrollPhysics(),
-                        scroll: false,
-                        desiredItemWidth: 237.5,
-                        minSpacing: widget.swidth * .016,
-                        children: data.map((post) {
-                          return Container(
-                            alignment: Alignment(0, 0),
-                            child: OurProductItem(
-                                title: post!.nome, image: post.url),
-                          );
-                        }).toList()),
-                  ],
-                ),
-              )
-            ],
-          );
-        } else if (snapshot.hasError) {
-          Container(
-            constraints: BoxConstraints(maxWidth: 1200),
-            padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-            width: widget.swidth * 0.67,
-            child: Text(
-              "Perdão, tivemos um problema, tente mais tarde.",
-            ),
-          );
-        }
-        return Container();
-        // return circleLoadSpinner(context);
-      },
-    );
-  }
-}*/
-
 class LearningLevelsHome {
   final String picture;
   final String title;
@@ -182,29 +106,25 @@ final List<LearningLevelsHome> levels = [
       picture: "images/obama_laranja.jpg",
       color: Color.fromARGB(191, 241, 134, 68),
       title: "Educação Infantil",
-      text:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
+      text: "",
       path: ""),
   LearningLevelsHome(
       picture: "images/obama_verde_cana.jpg",
       color: Color.fromARGB(187, 183, 220, 0),
       title: "Anos iniciais do Ensino Fundamental",
-      text:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
+      text: "",
       path: ""),
   LearningLevelsHome(
       picture: "images/obama_roxo.jpg",
       color: Color.fromARGB(188, 107, 78, 250),
       title: "Anos Finais do Ensino Fundamental",
-      text:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
+      text: "",
       path: ""),
   LearningLevelsHome(
       picture: "images/obama_salmao.jpg",
       color: Color.fromARGB(168, 255, 105, 133),
       title: "Ensino Médio",
-      text:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vestibulum nunc a aliquam sodales. Nam ac facilisis ipsum. Ut luctus fermentum tempus.",
+      text: "",
       path: "")
 ];
 
@@ -237,7 +157,7 @@ class OAHomeState extends ConsumerState<OAHome> {
                         EdgeInsets.symmetric(horizontal: widget.swidth * .016),
                     child: SectionTitle(
                         'Objetos de Aprendizagem',
-                        '', //WIdget que monta o título das seções
+                        'Recursos digitais classificados com base nas habilidades da BNCC e descritores dos PCN.', //WIdget que monta o título das seções
                         CrossAxisAlignment.start),
                   ),
                 ],
@@ -269,8 +189,10 @@ class OAHomeState extends ConsumerState<OAHome> {
                                       radius: 33,
                                       child: CircleAvatar(
                                         backgroundColor: background,
-                                        child:
-                                            SizedBox(width: 46, height: 46, child: Image.asset(post.picture)),
+                                        child: SizedBox(
+                                            width: 46,
+                                            height: 46,
+                                            child: Image.asset(post.picture)),
                                         radius: 30,
                                       ),
                                     ),

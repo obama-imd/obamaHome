@@ -78,7 +78,7 @@ class _HomeDesktopState extends State<TemplateHome> {
                   Container(
                       width: swidth,
                       constraints: BoxConstraints(maxHeight: 660),
-                      child: Image.asset("assets/images/animate.gif",
+                      child: Image.asset("assets/images/team.gif",
                           fit: BoxFit.cover)),
                   LinearProgressIndicator(
                     minHeight: 5,

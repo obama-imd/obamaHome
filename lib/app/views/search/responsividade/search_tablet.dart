@@ -49,7 +49,7 @@ class _SearchTabletState extends State<SearchTablet> {
         ]),
       ),
       SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
-          widget.updateData, widget.selectedPage),
+          widget.selectedPage, null),
     ]);
   }
 }

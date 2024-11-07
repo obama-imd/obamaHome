@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:googleapis/mybusinesslodging/v1.dart';
+import 'package:obamahome/utils/nav_key.dart';
 import 'utils/app_theme.dart';
 
 // Rodar com esse comando para pegar o backend localmente
 // flutter run -d chrome --web-browser-flag "--disable-web-security"
 
 void main() {
-  runApp(
-    ProviderScope(
-      child: MyApp(),
-    ),
-  );
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends ConsumerStatefulWidget {
@@ -28,6 +26,8 @@ class _MyAppState extends ConsumerState<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MyAppMaterial(ref: ref,);
+    return MyAppMaterial(
+      ref: ref,
+    );
   }
 }

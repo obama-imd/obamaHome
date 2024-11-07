@@ -45,7 +45,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   }
 
   void getData() async {
-    fetchData("", ref, 0);
+    fetchData("", 0, null);
   }
 
   Future<List<String>?> getObjects() async {

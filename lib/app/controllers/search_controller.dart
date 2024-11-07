@@ -3,47 +3,148 @@ import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:obamahome/app/models/objeto_aprendizagem.dart';
 
 import '../../utils/apiURL.dart';
 import '../models/pagination_oa_model.dart';
 
-PaginationResponse filtrarOA(PaginationResponse jsonData, String searchTerm) {
-  if (searchTerm.isEmpty) {
-    return jsonData;
+Future<PaginationResponse?> fetchData(
+    String searchTerm, page, String? queryParams) async {
+  var apiUrl =
+      '${API_URL}/oa?page=${page}&size=12&sort=nome${searchTerm.isNotEmpty ? '&nome=$searchTerm' : ''}';
+  if (queryParams != null && queryParams.isNotEmpty) {
+    apiUrl = '${API_URL}/oa?$queryParams&page=${page}&size=12';
   }
-
-  List<Content> comparingData = jsonData.content.where((item) {
-    var nome = item.nome!.toLowerCase();
-
-    return nome.contains(searchTerm.toLowerCase());
-  }).toList();
-
-  jsonData.content = comparingData;
-
-  if (comparingData.isEmpty) {
-    return jsonData;
-  } else {
-    return jsonData;
-  }
-}
-
-Future<void> fetchData(String searchTerm, ref, page) async {
-  var apiUrl = '${API_URL}/oa?page=${page}&size=12&sort=id';
 
   final response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
   if (response.statusCode == 200) {
-    // final jsonData = filtrarOA(jsonDecode(response.body), searchTerm);
     final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
     PaginationResponse paginationResponse =
         PaginationResponse.fromJson(Map.from(jsonData));
 
-    ref.read(searchPagination.notifier).state = paginationResponse;
+    return paginationResponse;
   } else {
-    print('Failed to load data. Status code: ${response.statusCode}');
-    ref.read(searchPagination.notifier).state = null;
+    print(
+        'Failed to load ${PaginationResponse}. Status code: ${response.statusCode}');
+    return null;
+  }
+}
+
+Future<ObjetoAprendizagem> fetchOAById(int id) async {
+  var apiUrl = '${API_URL}/oa/${id}';
+
+  final response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+
+    ObjetoAprendizagem objetoAprendizagemResponse =
+        ObjetoAprendizagem.fromJson(Map.from(jsonData));
+    return objetoAprendizagemResponse;
+  } else {
+    return Future.error(
+        'Failed to load data. Status code: ${response.statusCode}');
+  }
+}
+
+class SearchParametersResult {
+  final List<NivelEnsino> allNivelEnsino;
+  final List<TemaConteudo> allTemaConteudo;
+
+  SearchParametersResult(
+      {required this.allNivelEnsino, required this.allTemaConteudo});
+}
+
+Future<SearchParametersResult> fetchSearchData() async {
+  List<NivelEnsino> responseNivelEnsino = [];
+  List<TemaConteudo> responseTemaConteudo = [];
+
+  var apiUrl = '${API_URL}/nivelensino';
+  var response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+
+    responseNivelEnsino =
+        List<NivelEnsino>.from(jsonData.map((x) => NivelEnsino.fromJson(x)));
+  } else {
+    return Future.error(
+        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+  }
+
+  apiUrl = '${API_URL}/temaconteudo?curriculo=BNCC';
+  response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+
+    responseTemaConteudo = List<TemaConteudo>.from(
+        jsonData.map((x) => TemaConteudo.fromJson(x, 'BNCC')));
+  } else {
+    return Future.error(
+        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+  }
+
+  apiUrl = '${API_URL}/temaconteudo?curriculo=PCN';
+  response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+
+    responseTemaConteudo.addAll(List<TemaConteudo>.from(
+        jsonData.map((x) => TemaConteudo.fromJson(x, 'PCN'))));
+  } else {
+    return Future.error(
+        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+  }
+
+  final tudo = SearchParametersResult(
+      allNivelEnsino: responseNivelEnsino,
+      allTemaConteudo: responseTemaConteudo);
+  return tudo;
+}
+
+Future<List<Habilidade>> fetchHabilidadeByAnoEnsinoTemaConteudo(
+    String? idConteudo, String? idAnoEnsino) async {
+  List<Habilidade> responseHabilidade;
+
+  var apiUrl =
+      '${API_URL}/habilidade?anoEnsino=$idAnoEnsino&temaConteudoId=$idConteudo';
+  var response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+
+    responseHabilidade =
+        List<Habilidade>.from(jsonData.map((x) => Habilidade.fromJson(x)));
+  } else {
+    return Future.error(
+        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+  }
+
+  return responseHabilidade;
+}
+
+Future<List<NivelEnsino>> fetchNivelEnsino() async {
+  var apiUrl = '${API_URL}/nivelensino';
+
+  var response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+
+    return List<NivelEnsino>.from(jsonData.map((x) => NivelEnsino.fromJson(x)));
+  } else {
+    return Future.error(
+        'Failed to load ${NivelEnsino}. Status code: ${response.statusCode}');
   }
 }
 
@@ -51,14 +152,18 @@ final searchPagination = StateProvider<PaginationResponse?>((ref) {
   return null;
 });
 
-class StudyLevelsNotifier extends StateNotifier<List<String?>> {
+final oaData = StateProvider<ObjetoAprendizagem?>((ref) {
+  return null;
+});
+
+class StudyLevelsNotifier extends StateNotifier<List<NivelEnsino>> {
   StudyLevelsNotifier() : super([]);
 
-  void setLevels(List<String?> newLevels) {
+  void setLevels(List<NivelEnsino> newLevels) {
     state = newLevels;
   }
 
-  void addLevel(String level) {
+  void addLevel(NivelEnsino level) {
     if (!state.contains(level)) {
       state = [...state, level];
     }
@@ -69,14 +174,14 @@ class StudyLevelsNotifier extends StateNotifier<List<String?>> {
   }
 }
 
-class StudyClassesNotifier extends StateNotifier<List<String?>> {
+class StudyClassesNotifier extends StateNotifier<List<AnoEnsino?>> {
   StudyClassesNotifier() : super([]);
 
-  void setClasses(List<String?> newClasses) {
+  void setClasses(List<AnoEnsino?> newClasses) {
     state = newClasses;
   }
 
-  void addClass(String className) {
+  void addClass(AnoEnsino className) {
     if (!state.contains(className)) {
       state = [...state, className];
     }
@@ -123,14 +228,14 @@ class DisciplineNotifier extends StateNotifier<List<String?>> {
   }
 }
 
-class AbilityNotifier extends StateNotifier<List<String>> {
+class AbilityNotifier extends StateNotifier<List<Habilidade>> {
   AbilityNotifier() : super([]);
 
-  void setAbilities(List<String> newAbilities) {
+  void setAbilities(List<Habilidade> newAbilities) {
     state = newAbilities;
   }
 
-  void addAbility(String ability) {
+  void addAbility(Habilidade ability) {
     if (!state.contains(ability)) {
       state = [...state, ability];
     }
@@ -142,12 +247,12 @@ class AbilityNotifier extends StateNotifier<List<String>> {
 }
 
 final studyLevelsProvider =
-    StateNotifierProvider<StudyLevelsNotifier, List<String?>>((ref) {
+    StateNotifierProvider<StudyLevelsNotifier, List<NivelEnsino?>>((ref) {
   return StudyLevelsNotifier();
 });
 
 final studyClassesProvider =
-    StateNotifierProvider<StudyClassesNotifier, List<String?>>((ref) {
+    StateNotifierProvider<StudyClassesNotifier, List<AnoEnsino?>>((ref) {
   return StudyClassesNotifier();
 });
 
@@ -162,7 +267,7 @@ final disciplineProvider =
 });
 
 final abilityProvider =
-    StateNotifierProvider<AbilityNotifier, List<String?>>((ref) {
+    StateNotifierProvider<AbilityNotifier, List<Habilidade?>>((ref) {
   return AbilityNotifier();
 });
 
@@ -187,9 +292,10 @@ Future<void> fetchLevels(WidgetRef ref) async {
         headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
     if (responseNivelEnsino.statusCode == 200) {
-      List<dynamic> jsonData = jsonDecode(responseNivelEnsino.body);
-      List<String?> setLevels =
-          jsonData.map((level) => level["nome"] as String?).toList();
+      final jsonData = jsonDecode(utf8.decode(responseNivelEnsino.bodyBytes));
+      List<NivelEnsino> setLevels = List<NivelEnsino>.from(jsonData.map((data) {
+        return NivelEnsino.fromJson(data);
+      }));
 
       ref.read(studyLevelsProvider.notifier).setLevels(setLevels);
     } else {
@@ -198,33 +304,17 @@ Future<void> fetchLevels(WidgetRef ref) async {
     }
 
     if (responseAnoEnsinoResource.statusCode == 200) {
-      var jsonData = jsonDecode(responseAnoEnsinoResource.body);
+      final jsonData =
+          jsonDecode(utf8.decode(responseAnoEnsinoResource.bodyBytes));
 
-      PaginationResponse paginationResponse =
-          PaginationResponse.fromJson(jsonData as Map<String, dynamic>);
-
-      List<String?> setClasses =
-          paginationResponse.content.map((level) => level.nome).toList();
+      List<AnoEnsino> setClasses = List<AnoEnsino>.from(jsonData.map((data) {
+        return AnoEnsino.fromJson(data);
+      }));
 
       ref.read(studyClassesProvider.notifier).setClasses(setClasses);
     } else {
       throw Exception(
           'Failed to fetch API data. Status code: ${responseAnoEnsinoResource.statusCode}');
-    }
-
-    if (responseDisciplineResource.statusCode == 200) {
-      var jsonData = jsonDecode(responseDisciplineResource.body);
-
-      PaginationResponse paginationResponse =
-          PaginationResponse.fromJson(jsonData as Map<String, dynamic>);
-
-      List<String?> setDisciplines =
-          paginationResponse.content.map((level) => level.nome).toList();
-
-      ref.read(disciplineProvider.notifier).setDisciplines(setDisciplines);
-    } else {
-      throw Exception(
-          'Failed to fetch API data. Status code: ${responseDisciplineResource.statusCode}');
     }
   } catch (e) {
     print('Error fetching data: $e');

@@ -26,7 +26,7 @@ class NavMenu extends StatefulWidget {
 String searchText = '';
 
 Future searchObject(context, String value) async {
-  if (value == '') {
+  if (value.isEmpty) {
     showMessage(context);
   } else {
     Navigator.pushNamed(context, '/servicos', arguments: value);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/searchDropdown.dart';
@@ -13,18 +13,15 @@ import '../../../controllers/search_controller.dart';
 
 const List<String> tileTitle = <String>[
   'Selecione o nível de ensino',
-  'Selecione o ano de ensino',
+  'Selecione o Tema/Conteúdo',
   'Selecione o descritor',
   'Selecione a disciplina',
   'Selecione a habilidade',
 ];
 
-// bool pcnCheck = false;
-// bool bnccCheck = false;
-
-class OAFilters extends ConsumerStatefulWidget {
+class OAFilters extends StatefulWidget {
   final double swidth;
-  final String data;
+  var data;
   final Function(String) updateData;
   final TextStyle titleStyle;
   OAFilters(
@@ -37,99 +34,153 @@ class OAFilters extends ConsumerStatefulWidget {
   OAFilterState createState() => OAFilterState();
 }
 
-class OAFilterState extends ConsumerState<OAFilters> {
+class OAFilterState extends State<OAFilters> {
+  String selectedNivelEnsino = '';
+  String selectedTemaConteudo = '';
+  int? temaConteudoSelecionado = 0;
+  int? nivelEnsinoSelecionado = 0;
+  String searchTerm = '';
+
+  List<(int, String)>? nivelEnsinolData;
+  List<(int, String)>? temaConteudoData;
+  List<(int, String)>? habilidadeData;
+  List<(int, String)>? descritorData;
+
+  RadioTextField? nivelEnsinoRadioTextField;
+  RadioTextField? temaConteudoRadioTextField;
+  RadioTextField? descritorRadioTextField;
+  RadioTextField? habilidadeRadioTextField;
+
+  TextEditingController searchTextController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    fetchSearchData().then((response) {
+      setState(() {
+        nivelEnsinolData =
+            response.allNivelEnsino.map((x) => (x.id, x.nome)).toList();
+        temaConteudoData = response.allTemaConteudo
+            .map((x) => (x.id, x.getNomeWithCurriculo()))
+            .toList();
+      });
+      nivelEnsinoRadioTextField = RadioTextField(
+        array: nivelEnsinolData ?? [],
+        title: tileTitle[0],
+        titleStyle: textTheme.bodySmall!,
+        initalValue: 0,
+        refreshData: _refreshDescritorHabilidade,
+      );
+      temaConteudoRadioTextField = RadioTextField(
+        array: temaConteudoData ?? [],
+        title: tileTitle[1],
+        titleStyle: textTheme.bodySmall!,
+        initalValue: 0,
+        refreshData: _refreshDescritorHabilidade,
+      );
+    });
+  }
+
+  void _refreshDescritorHabilidade(int? value) {
+    fetchHabilidadeByAnoEnsinoTemaConteudo(
+            selectedNivelEnsino, selectedTemaConteudo)
+        .then((response) {
+      setState(() {
+        habilidadeData = response.map((x) => (x.id, x.descricao)).toList();
+      });
+      habilidadeRadioTextField = RadioTextField(
+        array: habilidadeData ?? [],
+        title: tileTitle[2],
+        titleStyle: textTheme.bodySmall!,
+        initalValue: 0,
+      );
+    });
+
+    descritorRadioTextField = RadioTextField(
+      array: descritorData ?? [],
+      title: tileTitle[2],
+      titleStyle: textTheme.bodySmall!,
+      initalValue: 0,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-      future: fetchLevels(ref),
-      builder: (BuildContext context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final studyLevelData = ref.watch(studyLevelsProvider);
-          final studyClassData = ref.watch(studyClassesProvider);
-          // final describerData = ref.watch(describerProvider);
-          final disciplineData = ref.watch(disciplineProvider);
-          // final abilityData = ref.watch(abilityProvider);
-
-          // print("json $describerData");
-
-          return Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      Container(
+          alignment: Alignment.centerLeft,
+          margin: const EdgeInsets.only(bottom: 30),
+          child: Text('BUSCA AVANÇADA', style: widget.titleStyle)),
+      Container(
+          height: 50,
+          margin: const EdgeInsets.only(bottom: 50),
+          child: TextField(
+              controller: searchTextController,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.circular(100)),
+                  hintText: 'Buscar',
+                  hintStyle: textTheme.bodySmall,
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 15),
+                  filled: true,
+                  fillColor: const Color.fromARGB(255, 218, 216, 216),
+                  suffixIcon: const Icon(Icons.search)))),
+      Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          ExpansionPanelListSimple(data: [
+            Item(
+                expandedValue: nivelEnsinoRadioTextField ?? Container(),
+                headerValue: tileTitle[0]),
+            Item(
+                expandedValue: temaConteudoRadioTextField ?? Container(),
+                headerValue: tileTitle[1]),
+          ]),
+          Padding(
+            padding: const EdgeInsets.only(top: 50),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                    alignment: Alignment.centerLeft,
-                    margin: const EdgeInsets.only(bottom: 30),
-                    child: Text('BUSCA', style: widget.titleStyle)),
-                Container(
-                    height: 50,
-                    margin: const EdgeInsets.only(bottom: 50),
-                    child: TextField(
-                        onSubmitted: (value) async {
-                          widget.updateData(value);
-                        },
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide.none,
-                                borderRadius: BorderRadius.circular(100)),
-                            hintText: 'Buscar',
-                            hintStyle: textTheme.bodySmall,
-                            contentPadding:
-                                const EdgeInsets.symmetric(horizontal: 15),
-                            filled: true,
-                            fillColor: const Color.fromARGB(255, 218, 216, 216),
-                            suffixIcon: const Icon(Icons.search)))),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    studyLevelData.length > 0
-                        ? searchDropdown(context, tileTitle[0], studyLevelData,
-                            widget.titleStyle)
-                        : Container(),
-                    studyClassData.length > 0
-                        ? searchDropdown(context, tileTitle[1], studyClassData,
-                            widget.titleStyle)
-                        : Container(),
-                    // describerData.length > 0
-                    //     ? searchDropdown(context, tileTitle[2], describerData,
-                    //         widget.titleStyle)
-                    //     : Container(),
-                    disciplineData.length > 0
-                        ? searchDropdown(context, tileTitle[3], disciplineData,
-                            widget.titleStyle)
-                        : Container(),
-                    // searchDropdown(context, tileTitle[4], abilityData, widget.titleStyle),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          mainButton(context, 'Busca Avançada', null, null),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ]);
-        } else if (snapshot.hasError) {
-          Container(
-              padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-              width: widget.swidth * 0.67,
-              child: Text(
-                "Perdão, não há nenhum item a ser exibido no momento.",
-              ));
-        }
-        return Container(
-          child: Center(
-            child: SizedBox(
-              width: 50,
-              height: 50,
-              child: CircularProgressIndicator(
-                color: modalBackground,
-              ),
+                mainButton(context, 'Busca Avançada', null, () {
+                  setState(() {
+                    selectedNivelEnsino =
+                        nivelEnsinoRadioTextField!.selectedValue != null &&
+                                nivelEnsinoRadioTextField!.selectedValue > 0
+                            ? '${nivelEnsinoRadioTextField!.selectedValue}'
+                            : '';
+                    selectedTemaConteudo =
+                        temaConteudoRadioTextField!.selectedValue != null &&
+                                temaConteudoRadioTextField!.selectedValue > 0
+                            ? '${temaConteudoRadioTextField!.selectedValue}'
+                            : '';
+                    searchTerm = searchTextController.text;
+                  });
+                  final queryString = _buildQueryString();
+                  widget.updateData(queryString);
+                  print(selectedNivelEnsino);
+                }),
+              ],
             ),
           ),
-        );
-        ;
-      },
-    );
+        ],
+      ),
+    ]);
+  }
+
+  String _buildQueryString() {
+    final params = [];
+    if (selectedNivelEnsino.isNotEmpty) {
+      params.add('nivelEnsinoId=$selectedNivelEnsino');
+    }
+    if (selectedTemaConteudo.isNotEmpty) {
+      params.add('temaConteudoId=$selectedTemaConteudo');
+    }
+    if (searchTerm.isNotEmpty) {
+      params.add('nome=$searchTerm');
+    } else {
+      params.add('nome=');
+    }
+    return params.join('&');
   }
 }
