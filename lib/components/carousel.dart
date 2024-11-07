@@ -274,10 +274,10 @@ class Carousel extends StatelessWidget {
                         child: Image.asset('assets/images/img2.jpg',
                             fit: BoxFit.cover)),
                   ]),
-                  SizedBox(height: 40, width: swidth),
+                  // SizedBox(height: 20, width: swidth),
                   ImageSlideshow(
                     width: swidth,
-                    height: 240,
+                    height: 210,
                     initialPage: 0,
                     indicatorColor: CoresPersonalizadas.azulObama,
                     indicatorBackgroundColor: Colors.grey,
@@ -297,16 +297,16 @@ class Carousel extends StatelessWidget {
                                       image: AssetImage(imageCarousel[i]),
                                       fit: BoxFit.cover))),
                           Container(
-                              padding: const EdgeInsets.only(left: 30),
-                              height: 100,
+                              padding: const EdgeInsets.only(left: 20),
+                              height: 120,
                               width: swidth - 160,
                               child: ListView(children: [
                                 Text(titleCarousel[i],
                                     style: textTheme.displayMedium),
-                                Container(height: 35),
+                                Container(height: 10),
                                 Text(nameCarousel[i],
                                     style: textTheme.displaySmall),
-                                Container(height: 20),
+                                Container(height: 10),
                                 Text(summaryCarousel[i],
                                     style: textTheme.displaySmall)
                               ])),
@@ -317,13 +317,15 @@ class Carousel extends StatelessWidget {
                 ]),
                 Container(
                     color: CoresPersonalizadas.azulObama,
-                    height: 180,
+                    height: 210,
                     width: swidth * 0.95,
-                    child: Column(children: [
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
                       Row(children: [
-                        Container(width: 15),
-                        const SizedBox(
-                            width: 50,
+                        // Container(width: 15),
+                        SizedBox(
+                            width:  swidth * 0.15,
                             height: 100,
                             child: Icon(
                               Icons.phone,
@@ -331,8 +333,8 @@ class Carousel extends StatelessWidget {
                               color: background,
                             )),
                         SizedBox(
-                            width: swidth * 0.7,
-                            height: 100,
+                            width: swidth * 0.75,
+                            // height: 100,
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 mainAxisAlignment: MainAxisAlignment.center,
@@ -344,7 +346,7 @@ class Carousel extends StatelessWidget {
                                       style: textTheme.displaySmall)
                                 ]))
                       ]),
-                      Container(width: swidth * 0.25),
+                      Container(width: swidth * 0.25, height: 10),
                       TextButton(
                           style: ButtonStyle(
                             fixedSize: MaterialStatePropertyAll(Size(150, 50)),

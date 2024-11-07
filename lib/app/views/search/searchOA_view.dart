@@ -165,7 +165,7 @@ class SearchDesktopState extends State<SearchPageView> {
 
             double rowNumbers = 0;
 
-            if (widget.swidth < 360) {
+            if (widget.swidth < 460) {
               rowNumbers = 12;
             } else if (widget.swidth >= 460 && widget.swidth < 680) {
               rowNumbers = 8;
@@ -177,7 +177,7 @@ class SearchDesktopState extends State<SearchPageView> {
               children: [
                 if (searchResult.isNotEmpty) ...{
                   Container(
-                      height: (360 * (rowNumbers)),
+                      height: (355 * (rowNumbers)),
                       child: ResponsiveGridList(
                         physics: NeverScrollableScrollPhysics(),
                         scroll: false,
@@ -294,6 +294,7 @@ class SearchDesktopState extends State<SearchPageView> {
                       }
                     ],
                   ),
+                  // Container(height:60),
                 } else ...{
                   Center(child: Text("Nada a exibir no momento")),
                 },

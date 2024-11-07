@@ -9,7 +9,6 @@ import 'package:url_launcher/url_launcher.dart';
 import '../components/launchSocialMedia.dart';
 import '../utils/app_padding.dart';
 import '../utils/app_theme.dart';
-import 'topbar.dart';
 
 // ignore: must_be_immutable
 class Footer extends StatefulWidget {
@@ -70,6 +69,7 @@ class _FooterState extends State<Footer> {
   Widget build(BuildContext context) {
     String emailText = "";
     final Uri emailLaunchUri = Uri.parse('https://forms.gle/9bZ8sGSiSERTZXeU9');
+    final currentYear = DateTime.now().year;
 
     return Column(children: [
       if (widget.swidth > 800) ...[
@@ -125,7 +125,7 @@ class _FooterState extends State<Footer> {
                               height: 60,
                               width: 300,
                               child: Text(
-                                  'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
+                                  'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal/RN, 59078-970',
                                   style: textTheme.bodySmall)),
                           Container(height: 20),
                           Container(
@@ -146,7 +146,7 @@ class _FooterState extends State<Footer> {
                 width: widget.swidth * 0.7,
                 color: CoresPersonalizadas.azulObama,
                 child: Center(
-                    child: Text('Obama/IMD - UFRN 2024',
+                    child: Text('Obama/IMD - UFRN $currentYear',
                         style: textTheme.displaySmall)))
           ])
         ]))
@@ -189,31 +189,31 @@ class _FooterState extends State<Footer> {
                   height: 60,
                   width: 300,
                   child: Text(
-                      'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN, 59078-970',
+                      'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal/RN, 59078-970',
                       style: textTheme.bodySmall)),
               Container(height: 20),
               Row(
                 children: [
-                  SizedBox(
-                      height: 40,
-                      width: widget.swidth - 120,
-                      child: TextField(
-                          onChanged: (value) {
-                            setState(() {
-                              emailText = value;
-                            });
-                          },
-                          onSubmitted: (value) {
-                            launchUrl(emailLaunchUri);
-                          },
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              hintText: 'E-mail',
-                              hintStyle: textTheme.bodySmall,
-                              contentPadding: EdgeInsets.all(10.0),
-                              filled: true,
-                              fillColor: background))),
+                  // SizedBox(
+                  //     height: 40,
+                  //     width: widget.swidth - 120,
+                  //     child: TextField(
+                  //         onChanged: (value) {
+                  //           setState(() {
+                  //             emailText = value;
+                  //           });
+                  //         },
+                  //         onSubmitted: (value) {
+                  //           launchUrl(emailLaunchUri);
+                  //         },
+                  //         decoration: InputDecoration(
+                  //             border: OutlineInputBorder(
+                  //                 borderSide: BorderSide.none),
+                  //             hintText: 'E-mail',
+                  //             hintStyle: textTheme.bodySmall,
+                  //             contentPadding: EdgeInsets.all(10.0),
+                  //             filled: true,
+                  //             fillColor: background))),
                   Container(
                       height: 40,
                       width: 40,
@@ -233,7 +233,7 @@ class _FooterState extends State<Footer> {
               width: widget.swidth,
               color: CoresPersonalizadas.azulObama,
               child: Center(
-                  child: Text('Obama/IMD - UFRN 2024',
+                  child: Text('Obama/IMD - UFRN $currentYear',
                       style: textTheme.displaySmall)))
         ])
       ],

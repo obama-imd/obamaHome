@@ -34,7 +34,7 @@ class _LoginPageViewState extends State<LoginPageView> {
   Widget build(BuildContext context) {
     return TemplateColumn(children: [
       Padding(
-        padding: const EdgeInsets.only(top: 120),
+        padding: const EdgeInsets.only(top: 120, bottom: 90),
         child: Form(
             key: loginKey,
             child: ConstrainedBox(
@@ -42,7 +42,7 @@ class _LoginPageViewState extends State<LoginPageView> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
-                  child: Image.network("assets/images/icone.png", width: 150),
+                  child: Image.asset("assets/images/icone.png", width: 150),
                 ),
                 formFieldNoHide(context, "E-mail"),
                 SizedBox(height: 10),

@@ -8,7 +8,6 @@ import '../../../../components/sectionTitle.dart';
 import '../../../../utils/app_padding.dart';
 import '../../../../utils/app_theme.dart';
 import '../constants.dart';
-import '../home_view.dart';
 
 class HomeTablet extends StatefulWidget {
   final TrackingScrollController scrollController;
@@ -52,8 +51,7 @@ class _HomeTabletState extends State<HomeTablet> {
                   xs: 12,
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 30),
-                    child: ItemProduto(
-                        "Data Recovery", "nononon nono nonon non !", "i1.png"),
+                    child: ItemProduto(sectionTitle[i], "", sectionImage[i]),
                   ),
                 ),
               }

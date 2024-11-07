@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:googleapis/mybusinesslodging/v1.dart';
-import 'package:obamahome/utils/nav_key.dart';
+
 import 'utils/app_theme.dart';
 
 // Rodar com esse comando para pegar o backend localmente
@@ -15,7 +14,7 @@ class MyApp extends ConsumerStatefulWidget {
   const MyApp({super.key});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState();
+  ConsumerState<ConsumerStatefulWidget> createState() => _MyAppState(); 
 }
 
 class _MyAppState extends ConsumerState<MyApp> {

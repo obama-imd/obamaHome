@@ -23,6 +23,7 @@ class _MyStatefulWidgetState extends State<ManuaisDesktop> {
       Container(
         constraints: BoxConstraints(maxWidth: 1200),
         padding: paddingValues("carouselTop", context),
+        margin: EdgeInsets.only(bottom: 75),
         child: DropdownManuais(accordionContent: manualItems),
       )
     ]);

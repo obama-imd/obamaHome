@@ -13,11 +13,11 @@ menuMobile(context, scaffoldKey, swidth) {
             onPressed: () => scaffoldKey.currentState?.openDrawer()),
         Container(
             width: 190,
-            margin: const EdgeInsets.only(right: 15, left: 15),
+            margin: const EdgeInsets.only(right: 10, left: 10),
             child:
                 Image.asset('assets/images/logo.png', fit: BoxFit.fitHeight)),
         SizedBox(
-          width: 36,
+          width: 42,
           height: 40,
           child: SearchDialog(swidth: swidth, searchText: '', isHovered: false),
         ),
