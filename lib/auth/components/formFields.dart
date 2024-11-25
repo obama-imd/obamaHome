@@ -3,8 +3,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../utils/app_theme.dart';
 
-Widget formFieldNoHide(context, String formLabel) {
+Widget formFieldNoHide(
+    context, String formLabel, TextEditingController controller) {
   return TextFormField(
+    controller: controller,
     decoration: InputDecoration(
         filled: true,
         label: Text(formLabel),
@@ -17,8 +19,9 @@ Widget formFieldNoHide(context, String formLabel) {
 }
 
 Widget formFieldHidden(context, String formLabel, bool showPassword,
-    void Function() displayPassword) {
+    void Function() displayPassword, TextEditingController controller) {
   return TextFormField(
+    controller: controller,
     obscureText: showPassword,
     decoration: InputDecoration(
         filled: true,

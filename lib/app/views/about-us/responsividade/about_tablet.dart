@@ -56,7 +56,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(swidth: swidth, heightBtn: 50, itemValues: itemValues, searchAvailable: true),
+                          NavMenu(
+                              swidth: swidth,
+                              heightBtn: 50,
+                              itemValues: getItemValues(),
+                              searchAvailable: true),
                         ])),
               ] else ...[
                 menuMobile(context, scaffoldKey, swidth),
@@ -210,8 +214,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
-                            child: StaffCard(
-                                LeaderNames[i], LeaderImgs[i], LeaderLink[i], swidth),
+                            child: StaffCard(LeaderNames[i], LeaderImgs[i],
+                                LeaderLink[i], swidth),
                           ))
                     },
                     ResponsiveGridCol(lg: 3, child: Spacer()),
@@ -234,8 +238,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
-                            child:
-                                StaffCard(staffNames[i], staffImgs[i], staffLinks[i], swidth),
+                            child: StaffCard(staffNames[i], staffImgs[i],
+                                staffLinks[i], swidth),
                           ))
                     }
                   ]),

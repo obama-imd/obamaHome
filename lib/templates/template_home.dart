@@ -68,7 +68,7 @@ class _HomeDesktopState extends State<TemplateHome> {
                             NavMenu(
                                 swidth: swidth,
                                 heightBtn: 50,
-                                itemValues: itemValues,
+                                itemValues: getItemValues(),
                                 searchAvailable: true),
                           ])),
                 ] else ...[

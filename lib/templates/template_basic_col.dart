@@ -33,8 +33,8 @@ class TemplateColumnState extends State<TemplateColumn> {
 
   String getPageName(BuildContext context) {
     final currentRoute = ModalRoute.of(context)?.settings.name;
-    final matchingItem =
-        itemValues.firstWhere((item) => item.path.contains(currentRoute ?? ""));
+    final matchingItem = getItemValues()
+        .firstWhere((item) => item.path.contains(currentRoute ?? ""));
 
     setState(() {
       pageName = matchingItem.name;
@@ -73,7 +73,7 @@ class TemplateColumnState extends State<TemplateColumn> {
                             NavMenu(
                                 swidth: swidth,
                                 heightBtn: 50,
-                                itemValues: itemValues,
+                                itemValues: getItemValues(),
                                 searchAvailable: true),
                           ])),
                 ] else ...[

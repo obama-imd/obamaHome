@@ -18,6 +18,10 @@ class _SignInPageViewState extends State<SignInPageView> {
   GlobalKey signInKey = GlobalKey<FormState>();
   bool showPassword = true;
 
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   void displayPassword() {
     setState(() {
       showPassword = !showPassword;
@@ -38,13 +42,13 @@ class _SignInPageViewState extends State<SignInPageView> {
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
                   child: Image.asset("assets/images/icone.png", width: 150),
                 ),
-                formFieldNoHide(context, "Nome"),
+                formFieldNoHide(context, "Nome", nameController),
                 SizedBox(height: 10),
-                formFieldNoHide(context, "E-mail"),
+                formFieldNoHide(context, "E-mail", emailController),
                 for (var passwordField in passwordFields) ...{
                   SizedBox(height: 10),
-                  formFieldHidden(
-                      context, passwordField, showPassword, displayPassword),
+                  formFieldHidden(context, passwordField, showPassword,
+                      displayPassword, passwordController),
                 },
                 Padding(
                   padding: const EdgeInsets.only(top: 35),

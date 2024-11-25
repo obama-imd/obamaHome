@@ -28,24 +28,25 @@ class drawermenu extends StatelessWidget {
             padding: EdgeInsets.only(top: 35),
             child: Column(
               children: [
-                for (var item in itemValues) ...{
+                for (var item in getItemValues()) ...{
                   if (item.subItems.isNotEmpty) ...{
                     ExpansionTile(
-                        title: Text(item.name.toUpperCase(), style: textTheme.headlineSmall),
+                        title: Text(item.name.toUpperCase(),
+                            style: textTheme.headlineSmall),
                         children: [
                           for (var i = 0; i < item.subItems.length; i++) ...{
                             ListTile(
                                 title: Padding(
-                                  padding: EdgeInsets.only(left: 15),
-                                  child: InkWell(
-                                      child: Text(
-                                        item.subItems[i]!.toUpperCase(), style: textTheme.bodyMedium,
-                                      ),
-                                      onTap: () {
-                                        Navigator.pushNamed(
-                                            context, item.path[i]);
-                                      }),
-                                ))
+                              padding: EdgeInsets.only(left: 15),
+                              child: InkWell(
+                                  child: Text(
+                                    item.subItems[i]!.toUpperCase(),
+                                    style: textTheme.bodyMedium,
+                                  ),
+                                  onTap: () {
+                                    Navigator.pushNamed(context, item.path[i]);
+                                  }),
+                            ))
                           }
                         ]),
                   } else ...{
@@ -59,7 +60,8 @@ class drawermenu extends StatelessWidget {
                               onTap: () {
                                 Navigator.pushNamed(context, item.path[0]);
                               },
-                              child: Text(item.name.toUpperCase(), style: textTheme.headlineSmall)),
+                              child: Text(item.name.toUpperCase(),
+                                  style: textTheme.headlineSmall)),
                         ),
                       ],
                     )

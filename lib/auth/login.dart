@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/auth/controller.dart';
 import 'package:obamahome/auth/forgotPassword.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
@@ -17,6 +18,9 @@ class _LoginPageViewState extends State<LoginPageView> {
   GlobalKey loginKey = GlobalKey<FormState>();
   bool showPassword = true;
   bool logged = false;
+
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
   void displayPassword() {
     setState(() {
@@ -44,10 +48,10 @@ class _LoginPageViewState extends State<LoginPageView> {
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
                   child: Image.asset("assets/images/icone.png", width: 150),
                 ),
-                formFieldNoHide(context, "E-mail"),
+                formFieldNoHide(context, "E-mail", emailController),
                 SizedBox(height: 10),
-                formFieldHidden(
-                    context, "Senha", showPassword, displayPassword),
+                formFieldHidden(context, "Senha", showPassword, displayPassword,
+                    passwordController),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 35),
                   child: ForgotPasswordView(),
@@ -55,7 +59,17 @@ class _LoginPageViewState extends State<LoginPageView> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    mainButton(context, "Entrar", null, () {}),
+                    mainButton(context, "Entrar", null, () {
+                      setState(() {
+                        fetchLogin(
+                                emailController.text, passwordController.text)
+                            .then((val) {
+                          Navigator.pushNamed(context, "/");
+                        }).onError((e, trace) {
+                          Navigator.pushNamed(context, "/login");
+                        });
+                      });
+                    }),
                     GoogleSigninButton(),
                   ],
                 ),

@@ -45,7 +45,7 @@ class ErrorPage extends StatelessWidget {
                           NavMenu(
                               swidth: swidth,
                               heightBtn: 50,
-                              itemValues: itemValues,
+                              itemValues: getItemValues(),
                               searchAvailable: true),
                         ])),
               ] else ...[

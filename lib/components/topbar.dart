@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/auth/controller.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:obamahome/utils/app_padding.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,23 +39,46 @@ class _TopBarState extends ConsumerState<TopBar> {
 
     List<String?> userName = [...googleUserName];
     List<bool> userLogged = [...googleUserBool];
-    return InkWell(
-        onTap: () {
-          checkAuth(context);
-          // checkSignIn();
-          // print("teste => ${userLogged[0]}, ${userName[0]}");
-        },
-        child: SizedBox(
-          width: 200,
-          height: 45,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(userLogged.isNotEmpty ? 'Olá, ${userName.first}' : 'Acesse',
-                  style: textTheme.headlineSmall, textAlign: TextAlign.center)
-            ],
-          ),
-        ));
+    return hasUserSession || userLogged.isNotEmpty
+        ? InkWell(
+            onTap: () {
+              setState(() {
+                hasUserSession = false;
+                removeUserToken().then((_) {
+                  Navigator.pushNamed(context, "/");
+                });
+              });
+            },
+            child: SizedBox(
+              width: 200,
+              height: 45,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Sair >',
+                      style: textTheme.headlineSmall,
+                      textAlign: TextAlign.center)
+                ],
+              ),
+            ))
+        : InkWell(
+            onTap: () {
+              checkAuth(context);
+              // checkSignIn();
+              // print("teste => ${userLogged[0]}, ${userName[0]}");
+            },
+            child: SizedBox(
+              width: 200,
+              height: 45,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Acesse',
+                      style: textTheme.headlineSmall,
+                      textAlign: TextAlign.center)
+                ],
+              ),
+            ));
   }
 
   @override
@@ -169,8 +193,9 @@ class _TopBarState extends ConsumerState<TopBar> {
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                 margin: EdgeInsets.only(top: 5),
-                width: widget.swidth*.95,
-                child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                width: widget.swidth * .95,
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: const Icon(FontAwesomeIcons.house,

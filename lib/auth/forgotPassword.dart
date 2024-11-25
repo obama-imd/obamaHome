@@ -12,6 +12,8 @@ class ForgotPasswordView extends StatefulWidget {
 }
 
 class _ForgotPasswordViewState extends State<ForgotPasswordView> {
+  TextEditingController controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -26,7 +28,8 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       child: Text("Recuperação de Senha",
                           style: textTheme.titleSmall)),
                   content: ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 250, minWidth: 300, maxWidth: 350),
+                    constraints: BoxConstraints(
+                        maxHeight: 250, minWidth: 300, maxWidth: 350),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -34,7 +37,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                             "Informe o e-mail cadastrado para que possamos te ajudar a recuperar os dados de acesso."),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 35),
-                          child: formFieldNoHide(context, "E-mail"),
+                          child: formFieldNoHide(context, "E-mail", controller),
                         ),
                         mainButton(context, "Enviar", null, () {})
                       ],
