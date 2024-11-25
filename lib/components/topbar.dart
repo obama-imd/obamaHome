@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:obamahome/auth/controller.dart';
 import 'package:obamahome/components/launchSocialMedia.dart';
 import 'package:obamahome/utils/app_padding.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,23 +39,46 @@ class _TopBarState extends ConsumerState<TopBar> {
 
     List<String?> userName = [...googleUserName];
     List<bool> userLogged = [...googleUserBool];
-    return InkWell(
-        onTap: () {
-          checkAuth(context);
-          // checkSignIn();
-          // print("teste => ${userLogged[0]}, ${userName[0]}");
-        },
-        child: SizedBox(
-          width: 200,
-          height: 45,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(userLogged.isNotEmpty ? 'Olá, ${userName.first}' : 'Acesse',
-                  style: textTheme.headlineSmall, textAlign: TextAlign.center)
-            ],
-          ),
-        ));
+    return hasUserSession || userLogged.isNotEmpty
+        ? InkWell(
+            onTap: () {
+              setState(() {
+                hasUserSession = false;
+                removeUserToken().then((_) {
+                  Navigator.pushNamed(context, "/");
+                });
+              });
+            },
+            child: SizedBox(
+              width: 200,
+              height: 45,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Sair >',
+                      style: textTheme.headlineSmall,
+                      textAlign: TextAlign.center)
+                ],
+              ),
+            ))
+        : InkWell(
+            onTap: () {
+              checkAuth(context);
+              // checkSignIn();
+              // print("teste => ${userLogged[0]}, ${userName[0]}");
+            },
+            child: SizedBox(
+              width: 200,
+              height: 45,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Acesse',
+                      style: textTheme.headlineSmall,
+                      textAlign: TextAlign.center)
+                ],
+              ),
+            ));
   }
 
   @override
@@ -84,8 +108,8 @@ class _TopBarState extends ConsumerState<TopBar> {
                               color: CoresPersonalizadas.azulObama,
                               child: Text(
                                   'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                                  style:
-                                      TextStyle(color: background, fontSize: 13)),
+                                  style: TextStyle(
+                                      color: background, fontSize: 13)),
                             ),
                           ])),
                           Container(
@@ -101,8 +125,10 @@ class _TopBarState extends ConsumerState<TopBar> {
                                 child: Row(children: [
                                   Container(
                                       padding: const EdgeInsets.only(right: 10),
-                                      child: const Icon(FontAwesomeIcons.envelope,
-                                          color: background, size: 16)),
+                                      child: const Icon(
+                                          FontAwesomeIcons.envelope,
+                                          color: background,
+                                          size: 16)),
                                   Text('obama@imd.ufrn.br',
                                       style: TextStyle(
                                           color: background, fontSize: 13)),
@@ -111,7 +137,8 @@ class _TopBarState extends ConsumerState<TopBar> {
                         ]),
                         Container(
                             child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
                                 children: [
                               SocialMedia(background),
                               Container(
@@ -162,7 +189,8 @@ class _TopBarState extends ConsumerState<TopBar> {
             color: CoresPersonalizadas.azulObama,
             width: widget.swidth,
             height: 130,
-            child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+            child:
+                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 Container(
                     padding: const EdgeInsets.only(right: 10),
@@ -191,8 +219,8 @@ class _TopBarState extends ConsumerState<TopBar> {
                                   child: const Icon(FontAwesomeIcons.envelope,
                                       color: background, size: 16)),
                               Text('obama@imd.ufrn.br',
-                                  style:
-                                      TextStyle(color: background, fontSize: 13)),
+                                  style: TextStyle(
+                                      color: background, fontSize: 13)),
                             ]),
                       ))),
               Padding(

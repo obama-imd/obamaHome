@@ -75,7 +75,7 @@ class TemplateRowState extends State<TemplateRow> {
                             NavMenu(
                                 swidth: swidth,
                                 heightBtn: 50,
-                                itemValues: itemValues,
+                                itemValues: getItemValues(),
                                 searchAvailable: true),
                           ])),
                 ] else ...[
