@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/models/lesson_plan_models.dart';
+import 'package:obamahome/app/views/lessons/controller.dart';
 import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/components/topbar.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
@@ -8,11 +10,23 @@ import 'components/pageView/pageViewFirst.dart';
 import 'components/pageView/pageViewSecond.dart';
 import 'components/textEditorClass.dart';
 
-List<String> pageHints = [
-  'Qual o nome da instituição a que se destina esse plano de aula?*',
-  'Escreva uma frase curta que defina sua aula.*',
-  'A qual ano de ensino esta proposta de aula melhor se aplica?*',
-  'Quanto tempo (em minutos) você acha necessário para a aplicação deste plano de aula?*'
+final List<(String, TextEditingController)> pageHints = [
+  (
+    'Qual o nome da instituição a que se destina esse plano de aula?*',
+    new TextEditingController()
+  ),
+  (
+    'Escreva uma frase curta que defina sua aula.*',
+    new TextEditingController()
+  ),
+  (
+    'A qual ano de ensino esta proposta de aula melhor se aplica?*',
+    new TextEditingController()
+  ),
+  (
+    'Quanto tempo (em minutos) você acha necessário para a aplicação deste plano de aula?*',
+    new TextEditingController()
+  )
 ];
 
 List<String> options = <String>[
@@ -44,6 +58,9 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
   }
 
   List<Widget> paveViewContent = [PageViewFirst(), PageViewSecond()];
+  String escola = '';
+  String titulo = '';
+  int duracao = 0;
 
   // void _updateCurrentPageIndex(int index) {
   //   // _tabController.index = index;
@@ -92,7 +109,25 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                   NavMenu(
                     swidth: swidth,
                     heightBtn: 50,
-                    itemValues: editorValues,
+                    itemValues: getEditorValues(() {
+                      setState(() {
+                        escola = pageHints[0].$2.text;
+                        titulo = pageHints[1].$2.text;
+                        duracao = int.parse(pageHints[3].$2.text);
+                        saveNewLessonPlan(LessonPlanModel(
+                            escola: escola,
+                            idNivelEnsino: 1,
+                            disciplinasEnvolvida: [1],
+                            idAnoEnsino: 1,
+                            duracaoEmMinutos: duracao,
+                            titulo: titulo,
+                            metodologia: '',
+                            objetivosEspecificos: '',
+                            objetivoGeral: '',
+                            avaliacao: '',
+                            referencias: ''));
+                      });
+                    }),
                     searchAvailable: false,
                   )
                 ]),

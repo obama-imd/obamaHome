@@ -7,7 +7,7 @@ import '../../utils/apiURL.dart';
 
 final storage = FlutterSecureStorage();
 
-var hasUserSession = true;
+var hasUserSession = false;
 
 Future<String?> userToken() async {
   return await storage.read(key: 'access_token');
@@ -32,7 +32,7 @@ Future<bool> fetchLogin(String email, String password) async {
 
   try {
     final response = await http.post(
-      Uri.parse(apiUrl), // Substitua pelo seu endpoint
+      Uri.parse(apiUrl),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({'login': email, 'senha': password}),
     );
@@ -60,4 +60,66 @@ Future<bool> fetchLogin(String email, String password) async {
   } finally {
     print('Concluído');
   }
+}
+
+Future<void> validateUser(String token) async {
+  var apiUrl = '${API_URL}usuario/ativar';
+
+  try {
+    final response = await http.patch(
+      Uri.parse(apiUrl),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'token': token}),
+    );
+
+    if (response.statusCode != 204) {
+      print(response);
+      throw Exception('Ocorreu um erro!');
+    }
+  } catch (e) {
+    print('Erro de conexão');
+    throw Exception('Ocorreu um erro de conexão');
+  } finally {
+    print('Concluído');
+  }
+}
+
+Future<bool> newUser(String name, String email, String password) async {
+  var apiUrl = '${API_URL}usuario/cadastrar';
+  var resultado = false;
+  try {
+    final Map<String, dynamic> body = {
+      "nome": name.split(' ').first,
+      "sobrenome": name,
+      "email": email,
+      "senha": password,
+    };
+
+    final headers = {
+      'Content-Type': 'application/json',
+    };
+    final response = await http.post(
+      Uri.parse(apiUrl), // Substitua pelo seu endpoint
+      headers: headers,
+      body: jsonEncode(body),
+    );
+
+    final responseData = jsonDecode(response.body);
+    resultado = await fetchLogin(email, password);
+
+    if (response.statusCode == 201) {
+      // Cadastro bem-sucedido
+      resultado = true;
+      // Navegar para a próxima tela ou salvar dados
+    } else {
+      print(responseData['message'] ?? 'Erro desconhecido');
+      resultado = false;
+    }
+  } catch (e) {
+    print('Erro de conexão');
+    resultado = false;
+  } finally {
+    print('Concluído');
+  }
+  return resultado;
 }

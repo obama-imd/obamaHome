@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/auth/controller.dart';
 
 import '../components/mainButton.dart';
 import '../templates/template_basic_col.dart';
@@ -55,7 +56,15 @@ class _SignInPageViewState extends State<SignInPageView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      mainButton(context, "Cadastrar", null, () {}),
+                      mainButton(context, "Cadastrar", null, () {
+                        setState(() {
+                          newUser(nameController.text, emailController.text,
+                                  passwordController.text)
+                              .whenComplete(() {
+                            Navigator.pushNamed(context, "/validar-cadastro");
+                          });
+                        });
+                      }),
                       GoogleSigninButton(),
                     ],
                   ),

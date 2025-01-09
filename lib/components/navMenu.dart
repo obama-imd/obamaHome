@@ -68,8 +68,12 @@ class _NavMenuState extends State<NavMenu> {
                       hoverColor: background,
                       highlightColor: background,
                       onTap: () {
-                        Navigator.pushNamed(
-                            context, widget.itemValues[i].path[0]);
+                        if (widget.itemValues[i].action != null) {
+                          widget.itemValues[i].action!();
+                        } else {
+                          Navigator.pushNamed(
+                              context, widget.itemValues[i].path[0]);
+                        }
                       },
                       // teste tooltip
                       child: LibrasTooltip(

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
+import 'package:obamahome/auth/controller.dart';
 import 'package:obamahome/auth/login.dart';
+import 'package:obamahome/auth/validateUser.dart';
 
 import '../404.dart';
 import '../app/views/about-us/aboutUs_view.dart';
@@ -204,6 +206,7 @@ class MyAppMaterial extends MaterialApp {
             '/planos-aulas/criar': (context) => NewLessonPlan(),
             '/login': (context) => LoginPageView(),
             '/cadastro': (context) => SignInPageView(),
+            '/validar-cadastro': (context) => ValidateUserPageView(),
             // '/esqueciMinhaSenha': (context) => ForgotPasswordView()
           },
           onGenerateRoute: (settings) {
