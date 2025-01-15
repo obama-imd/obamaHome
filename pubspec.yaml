@@ -47,7 +47,6 @@ dependencies:
   html: ^0.15.4
   image_network: ^2.5.4+1
   responsive_grid: ^2.4.4
-  curved_navigation_bar: ^1.0.3
   flutter_riverpod: ^2.4.8
   riverpod: any
   flutter_map_cancellable_tile_provider: ^2.0.0

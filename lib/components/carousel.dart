@@ -52,7 +52,7 @@ class Carousel extends StatelessWidget {
     'assets/images/imd.png',
     'assets/images/remne.jpg',
     'assets/images/gilfe.png',
-    'assets/images/ppgite.png',
+    'assets/images/ppgite.png'
   ];
 
   final List<double> partnersPadding = [24, 30, 0, 25, 0];
