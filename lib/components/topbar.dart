@@ -107,7 +107,7 @@ class _TopBarState extends ConsumerState<TopBar> {
                             Material(
                               color: CoresPersonalizadas.azulObama,
                               child: Text(
-                                  'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
+                                  'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal/RN',
                                   style: TextStyle(
                                       color: background, fontSize: 13)),
                             ),
@@ -191,14 +191,19 @@ class _TopBarState extends ConsumerState<TopBar> {
             height: 130,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Container(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: const Icon(FontAwesomeIcons.house,
-                        color: background, size: 13)),
-                Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
-                    style: TextStyle(color: background, fontSize: 13)),
-              ]),
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                width: widget.swidth * .95,
+                child:
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                  Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: const Icon(FontAwesomeIcons.house,
+                          color: background, size: 13)),
+                  Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal/RN',
+                      style: TextStyle(color: background, fontSize: 12)),
+                ]),
+              ),
               Container(
                   child: TextButton(
                       style: ButtonStyle(
@@ -223,19 +228,16 @@ class _TopBarState extends ConsumerState<TopBar> {
                                       color: background, fontSize: 13)),
                             ]),
                       ))),
-              Padding(
-                padding: const EdgeInsets.only(top: 13),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    // SocialMedia(background),
-                    Material(
-                        color: background,
-                        textStyle: textTheme.headlineMedium,
-                        child: loginButton(context))
-                  ],
-                ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  // SocialMedia(background),
+                  Material(
+                      color: background,
+                      textStyle: textTheme.headlineMedium,
+                      child: loginButton(context))
+                ],
               ),
             ]),
           )

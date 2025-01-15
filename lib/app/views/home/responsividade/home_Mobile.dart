@@ -8,7 +8,6 @@ import '../../../../components/sectionTitle.dart';
 import '../../../../utils/app_padding.dart';
 import '../../../../utils/app_theme.dart';
 import '../constants.dart';
-import '../home_view.dart';
 
 class HomeMobile extends StatefulWidget {
   final TrackingScrollController scrollController;
@@ -33,8 +32,8 @@ class _HomeMobileState extends State<HomeMobile> {
     return TemplateHome(children: [
       //abaixo do gif
       Container(
-        height: 320,
-        width: MediaQuery.of(context).size.width,
+        height: 250,
+        width: MediaQuery.of(context).size.width*.9,
         padding: paddingValues("mainTitle", context),
         child: SectionTitle(
             'Plataforma OBAMA',
@@ -50,11 +49,7 @@ class _HomeMobileState extends State<HomeMobile> {
                   lg: 3,
                   md: 6,
                   xs: 12,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: ItemProduto(
-                        "Data Recovery", "nononon nono nonon non !", "i1.png"),
-                  ),
+                  child: ItemProduto(sectionTitle[i], "", sectionImage[i]),
                 ),
               }
             ],
@@ -91,7 +86,7 @@ class _HomeMobileState extends State<HomeMobile> {
                                       sm: 12,
                                       child: Padding(
                                         padding:
-                                            const EdgeInsets.only(bottom: 100),
+                                            const EdgeInsets.only(bottom: 45),
                                         child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,

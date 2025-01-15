@@ -61,14 +61,11 @@ class _PageViewFirstState extends ConsumerState<PageViewFirst> {
                   height: 50,
                   margin: const EdgeInsets.symmetric(vertical: 20),
                   child: TextField(
-                      onChanged: (value) async {
-                        arrayData[i] = value;
-                        print(arrayData);
-                      },
+                      controller: pageHints[i].$2,
                       decoration: InputDecoration(
                         border: UnderlineInputBorder(
                             borderSide: BorderSide(width: 1)),
-                        hintText: pageHints[i],
+                        hintText: pageHints[i].$1,
                         hintStyle: textTheme.bodySmall,
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 15),
@@ -83,7 +80,8 @@ class _PageViewFirstState extends ConsumerState<PageViewFirst> {
               Container(
                 height: 50,
                 width: 170,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(100)),
                 child: TextButton(
                     onPressed: () {
                       saveFirstStepData(ref, arrayData);

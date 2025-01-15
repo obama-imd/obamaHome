@@ -1,18 +1,22 @@
+import 'package:obamahome/app/models/lesson_plan_models.dart';
+
 import '../../../../components/menuClass.dart';
 
-final List<ItemValue> editorValues = [
-  ItemValue(
-    name: "Voltar",
-    path: ['/'],
-    subItems: [],
-    itemHover: false,
-    subItemHover: List.generate(1, (index) => false),
-  ),
-  ItemValue(
-    name: "Salvar",
-    path: [""],
-    subItems: [],
-    itemHover: false,
-    subItemHover: List.generate(1, (index) => false),
-  ),
-];
+List<ItemValue> getEditorValues(Function action) {
+  return [
+    ItemValue(
+      name: "Voltar",
+      path: ['/'],
+      subItems: [],
+      itemHover: false,
+      subItemHover: List.generate(1, (index) => false),
+    ),
+    ItemValue(
+        name: "Salvar",
+        path: [""],
+        subItems: [],
+        itemHover: false,
+        subItemHover: List.generate(1, (index) => false),
+        action: action),
+  ];
+}

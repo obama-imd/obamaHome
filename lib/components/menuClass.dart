@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+import 'package:obamahome/app/models/lesson_plan_models.dart';
 import 'package:obamahome/auth/controller.dart';
 
 class ItemValue {
@@ -6,13 +8,15 @@ class ItemValue {
   bool itemHover;
   final String name;
   final List<String> path;
+  final Function? action;
 
   ItemValue(
       {required this.subItems,
       required this.subItemHover,
       required this.name,
       required this.itemHover,
-      required this.path});
+      required this.path,
+      this.action = null});
 }
 
 List<ItemValue> getItemValues() {

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/trilhas/responsividade/trilhas_desktop.dart';
 
+import '../../../utils/responsivo.dart';
+import 'responsividade/trilhas_mobile.dart';
+import 'responsividade/trilhas_tablet.dart';
+
 class TrilhasPage extends StatelessWidget {
   const TrilhasPage({super.key});
   @override
@@ -23,12 +27,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
-          body: TrilhasDesktop(),
-        //   Responsivo(
-        //       mobile: TrilhasMobile(),
-        //       tablet: TrilhasTablet(),
-        //       desktop: TrilhasDesktop()
-        // )
+          // body: TrilhasDesktop(),
+          body: Responsivo(
+              mobile: TrilhasMobile(),
+              tablet: TrilhasTablet(),
+              desktop: TrilhasDesktop()
+        )
         ));
   }
 }

@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
-import 'package:obamahome/utils/app_padding.dart';
 
+import '../../../../utils/app_padding.dart';
 import '../searchOA_view.dart';
 
 class SearchMobile extends StatefulWidget {
@@ -32,22 +32,25 @@ class _SearchMobileState extends State<SearchMobile> {
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
+      // Container(
+      //   margin: paddingValues("sectionPadding", context),
+      //   padding: paddingValues("sideMainPadding", context),
+      //   child: ExpansionTile(title: Text("Busca Avançada"), children: [
+      //     // Padding(
+      //     //   padding: paddingValues("fullGrid", context),
+      //     //   child: OAFilters(
+      //     //       swidth: swidth,
+      //     //       data: widget.termSearched,
+      //     //       updateData: widget.updateData,
+      //     //       titleStyle: widget.titleStyle),
+      //     // ),
+      //   ]),
+      // ),
       Container(
         margin: paddingValues("sectionPadding", context),
-        padding: paddingValues("sideMainPadding", context),
-        child: ExpansionTile(title: Text("Busca Avançada"), children: [
-          // Padding(
-          //   padding: paddingValues("fullGrid", context),
-          //   child: OAFilters(
-          //       swidth: swidth,
-          //       data: widget.termSearched,
-          //       updateData: widget.updateData,
-          //       titleStyle: widget.titleStyle),
-          // ),
-        ]),
+        child: SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
+            widget.selectedPage, null),
       ),
-      SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
-          widget.selectedPage, null),
     ]);
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import "package:flutter/material.dart";
 import 'package:obamahome/app/controllers/search_controller.dart';
@@ -7,7 +8,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
-import '../../../../utils/nav_key.dart';
+// import '../../../../utils/nav_key.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(
@@ -214,39 +215,37 @@ class _OurProductItemState extends State<OurProductItem> {
               return AlertDialog(
                 scrollable: true,
                 title: Text(oa!.nome),
-                content: Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      child: Text("Plataforma de uso: ${oa!.getPlataforma()}",
+                          style: textTheme.headlineSmall),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+                      child: Text("Descritores PCN",
+                          style: textTheme.headlineSmall),
+                    ),
+                    kIsWeb
+                        ? FittedBox(
+                            fit: BoxFit.fitHeight,
+                            child: Text(oa!.getDescritores()))
+                        : Text(oa!.getDescritores()),
+                    Padding(
                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: Text("Plataforma de uso: ${oa!.getPlataforma()}",
-                            style: textTheme.headlineSmall),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                        child: Text("Descritores PCN",
-                            style: textTheme.headlineSmall),
-                      ),
-                      kIsWeb
-                          ? FittedBox(
-                              fit: BoxFit.fitHeight,
-                              child: Text(oa!.getDescritores()))
-                          : Expanded(child: Text(oa!.getDescritores())),
-                      Padding(
-                          padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                          child: Text(
-                            "Habilidades BNCC",
-                            style: textTheme.headlineSmall,
-                          )),
-                      kIsWeb
-                          ? FittedBox(
-                              fit: BoxFit.fitHeight,
-                              child: Text(oa!.getHabilidades()))
-                          : Expanded(child: Text(oa!.getHabilidades()))
-                    ],
-                  ),
+                        child: Text(
+                          "Habilidades BNCC",
+                          style: textTheme.headlineSmall,
+                        )),
+                    kIsWeb
+                        ? FittedBox(
+                            fit: BoxFit.fitHeight,
+                            child: Text(oa!.getHabilidades()))
+                        : Text(oa!.getHabilidades())
+                  ],
                 ),
                 actions: <Widget>[
                   TextButton(
@@ -264,3 +263,83 @@ class _OurProductItemState extends State<OurProductItem> {
           );
   }
 }
+
+//   Future<void> _dialogBuilder() async {
+//     return oa == null
+//         ? showDialog<void>(
+//             context: context,
+//             builder: (BuildContext context) {
+//               return AlertDialog(
+//                 title: Text(
+//                     'Erro ao buscar informações sobre este Objeto de Aprendizagem.'),
+//                 content: Container(),
+//                 actions: <Widget>[
+//                   TextButton(
+//                     style: TextButton.styleFrom(
+//                       textStyle: textTheme.labelLarge,
+//                     ),
+//                     child: const Text('Ok'),
+//                     onPressed: () {
+//                       Navigator.of(context).pop();
+//                     },
+//                   ),
+//                 ],
+//               );
+//             },
+//           )
+//         : showGeneralDialog<void>(
+//             context: context,
+//             pageBuilder: (x, y, z) {
+//               return AlertDialog(
+//                 // scrollable: true,
+//                 title: Text(oa!.nome),
+//                 content: Container(
+//                   child: Column(
+//                     mainAxisSize: MainAxisSize.min,
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+//                         child: Text("Plataforma de uso: ${oa!.getPlataforma()}",
+//                             style: textTheme.headlineSmall),
+//                       ),
+//                       Padding(
+//                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+//                         child: Text("Descritores PCN",
+//                             style: textTheme.headlineSmall),
+//                       ),
+//                       kIsWeb
+//                           ? FittedBox(
+//                               fit: BoxFit.fitHeight,
+//                               child: Text(oa!.getDescritores()))
+//                           : Expanded(child: Text(oa!.getDescritores())),
+//                       Padding(
+//                           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+//                           child: Text(
+//                             "Habilidades BNCC",
+//                             style: textTheme.headlineSmall,
+//                           )),
+//                       kIsWeb
+//                           ? FittedBox(
+//                               fit: BoxFit.fitHeight,
+//                               child: Text(oa!.getHabilidades()))
+//                           : Expanded(child: Text(oa!.getHabilidades()))
+//                     ],
+//                   ),
+//                 ),
+//                 actions: <Widget>[
+//                   TextButton(
+//                     style: TextButton.styleFrom(
+//                       textStyle: textTheme.labelLarge,
+//                     ),
+//                     child: const Text('Ok'),
+//                     onPressed: () {
+//                       Navigator.pop(x);
+//                     },
+//                   ),
+//                 ],
+//               );
+//             },
+//           );
+//   }
+// }

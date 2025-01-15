@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/controllers/lessons_controller.dart';
 import 'package:obamahome/app/models/lesson_plan_models.dart';
+import 'package:obamahome/app/views/lessons/controller.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_padding.dart';
 import 'package:obamahome/utils/app_theme.dart';
@@ -18,6 +19,14 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
   String searchTerm = "";
   int _currentPage = 0;
   int _itemsPerPage = 10;
+  var lessonsData = [];
+
+  void initState() {
+    super.initState();
+    fetchLessonPlan().then((value) {
+      lessonsData = value ?? [];
+    });
+  }
 
   List<LessonPlan> _pagedItems(List<LessonPlan> data) {
     int startIndex = _currentPage * _itemsPerPage;
@@ -34,7 +43,6 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
     return FutureBuilder(
       future: randomName(searchTerm, ref),
       builder: (context, snapshot) {
-        final lessonsData = ref.watch(lessons);
         List<LessonPlan> data = [...lessonsData];
         return TemplateColumn(
           children: [
@@ -86,9 +94,9 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
                           itemBuilder: (context, index) {
                             final lessonPlan = _pagedItems(data)[index];
                             return _buildRow(
-                              lessonPlan.titulo,
-                              lessonPlan.autor,
-                              lessonPlan.dataPublicacao.toString(),
+                              lessonPlan.id.toString(),
+                              lessonPlan.title,
+                              lessonPlan.status,
                             );
                           },
                         );

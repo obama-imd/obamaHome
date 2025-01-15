@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/auth/controller.dart';
 
 import '../components/mainButton.dart';
 import '../templates/template_basic_col.dart';
@@ -32,7 +33,7 @@ class _SignInPageViewState extends State<SignInPageView> {
   Widget build(BuildContext context) {
     return TemplateColumn(children: [
       Padding(
-        padding: const EdgeInsets.only(top: 120),
+        padding: const EdgeInsets.only(top: 120, bottom: 90),
         child: Form(
             key: signInKey,
             child: ConstrainedBox(
@@ -40,7 +41,7 @@ class _SignInPageViewState extends State<SignInPageView> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
-                  child: Image.network("assets/images/icone.png", width: 150),
+                  child: Image.asset("assets/images/icone.png", width: 150),
                 ),
                 formFieldNoHide(context, "Nome", nameController),
                 SizedBox(height: 10),
@@ -55,7 +56,15 @@ class _SignInPageViewState extends State<SignInPageView> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      mainButton(context, "Cadastrar", null, () {}),
+                      mainButton(context, "Cadastrar", null, () {
+                        setState(() {
+                          newUser(nameController.text, emailController.text,
+                                  passwordController.text)
+                              .whenComplete(() {
+                            Navigator.pushNamed(context, "/validar-cadastro");
+                          });
+                        });
+                      }),
                       GoogleSigninButton(),
                     ],
                   ),
