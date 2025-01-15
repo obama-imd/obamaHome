@@ -30,6 +30,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       Container(
         constraints: BoxConstraints(maxWidth: 1200),
         padding: paddingValues("carouselTop", context),
+        margin: EdgeInsets.only(bottom: 75),
         child: DropdownFormations(accordionContent: accordionContent),
       ),
     ]);
