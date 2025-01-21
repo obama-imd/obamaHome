@@ -37,6 +37,10 @@ class _SignInPageViewState extends State<SignInPageView> {
     });
   }
 
+  bool isSamePassword() {
+    return passwordController.text == passwordConfirmController.text;
+  }
+
   @override
   Widget build(BuildContext context) {
     return TemplateColumn(children: [
@@ -71,13 +75,22 @@ class _SignInPageViewState extends State<SignInPageView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       mainButton(context, "Cadastrar", null, () {
-                        setState(() {
+                        // setState(() {
+                        if (isSamePassword()) {
                           newUser(nameController.text, emailController.text,
                                   passwordController.text)
                               .whenComplete(() {
                             Navigator.pushNamed(context, "/validar-cadastro");
                           });
-                        });
+                        } else {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                    content: Text("As senhas não conferem.", style: TextStyle(color: Colors.red)));
+                              });
+                        }
+                        // });
                       }),
                       GoogleSigninButton(),
                     ],
