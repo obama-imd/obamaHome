@@ -18,14 +18,22 @@ class SignInPageView extends StatefulWidget {
 class _SignInPageViewState extends State<SignInPageView> {
   GlobalKey signInKey = GlobalKey<FormState>();
   bool showPassword = true;
+  bool showConfirmPassword = true;
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
 
   void displayPassword() {
     setState(() {
       showPassword = !showPassword;
+    });
+  }
+
+  void displayConfirmPassword() {
+    setState(() {
+      showConfirmPassword = !showConfirmPassword;
     });
   }
 
@@ -46,11 +54,17 @@ class _SignInPageViewState extends State<SignInPageView> {
                 formFieldNoHide(context, "Nome", nameController),
                 SizedBox(height: 10),
                 formFieldNoHide(context, "E-mail", emailController),
-                for (var passwordField in passwordFields) ...{
-                  SizedBox(height: 10),
-                  formFieldHidden(context, passwordField, showPassword,
-                      displayPassword, passwordController),
-                },
+                // for (var passwordField in passwordFields) ...{
+                //   SizedBox(height: 10),
+                //   formFieldHidden(context, passwordField, showPassword,
+                //       displayPassword, passwordController),
+                // },
+                SizedBox(height: 10),
+                formFieldHidden(context, passwordFields[0], showPassword,
+                    displayPassword, passwordController),
+                SizedBox(height: 10),
+                formFieldHidden(context, passwordFields[1], showConfirmPassword,
+                    displayConfirmPassword, passwordConfirmController),
                 Padding(
                   padding: const EdgeInsets.only(top: 35),
                   child: Row(
