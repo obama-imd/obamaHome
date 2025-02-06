@@ -37,7 +37,7 @@ List<ItemValue> getItemValues() {
     ),
     ItemValue(
       name: "Serviços",
-      path: ['/servicos', '/trilhas', '/manuais'],
+      path: ['/objetos-aprendizagem', '/trilhas', '/manuais'],
       subItems: ["OA", "Trilhas", "Manuais"],
       itemHover: false,
       subItemHover: List.generate(3, (index) => false),

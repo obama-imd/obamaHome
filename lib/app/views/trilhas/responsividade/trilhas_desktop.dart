@@ -22,8 +22,9 @@ class _MyStatefulWidgetState extends State<TrilhasDesktop> {
   Widget build(BuildContext context) {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
-      Padding(
-        padding: const EdgeInsets.only(top: 120),
+      Container(
+        padding: paddingValues("carouselTop", context),
+        margin: EdgeInsets.only(bottom: 75),
         child: Stack(
           children: [
             Container(
@@ -70,20 +71,22 @@ class _MyStatefulWidgetState extends State<TrilhasDesktop> {
                                         lg: 6,
                                         sm: 12,
                                         child: Padding(
-                                          padding:
-                                              const EdgeInsets.only(bottom: 100),
+                                          padding: const EdgeInsets.only(
+                                              bottom: 100),
                                           child: Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      bottom: 25),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 25),
                                                   child: ClipOval(
                                                       child: Container(
                                                     color: background,
                                                     padding:
-                                                        const EdgeInsets.all(20),
+                                                        const EdgeInsets.all(
+                                                            20),
                                                     child: Image.asset(
                                                       "assets/images/" +
                                                           sectionImage[i],

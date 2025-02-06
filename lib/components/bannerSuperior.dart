@@ -24,7 +24,7 @@ final List<RouteList> routesList = [
   ),
   RouteList(
     name: "Objetos de Aprendizagem",
-    path: ['/servicos'],
+    path: ['/objetos-aprendizagem'],
   ),
   RouteList(
     name: "Trilhas de Aprendizagem",
@@ -92,7 +92,9 @@ Widget BannerSuperior(context, String pageName) {
                 Container(
                     child: Row(children: [
                   InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "/");
+                      },
                       child: Text(
                         'Home',
                         style: textTheme.labelSmall,

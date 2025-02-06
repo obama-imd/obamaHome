@@ -29,7 +29,7 @@ Future searchObject(context, String value) async {
   if (value.isEmpty) {
     showMessage(context);
   } else {
-    Navigator.pushNamed(context, '/servicos', arguments: value);
+    Navigator.pushNamed(context, '/objetos-aprendizagem', arguments: value);
   }
 }
 

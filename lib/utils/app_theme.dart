@@ -192,7 +192,7 @@ class MyAppMaterial extends MaterialApp {
                       ModalRoute.of(context)?.settings.arguments as int? ?? 0,
                 ),
             '/formacoes': (context) => const Formacoes(),
-            '/servicos': (context) {
+            '/objetos-aprendizagem': (context) {
               //ref.read(allStudyLevelProvider.notifier).loadLevels();
               return SearchPage(
                 termSearched:
