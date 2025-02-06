@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:obamahome/components/drawer.dart';
 
 import '../../../../components/carousel.dart';
@@ -6,9 +7,15 @@ import '../../../../components/footer.dart';
 import '../../../../components/menuMobile.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
-import '../../../../utils/app_theme.dart';
 import '../components/librasButton.dart';
 import '../components/menuClass.dart';
+import '../utils/app_theme.dart';
+
+final List<String> imageCarousel = [
+  "assets/images/slider1.jpg",
+  "assets/images/slider2.jpg",
+  "assets/images/slider3.jpg"
+];
 
 class TemplateHome extends StatefulWidget {
   final List<Widget> children;
@@ -18,25 +25,35 @@ class TemplateHome extends StatefulWidget {
   });
 
   @override
-  State<TemplateHome> createState() => _HomeDesktopState();
+  State<TemplateHome> createState() => _TemplateHomeState();
 }
 
-class _HomeDesktopState extends State<TemplateHome> {
+class _TemplateHomeState extends State<TemplateHome>
+    with TickerProviderStateMixin {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-
   late AnimationController controller;
+  int index = 0;
 
-  // @override
-  // void initState() {
-  //   controller = AnimationController(
-  //     vsync: this,
-  //     duration: const Duration(seconds: 5),
-  //   )..addListener(() {
-  //       setState(() {});
-  //     });
-  //   controller.repeat();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _changeImagePeriodically();
+  }
+
+  void _changeImagePeriodically() {
+    Future.delayed(Duration(seconds: 4), () {
+      setState(() {
+        index = (index + 1) % imageCarousel.length;
+      });
+      _changeImagePeriodically();
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,18 +91,56 @@ class _HomeDesktopState extends State<TemplateHome> {
                 ] else ...[
                   menuMobile(context, scaffoldKey, swidth),
                 ],
-                Stack(children: [
-                  Container(
-                      width: swidth,
-                      constraints: BoxConstraints(maxHeight: 660),
-                      child: Image.asset("assets/images/team.gif",
-                          fit: BoxFit.cover)),
-                  LinearProgressIndicator(
-                    minHeight: 5,
-                    backgroundColor: onSecondary,
-                    // value: controller.value,
-                  ),
-                ]),
+                Stack(
+                  children: [
+                    // Container(
+                    //   //   constraints: BoxConstraints(maxHeight: 660, minWidth: swidth),
+                    //   //   child: Image.asset("assets/images/team.gif", fit: BoxFit.cover,)
+                    //   child: ImageSlideshow(
+                    //       // width: swidth,
+                    //       height: 660,
+                    //       initialPage: 0,
+                    //       // indicatorColor: CoresPersonalizadas.azulObama,
+                    //       // indicatorBackgroundColor: Colors.grey,
+                    //       onPageChanged: (value) {},
+                    //       autoPlayInterval: 3600,
+                    //       isLoop: true,
+                    //       children: [
+                    //         for (int i = 0; i < imageCarousel.length; i++) ...{
+                    //           Image.asset(
+                    //             imageCarousel[i],
+                    //             fit: BoxFit.cover,
+                    //           ),
+                    //         },
+                    //       ]),
+                    // ),
+                    // Image.asset("assets/images/team.gif", fit: BoxFit.cover),
+                    Stack(
+                      children: [
+                        Container(
+                            constraints: BoxConstraints(
+                                maxHeight: 660, minWidth: swidth),
+                            child: Image.asset(
+                              imageCarousel[(index + 1) % imageCarousel.length],
+                              fit: BoxFit.cover,
+                            )),
+                        // },
+                        Container(
+                            constraints: BoxConstraints(
+                                maxHeight: 660, minWidth: swidth),
+                            child: Image.asset(
+                              imageCarousel[index],
+                              fit: BoxFit.cover,
+                            ))
+                      ],
+                    ),
+                    // LinearProgressIndicator(
+                    //   minHeight: 5,
+                    //   backgroundColor: onSecondary,
+                    //   value: controller.value,
+                    // ),
+                  ],
+                ),
                 ...widget.children,
                 Carousel(swidth),
                 Footer(swidth),

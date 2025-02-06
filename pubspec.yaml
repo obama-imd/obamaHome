@@ -111,17 +111,14 @@ flutter:
     - assets/images/img.jpg
     - assets/images/img2.jpg
     - assets/images/test.png
-    - assets/images/client.jpg
     - assets/images/ufrn.png
     - assets/images/imd.png
     - assets/images/remne.jpg
-    - assets/images/prod.jpg
     - assets/images/i1.png
     - assets/images/i2.png
     - assets/images/i3.png
     - assets/images/i4.png
     - assets/images/gilfe.png
-    - assets/images/animate.gif
     - assets/images/ppgite.png
     - assets/images/nopic.jpg
     - assets/images/AnaCarolina.jpeg
@@ -154,6 +151,9 @@ flutter:
     - assets/images/icon_writing.png
     - assets/images/icon_search.png
     - assets/images/footer.png
+    - assets/images/slider1.jpg
+    - assets/images/slider2.jpg
+    - assets/images/slider3.jpg
     - assets/images/team.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
