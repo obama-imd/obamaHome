@@ -37,6 +37,8 @@ class _TemplateHomeState extends State<TemplateHome>
   @override
   void initState() {
     super.initState();
+
+    controller = AnimationController(vsync: this);
     _changeImagePeriodically();
   }
 
@@ -45,6 +47,10 @@ class _TemplateHomeState extends State<TemplateHome>
       setState(() {
         index = (index + 1) % imageCarousel.length;
       });
+      controller = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 4),
+      )..forward();
       _changeImagePeriodically();
     });
   }
@@ -124,21 +130,25 @@ class _TemplateHomeState extends State<TemplateHome>
                               imageCarousel[(index + 1) % imageCarousel.length],
                               fit: BoxFit.cover,
                             )),
-                        // },
                         Container(
                             constraints: BoxConstraints(
                                 maxHeight: 660, minWidth: swidth),
                             child: Image.asset(
                               imageCarousel[index],
                               fit: BoxFit.cover,
-                            ))
+                            )),
+                        AnimatedBuilder(
+                          animation: controller,
+                          builder: (context, child) {
+                            return LinearProgressIndicator(
+                              minHeight: 5,
+                              backgroundColor: onSecondary,
+                              value: controller.value,
+                            );
+                          },
+                        ),
                       ],
                     ),
-                    // LinearProgressIndicator(
-                    //   minHeight: 5,
-                    //   backgroundColor: onSecondary,
-                    //   value: controller.value,
-                    // ),
                   ],
                 ),
                 ...widget.children,
