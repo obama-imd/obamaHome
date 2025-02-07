@@ -39,19 +39,25 @@ List<AccordionItem> accordionItems = [
 ];
 
 List<String> LeaderNames = [
-  "Dennys Leite Maia",
+  "Dennys Leite Maia"
   // "Nelson Ion de Oliveira",
 ];
 
 List<String> LeaderImgs = [
-  "assets/images/DennysLeite.jpg",
+  "assets/images/DennysLeite.jpg"
   // "assets/images/nelson.jpg",
 ];
 
 List<String> LeaderLink = [
-  "http://lattes.cnpq.br/4047293288281493",
+  "http://lattes.cnpq.br/4047293288281493"
   // "assets/images/nelson.jpg",
 ];
+
+final List<String> LeaderJobs = [
+  'Professor'
+];
+
+final List<String> LeaderSummaries = ['UFRN'];
 
 List<String> staffNames = [
   "Amanda Maria",
@@ -69,7 +75,7 @@ List<String> staffNames = [
   "Ramon Jales",
   "Roberia",
   "Sara Silva",
-  "Sarah Ribeiro",
+  "Sarah Ribeiro"
 ];
 
 List<String> staffImgs = [
@@ -88,7 +94,46 @@ List<String> staffImgs = [
   "assets/images/RamonJales.jpg",
   "assets/images/Roberia.jpg",
   "assets/images/SaraSilva.jpg",
-  "assets/images/SarahRibeiro.jpeg",
+  "assets/images/SarahRibeiro.jpeg"
+];
+
+final List<String> staffJobs = [
+  'Estudante de Doutorado',
+  'Estudante',
+  'Estudante',
+  'Estudante',
+  'Professora',
+  'Pedagogo',
+  'Professora',
+  'Professor',
+  'Estudante',
+  'Estudante',
+  'Professora',
+  'Estudante',
+  'Estudante',
+  'Professora',
+  'Estudante',
+  'Estudante'
+  // 'Estudante de Graduação em TI',
+];
+
+final List<String> staffSummaries = [
+  'UFRN',
+  'UFRN',
+  'IMD/UFRN',
+  'IMD/UFRN',
+  'CENTRO DE EDUCAÇÃO/UFRN',
+  'Estudante de Mestrado (PPGITE/UFRN)',
+  '',
+  'UFRN',
+  'IMD/UFRN',
+  'IMD/UFRN',
+  '',
+  'UFRN',
+  'IMD/UFRN',
+  '',
+  'IMD/UFRN',
+  'UFRN'
 ];
 
 List<dynamic> staffLinks = [

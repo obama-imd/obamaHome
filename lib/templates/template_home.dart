@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:obamahome/components/drawer.dart';
 
 import '../../../../components/carousel.dart';
@@ -120,7 +119,6 @@ class _TemplateHomeState extends State<TemplateHome>
                     //         },
                     //       ]),
                     // ),
-                    // Image.asset("assets/images/team.gif", fit: BoxFit.cover),
                     Stack(
                       children: [
                         Container(
