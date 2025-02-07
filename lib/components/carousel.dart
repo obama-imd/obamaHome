@@ -43,7 +43,7 @@ class CarouselElements extends StatelessWidget {
       Container(
           padding: const EdgeInsets.only(left: 20),
           height: 120,
-          width: swidth > 760 ? 760 : swidth,
+          width: swidth > 760 ? 760 : swidth - 160,
           child: ListView(children: [
             Text(nameList, style: textTheme.displayMedium),
             Container(height: 10),
@@ -56,6 +56,14 @@ class CarouselElements extends StatelessWidget {
 }
 
 class ClipTrapezoid extends CustomClipper<Path> {
+  final double multiplyFactor1;
+  final double multiplyFactor2;
+
+  ClipTrapezoid(
+      {super.reclip,
+      required this.multiplyFactor1,
+      required this.multiplyFactor2});
+
   @override
   Path getClip(Size size) {
     double width = size.width;
@@ -64,8 +72,8 @@ class ClipTrapezoid extends CustomClipper<Path> {
     Path path = Path();
 
     path.moveTo(0, 0);
-    path.lineTo(width*.7, 0);
-    path.lineTo(width*.4, height);
+    path.lineTo(width * multiplyFactor1, 0);
+    path.lineTo(width * multiplyFactor2, height);
     path.lineTo(0, height);
     path.close();
 
@@ -91,6 +99,19 @@ class Carousel extends StatelessWidget {
     'assets/images/ppgite.png'
   ];
 
+  final List<String> texts = [
+    'Quem faz a Plataforma OBAMA acontecer?',
+    'Conheça os membros da nossa equipe',
+    'QUER LEVAR A OBAMA PARA SUA ESCOLA?',
+    'Entre em contato para solicitar formações ou sugerir material para a Plataforma OBAMA.',
+    'FALE CONOSCO'
+  ];
+
+  final List<String> images = [
+    'assets/images/slider3.jpg',
+    'assets/images/img2.jpg',
+  ];
+
   final List<double> partnersPadding = [24, 30, 0, 25, 0];
 
   @override
@@ -106,15 +127,15 @@ class Carousel extends StatelessWidget {
                   Container(
                       width: swidth,
                       height: 740,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/images/slider3.jpg'),
+                            image: AssetImage(images[0]),
                             fit: BoxFit.cover),
                       )),
                   ClipPath(
-                    clipper: ClipTrapezoid(),
-                    child: Container(color: Color.fromRGBO(0, 0, 0, .7))
-                  ),
+                      clipper: ClipTrapezoid(
+                          multiplyFactor1: .7, multiplyFactor2: .4),
+                      child: Container(color: Color.fromRGBO(0, 0, 0, .7))),
                 ]),
                 Center(
                   child: Container(
@@ -125,20 +146,19 @@ class Carousel extends StatelessWidget {
                           children: [
                             Container(height: 140),
                             Container(
-                                child: Text(
-                                    'Quem faz a Plataforma OBAMA acontecer?',
+                                child: Text(texts[0],
                                     style: textTheme.labelMedium)),
                             Container(
                                 padding: const EdgeInsets.only(top: 15),
                                 child: Text(
-                                  'Conheça os membros da nossa equipe',
+                                  texts[1],
                                   style: textTheme.displaySmall,
                                 )),
                             Container(height: 20),
                             SizedBox(
                                 height: 5.0,
                                 width: 82.0,
-                                child: Image.asset('assets/images/img2.jpg',
+                                child: Image.asset(images[1],
                                     fit: BoxFit.cover)),
                             SizedBox(height: 40, width: swidth),
                             ImageSlideshow(
@@ -202,12 +222,10 @@ class Carousel extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                      'QUER LEVAR A OBAMA PARA SUA ESCOLA?',
+                                                  Text(texts[2],
                                                       style: textTheme
                                                           .labelMedium),
-                                                  Text(
-                                                      'Entre em contato para solicitar formações ou sugerir material para a Plataforma OBAMA.',
+                                                  Text(texts[3],
                                                       style: textTheme
                                                           .displayMedium)
                                                 ])),
@@ -226,7 +244,7 @@ class Carousel extends StatelessWidget {
                                             ),
                                             onPressed: openContactUsForm,
                                             child: Text(
-                                              'FALE CONOSCO',
+                                              texts[4],
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
@@ -273,27 +291,32 @@ class Carousel extends StatelessWidget {
               width: swidth,
               child:
                   Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-                Column(children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.only(top: 50),
-                      height: 650,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/slider3.png'),
-                            fit: BoxFit.cover),
-                      ))
-                ]),
+                Column(
+                  children: [
+                    Stack(children: [
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: const EdgeInsets.only(top: 50),
+                          height: 650,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(images[0]),
+                                fit: BoxFit.cover),
+                          )),
+                      Container(
+                          height: 650, color: Color.fromRGBO(0, 0, 0, .7)),
+                    ]),
+                  ],
+                ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Container(height: 40),
                   Container(
                       padding: const EdgeInsets.only(left: 40, top: 50),
-                      child: Text('Quem faz a Plataforma OBAMA acontecer?',
-                          style: textTheme.displayLarge)),
+                      child: Text(texts[0], style: textTheme.displayLarge)),
                   Container(
                       padding: const EdgeInsets.only(top: 15, left: 40),
                       child: Text(
-                        'Conheça os membros da nossa equipe',
+                        texts[1],
                         style: textTheme.displaySmall,
                       )),
                   Container(height: 20),
@@ -302,7 +325,7 @@ class Carousel extends StatelessWidget {
                     SizedBox(
                         height: 5.0,
                         width: 82.0,
-                        child: Image.asset('assets/images/img2.jpg',
+                        child: Image.asset(images[1],
                             fit: BoxFit.cover)),
                   ]),
                   // SizedBox(height: 20, width: swidth),
@@ -363,11 +386,9 @@ class Carousel extends StatelessWidget {
                                         CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                          'QUER LEVAR A OBAMA PARA SUA ESCOLA?',
+                                      Text(texts[2],
                                           style: textTheme.displayMedium),
-                                      Text(
-                                          'Entre em contato para solicitar formações ou sugerir material para a Plataforma OBAMA.',
+                                      Text(texts[3],
                                           style: textTheme.displaySmall)
                                     ]))
                           ]),
@@ -383,7 +404,7 @@ class Carousel extends StatelessWidget {
                               ),
                               onPressed: openContactUsForm,
                               child: Text(
-                                'FALE CONOSCO',
+                                texts[4],
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,

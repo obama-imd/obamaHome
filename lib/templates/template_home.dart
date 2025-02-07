@@ -36,7 +36,6 @@ class _TemplateHomeState extends State<TemplateHome>
   @override
   void initState() {
     super.initState();
-
     controller = AnimationController(vsync: this);
     _changeImagePeriodically();
   }
@@ -93,11 +92,7 @@ class _TemplateHomeState extends State<TemplateHome>
                                 itemValues: getItemValues(),
                                 searchAvailable: true),
                           ])),
-                ] else ...[
-                  menuMobile(context, scaffoldKey, swidth),
-                ],
-                Stack(
-                  children: [
+                  Stack(children: [
                     // Container(
                     //   //   constraints: BoxConstraints(maxHeight: 660, minWidth: swidth),
                     //   //   child: Image.asset("assets/images/team.gif", fit: BoxFit.cover,)
@@ -147,8 +142,36 @@ class _TemplateHomeState extends State<TemplateHome>
                         ),
                       ],
                     ),
-                  ],
-                ),
+                  ]),
+                ] else ...[
+                  menuMobile(context, scaffoldKey, swidth),
+                ],
+                Stack(children: [
+                  Stack(children: [
+                    Image.asset(
+                      imageCarousel[(index + 1) % imageCarousel.length],
+                      fit: BoxFit.cover,
+                      height: 250,
+                      width: swidth,
+                    ),
+                    Image.asset(
+                      imageCarousel[index],
+                      fit: BoxFit.cover,
+                      height: 250,
+                      width: swidth,
+                    ),
+                  ]),
+                  AnimatedBuilder(
+                    animation: controller,
+                    builder: (context, child) {
+                      return LinearProgressIndicator(
+                        minHeight: 5,
+                        backgroundColor: onSecondary,
+                        value: controller.value,
+                      );
+                    },
+                  ),
+                ]),
                 ...widget.children,
                 Carousel(swidth),
                 Footer(swidth),
