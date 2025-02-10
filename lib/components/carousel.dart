@@ -86,10 +86,16 @@ class ClipTrapezoid extends CustomClipper<Path> {
   }
 }
 
-class Carousel extends StatelessWidget {
+class Carousel extends StatefulWidget {
   final double swidth;
 
-  Carousel(this.swidth, {super.key});
+  Carousel(this.swidth, {Key? key}) : super(key: key);
+  @override
+  State<Carousel> createState() => CarouselState();
+}
+
+class CarouselState extends State<Carousel> {
+  late PageController _pageController;
 
   final List<String> partnersLogo = [
     'assets/images/ufrn.png',
@@ -108,29 +114,52 @@ class Carousel extends StatelessWidget {
   ];
 
   final List<String> images = [
-    'assets/images/slider3.jpg',
+    'assets/images/slider1.jpg',
     'assets/images/img2.jpg',
   ];
 
   final List<double> partnersPadding = [24, 30, 0, 25, 0];
 
   @override
+  void initState() {
+    // _pageController = PageController(
+    //   initialPage: 0,
+    // );
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
+      // PageController _pageController = PageController(initialPage: 0);
+
+
+  // void changeImage(int sumValue) {
+  //   setState(() {
+  //     _pageController.initialPage = (_pageController.initialPage + sumValue) %
+  //         (LeaderImgs.length + staffImgs.length);
+  //   });
+  // }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (swidth > 1300) ...[
+        if (widget.swidth > 1300) ...[
           Container(
               height: 875,
-              width: swidth,
+              width: widget.swidth,
               child: Stack(children: <Widget>[
                 Stack(children: [
                   Container(
-                      width: swidth,
+                      width: widget.swidth,
                       height: 740,
                       decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage(images[0]),
-                            fit: BoxFit.cover),
+                            image: AssetImage(images[0]), fit: BoxFit.cover),
                       )),
                   ClipPath(
                       clipper: ClipTrapezoid(
@@ -158,16 +187,16 @@ class Carousel extends StatelessWidget {
                             SizedBox(
                                 height: 5.0,
                                 width: 82.0,
-                                child: Image.asset(images[1],
-                                    fit: BoxFit.cover)),
-                            SizedBox(height: 40, width: swidth),
+                                child:
+                                    Image.asset(images[1], fit: BoxFit.cover)),
+                            SizedBox(height: 40, width: widget.swidth),
                             ImageSlideshow(
-                                width: swidth,
+                                width: widget.swidth,
                                 height: 240,
                                 initialPage: 0,
                                 indicatorColor: CoresPersonalizadas.azulObama,
                                 indicatorBackgroundColor: Colors.grey,
-                                onPageChanged: (value) {},
+                                // onPageChanged: (value) {},
                                 autoPlayInterval: 3500,
                                 isLoop: true,
                                 children: [
@@ -175,7 +204,7 @@ class Carousel extends StatelessWidget {
                                       i < LeaderNames.length;
                                       i++) ...{
                                     CarouselElements(
-                                        swidth: swidth,
+                                        swidth: widget.swidth,
                                         nameList: LeaderNames[i],
                                         imgList: LeaderImgs[i],
                                         jobList: LeaderJobs[i],
@@ -187,7 +216,7 @@ class Carousel extends StatelessWidget {
                                       i < staffNames.length;
                                       i++) ...{
                                     CarouselElements(
-                                        swidth: swidth,
+                                        swidth: widget.swidth,
                                         nameList: staffNames[i],
                                         imgList: staffImgs[i],
                                         jobList: staffJobs[i],
@@ -202,7 +231,7 @@ class Carousel extends StatelessWidget {
                                   child: Container(
                                       color: CoresPersonalizadas.azulObama,
                                       height: 150,
-                                      width: swidth * 0.9 + 40,
+                                      width: widget.swidth * 0.9 + 40,
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 30),
                                       child: Row(children: [
@@ -261,6 +290,23 @@ class Carousel extends StatelessWidget {
                             ),
                           ])),
                 ),
+                // Container(
+                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                //   height: 250,
+                //   child: Row(
+                //       crossAxisAlignment: CrossAxisAlignment.center,
+                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //       children: [
+                //         InkWell(
+                //             onTap: () => changeImage(1),
+                //             child: Icon(Icons.arrow_back_ios,
+                //                 color: background, size: 30)),
+                //         InkWell(
+                //             onTap: () => changeImage(-1),
+                //             child: Icon(Icons.arrow_forward_ios,
+                //                 color: background, size: 30)),
+                //       ]),
+                // ),
               ])),
           Container(
             constraints: BoxConstraints(maxWidth: 1200),
@@ -288,7 +334,7 @@ class Carousel extends StatelessWidget {
         ] else ...[
           SizedBox(
               height: 740,
-              width: swidth,
+              width: widget.swidth,
               child:
                   Stack(alignment: Alignment.bottomCenter, children: <Widget>[
                 Column(
@@ -325,12 +371,11 @@ class Carousel extends StatelessWidget {
                     SizedBox(
                         height: 5.0,
                         width: 82.0,
-                        child: Image.asset(images[1],
-                            fit: BoxFit.cover)),
+                        child: Image.asset(images[1], fit: BoxFit.cover)),
                   ]),
                   // SizedBox(height: 20, width: swidth),
                   ImageSlideshow(
-                      width: swidth,
+                      width: widget.swidth,
                       height: 210,
                       initialPage: 0,
                       indicatorColor: CoresPersonalizadas.azulObama,
@@ -341,7 +386,7 @@ class Carousel extends StatelessWidget {
                       children: [
                         for (int i = 0; i < LeaderNames.length; i++) ...{
                           CarouselElements(
-                              swidth: swidth,
+                              swidth: widget.swidth,
                               nameList: LeaderNames[i],
                               imgList: LeaderImgs[i],
                               jobList: LeaderJobs[i],
@@ -351,7 +396,7 @@ class Carousel extends StatelessWidget {
                         },
                         for (int i = 0; i < staffNames.length; i++) ...{
                           CarouselElements(
-                              swidth: swidth,
+                              swidth: widget.swidth,
                               nameList: staffNames[i],
                               imgList: staffImgs[i],
                               jobList: staffJobs[i],
@@ -364,14 +409,14 @@ class Carousel extends StatelessWidget {
                 Container(
                     color: CoresPersonalizadas.azulObama,
                     height: 210,
-                    width: swidth * 0.95,
+                    width: widget.swidth * 0.95,
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(children: [
                             // Container(width: 15),
                             SizedBox(
-                                width: swidth * 0.15,
+                                width: widget.swidth * 0.15,
                                 height: 100,
                                 child: Icon(
                                   Icons.phone,
@@ -379,7 +424,7 @@ class Carousel extends StatelessWidget {
                                   color: background,
                                 )),
                             SizedBox(
-                                width: swidth * 0.75,
+                                width: widget.swidth * 0.75,
                                 // height: 100,
                                 child: Column(
                                     crossAxisAlignment:
@@ -392,7 +437,7 @@ class Carousel extends StatelessWidget {
                                           style: textTheme.displaySmall)
                                     ]))
                           ]),
-                          Container(width: swidth * 0.25, height: 10),
+                          Container(width: widget.swidth * 0.25, height: 10),
                           TextButton(
                               style: ButtonStyle(
                                 fixedSize:
@@ -418,9 +463,9 @@ class Carousel extends StatelessWidget {
                               )),
                         ])),
               ])),
-          SizedBox(width: swidth * 0.9, height: 40),
+          SizedBox(width: widget.swidth * 0.9, height: 40),
           SizedBox(
-              width: swidth * 0.8,
+              width: widget.swidth * 0.8,
               child: Center(
                   child: Column(children: [
                 for (int i = 0; i < partnersLogo.length; i++) ...{

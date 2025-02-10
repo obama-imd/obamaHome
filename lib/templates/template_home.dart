@@ -53,6 +53,12 @@ class _TemplateHomeState extends State<TemplateHome>
     });
   }
 
+  void changeImage(int sumValue) {
+    setState(() {
+      index = (index + sumValue) % imageCarousel.length;
+    });
+  }
+
   @override
   void dispose() {
     controller.dispose();
@@ -93,27 +99,6 @@ class _TemplateHomeState extends State<TemplateHome>
                                 searchAvailable: true),
                           ])),
                   Stack(children: [
-                    // Container(
-                    //   //   constraints: BoxConstraints(maxHeight: 660, minWidth: swidth),
-                    //   //   child: Image.asset("assets/images/team.gif", fit: BoxFit.cover,)
-                    //   child: ImageSlideshow(
-                    //       // width: swidth,
-                    //       height: 660,
-                    //       initialPage: 0,
-                    //       // indicatorColor: CoresPersonalizadas.azulObama,
-                    //       // indicatorBackgroundColor: Colors.grey,
-                    //       onPageChanged: (value) {},
-                    //       autoPlayInterval: 3600,
-                    //       isLoop: true,
-                    //       children: [
-                    //         for (int i = 0; i < imageCarousel.length; i++) ...{
-                    //           Image.asset(
-                    //             imageCarousel[i],
-                    //             fit: BoxFit.cover,
-                    //           ),
-                    //         },
-                    //       ]),
-                    // ),
                     Stack(
                       children: [
                         Container(
@@ -129,6 +114,23 @@ class _TemplateHomeState extends State<TemplateHome>
                                 maxHeight: 660, minWidth: swidth),
                             child: Image.asset(imageCarousel[index],
                                 fit: BoxFit.cover, height: 660)),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          height: 660,
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                    onTap: () => changeImage(1),
+                                    child: Icon(Icons.arrow_back_ios,
+                                        color: background, size: 40)),
+                                InkWell(
+                                    onTap: () => changeImage(-1),
+                                    child: Icon(Icons.arrow_forward_ios,
+                                        color: background, size: 40)),
+                              ]),
+                        ),
                         AnimatedBuilder(
                           animation: controller,
                           builder: (context, child) {
@@ -159,6 +161,23 @@ class _TemplateHomeState extends State<TemplateHome>
                         width: swidth,
                       ),
                     ]),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      height: 250,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                                onTap: () => changeImage(1),
+                                child: Icon(Icons.arrow_back_ios,
+                                    color: background, size: 30)),
+                            InkWell(
+                                onTap: () => changeImage(-1),
+                                child: Icon(Icons.arrow_forward_ios,
+                                    color: background, size: 30)),
+                          ]),
+                    ),
                     AnimatedBuilder(
                       animation: controller,
                       builder: (context, child) {
