@@ -132,7 +132,7 @@ class _SearchDialogState extends State<SearchDialog> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 20, top: 25),
+                                    const EdgeInsets.only(top: 25),
                                 child: Text(
                                     "Consulte os OA do nosso catálogo",
                                     style: textTheme.displaySmall),
