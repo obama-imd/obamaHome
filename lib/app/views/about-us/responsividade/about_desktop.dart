@@ -175,11 +175,11 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
             padding: paddingValues("sideStaff", context),
             child: ResponsiveGridRow(children: [
               ResponsiveGridCol(lg: 3, child: Spacer()),
-              for (int i = 0; i < LeaderNames.length; i++) ...{
+              for (int i = 0; i < LeadersTeam.length; i++) ...{
                 ResponsiveGridCol(
                     lg: 6,
                     child: StaffCard(
-                        LeaderNames[i], LeaderImgs[i], LeaderLink[i], swidth))
+                        LeadersTeam[i].name, LeadersTeam[i].image, LeadersTeam[i].link, swidth))
               },
               ResponsiveGridCol(lg: 3, child: Spacer()),
             ]),
@@ -194,13 +194,13 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
             child: Container(),
           ),
           ResponsiveGridRow(children: [
-            for (int i = 0; i < staffNames.length; i++) ...{
+            for (int i = 0; i < StaffTeam.length; i++) ...{
               ResponsiveGridCol(
                 lg: 3,
                 md: 6,
                 xs: 12,
                 child: StaffCard(
-                    staffNames[i], staffImgs[i], staffLinks[i], swidth),
+                    StaffTeam[i].name, StaffTeam[i].image, StaffTeam[i].link, swidth),
               )
             }
           ])

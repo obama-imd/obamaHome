@@ -65,6 +65,7 @@ dependencies:
   get: ^4.6.6
   flutter_widget_from_html_core: ^0.15.2
   fwfh_webview: ^0.15.3
+  carousel_slider: ^5.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

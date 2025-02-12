@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -134,15 +134,7 @@ class CarouselState extends State<Carousel> {
     super.dispose();
   }
 
-      // PageController _pageController = PageController(initialPage: 0);
-
-
-  // void changeImage(int sumValue) {
-  //   setState(() {
-  //     _pageController.initialPage = (_pageController.initialPage + sumValue) %
-  //         (LeaderImgs.length + staffImgs.length);
-  //   });
-  // }
+  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -190,41 +182,51 @@ class CarouselState extends State<Carousel> {
                                 child:
                                     Image.asset(images[1], fit: BoxFit.cover)),
                             SizedBox(height: 40, width: widget.swidth),
-                            ImageSlideshow(
-                                width: widget.swidth,
-                                height: 240,
-                                initialPage: 0,
-                                indicatorColor: CoresPersonalizadas.azulObama,
-                                indicatorBackgroundColor: Colors.grey,
-                                // onPageChanged: (value) {},
-                                autoPlayInterval: 3500,
-                                isLoop: true,
-                                children: [
-                                  for (int i = 0;
-                                      i < LeaderNames.length;
-                                      i++) ...{
-                                    CarouselElements(
-                                        swidth: widget.swidth,
-                                        nameList: LeaderNames[i],
-                                        imgList: LeaderImgs[i],
-                                        jobList: LeaderJobs[i],
-                                        summaryList: LeaderSummaries[i],
-                                        imgWidth: 150,
-                                        imgHeight: 150),
-                                  },
-                                  for (int i = 0;
-                                      i < staffNames.length;
-                                      i++) ...{
-                                    CarouselElements(
-                                        swidth: widget.swidth,
-                                        nameList: staffNames[i],
-                                        imgList: staffImgs[i],
-                                        jobList: staffJobs[i],
-                                        summaryList: staffSummaries[i],
-                                        imgWidth: 150,
-                                        imgHeight: 150),
-                                  }
-                                ]),
+                            Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                CarouselSlider(
+                                  items: (LeadersTeam + StaffTeam)
+                                      .map((member) => Container(
+                                            child: CarouselElements(
+                                                swidth: widget.swidth,
+                                                nameList: member.name,
+                                                imgList: member.image,
+                                                jobList: member.job,
+                                                summaryList: member.summary,
+                                                imgWidth: 150,
+                                                imgHeight: 150),
+                                          ))
+                                      .toList(),
+                                  options: CarouselOptions(
+                                      enlargeCenterPage: true,
+                                      autoPlay: true,
+                                      viewportFraction: 1,
+                                      height: 200),
+                                  carouselController: _controller,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: InkWell(
+                                        onTap: () => _controller.previousPage(),
+                                        child: Icon(Icons.arrow_back_ios,
+                                            color: background, size: 30),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: InkWell(
+                                        onTap: () => _controller.nextPage(),
+                                        child: Icon(Icons.arrow_forward_ios,
+                                            color: background, size: 30),
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
                             Padding(
                               padding: const EdgeInsets.only(top: 135.0),
                               child: Center(
@@ -290,23 +292,6 @@ class CarouselState extends State<Carousel> {
                             ),
                           ])),
                 ),
-                // Container(
-                //   padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                //   height: 250,
-                //   child: Row(
-                //       crossAxisAlignment: CrossAxisAlignment.center,
-                //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //       children: [
-                //         InkWell(
-                //             onTap: () => changeImage(1),
-                //             child: Icon(Icons.arrow_back_ios,
-                //                 color: background, size: 30)),
-                //         InkWell(
-                //             onTap: () => changeImage(-1),
-                //             child: Icon(Icons.arrow_forward_ios,
-                //                 color: background, size: 30)),
-                //       ]),
-                // ),
               ])),
           Container(
             constraints: BoxConstraints(maxWidth: 1200),
@@ -374,37 +359,54 @@ class CarouselState extends State<Carousel> {
                         child: Image.asset(images[1], fit: BoxFit.cover)),
                   ]),
                   // SizedBox(height: 20, width: swidth),
-                  ImageSlideshow(
-                      width: widget.swidth,
-                      height: 210,
-                      initialPage: 0,
-                      indicatorColor: CoresPersonalizadas.azulObama,
-                      indicatorBackgroundColor: background,
-                      onPageChanged: (value) {},
-                      autoPlayInterval: 3500,
-                      isLoop: true,
-                      children: [
-                        for (int i = 0; i < LeaderNames.length; i++) ...{
-                          CarouselElements(
-                              swidth: widget.swidth,
-                              nameList: LeaderNames[i],
-                              imgList: LeaderImgs[i],
-                              jobList: LeaderJobs[i],
-                              summaryList: LeaderSummaries[i],
-                              imgWidth: 120,
-                              imgHeight: 120),
-                        },
-                        for (int i = 0; i < staffNames.length; i++) ...{
-                          CarouselElements(
-                              swidth: widget.swidth,
-                              nameList: staffNames[i],
-                              imgList: staffImgs[i],
-                              jobList: staffJobs[i],
-                              summaryList: staffSummaries[i],
-                              imgWidth: 120,
-                              imgHeight: 120),
-                        }
-                      ])
+                  Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      CarouselSlider(
+                        items: (LeadersTeam + StaffTeam)
+                            .map((member) => Container(
+                                  child: CarouselElements(
+                                      swidth: widget.swidth,
+                                      nameList: member.name,
+                                      imgList: member.image,
+                                      jobList: member.job,
+                                      summaryList: member.summary,
+                                      imgWidth: 120,
+                                      imgHeight: 120),
+                                ))
+                            .toList(),
+                        options: CarouselOptions(
+                            enlargeCenterPage: true,
+                            aspectRatio: 4/3,
+                            autoPlay: true,
+                            viewportFraction: 1,
+                            height: 200),
+                        carouselController: _controller,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Flexible(
+                              child: InkWell(
+                                onTap: () => _controller.previousPage(),
+                                child: Icon(Icons.arrow_back_ios,
+                                    color: background, size: 35),
+                              ),
+                            ),
+                            Flexible(
+                              child: InkWell(
+                                onTap: () => _controller.nextPage(),
+                                child: Icon(Icons.arrow_forward_ios,
+                                    color: background, size: 35),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ]),
                 Container(
                     color: CoresPersonalizadas.azulObama,

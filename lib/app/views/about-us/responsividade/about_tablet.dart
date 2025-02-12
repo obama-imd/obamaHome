@@ -207,15 +207,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
                   child: ResponsiveGridRow(children: [
                     ResponsiveGridCol(lg: 3, child: Spacer()),
-                    for (int i = 0; i < LeaderNames.length; i++) ...{
+                    for (int i = 0; i < LeadersTeam.length; i++) ...{
                       ResponsiveGridCol(
                           lg: 3,
                           xs: 12,
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
-                            child: StaffCard(LeaderNames[i], LeaderImgs[i],
-                                LeaderLink[i], swidth),
+                            child: StaffCard(LeadersTeam[i].name, LeadersTeam[i].image,
+                                LeadersTeam[i].link, swidth),
                           ))
                     },
                     ResponsiveGridCol(lg: 3, child: Spacer()),
@@ -230,7 +230,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: swidth * 0.06),
                   child: ResponsiveGridRow(children: [
-                    for (int i = 0; i < staffNames.length; i++) ...{
+                    for (int i = 0; i < StaffTeam.length; i++) ...{
                       ResponsiveGridCol(
                           lg: 3,
                           md: 6,
@@ -238,8 +238,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 30, left: 10, right: 10),
-                            child: StaffCard(staffNames[i], staffImgs[i],
-                                staffLinks[i], swidth),
+                            child: StaffCard(StaffTeam[i].name, StaffTeam[i].image,
+                                StaffTeam[i].link, swidth),
                           ))
                     }
                   ]),

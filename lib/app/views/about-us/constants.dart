@@ -38,121 +38,128 @@ List<AccordionItem> accordionItems = [
   ),
 ];
 
-List<String> LeaderNames = [
-  "Dennys Leite Maia"
-  // "Nelson Ion de Oliveira",
+class TeamMembers {
+  String name;
+  String image;
+  String summary;
+  String link;
+  String job;
+
+  TeamMembers({
+    required this.name,
+    required this.image,
+    required this.summary,
+    required this.link,
+    required this.job,
+  });
+}
+
+List<TeamMembers> LeadersTeam = [
+  TeamMembers(
+      name: "Dennys Leite Maia",
+      image: "assets/images/DennysLeite.jpg",
+      summary: 'UFRN',
+      link: "http://lattes.cnpq.br/4047293288281493",
+      job: 'Professor'),
 ];
 
-List<String> LeaderImgs = [
-  "assets/images/DennysLeite.jpg"
-  // "assets/images/nelson.jpg",
-];
-
-List<String> LeaderLink = [
-  "http://lattes.cnpq.br/4047293288281493"
-  // "assets/images/nelson.jpg",
-];
-
-final List<String> LeaderJobs = [
-  'Professor'
-];
-
-final List<String> LeaderSummaries = ['UFRN'];
-
-List<String> staffNames = [
-  "Amanda Maria",
-  "Carol",
-  "Dênis Silva",
-  "Emanuel Kywal",
-  "Flávia Viana",
-  "Gabriel Barreto",
-  "Giluiza Catarina",
-  "Tonhaunm",
-  "Igor Rauan",
-  "Toshio",
-  "Malu",
-  "Mayara Cabral",
-  "Ramon Jales",
-  "Roberia",
-  "Sara Silva",
-  "Sarah Ribeiro"
-];
-
-List<String> staffImgs = [
-  "assets/images/AmandaMaria.jpg",
-  "assets/images/AnaCarolina.jpeg",
-  "assets/images/DenisSilva.jpg",
-  "assets/images/EmanuelKywal.jpg",
-  "assets/images/FláviaViana.jpg",
-  "assets/images/GabrielBarreto.png",
-  "assets/images/GiluizaCatarina.jpeg",
-  "assets/images/IgorAntonio.png",
-  "assets/images/IgorRauan.jpg",
-  "assets/images/LucasToshio.jpg",
-  "assets/images/MariaLuiza.jpg",
-  "assets/images/MayaraCabral.jpg",
-  "assets/images/RamonJales.jpg",
-  "assets/images/Roberia.jpg",
-  "assets/images/SaraSilva.jpg",
-  "assets/images/SarahRibeiro.jpeg"
-];
-
-final List<String> staffJobs = [
-  'Estudante de Doutorado',
-  'Estudante',
-  'Estudante',
-  'Estudante',
-  'Professora',
-  'Pedagogo',
-  'Professora',
-  'Professor',
-  'Estudante',
-  'Estudante',
-  'Professora',
-  'Estudante',
-  'Estudante',
-  'Professora',
-  'Estudante',
-  'Estudante'
-  // 'Estudante de Graduação em TI',
-];
-
-final List<String> staffSummaries = [
-  'UFRN',
-  'UFRN',
-  'IMD/UFRN',
-  'IMD/UFRN',
-  'CENTRO DE EDUCAÇÃO/UFRN',
-  'Estudante de Mestrado (PPGITE/UFRN)',
-  '',
-  'UFRN',
-  'IMD/UFRN',
-  'IMD/UFRN',
-  '',
-  'UFRN',
-  'IMD/UFRN',
-  '',
-  'IMD/UFRN',
-  'UFRN'
-];
-
-List<dynamic> staffLinks = [
-  "http://lattes.cnpq.br", //AmandaMaria
-  "http://lattes.cnpq.br/8468792235766788",
-  "http://lattes.cnpq.br/1242640850027706",
-  "http://lattes.cnpq.br/9974122442384650",
-  "http://lattes.cnpq.br", //FláviaViana
-  "http://lattes.cnpq.br/4849964111530414",
-  "http://lattes.cnpq.br", //GiluizaCatarina
-  "https://lattes.cnpq.br/7854426004893677",
-  "http://lattes.cnpq.br", //IgorRauan
-  "http://lattes.cnpq.br/8503176266222901",
-  "http://lattes.cnpq.br/1059686872506852",
-  "http://lattes.cnpq.br", //MayaraCabral
-  "http://lattes.cnpq.br/6055540143517758",
-  "http://lattes.cnpq.br/8019572036140851",
-  "http://lattes.cnpq.br", //SaraSilva
-  "http://lattes.cnpq.br/3278417411887579",
+List<TeamMembers> StaffTeam = [
+  TeamMembers(
+      name: "Amanda Maria",
+      image: "assets/images/AmandaMaria.jpg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Estudante de Doutorado"),
+  TeamMembers(
+      name: "Carol",
+      image: "assets/images/AnaCarolina.jpeg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br/8468792235766788",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Dênis Silva",
+      image: "assets/images/DenisSilva.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/1242640850027706",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Emanuel Kywal",
+      image: "assets/images/EmanuelKywal.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/9974122442384650",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Flávia Viana",
+      image: "assets/images/FláviaViana.jpg",
+      summary: "CENTRO DE EDUCAÇÃO/UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Professora"),
+  TeamMembers(
+      name: "Gabriel Barreto",
+      image: "assets/images/GabrielBarreto.png",
+      summary: "Estudante de Mestrado (PPGITE/UFRN)",
+      link: "http://lattes.cnpq.br/4849964111530414",
+      job: "Pedagogo"),
+  TeamMembers(
+      name: "Giluiza Catarina",
+      image: "assets/images/GiluizaCatarina.jpeg",
+      summary: "",
+      link: "http://lattes.cnpq.br",
+      job: "Professora"),
+  TeamMembers(
+      name: "Tonhaunm",
+      image: "assets/images/IgorAntonio.png",
+      summary: "UFRN",
+      link: "https://lattes.cnpq.br/7854426004893677",
+      job: "Professor"),
+  TeamMembers(
+      name: "Igor Rauan",
+      image: "assets/images/IgorRauan.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Toshio",
+      image: "assets/images/LucasToshio.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/8503176266222901",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Malu",
+      image: "assets/images/MariaLuiza.jpg",
+      summary: "",
+      link: "http://lattes.cnpq.br/1059686872506852",
+      job: "Professora"),
+  TeamMembers(
+      name: "Mayara Cabral",
+      image: "assets/images/MayaraCabral.jpg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Ramon Jales",
+      image: "assets/images/RamonJales.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/6055540143517758",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Roberia",
+      image: "assets/images/Roberia.jpg",
+      summary: "",
+      link: "http://lattes.cnpq.br/8019572036140851",
+      job: "Professora"),
+  TeamMembers(
+      name: "Sara Silva",
+      image: "assets/images/SaraSilva.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Sarah Ribeiro",
+      image: "assets/images/SarahRibeiro.jpeg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br/3278417411887579",
+      job: "Estudante"),
 ];
 
 List<String> grid1Title = [
