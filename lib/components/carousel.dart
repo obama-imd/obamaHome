@@ -45,7 +45,7 @@ class CarouselElements extends StatelessWidget {
       Container(
           padding: const EdgeInsets.only(left: 20),
           height: 120,
-          width: swidth > 1070 ? 1070 : swidth - 160,
+          width: swidth > 1070 ? 800 : swidth - 160,
           child: ListView(children: [
             Text(nameList, style: textTheme.displayMedium),
             Container(height: 10),
@@ -97,8 +97,6 @@ class Carousel extends StatefulWidget {
 }
 
 class CarouselState extends State<Carousel> {
-  late PageController _pageController;
-
   final List<String> partnersLogo = [
     'assets/images/ufrn.png',
     'assets/images/imd.png',
@@ -124,16 +122,7 @@ class CarouselState extends State<Carousel> {
 
   @override
   void initState() {
-    // _pageController = PageController(
-    //   initialPage: 0,
-    // );
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 
   final CarouselSliderController _controller = CarouselSliderController();

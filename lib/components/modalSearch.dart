@@ -71,8 +71,9 @@ class _SearchDialogState extends State<SearchDialog> {
                           width: 60,
                           height: 60,
                           child: Material(
-                            child: InkWell(child: Icon(FontAwesomeIcons.xmark, size: 18),
-                            onTap: () => Navigator.pop(context)),
+                            child: InkWell(
+                                child: Icon(FontAwesomeIcons.xmark, size: 18),
+                                onTap: () => Navigator.pop(context)),
                           )),
                     ],
                   ),
@@ -85,7 +86,7 @@ class _SearchDialogState extends State<SearchDialog> {
                             // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
-                                child: Container(                                 
+                                child: Container(
                                   width: searchBarWidth,
                                   child: TextField(
                                       style: TextStyle(
@@ -131,10 +132,8 @@ class _SearchDialogState extends State<SearchDialog> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 25),
-                                child: Text(
-                                    "Consulte os OA do nosso catálogo",
+                                padding: const EdgeInsets.only(top: 25),
+                                child: Text("Consulte os OA do nosso catálogo",
                                     style: textTheme.displaySmall),
                               ),
                             ],
