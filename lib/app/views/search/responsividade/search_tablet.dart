@@ -50,6 +50,9 @@ class _SearchTabletState extends State<SearchTablet> {
       ),
       SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
           widget.selectedPage, null),
+      SizedBox(
+        height: 65,
+      ),
     ]);
   }
 }

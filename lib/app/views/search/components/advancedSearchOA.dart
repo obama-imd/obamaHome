@@ -104,6 +104,23 @@ class OAFilterState extends State<OAFilters> {
     );
   }
 
+  void mainSearch() {
+    setState(() {
+      selectedNivelEnsino = nivelEnsinoRadioTextField!.selectedValue != null &&
+              nivelEnsinoRadioTextField!.selectedValue > 0
+          ? '${nivelEnsinoRadioTextField!.selectedValue}'
+          : '';
+      selectedTemaConteudo =
+          temaConteudoRadioTextField!.selectedValue != null &&
+                  temaConteudoRadioTextField!.selectedValue > 0
+              ? '${temaConteudoRadioTextField!.selectedValue}'
+              : '';
+      searchTerm = searchTextController.text;
+    });
+    final queryString = _buildQueryString();
+    widget.updateData(queryString);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -116,6 +133,7 @@ class OAFilterState extends State<OAFilters> {
           margin: const EdgeInsets.only(bottom: 50),
           child: TextField(
               controller: searchTextController,
+              onSubmitted: (value) => mainSearch(),
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -143,22 +161,8 @@ class OAFilterState extends State<OAFilters> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 mainButton(context, 'Busca Avançada', null, () {
-                  setState(() {
-                    selectedNivelEnsino =
-                        nivelEnsinoRadioTextField!.selectedValue != null &&
-                                nivelEnsinoRadioTextField!.selectedValue > 0
-                            ? '${nivelEnsinoRadioTextField!.selectedValue}'
-                            : '';
-                    selectedTemaConteudo =
-                        temaConteudoRadioTextField!.selectedValue != null &&
-                                temaConteudoRadioTextField!.selectedValue > 0
-                            ? '${temaConteudoRadioTextField!.selectedValue}'
-                            : '';
-                    searchTerm = searchTextController.text;
-                  });
-                  final queryString = _buildQueryString();
-                  widget.updateData(queryString);
-                  print(selectedNivelEnsino);
+                  mainSearch();
+                  // print(selectedNivelEnsino);
                 }),
               ],
             ),

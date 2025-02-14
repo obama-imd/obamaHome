@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,7 +28,9 @@ class CarouselElements extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(children: [
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
       Container(
           margin: const EdgeInsets.only(left: 40),
           height: imgHeight,
@@ -43,7 +45,7 @@ class CarouselElements extends StatelessWidget {
       Container(
           padding: const EdgeInsets.only(left: 20),
           height: 120,
-          width: swidth > 760 ? 760 : swidth - 160,
+          width: swidth > 1070 ? 1070 : swidth - 160,
           child: ListView(children: [
             Text(nameList, style: textTheme.displayMedium),
             Container(height: 10),

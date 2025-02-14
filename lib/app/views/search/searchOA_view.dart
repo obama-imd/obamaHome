@@ -123,6 +123,12 @@ class SearchPageState extends ConsumerState<SearchPage> {
   }
 }
 
+double calcRowNumbers(double number, double factor) {
+  print("check $number, ${number % factor}");
+  double newValue = number / factor;
+  return (newValue.ceil().toDouble());
+}
+
 class SearchPageView extends StatefulWidget {
   String termSearched;
   final String? queryParam;
@@ -166,17 +172,24 @@ class SearchDesktopState extends State<SearchPageView> {
             double rowNumbers = 0;
 
             if (widget.swidth < 460) {
-              rowNumbers = 12;
+              rowNumbers = searchResult.length.toDouble();
             } else if (widget.swidth >= 460 && widget.swidth < 680) {
-              rowNumbers = 8;
+              rowNumbers = calcRowNumbers(searchResult.length.toDouble(), 2);
+            } else if (widget.swidth >= 680 && widget.swidth < 900) {
+              rowNumbers = calcRowNumbers(searchResult.length.toDouble(), 3);
+            } else if (widget.swidth >= 900 && widget.swidth < 1120) {
+              rowNumbers = calcRowNumbers(searchResult.length.toDouble(), 4);
+            } else if (widget.swidth >= 1120 && widget.swidth < 1200) {
+              rowNumbers = calcRowNumbers(searchResult.length.toDouble(), 5);
             } else {
-              rowNumbers = 4;
+              rowNumbers = calcRowNumbers(searchResult.length.toDouble(), 3);
             }
 
             return Column(
               children: [
                 if (searchResult.isNotEmpty) ...{
                   Container(
+                      constraints: BoxConstraints(minHeight: 370),
                       height: (355 * (rowNumbers)),
                       child: ResponsiveGridList(
                         physics: NeverScrollableScrollPhysics(),

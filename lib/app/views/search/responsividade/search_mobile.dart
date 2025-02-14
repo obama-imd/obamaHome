@@ -51,6 +51,9 @@ class _SearchMobileState extends State<SearchMobile> {
         child: SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
             widget.selectedPage, null),
       ),
+       SizedBox(
+        height: 40,
+      ),
     ]);
   }
 }
