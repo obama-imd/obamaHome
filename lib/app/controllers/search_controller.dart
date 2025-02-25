@@ -9,7 +9,7 @@ import '../../utils/apiURL.dart';
 import '../models/pagination_oa_model.dart';
 
 Future<PaginationResponse?> fetchData(
-    String searchTerm, page, String? queryParams) async {
+    String searchTerm, int page, String? queryParams) async {
   var apiUrl =
       '${API_URL}/oa?page=${page}&size=12&sort=nome${searchTerm.isNotEmpty ? '&nome=$searchTerm' : ''}';
   if (queryParams != null && queryParams.isNotEmpty) {

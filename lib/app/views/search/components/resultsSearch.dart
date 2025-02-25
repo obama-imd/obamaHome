@@ -50,6 +50,8 @@ class SearchResultsState extends State<DisplaySearchResults> {
             int? totalPages = pagination.totalPages;
             int? currentPage = pagination.pageable.pageNumber;
 
+            print("right here => $totalPages, $endValue");
+
             widget.selectedPageIndex = currentPage;
 
             double rowNumbers = 0;
@@ -123,41 +125,43 @@ class SearchResultsState extends State<DisplaySearchResults> {
                           ),
                         ),
                         for (int i = startValue; i <= endValue; i++) ...{
-                          Container(
-                            width: 40,
-                            height: 40,
-                            margin: EdgeInsets.symmetric(horizontal: 5.0),
-                            decoration: BoxDecoration(
-                              color: widget.selectedPageIndex == i
-                                  ? primary
-                                  : null,
-                              border: Border.all(
-                                width: 1,
-                                color: Color.fromRGBO(225, 225, 225, 1.0),
+                          if (i < totalPages) ...{
+                            Container(
+                              width: 40,
+                              height: 40,
+                              margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              decoration: BoxDecoration(
+                                color: widget.selectedPageIndex == i
+                                    ? primary
+                                    : null,
+                                border: Border.all(
+                                  width: 1,
+                                  color: Color.fromRGBO(225, 225, 225, 1.0),
+                                ),
+                                borderRadius: BorderRadius.circular(5.0),
                               ),
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            child: InkWell(
-                              child: Center(
-                                child: Text((i + 1).toString(),
-                                    style: widget.selectedPageIndex == i
-                                        ? textTheme.displaySmall
-                                        : textTheme.bodySmall),
+                              child: InkWell(
+                                child: Center(
+                                  child: Text((i + 1).toString(),
+                                      style: widget.selectedPageIndex == i
+                                          ? textTheme.displaySmall
+                                          : textTheme.bodySmall),
+                                ),
+                                onTap: () {
+                                  if ((i) != currentPage) {
+                                    widget.selectedPage(i);
+                                    setState(() {
+                                      if (i >= 0 && i <= totalPages - 1) {
+                                        startValue = i - 1;
+                                        actualPage = i;
+                                        endValue = i + 1;
+                                      }
+                                    });
+                                  }
+                                },
                               ),
-                              onTap: () {
-                                if ((i) != currentPage) {
-                                  widget.selectedPage(i);
-                                  setState(() {
-                                    if (i > 0 && i < totalPages - 1) {
-                                      startValue = i - 1;
-                                      actualPage = i;
-                                      endValue = i + 1;
-                                    }
-                                  });
-                                }
-                              },
-                            ),
-                          )
+                            )
+                          }
                         },
                         Container(
                           width: 40,
