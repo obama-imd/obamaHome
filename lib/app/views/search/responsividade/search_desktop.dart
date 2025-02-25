@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import 'package:obamahome/app/views/search/components/advancedSearchOA.dart';
 
 import '../../../../utils/app_padding.dart';
+import '../components/resultsSearch.dart';
 
 class SearchDesktop extends StatefulWidget {
   String termSearched;
@@ -53,7 +53,7 @@ class _SearchDesktopState extends State<SearchDesktop> {
                 width: swidth > 1200 ? (1200 * .7) : (swidth * .7),
                 child: Column(
                   children: [
-                    SearchPageView(
+                    DisplaySearchResults(
                         widget.termSearched,
                         swidth,
                         widget.selectedPageIndex,

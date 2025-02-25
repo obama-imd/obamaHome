@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import '../../../../utils/app_padding.dart';
-import '../searchOA_view.dart';
+import '../components/resultsSearch.dart';
 
 class SearchMobile extends StatefulWidget {
   String termSearched;
@@ -48,7 +48,7 @@ class _SearchMobileState extends State<SearchMobile> {
       // ),
       Container(
         margin: paddingValues("sectionPadding", context),
-        child: SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
+        child: DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex,
             widget.selectedPage, null),
       ),
        SizedBox(

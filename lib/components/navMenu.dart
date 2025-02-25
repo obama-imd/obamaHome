@@ -3,7 +3,7 @@ import 'package:obamahome/components/librasTooltip.dart';
 import 'package:obamahome/components/menuClass.dart';
 import 'package:obamahome/components/modalSearch.dart';
 
-import '../app/views/search/searchOA_view.dart';
+import '../app/views/search/components/resultsSearch.dart';
 import '../utils/app_theme.dart';
 
 class NavMenu extends StatefulWidget {

@@ -120,7 +120,7 @@ List<TeamMembers> StaffTeam = [
       job: "Estudante"),
   TeamMembers(
       name: "Toshio",
-      image: "assets/images/LucasToshio.jpg",
+      image: "assets/images/LucasToshio.jpeg",
       summary: "IMD/UFRN",
       link: "http://lattes.cnpq.br/8503176266222901",
       job: "Estudante"),

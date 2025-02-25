@@ -1,10 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import '../../../../utils/app_padding.dart';
+import '../components/resultsSearch.dart';
 
 class SearchTablet extends StatefulWidget {
   String termSearched;
@@ -48,7 +48,7 @@ class _SearchTabletState extends State<SearchTablet> {
           // ),
         ]),
       ),
-      SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
+      DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex,
           widget.selectedPage, null),
       SizedBox(
         height: 65,
