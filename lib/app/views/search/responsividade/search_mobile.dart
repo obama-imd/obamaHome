@@ -10,7 +10,6 @@ class SearchMobile extends StatefulWidget {
   String termSearched;
   int selectedPageIndex;
   Function(void) updateData;
-  void Function(int) selectedPage;
   TextStyle titleStyle;
 
   SearchMobile(
@@ -18,7 +17,6 @@ class SearchMobile extends StatefulWidget {
       required this.termSearched,
       required this.selectedPageIndex,
       required this.updateData,
-      required this.selectedPage,
       required this.titleStyle})
       : super(key: key);
   @override
@@ -48,8 +46,7 @@ class _SearchMobileState extends State<SearchMobile> {
       // ),
       Container(
         margin: paddingValues("sectionPadding", context),
-        child: DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex,
-            widget.selectedPage, null),
+        child: DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex, null),
       ),
        SizedBox(
         height: 40,

@@ -15,7 +15,6 @@ class SearchDesktop extends StatefulWidget {
   int selectedPageIndex;
   Function(void) updateData;
   Function(String) updateDataFromAdvancedSearchPage;
-  void Function(int) selectedPage;
   TextStyle titleStyle;
 
   SearchDesktop({
@@ -24,7 +23,6 @@ class SearchDesktop extends StatefulWidget {
     required this.selectedPageIndex,
     required this.updateData,
     required this.updateDataFromAdvancedSearchPage,
-    required this.selectedPage,
     required this.titleStyle,
     required this.queryParams,
   });
@@ -57,7 +55,6 @@ class _SearchDesktopState extends State<SearchDesktop> {
                         widget.termSearched,
                         swidth,
                         widget.selectedPageIndex,
-                        widget.selectedPage,
                         widget.queryParams),
                   ],
                 ),

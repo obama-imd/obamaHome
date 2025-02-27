@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'package:get/get_state_manager/src/simple/g
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/searchDropdown.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
-
-// List<String> nivelEnsino = <String>['Todos'];
-// List<String> temaCurricular = <String>['Todos'];
-// List<String> tipo = <String>['Todos'];
-// List<String> descritor = <String>['Todos'];
 
 const List<String> tileTitle = <String>[
   'Selecione o nível de ensino',

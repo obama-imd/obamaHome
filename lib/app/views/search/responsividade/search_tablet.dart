@@ -10,7 +10,6 @@ class SearchTablet extends StatefulWidget {
   String termSearched;
   int selectedPageIndex;
   Function(void) updateData;
-  void Function(int) selectedPage;
   TextStyle titleStyle;
 
   SearchTablet(
@@ -18,7 +17,6 @@ class SearchTablet extends StatefulWidget {
       required this.termSearched,
       required this.selectedPageIndex,
       required this.updateData,
-      required this.selectedPage,
       required this.titleStyle})
       : super(key: key);
 
@@ -48,8 +46,7 @@ class _SearchTabletState extends State<SearchTablet> {
           // ),
         ]),
       ),
-      DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex,
-          widget.selectedPage, null),
+      DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex, null),
       SizedBox(
         height: 65,
       ),

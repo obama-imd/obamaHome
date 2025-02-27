@@ -17,10 +17,9 @@ class DisplaySearchResults extends StatefulWidget {
   final String? queryParam;
   final double swidth;
   int selectedPageIndex;
-  void Function(int) selectedPage;
 
-  DisplaySearchResults(this.termSearched, this.swidth, this.selectedPageIndex,
-      this.selectedPage, this.queryParam);
+  DisplaySearchResults(
+      this.termSearched, this.swidth, this.selectedPageIndex, this.queryParam);
 
   @override
   SearchResultsState createState() => SearchResultsState();
@@ -28,14 +27,12 @@ class DisplaySearchResults extends StatefulWidget {
 
 class SearchResultsState extends State<DisplaySearchResults> {
   Key key = UniqueKey();
-  int startValue = 0;
-  int endValue = 2;
-  int actualPage = 0;
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<PaginationResponse?>(
-        future: fetchData(widget.termSearched, actualPage, widget.queryParam),
+        future: fetchData(
+            widget.termSearched, widget.selectedPageIndex, widget.queryParam),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             final paginationData = snapshot.data;
@@ -49,10 +46,6 @@ class SearchResultsState extends State<DisplaySearchResults> {
 
             int? totalPages = pagination.totalPages;
             int? currentPage = pagination.pageable.pageNumber;
-
-            print("right here => $totalPages, $endValue");
-
-            widget.selectedPageIndex = currentPage;
 
             double rowNumbers = 0;
 
@@ -95,37 +88,31 @@ class SearchResultsState extends State<DisplaySearchResults> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      if (searchResult.length > 5) ...{
-                        Container(
-                          width: 40,
-                          height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1,
-                              color: Color.fromRGBO(225, 225, 225, 1.0),
+                      if (totalPages > 1) ...{
+                        if (currentPage > 0) ...{
+                          Container(
+                            width: 40,
+                            height: 40,
+                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1,
+                                color: Color.fromRGBO(225, 225, 225, 1.0),
+                              ),
                             ),
-                          ),
-                          child: InkWell(
-                            child: Icon(Icons.navigate_before),
-                            onTap: currentPage > 0
-                                ? () {
-                                    widget.selectedPage(
-                                      currentPage - 1,
-                                    );
-                                    setState(() {
-                                      if (currentPage > 0) {
-                                        startValue--;
-                                        endValue--;
-                                        actualPage--;
-                                      }
-                                    });
-                                  }
-                                : null,
-                          ),
-                        ),
-                        for (int i = startValue; i <= endValue; i++) ...{
-                          if (i < totalPages) ...{
+                            child: InkWell(
+                                child: Icon(Icons.navigate_before),
+                                onTap: () {
+                                  setState(() {
+                                    widget.selectedPageIndex = currentPage - 1;
+                                  });
+                                }),
+                          )
+                        },
+                        for (int i = currentPage - 1;
+                            i <= currentPage + 1;
+                            i++) ...{
+                          if (i >= 0 && i < totalPages) ...{
                             Container(
                               width: 40,
                               height: 40,
@@ -149,12 +136,9 @@ class SearchResultsState extends State<DisplaySearchResults> {
                                 ),
                                 onTap: () {
                                   if ((i) != currentPage) {
-                                    widget.selectedPage(i);
                                     setState(() {
                                       if (i >= 0 && i <= totalPages - 1) {
-                                        startValue = i - 1;
-                                        actualPage = i;
-                                        endValue = i + 1;
+                                        widget.selectedPageIndex = i;
                                       }
                                     });
                                   }
@@ -163,34 +147,26 @@ class SearchResultsState extends State<DisplaySearchResults> {
                             )
                           }
                         },
-                        Container(
-                          width: 40,
-                          height: 40,
-                          margin: EdgeInsets.symmetric(horizontal: 5.0),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1,
-                              color: Color.fromRGBO(225, 225, 225, 1.0),
+                        if (currentPage < totalPages - 1) ...{
+                          Container(
+                            width: 40,
+                            height: 40,
+                            margin: EdgeInsets.symmetric(horizontal: 5.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1,
+                                color: Color.fromRGBO(225, 225, 225, 1.0),
+                              ),
                             ),
+                            child: InkWell(
+                                child: Icon(Icons.navigate_next),
+                                onTap: () {
+                                  setState(() {
+                                    widget.selectedPageIndex = currentPage + 1;
+                                  });
+                                }),
                           ),
-                          child: InkWell(
-                            child: Icon(Icons.navigate_next),
-                            onTap: currentPage < totalPages - 1
-                                ? () {
-                                    widget.selectedPage(
-                                      currentPage + 1,
-                                    );
-                                    setState(() {
-                                      if (endValue < totalPages - 1) {
-                                        startValue++;
-                                        actualPage++;
-                                        endValue++;
-                                      }
-                                    });
-                                  }
-                                : null,
-                          ),
-                        ),
+                        }
                       }
                     ],
                   ),

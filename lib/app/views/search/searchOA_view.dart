@@ -38,21 +38,15 @@ class SearchPageState extends ConsumerState<SearchPage> {
   void updateData(newData) {
     setState(() {
       widget.termSearched = '$newData';
+      selectedPageIndex = 0;
     });
   }
 
   void updateDataFromAdvancedSearchPage(newData) {
     setState(() {
       widget.queryParams = newData;
+      selectedPageIndex = 0;
     });
-  }
-
-  void selectedPage(int i) {
-    if (i != selectedPageIndex) {
-      setState() {
-        selectedPageIndex = i;
-      }
-    }
   }
 
   @override
@@ -95,13 +89,11 @@ class SearchPageState extends ConsumerState<SearchPage> {
                   termSearched: widget.termSearched,
                   selectedPageIndex: selectedPageIndex,
                   updateData: updateData,
-                  selectedPage: selectedPage,
                   titleStyle: textTheme.headlineSmall!),
               tablet: SearchTablet(
                   termSearched: widget.termSearched,
                   selectedPageIndex: selectedPageIndex,
                   updateData: updateData,
-                  selectedPage: selectedPage,
                   titleStyle: textTheme.headlineSmall!),
               desktop: SearchDesktop(
                   termSearched: widget.termSearched,
@@ -110,7 +102,6 @@ class SearchPageState extends ConsumerState<SearchPage> {
                   queryParams: widget.queryParams ?? '',
                   updateDataFromAdvancedSearchPage:
                       updateDataFromAdvancedSearchPage,
-                  selectedPage: selectedPage,
                   titleStyle: textTheme.titleSmall!)),
           if (loadObjects) ...{circleLoadSpinner(context)}
         ],
