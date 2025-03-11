@@ -98,11 +98,11 @@ class Carousel extends StatefulWidget {
 
 class CarouselState extends State<Carousel> {
   final List<String> partnersLogo = [
-    'assets/images/ufrn.png',
-    'assets/images/imd.png',
-    'assets/images/remne.jpg',
-    'assets/images/gilfe.png',
-    'assets/images/ppgite.png'
+    'assets/images/icons/ufrn.png',
+    'assets/images/icons/imd.png',
+    'assets/images/icons/remne.jpg',
+    'assets/images/icons/gilfe.png',
+    'assets/images/icons/ppgite.png'
   ];
 
   final List<String> texts = [
@@ -114,7 +114,7 @@ class CarouselState extends State<Carousel> {
   ];
 
   final List<String> images = [
-    'assets/images/slider1.jpg',
+    'assets/images/carousel/slider1.jpg',
     'assets/images/img2.jpg',
   ];
 

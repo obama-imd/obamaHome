@@ -11,9 +11,9 @@ import '../components/menuClass.dart';
 import '../utils/app_theme.dart';
 
 final List<String> imageCarousel = [
-  "assets/images/slider1.jpg",
-  "assets/images/slider2.jpg",
-  "assets/images/slider3.jpg"
+  "assets/images/carousel/slider1.jpg",
+  "assets/images/carousel/slider2.jpg",
+  "assets/images/carousel/slider3.jpg"
 ];
 
 class TemplateHome extends StatefulWidget {

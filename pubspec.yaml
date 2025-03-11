@@ -108,53 +108,46 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:    
     - assets/images/logo.png
-    - assets/images/icone.png
+    - assets/images/icons/icone.png
     - assets/images/img.jpg
     - assets/images/img2.jpg
     - assets/images/test.png
-    - assets/images/ufrn.png
-    - assets/images/imd.png
-    - assets/images/remne.jpg
-    - assets/images/i1.png
-    - assets/images/i2.png
-    - assets/images/i3.png
-    - assets/images/i4.png
-    - assets/images/gilfe.png
-    - assets/images/ppgite.png
+    - assets/images/icons/ufrn.png
+    - assets/images/icons/imd.png
+    - assets/images/icons/remne.jpg
+    - assets/images/icons/gilfe.png
+    - assets/images/icons/ppgite.png
     - assets/images/nopic.jpg
-    - assets/images/AnaCarolina.jpeg
-    - assets/images/AmandaMaria.jpg
-    - assets/images/DenisSilva.jpg
-    - assets/images/DennysLeite.jpg
-    - assets/images/EmanuelKywal.jpg
-    - assets/images/FláviaViana.jpg
-    - assets/images/GabrielBarreto.png
-    - assets/images/GiluizaCatarina.jpeg
-    - assets/images/IgorAntonio.png
-    - assets/images/IgorRauan.jpg
-    - assets/images/LucasToshio.jpeg
-    - assets/images/MariaLuiza.jpg
-    - assets/images/MayaraCabral.jpg
-    - assets/images/RamonJales.jpg
-    - assets/images/Roberia.jpg
-    - assets/images/SaraSilva.jpg
-    - assets/images/SarahRibeiro.jpeg
-    - assets/images/gmail.png
-    - assets/images/meet.png
-    - assets/images/forms.png
-    - assets/images/sala-de-aula.png
+    - assets/images/team/AnaCarolina.jpeg
+    - assets/images/team/AmandaMaria.jpg
+    - assets/images/team/DenisSilva.jpg
+    - assets/images/team/DennysLeite.jpg
+    - assets/images/team/EmanuelKywal.jpg
+    - assets/images/team/FláviaViana.jpg
+    - assets/images/team/GabrielBarreto.png
+    - assets/images/team/GiluizaCatarina.jpeg
+    - assets/images/team/IgorAntonio.png
+    - assets/images/team/IgorRauan.jpg
+    - assets/images/team/LucasToshio.jpeg
+    - assets/images/team/MariaLuiza.jpg
+    - assets/images/team/Roberia.jpg
+    - assets/images/team/SaraSilva.jpg
+    - assets/images/icons/gmail.png
+    - assets/images/icons/meet.png
+    - assets/images/icons/forms.png
+    - assets/images/icons/sala-de-aula.png
     - assets/images/not-found.png
-    - assets/images/obama_salmao.jpg
-    - assets/images/obama_roxo.jpg
-    - assets/images/obama_verde_cana.jpg
-    - assets/images/icon_share.png
-    - assets/images/icon_select.png
-    - assets/images/icon_writing.png
-    - assets/images/icon_search.png
+    - assets/images/icons/obama_salmao.jpg
+    - assets/images/icons/obama_roxo.jpg
+    - assets/images/icons/obama_verde_cana.jpg
+    - assets/images/icons/icon_share.png
+    - assets/images/icons/icon_select.png
+    - assets/images/icons/icon_writing.png
+    - assets/images/icons/icon_search.png
     - assets/images/footer.png
-    - assets/images/slider1.jpg
-    - assets/images/slider2.jpg
-    - assets/images/slider3.jpg
+    - assets/images/carousel/slider1.jpg
+    - assets/images/carousel/slider2.jpg
+    - assets/images/carousel/slider3.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

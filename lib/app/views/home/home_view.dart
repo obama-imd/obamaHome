@@ -103,25 +103,25 @@ class LearningLevelsHome {
 
 final List<LearningLevelsHome> levels = [
   LearningLevelsHome(
-      picture: "images/obama_laranja.jpg",
+      picture: "images/icons/obama_laranja.jpg",
       color: Color.fromARGB(191, 241, 134, 68),
       title: "Educação Infantil",
       text: "",
       path: ""),
   LearningLevelsHome(
-      picture: "images/obama_verde_cana.jpg",
+      picture: "images/icons/obama_verde_cana.jpg",
       color: Color.fromARGB(187, 183, 220, 0),
       title: "Anos iniciais do Ensino Fundamental",
       text: "",
       path: ""),
   LearningLevelsHome(
-      picture: "images/obama_roxo.jpg",
+      picture: "images/icons/obama_roxo.jpg",
       color: Color.fromARGB(188, 107, 78, 250),
       title: "Anos Finais do Ensino Fundamental",
       text: "",
       path: ""),
   LearningLevelsHome(
-      picture: "images/obama_salmao.jpg",
+      picture: "images/icons/obama_salmao.jpg",
       color: Color.fromARGB(168, 255, 105, 133),
       title: "Ensino Médio",
       text: "",

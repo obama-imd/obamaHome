@@ -41,7 +41,7 @@ class _ValidateUserPageViewState extends State<ValidateUserPageView> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 30, bottom: 30),
-                      child: Image.asset("assets/images/icone.png", width: 150),
+                      child: Image.asset("assets/images/icons/icone.png", width: 150),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10),

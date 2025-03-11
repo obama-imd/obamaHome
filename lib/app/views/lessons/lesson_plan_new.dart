@@ -103,7 +103,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                   } else ...{
                     Container(
                       width: 100,
-                      child: Image.asset("assets/images/icone.png"),
+                      child: Image.asset("assets/images/icons/icone.png"),
                     )
                   },
                   NavMenu(
