@@ -112,7 +112,7 @@ class _OurProductItemState extends State<OurProductItem> {
                           oa = result;
                         });
                         if (oa != null) {
-                          final Uri url = Uri.parse(oa!.getLink() ?? "");
+                          final Uri url = Uri.parse(oa!.getLink());
                           launchUrl(url);
                         }
                       });

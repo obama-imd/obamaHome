@@ -119,6 +119,18 @@ List<TeamMembers> StaffTeam = [
       link: "http://lattes.cnpq.br",
       job: "Estudante"),
   TeamMembers(
+      name: "Keven",
+      image: "assets/images/team/Keven.jpg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br/0587829541822551",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Leonel",
+      image: "assets/images/team/Leonel.jpg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br/4080549720309429",
+      job: "Estudante"),
+  TeamMembers(
       name: "Toshio",
       image: "assets/images/team/LucasToshio.jpeg",
       summary: "IMD/UFRN",
@@ -136,6 +148,12 @@ List<TeamMembers> StaffTeam = [
       summary: "",
       link: "http://lattes.cnpq.br/8019572036140851",
       job: "Professora"),
+  TeamMembers(
+      name: "Samuel",
+      image: "assets/images/team/Samuel.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/9708412519196484",
+      job: "Estudante"),
   TeamMembers(
       name: "Sara Silva",
       image: "assets/images/team/SaraSilva.jpg",

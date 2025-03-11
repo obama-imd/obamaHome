@@ -177,9 +177,11 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
               ResponsiveGridCol(lg: 3, child: Spacer()),
               for (int i = 0; i < LeadersTeam.length; i++) ...{
                 ResponsiveGridCol(
-                    lg: 6,
-                    child: StaffCard(
-                        LeadersTeam[i].name, LeadersTeam[i].image, LeadersTeam[i].link, swidth))
+                    lg: 3,
+                    md: 6,
+                    xs: 12,
+                    child: StaffCard(LeadersTeam[i].name, LeadersTeam[i].image,
+                        LeadersTeam[i].link, swidth))
               },
               ResponsiveGridCol(lg: 3, child: Spacer()),
             ]),
@@ -199,11 +201,15 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
                 lg: 3,
                 md: 6,
                 xs: 12,
-                child: StaffCard(
-                    StaffTeam[i].name, StaffTeam[i].image, StaffTeam[i].link, swidth),
+                child: StaffCard(StaffTeam[i].name, StaffTeam[i].image,
+                    StaffTeam[i].link, swidth),
               )
             }
-          ])
+          ]),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(bottom: 65.0),
+          ),
         ]),
       )
     ]);

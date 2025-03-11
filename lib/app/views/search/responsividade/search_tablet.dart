@@ -32,21 +32,9 @@ class _SearchTabletState extends State<SearchTablet> {
     double swidth = MediaQuery.of(context).size.width;
     return TemplateColumn(children: [
       Container(
-        margin: paddingValues("sectionPadding", context),
-        padding: paddingValues("sideMainPadding", context),
-        child: ExpansionTile(title: Text("Busca Avançada"), children: [
-          // Padding(
-          //   padding: paddingValues("fullGrid", context),
-          //   child: OAFilters(
-          //     swidth: swidth,
-          //     data: widget.termSearched,
-          //     updateData: widget.updateData,
-          //     titleStyle: widget.titleStyle,
-          //   ),
-          // ),
-        ]),
-      ),
-      DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex, null),
+          margin: paddingValues("sectionPadding", context),
+          child: DisplaySearchResults(
+              widget.termSearched, swidth, widget.selectedPageIndex, null)),
       SizedBox(
         height: 65,
       ),
