@@ -23,6 +23,7 @@ class SearchDialog extends StatefulWidget {
 
 class _SearchDialogState extends State<SearchDialog> {
   final TextEditingController _searchController = TextEditingController();
+  String searchText = '';
 
   @override
   Widget build(BuildContext context) {

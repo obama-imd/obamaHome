@@ -23,18 +23,19 @@ class NavMenu extends StatefulWidget {
   State<NavMenu> createState() => _NavMenuState();
 }
 
-String searchText = '';
-
 Future searchObject(context, String value) async {
   if (value.isEmpty) {
     showMessage(context);
   } else {
-    Navigator.pushNamed(context, '/objetos-aprendizagem', arguments: value);
+    // Navigator.pushNamed(context, '/objetos-aprendizagem', arguments: value);
+    Navigator.popAndPushNamed(context, '/objetos-aprendizagem-nav', arguments: value);
+    // Navigator.pop(context);
   }
 }
 
 class _NavMenuState extends State<NavMenu> {
   bool isHovered = false;
+  String searchText = '';
 
   Future registerSearch(context, String value) async {
     setState(() {
@@ -71,8 +72,11 @@ class _NavMenuState extends State<NavMenu> {
                         if (widget.itemValues[i].action != null) {
                           widget.itemValues[i].action!();
                         } else {
-                          Navigator.pushNamed(
-                              context, widget.itemValues[i].path[0]);
+                          Navigator.popAndPushNamed(
+                            context,
+                            widget.itemValues[i].path[0],
+                            arguments: "",
+                          );
                         }
                       },
                       // teste tooltip
