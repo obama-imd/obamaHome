@@ -143,6 +143,12 @@ List<TeamMembers> StaffTeam = [
       link: "http://lattes.cnpq.br/1059686872506852",
       job: "Professora"),
   TeamMembers(
+      name: "Raiza",
+      image: "assets/images/team/Raiza.jpeg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/3768644861934814",
+      job: "Estudante"),
+  TeamMembers(
       name: "Roberia",
       image: "assets/images/team/Roberia.jpg",
       summary: "",
@@ -158,8 +164,14 @@ List<TeamMembers> StaffTeam = [
       name: "Sara Silva",
       image: "assets/images/team/SaraSilva.jpg",
       summary: "IMD/UFRN",
-      link: "http://lattes.cnpq.br",
+      link: "http://lattes.cnpq.br/9126372629823675",
       job: "Estudante"),
+  TeamMembers(
+      name: "Vitor",
+      image: "assets/images/team/vitor.jpeg",
+      summary: "",
+      link: "http://lattes.cnpq.br/7519626753410754",
+      job: "Voluntário"),
 ];
 
 // Raiza, Samuel, Keven, Leonel
