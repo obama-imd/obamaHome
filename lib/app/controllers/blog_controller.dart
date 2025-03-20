@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/blog_models.dart';
+import '../views/blog/blog_controller.dart';
 
 Future<List<dynamic>> fetchData(String searchTerm) async {
   final response = await http.get(Uri.parse('http://localhost:3000/dados'));
@@ -53,20 +54,34 @@ final blogPosts = StateProvider<List<BlogModel?>>((ref) {
 class BlogController {
   Future<List<BlogModel?>> updateBlogContent(WidgetRef ref, String search) async {
 
-    final posts = await fetchData(search);
-    final updatedPosts = posts
-        .map((postData) => BlogModel(
-              title: postData['title'],
-              text: postData['text'],
-              summary: extractSummaryPath(postData['summary']),
-              publishedDate: convertDate(postData['published_date']),
-              imagePath: extractImagePath(postData['content']),
-            ))
-        .toList();
+    // final posts = await fetchData(search);
+    // final updatedPosts = posts
+    //     .map((postData) => BlogModel(
+    //           title: postData['title'],
+    //           text: postData['text'],
+    //           summary: extractSummaryPath(postData['summary']),
+    //           publishedDate: convertDate(postData['published_date']),
+    //           imagePath: extractImagePath(postData['content']),
+    //         ))
+    //     .toList();
 
-    final newPosts = ref.read(blogPosts);
-    newPosts.clear();
-    newPosts.addAll(updatedPosts);
-    return updatedPosts;
+    await getBlogContent();
+    // print(posts);
+
+    // final updatedPosts = posts
+    //     .map((postData) => BlogModel(
+    //           title: postData['title'],
+    //           text: postData['text'],
+    //           summary: extractSummaryPath(postData['summary']),
+    //           publishedDate: convertDate(postData['published_date']),
+    //           imagePath: extractImagePath(postData['content']),
+    //         ))
+    //     .toList();
+
+    // final newPosts = ref.read(blogPosts);
+    // newPosts.clear();
+    // newPosts.addAll(updatedPosts);
+    // return updatedPosts;
+    return [];
   }
 }
