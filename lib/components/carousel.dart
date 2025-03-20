@@ -118,7 +118,7 @@ class CarouselState extends State<Carousel> {
     'assets/images/img2.jpg',
   ];
 
-  final List<double> partnersPadding = [24, 30, 0, 25, 0];
+  final List<double> partnersPadding = [24, 30, 0, 0, 0];
 
   @override
   void initState() {

@@ -16,7 +16,6 @@ class OurProductItem extends StatefulWidget {
       {super.key,
       required this.id,
       required this.title,
-      this.image,
       this.width = 237.5,
       this.height = 327.5});
 
@@ -24,7 +23,6 @@ class OurProductItem extends StatefulWidget {
   final double height;
   final double width;
   final String title;
-  final String? image;
 
   @override
   State<OurProductItem> createState() => _OurProductItemState();

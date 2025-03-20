@@ -117,7 +117,6 @@ flutter:
     - assets/images/icons/remne.jpg
     - assets/images/icons/gilfe.png
     - assets/images/icons/ppgite.png
-    - assets/images/nopic.jpg
     - assets/images/team/AnaCarolina.jpeg
     - assets/images/team/AmandaMaria.jpg
     - assets/images/team/DenisSilva.jpg
@@ -142,9 +141,6 @@ flutter:
     - assets/images/icons/forms.png
     - assets/images/icons/sala-de-aula.png
     - assets/images/not-found.png
-    - assets/images/icons/obama_salmao.jpg
-    - assets/images/icons/obama_roxo.jpg
-    - assets/images/icons/obama_verde_cana.jpg
     - assets/images/icons/icon_share.png
     - assets/images/icons/icon_select.png
     - assets/images/icons/icon_writing.png

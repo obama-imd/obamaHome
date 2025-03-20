@@ -46,116 +46,121 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
         List<LessonPlan> data = [...lessonsData];
         return TemplateColumn(
           children: [
-            Container(
-              constraints: BoxConstraints(maxWidth: 1200),
-              color: borderInput,
-              margin: paddingValues("carouselTop", context),
-              padding: paddingValues("sideMainPadding", context),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          constraints: BoxConstraints(
-                              maxWidth: 600, minWidth: 200, maxHeight: 39),
-                          filled: true,
-                          fillColor: background,
-                          hintText: "Busca",
-                          hintStyle: textTheme.bodySmall,
-                          border: InputBorder.none,
-                          suffixIcon: Icon(CupertinoIcons.search,
-                              color: secondary, size: 16)),
-                      onChanged: (value) {
-                        setState(() {
-                          searchTerm = value;
-                        });
-                      },
-                      onSubmitted: (value) {
-                        setState(() {
-                          searchTerm = value;
-                        });
+            Padding(
+              padding: const EdgeInsets.only(bottom: 90),
+              child: Container(
+                constraints: BoxConstraints(maxWidth: 1200),
+                color: borderInput,
+                margin: paddingValues("carouselTop", context),
+                padding: paddingValues("sideMainPadding", context),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15, vertical: 25),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            constraints: BoxConstraints(
+                                maxWidth: 600, minWidth: 200, maxHeight: 39),
+                            filled: true,
+                            fillColor: background,
+                            // labelStyle: TextStyle(fontSize: 14),
+                            hintText: "Busca",
+                            hintStyle: textTheme.bodySmall,
+                            contentPadding: EdgeInsets.all(5),
+                            border: InputBorder.none,
+                            suffixIcon: Icon(CupertinoIcons.search,
+                                color: secondary, size: 16)),
+                        onChanged: (value) {
+                          setState(() {
+                            searchTerm = value;
+                          });
+                        },
+                        onSubmitted: (value) {
+                          setState(() {
+                            searchTerm = value;
+                          });
+                        },
+                      ),
+                    ),
+                    ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: (_pagedItems(data).length ~/ _itemsPerPage) + 1,
+                      itemBuilder: (context, index) {
+                        if (index == 0) {
+                          return _buildHeader();
+                        } else {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: _pagedItems(data).length,
+                            itemBuilder: (context, index) {
+                              final lessonPlan = _pagedItems(data)[index];
+                              return _buildRow(
+                                lessonPlan.id.toString(),
+                                lessonPlan.title,
+                                lessonPlan.status,
+                              );
+                            },
+                          );
+                        }
                       },
                     ),
-                  ),
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: (_pagedItems(data).length ~/ _itemsPerPage) + 1,
-                    itemBuilder: (context, index) {
-                      if (index == 0) {
-                        return _buildHeader();
-                      } else {
-                        return ListView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: _pagedItems(data).length,
-                          itemBuilder: (context, index) {
-                            final lessonPlan = _pagedItems(data)[index];
-                            return _buildRow(
-                              lessonPlan.id.toString(),
-                              lessonPlan.title,
-                              lessonPlan.status,
-                            );
-                          },
-                        );
-                      }
-                    },
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 100,
-                        padding: EdgeInsets.all(10.0),
-                        child: Scrollbar(
-                          controller: _scrollController,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: 100,
+                          padding: EdgeInsets.all(10.0),
+                          child: Scrollbar(
                             controller: _scrollController,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: List.generate(
-                                10,
-                                (index) => Container(
-                                  width: 20,
-                                  padding: EdgeInsets.all(0.0),
-                                  margin: EdgeInsets.all(0.0),
-                                  child: TextButton(
-                                    style: ButtonStyle(
-                                      padding: MaterialStateProperty.all<
-                                          EdgeInsetsGeometry>(
-                                        EdgeInsets.symmetric(
-                                          horizontal: 0.0,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              controller: _scrollController,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List.generate(
+                                  10,
+                                  (index) => Container(
+                                    width: 20,
+                                    padding: EdgeInsets.all(0.0),
+                                    margin: EdgeInsets.all(0.0),
+                                    child: TextButton(
+                                      style: ButtonStyle(
+                                        padding: MaterialStateProperty.all<
+                                            EdgeInsetsGeometry>(
+                                          EdgeInsets.symmetric(
+                                            horizontal: 0.0,
+                                          ),
+                                        ),
+                                        shape: MaterialStatePropertyAll(
+                                          RoundedRectangleBorder(
+                                            side: BorderSide.none,
+                                          ),
+                                        ),
+                                        overlayColor: MaterialStatePropertyAll(
+                                          Color(0x00000000),
+                                        ),
+                                        backgroundColor: MaterialStatePropertyAll(
+                                          Color(0x00000000),
                                         ),
                                       ),
-                                      shape: MaterialStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                          side: BorderSide.none,
+                                      onPressed: () {
+                                        setState(
+                                          () {
+                                            _currentPage = index;
+                                          },
+                                        );
+                                      },
+                                      child: Text(
+                                        (index + 1).toString(),
+                                        style: TextStyle(
+                                          fontFamily: 'Raleway',
+                                          fontSize: 15,
                                         ),
-                                      ),
-                                      overlayColor: MaterialStatePropertyAll(
-                                        Color(0x00000000),
-                                      ),
-                                      backgroundColor: MaterialStatePropertyAll(
-                                        Color(0x00000000),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      setState(
-                                        () {
-                                          _currentPage = index;
-                                        },
-                                      );
-                                    },
-                                    child: Text(
-                                      (index + 1).toString(),
-                                      style: TextStyle(
-                                        fontFamily: 'Raleway',
-                                        fontSize: 15,
                                       ),
                                     ),
                                   ),
@@ -164,10 +169,10 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

@@ -80,7 +80,6 @@ class SearchResultsState extends State<DisplaySearchResults> {
                             child: OurProductItem(
                               id: result?.id ?? -1,
                               title: result?.nome ?? "",
-                              image: result?.caminhoImagem ?? "",
                             ),
                           );
                         }).toList(),

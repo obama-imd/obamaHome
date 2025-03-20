@@ -27,6 +27,10 @@ final List<RouteList> routesList = [
     path: ['/objetos-aprendizagem'],
   ),
   RouteList(
+    name: "Objetos de Aprendizagem",
+    path: ['/objetos-aprendizagem-nav'],
+  ),
+  RouteList(
     name: "Trilhas de Aprendizagem",
     path: ['/trilhas'],
   ),

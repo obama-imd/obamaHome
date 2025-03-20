@@ -174,8 +174,6 @@ List<TeamMembers> StaffTeam = [
       job: "Voluntário"),
 ];
 
-// Raiza, Samuel, Keven, Leonel
-
 List<String> grid1Title = [
   "Objetos de Aprendizagem",
   "Planos de Aula",
