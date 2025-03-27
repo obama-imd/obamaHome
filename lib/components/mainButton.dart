@@ -14,6 +14,7 @@ Widget mainButton(
 
   return Expanded(
     child: Container(
+      constraints: BoxConstraints(minWidth: 155),
         height: 50,
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(100)),
         child: TextButton(
