@@ -98,33 +98,6 @@ class LearningLevelsHome {
       required this.path});
 }
 
-final List<LearningLevelsHome> levels = [
-  LearningLevelsHome(
-      picture: "images/icons/obama_laranja.jpg",
-      color: Color.fromARGB(191, 241, 134, 68),
-      title: "Educação Infantil",
-      text: "",
-      path: ""),
-  LearningLevelsHome(
-      picture: "images/icons/obama_verde_cana.jpg",
-      color: Color.fromARGB(187, 183, 220, 0),
-      title: "Anos iniciais do Ensino Fundamental",
-      text: "",
-      path: ""),
-  LearningLevelsHome(
-      picture: "images/icons/obama_roxo.jpg",
-      color: Color.fromARGB(188, 107, 78, 250),
-      title: "Anos Finais do Ensino Fundamental",
-      text: "",
-      path: ""),
-  LearningLevelsHome(
-      picture: "images/icons/obama_salmao.jpg",
-      color: Color.fromARGB(168, 255, 105, 133),
-      title: "Ensino Médio",
-      text: "",
-      path: "")
-];
-
 class OAHome extends ConsumerStatefulWidget {
   final double swidth;
   const OAHome(this.swidth, {super.key});
@@ -160,104 +133,104 @@ class OAHomeState extends ConsumerState<OAHome> {
                 ],
               ),
             ),
-            ResponsiveGridList(
-                physics: NeverScrollableScrollPhysics(),
-                scroll: false,
-                desiredItemWidth: 237.5,
-                minSpacing: widget.swidth * .016,
-                children: levels.map((post) {
-                  //Loop que opera em cima da lista de dados recebidos
-                  return Container(
-                    alignment: Alignment(0, 0),
-                    child: Row(
-                      children: [
-                        Center(
-                          // card 1
-                          child: Card(
-                            color: Colors.white,
-                            child: SizedBox(
-                              width: 250,
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Column(
-                                  children: [
-                                    CircleAvatar(
-                                      backgroundColor: post.color,
-                                      radius: 33,
-                                      child: CircleAvatar(
-                                        backgroundColor: background,
-                                        child: SizedBox(
-                                            width: 46,
-                                            height: 46,
-                                            child: Image.asset(post.picture)),
-                                        radius: 30,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      // espaço entre o icon e o titulo
-                                      height: 20,
-                                    ),
-                                    SizedBox(
-                                      height: 60,
-                                      child: Text(
-                                        post.title,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      // espaço entre o titulo e o texto
-                                      height: 5,
-                                    ),
-                                    Text(
-                                      post.text,
-                                      textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: secondary,
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      // espaço entre o texto e o botão
-                                      height: 20,
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 20.0),
-                                      child: SizedBox(
-                                        width: 101,
-                                        child: TextButton(
-                                          onPressed: () => 'Null',
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(5),
-                                            child: Row(
-                                              children: const [
-                                                Text(
-                                                  'Leia mais >',
-                                                  style: TextStyle(
-                                                    color: background,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }).toList()),
+            // ResponsiveGridList(
+            //     physics: NeverScrollableScrollPhysics(),
+            //     scroll: false,
+            //     desiredItemWidth: 237.5,
+            //     minSpacing: widget.swidth * .016,
+            //     children: levels.map((post) {
+            //       //Loop que opera em cima da lista de dados recebidos
+            //       return Container(
+            //         alignment: Alignment(0, 0),
+            //         child: Row(
+            //           children: [
+            //             Center(
+            //               // card 1
+            //               child: Card(
+            //                 color: Colors.white,
+            //                 child: SizedBox(
+            //                   width: 250,
+            //                   child: Padding(
+            //                     padding: const EdgeInsets.all(10.0),
+            //                     child: Column(
+            //                       children: [
+            //                         CircleAvatar(
+            //                           backgroundColor: post.color,
+            //                           radius: 33,
+            //                           child: CircleAvatar(
+            //                             backgroundColor: background,
+            //                             child: SizedBox(
+            //                                 width: 46,
+            //                                 height: 46,
+            //                                 child: Image.asset(post.picture)),
+            //                             radius: 30,
+            //                           ),
+            //                         ),
+            //                         const SizedBox(
+            //                           // espaço entre o icon e o titulo
+            //                           height: 20,
+            //                         ),
+            //                         SizedBox(
+            //                           height: 60,
+            //                           child: Text(
+            //                             post.title,
+            //                             textAlign: TextAlign.center,
+            //                             style: TextStyle(
+            //                               fontWeight: FontWeight.bold,
+            //                               fontSize: 18,
+            //                               color: Colors.black,
+            //                             ),
+            //                           ),
+            //                         ),
+            //                         const SizedBox(
+            //                           // espaço entre o titulo e o texto
+            //                           height: 5,
+            //                         ),
+            //                         Text(
+            //                           post.text,
+            //                           textAlign: TextAlign.center,
+            //                           style: TextStyle(
+            //                             fontSize: 16,
+            //                             color: secondary,
+            //                           ),
+            //                         ),
+            //                         const SizedBox(
+            //                           // espaço entre o texto e o botão
+            //                           height: 20,
+            //                         ),
+            //                         Padding(
+            //                           padding:
+            //                               const EdgeInsets.only(bottom: 20.0),
+            //                           child: SizedBox(
+            //                             width: 101,
+            //                             child: TextButton(
+            //                               onPressed: () => 'Null',
+            //                               child: Padding(
+            //                                 padding: const EdgeInsets.all(5),
+            //                                 child: Row(
+            //                                   children: const [
+            //                                     Text(
+            //                                       'Leia mais >',
+            //                                       style: TextStyle(
+            //                                         color: background,
+            //                                       ),
+            //                                     ),
+            //                                   ],
+            //                                 ),
+            //                               ),
+            //                             ),
+            //                           ),
+            //                         ),
+            //                       ],
+            //                     ),
+            //                   ),
+            //                 ),
+            //               ),
+            //             ),
+            //           ],
+            //         ),
+            //       );
+            //     }).toList()),
           ],
         ),
       )

@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/searchDropdown.dart';
@@ -121,10 +123,10 @@ class OAFilterState extends State<OAFilters> {
       Container(
           alignment: Alignment.centerLeft,
           margin: const EdgeInsets.only(bottom: 30),
-          child: Text('BUSCA AVANÇADA', style: widget.titleStyle)),
+          child: Text('BUSCA', style: widget.titleStyle)),
       Container(
           height: 50,
-          margin: const EdgeInsets.only(bottom: 50),
+          margin: const EdgeInsets.only(bottom: 30),
           child: TextField(
               controller: searchTextController,
               onSubmitted: (value) => mainSearch(),
@@ -141,25 +143,111 @@ class OAFilterState extends State<OAFilters> {
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ExpansionPanelListSimple(data: [
-            Item(
-                expandedValue: nivelEnsinoRadioTextField ?? Container(),
-                headerValue: tileTitle[0]),
-            Item(
-                expandedValue: temaConteudoRadioTextField ?? Container(),
-                headerValue: tileTitle[1]),
-          ]),
-          Padding(
-            padding: const EdgeInsets.only(top: 50),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                mainButton(context, 'Busca Avançada', null, () {
+          // Container(child: Text(tileTitle[0])),
+          // ExpansionPanelListSimple(data: [
+          //   Item(
+          //       expandedValue: nivelEnsinoRadioTextField ?? Container(),
+          //       headerValue: tileTitle[0]),
+          //   Item(
+          //       expandedValue: temaConteudoRadioTextField ?? Container(),
+          //       headerValue: tileTitle[1]),
+          // ]),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              mainButton(
+                context,
+                'Buscar',
+                null,
+                () {
                   mainSearch();
-                  // print(selectedNivelEnsino);
-                }),
-              ],
-            ),
+                },
+              ),
+              SizedBox(width: 8),
+              mainButton(context, 'Busca Avançada', null, () {
+                showDialog<void>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      content: Container(
+                        height: MediaQuery.of(context).size.height,
+                        width: MediaQuery.of(context).size.width * .9,
+                        child: Column(
+                          children: [
+                            Wrap(
+                              alignment: WrapAlignment.spaceEvenly,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tileTitle[0],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                    Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .75,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .45,
+                                        child: nivelEnsinoRadioTextField),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tileTitle[1],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                    Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .75,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .45,
+                                        child: temaConteudoRadioTextField),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                      actions: <Widget>[
+                        mainButton(
+                          context,
+                          'Voltar',
+                          null,
+                          () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        mainButton(
+                          context,
+                          'Buscar',
+                          null,
+                          () {
+                            mainSearch();
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              }),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [],
           ),
         ],
       ),
