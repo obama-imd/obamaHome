@@ -84,7 +84,6 @@ class _SearchDialogState extends State<SearchDialog> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Row(
-                            // crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Expanded(
                                 child: Container(

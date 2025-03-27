@@ -164,7 +164,6 @@ class MyAppMaterial extends MaterialApp {
             splashColor: background,
             disabledColor: secondary,
             fontFamily: 'Raleway',
-            // hoverColor: Colors.black,
             colorScheme: ColorScheme(
               brightness: Brightness.light,
               primary: primary,
