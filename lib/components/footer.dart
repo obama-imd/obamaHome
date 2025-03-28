@@ -25,14 +25,14 @@ class _FooterState extends State<Footer> {
     "> Formações",
     "> Objetos de Aprendizagem",
     "> Planos de Aula",
-    // "> Publicações",
+    "> Publicações",
     "> Trilhas",
   ];
   List<String> servicePaths = [
     '/formacoes',
     '/servicos',
     '/planos-aulas/lista',
-    // '/blog',
+    '/publications',
     "/trilhas"
   ];
 
