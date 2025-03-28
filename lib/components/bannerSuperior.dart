@@ -40,12 +40,12 @@ final List<RouteList> routesList = [
   ),
   RouteList(
     name: "Publicações",
-    path: ['/blog'],
+    path: ['/publicacoes'],
   ),
-  RouteList(
-    name: "Publicações",
-    path: ['/blog-detalhes'],
-  ),
+  // RouteList(
+  //   name: "Publicações",
+  //   path: ['/blog-detalhes'],
+  // ),
   RouteList(
     name: "Formações",
     path: ['/formacoes'],

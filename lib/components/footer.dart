@@ -32,7 +32,7 @@ class _FooterState extends State<Footer> {
     '/formacoes',
     '/servicos',
     '/planos-aulas/lista',
-    '/publications',
+    '/publicacoes',
     "/trilhas"
   ];
 
