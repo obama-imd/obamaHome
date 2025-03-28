@@ -186,11 +186,11 @@ class MyAppMaterial extends MaterialApp {
           initialRoute: '/',
           routes: {
             '/sobre': (context) => const AboutUsPage(),
-            '/blog': (context) => const BlogPage(),
-            '/blog-detalhes': (context) => BlogDetails(
-                  initialPageIndex:
-                      ModalRoute.of(context)?.settings.arguments as int? ?? 0,
-                ),
+            '/publicacoes': (context) => const BlogPage(),
+            // '/publicacao-detalhe': (context) => BlogDetails(
+            //       initialPageIndex:
+            //           ModalRoute.of(context)?.settings.arguments as int? ?? 0,
+            //     ),
             '/formacoes': (context) => const Formacoes(),
             '/objetos-aprendizagem-nav': (context) {
               return SearchPage(

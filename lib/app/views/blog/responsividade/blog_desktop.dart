@@ -7,6 +7,7 @@ import 'package:obamahome/templates/template_basic_row.dart';
 
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
+import '../blog_controller.dart';
 import '../blog_view.dart';
 
 class BlogDesktop extends ConsumerStatefulWidget {
@@ -29,12 +30,14 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
     double swidth = MediaQuery.of(context).size.width;
 
     return TemplateRow(children: [
-      FutureBuilder<void>(
-        future: BlogController().updateBlogContent(ref, widget.newData),
+      FutureBuilder<List<BlogModel?>>(
+        future: BlogController().updateBlogContent(widget.newData),
         builder: (context, snapshot) {
+
           if (snapshot.connectionState == ConnectionState.done) {
-            final blogDataList = ref.watch(blogPosts);
+            final blogDataList = snapshot.data!;
             List<BlogModel?> posts = blogDataList;
+
             return SizedBox(
               width: swidth,
               child: Column(
@@ -57,7 +60,7 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
                             Container(
                               width: swidth> 1200 ? 1200 *.7: swidth *.565,
                               padding: const EdgeInsets.only(top: 100),
-                              child: blogListView(context, widget.key, swidth, posts),
+                              child: BlogListView(posts, swidth),
                             ),
                           },
                           Container(

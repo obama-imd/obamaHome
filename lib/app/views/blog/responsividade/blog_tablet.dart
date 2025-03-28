@@ -8,6 +8,7 @@ import 'package:obamahome/templates/template_basic_col.dart';
 import '../../../../utils/app_padding.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
+import '../blog_controller.dart';
 import '../blog_view.dart';
 
 class BlogTablet extends ConsumerStatefulWidget {
@@ -29,12 +30,13 @@ class BlogTabletState extends ConsumerState<BlogTablet> {
     double swidth = MediaQuery.of(context).size.width;
 
     return TemplateColumn(children: [
-      FutureBuilder<void>(
-        future: BlogController().updateBlogContent(ref, widget.newData),
+       FutureBuilder<List<BlogModel?>>(
+        future: BlogController().updateBlogContent(widget.newData),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            final blogDataList = ref.watch(blogPosts);
+            final blogDataList = snapshot.data!;
             List<BlogModel?> posts = blogDataList;
+            
             return Column(
               children: [
                 Container(
@@ -64,7 +66,7 @@ class BlogTabletState extends ConsumerState<BlogTablet> {
                     } else ...{
                       Padding(
                         padding: const EdgeInsets.only(top: 100),
-                        child: blogListView(context, widget.key, swidth, posts),
+                        child: BlogListView(posts, swidth),
                       ),
                     },
                   ]),

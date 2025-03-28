@@ -8,6 +8,7 @@ import '../../../../components/loadCircle.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
+import '../blog_controller.dart';
 import '../blog_view.dart';
 import 'blog-filters.dart';
 
@@ -57,7 +58,7 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
   }
 
   void waitData() async {
-    Future.wait([fetchData("")])
+    Future.wait([BlogController().updateBlogContent("")])
         .timeout(Duration(seconds: 5))
         .whenComplete(() => setState(() {
               loadPosts = false;
@@ -78,24 +79,26 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
 
     return Stack(
       children: [
-        TemplateRow(children: [
-          FutureBuilder<void>(
-            future: BlogController().updateBlogContent(ref, newData),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                final blogDataList = ref.watch(blogPosts);
-                List<BlogModel?> datas = [...blogDataList];
+        TemplateRow(
+          children: [
+            FutureBuilder<List<BlogModel?>>(
+              future: BlogController().updateBlogContent(newData),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  final blogDataList = snapshot.data!;
+                  List<BlogModel?> posts = blogDataList;
+
                   return Column(
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          blogPageView(context, swidth, _pageController, datas),
+                          blogPageView(context, swidth, _pageController, posts),
                           Container(
                               padding:
                                   const EdgeInsets.only(top: 85.0, left: 15),
                               width: swidth * .295,
-                              child: blogFilters(context, swidth, datas,
+                              child: blogFilters(context, swidth, posts,
                                   updateData, textTheme.titleSmall!)),
                         ],
                       ),

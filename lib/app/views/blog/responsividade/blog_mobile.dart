@@ -8,6 +8,7 @@ import 'package:obamahome/utils/app_padding.dart';
 import '../../../../templates/template_basic_col.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
+import '../blog_controller.dart';
 import '../blog_view.dart';
 
 class BlogMobile extends ConsumerStatefulWidget {
@@ -16,7 +17,8 @@ class BlogMobile extends ConsumerStatefulWidget {
   final double swidth;
   Function(String) updateData;
   final TextStyle titleStyle;
-  BlogMobile(this.newData, this.key, this.swidth, this.updateData, this.titleStyle);
+  BlogMobile(
+      this.newData, this.key, this.swidth, this.updateData, this.titleStyle);
 
   @override
   BlogMobileState createState() => BlogMobileState();
@@ -30,12 +32,13 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
     double swidth = MediaQuery.of(context).size.width;
 
     return TemplateColumn(children: [
-      FutureBuilder<void>(
-        future: BlogController().updateBlogContent(ref, widget.newData),
+      FutureBuilder<List<BlogModel?>>(
+        future: BlogController().updateBlogContent(widget.newData),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            final blogDataList = ref.watch(blogPosts);
+            final blogDataList = snapshot.data!;
             List<BlogModel?> posts = blogDataList;
+
             return Column(
               children: [
                 Container(
@@ -50,8 +53,8 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
                             children: [
                               Padding(
                                 padding: paddingValues("fullGrid", context),
-                                child: blogFilters(
-                                    context, swidth, posts, widget.updateData, widget.titleStyle),
+                                child: blogFilters(context, swidth, posts,
+                                    widget.updateData, widget.titleStyle),
                               ),
                             ])),
                     if (posts.isEmpty) ...{
@@ -65,7 +68,7 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
                     } else ...{
                       Padding(
                         padding: const EdgeInsets.only(top: 100),
-                        child: blogListView(context, widget.key, swidth, posts),
+                        child: BlogListView(posts, swidth),
                       ),
                     },
                   ]),

@@ -35,29 +35,29 @@ class HomeViewState extends ConsumerState<HomeView> {
   @override
   void initState() {
     super.initState();
-    activateLoad();
-    waitData(ref);
+    // activateLoad();
+    // waitData(ref);
   }
 
-  void activateLoad() {
-    setState(() {
-      loadPosts = true;
-      loadObjects = true;
-    });
-  }
+  // void activateLoad() {
+  //   setState(() {
+  //     loadPosts = true;
+  //     loadObjects = true;
+  //   });
+  // }
 
-  void waitData(ref) {
-    Future.wait([fetchPosts(ref), fetchObjects(ref)])
-        .timeout(Duration(seconds: 5))
-        .whenComplete(
-          () => setState(
-            () {
-              loadPosts = false;
-              loadObjects = false;
-            },
-          ),
-        );
-  }
+  // void waitData(ref) {
+  //   Future.wait([fetchObjects(ref)])
+  //       .timeout(Duration(seconds: 5))
+  //       .whenComplete(
+  //         () => setState(
+  //           () {
+  //             loadPosts = false;
+  //             loadObjects = false;
+  //           },
+  //         ),
+  //       );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +78,7 @@ class HomeViewState extends ConsumerState<HomeView> {
                 scrollController: _scrollController,
               ),
             ),
-            if (loadPosts || loadObjects) ...{circleLoadSpinner(context)}
+            // if (loadPosts || loadObjects) ...{circleLoadSpinner(context)}
           ],
         ),
       ),
@@ -269,104 +269,104 @@ class OAHomeState extends ConsumerState<OAHome> {
 }
 
 // fim
-class BlogHome extends ConsumerStatefulWidget {
-  final double swidth;
-  const BlogHome(this.swidth, {super.key});
+// class BlogHome extends ConsumerStatefulWidget {
+//   final double swidth;
+//   const BlogHome(this.swidth, {super.key});
 
-  @override
-  BlogHomeState createState() => BlogHomeState();
-}
+//   @override
+//   BlogHomeState createState() => BlogHomeState();
+// }
 
-class BlogHomeState extends ConsumerState<BlogHome> {
-  @override
-  Widget build(BuildContext context) {
-    double imageWidth = widget.swidth * .3;
-    double imageHeight = 185;
+// class BlogHomeState extends ConsumerState<BlogHome> {
+//   @override
+//   Widget build(BuildContext context) {
+//     double imageWidth = widget.swidth * .3;
+//     double imageHeight = 185;
 
-    return FutureBuilder(
-      future: fetchPosts(ref),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          final blogList = ref.watch(blogPostsHome);
-          List<BlogModel?> posts = [...blogList];
-          return Container(
-            constraints: BoxConstraints(maxWidth: 1200),
-            padding: EdgeInsets.symmetric(horizontal: widget.swidth * .057),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (posts.isNotEmpty) ...{
-                  Padding(
-                    padding: paddingValues("mainTitle", context),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: widget.swidth * .01),
-                          child: SectionTitle('Últimos posts do blog', '',
-                              CrossAxisAlignment.start),
-                        ),
-                      ],
-                    ),
-                  ),
-                  ResponsiveGridRow(
-                    children: [
-                      for (var item in posts) ...{
-                        ResponsiveGridCol(
-                          lg: 4,
-                          md: 8,
-                          sm: 12,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: widget.swidth * .01),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.network(item!.imagePath,
-                                    height: imageHeight,
-                                    width: imageWidth,
-                                    fit: BoxFit.cover),
-                                Padding(
-                                  padding:
-                                      paddingValues("blogPostDate", context),
-                                  child: Row(
-                                    children: [
-                                      const Icon(Icons.access_time, size: 16),
-                                      Text(item.publishedDate),
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  margin:
-                                      paddingValues("blogHomeTitle", context),
-                                  child: Text(item.title,
-                                      style: textTheme.titleSmall!),
-                                ),
-                                Text(item.text, maxLines: 4),
-                              ],
-                            ),
-                          ),
-                        ),
-                      }
-                    ],
-                  ),
-                } else
-                  ...{}
-              ],
-            ),
-          );
-        } else if (snapshot.hasError) {
-          Container(
-            padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
-            width: widget.swidth,
-            child: Text(
-              "Perdão, tivemos um problema, tente mais tarde.",
-            ),
-          );
-        }
-        return circleLoadSpinner(context);
-      },
-    );
-  }
-}
+//     return FutureBuilder(
+//       future: fetchPosts(ref),
+//       builder: (context, snapshot) {
+//         if (snapshot.connectionState == ConnectionState.done) {
+//           final blogList = ref.watch(blogPostsHome);
+//           List<BlogModel?> posts = [...blogList];
+//           return Container(
+//             constraints: BoxConstraints(maxWidth: 1200),
+//             padding: EdgeInsets.symmetric(horizontal: widget.swidth * .057),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               children: [
+//                 if (posts.isNotEmpty) ...{
+//                   Padding(
+//                     padding: paddingValues("mainTitle", context),
+//                     child: Row(
+//                       mainAxisSize: MainAxisSize.max,
+//                       children: [
+//                         Padding(
+//                           padding: EdgeInsets.symmetric(
+//                               horizontal: widget.swidth * .01),
+//                           child: SectionTitle('Últimos posts do blog', '',
+//                               CrossAxisAlignment.start),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                   ResponsiveGridRow(
+//                     children: [
+//                       for (var item in posts) ...{
+//                         ResponsiveGridCol(
+//                           lg: 4,
+//                           md: 8,
+//                           sm: 12,
+//                           child: Padding(
+//                             padding: EdgeInsets.symmetric(
+//                                 horizontal: widget.swidth * .01),
+//                             child: Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 // Image.network(item!.imagePath,
+//                                 //     height: imageHeight,
+//                                 //     width: imageWidth,
+//                                 //     fit: BoxFit.cover),
+//                                 Padding(
+//                                   padding:
+//                                       paddingValues("blogPostDate", context),
+//                                   child: Row(
+//                                     children: [
+//                                       const Icon(Icons.access_time, size: 16),
+//                                       Text(item!.year),
+//                                     ],
+//                                   ),
+//                                 ),
+//                                 Container(
+//                                   margin:
+//                                       paddingValues("blogHomeTitle", context),
+//                                   child: Text(item.title,
+//                                       style: textTheme.titleSmall!),
+//                                 ),
+//                                 Text(item.summary, maxLines: 4),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                       }
+//                     ],
+//                   ),
+//                 } else
+//                   ...{}
+//               ],
+//             ),
+//           );
+//         } else if (snapshot.hasError) {
+//           Container(
+//             padding: const EdgeInsets.only(top: 100, left: 90, right: 15),
+//             width: widget.swidth,
+//             child: Text(
+//               "Perdão, tivemos um problema, tente mais tarde.",
+//             ),
+//           );
+//         }
+//         return circleLoadSpinner(context);
+//       },
+//     );
+//   }
+// }
