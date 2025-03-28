@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/searchDropdown.dart';
@@ -172,7 +170,7 @@ class OAFilterState extends State<OAFilters> {
                       content: Container(
                         height: MediaQuery.of(context).size.height,
                         width: MediaQuery.of(context).size.width * .9,
-                        child: Column(
+                        child: ListView(
                           children: [
                             Wrap(
                               alignment: WrapAlignment.spaceEvenly,
@@ -213,6 +211,25 @@ class OAFilterState extends State<OAFilters> {
                                             MediaQuery.of(context).size.width *
                                                 .45,
                                         child: temaConteudoRadioTextField),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      tileTitle[4],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18),
+                                    ),
+                                    Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                .75,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                .45,
+                                        child: habilidadeRadioTextField)
                                   ],
                                 ),
                               ],
