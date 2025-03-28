@@ -8,7 +8,6 @@ import 'package:obamahome/utils/app_padding.dart';
 import '../../../../templates/template_basic_col.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
-import '../blog_controller.dart';
 import '../blog_view.dart';
 
 class BlogMobile extends ConsumerStatefulWidget {

@@ -68,14 +68,14 @@ class SearchPageState extends ConsumerState<SearchPage> {
         .whenComplete(() => setState(() {
               loadObjects = false;
             }));
-    Future.wait([fetchNivelEnsino()])
-        .then((data) => setState(() {
-              niveisEnsino = data.first;
-            }))
-        .timeout(Duration(seconds: 5))
-        .whenComplete(() => setState(() {
-              loadObjects = false;
-            }));
+    // Future.wait([fetchNivelEnsino()])
+    //     .then((data) => setState(() {
+    //           niveisEnsino = data.first;
+    //         }))
+    //     .timeout(Duration(seconds: 5))
+    //     .whenComplete(() => setState(() {
+    //           loadObjects = false;
+    //         }));
   }
 
   @override

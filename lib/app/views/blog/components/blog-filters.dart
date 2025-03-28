@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/app/models/blog_models.dart';
 
 import '../../../../utils/app_theme.dart';
@@ -7,7 +6,7 @@ import '../../../../utils/app_theme.dart';
 @override
 Widget blogFilters(BuildContext context, double swidth, List<BlogModel?> datas,
     Function(String) updateData, TextStyle titleStyle) {
-  bool isHover = false;
+      
   return Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
     Container(
         alignment: Alignment.centerLeft,

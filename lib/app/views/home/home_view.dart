@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:obamahome/app/models/blog_models.dart';
 import 'package:obamahome/app/views/home/responsividade/home_desktop.dart';
 import 'package:obamahome/app/views/home/responsividade/home_tablet.dart';
-import 'package:obamahome/components/loadCircle.dart';
 import 'package:obamahome/utils/responsivo.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../../components/sectionTitle.dart';
 import '../../../utils/app_padding.dart';
 import '../../../utils/app_theme.dart';
-import '../../controllers/home_controllers.dart';
 import 'responsividade/home_Mobile.dart';
 
 class HomeView extends ConsumerStatefulWidget {

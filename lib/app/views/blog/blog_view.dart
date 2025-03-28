@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_network/image_network.dart';
 import 'package:obamahome/app/views/blog/responsividade/blog_desktop.dart';
 import 'package:obamahome/app/views/blog/responsividade/blog_mobile.dart';
 import 'package:obamahome/app/views/blog/responsividade/blog_tablet.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../components/loadCircle.dart';
@@ -12,7 +10,6 @@ import '../../../utils/app_theme.dart';
 import '../../../utils/responsivo.dart';
 import '../../controllers/blog_controller.dart';
 import '../../models/blog_models.dart';
-import 'components/blog-details.dart';
 
 List<IconData> shareMedia = [
   FontAwesomeIcons.facebook,

@@ -7,7 +7,6 @@ import 'package:obamahome/templates/template_basic_row.dart';
 
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
-import '../blog_controller.dart';
 import '../blog_view.dart';
 
 class BlogDesktop extends ConsumerStatefulWidget {

@@ -1,7 +1,36 @@
+import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:http/http.dart' as http;
 
 import '../models/blog_models.dart';
-import '../views/blog/blog_controller.dart';
+
+Future<dynamic> fetchJsonData(String url) async {
+  final response = await http.get(Uri.parse(url));
+  if (response.statusCode == 200) {
+    final data = jsonDecode(response.body);
+    return data;
+  } else {
+    throw Exception('Falha ao carregar conteúdo de $url');
+  }
+}
+
+Future<List<BlogModel>> fetchPublications() async {
+  final url =
+      'https://raw.githubusercontent.com/amandamaria/imagens-oas/refs/heads/main/publications.json';
+
+  try {
+    final jsonData = await fetchJsonData(url);
+
+    if (jsonData.containsKey('content') && jsonData['content'] is List) {
+      return BlogModel.fromJsonList(jsonData['content']);
+    } else {
+      throw Exception('Formato de JSON inválido');
+    }
+  } catch (e) {
+    print('Erro: $e');
+    return [];
+  }
+}
 
 List<BlogModel> filtrarPosts(List<BlogModel> jsonData, String searchTerm) {
   if (searchTerm.isEmpty) {
@@ -28,9 +57,9 @@ final blogPosts = StateProvider<List<BlogModel?>>((ref) {
 
 class BlogController {
   Future<List<BlogModel?>> updateBlogContent(String searchTerm) async {
-
-    List<BlogModel> updatedPosts = await fetchContents();
-    final List<BlogModel> postsFiltrados = filtrarPosts(updatedPosts, searchTerm);
+    List<BlogModel> updatedPosts = await fetchPublications();
+    final List<BlogModel> postsFiltrados =
+        filtrarPosts(updatedPosts, searchTerm);
 
     return postsFiltrados;
   }

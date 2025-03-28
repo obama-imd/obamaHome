@@ -8,7 +8,6 @@ import '../../../../components/loadCircle.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/blog_controller.dart';
 import '../../../models/blog_models.dart';
-import '../blog_controller.dart';
 import '../blog_view.dart';
 import 'blog-filters.dart';
 
