@@ -203,34 +203,30 @@ enum Curriculo { BNCC, PCN }
 
 class Habilidade {
   int id;
-  String descricao;
-  String conhecimentos;
   String codigo;
-  TemaConteudo temaConteudo;
-  AnoEnsino anoEnsino;
+  String descricao;
+  String nomeAnoEnsino;
 
   Habilidade({
     required this.id,
-    required this.descricao,
-    required this.conhecimentos,
     required this.codigo,
-    required this.temaConteudo,
-    required this.anoEnsino,
+    required this.descricao,
+    required this.nomeAnoEnsino,
   });
 
   factory Habilidade.fromJson(Map<String, dynamic> json) {
     return Habilidade(
-        id: json['id'],
-        descricao: json['descricao'],
-        conhecimentos: json['conhecimentos'],
-        codigo: json['codigo'],
-        temaConteudo: TemaConteudo.fromJson(json['temaConteudo'], 'BNCC'),
-        anoEnsino: AnoEnsino.fromJson(json['anoEnsino']));
+      id: json['id'],
+      codigo: json['codigo'],
+      descricao: json['descricao'],
+      nomeAnoEnsino: json['nome_ano_ensino'], // Ajustado para o formato correto do JSON
+    );
   }
-  @override
-  String toString() {
-    return '${anoEnsino.nivelEnsino.nome} - $codigo: $descricao';
-  }
+
+  String get formattedDescricao => '$nomeAnoEnsino - $codigo: $descricao';
+  (int, String) get asTuple => (id, formattedDescricao);
+
+  (int, String) tointString() => asTuple;
 }
 
 class AnoEnsino {

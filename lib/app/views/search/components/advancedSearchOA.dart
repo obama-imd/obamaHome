@@ -11,7 +11,7 @@ const List<String> tileTitle = <String>[
   'Selecione o nível de ensino',
   'Selecione o Tema/Conteúdo',
   'Selecione o descritor',
-  'Selecione a disciplina',
+  // 'Selecione a disciplina',
   'Selecione a habilidade',
 ];
 
@@ -35,6 +35,8 @@ class OAFilterState extends State<OAFilters> {
   String selectedTemaConteudo = '';
   int? temaConteudoSelecionado = 0;
   int? nivelEnsinoSelecionado = 0;
+  int? descritorSelecionado = 0;
+  int? habilidadeSelecionada = 0;
   String searchTerm = '';
 
   List<(int, String)>? nivelEnsinolData;
@@ -49,9 +51,20 @@ class OAFilterState extends State<OAFilters> {
 
   TextEditingController searchTextController = TextEditingController();
 
+  Map<int, int?>? selectedValues = {};
+  List<RadioTextField?> RadioTextFieldsList = [];
+
   @override
   void initState() {
     super.initState();
+
+    selectedValues = {
+      0: nivelEnsinoSelecionado,
+      1: temaConteudoSelecionado,
+      2: descritorSelecionado,
+      3: habilidadeSelecionada
+    };
+
     fetchSearchData().then((response) {
       setState(() {
         nivelEnsinolData =
@@ -61,44 +74,89 @@ class OAFilterState extends State<OAFilters> {
             .toList();
       });
       nivelEnsinoRadioTextField = RadioTextField(
-        array: nivelEnsinolData ?? [],
+        array: nivelEnsinolData!,
+        radioTextFieldID: 0,
         title: tileTitle[0],
         titleStyle: textTheme.bodySmall!,
-        initalValue: 0,
+        tileHeight: 35,
+        initialValue: selectedValues,
         refreshData: _refreshDescritorHabilidade,
       );
       temaConteudoRadioTextField = RadioTextField(
-        array: temaConteudoData ?? [],
+        array: temaConteudoData!,
+        radioTextFieldID: 1,
         title: tileTitle[1],
         titleStyle: textTheme.bodySmall!,
-        initalValue: 0,
+        tileHeight: 35,
+        initialValue: selectedValues,
         refreshData: _refreshDescritorHabilidade,
       );
-    });
-  }
-
-  void _refreshDescritorHabilidade(int? value) {
-    fetchHabilidadeByAnoEnsinoTemaConteudo(
-            selectedNivelEnsino, selectedTemaConteudo)
-        .then((response) {
-      setState(() {
-        habilidadeData = response.map((x) => (x.id, x.descricao)).toList();
-      });
-      habilidadeRadioTextField = RadioTextField(
-        array: habilidadeData ?? [],
+      descritorRadioTextField = RadioTextField(
+        array: descritorData ?? [],
+        radioTextFieldID: 2,
         title: tileTitle[2],
+        initialValue: selectedValues,
         titleStyle: textTheme.bodySmall!,
-        initalValue: 0,
       );
+      setState(() {
+        RadioTextFieldsList = [
+          nivelEnsinoRadioTextField,
+          temaConteudoRadioTextField,
+          descritorRadioTextField,
+          habilidadeRadioTextField,
+        ];
+      });
     });
-
-    descritorRadioTextField = RadioTextField(
-      array: descritorData ?? [],
-      title: tileTitle[2],
-      titleStyle: textTheme.bodySmall!,
-      initalValue: 0,
-    );
   }
+
+  void _refreshDescritorHabilidade(int? nivelEnsinoId, int? temaConteudoId) {
+    if (nivelEnsinoId! > 0 && temaConteudoId! > 0) {
+      fetchHabilidadeByAnoEnsinoTemaConteudo(nivelEnsinoId, temaConteudoId)
+          .then((response) {
+        setState(() {
+          habilidadeData =
+              response.map((x) => (x.id, x.formattedDescricao)).toList();
+
+          habilidadeRadioTextField = RadioTextField(
+              array: habilidadeData!,
+              radioTextFieldID: 3,
+              title: tileTitle[2],
+              initialValue: selectedValues,
+              titleStyle: textTheme.bodySmall!,
+              shoulAddOptionAll: false);
+
+          RadioTextFieldsList[3] = habilidadeRadioTextField;
+        });
+        Navigator.of(context).pop();
+        advancedSearchModal(RadioTextFieldsList);
+      });
+    }
+  }
+
+  // void _refreshDescritorHabilidade(int? nivelEnsinoId, int? temaConteudoId) {
+  //   fetchHabilidadeByAnoEnsinoTemaConteudo(nivelEnsinoId, temaConteudoId)
+  //       .then((response) {
+  //     setState(() {
+  //       habilidadeData = response.map((x) => (x.id, x.descricao)).toList();
+  //     });
+
+  //     habilidadeRadioTextField = RadioTextField(
+  //       array: habilidadeData ?? [],
+  //       radioTextFieldID: 3,
+  //       title: tileTitle[2],
+  //       initialValue: selectedValues,
+  //       titleStyle: textTheme.bodySmall!,
+  //     );
+  //   });
+
+  //   descritorRadioTextField = RadioTextField(
+  //     array: descritorData ?? [],
+  //     radioTextFieldID: 2,
+  //     title: tileTitle[2],
+  //     initialValue: selectedValues,
+  //     titleStyle: textTheme.bodySmall!,
+  //   );
+  // }
 
   void mainSearch() {
     setState(() {
@@ -143,15 +201,6 @@ class OAFilterState extends State<OAFilters> {
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          // Container(child: Text(tileTitle[0])),
-          // ExpansionPanelListSimple(data: [
-          //   Item(
-          //       expandedValue: nivelEnsinoRadioTextField ?? Container(),
-          //       headerValue: tileTitle[0]),
-          //   Item(
-          //       expandedValue: temaConteudoRadioTextField ?? Container(),
-          //       headerValue: tileTitle[1]),
-          // ]),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -164,94 +213,72 @@ class OAFilterState extends State<OAFilters> {
                 },
               ),
               SizedBox(width: 8),
-              mainButton(context, 'Busca Avançada', null, () {
-                showDialog<void>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      content: Container(
-                        height: MediaQuery.of(context).size.height,
-                        width: MediaQuery.of(context).size.width * .9,
-                        child: Column(
-                          children: [
-                            Wrap(
-                              alignment: WrapAlignment.spaceEvenly,
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      tileTitle[0],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                    Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .75,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .45,
-                                        child: nivelEnsinoRadioTextField),
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      tileTitle[1],
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18),
-                                    ),
-                                    Container(
-                                        height:
-                                            MediaQuery.of(context).size.height *
-                                                .75,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                .45,
-                                        child: temaConteudoRadioTextField),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      actions: <Widget>[
-                        mainButton(
-                          context,
-                          'Voltar',
-                          null,
-                          () {
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                        mainButton(
-                          context,
-                          'Buscar',
-                          null,
-                          () {
-                            mainSearch();
-                            Navigator.of(context).pop();
-                          },
-                        ),
-                      ],
-                    );
-                  },
-                );
-              }),
+              mainButton(context, 'Busca Avançada', null,
+                  () => advancedSearchModal(RadioTextFieldsList)),
             ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [],
           ),
         ],
       ),
     ]);
+  }
+
+  void advancedSearchModal(List<RadioTextField?> RadioTextFieldsList) {
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width * .95,
+            child: SingleChildScrollView(
+              child: Wrap(
+                alignment: WrapAlignment.spaceEvenly,
+                children: [
+                  for (var i = 0; i < RadioTextFieldsList.length; i++) ...{
+                    Container(
+                      width: MediaQuery.of(context).size.width * .45,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25, bottom: 8),
+                            child: Text(
+                              tileTitle[i],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
+                          ),
+                          Container(child: RadioTextFieldsList[i]),
+                        ],
+                      ),
+                    ),
+                  },
+                ],
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            mainButton(
+              context,
+              'Voltar',
+              null,
+              () {
+                Navigator.of(context).pop();
+              },
+            ),
+            mainButton(
+              context,
+              'Buscar',
+              null,
+              () {
+                mainSearch();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   String _buildQueryString() {

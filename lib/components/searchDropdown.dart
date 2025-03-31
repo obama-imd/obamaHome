@@ -65,33 +65,29 @@ class RadioTextField extends StatefulWidget {
   RadioTextField(
       {super.key,
       required this.array,
+      required this.radioTextFieldID,
       required this.title,
       required this.titleStyle,
-      this.initalValue,
+      this.tileHeight,
+      this.initialValue,
       this.shoulAddOptionAll = true,
       this.refreshData = null});
 
   final List<(int, String)> array;
+  final int radioTextFieldID;
   final String title;
   final TextStyle titleStyle;
-  final int? initalValue;
+  final Map<int, int?>? initialValue;
+  double? tileHeight;
   var selectedValue;
   bool shoulAddOptionAll;
-  Function(int?)? refreshData;
+  Function(int?, int?)? refreshData;
 
   @override
   State<RadioTextField> createState() => _RadioTextFieldState();
 }
 
 class _RadioTextFieldState extends State<RadioTextField> {
-  int? _character;
-
-  @override
-  void initState() {
-    _character = widget.initalValue;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     if (widget.shoulAddOptionAll) {
@@ -101,27 +97,34 @@ class _RadioTextFieldState extends State<RadioTextField> {
 
     return Column(
       children: widget.array
-          .map((e) => ListTile(
-                title: Text(
-                  e.$2,
-                  style: widget.titleStyle,
-                ),
-                leading: Radio<int>(
-                  value: e.$1,
-                  groupValue: _character,
-                  onChanged: _handleUpdate,
+          .map((e) => Container(
+                height: widget.tileHeight,
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(3),
+                  title: Text(
+                    e.$2,
+                    style: widget.titleStyle,
+                  ),
+                  leading: Radio<int>(
+                    value: e.$1,
+                    splashRadius: 20,
+                    groupValue: widget.initialValue![widget.radioTextFieldID],
+                    onChanged: (int? value) {
+                      _handleUpdate(value, widget.radioTextFieldID);
+                    },
+                  ),
                 ),
               ))
           .toList(),
     );
   }
 
-  void _handleUpdate(int? value) {
+  void _handleUpdate(int? selectedValue, int radioTextFieldId) {
     setState(() {
-      _character = value;
-      widget.selectedValue = value;
+      widget.initialValue![widget.radioTextFieldID] = selectedValue;
+      widget.selectedValue = selectedValue;
     });
-    widget.refreshData!(_character);
+    widget.refreshData!(widget.initialValue![0], widget.initialValue![1]);
   }
 }
 
