@@ -30,7 +30,7 @@ class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
       child: ElevatedButton(
           onPressed: () async {
             await LoginAPI.login(ref);
-            bool boolLog = await GoogleSignIn().isSignedIn();
+            // bool boolLog = await GoogleSignIn().isSignedIn();
             // () => widget.isLogged(boolLog);
             // print(" userData => $user");
           },

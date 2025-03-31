@@ -11,30 +11,30 @@ final blogPostsHome = StateProvider<List<BlogModel?>>((ref) {
   return [];
 });
 
-Future<List<dynamic>> fetchPosts(WidgetRef ref) async {
-  final response = await http.get(Uri.parse('http://localhost:3000/dados'));
+// Future<List<dynamic>> fetchPosts(WidgetRef ref) async {
+//   final response = await http.get(Uri.parse('http://localhost:3000/dados'));
 
-  if (response.statusCode == 200) {
-    final jsonData = jsonDecode(response.body);
-    final posts = jsonData
-        .map<BlogModel>((item) => BlogModel(
-              title: item['title'],
-              text: item['text'],
-              summary: extractSummaryPath(item['summary']),
-              publishedDate: convertDate(item['published_date']),
-              imagePath: extractImagePath(item['content']),
-            ))
-        .toList() as List<BlogModel>;
+//   if (response.statusCode == 200) {
+//     final jsonData = jsonDecode(response.body);
+//     final posts = jsonData
+//         .map<BlogModel>((item) => BlogModel(
+//               title: item['title'],
+//               text: item['text'],
+//               summary: extractSummaryPath(item['summary']),
+//               publishedDate: convertDate(item['published_date']),
+//               imagePath: extractImagePath(item['content']),
+//             ))
+//         .toList() as List<BlogModel>;
 
-    final newPosts = ref.read(blogPostsHome);
-    newPosts.clear();
-    newPosts.addAll(posts);
+//     final newPosts = ref.read(blogPostsHome);
+//     newPosts.clear();
+//     newPosts.addAll(posts);
 
-    return posts;
-  } else {
-    return [];
-  }
-}
+//     return posts;
+//   } else {
+//     return [];
+//   }
+// }
 
 final searchListHome = StateProvider<List<SearchModel?>>((ref) {
   return [];

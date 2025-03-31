@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/searchDropdown.dart';

@@ -78,19 +78,20 @@ Future<SearchParametersResult> fetchSearchData() async {
         'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
   }
 
-  apiUrl = '${API_URL}/temaconteudo?curriculo=BNCC';
-  response = await http.get(Uri.parse(apiUrl),
-      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+  // apiUrl = '${API_URL}/temaconteudo?curriculo=';
+  // // apiUrl = '${API_URL}/temaconteudo?curriculo=BNCC';
+  // response = await http.get(Uri.parse(apiUrl),
+  //     headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
-  if (response.statusCode == 200) {
-    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+  // if (response.statusCode == 200) {
+  //   final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
-    responseTemaConteudo = List<TemaConteudo>.from(
-        jsonData.map((x) => TemaConteudo.fromJson(x, 'BNCC')));
-  } else {
-    return Future.error(
-        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
-  }
+  //   responseTemaConteudo = List<TemaConteudo>.from(
+  //       jsonData.map((x) => TemaConteudo.fromJson(x, 'BNCC')));
+  // } else {
+  //   return Future.error(
+  //       'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+  // }
 
   apiUrl = '${API_URL}/temaconteudo?curriculo=PCN';
   response = await http.get(Uri.parse(apiUrl),

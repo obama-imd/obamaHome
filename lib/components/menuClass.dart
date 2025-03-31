@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:obamahome/app/models/lesson_plan_models.dart';
+
 import 'package:obamahome/auth/controller.dart';
 
 class ItemValue {
@@ -42,13 +41,15 @@ List<ItemValue> getItemValues() {
       itemHover: false,
       subItemHover: List.generate(3, (index) => false),
     ),
-    // ItemValue(
-    //   name: "Publicações",
-    //   path: ['/blog', '/blog-detalhes'],
-    //   subItems: ["Lista de Posts", "Último post"],
-    //   itemHover: false,
-    //   subItemHover: List.generate(2, (index) => false),
-    // ),
+    ItemValue(
+      name: "Publicações",
+      path: ['/publicacoes'],
+      // path: ['/publicacoes', '/publicacao-detalhe'],
+      subItems: [],
+      // subItems: ["Lista de Publicações", "Última publicação"],
+      itemHover: false,
+      subItemHover: List.generate(2, (index) => false),
+    ),
     ItemValue(
       name: "Formações",
       path: ['/formacoes'],
