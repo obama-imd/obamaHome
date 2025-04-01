@@ -255,13 +255,13 @@ class CarouselState extends State<Carousel> {
                                         TextButton(
                                             style: ButtonStyle(
                                               fixedSize:
-                                                  MaterialStatePropertyAll(
+                                                  WidgetStatePropertyAll(
                                                       Size(150, 50)),
                                               backgroundColor:
-                                                  MaterialStatePropertyAll(
+                                                  WidgetStatePropertyAll(
                                                       onPrimary),
                                               overlayColor:
-                                                  MaterialStatePropertyAll(
+                                                  WidgetStatePropertyAll(
                                                       onPrimary),
                                             ),
                                             onPressed: openContactUsForm,
@@ -434,11 +434,11 @@ class CarouselState extends State<Carousel> {
                           TextButton(
                               style: ButtonStyle(
                                 fixedSize:
-                                    MaterialStatePropertyAll(Size(150, 50)),
+                                    WidgetStatePropertyAll(Size(150, 50)),
                                 backgroundColor:
-                                    MaterialStatePropertyAll(onPrimary),
+                                    WidgetStatePropertyAll(onPrimary),
                                 overlayColor:
-                                    MaterialStatePropertyAll(onPrimary),
+                                    WidgetStatePropertyAll(onPrimary),
                               ),
                               onPressed: openContactUsForm,
                               child: Text(

@@ -76,7 +76,9 @@ class OAFilterState extends State<OAFilters> {
             .map((x) => (x.id, x.formattedDescricao))
             .toList();
       });
-
+      if (nivelEnsinolData != null) {
+        nivelEnsinolData?.sort((a, b) => a.$1.compareTo(b.$1));
+      }
       nivelEnsinoRadioTextField = RadioTextField(
         array: nivelEnsinolData ?? [],
         radioTextFieldID: 0,

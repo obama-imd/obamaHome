@@ -35,7 +35,7 @@ class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
             // print(" userData => $user");
           },
           style: ButtonStyle(
-            side: MaterialStatePropertyAll(
+            side: WidgetStatePropertyAll(
                 BorderSide(width: 1, color: secondary)),
           ),
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [

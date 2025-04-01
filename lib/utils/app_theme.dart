@@ -125,15 +125,15 @@ class MyAppMaterial extends MaterialApp {
           theme: ThemeData(
             menuButtonTheme: MenuButtonThemeData(
               style: ButtonStyle(
-                overlayColor: MaterialStatePropertyAll(background),
+                overlayColor: WidgetStatePropertyAll(background),
               ),
             ),
             menuBarTheme: MenuBarThemeData(
               style: MenuStyle(
                 // padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 18, vertical: 15)),
-                elevation: MaterialStatePropertyAll(0),
-                backgroundColor: MaterialStatePropertyAll(background),
-                shape: MaterialStatePropertyAll(
+                elevation: WidgetStatePropertyAll(0),
+                backgroundColor: WidgetStatePropertyAll(background),
+                shape: WidgetStatePropertyAll(
                   BeveledRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
@@ -142,22 +142,22 @@ class MyAppMaterial extends MaterialApp {
             ),
             textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(primary),
-                foregroundColor: MaterialStatePropertyAll(background),
-                padding: MaterialStatePropertyAll(
+                backgroundColor: WidgetStatePropertyAll(primary),
+                foregroundColor: WidgetStatePropertyAll(background),
+                padding: WidgetStatePropertyAll(
                   EdgeInsets.all(10),
                 ),
-                textStyle: MaterialStatePropertyAll(
+                textStyle: WidgetStatePropertyAll(
                   textTheme.displaySmall,
                 ),
-                overlayColor: MaterialStatePropertyAll(
+                overlayColor: WidgetStatePropertyAll(
                   Colors.lightBlue,
                 ),
               ),
             ),
             iconButtonTheme: IconButtonThemeData(
               style: ButtonStyle(
-                shape: MaterialStatePropertyAll(
+                shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
@@ -179,8 +179,6 @@ class MyAppMaterial extends MaterialApp {
               error: error,
               onError: onError,
               surface: background,
-              background: background,
-              onBackground: background,
               onSurface: onSurface,
             ),
             textTheme: textTheme,
