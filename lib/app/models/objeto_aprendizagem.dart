@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class ObjetoAprendizagem {
   String nome;
   String descricao;
@@ -130,8 +132,8 @@ class Descritor {
   int id;
   String descricao;
   String codigo;
-  TemaConteudo temaConteudo;
-  NivelEnsino nivelEnsino;
+  String temaConteudo;
+  String nivelEnsino;
 
   Descritor({
     required this.id,
@@ -141,19 +143,49 @@ class Descritor {
     required this.nivelEnsino,
   });
 
-  factory Descritor.fromJson(Map<String, dynamic> json) {
-    return Descritor(
-        id: json['id'],
-        descricao: json['descricao'],
-        codigo: json['codigo'],
-        temaConteudo: TemaConteudo.fromJson(json['temaConteudo'], 'PCN'),
-        nivelEnsino: NivelEnsino.fromJson(json['nivelEnsino']));
+  Map<String, dynamic> toMap() {
+    return {
+      'descricao': descricao,
+      'codigo': codigo,
+      'nome_tema_conteudo': temaConteudo,
+      'nome_nivel_ensino': nivelEnsino,
+    };
   }
 
-  @override
-  String toString() {
-    return '${nivelEnsino.nome} - $codigo: $descricao';
+  factory Descritor.fromMap(Map<String, dynamic> map) {
+    return Descritor(
+      id: map['id'],
+      descricao: map['descricao'],
+      codigo: map['codigo'],
+      temaConteudo: map['nome_tema_conteudo'],
+      nivelEnsino: map['nome_nivel_ensino'],
+    );
   }
+
+  String toJson() => json.encode(toMap());
+
+  // Criando objeto a partir de JSON
+  factory Descritor.fromJson(String source) =>
+      Descritor.fromMap(json.decode(source));
+
+  // Função para converter lista de JSON em lista de Descritor
+  static List<Descritor> fromJsonList(List<dynamic> jsonList) {
+    return jsonList.map((item) => Descritor.fromMap(item)).toList();
+  }
+
+  // factory Descritor.fromJson(Map<String, dynamic> json) {
+  //   return Descritor(
+  // id: json['id'],
+  // descricao: json['descricao'],
+  // codigo: json['codigo'],
+  // temaConteudo: json['nome_tema_conteudo'],
+  // nivelEnsino: json['nome_nivel_ensino']);
+  // }
+
+  String get formattedDescricao => '${nivelEnsino} - $codigo: $descricao';
+  (int, String) get asTuple => (id, formattedDescricao);
+
+  (int, String) tointString() => asTuple;
 }
 
 class NivelEnsino {
@@ -219,12 +251,12 @@ class Habilidade {
       id: json['id'],
       codigo: json['codigo'],
       descricao: json['descricao'],
-      nomeAnoEnsino: json['nome_ano_ensino'], // Ajustado para o formato correto do JSON
+      nomeAnoEnsino: json['nome_ano_ensino'],
     );
   }
 
-  String get formattedDescricao => '$nomeAnoEnsino - $codigo: $descricao';
-  (int, String) get asTuple => (id, formattedDescricao);
+  String get formattedHabilidade => '$nomeAnoEnsino - $codigo: $descricao';
+  (int, String) get asTuple => (id, formattedHabilidade);
 
   (int, String) tointString() => asTuple;
 }

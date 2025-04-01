@@ -53,15 +53,19 @@ Future<ObjetoAprendizagem> fetchOAById(int id) async {
 class SearchParametersResult {
   final List<NivelEnsino> allNivelEnsino;
   final List<TemaConteudo> allTemaConteudo;
+  final List<Descritor> allDescricoes;
 
-  SearchParametersResult(
-      {required this.allNivelEnsino, required this.allTemaConteudo});
+  SearchParametersResult({
+    required this.allNivelEnsino,
+    required this.allTemaConteudo,
+    required this.allDescricoes
+  });
 }
 
 Future<SearchParametersResult> fetchSearchData() async {
   List<NivelEnsino> responseNivelEnsino = [];
   List<TemaConteudo> responseTemaConteudo = [];
-  List<TemaConteudo> responseDescritor = [];
+  List<Descritor> responseDescritor = [];
 
   var apiUrl = '${API_URL}/nivelensino';
   var response = await http.get(Uri.parse(apiUrl),
@@ -74,10 +78,9 @@ Future<SearchParametersResult> fetchSearchData() async {
         List<NivelEnsino>.from(jsonData.map((x) => NivelEnsino.fromJson(x)));
   } else {
     return Future.error(
-        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+        'Failed to load ${NivelEnsino}. Status code: ${response.statusCode}');
   }
 
-  // apiUrl = '${API_URL}/temaconteudo?curriculo=';
   apiUrl = '${API_URL}/temaconteudo?curriculo=BNCC';
   response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
@@ -113,20 +116,27 @@ Future<SearchParametersResult> fetchSearchData() async {
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
-    // responseDescritor.addAll(List<TemaConteudo>.from(
-    //     jsonData.map((x) => TemaConteudo.fromJson(x))));
+    if (jsonData.containsKey('content') && jsonData['content'] is List) {
+      responseDescritor = Descritor.fromJsonList(jsonData['content']);
+    } else {
+      throw Exception('Formato de JSON inválido');
+    }
   } else {
     return Future.error(
-        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+        'Failed to load ${Descritor}. Status code: ${response.statusCode}');
   }
 
   final tudo = SearchParametersResult(
-      allNivelEnsino: responseNivelEnsino,
-      allTemaConteudo: responseTemaConteudo);
+    allNivelEnsino: responseNivelEnsino,
+    allTemaConteudo: responseTemaConteudo,
+    allDescricoes: responseDescritor,
+  );
+
   return tudo;
 }
 
-Future<List<Habilidade>> fetchHabilidadeByAnoEnsinoTemaConteudo(int? idAnoEnsino, int? idConteudo) async {
+Future<List<Habilidade>> fetchHabilidadeByAnoEnsinoTemaConteudo(
+    int? idAnoEnsino, int? idConteudo) async {
   List<Habilidade> responseHabilidade;
 
   var apiUrl =
@@ -143,9 +153,8 @@ Future<List<Habilidade>> fetchHabilidadeByAnoEnsinoTemaConteudo(int? idAnoEnsino
     responseHabilidade = habilidadesFromJson(jsonData["content"]);
   } else {
     return Future.error(
-        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+        'Failed to load ${Habilidade}. Status code: ${response.statusCode}');
   }
 
   return responseHabilidade;
 }
-

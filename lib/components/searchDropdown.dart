@@ -72,7 +72,7 @@ class RadioTextField extends StatefulWidget {
       this.shoulAddOptionAll = true,
       this.refreshData = null});
 
-  final List<(int, String)> array;
+  late final List<(int, String)> array;
   final int radioTextFieldID;
   final String title;
   final TextStyle titleStyle;
@@ -170,7 +170,8 @@ class _ExpansionPanelListSimpleState extends State<ExpansionPanelListSimple> {
         return ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
-              title: Text(item.headerValue),
+              title: Text(item.headerValue, textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             );
           },
           body: ListTile(title: item.expandedValue),

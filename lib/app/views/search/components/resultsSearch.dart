@@ -38,7 +38,7 @@ class SearchResultsState extends State<DisplaySearchResults> {
             final paginationData = snapshot.data;
 
             if (paginationData == null) {
-              return Center(child: Text("No data available"));
+              return Center(child: Text("Sem dados disponíveis"));
             }
 
             List<Content?> searchResult = [...paginationData.content];
@@ -66,6 +66,12 @@ class SearchResultsState extends State<DisplaySearchResults> {
             return Column(
               children: [
                 if (searchResult.isNotEmpty) ...{
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text("Busca obteve ${pagination.totalElements} resultados", style: textTheme.bodySmall),
+                    ],
+                  ),
                   Container(
                       constraints: BoxConstraints(minHeight: 370),
                       height: (355 * (rowNumbers)),
@@ -169,7 +175,6 @@ class SearchResultsState extends State<DisplaySearchResults> {
                       }
                     ],
                   ),
-                  // Container(height:60),
                 } else ...{
                   Center(child: Text("Nada a exibir no momento")),
                 },

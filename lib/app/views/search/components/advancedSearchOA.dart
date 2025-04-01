@@ -72,9 +72,13 @@ class OAFilterState extends State<OAFilters> {
         temaConteudoData = response.allTemaConteudo
             .map((x) => (x.id, x.getNomeWithCurriculo()))
             .toList();
+        descritorData = response.allDescricoes
+            .map((x) => (x.id, x.formattedDescricao))
+            .toList();
       });
+
       nivelEnsinoRadioTextField = RadioTextField(
-        array: nivelEnsinolData!,
+        array: nivelEnsinolData ?? [],
         radioTextFieldID: 0,
         title: tileTitle[0],
         titleStyle: textTheme.bodySmall!,
@@ -83,7 +87,7 @@ class OAFilterState extends State<OAFilters> {
         refreshData: _refreshDescritorHabilidade,
       );
       temaConteudoRadioTextField = RadioTextField(
-        array: temaConteudoData!,
+        array: temaConteudoData ?? [],
         radioTextFieldID: 1,
         title: tileTitle[1],
         titleStyle: textTheme.bodySmall!,
@@ -115,10 +119,10 @@ class OAFilterState extends State<OAFilters> {
           .then((response) {
         setState(() {
           habilidadeData =
-              response.map((x) => (x.id, x.formattedDescricao)).toList();
+              response.map((x) => (x.id, x.formattedHabilidade)).toList();
 
           habilidadeRadioTextField = RadioTextField(
-              array: habilidadeData!,
+              array: habilidadeData ?? [],
               radioTextFieldID: 3,
               title: tileTitle[2],
               initialValue: selectedValues,
@@ -127,10 +131,10 @@ class OAFilterState extends State<OAFilters> {
 
           RadioTextFieldsList[3] = habilidadeRadioTextField;
         });
-        Navigator.of(context).pop();
-        advancedSearchModal(RadioTextFieldsList);
       });
     }
+    Navigator.of(context).pop();
+    advancedSearchModal(RadioTextFieldsList);
   }
 
   void mainSearch() {
@@ -206,62 +210,97 @@ class OAFilterState extends State<OAFilters> {
   }
 
   void advancedSearchModal(List<RadioTextField?> RadioTextFieldsList) {
-    showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          content: Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width * .95,
-            child: SingleChildScrollView(
-              child: Wrap(
-                alignment: WrapAlignment.spaceEvenly,
-                children: [
-                  for (var i = 0; i < RadioTextFieldsList.length; i++) ...{
-                    Container(
-                      width: MediaQuery.of(context).size.width * .45,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25, bottom: 8),
-                            child: Text(
-                              tileTitle[i],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
+    List<Item> generateValuesList(int i) {
+      List<Item> itemValue = [
+        Item(
+            expandedValue: Container(child: RadioTextFieldsList[i]),
+            headerValue: tileTitle[i])
+      ];
+      return itemValue;
+    }
+
+    if (nivelEnsinolData!.isNotEmpty && temaConteudoData!.isNotEmpty) {
+      showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            surfaceTintColor: background,
+            content: Container(
+              color: background,
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width * .95,
+              child: SingleChildScrollView(
+                child: Wrap(
+                  alignment: WrapAlignment.spaceEvenly,
+                  children: [
+                    for (var i = 0; i < RadioTextFieldsList.length; i++) ...{
+                      Container(
+                        width: MediaQuery.of(context).size.width * .45,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(top: 25, bottom: 8),
+                              child: Text(
+                                tileTitle[i],
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 18),
+                              ),
                             ),
-                          ),
-                          Container(child: RadioTextFieldsList[i]),
-                        ],
+                            Container(child: RadioTextFieldsList[i]),
+                          ],
+                        ),
                       ),
-                    ),
-                  },
-                ],
+                    },
+                    // for (var i = 2; i < RadioTextFieldsList.length; i++) ...{
+                    //   Container(
+                    //     width: MediaQuery.of(context).size.width * .45,
+                    //     child: Column(
+                    //       mainAxisAlignment: MainAxisAlignment.start,
+                    //       children: [
+                    //         Padding(
+                    //           padding: const EdgeInsets.only(top: 25),
+                    //           child: ExpansionPanelListSimple(
+                    //               data: generateValuesList(i)),
+                    //         )
+                    //       ],
+                    //     ),
+                    //   ),
+                    // },
+                  ],
+                ),
               ),
             ),
-          ),
-          actions: <Widget>[
-            mainButton(
-              context,
-              'Voltar',
-              null,
-              () {
-                Navigator.of(context).pop();
-              },
-            ),
-            mainButton(
-              context,
-              'Buscar',
-              null,
-              () {
-                mainSearch();
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
-        );
-      },
-    );
+            actions: <Widget>[
+              mainButton(
+                context,
+                'Voltar',
+                null,
+                () {
+                  Navigator.of(context).pop();
+                },
+              ),
+              mainButton(
+                context,
+                'Buscar',
+                null,
+                () {
+                  mainSearch();
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(content: Text("Sem dados disponíveis"));
+          });
+    }
   }
 
   String _buildQueryString() {
