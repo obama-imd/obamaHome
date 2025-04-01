@@ -46,7 +46,7 @@ class BlogTabletState extends ConsumerState<BlogTablet> {
                         // padding: paddingValues(paddingName, context)
                         width: swidth,
                         child: ExpansionTile(
-                            title: Text("Busca Avançada"),
+                            title: Text("Busca"),
                             children: [
                               Padding(
                                 padding: paddingValues("fullGrid", context),
