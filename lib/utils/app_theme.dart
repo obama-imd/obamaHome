@@ -1,17 +1,14 @@
-import 'dart:js';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
-import 'package:obamahome/auth/controller.dart';
 import 'package:obamahome/auth/login.dart';
 import 'package:obamahome/auth/validateUser.dart';
 
 import '../404.dart';
 import '../app/views/about-us/aboutUs_view.dart';
 import '../app/views/blog/blog_view.dart';
-import '../app/views/blog/components/blog-details.dart';
 import '../app/views/formations/formacoes_view.dart';
 import '../app/views/home/home_view.dart';
 import '../app/views/lessons/lesson_plan_new.dart';
@@ -194,11 +191,11 @@ class MyAppMaterial extends MaterialApp {
           initialRoute: '/',
           routes: {
             '/sobre': (context) => const AboutUsPage(),
-            '/blog': (context) => const BlogPage(),
-            '/blog-detalhes': (context) => BlogDetails(
-                  initialPageIndex:
-                      ModalRoute.of(context)?.settings.arguments as int? ?? 0,
-                ),
+            '/publicacoes': (context) => const BlogPage(),
+            // '/blog-detalhes': (context) => BlogDetails(
+            //       initialPageIndex:
+            //           ModalRoute.of(context)?.settings.arguments as int? ?? 0,
+            //     ),
             '/formacoes': (context) => const Formacoes(),
             '/objetos-aprendizagem-nav': (context) {
               return SearchPage(
