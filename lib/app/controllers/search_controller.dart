@@ -69,7 +69,6 @@ Future<SearchParametersResult> fetchSearchData() async {
 
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
-    // print("print => $jsonData");
 
     responseNivelEnsino =
         List<NivelEnsino>.from(jsonData.map((x) => NivelEnsino.fromJson(x)));
@@ -79,19 +78,19 @@ Future<SearchParametersResult> fetchSearchData() async {
   }
 
   // apiUrl = '${API_URL}/temaconteudo?curriculo=';
-  // // apiUrl = '${API_URL}/temaconteudo?curriculo=BNCC';
-  // response = await http.get(Uri.parse(apiUrl),
-  //     headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+  apiUrl = '${API_URL}/temaconteudo?curriculo=BNCC';
+  response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
-  // if (response.statusCode == 200) {
-  //   final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
-  //   responseTemaConteudo = List<TemaConteudo>.from(
-  //       jsonData.map((x) => TemaConteudo.fromJson(x, 'BNCC')));
-  // } else {
-  //   return Future.error(
-  //       'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
-  // }
+    responseTemaConteudo = List<TemaConteudo>.from(
+        jsonData.map((x) => TemaConteudo.fromJson(x, 'BNCC')));
+  } else {
+    return Future.error(
+        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
+  }
 
   apiUrl = '${API_URL}/temaconteudo?curriculo=PCN';
   response = await http.get(Uri.parse(apiUrl),
@@ -113,8 +112,6 @@ Future<SearchParametersResult> fetchSearchData() async {
 
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
-
-    // print("print => $jsonData");
 
     // responseDescritor.addAll(List<TemaConteudo>.from(
     //     jsonData.map((x) => TemaConteudo.fromJson(x))));
@@ -138,8 +135,6 @@ Future<List<Habilidade>> fetchHabilidadeByAnoEnsinoTemaConteudo(int? idAnoEnsino
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
   if (response.statusCode == 200) {
     final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
-
-    print("print => $idAnoEnsino");
 
     List<Habilidade> habilidadesFromJson(List<dynamic> jsonList) {
       return jsonList.map((json) => Habilidade.fromJson(json)).toList();

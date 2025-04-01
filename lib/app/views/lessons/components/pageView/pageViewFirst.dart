@@ -44,7 +44,6 @@ class _PageViewFirstState extends ConsumerState<PageViewFirst> {
                       style: textTheme.bodySmall,
                       onChanged: (String? value) {
                         arrayData[i] = value!;
-                        print(arrayData);
                         setState(() {
                           // learningLevel = value!;
                         });

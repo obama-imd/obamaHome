@@ -31,6 +31,8 @@ class OAFilters extends StatefulWidget {
 class OAFilterState extends State<OAFilters> {
   String selectedNivelEnsino = '';
   String selectedTemaConteudo = '';
+  String selectedDescritor = '';
+  String selectedHabilidade = '';
   int? temaConteudoSelecionado = 0;
   int? nivelEnsinoSelecionado = 0;
   int? descritorSelecionado = 0;
@@ -131,31 +133,6 @@ class OAFilterState extends State<OAFilters> {
     }
   }
 
-  // void _refreshDescritorHabilidade(int? nivelEnsinoId, int? temaConteudoId) {
-  //   fetchHabilidadeByAnoEnsinoTemaConteudo(nivelEnsinoId, temaConteudoId)
-  //       .then((response) {
-  //     setState(() {
-  //       habilidadeData = response.map((x) => (x.id, x.descricao)).toList();
-  //     });
-
-  //     habilidadeRadioTextField = RadioTextField(
-  //       array: habilidadeData ?? [],
-  //       radioTextFieldID: 3,
-  //       title: tileTitle[2],
-  //       initialValue: selectedValues,
-  //       titleStyle: textTheme.bodySmall!,
-  //     );
-  //   });
-
-  //   descritorRadioTextField = RadioTextField(
-  //     array: descritorData ?? [],
-  //     radioTextFieldID: 2,
-  //     title: tileTitle[2],
-  //     initialValue: selectedValues,
-  //     titleStyle: textTheme.bodySmall!,
-  //   );
-  // }
-
   void mainSearch() {
     setState(() {
       selectedNivelEnsino = nivelEnsinoRadioTextField!.selectedValue != null &&
@@ -167,6 +144,14 @@ class OAFilterState extends State<OAFilters> {
                   temaConteudoRadioTextField!.selectedValue > 0
               ? '${temaConteudoRadioTextField!.selectedValue}'
               : '';
+      selectedDescritor = descritorRadioTextField!.selectedValue != null &&
+              descritorRadioTextField!.selectedValue > 0
+          ? '${descritorRadioTextField!.selectedValue}'
+          : '';
+      selectedHabilidade = habilidadeRadioTextField!.selectedValue != null &&
+              habilidadeRadioTextField!.selectedValue > 0
+          ? '${habilidadeRadioTextField!.selectedValue}'
+          : '';
       searchTerm = searchTextController.text;
     });
     final queryString = _buildQueryString();
@@ -286,6 +271,12 @@ class OAFilterState extends State<OAFilters> {
     }
     if (selectedTemaConteudo.isNotEmpty) {
       params.add('temaConteudoId=$selectedTemaConteudo');
+    }
+    if (selectedDescritor.isNotEmpty) {
+      params.add('descritorId=$selectedDescritor');
+    }
+    if (selectedHabilidade.isNotEmpty) {
+      params.add('habilidadeId=$selectedHabilidade');
     }
     if (searchTerm.isNotEmpty) {
       params.add('nome=$searchTerm');
