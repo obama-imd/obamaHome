@@ -146,7 +146,7 @@ class _BlogListViewState extends State<BlogListView> {
                           //         builder: (context) =>
                           //             BlogDetails(initialPageIndex: i)));
                         },
-                        overlayColor: const MaterialStatePropertyAll(onPrimary),
+                        overlayColor: const WidgetStatePropertyAll(onPrimary),
                         child: SizedBox(
                           width: 170,
                           height: 50,

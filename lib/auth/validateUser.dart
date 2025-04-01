@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/auth/controller.dart';
-import 'package:obamahome/auth/forgotPassword.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import 'components/formFields.dart';
-import 'components/googleSignInButton.dart';
 
 class ValidateUserPageView extends StatefulWidget {
   const ValidateUserPageView({super.key});
