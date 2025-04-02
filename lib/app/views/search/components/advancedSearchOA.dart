@@ -101,6 +101,7 @@ class OAFilterState extends State<OAFilters> {
         array: descritorData ?? [],
         radioTextFieldID: 2,
         title: tileTitle[2],
+        tileHeight: 35,
         initialValue: selectedValues,
         titleStyle: textTheme.bodySmall!,
       );
