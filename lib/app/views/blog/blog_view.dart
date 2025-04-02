@@ -31,34 +31,39 @@ class _BlogPageState extends State<BlogPage> {
   Key key = UniqueKey();
   late TextStyle titleStyle;
   bool loadPosts = false;
-  bool loadObjects = false;
 
   void updateData(String value) {
     setState(() {
       newData = value;
       key = UniqueKey();
     });
+    fetchData();
   }
 
   @override
   void initState() {
     super.initState();
-    activateLoad();
-    waitData();
+    fetchData();
   }
 
-  void activateLoad() {
+  void fetchData() async {
     setState(() {
       loadPosts = true;
     });
-  }
 
-  void waitData() async {
-    Future.wait([BlogController().updateBlogContent("")])
-        .timeout(Duration(seconds: 5))
-        .whenComplete(() => setState(() {
-              loadPosts = false;
-            }));
+    try {
+      await BlogController()
+          .updateBlogContent("")
+          .timeout(Duration(seconds: 5));
+    } catch (e) {
+      print("Erro ao carregar dados: $e");
+    } finally {
+      if (mounted) {
+        setState(() {
+          loadPosts = false;
+        });
+      }
+    }
   }
 
   @override
