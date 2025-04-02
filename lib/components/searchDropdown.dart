@@ -170,7 +170,8 @@ class _ExpansionPanelListSimpleState extends State<ExpansionPanelListSimple> {
         return ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
-              title: Text(item.headerValue, textAlign: TextAlign.center,
+              title: Text(item.headerValue,
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             );
           },

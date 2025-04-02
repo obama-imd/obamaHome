@@ -105,6 +105,13 @@ class OAFilterState extends State<OAFilters> {
         initialValue: selectedValues,
         titleStyle: textTheme.bodySmall!,
       );
+      habilidadeRadioTextField = RadioTextField(
+          array: habilidadeData ?? [],
+          radioTextFieldID: 3,
+          title: tileTitle[2],
+          initialValue: selectedValues,
+          titleStyle: textTheme.bodySmall!,
+          shoulAddOptionAll: false);
       setState(() {
         RadioTextFieldsList = [
           nivelEnsinoRadioTextField,
@@ -135,9 +142,13 @@ class OAFilterState extends State<OAFilters> {
           RadioTextFieldsList[3] = habilidadeRadioTextField;
         });
       });
+      Navigator.of(context).pop();
+      advancedSearchModal(RadioTextFieldsList);
+    } else {
+      setState(() {
+        selectedValues![3] = 0;
+      });
     }
-    Navigator.of(context).pop();
-    advancedSearchModal(RadioTextFieldsList);
   }
 
   void mainSearch() {
@@ -155,12 +166,12 @@ class OAFilterState extends State<OAFilters> {
               descritorRadioTextField!.selectedValue > 0
           ? '${descritorRadioTextField!.selectedValue}'
           : '';
-      selectedHabilidade = habilidadeRadioTextField!.selectedValue != null &&
-              habilidadeRadioTextField!.selectedValue > 0
-          ? '${habilidadeRadioTextField!.selectedValue}'
+      selectedHabilidade = selectedValues![3] != null && selectedValues![3]! > 0
+          ? '${selectedValues![3]}'
           : '';
       searchTerm = searchTextController.text;
     });
+
     final queryString = _buildQueryString();
     widget.updateData(queryString);
   }
@@ -194,14 +205,7 @@ class OAFilterState extends State<OAFilters> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              mainButton(
-                context,
-                'Buscar',
-                null,
-                () {
-                  mainSearch();
-                },
-              ),
+              mainButton(context, 'Buscar', null, mainSearch),
               SizedBox(width: 8),
               mainButton(context, 'Busca Avançada', null,
                   () => advancedSearchModal(RadioTextFieldsList)),
@@ -213,14 +217,14 @@ class OAFilterState extends State<OAFilters> {
   }
 
   void advancedSearchModal(List<RadioTextField?> RadioTextFieldsList) {
-    List<Item> generateValuesList(int i) {
-      List<Item> itemValue = [
-        Item(
-            expandedValue: Container(child: RadioTextFieldsList[i]),
-            headerValue: tileTitle[i])
-      ];
-      return itemValue;
-    }
+    // List<Item> generateValuesList(int i) {
+    //   List<Item> itemValue = [
+    //     Item(
+    //         expandedValue: Container(child: RadioTextFieldsList[i]),
+    //         headerValue: tileTitle[i])
+    //   ];
+    //   return itemValue;
+    // }
 
     if (nivelEnsinolData!.isNotEmpty && temaConteudoData!.isNotEmpty) {
       showDialog<void>(
