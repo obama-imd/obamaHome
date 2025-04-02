@@ -153,18 +153,14 @@ class OAFilterState extends State<OAFilters> {
 
   void mainSearch() {
     setState(() {
-      selectedNivelEnsino = nivelEnsinoRadioTextField!.selectedValue != null &&
-              nivelEnsinoRadioTextField!.selectedValue > 0
-          ? '${nivelEnsinoRadioTextField!.selectedValue}'
+      selectedNivelEnsino = selectedValues![0] != null && selectedValues![0]! > 0
+          ? '${selectedValues![0]}'
           : '';
-      selectedTemaConteudo =
-          temaConteudoRadioTextField!.selectedValue != null &&
-                  temaConteudoRadioTextField!.selectedValue > 0
-              ? '${temaConteudoRadioTextField!.selectedValue}'
+      selectedTemaConteudo = selectedValues![1] != null && selectedValues![1]! > 0
+          ? '${selectedValues![1]}'
               : '';
-      selectedDescritor = descritorRadioTextField!.selectedValue != null &&
-              descritorRadioTextField!.selectedValue > 0
-          ? '${descritorRadioTextField!.selectedValue}'
+      selectedDescritor = selectedValues![2] != null && selectedValues![2]! > 0
+          ? '${selectedValues![2]}'
           : '';
       selectedHabilidade = selectedValues![3] != null && selectedValues![3]! > 0
           ? '${selectedValues![3]}'

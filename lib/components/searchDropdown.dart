@@ -78,7 +78,6 @@ class RadioTextField extends StatefulWidget {
   final TextStyle titleStyle;
   final Map<int, int?>? initialValue;
   double? tileHeight;
-  var selectedValue;
   bool shoulAddOptionAll;
   Function(int?, int?)? refreshData;
 
@@ -121,7 +120,6 @@ class _RadioTextFieldState extends State<RadioTextField> {
   void _handleUpdate(int? selectedValue, int radioTextFieldId) {
     setState(() {
       widget.initialValue![widget.radioTextFieldID] = selectedValue;
-      widget.selectedValue = selectedValue;
     });
     widget.refreshData!(widget.initialValue![0], widget.initialValue![1]);
   }
