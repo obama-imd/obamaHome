@@ -12,7 +12,7 @@ Future<PaginationResponse?> fetchData(
   var apiUrl =
       '${API_URL}/oa?page=${page}&size=12&sort=nome${searchTerm.isNotEmpty ? '&nome=$searchTerm' : ''}';
   if (queryParams != null && queryParams.isNotEmpty) {
-    apiUrl = '${API_URL}/oa?$queryParams&page=${page}&size=12';
+    apiUrl = '${API_URL}oa?$queryParams&page=${page}&size=12&sort=nome';
   }
 
   final response = await http.get(Uri.parse(apiUrl),
@@ -55,14 +55,13 @@ class SearchParametersResult {
   final List<TemaConteudo> allTemaConteudo;
   final List<Descritor> allDescricoes;
 
-  SearchParametersResult({
-    required this.allNivelEnsino,
-    required this.allTemaConteudo,
-    required this.allDescricoes
-  });
+  SearchParametersResult(
+      {required this.allNivelEnsino,
+      required this.allTemaConteudo,
+      required this.allDescricoes});
 }
 
-Future<SearchParametersResult> fetchSearchData() async {
+Future<SearchParametersResult> fetchSearchData(String? curriculo) async {
   List<NivelEnsino> responseNivelEnsino = [];
   List<TemaConteudo> responseTemaConteudo = [];
   List<Descritor> responseDescritor = [];
@@ -81,7 +80,7 @@ Future<SearchParametersResult> fetchSearchData() async {
         'Failed to load ${NivelEnsino}. Status code: ${response.statusCode}');
   }
 
-  apiUrl = '${API_URL}/temaconteudo?curriculo=BNCC';
+  apiUrl = '${API_URL}/temaconteudo?curriculo=${curriculo}';
   response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
@@ -89,21 +88,7 @@ Future<SearchParametersResult> fetchSearchData() async {
     final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
     responseTemaConteudo = List<TemaConteudo>.from(
-        jsonData.map((x) => TemaConteudo.fromJson(x, 'BNCC')));
-  } else {
-    return Future.error(
-        'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
-  }
-
-  apiUrl = '${API_URL}/temaconteudo?curriculo=PCN';
-  response = await http.get(Uri.parse(apiUrl),
-      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
-
-  if (response.statusCode == 200) {
-    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
-
-    responseTemaConteudo.addAll(List<TemaConteudo>.from(
-        jsonData.map((x) => TemaConteudo.fromJson(x, 'PCN'))));
+        jsonData.map((x) => TemaConteudo.fromJson(x, curriculo ?? '')));
   } else {
     return Future.error(
         'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
@@ -135,12 +120,34 @@ Future<SearchParametersResult> fetchSearchData() async {
   return tudo;
 }
 
+Future<List<AnoEnsino>> fetchAnoEnsino() async {
+  List<AnoEnsino> responseAnoEnsino;
+
+  var apiUrl = '${API_URL}/anoEnsino';
+  var response = await http.get(Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+  if (response.statusCode == 200) {
+    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+
+    List<AnoEnsino> habilidadesFromJson(List<dynamic> jsonList) {
+      return jsonList.map((json) => AnoEnsino.fromJson(json)).toList();
+    }
+
+    responseAnoEnsino = habilidadesFromJson(jsonData["content"]);
+  } else {
+    return Future.error(
+        'Failed to load ${AnoEnsino}. Status code: ${response.statusCode}');
+  }
+
+  return responseAnoEnsino;
+}
+
 Future<List<Habilidade>> fetchHabilidadeByAnoEnsinoTemaConteudo(
-    int? idAnoEnsino, int? idConteudo) async {
+    int? IdAnoEnsino, int? idConteudo) async {
   List<Habilidade> responseHabilidade;
 
   var apiUrl =
-      '${API_URL}/habilidade?anoEnsino=$idAnoEnsino&temaConteudoId=$idConteudo';
+      '${API_URL}/habilidade?anoEnsinoId=$IdAnoEnsino&temaConteudoId=$idConteudo';
   var response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
   if (response.statusCode == 200) {

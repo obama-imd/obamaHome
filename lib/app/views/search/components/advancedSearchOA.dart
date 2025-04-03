@@ -6,7 +6,9 @@ import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
 
 const List<String> tileTitle = <String>[
+  'Selecione o currículo',
   'Selecione o nível de ensino',
+  'Selecione o ano de ensino',
   'Selecione o Tema/Conteúdo',
   'Selecione o descritor',
   // 'Selecione a disciplina',
@@ -33,18 +35,25 @@ class OAFilterState extends State<OAFilters> {
   String selectedTemaConteudo = '';
   String selectedDescritor = '';
   String selectedHabilidade = '';
+
+  int? curriculoSelecionado = 0;
   int? temaConteudoSelecionado = 0;
   int? nivelEnsinoSelecionado = 0;
+  int? anoEnsinoSelecionado = 0;
   int? descritorSelecionado = 0;
   int? habilidadeSelecionada = 0;
+
   String searchTerm = '';
 
   List<(int, String)>? nivelEnsinolData;
+  List<(int, String)>? anoEnsinoData;
   List<(int, String)>? temaConteudoData;
   List<(int, String)>? habilidadeData;
   List<(int, String)>? descritorData;
 
+  RadioTextField? curriculoRadioTextField;
   RadioTextField? nivelEnsinoRadioTextField;
+  RadioTextField? anoEnsinoRadioTextField;
   RadioTextField? temaConteudoRadioTextField;
   RadioTextField? descritorRadioTextField;
   RadioTextField? habilidadeRadioTextField;
@@ -59,116 +68,161 @@ class OAFilterState extends State<OAFilters> {
     super.initState();
 
     selectedValues = {
-      0: nivelEnsinoSelecionado,
-      1: temaConteudoSelecionado,
-      2: descritorSelecionado,
-      3: habilidadeSelecionada
+      0: curriculoSelecionado,
+      1: nivelEnsinoSelecionado,
+      2: anoEnsinoSelecionado,
+      3: temaConteudoSelecionado,
+      4: descritorSelecionado,
+      5: habilidadeSelecionada
     };
 
-    fetchSearchData().then((response) {
+    curriculoRadioTextField = RadioTextField(
+      array: [(1, 'PCN'), (2, 'BNCC')],
+      radioTextFieldID: 0,
+      title: tileTitle[0],
+      titleStyle: textTheme.bodySmall!,
+      tileHeight: 35,
+      initialValue: selectedValues,
+      refreshData2: _refreshNivelEnsinoTemaConteudo,
+      shoulAddOptionAll: false,
+    );
+    setState(() {
+      RadioTextFieldsList = [
+        curriculoRadioTextField,
+        nivelEnsinoRadioTextField,
+        anoEnsinoRadioTextField,
+        temaConteudoRadioTextField,
+        descritorRadioTextField,
+        habilidadeRadioTextField,
+      ];
+    });
+  }
+
+  void _refreshNivelEnsinoTemaConteudo(String curriculo) {
+    fetchSearchData(curriculo).then((response) {
       setState(() {
         nivelEnsinolData =
             response.allNivelEnsino.map((x) => (x.id, x.nome)).toList();
+        if (nivelEnsinolData != null) {
+          nivelEnsinolData?.sort((a, b) => a.$1.compareTo(b.$1));
+        }
         temaConteudoData = response.allTemaConteudo
             .map((x) => (x.id, x.getNomeWithCurriculo()))
             .toList();
         descritorData = response.allDescricoes
             .map((x) => (x.id, x.formattedDescricao))
             .toList();
-      });
-      if (nivelEnsinolData != null) {
-        nivelEnsinolData?.sort((a, b) => a.$1.compareTo(b.$1));
-      }
-      nivelEnsinoRadioTextField = RadioTextField(
-        array: nivelEnsinolData ?? [],
-        radioTextFieldID: 0,
-        title: tileTitle[0],
-        titleStyle: textTheme.bodySmall!,
-        tileHeight: 35,
-        initialValue: selectedValues,
-        refreshData: _refreshDescritorHabilidade,
-      );
-      temaConteudoRadioTextField = RadioTextField(
-        array: temaConteudoData ?? [],
-        radioTextFieldID: 1,
-        title: tileTitle[1],
-        titleStyle: textTheme.bodySmall!,
-        tileHeight: 35,
-        initialValue: selectedValues,
-        refreshData: _refreshDescritorHabilidade,
-      );
-      descritorRadioTextField = RadioTextField(
-        array: descritorData ?? [],
-        radioTextFieldID: 2,
-        title: tileTitle[2],
-        tileHeight: 35,
-        initialValue: selectedValues,
-        titleStyle: textTheme.bodySmall!,
-      );
-      habilidadeRadioTextField = RadioTextField(
-          array: habilidadeData ?? [],
+
+        nivelEnsinoRadioTextField = RadioTextField(
+          array: nivelEnsinolData ?? [],
+          radioTextFieldID: 1,
+          title: tileTitle[1],
+          titleStyle: textTheme.bodySmall!,
+          tileHeight: 35,
+          initialValue: selectedValues,
+          refreshData: _refreshAnoEnsino,
+        );
+        temaConteudoRadioTextField = RadioTextField(
+          array: temaConteudoData ?? [],
           radioTextFieldID: 3,
+          title: tileTitle[3],
+          titleStyle: textTheme.bodySmall!,
+          tileHeight: 35,
+          initialValue: selectedValues,
+          refreshData: _refreshDescritorHabilidade,
+        );
+        descritorRadioTextField = RadioTextField(
+          array: descritorData ?? [],
+          radioTextFieldID: 2,
           title: tileTitle[2],
+          tileHeight: 35,
           initialValue: selectedValues,
           titleStyle: textTheme.bodySmall!,
-          shoulAddOptionAll: false);
-      setState(() {
-        RadioTextFieldsList = [
-          nivelEnsinoRadioTextField,
-          temaConteudoRadioTextField,
-          descritorRadioTextField,
-          habilidadeRadioTextField,
-        ];
+        );
+
+        RadioTextFieldsList[1] = nivelEnsinoRadioTextField;
+        RadioTextFieldsList[3] = temaConteudoRadioTextField;
       });
+      Navigator.of(context).pop();
+      advancedSearchModal(RadioTextFieldsList);
     });
+  }
+
+  void _refreshAnoEnsino(int? nivelEnsinoId, int? temaConteudoId) {
+    if (nivelEnsinoId! > 0) {
+      fetchAnoEnsino().then((response) {
+        setState(() {
+          anoEnsinoData = response.map((x) => (x.id, x.nome)).toList();
+
+          anoEnsinoRadioTextField = RadioTextField(
+              array: anoEnsinoData ?? [],
+              radioTextFieldID: 2,
+              title: tileTitle[2],
+              tileHeight: 35,
+              initialValue: selectedValues,
+              titleStyle: textTheme.bodySmall!,
+              shoulAddOptionAll: false);
+        });
+        RadioTextFieldsList[2] = anoEnsinoRadioTextField;
+
+        Navigator.of(context).pop();
+        advancedSearchModal(RadioTextFieldsList);
+      });
+    }
   }
 
   void _refreshDescritorHabilidade(int? nivelEnsinoId, int? temaConteudoId) {
     if (nivelEnsinoId! > 0 && temaConteudoId! > 0) {
-      fetchHabilidadeByAnoEnsinoTemaConteudo(nivelEnsinoId, temaConteudoId)
-          .then((response) {
-        setState(() {
-          habilidadeData =
-              response.map((x) => (x.id, x.formattedHabilidade)).toList();
+      if (selectedValues![0]! == 1) {
+        RadioTextFieldsList[4] = descritorRadioTextField;
+      } else if (selectedValues![0]! == 2) {
+        fetchHabilidadeByAnoEnsinoTemaConteudo(nivelEnsinoId, temaConteudoId)
+            .then((response) {
+          setState(() {
+            habilidadeData =
+                response.map((x) => (x.id, x.formattedHabilidade)).toList();
 
-          habilidadeRadioTextField = RadioTextField(
-              array: habilidadeData ?? [],
-              radioTextFieldID: 3,
-              title: tileTitle[2],
-              initialValue: selectedValues,
-              titleStyle: textTheme.bodySmall!,
-              shoulAddOptionAll: false);
-
-          RadioTextFieldsList[3] = habilidadeRadioTextField;
+            habilidadeRadioTextField = RadioTextField(
+                array: habilidadeData ?? [],
+                radioTextFieldID: 5,
+                title: tileTitle[5],
+                initialValue: selectedValues,
+                titleStyle: textTheme.bodySmall!,
+                shoulAddOptionAll: false);
+          });
+          RadioTextFieldsList[5] = habilidadeRadioTextField;
         });
-      });
+      }
       Navigator.of(context).pop();
       advancedSearchModal(RadioTextFieldsList);
     } else {
       setState(() {
-        selectedValues![3] = 0;
+        selectedValues![4] = 0;
+        selectedValues![5] = 0;
       });
     }
   }
 
   void mainSearch() {
     setState(() {
-      selectedNivelEnsino = selectedValues![0] != null && selectedValues![0]! > 0
-          ? '${selectedValues![0]}'
-          : '';
-      selectedTemaConteudo = selectedValues![1] != null && selectedValues![1]! > 0
-          ? '${selectedValues![1]}'
-              : '';
-      selectedDescritor = selectedValues![2] != null && selectedValues![2]! > 0
-          ? '${selectedValues![2]}'
-          : '';
-      selectedHabilidade = selectedValues![3] != null && selectedValues![3]! > 0
-          ? '${selectedValues![3]}'
-          : '';
+      //   selectedNivelEnsino =
+      //       selectedValues![0] != null && selectedValues![0]! > 0
+      //           ? '${selectedValues![0]}'
+      //           : '';
+      //   selectedTemaConteudo =
+      //       selectedValues![1] != null && selectedValues![1]! > 0
+      //           ? '${selectedValues![1]}'
+      //           : '';
+      //   selectedDescritor = selectedValues![2] != null && selectedValues![2]! > 0
+      //       ? '${selectedValues![2]}'
+      //       : '';
+      //   selectedHabilidade = selectedValues![3] != null && selectedValues![3]! > 0
+      //       ? '${selectedValues![3]}'
+      //       : '';
       searchTerm = searchTextController.text;
     });
 
-    final queryString = _buildQueryString();
+    var queryString = _buildQueryString();
     widget.updateData(queryString);
   }
 
@@ -213,118 +267,107 @@ class OAFilterState extends State<OAFilters> {
   }
 
   void advancedSearchModal(List<RadioTextField?> RadioTextFieldsList) {
-    // List<Item> generateValuesList(int i) {
-    //   List<Item> itemValue = [
-    //     Item(
-    //         expandedValue: Container(child: RadioTextFieldsList[i]),
-    //         headerValue: tileTitle[i])
-    //   ];
-    //   return itemValue;
-    // }
-
-    if (nivelEnsinolData!.isNotEmpty && temaConteudoData!.isNotEmpty) {
-      showDialog<void>(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            surfaceTintColor: background,
-            content: Container(
-              color: background,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width * .95,
-              child: SingleChildScrollView(
-                child: Wrap(
-                  alignment: WrapAlignment.spaceEvenly,
-                  children: [
-                    for (var i = 0; i < RadioTextFieldsList.length; i++) ...{
-                      Container(
-                        width: MediaQuery.of(context).size.width * .45,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 25, bottom: 8),
-                              child: Text(
-                                tileTitle[i],
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 18),
-                              ),
-                            ),
-                            Container(child: RadioTextFieldsList[i]),
-                          ],
-                        ),
-                      ),
-                    },
-                    // for (var i = 2; i < RadioTextFieldsList.length; i++) ...{
-                    //   Container(
-                    //     width: MediaQuery.of(context).size.width * .45,
-                    //     child: Column(
-                    //       mainAxisAlignment: MainAxisAlignment.start,
-                    //       children: [
-                    //         Padding(
-                    //           padding: const EdgeInsets.only(top: 25),
-                    //           child: ExpansionPanelListSimple(
-                    //               data: generateValuesList(i)),
-                    //         )
-                    //       ],
-                    //     ),
-                    //   ),
-                    // },
-                  ],
-                ),
-              ),
-            ),
-            actions: <Widget>[
-              mainButton(
-                context,
-                'Voltar',
-                null,
-                () {
-                  Navigator.of(context).pop();
-                },
-              ),
-              mainButton(
-                context,
-                'Buscar',
-                null,
-                () {
-                  mainSearch();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    } else {
-      showDialog<void>(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(content: Text("Sem dados disponíveis"));
-          });
+    List<Item> generateValuesList(int i) {
+      i = i + 3;
+      List<Item> itemValue = [
+        Item(
+            expandedValue: Container(child: RadioTextFieldsList[i]),
+            headerValue: tileTitle[i])
+      ];
+      return itemValue;
     }
+
+    showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          surfaceTintColor: background,
+          content: Container(
+            color: background,
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width * .95,
+            child: SingleChildScrollView(
+              child: Wrap(alignment: WrapAlignment.spaceEvenly, children: [
+                for (var i = 0; i < RadioTextFieldsList.length - 2; i++) ...{
+                  Container(
+                    width: MediaQuery.of(context).size.width * .45,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25, bottom: 8),
+                          child: Text(
+                            tileTitle[i],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
+                          ),
+                        ),
+                        Container(child: RadioTextFieldsList[i]),
+                      ],
+                    ),
+                  ),
+                },
+                if (selectedValues![0]! > 0) ...{
+                  Container(
+                    width: MediaQuery.of(context).size.width * .45,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: ExpansionPanelListSimple(
+                              data: generateValuesList(selectedValues![0]!)),
+                        )
+                      ],
+                    ),
+                  ),
+                }
+              ]),
+            ),
+          ),
+          actions: <Widget>[
+            mainButton(
+              context,
+              'Voltar',
+              null,
+              () {
+                Navigator.of(context).pop();
+              },
+            ),
+            mainButton(
+              context,
+              'Buscar',
+              null,
+              () {
+                mainSearch();
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
   }
 
   String _buildQueryString() {
     final params = [];
-    if (selectedNivelEnsino.isNotEmpty) {
-      params.add('nivelEnsinoId=$selectedNivelEnsino');
-    }
-    if (selectedTemaConteudo.isNotEmpty) {
-      params.add('temaConteudoId=$selectedTemaConteudo');
-    }
-    if (selectedDescritor.isNotEmpty) {
-      params.add('descritorId=$selectedDescritor');
-    }
-    if (selectedHabilidade.isNotEmpty) {
-      params.add('habilidadeId=$selectedHabilidade');
-    }
-    if (searchTerm.isNotEmpty) {
-      params.add('nome=$searchTerm');
-    } else {
-      params.add('nome=');
-    }
+    // if (selectedNivelEnsino.isNotEmpty) {
+    //   params.add('nivelEnsinoId=$selectedNivelEnsino');
+    // }
+    // if (selectedTemaConteudo.isNotEmpty) {
+    //   params.add('temaConteudoId=$selectedTemaConteudo');
+    // }
+    // if (selectedDescritor.isNotEmpty) {
+    //   params.add('descritorId=$selectedDescritor');
+    // }
+    // if (selectedHabilidade.isNotEmpty) {
+    //   params.add('habilidadeId=$selectedHabilidade');
+    // }
+    // if (searchTerm.isNotEmpty) {
+    //   params.add('nome=$searchTerm');
+    // } else {
+    //   params.add('nome=');
+    // }
     return params.join('&');
   }
 }

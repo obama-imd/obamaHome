@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/models/objeto_aprendizagem.dart';
 import '../utils/app_theme.dart';
 
 class DropdownField extends StatefulWidget {
@@ -70,7 +71,8 @@ class RadioTextField extends StatefulWidget {
       this.tileHeight,
       this.initialValue,
       this.shoulAddOptionAll = true,
-      this.refreshData = null});
+      this.refreshData = null,
+      this.refreshData2 = null});
 
   late final List<(int, String)> array;
   final int radioTextFieldID;
@@ -80,6 +82,7 @@ class RadioTextField extends StatefulWidget {
   double? tileHeight;
   bool shoulAddOptionAll;
   Function(int?, int?)? refreshData;
+  Function(String)? refreshData2;
 
   @override
   State<RadioTextField> createState() => _RadioTextFieldState();
@@ -93,7 +96,7 @@ class _RadioTextFieldState extends State<RadioTextField> {
       widget.shoulAddOptionAll = false;
     }
 
-    return Column(
+    return Wrap(
       children: widget.array
           .map((e) => Container(
                 height: widget.tileHeight,
@@ -108,7 +111,11 @@ class _RadioTextFieldState extends State<RadioTextField> {
                     splashRadius: 20,
                     groupValue: widget.initialValue![widget.radioTextFieldID],
                     onChanged: (int? value) {
-                      _handleUpdate(value, widget.radioTextFieldID);
+                      if (widget.refreshData != null) {
+                        _handleUpdate(value, widget.radioTextFieldID);
+                      } else if (widget.refreshData2 != null) {
+                        _handleUpdate2(value, e.$2);
+                      }
                     },
                   ),
                 ),
@@ -122,6 +129,13 @@ class _RadioTextFieldState extends State<RadioTextField> {
       widget.initialValue![widget.radioTextFieldID] = selectedValue;
     });
     widget.refreshData!(widget.initialValue![0], widget.initialValue![1]);
+  }
+
+  void _handleUpdate2(int? selectedValue, String curriculo) {
+    setState(() {
+      widget.initialValue![widget.radioTextFieldID] = selectedValue;
+    });
+    widget.refreshData2!(curriculo);
   }
 }
 

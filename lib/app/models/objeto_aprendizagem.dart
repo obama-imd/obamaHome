@@ -264,18 +264,18 @@ class Habilidade {
 class AnoEnsino {
   int id;
   String nome;
-  NivelEnsino nivelEnsino;
+  // NivelEnsino nivelEnsino;
 
   AnoEnsino({
     required this.id,
     required this.nome,
-    required this.nivelEnsino,
+    // required this.nivelEnsino,
   });
 
   factory AnoEnsino.fromJson(Map<String, dynamic> json) {
     return AnoEnsino(
         id: json['id'],
-        nome: json['nome'],
-        nivelEnsino: NivelEnsino.fromJson(json['nivelEnsino']));
+        nome: json['nome']);
+        // nivelEnsino: NivelEnsino.fromJson(json['nivelEnsino']));
   }
 }

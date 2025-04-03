@@ -68,7 +68,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
         .whenComplete(() => setState(() {
               loadObjects = false;
             }));
-    Future.wait([fetchSearchData()])
+    Future.wait([fetchSearchData("")])
         .timeout(Duration(seconds: 5))
         .whenComplete(() => setState(() {
               loadObjects = false;
