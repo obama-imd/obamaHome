@@ -28,7 +28,7 @@ class SearchPage extends ConsumerStatefulWidget {
 
 class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
-  bool loadObjects = false;
+  bool loadPosts = false;
   late TextStyle titleStyle;
   String nivelEnsinoSelected = '0';
   String temaConteudoSelected = '0';
@@ -53,29 +53,24 @@ class SearchPageState extends ConsumerState<SearchPage> {
   void initState() {
     super.initState();
     waitData();
-    activateLoad();
-  }
-
-  void activateLoad() {
-    setState(() {
-      loadObjects = true;
-    });
   }
 
   void waitData() async {
-    Future.wait([fetchData("", 0, null)])
-        .timeout(Duration(seconds: 5))
-        .whenComplete(() => setState(() {
-              loadObjects = false;
-            }));
-    Future.wait([fetchNivelEnsino()])
-        .then((data) => setState(() {
-              niveisEnsino = data.first;
-            }))
-        .timeout(Duration(seconds: 5))
-        .whenComplete(() => setState(() {
-              loadObjects = false;
-            }));
+    setState(() {
+      loadPosts = true;
+    });
+
+    try {
+      await fetchData("", 0, null).timeout(Duration(seconds: 5));
+    } catch (e) {
+      print("Erro ao carregar dados: $e");
+    } finally {
+      if (mounted) {
+        setState(() {
+          loadPosts = false;
+        });
+      }
+    }
   }
 
   @override
@@ -103,7 +98,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                   updateDataFromAdvancedSearchPage:
                       updateDataFromAdvancedSearchPage,
                   titleStyle: textTheme.titleSmall!)),
-          if (loadObjects) ...{circleLoadSpinner(context)}
+          if (loadPosts) ...{circleLoadSpinner(context)}
         ],
       ),
     );

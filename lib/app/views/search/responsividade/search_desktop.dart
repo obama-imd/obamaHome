@@ -52,10 +52,11 @@ class _SearchDesktopState extends State<SearchDesktop> {
                 child: Column(
                   children: [
                     DisplaySearchResults(
-                        widget.termSearched,
-                        swidth,
-                        widget.selectedPageIndex,
-                        widget.queryParams),
+                      termSearched: widget.termSearched,
+                      swidth: swidth,
+                      selectedPageIndex: widget.selectedPageIndex,
+                      queryParam: widget.queryParams,
+                    ),
                   ],
                 ),
               ),

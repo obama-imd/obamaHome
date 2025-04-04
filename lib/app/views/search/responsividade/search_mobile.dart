@@ -46,9 +46,13 @@ class _SearchMobileState extends State<SearchMobile> {
       // ),
       Container(
         margin: paddingValues("sectionPadding", context),
-        child: DisplaySearchResults(widget.termSearched, swidth, widget.selectedPageIndex, null),
+        child: DisplaySearchResults(
+          termSearched: widget.termSearched,
+          swidth: swidth,
+          selectedPageIndex: widget.selectedPageIndex,
+        ),
       ),
-       SizedBox(
+      SizedBox(
         height: 40,
       ),
     ]);

@@ -46,22 +46,27 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
   @override
   void initState() {
     super.initState();
-    activateLoad();
-    waitData();
+    fetchData();
   }
 
-  void activateLoad() {
+  void fetchData() async {
     setState(() {
       loadPosts = true;
     });
-  }
 
-  void waitData() async {
-    Future.wait([fetchData("")])
-        .timeout(Duration(seconds: 5))
-        .whenComplete(() => setState(() {
-              loadPosts = false;
-            }));
+    try {
+      await BlogController()
+          .updateBlogContent("")
+          .timeout(Duration(seconds: 5));
+    } catch (e) {
+      print("Erro ao carregar dados: $e");
+    } finally {
+      if (mounted) {
+        setState(() {
+          loadPosts = false;
+        });
+      }
+    }
   }
 
   @override
@@ -78,24 +83,26 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
 
     return Stack(
       children: [
-        TemplateRow(children: [
-          FutureBuilder<void>(
-            future: BlogController().updateBlogContent(ref, newData),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                final blogDataList = ref.watch(blogPosts);
-                List<BlogModel?> datas = [...blogDataList];
+        TemplateRow(
+          children: [
+            FutureBuilder<List<BlogModel?>>(
+              future: BlogController().updateBlogContent(newData),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  final blogDataList = snapshot.data!;
+                  List<BlogModel?> posts = blogDataList;
+
                   return Column(
                     children: [
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          blogPageView(context, swidth, _pageController, datas),
+                          blogPageView(context, swidth, _pageController, posts),
                           Container(
                               padding:
                                   const EdgeInsets.only(top: 85.0, left: 15),
                               width: swidth * .295,
-                              child: blogFilters(context, swidth, datas,
+                              child: blogFilters(context, swidth, posts,
                                   updateData, textTheme.titleSmall!)),
                         ],
                       ),
@@ -192,7 +199,7 @@ Widget blogPageView(context, swidth, _pageController, datas) {
                                 crossAxisCount: 4),
                         itemBuilder: (BuildContext context, int mediaId) {
                           return InkWell(
-                              overlayColor: const MaterialStatePropertyAll(
+                              overlayColor: const WidgetStatePropertyAll(
                                   Colors.transparent),
                               onTap: () {},
                               child: SizedBox(

@@ -283,13 +283,13 @@ Future<void> fetchLevels(WidgetRef ref) async {
         Uri.parse('${API_URL}/anoEnsino?page=$page&size=50&sort=id'),
         headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
-    final responseDescritor = await http.get(
-        Uri.parse('${API_URL}/descritor?page=$page&size=50&sort=id'),
-        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+    // final responseDescritor = await http.get(
+    //     Uri.parse('${API_URL}/descritor?page=$page&size=50&sort=id'),
+    //     headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
-    final responseDisciplineResource = await http.get(
-        Uri.parse('${API_URL}/disciplina?page=$page&size=50&sort=id'),
-        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+    // final responseDisciplineResource = await http.get(
+    //     Uri.parse('${API_URL}/disciplina?page=$page&size=50&sort=id'),
+    //     headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
     if (responseNivelEnsino.statusCode == 200) {
       final jsonData = jsonDecode(utf8.decode(responseNivelEnsino.bodyBytes));
