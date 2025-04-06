@@ -60,7 +60,7 @@ List<TeamMembers> LeadersTeam = [
       image: "assets/images/team/AmandaMaria.jpg",
       summary: "UFRN",
       link: "http://lattes.cnpq.br",
-      job: "Tech Leader"),
+      job: "Tech Leader WEB/Flutter"),
   TeamMembers(
       name: "Dennys Leite Maia",
       image: "assets/images/team/DennysLeite.jpg",
