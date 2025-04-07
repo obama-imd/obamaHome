@@ -78,91 +78,13 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
           margin: const EdgeInsets.only(top: 100),
           constraints: BoxConstraints(maxWidth: 1200),
           padding: paddingValues("sideMainPadding", context),
-          child: ResponsiveGridCol(
-            lg: 8,
-            sm: 12,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(accordionItems[1].accordionTitle,
-                  style: textTheme.titleSmall),
-              Container(height: 15),
-              Text(accordionItems[1].accordionContent,
-                  textAlign: TextAlign.justify)
-            ]),
-          )),
-      // Padding(
-      //   padding: const EdgeInsets.only(top: 100),
-      //   child: ResponsiveGridRow(children: [
-      //     ResponsiveGridCol(
-      //       lg: 8,
-      //       sm: 12,
-      //       child: Container(
-      //           color: const Color.fromARGB(255, 241, 238, 238),
-      //           padding: const EdgeInsets.only(top: 110, left: 90),
-      //           child: Column(
-      //               crossAxisAlignment: CrossAxisAlignment.start,
-      //               children: [
-      //                 SectionTitle(
-      //                     'Serviços Oferecidos',
-      //                     'Easy and effective way to get your device repaired.',
-      //                     CrossAxisAlignment.start),
-      //                 Container(
-      //                     padding: const EdgeInsets.only(top: 60),
-      //                     child: ResponsiveGridRow(
-      //                         crossAxisAlignment: CrossAxisAlignment.start,
-      //                         children: [
-      //                           for (int i = 0; i < grid1Title.length; i++) ...{
-      //                             ResponsiveGridCol(
-      //                               lg: 6,
-      //                               sm: 12,
-      //                               child: Padding(
-      //                                 padding:
-      //                                     const EdgeInsets.only(bottom: 100),
-      //                                 child: Column(
-      //                                     crossAxisAlignment:
-      //                                         CrossAxisAlignment.start,
-      //                                     children: [
-      //                                       Container(
-      //                                           height: 100,
-      //                                           width: 100,
-      //                                           decoration: BoxDecoration(
-      //                                               color: CoresPersonalizadas
-      //                                                   .azulObama,
-      //                                               borderRadius:
-      //                                                   BorderRadius.circular(
-      //                                                       100)),
-      //                                           child: Icon(grid1Icon[i],
-      //                                               size: iconSize[i],
-      //                                               color: background)),
-      //                                       Container(
-      //                                           padding: const EdgeInsets.only(
-      //                                               top: 20),
-      //                                           child: Text(grid1Title[i],
-      //                                               style:
-      //                                                   textTheme.titleSmall)),
-      //                                       Container(
-      //                                           padding: const EdgeInsets.only(
-      //                                               top: 20),
-      //                                           child: Text(grid1Content[i],
-      //                                               style: textTheme.bodySmall))
-      //                                     ]),
-      //                               ),
-      //                             ),
-      //                           },
-      //                         ]))
-      //               ])),
-      //     ),
-      //     if (swidth > 992) ...{
-      //       ResponsiveGridCol(
-      //         lg: 4,
-      //         child: SizedBox(
-      //             height: 865,
-      //             child:
-      //                 Image.asset('assets/images/img2.jpg', fit: BoxFit.cover)),
-      //       ),
-      //     }
-      //   ]),
-      // ),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(accordionItems[1].accordionTitle, style: textTheme.titleSmall),
+            Container(height: 15),
+            Text(accordionItems[1].accordionContent,
+                textAlign: TextAlign.justify)
+          ])),
       Container(
         constraints: BoxConstraints(maxWidth: 1200),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
