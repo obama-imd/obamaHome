@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:obamahome/app/views/search/searchOA_view.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import 'package:obamahome/app/views/search/components/advancedSearchOA.dart';
 
 import '../../../../utils/app_padding.dart';
+import '../components/resultsSearch.dart';
 
 class SearchDesktop extends StatefulWidget {
   String termSearched;
@@ -15,7 +15,6 @@ class SearchDesktop extends StatefulWidget {
   int selectedPageIndex;
   Function(void) updateData;
   Function(String) updateDataFromAdvancedSearchPage;
-  void Function(int) selectedPage;
   TextStyle titleStyle;
 
   SearchDesktop({
@@ -24,7 +23,6 @@ class SearchDesktop extends StatefulWidget {
     required this.selectedPageIndex,
     required this.updateData,
     required this.updateDataFromAdvancedSearchPage,
-    required this.selectedPage,
     required this.titleStyle,
     required this.queryParams,
   });
@@ -53,12 +51,12 @@ class _SearchDesktopState extends State<SearchDesktop> {
                 width: swidth > 1200 ? (1200 * .7) : (swidth * .7),
                 child: Column(
                   children: [
-                    SearchPageView(
-                        widget.termSearched,
-                        swidth,
-                        widget.selectedPageIndex,
-                        widget.selectedPage,
-                        widget.queryParams),
+                    DisplaySearchResults(
+                      termSearched: widget.termSearched,
+                      swidth: swidth,
+                      selectedPageIndex: widget.selectedPageIndex,
+                      queryParam: widget.queryParams,
+                    ),
                   ],
                 ),
               ),

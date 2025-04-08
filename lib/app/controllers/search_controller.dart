@@ -9,7 +9,7 @@ import '../../utils/apiURL.dart';
 import '../models/pagination_oa_model.dart';
 
 Future<PaginationResponse?> fetchData(
-    String searchTerm, page, String? queryParams) async {
+    String searchTerm, int page, String? queryParams) async {
   var apiUrl =
       '${API_URL}/oa?page=${page}&size=12&sort=nome${searchTerm.isNotEmpty ? '&nome=$searchTerm' : ''}';
   if (queryParams != null && queryParams.isNotEmpty) {
@@ -283,13 +283,13 @@ Future<void> fetchLevels(WidgetRef ref) async {
         Uri.parse('${API_URL}/anoEnsino?page=$page&size=50&sort=id'),
         headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
-    final responseDescritor = await http.get(
-        Uri.parse('${API_URL}/descritor?page=$page&size=50&sort=id'),
-        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+    // final responseDescritor = await http.get(
+    //     Uri.parse('${API_URL}/descritor?page=$page&size=50&sort=id'),
+    //     headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
-    final responseDisciplineResource = await http.get(
-        Uri.parse('${API_URL}/disciplina?page=$page&size=50&sort=id'),
-        headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+    // final responseDisciplineResource = await http.get(
+    //     Uri.parse('${API_URL}/disciplina?page=$page&size=50&sort=id'),
+    //     headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
     if (responseNivelEnsino.statusCode == 200) {
       final jsonData = jsonDecode(utf8.decode(responseNivelEnsino.bodyBytes));

@@ -53,7 +53,7 @@ class ErrorPage extends StatelessWidget {
               ],
               BannerSuperior(context, 'Erro 404'),
               Padding(
-                padding: const EdgeInsets.only(top: 120),
+                padding: const EdgeInsets.only(top: 120, bottom: 65),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -1,5 +1,3 @@
-import 'package:obamahome/app/models/lesson_plan_models.dart';
-
 import '../../../../components/menuClass.dart';
 
 List<ItemValue> getEditorValues(Function action) {

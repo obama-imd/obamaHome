@@ -24,7 +24,11 @@ final List<RouteList> routesList = [
   ),
   RouteList(
     name: "Objetos de Aprendizagem",
-    path: ['/servicos'],
+    path: ['/objetos-aprendizagem'],
+  ),
+  RouteList(
+    name: "Objetos de Aprendizagem",
+    path: ['/objetos-aprendizagem-nav'],
   ),
   RouteList(
     name: "Trilhas de Aprendizagem",
@@ -36,12 +40,12 @@ final List<RouteList> routesList = [
   ),
   RouteList(
     name: "Publicações",
-    path: ['/blog'],
+    path: ['/publicacoes'],
   ),
-  RouteList(
-    name: "Publicações",
-    path: ['/blog-detalhes'],
-  ),
+  // RouteList(
+  //   name: "Publicações",
+  //   path: ['/blog-detalhes'],
+  // ),
   RouteList(
     name: "Formações",
     path: ['/formacoes'],
@@ -92,7 +96,9 @@ Widget BannerSuperior(context, String pageName) {
                 Container(
                     child: Row(children: [
                   InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushNamed(context, "/");
+                      },
                       child: Text(
                         'Home',
                         style: textTheme.labelSmall,

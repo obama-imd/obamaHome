@@ -11,10 +11,10 @@ List<String> sectionTitle = [
 ];
 
 List<String> sectionImage = [
-  "icon_search.png",
-  "icon_select.png",
-  "icon_writing.png",
-  "icon_share.png",
+  "icons/icon_search.png",
+  "icons/icon_select.png",
+  "icons/icon_writing.png",
+  "icons/icon_share.png",
 ];
 
 List<String> sectionContent = [

@@ -32,7 +32,7 @@ class _FooterState extends State<Footer> {
     '/formacoes',
     '/servicos',
     '/planos-aulas/lista',
-    '/blog',
+    '/publicacoes',
     "/trilhas"
   ];
 
@@ -67,7 +67,7 @@ class _FooterState extends State<Footer> {
 
   @override
   Widget build(BuildContext context) {
-    String emailText = "";
+    // String emailText = "";
     final Uri emailLaunchUri = Uri.parse('https://forms.gle/9bZ8sGSiSERTZXeU9');
     final currentYear = DateTime.now().year;
 

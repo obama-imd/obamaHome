@@ -3,7 +3,7 @@ import 'package:obamahome/components/librasTooltip.dart';
 import 'package:obamahome/components/menuClass.dart';
 import 'package:obamahome/components/modalSearch.dart';
 
-import '../app/views/search/searchOA_view.dart';
+import '../app/views/search/components/resultsSearch.dart';
 import '../utils/app_theme.dart';
 
 class NavMenu extends StatefulWidget {
@@ -23,18 +23,19 @@ class NavMenu extends StatefulWidget {
   State<NavMenu> createState() => _NavMenuState();
 }
 
-String searchText = '';
-
 Future searchObject(context, String value) async {
   if (value.isEmpty) {
     showMessage(context);
   } else {
-    Navigator.pushNamed(context, '/servicos', arguments: value);
+    // Navigator.pushNamed(context, '/objetos-aprendizagem', arguments: value);
+    Navigator.popAndPushNamed(context, '/objetos-aprendizagem-nav', arguments: value);
+    // Navigator.pop(context);
   }
 }
 
 class _NavMenuState extends State<NavMenu> {
   bool isHovered = false;
+  String searchText = '';
 
   Future registerSearch(context, String value) async {
     setState(() {
@@ -71,8 +72,11 @@ class _NavMenuState extends State<NavMenu> {
                         if (widget.itemValues[i].action != null) {
                           widget.itemValues[i].action!();
                         } else {
-                          Navigator.pushNamed(
-                              context, widget.itemValues[i].path[0]);
+                          Navigator.popAndPushNamed(
+                            context,
+                            widget.itemValues[i].path[0],
+                            arguments: "",
+                          );
                         }
                       },
                       // teste tooltip
@@ -106,18 +110,18 @@ class _NavMenuState extends State<NavMenu> {
                     });
                   },
                   menuStyle: MenuStyle(
-                    backgroundColor: MaterialStateProperty.all(background),
+                    backgroundColor: WidgetStateProperty.all(background),
                   ),
                   style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(background),
-                    foregroundColor: MaterialStateProperty.all(
+                    backgroundColor: WidgetStateProperty.all(background),
+                    foregroundColor: WidgetStateProperty.all(
                         widget.itemValues[i].path.contains(currentRoute)
                             ? primary
                             : widget.itemValues[i].itemHover
                                 ? primary
                                 : onPrimary),
                     textStyle:
-                        MaterialStateProperty.all(textTheme.headlineSmall),
+                        WidgetStateProperty.all(textTheme.headlineSmall),
                   ),
                   menuChildren: <Widget>[
                     if (i >= 0 && i < widget.itemValues.length) ...{
@@ -145,18 +149,18 @@ class _NavMenuState extends State<NavMenu> {
                               });
                             },
                             style: ButtonStyle(
-                              padding: MaterialStatePropertyAll(
+                              padding: WidgetStatePropertyAll(
                                   EdgeInsets.symmetric(horizontal: 20)),
                               minimumSize:
-                                  MaterialStatePropertyAll(Size(250, 44)),
+                                  WidgetStatePropertyAll(Size(250, 44)),
                               backgroundColor:
-                                  MaterialStateProperty.all(background),
-                              overlayColor: MaterialStateProperty.all(primary),
-                              foregroundColor: MaterialStateProperty.all(
+                                  WidgetStateProperty.all(background),
+                              overlayColor: WidgetStateProperty.all(primary),
+                              foregroundColor: WidgetStateProperty.all(
                                   widget.itemValues[i].subItemHover[j]
                                       ? background
                                       : onPrimary),
-                              textStyle: MaterialStateProperty.all(
+                              textStyle: WidgetStateProperty.all(
                                   textTheme.displaySmall),
                             ),
                             onPressed: () {

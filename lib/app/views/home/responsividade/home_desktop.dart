@@ -8,7 +8,6 @@ import '../../../../components/sectionTitle.dart';
 import '../../../../utils/app_padding.dart';
 import '../../../../utils/app_theme.dart';
 import '../constants.dart';
-import '../home_view.dart';
 
 class HomeDesktop extends StatefulWidget {
   final TrackingScrollController scrollController;

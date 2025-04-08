@@ -116,7 +116,7 @@ class _TopBarState extends ConsumerState<TopBar> {
                               margin: const EdgeInsets.only(left: 20),
                               child: TextButton(
                                 style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(
+                                  backgroundColor: WidgetStateProperty.all(
                                       CoresPersonalizadas.azulObama),
                                 ),
                                 onPressed: () {
@@ -207,7 +207,7 @@ class _TopBarState extends ConsumerState<TopBar> {
               Container(
                   child: TextButton(
                       style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
+                        backgroundColor: WidgetStateProperty.all(
                             CoresPersonalizadas.azulObama),
                       ),
                       onPressed: () {

@@ -26,8 +26,6 @@ class _HomeMobileState extends State<HomeMobile> {
 
   @override
   Widget build(BuildContext context) {
-    // double paddingCard = MediaQuery.of(context).size.width * .025;
-    double swidth = MediaQuery.of(context).size.width;
 
     return TemplateHome(children: [
       //abaixo do gif

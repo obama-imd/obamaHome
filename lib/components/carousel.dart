@@ -1,80 +1,153 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../utils/app_padding.dart';
 import '../utils/app_theme.dart';
 import '../utils/cores_personalizadas.dart';
 
-class Carousel extends StatelessWidget {
+class CarouselElements extends StatelessWidget {
+  final double swidth;
+  final String nameList;
+  final String imgList;
+  final String jobList;
+  final String summaryList;
+  final double imgWidth;
+  final double imgHeight;
+
+  CarouselElements(
+      {super.key,
+      required double this.swidth,
+      required String this.nameList,
+      required String this.imgList,
+      required String this.jobList,
+      required String this.summaryList,
+      required double this.imgWidth,
+      required double this.imgHeight});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+      Container(
+          margin: const EdgeInsets.only(left: 40),
+          height: imgHeight,
+          width: imgWidth,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(100),
+              image: DecorationImage(
+                  alignment: Alignment.topCenter,
+                  filterQuality: FilterQuality.low,
+                  image: AssetImage(imgList),
+                  fit: BoxFit.cover))),
+      Container(
+          padding: const EdgeInsets.only(left: 20),
+          height: 120,
+          width: swidth > 1070 ? 800 : swidth - 160,
+          child: ListView(children: [
+            Text(nameList, style: textTheme.displayMedium),
+            Container(height: 10),
+            Text(jobList, style: textTheme.displaySmall),
+            Container(height: 10),
+            Text(summaryList, style: textTheme.displaySmall)
+          ])),
+    ]);
+  }
+}
+
+class ClipTrapezoid extends CustomClipper<Path> {
+  final double multiplyFactor1;
+  final double multiplyFactor2;
+
+  ClipTrapezoid(
+      {super.reclip,
+      required this.multiplyFactor1,
+      required this.multiplyFactor2});
+
+  @override
+  Path getClip(Size size) {
+    double width = size.width;
+    double height = 760;
+
+    Path path = Path();
+
+    path.moveTo(0, 0);
+    path.lineTo(width * multiplyFactor1, 0);
+    path.lineTo(width * multiplyFactor2, height);
+    path.lineTo(0, height);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+    return true;
+  }
+}
+
+class Carousel extends StatefulWidget {
   final double swidth;
 
-  Carousel(this.swidth, {super.key});
+  Carousel(this.swidth, {Key? key}) : super(key: key);
+  @override
+  State<Carousel> createState() => CarouselState();
+}
 
-  final List<String> imageCarousel = [
-    'assets/images/AmandaMaria.jpg',
-    'assets/images/DennysLeite.jpg',
-    'assets/images/DenisSilva.jpg',
-    'assets/images/LucasToshio.jpg',
-    'assets/images/GabrielBarreto.png',
-    'assets/images/FláviaViana.jpg',
-  ];
-
-  final List<String> titleCarousel = [
-    'Amanda Maria',
-    'Dennys Maia',
-    'Denis Rocha',
-    'Lucas Toshio',
-    'Gabriel Barreto',
-    'Flávia Roldan',
-  ];
-
-  final List<String> nameCarousel = [
-    'Estudante de Doutorado',
-    'Professor',
-    'Técnico em Informática para Internet',
-    'Estudante de Graduação em TI',
-    'Pedagogo',
-    'Professora',
-  ];
-
-  final List<String> summaryCarousel = [
-    'UFRN',
-    'IMD/UFRN',
-    '',
-    'IMD/UFRN',
-    'Estudante de Mestrado (PPGITE/UFRN)',
-    'CENTRO DE EDUCAÇÃO/UFRN',
-  ];
-
+class CarouselState extends State<Carousel> {
   final List<String> partnersLogo = [
-    'assets/images/ufrn.png',
-    'assets/images/imd.png',
-    'assets/images/remne.jpg',
-    'assets/images/gilfe.png',
-    'assets/images/ppgite.png'
+    'assets/images/icons/ufrn.png',
+    'assets/images/icons/imd.png',
+    'assets/images/icons/remne.jpg',
+    'assets/images/icons/gilfe.png',
+    'assets/images/icons/ppgite.png'
   ];
 
-  final List<double> partnersPadding = [24, 30, 0, 25, 0];
+  final List<String> texts = [
+    'Quem faz a Plataforma OBAMA acontecer?',
+    'Conheça os membros da nossa equipe',
+    'QUER LEVAR A OBAMA PARA SUA ESCOLA?',
+    'Entre em contato para solicitar formações ou sugerir material para a Plataforma OBAMA.',
+    'FALE CONOSCO'
+  ];
+
+  final List<String> images = [
+    'assets/images/carousel/slider1.jpg',
+    'assets/images/img2.jpg',
+  ];
+
+  final List<double> partnersPadding = [24, 30, 0, 0, 0];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  final CarouselSliderController _controller = CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (swidth > 1300) ...[
+        if (widget.swidth > 1300) ...[
           Container(
               height: 875,
-              width: swidth,
+              width: widget.swidth,
               child: Stack(children: <Widget>[
-                Column(children: [
+                Stack(children: [
                   Container(
-                      width: swidth,
+                      width: widget.swidth,
                       height: 740,
-                      decoration: const BoxDecoration(
+                      decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/images/footer.png'),
-                            fit: BoxFit.cover),
-                      ))
+                            image: AssetImage(images[0]), fit: BoxFit.cover),
+                      )),
+                  ClipPath(
+                      clipper: ClipTrapezoid(
+                          multiplyFactor1: .7, multiplyFactor2: .4),
+                      child: Container(color: Color.fromRGBO(0, 0, 0, .7))),
                 ]),
                 Center(
                   child: Container(
@@ -85,64 +158,64 @@ class Carousel extends StatelessWidget {
                           children: [
                             Container(height: 140),
                             Container(
-                                child: Text(
-                                    'Quem faz a Plataforma OBAMA acontecer?',
+                                child: Text(texts[0],
                                     style: textTheme.labelMedium)),
                             Container(
                                 padding: const EdgeInsets.only(top: 15),
                                 child: Text(
-                                  'Conheça os membros da nossa equipe',
+                                  texts[1],
                                   style: textTheme.displaySmall,
                                 )),
                             Container(height: 20),
                             SizedBox(
                                 height: 5.0,
                                 width: 82.0,
-                                child: Image.asset('assets/images/img2.jpg',
-                                    fit: BoxFit.cover)),
-                            SizedBox(height: 40, width: swidth),
-                            ImageSlideshow(
-                              width: 760,
-                              height: 240,
-                              initialPage: 0,
-                              indicatorColor: CoresPersonalizadas.azulObama,
-                              indicatorBackgroundColor: Colors.grey,
-                              onPageChanged: (value) {},
-                              autoPlayInterval: 3500,
-                              isLoop: true,
-                              children: [
-                                for (int i = 0;
-                                    i < titleCarousel.length;
-                                    i++) ...{
-                                  Row(children: [
-                                    Container(
-                                        height: 150,
-                                        width: 150,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            image: DecorationImage(
-                                                image: AssetImage(
-                                                    imageCarousel[i]),
-                                                fit: BoxFit.cover))),
-                                    Container(width: 20),
-                                    Container(
-                                        padding:
-                                            const EdgeInsets.only(left: 10),
-                                        height: 150,
-                                        width: 500,
-                                        child: ListView(children: [
-                                          Text(titleCarousel[i],
-                                              style: textTheme.displayMedium),
-                                          Container(height: 35),
-                                          Text(nameCarousel[i],
-                                              style: textTheme.displaySmall),
-                                          Container(height: 20),
-                                          Text(summaryCarousel[i],
-                                              style: textTheme.displaySmall)
-                                        ])),
-                                  ]),
-                                },
+                                child:
+                                    Image.asset(images[1], fit: BoxFit.cover)),
+                            SizedBox(height: 40, width: widget.swidth),
+                            Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                CarouselSlider(
+                                  items: (LeadersTeam + StaffTeam)
+                                      .map((member) => Container(
+                                            child: CarouselElements(
+                                                swidth: widget.swidth,
+                                                nameList: member.name,
+                                                imgList: member.image,
+                                                jobList: member.job,
+                                                summaryList: member.summary,
+                                                imgWidth: 150,
+                                                imgHeight: 150),
+                                          ))
+                                      .toList(),
+                                  options: CarouselOptions(
+                                      enlargeCenterPage: true,
+                                      autoPlay: true,
+                                      viewportFraction: 1,
+                                      height: 200),
+                                  carouselController: _controller,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: <Widget>[
+                                    Flexible(
+                                      child: InkWell(
+                                        onTap: () => _controller.previousPage(),
+                                        child: Icon(Icons.arrow_back_ios,
+                                            color: background, size: 30),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: InkWell(
+                                        onTap: () => _controller.nextPage(),
+                                        child: Icon(Icons.arrow_forward_ios,
+                                            color: background, size: 30),
+                                      ),
+                                    ),
+                                  ],
+                                )
                               ],
                             ),
                             Padding(
@@ -151,7 +224,7 @@ class Carousel extends StatelessWidget {
                                   child: Container(
                                       color: CoresPersonalizadas.azulObama,
                                       height: 150,
-                                      width: swidth * 0.9 + 40,
+                                      width: widget.swidth * 0.9 + 40,
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 30),
                                       child: Row(children: [
@@ -171,12 +244,10 @@ class Carousel extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Text(
-                                                      'QUER LEVAR A OBAMA PARA SUA ESCOLA?',
+                                                  Text(texts[2],
                                                       style: textTheme
                                                           .labelMedium),
-                                                  Text(
-                                                      'Entre em contato para solicitar formações ou sugerir material para a Plataforma OBAMA.',
+                                                  Text(texts[3],
                                                       style: textTheme
                                                           .displayMedium)
                                                 ])),
@@ -184,18 +255,18 @@ class Carousel extends StatelessWidget {
                                         TextButton(
                                             style: ButtonStyle(
                                               fixedSize:
-                                                  MaterialStatePropertyAll(
+                                                  WidgetStatePropertyAll(
                                                       Size(150, 50)),
                                               backgroundColor:
-                                                  MaterialStatePropertyAll(
+                                                  WidgetStatePropertyAll(
                                                       onPrimary),
                                               overlayColor:
-                                                  MaterialStatePropertyAll(
+                                                  WidgetStatePropertyAll(
                                                       onPrimary),
                                             ),
                                             onPressed: openContactUsForm,
                                             child: Text(
-                                              'FALE CONOSCO',
+                                              texts[4],
                                               style: TextStyle(
                                                 color: Colors.white,
                                                 fontSize: 14,
@@ -239,30 +310,35 @@ class Carousel extends StatelessWidget {
         ] else ...[
           SizedBox(
               height: 740,
-              width: swidth,
+              width: widget.swidth,
               child:
                   Stack(alignment: Alignment.bottomCenter, children: <Widget>[
-                Column(children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width,
-                      padding: const EdgeInsets.only(top: 50),
-                      height: 650,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/images/footer.png'),
-                            fit: BoxFit.cover),
-                      ))
-                ]),
+                Column(
+                  children: [
+                    Stack(children: [
+                      Container(
+                          width: MediaQuery.of(context).size.width,
+                          padding: const EdgeInsets.only(top: 50),
+                          height: 650,
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: AssetImage(images[0]),
+                                fit: BoxFit.cover),
+                          )),
+                      Container(
+                          height: 650, color: Color.fromRGBO(0, 0, 0, .7)),
+                    ]),
+                  ],
+                ),
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Container(height: 40),
                   Container(
                       padding: const EdgeInsets.only(left: 40, top: 50),
-                      child: Text('Quem faz a Plataforma OBAMA acontecer?',
-                          style: textTheme.displayLarge)),
+                      child: Text(texts[0], style: textTheme.displayLarge)),
                   Container(
                       padding: const EdgeInsets.only(top: 15, left: 40),
                       child: Text(
-                        'Conheça os membros da nossa equipe',
+                        texts[1],
                         style: textTheme.displaySmall,
                       )),
                   Container(height: 20),
@@ -271,108 +347,118 @@ class Carousel extends StatelessWidget {
                     SizedBox(
                         height: 5.0,
                         width: 82.0,
-                        child: Image.asset('assets/images/img2.jpg',
-                            fit: BoxFit.cover)),
+                        child: Image.asset(images[1], fit: BoxFit.cover)),
                   ]),
                   // SizedBox(height: 20, width: swidth),
-                  ImageSlideshow(
-                    width: swidth,
-                    height: 210,
-                    initialPage: 0,
-                    indicatorColor: CoresPersonalizadas.azulObama,
-                    indicatorBackgroundColor: Colors.grey,
-                    onPageChanged: (value) {},
-                    autoPlayInterval: 3500,
-                    isLoop: true,
-                    children: [
-                      for (int i = 0; i < titleCarousel.length; i++) ...{
-                        Row(children: [
-                          Container(
-                              margin: const EdgeInsets.only(left: 40),
-                              height: 120,
-                              width: 120,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  image: DecorationImage(
-                                      image: AssetImage(imageCarousel[i]),
-                                      fit: BoxFit.cover))),
-                          Container(
-                              padding: const EdgeInsets.only(left: 20),
-                              height: 120,
-                              width: swidth - 160,
-                              child: ListView(children: [
-                                Text(titleCarousel[i],
-                                    style: textTheme.displayMedium),
-                                Container(height: 10),
-                                Text(nameCarousel[i],
-                                    style: textTheme.displaySmall),
-                                Container(height: 10),
-                                Text(summaryCarousel[i],
-                                    style: textTheme.displaySmall)
-                              ])),
-                        ]),
-                      },
+                  Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      CarouselSlider(
+                        items: (LeadersTeam + StaffTeam)
+                            .map((member) => Container(
+                                  child: CarouselElements(
+                                      swidth: widget.swidth,
+                                      nameList: member.name,
+                                      imgList: member.image,
+                                      jobList: member.job,
+                                      summaryList: member.summary,
+                                      imgWidth: 120,
+                                      imgHeight: 120),
+                                ))
+                            .toList(),
+                        options: CarouselOptions(
+                            enlargeCenterPage: true,
+                            aspectRatio: 4/3,
+                            autoPlay: true,
+                            viewportFraction: 1,
+                            height: 200),
+                        carouselController: _controller,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Flexible(
+                              child: InkWell(
+                                onTap: () => _controller.previousPage(),
+                                child: Icon(Icons.arrow_back_ios,
+                                    color: background, size: 35),
+                              ),
+                            ),
+                            Flexible(
+                              child: InkWell(
+                                onTap: () => _controller.nextPage(),
+                                child: Icon(Icons.arrow_forward_ios,
+                                    color: background, size: 35),
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
                     ],
-                  )
+                  ),
                 ]),
                 Container(
                     color: CoresPersonalizadas.azulObama,
                     height: 210,
-                    width: swidth * 0.95,
+                    width: widget.swidth * 0.95,
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                      Row(children: [
-                        // Container(width: 15),
-                        SizedBox(
-                            width:  swidth * 0.15,
-                            height: 100,
-                            child: Icon(
-                              Icons.phone,
-                              size: 40,
-                              color: background,
-                            )),
-                        SizedBox(
-                            width: swidth * 0.75,
-                            // height: 100,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('QUER LEVAR A OBAMA PARA SUA ESCOLA?',
-                                      style: textTheme.displayMedium),
-                                  Text(
-                                      'Entre em contato para solicitar formações ou sugerir material para a Plataforma OBAMA.',
-                                      style: textTheme.displaySmall)
-                                ]))
-                      ]),
-                      Container(width: swidth * 0.25, height: 10),
-                      TextButton(
-                          style: ButtonStyle(
-                            fixedSize: MaterialStatePropertyAll(Size(150, 50)),
-                            backgroundColor:
-                                MaterialStatePropertyAll(onPrimary),
-                            overlayColor: MaterialStatePropertyAll(onPrimary),
-                          ),
-                          onPressed: openContactUsForm,
-                          child: Text(
-                            'FALE CONOSCO',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1, 1),
-                                  color: Color.fromRGBO(0, 0, 0, 0.5),
-                                )
-                              ],
-                            ),
-                          )),
-                    ])),
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Row(children: [
+                            // Container(width: 15),
+                            SizedBox(
+                                width: widget.swidth * 0.15,
+                                height: 100,
+                                child: Icon(
+                                  Icons.phone,
+                                  size: 40,
+                                  color: background,
+                                )),
+                            SizedBox(
+                                width: widget.swidth * 0.75,
+                                // height: 100,
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(texts[2],
+                                          style: textTheme.displayMedium),
+                                      Text(texts[3],
+                                          style: textTheme.displaySmall)
+                                    ]))
+                          ]),
+                          Container(width: widget.swidth * 0.25, height: 10),
+                          TextButton(
+                              style: ButtonStyle(
+                                fixedSize:
+                                    WidgetStatePropertyAll(Size(150, 50)),
+                                backgroundColor:
+                                    WidgetStatePropertyAll(onPrimary),
+                                overlayColor:
+                                    WidgetStatePropertyAll(onPrimary),
+                              ),
+                              onPressed: openContactUsForm,
+                              child: Text(
+                                texts[4],
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  shadows: [
+                                    Shadow(
+                                      offset: Offset(1, 1),
+                                      color: Color.fromRGBO(0, 0, 0, 0.5),
+                                    )
+                                  ],
+                                ),
+                              )),
+                        ])),
               ])),
-          SizedBox(width: swidth * 0.9, height: 40),
+          SizedBox(width: widget.swidth * 0.9, height: 40),
           SizedBox(
-              width: swidth * 0.8,
+              width: widget.swidth * 0.8,
               child: Center(
                   child: Column(children: [
                 for (int i = 0; i < partnersLogo.length; i++) ...{

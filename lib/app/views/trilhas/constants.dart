@@ -1,8 +1,8 @@
 List<String> sectionImage = [
-  'gmail.png',
-  'meet.png',
-  'forms.png',
-  'sala-de-aula.png',
+  'icons/gmail.png',
+  'icons/meet.png',
+  'icons/forms.png',
+  'icons/sala-de-aula.png',
 ];
 
 List<String> sectionLinks = [

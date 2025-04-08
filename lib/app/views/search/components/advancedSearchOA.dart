@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-// import 'package:get/get_state_manager/src/simple/g
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../components/searchDropdown.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
-
-// List<String> nivelEnsino = <String>['Todos'];
-// List<String> temaCurricular = <String>['Todos'];
-// List<String> tipo = <String>['Todos'];
-// List<String> descritor = <String>['Todos'];
 
 const List<String> tileTitle = <String>[
   'Selecione o nível de ensino',
@@ -64,6 +58,9 @@ class OAFilterState extends State<OAFilters> {
             .map((x) => (x.id, x.getNomeWithCurriculo()))
             .toList();
       });
+      if (nivelEnsinolData != null) {
+        nivelEnsinolData?.sort((a, b) => a.$1.compareTo(b.$1));
+      }
       nivelEnsinoRadioTextField = RadioTextField(
         array: nivelEnsinolData ?? [],
         title: tileTitle[0],
@@ -104,6 +101,23 @@ class OAFilterState extends State<OAFilters> {
     );
   }
 
+  void mainSearch() {
+    setState(() {
+      selectedNivelEnsino = nivelEnsinoRadioTextField!.selectedValue != null &&
+              nivelEnsinoRadioTextField!.selectedValue > 0
+          ? '${nivelEnsinoRadioTextField!.selectedValue}'
+          : '';
+      selectedTemaConteudo =
+          temaConteudoRadioTextField!.selectedValue != null &&
+                  temaConteudoRadioTextField!.selectedValue > 0
+              ? '${temaConteudoRadioTextField!.selectedValue}'
+              : '';
+      searchTerm = searchTextController.text;
+    });
+    final queryString = _buildQueryString();
+    widget.updateData(queryString);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -116,6 +130,7 @@ class OAFilterState extends State<OAFilters> {
           margin: const EdgeInsets.only(bottom: 50),
           child: TextField(
               controller: searchTextController,
+              onSubmitted: (value) => mainSearch(),
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderSide: BorderSide.none,
@@ -143,22 +158,8 @@ class OAFilterState extends State<OAFilters> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 mainButton(context, 'Busca Avançada', null, () {
-                  setState(() {
-                    selectedNivelEnsino =
-                        nivelEnsinoRadioTextField!.selectedValue != null &&
-                                nivelEnsinoRadioTextField!.selectedValue > 0
-                            ? '${nivelEnsinoRadioTextField!.selectedValue}'
-                            : '';
-                    selectedTemaConteudo =
-                        temaConteudoRadioTextField!.selectedValue != null &&
-                                temaConteudoRadioTextField!.selectedValue > 0
-                            ? '${temaConteudoRadioTextField!.selectedValue}'
-                            : '';
-                    searchTerm = searchTextController.text;
-                  });
-                  final queryString = _buildQueryString();
-                  widget.updateData(queryString);
-                  print(selectedNivelEnsino);
+                  mainSearch();
+                  // print(selectedNivelEnsino);
                 }),
               ],
             ),

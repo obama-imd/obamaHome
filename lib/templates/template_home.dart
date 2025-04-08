@@ -6,9 +6,15 @@ import '../../../../components/footer.dart';
 import '../../../../components/menuMobile.dart';
 import '../../../../components/navMenu.dart';
 import '../../../../components/topbar.dart';
-import '../../../../utils/app_theme.dart';
 import '../components/librasButton.dart';
 import '../components/menuClass.dart';
+import '../utils/app_theme.dart';
+
+final List<String> imageCarousel = [
+  "assets/images/carousel/slider1.jpg",
+  "assets/images/carousel/slider2.jpg",
+  "assets/images/carousel/slider3.jpg"
+];
 
 class TemplateHome extends StatefulWidget {
   final List<Widget> children;
@@ -18,25 +24,54 @@ class TemplateHome extends StatefulWidget {
   });
 
   @override
-  State<TemplateHome> createState() => _HomeDesktopState();
+  State<TemplateHome> createState() => _TemplateHomeState();
 }
 
-class _HomeDesktopState extends State<TemplateHome> {
+class _TemplateHomeState extends State<TemplateHome>
+    with TickerProviderStateMixin {
   var scaffoldKey = GlobalKey<ScaffoldState>();
-
   late AnimationController controller;
+  int index = 0;
 
-  // @override
-  // void initState() {
-  //   controller = AnimationController(
-  //     vsync: this,
-  //     duration: const Duration(seconds: 5),
-  //   )..addListener(() {
-  //       setState(() {});
-  //     });
-  //   controller.repeat();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(vsync: this);
+    _changeImagePeriodically();
+  }
+
+  void restartTimer() {
+    controller = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 4),
+      )..forward();
+      _changeImagePeriodically();
+  }
+
+  void _changeImagePeriodically() {
+    Future.delayed(Duration(seconds: 4), () {
+      setState(() {
+        index = (index + 1) % imageCarousel.length;
+      });
+      controller = AnimationController(
+        vsync: this,
+        duration: const Duration(seconds: 4),
+      )..forward();
+      _changeImagePeriodically();
+    });
+  }
+
+  void changeImage(int sumValue) {
+    setState(() {
+      index = (index + sumValue) % imageCarousel.length;
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -71,21 +106,98 @@ class _HomeDesktopState extends State<TemplateHome> {
                                 itemValues: getItemValues(),
                                 searchAvailable: true),
                           ])),
+                  Stack(children: [
+                    Stack(
+                      children: [
+                        Container(
+                            constraints: BoxConstraints(
+                                maxHeight: 660, minWidth: swidth),
+                            child: Image.asset(
+                              imageCarousel[(index + 1) % imageCarousel.length],
+                              fit: BoxFit.cover,
+                              height: 660,
+                            )),
+                        Container(
+                            constraints: BoxConstraints(
+                                maxHeight: 660, minWidth: swidth),
+                            child: Image.asset(imageCarousel[index],
+                                fit: BoxFit.cover, height: 660)),
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                          height: 660,
+                          child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                InkWell(
+                                    onTap: () => changeImage(1),
+                                    child: Icon(Icons.arrow_back_ios,
+                                        color: background, size: 40)),
+                                InkWell(
+                                    onTap: () => changeImage(-1),
+                                    child: Icon(Icons.arrow_forward_ios,
+                                        color: background, size: 40)),
+                              ]),
+                        ),
+                        AnimatedBuilder(
+                          animation: controller,
+                          builder: (context, child) {
+                            return LinearProgressIndicator(
+                              minHeight: 5,
+                              backgroundColor: onSecondary,
+                              value: controller.value,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ]),
                 ] else ...[
                   menuMobile(context, scaffoldKey, swidth),
+                  Stack(children: [
+                    Stack(children: [
+                      Image.asset(
+                        imageCarousel[(index + 1) % imageCarousel.length],
+                        fit: BoxFit.cover,
+                        height: 250,
+                        width: swidth,
+                      ),
+                      Image.asset(
+                        imageCarousel[index],
+                        fit: BoxFit.cover,
+                        height: 250,
+                        width: swidth,
+                      ),
+                    ]),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      height: 250,
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            InkWell(
+                                onTap: () => changeImage(1),
+                                child: Icon(Icons.arrow_back_ios,
+                                    color: background, size: 30)),
+                            InkWell(
+                                onTap: () => changeImage(-1),
+                                child: Icon(Icons.arrow_forward_ios,
+                                    color: background, size: 30)),
+                          ]),
+                    ),
+                    AnimatedBuilder(
+                      animation: controller,
+                      builder: (context, child) {
+                        return LinearProgressIndicator(
+                          minHeight: 5,
+                          backgroundColor: onSecondary,
+                          value: controller.value,
+                        );
+                      },
+                    ),
+                  ]),
                 ],
-                Stack(children: [
-                  Container(
-                      width: swidth,
-                      constraints: BoxConstraints(maxHeight: 660),
-                      child: Image.asset("assets/images/team.gif",
-                          fit: BoxFit.cover)),
-                  LinearProgressIndicator(
-                    minHeight: 5,
-                    backgroundColor: onSecondary,
-                    // value: controller.value,
-                  ),
-                ]),
                 ...widget.children,
                 Carousel(swidth),
                 Footer(swidth),

@@ -15,7 +15,6 @@ class OurProductItem extends StatefulWidget {
       {super.key,
       required this.id,
       required this.title,
-      this.image,
       this.width = 237.5,
       this.height = 327.5});
 
@@ -23,7 +22,6 @@ class OurProductItem extends StatefulWidget {
   final double height;
   final double width;
   final String title;
-  final String? image;
 
   @override
   State<OurProductItem> createState() => _OurProductItemState();
@@ -88,7 +86,7 @@ class _OurProductItemState extends State<OurProductItem> {
                         width: 20.0,
                       ),
               ),
-              child: buildImage(widget.title)),
+              child: buildImage(widget.title, "${widget.id}")),
         ),
         Expanded(
           flex: 1,
@@ -112,7 +110,7 @@ class _OurProductItemState extends State<OurProductItem> {
                           oa = result;
                         });
                         if (oa != null) {
-                          final Uri url = Uri.parse(oa!.getLink() ?? "");
+                          final Uri url = Uri.parse(oa!.getLink());
                           launchUrl(url);
                         }
                       });
@@ -169,20 +167,39 @@ class _OurProductItemState extends State<OurProductItem> {
     );
   }
 
-  Widget buildImage(String text) {
-    return Container(
-      color: mycolor,
-      constraints: BoxConstraints.expand(),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-                fontFamily: 'SRF2', color: Colors.white, fontSize: 28),
+  Widget buildImage(String text, String id) {
+    return Stack(
+      children: [
+        Container(
+          width: 300,
+          height: 200,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: NetworkImage(
+                  "https://raw.githubusercontent.com/amandamaria/imagens-oas/refs/heads/main/${id}.png"), // Substitua pela sua imagem
+              fit: BoxFit.cover,
+            ),
+            borderRadius: BorderRadius.circular(15),
           ),
         ),
-      ),
+        Container(
+          constraints: BoxConstraints.expand(),
+          decoration: BoxDecoration(
+            color: Colors.black.withOpacity(0.5), // Fundo semi-transparente
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Text(
+                text,
+                style: TextStyle(
+                    fontFamily: 'SRF2', color: Colors.white, fontSize: 28),
+              ),
+            ),
+          ),
+        )
+      ],
     );
   }
 

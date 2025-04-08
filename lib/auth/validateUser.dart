@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/auth/controller.dart';
-import 'package:obamahome/auth/forgotPassword.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import 'components/formFields.dart';
-import 'components/googleSignInButton.dart';
 
 class ValidateUserPageView extends StatefulWidget {
   const ValidateUserPageView({super.key});
@@ -41,7 +39,7 @@ class _ValidateUserPageViewState extends State<ValidateUserPageView> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 30, bottom: 30),
-                      child: Image.asset("assets/images/icone.png", width: 150),
+                      child: Image.asset("assets/images/icons/icone.png", width: 150),
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 10),

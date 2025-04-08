@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 
 import '../../../../utils/app_padding.dart';
-import '../searchOA_view.dart';
+import '../components/resultsSearch.dart';
 
 class SearchMobile extends StatefulWidget {
   String termSearched;
   int selectedPageIndex;
   Function(void) updateData;
-  void Function(int) selectedPage;
   TextStyle titleStyle;
 
   SearchMobile(
@@ -18,7 +17,6 @@ class SearchMobile extends StatefulWidget {
       required this.termSearched,
       required this.selectedPageIndex,
       required this.updateData,
-      required this.selectedPage,
       required this.titleStyle})
       : super(key: key);
   @override
@@ -48,8 +46,14 @@ class _SearchMobileState extends State<SearchMobile> {
       // ),
       Container(
         margin: paddingValues("sectionPadding", context),
-        child: SearchPageView(widget.termSearched, swidth, widget.selectedPageIndex,
-            widget.selectedPage, null),
+        child: DisplaySearchResults(
+          termSearched: widget.termSearched,
+          swidth: swidth,
+          selectedPageIndex: widget.selectedPageIndex,
+        ),
+      ),
+      SizedBox(
+        height: 40,
       ),
     ]);
   }

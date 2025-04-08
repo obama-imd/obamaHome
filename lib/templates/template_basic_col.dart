@@ -31,15 +31,17 @@ class TemplateColumnState extends State<TemplateColumn> {
     WidgetsBinding.instance.addPostFrameCallback((_) => getPageName(context));
   }
 
-  String getPageName(BuildContext context) {
-    final currentRoute = ModalRoute.of(context)?.settings.name;
-    final matchingItem = getItemValues()
-        .firstWhere((item) => item.path.contains(currentRoute ?? ""));
-
-    setState(() {
-      pageName = matchingItem.name;
-    });
-    return pageName;
+  void getPageName(BuildContext context) {
+    String? currentRoute = ModalRoute.of(context)?.settings.name;
+    for (var currentPage in routesList) {
+      for (var path in currentPage.path) {
+        if (currentRoute == path) {
+          setState(() {
+            pageName = currentPage.name;
+          });
+        }
+      }
+    }
   }
 
   @override

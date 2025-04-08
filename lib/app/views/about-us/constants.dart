@@ -15,7 +15,7 @@ List<AccordionItem> accordionItems = [
   AccordionItem(
       accordionTitle: "O que nós fazemos?",
       accordionContent:
-          'A Plataforma OBAMA é um repositório que faz a catalogação de Objetos de Aprendizagem (OA) classificados a partir de critérios pedagógicos e técnicos, com conteúdos explorados e habilidades que podem ser desenvolvidas em plataformas de funcionamento diferentes (desktop ou mobile). Além do desenvolvimento do repositório para ajudar professores da Educação Básica a encontrar recursos educativos digitais para diversificar as estratégias de ensino de Matemática em sala de aula, a OBAMA intenciona formar docentes para a busca, utilização e integração dos OA em processos de ensino e aprendizagem. A plataforma também tem mapeados e catalogados aplicativos voltados para o ensino da Matemática segundo as habilidades trabalhadas na Prova Brasil e na Base Nacional Comum Curricular (BNCC). São exemplos de OA’s animações, simulações, jogos educativos e softwares, os quais podem ser favoritados e até compor planos virtuais de aulas, recurso permitido para docentes cadastrados na OBAMA.'),
+          'A Plataforma OBAMA é um repositório que dispolibiliza a catalogação de Objetos de Aprendizagem (OA) classificados a partir de critérios pedagógicos e técnicos, com conteúdos explorados e habilidades que podem ser desenvolvidas em plataformas de funcionamento diferentes (desktop ou mobile). Além do desenvolvimento do repositório para ajudar professores da Educação Básica a encontrar recursos educativos digitais para diversificar as estratégias de ensino de Matemática em sala de aula, a OBAMA intenciona formar docentes para a busca, utilização e integração dos OA em processos de ensino e aprendizagem. A plataforma também tem mapeados e catalogados aplicativos voltados para o ensino da Matemática segundo as habilidades trabalhadas na Prova Brasil e na Base Nacional Comum Curricular (BNCC). São exemplos de OA’s animações, simulações, jogos educativos e softwares, os quais podem ser favoritados e até compor planos virtuais de aulas, recurso permitido para docentes cadastrados na OBAMA.'),
   AccordionItem(
     accordionTitle: "Nossa História",
     accordionContent:
@@ -38,76 +38,140 @@ List<AccordionItem> accordionItems = [
   ),
 ];
 
-List<String> LeaderNames = [
-  "Dennys Leite Maia",
-  // "Nelson Ion de Oliveira",
+class TeamMembers {
+  String name;
+  String image;
+  String summary;
+  String link;
+  String job;
+
+  TeamMembers({
+    required this.name,
+    required this.image,
+    required this.summary,
+    required this.link,
+    required this.job,
+  });
+}
+
+List<TeamMembers> LeadersTeam = [
+  TeamMembers(
+      name: "Amanda Maria",
+      image: "assets/images/team/AmandaMaria.jpg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Tech Leader WEB/Flutter"),
+  TeamMembers(
+      name: "Dennys Leite Maia",
+      image: "assets/images/team/DennysLeite.jpg",
+      summary: 'UFRN',
+      link: "http://lattes.cnpq.br/4047293288281493",
+      job: 'Professor/Coordenador'),
 ];
 
-List<String> LeaderImgs = [
-  "assets/images/DennysLeite.jpg",
-  // "assets/images/nelson.jpg",
-];
-
-List<String> LeaderLink = [
-  "http://lattes.cnpq.br/4047293288281493",
-  // "assets/images/nelson.jpg",
-];
-
-List<String> staffNames = [
-  "Amanda Maria",
-  "Carol",
-  "Dênis Silva",
-  "Emanuel Kywal",
-  "Flávia Viana",
-  "Gabriel Barreto",
-  "Giluiza Catarina",
-  "Tonhaunm",
-  "Igor Rauan",
-  "Toshio",
-  "Malu",
-  "Mayara Cabral",
-  "Ramon Jales",
-  "Roberia",
-  "Sara Silva",
-  "Sarah Ribeiro",
-];
-
-List<String> staffImgs = [
-  "assets/images/AmandaMaria.jpg",
-  "assets/images/AnaCarolina.jpeg",
-  "assets/images/DenisSilva.jpg",
-  "assets/images/EmanuelKywal.jpg",
-  "assets/images/FláviaViana.jpg",
-  "assets/images/GabrielBarreto.png",
-  "assets/images/GiluizaCatarina.jpeg",
-  "assets/images/IgorAntonio.png",
-  "assets/images/IgorRauan.jpg",
-  "assets/images/LucasToshio.jpg",
-  "assets/images/MariaLuiza.jpg",
-  "assets/images/MayaraCabral.jpg",
-  "assets/images/RamonJales.jpg",
-  "assets/images/Roberia.jpg",
-  "assets/images/SaraSilva.jpg",
-  "assets/images/SarahRibeiro.jpeg",
-];
-
-List<dynamic> staffLinks = [
-  "http://lattes.cnpq.br", //AmandaMaria
-  "http://lattes.cnpq.br/8468792235766788",
-  "http://lattes.cnpq.br/1242640850027706",
-  "http://lattes.cnpq.br/9974122442384650",
-  "http://lattes.cnpq.br", //FláviaViana
-  "http://lattes.cnpq.br/4849964111530414",
-  "http://lattes.cnpq.br", //GiluizaCatarina
-  "https://lattes.cnpq.br/7854426004893677",
-  "http://lattes.cnpq.br", //IgorRauan
-  "http://lattes.cnpq.br/8503176266222901",
-  "http://lattes.cnpq.br/1059686872506852",
-  "http://lattes.cnpq.br", //MayaraCabral
-  "http://lattes.cnpq.br/6055540143517758",
-  "http://lattes.cnpq.br/8019572036140851",
-  "http://lattes.cnpq.br", //SaraSilva
-  "http://lattes.cnpq.br/3278417411887579",
+List<TeamMembers> StaffTeam = [
+  TeamMembers(
+      name: "Carol",
+      image: "assets/images/team/AnaCarolina.jpeg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br/8468792235766788",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Dênis Silva",
+      image: "assets/images/team/DenisSilva.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/1242640850027706",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Emanuel Kywal",
+      image: "assets/images/team/EmanuelKywal.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/9974122442384650",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Flávia Viana",
+      image: "assets/images/team/FláviaViana.jpg",
+      summary: "CENTRO DE EDUCAÇÃO/UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Professora"),
+  TeamMembers(
+      name: "Gabriel Barreto",
+      image: "assets/images/team/GabrielBarreto.png",
+      summary: "Estudante de Mestrado (PPGITE/UFRN)",
+      link: "http://lattes.cnpq.br/4849964111530414",
+      job: "Pedagogo"),
+  // TeamMembers(
+  //     name: "Giluiza Catarina",
+  //     image: "assets/images/team/GiluizaCatarina.jpeg",
+  //     summary: "",
+  //     link: "http://lattes.cnpq.br",
+  //     job: "Professora"),
+  TeamMembers(
+      name: "Tonhaunm",
+      image: "assets/images/team/IgorAntonio.png",
+      summary: "UFRN",
+      link: "https://lattes.cnpq.br/7854426004893677",
+      job: "Professor"),
+  TeamMembers(
+      name: "Igor Rauan",
+      image: "assets/images/team/IgorRauan.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Keven",
+      image: "assets/images/team/Keven.jpg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br/0587829541822551",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Leonel",
+      image: "assets/images/team/Leonel.jpg",
+      summary: "UFRN",
+      link: "http://lattes.cnpq.br/4080549720309429",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Toshio",
+      image: "assets/images/team/LucasToshio.jpeg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/8503176266222901",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Malu",
+      image: "assets/images/team/MariaLuiza.jpg",
+      summary: "",
+      link: "http://lattes.cnpq.br/1059686872506852",
+      job: "Professora"),
+  TeamMembers(
+      name: "Raiza",
+      image: "assets/images/team/Raiza.jpeg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/3768644861934814",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Roberia",
+      image: "assets/images/team/Roberia.jpg",
+      summary: "",
+      link: "http://lattes.cnpq.br/8019572036140851",
+      job: "Professora"),
+  TeamMembers(
+      name: "Samuel",
+      image: "assets/images/team/Samuel.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/9708412519196484",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Sara Silva",
+      image: "assets/images/team/SaraSilva.jpg",
+      summary: "IMD/UFRN",
+      link: "http://lattes.cnpq.br/9126372629823675",
+      job: "Estudante"),
+  TeamMembers(
+      name: "Vitor",
+      image: "assets/images/team/vitor.jpeg",
+      summary: "",
+      link: "http://lattes.cnpq.br/7519626753410754",
+      job: "Voluntário"),
 ];
 
 List<String> grid1Title = [

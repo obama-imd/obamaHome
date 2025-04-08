@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
-import 'package:obamahome/auth/controller.dart';
 import 'package:obamahome/auth/login.dart';
 import 'package:obamahome/auth/validateUser.dart';
 
 import '../404.dart';
 import '../app/views/about-us/aboutUs_view.dart';
 import '../app/views/blog/blog_view.dart';
-import '../app/views/blog/components/blog-details.dart';
 import '../app/views/formations/formacoes_view.dart';
 import '../app/views/home/home_view.dart';
 import '../app/views/lessons/lesson_plan_new.dart';
@@ -119,15 +117,15 @@ class MyAppMaterial extends MaterialApp {
           theme: ThemeData(
             menuButtonTheme: MenuButtonThemeData(
               style: ButtonStyle(
-                overlayColor: MaterialStatePropertyAll(background),
+                overlayColor: WidgetStatePropertyAll(background),
               ),
             ),
             menuBarTheme: MenuBarThemeData(
               style: MenuStyle(
                 // padding: MaterialStatePropertyAll(EdgeInsets.symmetric(horizontal: 18, vertical: 15)),
-                elevation: MaterialStatePropertyAll(0),
-                backgroundColor: MaterialStatePropertyAll(background),
-                shape: MaterialStatePropertyAll(
+                elevation: WidgetStatePropertyAll(0),
+                backgroundColor: WidgetStatePropertyAll(background),
+                shape: WidgetStatePropertyAll(
                   BeveledRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
@@ -136,22 +134,22 @@ class MyAppMaterial extends MaterialApp {
             ),
             textButtonTheme: TextButtonThemeData(
               style: ButtonStyle(
-                backgroundColor: MaterialStatePropertyAll(primary),
-                foregroundColor: MaterialStatePropertyAll(background),
-                padding: MaterialStatePropertyAll(
+                backgroundColor: WidgetStatePropertyAll(primary),
+                foregroundColor: WidgetStatePropertyAll(background),
+                padding: WidgetStatePropertyAll(
                   EdgeInsets.all(10),
                 ),
-                textStyle: MaterialStatePropertyAll(
+                textStyle: WidgetStatePropertyAll(
                   textTheme.displaySmall,
                 ),
-                overlayColor: MaterialStatePropertyAll(
+                overlayColor: WidgetStatePropertyAll(
                   Colors.lightBlue,
                 ),
               ),
             ),
             iconButtonTheme: IconButtonThemeData(
               style: ButtonStyle(
-                shape: MaterialStatePropertyAll(
+                shape: WidgetStatePropertyAll(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.zero,
                   ),
@@ -174,8 +172,6 @@ class MyAppMaterial extends MaterialApp {
               error: error,
               onError: onError,
               surface: background,
-              background: background,
-              onBackground: background,
               onSurface: onSurface,
             ),
             textTheme: textTheme,
@@ -186,17 +182,22 @@ class MyAppMaterial extends MaterialApp {
           initialRoute: '/',
           routes: {
             '/sobre': (context) => const AboutUsPage(),
-            '/blog': (context) => const BlogPage(),
-            '/blog-detalhes': (context) => BlogDetails(
-                  initialPageIndex:
-                      ModalRoute.of(context)?.settings.arguments as int? ?? 0,
-                ),
+            '/publicacoes': (context) => const BlogPage(),
+            // '/publicacao-detalhe': (context) => BlogDetails(
+            //       initialPageIndex:
+            //           ModalRoute.of(context)?.settings.arguments as int? ?? 0,
+            //     ),
             '/formacoes': (context) => const Formacoes(),
-            '/servicos': (context) {
-              //ref.read(allStudyLevelProvider.notifier).loadLevels();
+            '/objetos-aprendizagem-nav': (context) {
               return SearchPage(
                 termSearched:
                     ModalRoute.of(context)?.settings.arguments as String? ?? '',
+                queryParams: '',
+              );
+            },
+            '/objetos-aprendizagem': (context) {
+              return SearchPage(
+                termSearched: '',
                 queryParams: '',
               );
             },

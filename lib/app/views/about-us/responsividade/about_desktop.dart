@@ -78,91 +78,13 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
           margin: const EdgeInsets.only(top: 100),
           constraints: BoxConstraints(maxWidth: 1200),
           padding: paddingValues("sideMainPadding", context),
-          child: ResponsiveGridCol(
-            lg: 8,
-            sm: 12,
-            child:
-                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(accordionItems[1].accordionTitle,
-                  style: textTheme.titleSmall),
-              Container(height: 15),
-              Text(accordionItems[1].accordionContent,
-                  textAlign: TextAlign.justify)
-            ]),
-          )),
-      // Padding(
-      //   padding: const EdgeInsets.only(top: 100),
-      //   child: ResponsiveGridRow(children: [
-      //     ResponsiveGridCol(
-      //       lg: 8,
-      //       sm: 12,
-      //       child: Container(
-      //           color: const Color.fromARGB(255, 241, 238, 238),
-      //           padding: const EdgeInsets.only(top: 110, left: 90),
-      //           child: Column(
-      //               crossAxisAlignment: CrossAxisAlignment.start,
-      //               children: [
-      //                 SectionTitle(
-      //                     'Serviços Oferecidos',
-      //                     'Easy and effective way to get your device repaired.',
-      //                     CrossAxisAlignment.start),
-      //                 Container(
-      //                     padding: const EdgeInsets.only(top: 60),
-      //                     child: ResponsiveGridRow(
-      //                         crossAxisAlignment: CrossAxisAlignment.start,
-      //                         children: [
-      //                           for (int i = 0; i < grid1Title.length; i++) ...{
-      //                             ResponsiveGridCol(
-      //                               lg: 6,
-      //                               sm: 12,
-      //                               child: Padding(
-      //                                 padding:
-      //                                     const EdgeInsets.only(bottom: 100),
-      //                                 child: Column(
-      //                                     crossAxisAlignment:
-      //                                         CrossAxisAlignment.start,
-      //                                     children: [
-      //                                       Container(
-      //                                           height: 100,
-      //                                           width: 100,
-      //                                           decoration: BoxDecoration(
-      //                                               color: CoresPersonalizadas
-      //                                                   .azulObama,
-      //                                               borderRadius:
-      //                                                   BorderRadius.circular(
-      //                                                       100)),
-      //                                           child: Icon(grid1Icon[i],
-      //                                               size: iconSize[i],
-      //                                               color: background)),
-      //                                       Container(
-      //                                           padding: const EdgeInsets.only(
-      //                                               top: 20),
-      //                                           child: Text(grid1Title[i],
-      //                                               style:
-      //                                                   textTheme.titleSmall)),
-      //                                       Container(
-      //                                           padding: const EdgeInsets.only(
-      //                                               top: 20),
-      //                                           child: Text(grid1Content[i],
-      //                                               style: textTheme.bodySmall))
-      //                                     ]),
-      //                               ),
-      //                             ),
-      //                           },
-      //                         ]))
-      //               ])),
-      //     ),
-      //     if (swidth > 992) ...{
-      //       ResponsiveGridCol(
-      //         lg: 4,
-      //         child: SizedBox(
-      //             height: 865,
-      //             child:
-      //                 Image.asset('assets/images/img2.jpg', fit: BoxFit.cover)),
-      //       ),
-      //     }
-      //   ]),
-      // ),
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(accordionItems[1].accordionTitle, style: textTheme.titleSmall),
+            Container(height: 15),
+            Text(accordionItems[1].accordionContent,
+                textAlign: TextAlign.justify)
+          ])),
       Container(
         constraints: BoxConstraints(maxWidth: 1200),
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
@@ -175,11 +97,13 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
             padding: paddingValues("sideStaff", context),
             child: ResponsiveGridRow(children: [
               ResponsiveGridCol(lg: 3, child: Spacer()),
-              for (int i = 0; i < LeaderNames.length; i++) ...{
+              for (int i = 0; i < LeadersTeam.length; i++) ...{
                 ResponsiveGridCol(
-                    lg: 6,
-                    child: StaffCard(
-                        LeaderNames[i], LeaderImgs[i], LeaderLink[i], swidth))
+                    lg: 3,
+                    md: 6,
+                    xs: 12,
+                    child: StaffCard(LeadersTeam[i].name, LeadersTeam[i].image,
+                        LeadersTeam[i].link, swidth))
               },
               ResponsiveGridCol(lg: 3, child: Spacer()),
             ]),
@@ -194,16 +118,20 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
             child: Container(),
           ),
           ResponsiveGridRow(children: [
-            for (int i = 0; i < staffNames.length; i++) ...{
+            for (int i = 0; i < StaffTeam.length; i++) ...{
               ResponsiveGridCol(
                 lg: 3,
                 md: 6,
                 xs: 12,
-                child: StaffCard(
-                    staffNames[i], staffImgs[i], staffLinks[i], swidth),
+                child: StaffCard(StaffTeam[i].name, StaffTeam[i].image,
+                    StaffTeam[i].link, swidth),
               )
             }
-          ])
+          ]),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.only(bottom: 65.0),
+          ),
         ]),
       )
     ]);
