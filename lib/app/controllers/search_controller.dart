@@ -10,7 +10,7 @@ import '../models/pagination_oa_model.dart';
 Future<PaginationResponse?> fetchData(
     String searchTerm, int page, String? queryParams) async {
   var apiUrl =
-      '${API_URL}/oa?page=${page}&size=12&sort=nome${searchTerm.isNotEmpty ? '&nome=$searchTerm' : ''}';
+      '${API_URL}oa?page=${page}&size=12&sort=nome${searchTerm.isNotEmpty ? '&nome=$searchTerm' : ''}';
   if (queryParams != null && queryParams.isNotEmpty) {
     apiUrl = '${API_URL}oa?$queryParams&page=${page}&size=12&sort=nome';
   }
@@ -33,7 +33,7 @@ Future<PaginationResponse?> fetchData(
 }
 
 Future<ObjetoAprendizagem> fetchOAById(int id) async {
-  var apiUrl = '${API_URL}/oa/${id}';
+  var apiUrl = '${API_URL}oa/${id}';
 
   final response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
@@ -66,7 +66,7 @@ Future<SearchParametersResult> fetchSearchData(String? curriculo) async {
   List<TemaConteudo> responseTemaConteudo = [];
   List<Descritor> responseDescritor = [];
 
-  var apiUrl = '${API_URL}/nivelensino';
+  var apiUrl = '${API_URL}nivelensino';
   var response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
@@ -80,7 +80,7 @@ Future<SearchParametersResult> fetchSearchData(String? curriculo) async {
         'Failed to load ${NivelEnsino}. Status code: ${response.statusCode}');
   }
 
-  apiUrl = '${API_URL}/temaconteudo?curriculo=${curriculo}';
+  apiUrl = '${API_URL}temaconteudo?curriculo=${curriculo}';
   response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
@@ -94,7 +94,7 @@ Future<SearchParametersResult> fetchSearchData(String? curriculo) async {
         'Failed to load ${TemaConteudo}. Status code: ${response.statusCode}');
   }
 
-  apiUrl = '${API_URL}/descritor';
+  apiUrl = '${API_URL}descritor';
   response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
 
@@ -123,7 +123,7 @@ Future<SearchParametersResult> fetchSearchData(String? curriculo) async {
 Future<List<AnoEnsino>> fetchAnoEnsino() async {
   List<AnoEnsino> responseAnoEnsino;
 
-  var apiUrl = '${API_URL}/anoEnsino';
+  var apiUrl = '${API_URL}anoEnsino';
   var response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
   if (response.statusCode == 200) {
@@ -147,7 +147,7 @@ Future<List<Habilidade>> fetchHabilidadeByAnoEnsinoTemaConteudo(
   List<Habilidade> responseHabilidade;
 
   var apiUrl =
-      '${API_URL}/habilidade?anoEnsinoId=$IdAnoEnsino&temaConteudoId=$idConteudo';
+      '${API_URL}habilidade?anoEnsinoId=$IdAnoEnsino&temaConteudoId=$idConteudo';
   var response = await http.get(Uri.parse(apiUrl),
       headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
   if (response.statusCode == 200) {

@@ -30,8 +30,6 @@ class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
   bool loadObjects = false;
   late TextStyle titleStyle;
-  String nivelEnsinoSelected = '0';
-  String temaConteudoSelected = '0';
 
   List<NivelEnsino> niveisEnsino = [];
 

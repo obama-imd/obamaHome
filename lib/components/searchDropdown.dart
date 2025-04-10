@@ -66,7 +66,6 @@ class RadioTextField extends StatefulWidget {
       {super.key,
       required this.array,
       required this.radioTextFieldID,
-      required this.title,
       required this.titleStyle,
       this.tileHeight,
       this.initialValue,
@@ -76,12 +75,11 @@ class RadioTextField extends StatefulWidget {
 
   late final List<(int, String)> array;
   final int radioTextFieldID;
-  final String title;
   final TextStyle titleStyle;
   final Map<int, int?>? initialValue;
   double? tileHeight;
   bool shoulAddOptionAll;
-  Function(int?, int?)? refreshData;
+  Function()? refreshData;
   Function(String)? refreshData2;
 
   @override
@@ -111,9 +109,8 @@ class _RadioTextFieldState extends State<RadioTextField> {
                     splashRadius: 20,
                     groupValue: widget.initialValue![widget.radioTextFieldID],
                     onChanged: (int? value) {
-                      if (widget.refreshData != null) {
-                        _handleUpdate(value, widget.radioTextFieldID);
-                      } else if (widget.refreshData2 != null) {
+                      _handleUpdate(value, widget.radioTextFieldID);
+                      if (widget.refreshData2 != null) {
                         _handleUpdate2(value, e.$2);
                       }
                     },
@@ -128,13 +125,15 @@ class _RadioTextFieldState extends State<RadioTextField> {
     setState(() {
       widget.initialValue![widget.radioTextFieldID] = selectedValue;
     });
-    widget.refreshData!(widget.initialValue![0], widget.initialValue![1]);
+    if (widget.refreshData != null) {
+      widget.refreshData!();
+    }
   }
 
   void _handleUpdate2(int? selectedValue, String curriculo) {
-    setState(() {
-      widget.initialValue![widget.radioTextFieldID] = selectedValue;
-    });
+    // setState(() {
+    //   widget.initialValue![widget.radioTextFieldID] = selectedValue;
+    // });
     widget.refreshData2!(curriculo);
   }
 }
