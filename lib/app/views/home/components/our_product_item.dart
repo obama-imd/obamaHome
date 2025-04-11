@@ -56,9 +56,9 @@ class _OurProductItemState extends State<OurProductItem> {
   void initState() {
     super.initState();
     mycolor =
-        Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+        Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(1);
     contentItem = buildListItem();
-    fetchOAById(widget.id).then((result) => oa = result);
+    // fetchOAById(widget.id).then((result) => oa = result);
   }
 
   Widget buildListItem() {
@@ -124,8 +124,24 @@ class _OurProductItemState extends State<OurProductItem> {
                       textStyle: textTheme.labelLarge,
                     ),
                     child: const Text('Detalhes'),
-                    onPressed: () {
-                      _dialogBuilder();
+                    onPressed: () async {
+                      ObjetoAprendizagem OAResponse =
+                          await fetchOAById(widget.id);
+                      // setState(() {
+                      //   oa = OAResponse;
+                      // });
+                      // print("here = > $OAResponse");
+                      _dialogBuilder(OAResponse);
+                      // fetchOAById(widget.id)
+                      //     .then((result) =>
+                      //     // setState(() {
+                      //     //       oa = result;
+                      //     //     }))
+                      //     print("here => $result")
+                      //     ).whenComplete(() {
+                      //   // _dialogBuilder(oa);
+                      // });
+                      // print("here => $OAResponse");
                     },
                   ),
                 )
@@ -185,7 +201,8 @@ class _OurProductItemState extends State<OurProductItem> {
         Container(
           constraints: BoxConstraints.expand(),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5), // Fundo semi-transparente
+            color:
+                Colors.black.withValues(alpha: 0.5), // Fundo semi-transparente
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -203,7 +220,8 @@ class _OurProductItemState extends State<OurProductItem> {
     );
   }
 
-  Future<void> _dialogBuilder() async {
+  Future<void> _dialogBuilder(ObjetoAprendizagem? oa) async {
+    print(oa);
     return oa == null
         ? showDialog<void>(
             context: context,
@@ -238,7 +256,7 @@ class _OurProductItemState extends State<OurProductItem> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      child: Text("Plataforma de uso: ${oa!.getPlataforma()}",
+                      child: Text("Plataforma de uso: ${oa.getPlataforma()}",
                           style: textTheme.headlineSmall),
                     ),
                     Padding(
@@ -249,8 +267,8 @@ class _OurProductItemState extends State<OurProductItem> {
                     kIsWeb
                         ? FittedBox(
                             fit: BoxFit.fitHeight,
-                            child: Text(oa!.getDescritores()))
-                        : Text(oa!.getDescritores()),
+                            child: Text(oa.getDescritores()))
+                        : Text(oa.getDescritores()),
                     Padding(
                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: Text(
@@ -260,8 +278,8 @@ class _OurProductItemState extends State<OurProductItem> {
                     kIsWeb
                         ? FittedBox(
                             fit: BoxFit.fitHeight,
-                            child: Text(oa!.getHabilidades()))
-                        : Text(oa!.getHabilidades())
+                            child: Text(oa.getHabilidades()))
+                        : Text(oa.getHabilidades())
                   ],
                 ),
                 actions: <Widget>[

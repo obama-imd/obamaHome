@@ -358,7 +358,7 @@ class OAFilterState extends State<OAFilters> {
                 // },
                 if (selectedValues![0]! > 0) ...{
                   Container(
-                    width: MediaQuery.of(context).size.width * .45,
+                    width: MediaQuery.of(context).size.width * .8,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

@@ -44,7 +44,6 @@ class _SearchResultsState extends State<DisplaySearchResults> {
       ),
       builder: (context, snapshot) {
         Widget child;
-
         if (snapshot.connectionState == ConnectionState.waiting) {
           child = SizedBox(
             height: double.maxFinite,
@@ -102,14 +101,13 @@ class _SearchResultsState extends State<DisplaySearchResults> {
 
             double rowNumbers = calcRowNumbers(searchResult.length.toDouble(),
                 _getColumnCount(widget.swidth).toDouble());
-
             child = Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text("Busca obteve ${pagination.totalElements} resultados",
-                        style: textTheme.bodySmall),
+                        style: textTheme.labelLarge),
                   ],
                 ),
                 Container(
@@ -147,7 +145,6 @@ class _SearchResultsState extends State<DisplaySearchResults> {
             );
           }
         }
-
         return AnimatedSwitcher(
           duration: Duration(milliseconds: 300),
           child: child,

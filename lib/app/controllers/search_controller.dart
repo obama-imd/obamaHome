@@ -33,20 +33,29 @@ Future<PaginationResponse?> fetchData(
 }
 
 Future<ObjetoAprendizagem> fetchOAById(int id) async {
-  var apiUrl = '${API_URL}oa/${id}';
+  var apiUrl = '${API_URL}oa/$id';
 
-  final response = await http.get(Uri.parse(apiUrl),
-      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL});
+  try {
+    final response = await http.get(
+      Uri.parse(apiUrl),
+      headers: {HttpHeaders.accessControlAllowOriginHeader: API_URL},
+    );
 
-  if (response.statusCode == 200) {
-    final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
+    if (response.statusCode == 200) {
+      final jsonData = jsonDecode(utf8.decode(response.bodyBytes));
 
-    ObjetoAprendizagem objetoAprendizagemResponse =
-        ObjetoAprendizagem.fromJson(Map.from(jsonData));
-    return objetoAprendizagemResponse;
-  } else {
-    return Future.error(
-        'Failed to load data. Status code: ${response.statusCode}');
+      final objetoAprendizagemResponse =
+          ObjetoAprendizagem.fromJson(Map<String, dynamic>.from(jsonData));
+
+      return objetoAprendizagemResponse;
+    } else {
+      throw Exception(
+          'Failed to load data. Status code: ${response.statusCode}');
+    }
+  } catch (e, stackTrace) {
+    print('Erro ao processar ObjetoAprendizagem: $e');
+    print(stackTrace);
+    rethrow;
   }
 }
 
