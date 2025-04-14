@@ -103,17 +103,20 @@ class OAFilterState extends State<OAFilters> {
     advancedSearchModal(RadioTextFieldsList);
   }
 
-  void _refreshNivelEnsinoTemaConteudo(String curriculo) {
-    fetchSearchData(curriculo).then((response) {
+  void _refreshNivelEnsinoTemaConteudo(String curriculo) async {
+    try {
+      final response = await fetchSearchData(curriculo);
+
       setState(() {
-        nivelEnsinolData =
-            response.allNivelEnsino.map((x) => (x.id, x.nome)).toList();
-        if (nivelEnsinolData != null) {
-          nivelEnsinolData?.sort((a, b) => a.$1.compareTo(b.$1));
-        }
+        nivelEnsinolData = response.allNivelEnsino
+            .map((x) => (x.id, x.nome))
+            .toList()
+          ..sort((a, b) => a.$1.compareTo(b.$1));
+
         temaConteudoData = response.allTemaConteudo
             .map((x) => (x.id, x.getNomeWithCurriculo()))
             .toList();
+
         descritorData = response.allDescricoes
             .map((x) => (x.id, x.formattedDescricao))
             .toList();
@@ -129,9 +132,7 @@ class OAFilterState extends State<OAFilters> {
               : _refreshDescritorHabilidade,
         );
 
-        curriculo == "BNCC"
-            ? tileTitle[2] = "Selecione o ano de ensino"
-            : tileTitle[2] = "";
+        tileTitle[2] = curriculo == "BNCC" ? "Selecione o ano de ensino" : "";
 
         temaConteudoRadioTextField = RadioTextField(
           array: temaConteudoData ?? [],
@@ -141,6 +142,7 @@ class OAFilterState extends State<OAFilters> {
           initialValue: selectedValues,
           refreshData: _refreshDescritorHabilidade,
         );
+
         descritorRadioTextField = RadioTextField(
           array: descritorData ?? [],
           radioTextFieldID: 2,
@@ -150,122 +152,122 @@ class OAFilterState extends State<OAFilters> {
         );
 
         RadioTextFieldsList[1] = nivelEnsinoRadioTextField;
+        RadioTextFieldsList[2] =
+            curriculo == "PCN" ? null : RadioTextFieldsList[2];
         RadioTextFieldsList[3] = temaConteudoRadioTextField;
       });
-    }).whenComplete(() {
+    } finally {
       reOpenModal();
-    });
-  }
-
-  void _refreshAnoEnsino() {
-    if (selectedValues![1]! > 0) {
-      fetchAnoEnsino().then((response) {
-        setState(() {
-          if (selectedValues![1]! == 1) {
-            anoEnsinoData = response
-                .where((x) => x.id == 1)
-                .map((x) => (x.id, x.nome))
-                .toList();
-          } else if (selectedValues![1]! == 2) {
-            anoEnsinoData = response
-                .where((x) => x.id > 1 && x.id < 7)
-                .map((x) => (x.id, x.nome))
-                .toList();
-          } else if (selectedValues![1]! == 3) {
-            anoEnsinoData = response
-                .where((x) => x.id > 6 && x.id < 11)
-                .map((x) => (x.id, x.nome))
-                .toList();
-          } else if (selectedValues![1]! == 4) {
-            anoEnsinoData = response
-                .where((x) => x.id > 10 && x.id < 14)
-                .map((x) => (x.id, x.nome))
-                .toList();
-          } else if (selectedValues![1]! == 5) {
-            anoEnsinoData = response
-                .where((x) => x.id == 14)
-                .map((x) => (x.id, x.nome))
-                .toList();
-          } else if (selectedValues![1]! == 6) {
-            anoEnsinoData = response
-                .where((x) => x.id == 15)
-                .map((x) => (x.id, x.nome))
-                .toList();
-          } else if (selectedValues![1]! == 7) {
-            anoEnsinoData = response
-                .where((x) => x.id == 16)
-                .map((x) => (x.id, x.nome))
-                .toList();
-          }
-
-          anoEnsinoRadioTextField = RadioTextField(
-            array: anoEnsinoData ?? [],
-            radioTextFieldID: 2,
-            tileHeight: 35,
-            initialValue: selectedValues,
-            titleStyle: textTheme.bodySmall!,
-            shoulAddOptionAll: false,
-            refreshData: _refreshDescritorHabilidade,
-          );
-        });
-        RadioTextFieldsList[2] = anoEnsinoRadioTextField;
-      }).whenComplete(() {
-        reOpenModal();
-      });
     }
   }
 
-  void _refreshDescritorHabilidade() {
-    if (selectedValues![1]! > 0 && selectedValues![3]! > 0) {
-      if (selectedValues![0]! == 1) {
-        RadioTextFieldsList[4] = descritorRadioTextField;
-        reOpenModal();
-      } else if (selectedValues![0]! == 2 && selectedValues![2]! > 0) {
-        fetchHabilidadeByAnoEnsinoTemaConteudo(
-                selectedValues![2]!, selectedValues![3]!)
-            .then((response) {
-          setState(() {
-            habilidadeData =
-                response.map((x) => (x.id, x.formattedHabilidade)).toList();
+  void _refreshAnoEnsino() async {
+    if (selectedValues![1]! <= 0) return;
 
-            habilidadeRadioTextField = RadioTextField(
-                array: habilidadeData ?? [],
-                radioTextFieldID: 5,
-                initialValue: selectedValues,
-                titleStyle: textTheme.bodySmall!,
-                shoulAddOptionAll: false,
-                refreshData: null);
+    try {
+      final response = await fetchAnoEnsino();
+      setState(() {
+        anoEnsinoData = response
+            .where((x) {
+              switch (selectedValues![1]!) {
+                case 1:
+                  return x.id == 1;
+                case 2:
+                  return x.id > 1 && x.id < 7;
+                case 3:
+                  return x.id > 6 && x.id < 11;
+                case 4:
+                  return x.id > 10 && x.id < 14;
+                case 5:
+                  return x.id == 14;
+                case 6:
+                  return x.id == 15;
+                case 7:
+                  return x.id == 16;
+                default:
+                  return false;
+              }
+            })
+            .map((x) => (x.id, x.nome))
+            .toList();
 
-            RadioTextFieldsList[5] = habilidadeRadioTextField;
-          });
-        }).whenComplete(() {
-          reOpenModal();
-        });
-      }
-    } else {
+        anoEnsinoRadioTextField = RadioTextField(
+          array: anoEnsinoData ?? [],
+          radioTextFieldID: 2,
+          tileHeight: 35,
+          initialValue: selectedValues,
+          titleStyle: textTheme.bodySmall!,
+          shoulAddOptionAll: false,
+          refreshData: _refreshDescritorHabilidade,
+        );
+
+        RadioTextFieldsList[2] = anoEnsinoRadioTextField;
+      });
+    } finally {
+      reOpenModal();
+    }
+  }
+
+  void _refreshDescritorHabilidade() async {
+    if (selectedValues![1]! <= 0 || selectedValues![3]! <= 0) {
       setState(() {
         selectedValues![4] = 0;
         selectedValues![5] = 0;
       });
+      return;
+    }
+
+    if (selectedValues![0]! == 1) {
+      setState(() {
+        anoEnsinoData = [];
+        RadioTextFieldsList[4] = descritorRadioTextField;
+      });
+      reOpenModal();
+    } else if (selectedValues![0]! == 2 && selectedValues![2]! > 0) {
+      try {
+        final response = await fetchHabilidadeByAnoEnsinoTemaConteudo(
+            selectedValues![2]!, selectedValues![3]!);
+
+        setState(() {
+          habilidadeData =
+              response.map((x) => (x.id, x.formattedHabilidade)).toList();
+
+          habilidadeRadioTextField = RadioTextField(
+            array: habilidadeData ?? [],
+            radioTextFieldID: 5,
+            initialValue: selectedValues,
+            titleStyle: textTheme.bodySmall!,
+            shoulAddOptionAll: false,
+            refreshData: null,
+          );
+
+          RadioTextFieldsList[5] = habilidadeRadioTextField;
+        });
+      } finally {
+        reOpenModal();
+      }
     }
   }
 
   void mainSearch() {
     setState(() {
       selectedNivelEnsino =
-          selectedValues![1] != null && selectedValues![1]! > 0
+          (selectedValues![1] != null && selectedValues![1]! > 0)
               ? '${selectedValues![1]}'
               : '';
       selectedTemaConteudo =
-          selectedValues![3] != null && selectedValues![3]! > 0
+          (selectedValues![3] != null && selectedValues![3]! > 0)
               ? '${selectedValues![3]}'
               : '';
-      selectedDescritor = selectedValues![4] != null && selectedValues![4]! > 0
-          ? '${selectedValues![4]}'
-          : '';
-      selectedHabilidade = selectedValues![5] != null && selectedValues![5]! > 0
-          ? '${selectedValues![5]}'
-          : '';
+      selectedDescritor =
+          (selectedValues![4] != null && selectedValues![4]! > 0)
+              ? '${selectedValues![4]}'
+              : '';
+      selectedHabilidade =
+          (selectedValues![5] != null && selectedValues![5]! > 0)
+              ? '${selectedValues![5]}'
+              : '';
+
       searchTerm = searchTextController.text;
     });
 
@@ -337,24 +339,24 @@ class OAFilterState extends State<OAFilters> {
               child: Wrap(alignment: WrapAlignment.spaceEvenly, children: [
                 for (var i = 0; i < RadioTextFieldsList.length - 2; i++) ...{
                   // if (tileTitle[i].length > 0) ...{
-                    Container(
-                      width: MediaQuery.of(context).size.width * .45,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25, bottom: 8),
-                            child: Text(
-                              tileTitle[i],
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 18),
-                            ),
+                  Container(
+                    width: MediaQuery.of(context).size.width * .45,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25, bottom: 8),
+                          child: Text(
+                            tileTitle[i],
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 18),
                           ),
-                          Container(child: RadioTextFieldsList[i]),
-                        ],
-                      ),
+                        ),
+                        Container(child: RadioTextFieldsList[i]),
+                      ],
                     ),
-                  },
+                  ),
+                },
                 // },
                 if (selectedValues![0]! > 0) ...{
                   Container(

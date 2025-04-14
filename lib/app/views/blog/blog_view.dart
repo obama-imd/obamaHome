@@ -50,29 +50,14 @@ class _BlogPageState extends State<BlogPage> {
     setState(() {
       loadPosts = true;
     });
+  }
 
-<<<<<<< HEAD
   void waitData() async {
     Future.wait([BlogController().updateBlogContent("")])
         .timeout(Duration(seconds: 5))
         .whenComplete(() => setState(() {
               loadPosts = false;
             }));
-=======
-    try {
-      await BlogController()
-          .updateBlogContent("")
-          .timeout(Duration(seconds: 5));
-    } catch (e) {
-      print("Erro ao carregar dados: $e");
-    } finally {
-      if (mounted) {
-        setState(() {
-          loadPosts = false;
-        });
-      }
-    }
->>>>>>> 9b3fa327c95c8351057645283a2ea2ece207bfd3
   }
 
   @override
