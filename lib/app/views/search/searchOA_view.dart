@@ -51,13 +51,6 @@ class SearchPageState extends ConsumerState<SearchPage> {
   void initState() {
     super.initState();
     waitData();
-    activateLoad();
-  }
-
-  void activateLoad() {
-    setState(() {
-      loadObjects = true;
-    });
   }
 
   void waitData() async {

@@ -46,15 +46,13 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
   @override
   void initState() {
     super.initState();
-    activateLoad();
-    waitData();
+    fetchData();
   }
 
-  void activateLoad() {
+  void fetchData() async {
     setState(() {
       loadPosts = true;
     });
-  }
 
   void waitData() async {
     Future.wait([BlogController().updateBlogContent("")])
@@ -62,7 +60,6 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
         .whenComplete(() => setState(() {
               loadPosts = false;
             }));
-  }
 
   @override
   Widget build(BuildContext context) {
