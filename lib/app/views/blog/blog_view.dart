@@ -46,13 +46,14 @@ class _BlogPageState extends State<BlogPage> {
     fetchData();
   }
 
-  void fetchData() async {
+  void fetchData() {
     setState(() {
       loadPosts = true;
     });
+    waitData();
   }
 
-  void waitData() async {
+  void waitData() {
     Future.wait([BlogController().updateBlogContent("")])
         .timeout(Duration(seconds: 5))
         .whenComplete(() => setState(() {
