@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
-// import '../../../../utils/nav_key.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(
@@ -58,7 +57,6 @@ class _OurProductItemState extends State<OurProductItem> {
     mycolor =
         Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(1);
     contentItem = buildListItem();
-    // fetchOAById(widget.id).then((result) => oa = result);
   }
 
   Widget buildListItem() {
@@ -127,21 +125,7 @@ class _OurProductItemState extends State<OurProductItem> {
                     onPressed: () async {
                       ObjetoAprendizagem OAResponse =
                           await fetchOAById(widget.id);
-                      // setState(() {
-                      //   oa = OAResponse;
-                      // });
-                      // print("here = > $OAResponse");
                       _dialogBuilder(OAResponse);
-                      // fetchOAById(widget.id)
-                      //     .then((result) =>
-                      //     // setState(() {
-                      //     //       oa = result;
-                      //     //     }))
-                      //     print("here => $result")
-                      //     ).whenComplete(() {
-                      //   // _dialogBuilder(oa);
-                      // });
-                      // print("here => $OAResponse");
                     },
                   ),
                 )

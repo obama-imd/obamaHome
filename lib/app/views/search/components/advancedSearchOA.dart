@@ -103,6 +103,25 @@ class OAFilterState extends State<OAFilters> {
     advancedSearchModal(RadioTextFieldsList);
   }
 
+  List<(int, String)>? removingRepeatedDescritors(data) {
+    Map<String, int> descricaoComPrimeiroId = {};
+
+    for (var item in data) {
+      int id = item.$1;
+      String descricao = item.$2;
+      
+      if (!descricaoComPrimeiroId.containsKey(descricao)) {
+        descricaoComPrimeiroId[descricao] = id;
+      }
+    }
+
+    List<(int, String)>? resultadoFinal = descricaoComPrimeiroId.entries
+        .map((entry) => (entry.value,  entry.key))
+        .toList();
+
+    return resultadoFinal;
+  }
+
   void _refreshNivelEnsinoTemaConteudo(String curriculo) async {
     try {
       final response = await fetchSearchData(curriculo);
@@ -144,7 +163,7 @@ class OAFilterState extends State<OAFilters> {
         );
 
         descritorRadioTextField = RadioTextField(
-          array: descritorData ?? [],
+          array: removingRepeatedDescritors(descritorData) ?? [],
           radioTextFieldID: 2,
           tileHeight: 35,
           initialValue: selectedValues,
@@ -338,7 +357,6 @@ class OAFilterState extends State<OAFilters> {
             child: SingleChildScrollView(
               child: Wrap(alignment: WrapAlignment.spaceEvenly, children: [
                 for (var i = 0; i < RadioTextFieldsList.length - 2; i++) ...{
-                  // if (tileTitle[i].length > 0) ...{
                   Container(
                     width: MediaQuery.of(context).size.width * .45,
                     child: Column(
@@ -357,7 +375,6 @@ class OAFilterState extends State<OAFilters> {
                     ),
                   ),
                 },
-                // },
                 if (selectedValues![0]! > 0) ...{
                   Container(
                     width: MediaQuery.of(context).size.width * .8,
