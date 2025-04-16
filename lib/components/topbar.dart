@@ -37,6 +37,7 @@ class _TopBarState extends ConsumerState<TopBar> {
     final googleUserName = ref.watch(googleName);
     final googleUserBool = ref.watch(googleBool);
 
+    // ignore: unused_local_variable
     List<String?> userName = [...googleUserName];
     List<bool> userLogged = [...googleUserBool];
     return hasUserSession || userLogged.isNotEmpty
