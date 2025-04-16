@@ -233,7 +233,7 @@ class _OurProductItemState extends State<OurProductItem> {
             pageBuilder: (x, y, z) {
               return AlertDialog(
                 scrollable: true,
-                title: Text(oa!.nome),
+                title: Text(oa.nome),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
