@@ -150,8 +150,10 @@ class Item {
 }
 
 class ExpansionPanelListSimple extends StatefulWidget {
-  const ExpansionPanelListSimple({super.key, required this.data});
+  ExpansionPanelListSimple(
+      {super.key, required this.data, required this.isExpanded});
   final List<Item> data;
+  bool isExpanded;
 
   @override
   State<ExpansionPanelListSimple> createState() =>
@@ -159,6 +161,14 @@ class ExpansionPanelListSimple extends StatefulWidget {
 }
 
 class _ExpansionPanelListSimpleState extends State<ExpansionPanelListSimple> {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      widget.data[0].isExpanded = widget.isExpanded;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -172,9 +182,11 @@ class _ExpansionPanelListSimpleState extends State<ExpansionPanelListSimple> {
     final _data = widget.data;
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          _data[index].isExpanded = isExpanded;
-        });
+        if (widget.isExpanded) {
+          setState(() {
+            _data[index].isExpanded = isExpanded;
+          });
+        }
       },
       children: _data.map<ExpansionPanel>((Item item) {
         return ExpansionPanel(

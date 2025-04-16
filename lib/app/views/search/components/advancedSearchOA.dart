@@ -45,6 +45,7 @@ class OAFilterState extends State<OAFilters> {
   int? habilidadeSelecionada = 0;
 
   String searchTerm = '';
+  bool willExpand = false;
 
   List<(int, String)>? nivelEnsinolData;
   List<(int, String)>? anoEnsinoData;
@@ -109,14 +110,14 @@ class OAFilterState extends State<OAFilters> {
     for (var item in data) {
       int id = item.$1;
       String descricao = item.$2;
-      
+
       if (!descricaoComPrimeiroId.containsKey(descricao)) {
         descricaoComPrimeiroId[descricao] = id;
       }
     }
 
     List<(int, String)>? resultadoFinal = descricaoComPrimeiroId.entries
-        .map((entry) => (entry.value,  entry.key))
+        .map((entry) => (entry.value, entry.key))
         .toList();
 
     return resultadoFinal;
@@ -144,7 +145,8 @@ class OAFilterState extends State<OAFilters> {
           array: nivelEnsinolData ?? [],
           radioTextFieldID: 1,
           titleStyle: textTheme.bodySmall!,
-          tileHeight: 35,
+          tileHeight: 40,
+          shoulAddOptionAll: false,
           initialValue: selectedValues,
           refreshData: curriculo == "BNCC"
               ? _refreshAnoEnsino
@@ -157,8 +159,9 @@ class OAFilterState extends State<OAFilters> {
           array: temaConteudoData ?? [],
           radioTextFieldID: 3,
           titleStyle: textTheme.bodySmall!,
-          tileHeight: 35,
+          tileHeight: 45,
           initialValue: selectedValues,
+          shoulAddOptionAll: false,
           refreshData: _refreshDescritorHabilidade,
         );
 
@@ -167,6 +170,7 @@ class OAFilterState extends State<OAFilters> {
           radioTextFieldID: 2,
           tileHeight: 35,
           initialValue: selectedValues,
+          shoulAddOptionAll: false,
           titleStyle: textTheme.bodySmall!,
         );
 
@@ -174,6 +178,7 @@ class OAFilterState extends State<OAFilters> {
         RadioTextFieldsList[2] =
             curriculo == "PCN" ? null : RadioTextFieldsList[2];
         RadioTextFieldsList[3] = temaConteudoRadioTextField;
+        willExpand = false;
       });
     } finally {
       reOpenModal();
@@ -221,6 +226,7 @@ class OAFilterState extends State<OAFilters> {
         );
 
         RadioTextFieldsList[2] = anoEnsinoRadioTextField;
+        willExpand = false;
       });
     } finally {
       reOpenModal();
@@ -228,7 +234,7 @@ class OAFilterState extends State<OAFilters> {
   }
 
   void _refreshDescritorHabilidade() async {
-    if (selectedValues![1]! <= 0 || selectedValues![3]! <= 0) {
+    if (selectedValues![1]! == 0 || selectedValues![3]! == 0) {
       setState(() {
         selectedValues![4] = 0;
         selectedValues![5] = 0;
@@ -236,13 +242,14 @@ class OAFilterState extends State<OAFilters> {
       return;
     }
 
-    if (selectedValues![0]! == 1) {
+    if (selectedValues![0]! == 1 && selectedValues![1]! > 0 && selectedValues![3]! > 0) {
       setState(() {
         anoEnsinoData = [];
         RadioTextFieldsList[4] = descritorRadioTextField;
+        willExpand = true;
       });
       reOpenModal();
-    } else if (selectedValues![0]! == 2 && selectedValues![2]! > 0) {
+    } else if (selectedValues![0]! == 2 && selectedValues![2]! > 0 && selectedValues![3]! > 0) {
       try {
         final response = await fetchHabilidadeByAnoEnsinoTemaConteudo(
             selectedValues![2]!, selectedValues![3]!);
@@ -261,6 +268,7 @@ class OAFilterState extends State<OAFilters> {
           );
 
           RadioTextFieldsList[5] = habilidadeRadioTextField;
+          willExpand = true;
         });
       } finally {
         reOpenModal();
@@ -349,7 +357,7 @@ class OAFilterState extends State<OAFilters> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          surfaceTintColor: background,
+          backgroundColor: background,
           content: Container(
             color: background,
             height: MediaQuery.of(context).size.height,
@@ -357,34 +365,37 @@ class OAFilterState extends State<OAFilters> {
             child: SingleChildScrollView(
               child: Wrap(alignment: WrapAlignment.spaceEvenly, children: [
                 for (var i = 0; i < RadioTextFieldsList.length - 2; i++) ...{
-                  Container(
-                    width: MediaQuery.of(context).size.width * .45,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25, bottom: 8),
-                          child: Text(
-                            tileTitle[i],
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 18),
+                  if (tileTitle[i].isNotEmpty) ...{
+                    Container(
+                      width: MediaQuery.of(context).size.width * .23,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 25, bottom: 8),
+                            child: Text(
+                              tileTitle[i],
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 18),
+                            ),
                           ),
-                        ),
-                        Container(child: RadioTextFieldsList[i]),
-                      ],
+                          Container(child: RadioTextFieldsList[i]),
+                        ],
+                      ),
                     ),
-                  ),
+                  }
                 },
                 if (selectedValues![0]! > 0) ...{
                   Container(
-                    width: MediaQuery.of(context).size.width * .8,
+                    width: MediaQuery.of(context).size.width * .85,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 25),
                           child: ExpansionPanelListSimple(
-                              data: generateValuesList(selectedValues![0]!)),
+                              data: generateValuesList(selectedValues![0]!),
+                              isExpanded: willExpand),
                         )
                       ],
                     ),
