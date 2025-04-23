@@ -7,9 +7,9 @@ import '../../../controllers/search_controller.dart';
 
 List<String> tileTitle = <String>[
   'Selecione o currículo',
-  'Selecione o nível de ensino',
   '',
-  'Selecione o Tema/Conteúdo',
+  '',
+  '',
   'Selecione o descritor',
   // 'Selecione a disciplina',
   'Selecione a habilidade',
@@ -123,6 +123,14 @@ class OAFilterState extends State<OAFilters> {
     return resultadoFinal;
   }
 
+  void _removeSelectionFrom(int selectedId) {
+    for (var key in selectedValues!.keys) {
+      if (key >= selectedId) {
+        selectedValues![key] = 0;
+      }
+    }
+  }
+
   void _refreshNivelEnsinoTemaConteudo(String curriculo) async {
     try {
       final response = await fetchSearchData(curriculo);
@@ -152,8 +160,9 @@ class OAFilterState extends State<OAFilters> {
               ? _refreshAnoEnsino
               : _refreshDescritorHabilidade,
         );
-
+        tileTitle[1] = "Selecione o nível de ensino";
         tileTitle[2] = curriculo == "BNCC" ? "Selecione o ano de ensino" : "";
+        tileTitle[3] = 'Selecione o Tema/Conteúdo';
 
         temaConteudoRadioTextField = RadioTextField(
           array: temaConteudoData ?? [],
@@ -179,6 +188,8 @@ class OAFilterState extends State<OAFilters> {
             curriculo == "PCN" ? null : RadioTextFieldsList[2];
         RadioTextFieldsList[3] = temaConteudoRadioTextField;
         willExpand = false;
+
+        _removeSelectionFrom(1);
       });
     } finally {
       reOpenModal();
@@ -242,14 +253,18 @@ class OAFilterState extends State<OAFilters> {
       return;
     }
 
-    if (selectedValues![0]! == 1 && selectedValues![1]! > 0 && selectedValues![3]! > 0) {
+    if (selectedValues![0]! == 1 &&
+        selectedValues![1]! > 0 &&
+        selectedValues![3]! > 0) {
       setState(() {
         anoEnsinoData = [];
         RadioTextFieldsList[4] = descritorRadioTextField;
         willExpand = true;
       });
       reOpenModal();
-    } else if (selectedValues![0]! == 2 && selectedValues![2]! > 0 && selectedValues![3]! > 0) {
+    } else if (selectedValues![0]! == 2 &&
+        selectedValues![2]! > 0 &&
+        selectedValues![3]! > 0) {
       try {
         final response = await fetchHabilidadeByAnoEnsinoTemaConteudo(
             selectedValues![2]!, selectedValues![3]!);
@@ -268,8 +283,9 @@ class OAFilterState extends State<OAFilters> {
           );
 
           RadioTextFieldsList[5] = habilidadeRadioTextField;
-          willExpand = true;
         });
+
+        willExpand = true;
       } finally {
         reOpenModal();
       }
@@ -343,14 +359,22 @@ class OAFilterState extends State<OAFilters> {
   }
 
   void advancedSearchModal(List<RadioTextField?> RadioTextFieldsList) {
-    List<Item> generateValuesList(int i) {
+    Item generateValuesList(int i) {
       i = i + 3;
-      List<Item> itemValue = [
-        Item(
+
+      if (RadioTextFieldsList[i] != null &&
+          RadioTextFieldsList[i]!.array.isNotEmpty) {
+        Item itemValue = Item(
             expandedValue: Container(child: RadioTextFieldsList[i]),
-            headerValue: tileTitle[i])
-      ];
-      return itemValue;
+            headerValue: tileTitle[i]);
+        return itemValue;
+      } else {
+        return Item(
+            expandedValue: Container(
+                child: Text("Nenhum Resultado encontrado",
+                    style: textTheme.bodySmall)),
+            headerValue: tileTitle[i]);
+      };
     }
 
     showDialog<void>(
@@ -394,7 +418,7 @@ class OAFilterState extends State<OAFilters> {
                         Padding(
                           padding: const EdgeInsets.only(top: 25),
                           child: ExpansionPanelListSimple(
-                              data: generateValuesList(selectedValues![0]!),
+                              data: [generateValuesList(selectedValues![0]!)],
                               isExpanded: willExpand),
                         )
                       ],
@@ -411,6 +435,7 @@ class OAFilterState extends State<OAFilters> {
               null,
               () {
                 Navigator.of(context).pop();
+                _removeSelectionFrom(0);
               },
             ),
             mainButton(
