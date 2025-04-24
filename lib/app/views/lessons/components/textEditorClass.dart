@@ -5,6 +5,7 @@ List<ItemValue> getEditorValues(Function action) {
     ItemValue(
       name: "Voltar",
       path: ['/'],
+      gifPath: [],
       subItems: [],
       itemHover: false,
       subItemHover: List.generate(1, (index) => false),
@@ -12,6 +13,7 @@ List<ItemValue> getEditorValues(Function action) {
     ItemValue(
         name: "Salvar",
         path: [""],
+        gifPath: [],
         subItems: [],
         itemHover: false,
         subItemHover: List.generate(1, (index) => false),

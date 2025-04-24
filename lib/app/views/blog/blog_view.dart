@@ -46,24 +46,19 @@ class _BlogPageState extends State<BlogPage> {
     fetchData();
   }
 
-  void fetchData() async {
+  void fetchData() {
     setState(() {
       loadPosts = true;
     });
+    waitData();
+  }
 
-    try {
-      await BlogController()
-          .updateBlogContent("")
-          .timeout(Duration(seconds: 5));
-    } catch (e) {
-      print("Erro ao carregar dados: $e");
-    } finally {
-      if (mounted) {
-        setState(() {
-          loadPosts = false;
-        });
-      }
-    }
+  void waitData() {
+    Future.wait([BlogController().updateBlogContent("")])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadPosts = false;
+            }));
   }
 
   @override
@@ -108,7 +103,7 @@ class _BlogListViewState extends State<BlogListView> {
         for (var i = 0; i < posts.length; i++) ...{
           Container(
               margin: EdgeInsets.only(bottom: 20),
-              width: widget.swidth * .565,
+              width: widget.swidth > 1200? widget.swidth * .565: widget.swidth * .95,
               child: Column(children: [
                 Container(
                     margin: const EdgeInsets.only(bottom: 30),
@@ -135,7 +130,7 @@ class _BlogListViewState extends State<BlogListView> {
                   Text(posts[i]!.year.toString(), style: textTheme.labelSmall),
                 ]),
                 Container(
-                    width: widget.swidth * 0.6,
+                    width: widget.swidth > 1200? widget.swidth * .6: widget.swidth * .95,
                     margin: const EdgeInsets.only(top: 20, bottom: 30),
                     child: Text(posts[i]!.summary,
                         maxLines: 5, style: textTheme.headlineMedium)),

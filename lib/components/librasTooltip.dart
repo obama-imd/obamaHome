@@ -5,33 +5,110 @@ import 'package:obamahome/utils/app_theme.dart';
 import 'librasButton.dart';
 
 class LibrasTooltip extends ConsumerStatefulWidget {
-  Widget content;
-  LibrasTooltip({super.key, required this.content});
+  final Widget content;
+  final List<String> imageGif; // pode conter um ou mais gifs
+  final List<String>? subItemsImageGif;
+  final bool isHover;
+  final List<bool>? isHoverSubItems;
+
+  const LibrasTooltip({
+    super.key,
+    required this.content,
+    required this.imageGif,
+    required this.subItemsImageGif,
+    required this.isHover,
+    required this.isHoverSubItems,
+  });
 
   @override
   _LibrasTooltipState createState() => _LibrasTooltipState();
 }
 
 class _LibrasTooltipState extends ConsumerState<LibrasTooltip> {
-  @override
-  Widget build(BuildContext context) {
-    bool isActive = ref.watch(librasMode);
+  OverlayEntry? _overlayEntry;
+  final _tooltipKey = GlobalKey();
 
-    if (isActive) {
-      return Tooltip(
-        decoration: BoxDecoration(color: background),
-        richMessage: WidgetSpan(
+  @override
+  void dispose() {
+    _removeOverlay();
+    super.dispose();
+  }
+
+  void _removeOverlay() {
+    _overlayEntry?.remove();
+    _overlayEntry = null;
+  }
+
+  void _createOverlay(BuildContext context, String? gifPath) {
+    _removeOverlay();
+
+    if (gifPath == null) return;
+
+    final renderBox = _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
+    if (renderBox == null) return;
+
+    final offset = renderBox.localToGlobal(Offset.zero);
+    final size = renderBox.size;
+
+    _overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        left: offset.dx + size.width + 8,
+        top: offset.dy + size.height,
+        child: Material(
+          color: Colors.transparent,
           child: Container(
-            color: background,
-            child: Text("Em breve")
-            // Image.network(
-            //     'https://th.bing.com/th/id/R.271c94354b33351d0ba70b4141279cba?rik=QMkddJRh815iEw&riu=http%3a%2f224.media.tumblr.com%2ftumblr_m0kxkrtQfJ1rrnvqio1_500.gif&ehk=JJa9MQXGTx4ZUw47A4KUrftSaCyLL%2bPBuXVmaBfR%2bv0%3A&risl=&pid=ImgRaw&r=0'),
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: background,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text("")
+            // Image.asset(
+            //   gifPath,
+            //   width: 200,
+            //   height: 350,
+            //   fit: BoxFit.cover,
+            // ),
           ),
         ),
-        child: widget.content,
-      );
-    } else {
-      return SizedBox(child: widget.content);
+      ),
+    );
+
+    Overlay.of(context).insert(_overlayEntry!);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final isActive = ref.watch(librasMode);
+
+    if (!isActive) {
+      return widget.content;
     }
+
+    String? selectedGif;
+
+    if (widget.isHover) {
+      selectedGif = widget.imageGif.first;
+      if (widget.isHoverSubItems != null && widget.isHoverSubItems!.contains(true)) {
+        final hoveredIndex = widget.isHoverSubItems!.indexWhere((e) => e);
+        if (hoveredIndex >= 0 && hoveredIndex < (widget.subItemsImageGif?.length ?? 0)) {
+          selectedGif = widget.subItemsImageGif?[hoveredIndex];
+        }
+      }
+    }
+
+    // Atualiza o overlay quando o GIF muda
+    if (selectedGif != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _createOverlay(context, selectedGif);
+      });
+    } else {
+      _removeOverlay();
+    }
+
+    return KeyedSubtree(
+      key: _tooltipKey,
+      child: widget.content,
+    );
   }
 }

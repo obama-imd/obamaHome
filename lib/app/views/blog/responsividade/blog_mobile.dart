@@ -47,15 +47,13 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
                     Container(
                         // padding: paddingValues(paddingName, context)
                         width: swidth,
-                        child: ExpansionTile(
-                            title: Text("Busca Avançada"),
-                            children: [
-                              Padding(
-                                padding: paddingValues("fullGrid", context),
-                                child: blogFilters(context, swidth, posts,
-                                    widget.updateData, widget.titleStyle),
-                              ),
-                            ])),
+                        child: ExpansionTile(title: Text("Busca"), children: [
+                          Padding(
+                            padding: paddingValues("fullGrid", context),
+                            child: blogFilters(context, swidth, posts,
+                                widget.updateData, widget.titleStyle),
+                          ),
+                        ])),
                     if (posts.isEmpty) ...{
                       Container(
                           padding: const EdgeInsets.only(top: 100),
@@ -66,7 +64,7 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
                           )))
                     } else ...{
                       Padding(
-                        padding: const EdgeInsets.only(top: 100),
+                        padding: const EdgeInsets.only(top: 65),
                         child: BlogListView(posts, swidth),
                       ),
                     },
@@ -83,8 +81,16 @@ class BlogMobileState extends ConsumerState<BlogMobile> {
                   )),
             );
           }
-          return Container();
-          // return circleLoadSpinner(context);
+          return SizedBox(
+              height: 200,
+              width: swidth,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              ));
         },
       )
     ]);
