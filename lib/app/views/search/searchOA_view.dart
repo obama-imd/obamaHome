@@ -28,10 +28,8 @@ class SearchPage extends ConsumerStatefulWidget {
 
 class SearchPageState extends ConsumerState<SearchPage> {
   int selectedPageIndex = 0;
-  bool loadPosts = false;
+  bool loadObjects = false;
   late TextStyle titleStyle;
-  String nivelEnsinoSelected = '0';
-  String temaConteudoSelected = '0';
 
   List<NivelEnsino> niveisEnsino = [];
 
@@ -56,21 +54,16 @@ class SearchPageState extends ConsumerState<SearchPage> {
   }
 
   void waitData() async {
-    setState(() {
-      loadPosts = true;
-    });
-
-    try {
-      await fetchData("", 0, null).timeout(Duration(seconds: 5));
-    } catch (e) {
-      print("Erro ao carregar dados: $e");
-    } finally {
-      if (mounted) {
-        setState(() {
-          loadPosts = false;
-        });
-      }
-    }
+    Future.wait([fetchData("", 0, null)])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadObjects = false;
+            }));
+    Future.wait([fetchSearchData("")])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadObjects = false;
+            }));
   }
 
   @override
@@ -98,7 +91,7 @@ class SearchPageState extends ConsumerState<SearchPage> {
                   updateDataFromAdvancedSearchPage:
                       updateDataFromAdvancedSearchPage,
                   titleStyle: textTheme.titleSmall!)),
-          if (loadPosts) ...{circleLoadSpinner(context)}
+          if (loadObjects) ...{circleLoadSpinner(context)}
         ],
       ),
     );

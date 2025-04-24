@@ -14,7 +14,7 @@ double calcRowNumbers(double number, double factor) {
 }
 
 class DisplaySearchResults extends StatefulWidget {
-  String termSearched;
+  final String termSearched;
   final String? queryParam;
   final double swidth;
   int selectedPageIndex;
@@ -44,7 +44,6 @@ class _SearchResultsState extends State<DisplaySearchResults> {
       ),
       builder: (context, snapshot) {
         Widget child;
-
         if (snapshot.connectionState == ConnectionState.waiting) {
           child = SizedBox(
             height: double.maxFinite,
@@ -102,9 +101,15 @@ class _SearchResultsState extends State<DisplaySearchResults> {
 
             double rowNumbers = calcRowNumbers(searchResult.length.toDouble(),
                 _getColumnCount(widget.swidth).toDouble());
-
             child = Column(
               children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("Busca obteve ${pagination.totalElements} resultados",
+                        style: textTheme.labelLarge),
+                  ],
+                ),
                 Container(
                   constraints: BoxConstraints(minHeight: 370),
                   height: (355 * rowNumbers),
@@ -140,7 +145,6 @@ class _SearchResultsState extends State<DisplaySearchResults> {
             );
           }
         }
-
         return AnimatedSwitcher(
           duration: Duration(milliseconds: 300),
           child: child,

@@ -8,7 +8,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
-// import '../../../../utils/nav_key.dart';
 
 class OurProductItem extends StatefulWidget {
   const OurProductItem(
@@ -29,7 +28,7 @@ class OurProductItem extends StatefulWidget {
 
 final shadowHouver = [
   BoxShadow(
-    color: onPrimary.withOpacity(0.1),
+    color: onPrimary.withValues(alpha: 0.1),
     spreadRadius: 4.0,
     blurRadius: 4.0,
   ),
@@ -56,9 +55,8 @@ class _OurProductItemState extends State<OurProductItem> {
   void initState() {
     super.initState();
     mycolor =
-        Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withOpacity(1.0);
+        Color((math.Random().nextDouble() * 0xFFFFFF).toInt()).withAlpha(1);
     contentItem = buildListItem();
-    fetchOAById(widget.id).then((result) => oa = result);
   }
 
   Widget buildListItem() {
@@ -124,8 +122,10 @@ class _OurProductItemState extends State<OurProductItem> {
                       textStyle: textTheme.labelLarge,
                     ),
                     child: const Text('Detalhes'),
-                    onPressed: () {
-                      _dialogBuilder();
+                    onPressed: () async {
+                      ObjetoAprendizagem OAResponse =
+                          await fetchOAById(widget.id);
+                      _dialogBuilder(OAResponse);
                     },
                   ),
                 )
@@ -185,7 +185,8 @@ class _OurProductItemState extends State<OurProductItem> {
         Container(
           constraints: BoxConstraints.expand(),
           decoration: BoxDecoration(
-            color: Colors.black.withOpacity(0.5), // Fundo semi-transparente
+            color:
+                Colors.black.withValues(alpha: 0.5), // Fundo semi-transparente
             borderRadius: BorderRadius.circular(15),
           ),
           child: Padding(
@@ -203,7 +204,8 @@ class _OurProductItemState extends State<OurProductItem> {
     );
   }
 
-  Future<void> _dialogBuilder() async {
+  Future<void> _dialogBuilder(ObjetoAprendizagem? oa) async {
+    print(oa);
     return oa == null
         ? showDialog<void>(
             context: context,
@@ -231,14 +233,14 @@ class _OurProductItemState extends State<OurProductItem> {
             pageBuilder: (x, y, z) {
               return AlertDialog(
                 scrollable: true,
-                title: Text(oa!.nome),
+                title: Text(oa.nome),
                 content: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                      child: Text("Plataforma de uso: ${oa!.getPlataforma()}",
+                      child: Text("Plataforma de uso: ${oa.getPlataforma()}",
                           style: textTheme.headlineSmall),
                     ),
                     Padding(
@@ -249,8 +251,8 @@ class _OurProductItemState extends State<OurProductItem> {
                     kIsWeb
                         ? FittedBox(
                             fit: BoxFit.fitHeight,
-                            child: Text(oa!.getDescritores()))
-                        : Text(oa!.getDescritores()),
+                            child: Text(oa.getDescritores()))
+                        : Text(oa.getDescritores()),
                     Padding(
                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: Text(
@@ -260,8 +262,8 @@ class _OurProductItemState extends State<OurProductItem> {
                     kIsWeb
                         ? FittedBox(
                             fit: BoxFit.fitHeight,
-                            child: Text(oa!.getHabilidades()))
-                        : Text(oa!.getHabilidades())
+                            child: Text(oa.getHabilidades()))
+                        : Text(oa.getHabilidades())
                   ],
                 ),
                 actions: <Widget>[
@@ -280,83 +282,3 @@ class _OurProductItemState extends State<OurProductItem> {
           );
   }
 }
-
-//   Future<void> _dialogBuilder() async {
-//     return oa == null
-//         ? showDialog<void>(
-//             context: context,
-//             builder: (BuildContext context) {
-//               return AlertDialog(
-//                 title: Text(
-//                     'Erro ao buscar informações sobre este Objeto de Aprendizagem.'),
-//                 content: Container(),
-//                 actions: <Widget>[
-//                   TextButton(
-//                     style: TextButton.styleFrom(
-//                       textStyle: textTheme.labelLarge,
-//                     ),
-//                     child: const Text('Ok'),
-//                     onPressed: () {
-//                       Navigator.of(context).pop();
-//                     },
-//                   ),
-//                 ],
-//               );
-//             },
-//           )
-//         : showGeneralDialog<void>(
-//             context: context,
-//             pageBuilder: (x, y, z) {
-//               return AlertDialog(
-//                 // scrollable: true,
-//                 title: Text(oa!.nome),
-//                 content: Container(
-//                   child: Column(
-//                     mainAxisSize: MainAxisSize.min,
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Padding(
-//                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-//                         child: Text("Plataforma de uso: ${oa!.getPlataforma()}",
-//                             style: textTheme.headlineSmall),
-//                       ),
-//                       Padding(
-//                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-//                         child: Text("Descritores PCN",
-//                             style: textTheme.headlineSmall),
-//                       ),
-//                       kIsWeb
-//                           ? FittedBox(
-//                               fit: BoxFit.fitHeight,
-//                               child: Text(oa!.getDescritores()))
-//                           : Expanded(child: Text(oa!.getDescritores())),
-//                       Padding(
-//                           padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-//                           child: Text(
-//                             "Habilidades BNCC",
-//                             style: textTheme.headlineSmall,
-//                           )),
-//                       kIsWeb
-//                           ? FittedBox(
-//                               fit: BoxFit.fitHeight,
-//                               child: Text(oa!.getHabilidades()))
-//                           : Expanded(child: Text(oa!.getHabilidades()))
-//                     ],
-//                   ),
-//                 ),
-//                 actions: <Widget>[
-//                   TextButton(
-//                     style: TextButton.styleFrom(
-//                       textStyle: textTheme.labelLarge,
-//                     ),
-//                     child: const Text('Ok'),
-//                     onPressed: () {
-//                       Navigator.pop(x);
-//                     },
-//                   ),
-//                 ],
-//               );
-//             },
-//           );
-//   }
-// }

@@ -53,20 +53,14 @@ class _MyStatefulWidgetState extends ConsumerState<BlogDetails> {
     setState(() {
       loadPosts = true;
     });
+  }
 
-    try {
-      await BlogController()
-          .updateBlogContent("")
-          .timeout(Duration(seconds: 5));
-    } catch (e) {
-      print("Erro ao carregar dados: $e");
-    } finally {
-      if (mounted) {
-        setState(() {
-          loadPosts = false;
-        });
-      }
-    }
+  void waitData() async {
+    Future.wait([BlogController().updateBlogContent("")])
+        .timeout(Duration(seconds: 5))
+        .whenComplete(() => setState(() {
+              loadPosts = false;
+            }));
   }
 
   @override
