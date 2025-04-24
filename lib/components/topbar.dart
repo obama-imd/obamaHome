@@ -11,7 +11,7 @@ import '../utils/app_theme.dart';
 import '../utils/cores_personalizadas.dart';
 
 class TopBar extends ConsumerStatefulWidget {
-  double swidth;
+  final double swidth;
 
   TopBar(this.swidth, {super.key});
 
@@ -34,10 +34,10 @@ class _TopBarState extends ConsumerState<TopBar> {
   }
 
   loginButton(context) {
-    final googleUserName = ref.watch(googleName);
+    // final googleUserName = ref.watch(googleName);
     final googleUserBool = ref.watch(googleBool);
 
-    List<String?> userName = [...googleUserName];
+    // List<String?> userName = [...googleUserName];
     List<bool> userLogged = [...googleUserBool];
     return hasUserSession || userLogged.isNotEmpty
         ? InkWell(

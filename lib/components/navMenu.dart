@@ -143,7 +143,6 @@ class _NavMenuState extends State<NavMenu> {
                             j++) ...{
                           Container(
                             decoration: BoxDecoration(
-                                // color: background,
                                 border: j == 0
                                     ? Border(
                                         top: BorderSide(
@@ -181,10 +180,6 @@ class _NavMenuState extends State<NavMenu> {
                                 widget.itemValues[i].subItemHover[j] = false;
                                 Navigator.pushNamed(
                                   context, widget.itemValues[i].path[j],
-                                  // arguments: widget.itemValues[i].path[j] ==
-                                  //         '/blog-detalhes'
-                                  //     ? 0
-                                  //     : searchText);
                                 );
                               },
                               child: MenuAcceleratorLabel(

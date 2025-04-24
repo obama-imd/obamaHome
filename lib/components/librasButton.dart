@@ -12,7 +12,7 @@ void SetLibrasModeActive(WidgetRef ref, bool isLibrasModeActive) {
 }
 
 class LibrasButton extends ConsumerStatefulWidget {
-  double swidth;
+  final double swidth;
   LibrasButton({super.key, required this.swidth});
 
   @override

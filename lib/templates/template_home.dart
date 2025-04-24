@@ -1,4 +1,3 @@
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:obamahome/components/drawer.dart';
@@ -214,7 +213,6 @@ class _TemplateHomeState extends State<TemplateHome> {
                                     )))
                                 .toList(),
                             options: CarouselOptions(
-                                enlargeCenterPage: true,
                                 autoPlay: true,
                                 viewportFraction: 1,
                                 height: 250),

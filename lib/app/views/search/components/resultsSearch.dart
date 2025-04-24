@@ -14,7 +14,7 @@ double calcRowNumbers(double number, double factor) {
 }
 
 class DisplaySearchResults extends StatefulWidget {
-  String termSearched;
+  final String termSearched;
   final String? queryParam;
   final double swidth;
   int selectedPageIndex;
