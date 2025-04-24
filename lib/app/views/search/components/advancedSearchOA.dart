@@ -64,6 +64,7 @@ class OAFilterState extends State<OAFilters> {
 
   Map<int, int?>? selectedValues = {};
   List<RadioTextField?> RadioTextFieldsList = [];
+  bool blockCleanFilters = false;
 
   @override
   void initState() {
@@ -341,9 +342,43 @@ class OAFilterState extends State<OAFilters> {
                   filled: true,
                   fillColor: const Color.fromARGB(255, 218, 216, 216),
                   suffixIcon: const Icon(Icons.search)))),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              foregroundColor: surface,
+              padding: EdgeInsets.zero,
+              minimumSize: Size(0, 0),
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
+            child: const Text('Limpar filtros'),
+            onPressed: () {
+              final values = selectedValues;
+              if (values != null) {
+                blockCleanFilters = values.entries.any((entry) =>
+                    (entry.value != null && entry.value! > 0) ||
+                    searchTextController.text.isNotEmpty);
+              }
+
+              if (blockCleanFilters) {
+                setState(() {
+                  _removeSelectionFrom(0);
+                  searchTextController.clear();
+                  searchTerm = '';
+                });
+                mainSearch();
+              }
+            },
+          ),
+          SizedBox(width: 15),
+        ],
+      ),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: 12),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -356,6 +391,17 @@ class OAFilterState extends State<OAFilters> {
         ],
       ),
     ]);
+  }
+
+  void updateBlockCleanFilters() {
+    final values = selectedValues;
+    final hasValues =
+        values?.entries.any((entry) => (entry.value ?? 0) > 0) ?? false;
+    final hasText = searchTextController.text.isNotEmpty;
+
+    setState(() {
+      blockCleanFilters = hasValues || hasText;
+    });
   }
 
   void advancedSearchModal(List<RadioTextField?> RadioTextFieldsList) {
