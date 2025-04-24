@@ -150,6 +150,22 @@ flutter:
     - assets/images/carousel/slider1.jpg
     - assets/images/carousel/slider2.jpg
     - assets/images/carousel/slider3.jpg
+    - assets/images/gifs/artigos.gif
+    - assets/images/gifs/capitulo-livro.gif
+    - assets/images/gifs/dissertacao.gif
+    - assets/images/gifs/formacoes.gif
+    - assets/images/gifs/inicio.gif
+    - assets/images/gifs/livros.gif
+    - assets/images/gifs/manuais.gif
+    - assets/images/gifs/objeto-aprendizagem.gif
+    - assets/images/gifs/plano-aula.gif
+    - assets/images/gifs/plano-aula-listar.gif
+    - assets/images/gifs/plano-aula-novo.gif
+    - assets/images/gifs/publicacoes.gif
+    - assets/images/gifs/servicos.gif
+    - assets/images/gifs/sobre.gif
+    - assets/images/gifs/tese.gif
+    - assets/images/gifs/trilhas.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

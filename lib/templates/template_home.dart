@@ -40,14 +40,6 @@ class _TemplateHomeState extends State<TemplateHome>
     _changeImagePeriodically();
   }
 
-  void restartTimer() {
-    controller = AnimationController(
-        vsync: this,
-        duration: const Duration(seconds: 4),
-      )..forward();
-      _changeImagePeriodically();
-  }
-
   void _changeImagePeriodically() {
     Future.delayed(Duration(seconds: 4), () {
       setState(() {

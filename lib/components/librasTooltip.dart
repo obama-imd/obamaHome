@@ -6,7 +6,15 @@ import 'librasButton.dart';
 
 class LibrasTooltip extends ConsumerStatefulWidget {
   Widget content;
-  LibrasTooltip({super.key, required this.content});
+  List<String> imageGif;
+  bool isHover;
+  List<bool>? isHoverSubItems;
+  LibrasTooltip(
+      {super.key,
+      required this.content,
+      required this.imageGif,
+      required this.isHover,
+      required this.isHoverSubItems});
 
   @override
   _LibrasTooltipState createState() => _LibrasTooltipState();
@@ -22,11 +30,22 @@ class _LibrasTooltipState extends ConsumerState<LibrasTooltip> {
         decoration: BoxDecoration(color: background),
         richMessage: WidgetSpan(
           child: Container(
-            color: background,
-            child: Text("Em breve")
-            // Image.network(
-            //     'https://th.bing.com/th/id/R.271c94354b33351d0ba70b4141279cba?rik=QMkddJRh815iEw&riu=http%3a%2f224.media.tumblr.com%2ftumblr_m0kxkrtQfJ1rrnvqio1_500.gif&ehk=JJa9MQXGTx4ZUw47A4KUrftSaCyLL%2bPBuXVmaBfR%2bv0%3A&risl=&pid=ImgRaw&r=0'),
-          ),
+              color: background,
+              child: Column(
+                children: [
+                  if (widget.isHover) ...{
+                    // if (widget.imageGif.length > 1) ...{
+                    //   for (var i = 0; i < widget.imageGif.length; i++) ...{
+                    //     if (widget.isHoverSubItems![i]) ...{
+                    //       Image.asset(widget.imageGif[i]),
+                    //     }
+                    //   }
+                    // } else ...{
+                      Image.asset(widget.imageGif[0]),
+                    // }
+                  }
+                ],
+              )),
         ),
         child: widget.content,
       );

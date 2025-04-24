@@ -28,7 +28,8 @@ Future searchObject(context, String value) async {
     showMessage(context);
   } else {
     // Navigator.pushNamed(context, '/objetos-aprendizagem', arguments: value);
-    Navigator.popAndPushNamed(context, '/objetos-aprendizagem-nav', arguments: value);
+    Navigator.popAndPushNamed(context, '/objetos-aprendizagem-nav',
+        arguments: value);
     // Navigator.pop(context);
   }
 }
@@ -81,6 +82,9 @@ class _NavMenuState extends State<NavMenu> {
                       },
                       // teste tooltip
                       child: LibrasTooltip(
+                        imageGif: widget.itemValues[i].gifPath!,
+                        isHover: widget.itemValues[i].itemHover,
+                        isHoverSubItems: null,
                         content: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8.0),
                           child: Text(widget.itemValues[i].name.toUpperCase(),
@@ -98,6 +102,9 @@ class _NavMenuState extends State<NavMenu> {
                   ))),
         } else ...{
           LibrasTooltip(
+            imageGif: widget.itemValues[i].subGifPath!,
+            isHover: widget.itemValues[i].itemHover,
+            isHoverSubItems: widget.itemValues[i].subItemHover,
             content: Padding(
                 padding: EdgeInsets.only(left: 18),
                 child: SubmenuButton(
@@ -120,8 +127,7 @@ class _NavMenuState extends State<NavMenu> {
                             : widget.itemValues[i].itemHover
                                 ? primary
                                 : onPrimary),
-                    textStyle:
-                        WidgetStateProperty.all(textTheme.headlineSmall),
+                    textStyle: WidgetStateProperty.all(textTheme.headlineSmall),
                   ),
                   menuChildren: <Widget>[
                     if (i >= 0 && i < widget.itemValues.length) ...{
