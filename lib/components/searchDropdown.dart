@@ -76,7 +76,7 @@ class RadioTextField extends StatefulWidget {
   final int radioTextFieldID;
   final TextStyle titleStyle;
   final Map<int, int?>? initialValue;
-  double? tileHeight;
+  final double? tileHeight;
   bool shoulAddOptionAll;
   Function()? refreshData;
   Function(String)? refreshData2;
@@ -153,7 +153,7 @@ class ExpansionPanelListSimple extends StatefulWidget {
   ExpansionPanelListSimple(
       {super.key, required this.data, required this.isExpanded});
   final List<Item> data;
-  bool isExpanded;
+  final bool isExpanded;
 
   @override
   State<ExpansionPanelListSimple> createState() =>

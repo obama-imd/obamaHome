@@ -17,7 +17,7 @@ List<String> tileTitle = <String>[
 
 class OAFilters extends StatefulWidget {
   final double swidth;
-  var data;
+  final data;
   final Function(String) updateData;
   final TextStyle titleStyle;
   OAFilters(
@@ -374,7 +374,7 @@ class OAFilterState extends State<OAFilters> {
                 child: Text("Nenhum Resultado encontrado",
                     style: textTheme.bodySmall)),
             headerValue: tileTitle[i]);
-      };
+      }
     }
 
     showDialog<void>(

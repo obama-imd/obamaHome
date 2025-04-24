@@ -28,7 +28,7 @@ class OurProductItem extends StatefulWidget {
 
 final shadowHouver = [
   BoxShadow(
-    color: onPrimary.withOpacity(0.1),
+    color: onPrimary.withValues(alpha: 0.1),
     spreadRadius: 4.0,
     blurRadius: 4.0,
   ),
