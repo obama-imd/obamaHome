@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/views/lessons/lesson_plan_view.dart';
@@ -112,8 +114,14 @@ final TextTheme textTheme = TextTheme(
 class MyAppMaterial extends MaterialApp {
   final WidgetRef ref;
 
-  MyAppMaterial({required this.ref})
+  MyAppMaterial({required this.ref, context})
       : super(
+          scrollBehavior: ScrollConfiguration.of(context).copyWith(
+            dragDevices: {
+              PointerDeviceKind.touch,
+              PointerDeviceKind.mouse,
+            },
+          ),
           theme: ThemeData(
             menuButtonTheme: MenuButtonThemeData(
               style: ButtonStyle(
@@ -162,7 +170,6 @@ class MyAppMaterial extends MaterialApp {
             splashColor: background,
             disabledColor: secondary,
             fontFamily: 'Raleway',
-            // hoverColor: Colors.black,
             colorScheme: ColorScheme(
               brightness: Brightness.light,
               primary: primary,
@@ -183,7 +190,7 @@ class MyAppMaterial extends MaterialApp {
           routes: {
             '/sobre': (context) => const AboutUsPage(),
             '/publicacoes': (context) => const BlogPage(),
-            // '/publicacao-detalhe': (context) => BlogDetails(
+            // '/blog-detalhes': (context) => BlogDetails(
             //       initialPageIndex:
             //           ModalRoute.of(context)?.settings.arguments as int? ?? 0,
             //     ),

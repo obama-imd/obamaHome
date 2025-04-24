@@ -302,7 +302,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                     color: background,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.grey.withOpacity(0.3),
+                                        color: Colors.grey.withValues(alpha: 0.3),
                                         spreadRadius: 0.8,
                                         blurRadius: 5.0,
                                         offset: Offset(0.0, 3.0),

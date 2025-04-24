@@ -28,7 +28,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MyAppMaterial(
-      ref: ref,
+      ref: ref, context: context,
     );
   }
 }

@@ -5,7 +5,7 @@ import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
 
 _launchURL(link) async {
-  Uri url = Uri.parse(link); // Parse o link para uma URI
+  Uri url = Uri.parse(link);
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {
