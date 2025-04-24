@@ -62,12 +62,13 @@ class _LibrasTooltipState extends ConsumerState<LibrasTooltip> {
               color: background,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Image.asset(
-              gifPath,
-              width: 200,
-              height: 350,
-              fit: BoxFit.cover,
-            ),
+            child: Text("")
+            // Image.asset(
+            //   gifPath,
+            //   width: 200,
+            //   height: 350,
+            //   fit: BoxFit.cover,
+            // ),
           ),
         ),
       ),

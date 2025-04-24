@@ -28,7 +28,8 @@ Widget blogFilters(BuildContext context, double swidth, List<BlogModel?> datas,
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 filled: true,
                 fillColor: const Color.fromARGB(255, 218, 216, 216),
-                suffixIcon: const Icon(Icons.search)))),
+                // suffixIcon: const Icon(Icons.search)
+                ))),
     // Container(
     //     alignment: Alignment.centerLeft,
     //     margin: const EdgeInsets.only(bottom: 20),

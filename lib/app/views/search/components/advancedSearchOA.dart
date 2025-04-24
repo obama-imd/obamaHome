@@ -378,7 +378,7 @@ class OAFilterState extends State<OAFilters> {
               borderRadius: BorderRadius.circular(100),
               borderSide: BorderSide.none,
             ),
-            suffixIcon: Icon(Icons.search),
+            // suffixIcon: Icon(Icons.search),
             contentPadding: EdgeInsets.symmetric(horizontal: 15),
           ),
         ),
