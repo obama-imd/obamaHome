@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/models/objeto_aprendizagem.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 
@@ -54,6 +55,7 @@ class OAFilterState extends State<OAFilters> {
   List<(int, String)>? temaConteudoData;
   List<(int, String)>? habilidadeData;
   List<(int, String)>? descritorData;
+  List<Descritor>? descritorTemporaryData;
 
   RadioTextField? curriculoRadioTextField;
   RadioTextField? nivelEnsinoRadioTextField;
@@ -126,6 +128,25 @@ class OAFilterState extends State<OAFilters> {
     }
   }
 
+  // List<Descritor> filterDescritoresPerNivelEnsinoAndTemaConteudo() {
+  //   if (descritorTemporaryData != null) {
+  //     return descritorTemporaryData!
+  //         .where((x) =>
+  //             selectedValues![1]! >= 0 &&
+  //             selectedValues![1]! < (nivelEnsinolData?.length ?? 0) &&
+  //             selectedValues![3]! >= 0 &&
+  //             selectedValues![3]! < (temaConteudoData?.length ?? 0))
+  //         .where((x) =>
+  //             x.nivelEnsino
+  //                 .contains(nivelEnsinolData![selectedValues![1]!].$2) &&
+  //             x.temaConteudo
+  //                 .contains(temaConteudoData![selectedValues![3]!].$2))
+  //         .toList();
+  //   } else {
+  //     return [];
+  //   }
+  // }
+
   void _refreshNivelEnsinoTemaConteudo(String curriculo) async {
     try {
       final response = await fetchSearchData(curriculo);
@@ -136,9 +157,11 @@ class OAFilterState extends State<OAFilters> {
             .map((x) => (x.id, x.getNomeWithCurriculo()))
             .toList();
 
-        descritorData = removingRepeatedDescritors(response.allDescricoes
-            .map((x) => (x.id, x.formattedDescricao))
-            .toList());
+        descritorTemporaryData = response.allDescricoes;
+
+        debugPrint("descritores length => ${descritorTemporaryData!.length}");
+        debugPrint("nivelEnsino => ${nivelEnsinolData}");
+        debugPrint("temaConteudo => ${temaConteudoData}");
 
         nivelEnsinoRadioTextField = RadioTextField(
           array: nivelEnsinolData ?? [],
@@ -250,6 +273,28 @@ class OAFilterState extends State<OAFilters> {
     if (selectedValues![0]! == 1) {
       setState(() {
         anoEnsinoData = [];
+
+        // final filteredDescritores =
+        //     filterDescritoresPerNivelEnsinoAndTemaConteudo();
+        // debugPrint(
+        //     "length descritores filtrados => ${filteredDescritores.length}");
+
+        descritorData = descritorTemporaryData!
+            .map((x) => (x.id, x.formattedDescricao))
+            .toList();
+
+        debugPrint("length descritores filtrados => ${descritorData?.length}");
+        debugPrint("descritores filtrados => ${descritorData}");
+
+        descritorRadioTextField = RadioTextField(
+            array: descritorData ?? [],
+            radioTextFieldID: 4,
+            tileHeight: 35,
+            initialValue: selectedValues,
+            shoulAddOptionAll: false,
+            titleStyle: textTheme.bodySmall!,
+            shouldToggle: true);
+
         RadioTextFieldsList[4] = descritorRadioTextField;
         willExpand = true;
       });
@@ -257,28 +302,26 @@ class OAFilterState extends State<OAFilters> {
     } else if (selectedValues![0]! == 2 &&
         selectedValues![2]! > 0 &&
         selectedValues![3]! > 0) {
-      try {
-        final response = await fetchHabilidadeByAnoEnsinoTemaConteudo(
-            selectedValues![2]!, selectedValues![3]!);
+      final response = await fetchHabilidadeByAnoEnsinoTemaConteudo(
+          selectedValues![2]!, selectedValues![3]!);
 
-        setState(() {
-          habilidadeData =
-              response.map((x) => (x.id, x.formattedHabilidade)).toList();
-          habilidadeRadioTextField = RadioTextField(
-            array: habilidadeData ?? [],
-            radioTextFieldID: 5,
-            initialValue: selectedValues,
-            titleStyle: textTheme.bodySmall!,
-            shoulAddOptionAll: false,
-            refreshData: null,
-            shouldToggle: true,
-          );
+      setState(() {
+        habilidadeData =
+            response.map((x) => (x.id, x.formattedHabilidade)).toList();
+        habilidadeRadioTextField = RadioTextField(
+          array: habilidadeData ?? [],
+          radioTextFieldID: 5,
+          initialValue: selectedValues,
+          titleStyle: textTheme.bodySmall!,
+          shoulAddOptionAll: false,
+          refreshData: null,
+          shouldToggle: true,
+        );
 
-          RadioTextFieldsList[5] = habilidadeRadioTextField;
-          willExpand = true;
-        });
-        reOpenModal();
-      } finally {}
+        RadioTextFieldsList[5] = habilidadeRadioTextField;
+        willExpand = true;
+      });
+      reOpenModal();
     }
   }
 
@@ -288,6 +331,9 @@ class OAFilterState extends State<OAFilters> {
           selectedValues![1] != null && selectedValues![1]! > 0
               ? '${selectedValues![1]}'
               : '';
+      selectedAnoEnsino = selectedValues![2] != null && selectedValues![2]! > 0
+          ? '${selectedValues![2]}'
+          : '';
       selectedTemaConteudo =
           selectedValues![3] != null && selectedValues![3]! > 0
               ? '${selectedValues![3]}'
@@ -445,13 +491,15 @@ class OAFilterState extends State<OAFilters> {
   String _buildQueryString() {
     final params = [];
     if (selectedNivelEnsino.isNotEmpty)
-      params.add('nivelEnsino=$selectedNivelEnsino');
+      params.add('nivelEnsinoId=$selectedNivelEnsino');
+    if (selectedAnoEnsino.isNotEmpty)
+      params.add('anoEnsinoId=$selectedAnoEnsino');
     if (selectedTemaConteudo.isNotEmpty)
-      params.add('temaConteudo=$selectedTemaConteudo');
+      params.add('temaConteudoId=$selectedTemaConteudo');
     if (selectedDescritor.isNotEmpty)
-      params.add('descritor=$selectedDescritor');
+      params.add('descritorId=$selectedDescritor');
     if (selectedHabilidade.isNotEmpty)
-      params.add('habilidade=$selectedHabilidade');
+      params.add('habilidadeId=$selectedHabilidade');
     if (searchTerm.isNotEmpty) {
       params.add('nome=$searchTerm');
     } else {
