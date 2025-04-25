@@ -88,6 +88,7 @@ class OAFilterState extends State<OAFilters> {
       initialValue: selectedValues,
       refreshData2: _refreshNivelEnsinoTemaConteudo,
       shoulAddOptionAll: false,
+      shouldToggle: false,
     );
 
     setState(() {
@@ -146,6 +147,7 @@ class OAFilterState extends State<OAFilters> {
           tileHeight: 40,
           shoulAddOptionAll: false,
           initialValue: selectedValues,
+          shouldToggle: true,
           refreshData: curriculo == "BNCC"
               ? _refreshAnoEnsino
               : _refreshDescritorHabilidade,
@@ -162,6 +164,7 @@ class OAFilterState extends State<OAFilters> {
           initialValue: selectedValues,
           shoulAddOptionAll: false,
           refreshData: _refreshDescritorHabilidade,
+          shouldToggle: true,
         );
 
         descritorRadioTextField = RadioTextField(
@@ -171,6 +174,7 @@ class OAFilterState extends State<OAFilters> {
           initialValue: selectedValues,
           shoulAddOptionAll: false,
           titleStyle: textTheme.bodySmall!,
+          shouldToggle: true,
         );
 
         RadioTextFieldsList[1] = nivelEnsinoRadioTextField;
@@ -222,6 +226,7 @@ class OAFilterState extends State<OAFilters> {
           initialValue: selectedValues,
           titleStyle: textTheme.bodySmall!,
           shoulAddOptionAll: false,
+          shouldToggle: true,
           refreshData: _refreshDescritorHabilidade,
         );
 
@@ -266,6 +271,7 @@ class OAFilterState extends State<OAFilters> {
             titleStyle: textTheme.bodySmall!,
             shoulAddOptionAll: false,
             refreshData: null,
+            shouldToggle: true,
           );
 
           RadioTextFieldsList[5] = habilidadeRadioTextField;
@@ -520,8 +526,13 @@ class OAFilterState extends State<OAFilters> {
               _removeSelectionFrom(0);
             }),
             mainButton(context, 'Buscar', null, () {
-              mainSearch();
-              Navigator.of(context).pop();
+              final counterOfSelectedValues = selectedValues!.values
+                  .where((value) => value != null && value > 0);
+
+              if (counterOfSelectedValues.length > 1) {
+                mainSearch();
+                Navigator.of(context).pop();
+              }
             }),
           ],
         );
