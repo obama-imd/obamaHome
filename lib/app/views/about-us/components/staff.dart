@@ -1,20 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../utils/app_theme.dart';
 import '../../../../utils/cores_personalizadas.dart';
 
-List<IconData> SocialMediaLinks = [
-  // (FontAwesomeIcons.facebook),
-  // (FontAwesomeIcons.googlePlus),
-  // (FontAwesomeIcons.twitter),
-  (FontAwesomeIcons.linkedin),
-  // (FontAwesomeIcons.instagram),
-];
-
 _launchURL(link) async {
-  Uri url = Uri.parse(link); // Parse o link para uma URI
+  Uri url = Uri.parse(link);
   if (await canLaunchUrl(url)) {
     await launchUrl(url);
   } else {
@@ -58,25 +49,32 @@ class StaffCard extends StatelessWidget {
                 child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(staffName, style: textTheme.bodyLarge),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 5.0),
+                        child: Text(staffName, style: textTheme.bodyLarge),
+                      ),
                       Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            for (int i = 0;
-                                i < SocialMediaLinks.length;
-                                i++) ...{
-                              SizedBox(
-                                  width: 30,
-                                  height: 30,
-                                  child: Material(
-                                    color: onSecondary,
-                                    child: InkWell(
-                                        onTap: () => _launchURL(staffLink),
-                                        child: Icon(SocialMediaLinks[i],
-                                            size: 16.0, color: onPrimary)),
-                                  )),
-                            }
+                            Tooltip(
+                              message: "Currículo Lattes",
+                              child: SizedBox(
+                                width: 30,
+                                height: 30,
+                                child: Material(
+                                  color: onSecondary,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(100),
+                                      onTap: () => _launchURL(staffLink),
+                                      child: Image.asset(
+                                          "assets/images/icons/lattes.png",
+                                          fit: BoxFit.cover,
+                                          alignment: Alignment.center,
+                                          )),
+                                ),
+                              ),
+                            ),
                           ])
                     ]),
               ),

@@ -80,8 +80,14 @@ class BlogDesktopState extends ConsumerState<BlogDesktop> {
                   "Perdão, ocorreu um erro interno.",
                 ));
           }
-          return Container();
-          // return circleLoadSpinner(context);
+          // return Container();
+          return SizedBox(height: 200, width: swidth, child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CircularProgressIndicator(),
+            ],
+          ));
         },
       )
     ]);

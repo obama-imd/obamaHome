@@ -366,7 +366,6 @@ String initText(QuillController _controller, List<String>? cachedObjects,
       ChangeSource.local);
   if (cachedObjects != null) {
     for (var selected in cachedObjects) {
-      // print("selected => $selected");
       var mainList = new Delta()
         ..insert(selected, {"size": "14"})
         ..insert("\n", {"list": "bullet"});

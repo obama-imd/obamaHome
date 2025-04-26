@@ -64,33 +64,28 @@ class RadioTextField extends StatefulWidget {
   RadioTextField(
       {super.key,
       required this.array,
-      required this.title,
+      required this.radioTextFieldID,
       required this.titleStyle,
-      this.initalValue,
+      this.tileHeight,
+      this.initialValue,
       this.shoulAddOptionAll = true,
-      this.refreshData = null});
+      this.refreshData = null,
+      this.refreshData2 = null});
 
-  final List<(int, String)> array;
-  final String title;
+  late final List<(int, String)> array;
+  final int radioTextFieldID;
   final TextStyle titleStyle;
-  final int? initalValue;
-  var selectedValue;
+  final Map<int, int?>? initialValue;
+  final double? tileHeight;
   bool shoulAddOptionAll;
-  Function(int?)? refreshData;
+  Function()? refreshData;
+  Function(String)? refreshData2;
 
   @override
   State<RadioTextField> createState() => _RadioTextFieldState();
 }
 
 class _RadioTextFieldState extends State<RadioTextField> {
-  int? _character;
-
-  @override
-  void initState() {
-    _character = widget.initalValue;
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     if (widget.shoulAddOptionAll) {
@@ -98,29 +93,47 @@ class _RadioTextFieldState extends State<RadioTextField> {
       widget.shoulAddOptionAll = false;
     }
 
-    return Column(
+    return Wrap(
       children: widget.array
-          .map((e) => ListTile(
-                title: Text(
-                  e.$2,
-                  style: widget.titleStyle,
-                ),
-                leading: Radio<int>(
-                  value: e.$1,
-                  groupValue: _character,
-                  onChanged: _handleUpdate,
+          .map((e) => Container(
+                height: widget.tileHeight,
+                child: ListTile(
+                  contentPadding: EdgeInsets.all(3),
+                  title: Text(
+                    e.$2,
+                    style: widget.titleStyle,
+                  ),
+                  leading: Radio<int>(
+                    value: e.$1,
+                    splashRadius: 20,
+                    groupValue: widget.initialValue![widget.radioTextFieldID],
+                    onChanged: (int? value) {
+                      _handleUpdate(value, widget.radioTextFieldID);
+                      if (widget.refreshData2 != null) {
+                        _handleUpdate2(value, e.$2);
+                      }
+                    },
+                  ),
                 ),
               ))
           .toList(),
     );
   }
 
-  void _handleUpdate(int? value) {
+  void _handleUpdate(int? selectedValue, int radioTextFieldId) {
     setState(() {
-      _character = value;
-      widget.selectedValue = value;
+      widget.initialValue![widget.radioTextFieldID] = selectedValue;
     });
-    widget.refreshData!(_character);
+    if (widget.refreshData != null) {
+      widget.refreshData!();
+    }
+  }
+
+  void _handleUpdate2(int? selectedValue, String curriculo) {
+    // setState(() {
+    //   widget.initialValue![widget.radioTextFieldID] = selectedValue;
+    // });
+    widget.refreshData2!(curriculo);
   }
 }
 
@@ -137,8 +150,10 @@ class Item {
 }
 
 class ExpansionPanelListSimple extends StatefulWidget {
-  const ExpansionPanelListSimple({super.key, required this.data});
+  ExpansionPanelListSimple(
+      {super.key, required this.data, required this.isExpanded});
   final List<Item> data;
+  final bool isExpanded;
 
   @override
   State<ExpansionPanelListSimple> createState() =>
@@ -146,6 +161,14 @@ class ExpansionPanelListSimple extends StatefulWidget {
 }
 
 class _ExpansionPanelListSimpleState extends State<ExpansionPanelListSimple> {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      widget.data[0].isExpanded = widget.isExpanded;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -159,15 +182,19 @@ class _ExpansionPanelListSimpleState extends State<ExpansionPanelListSimple> {
     final _data = widget.data;
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          _data[index].isExpanded = isExpanded;
-        });
+        if (widget.isExpanded) {
+          setState(() {
+            _data[index].isExpanded = isExpanded;
+          });
+        }
       },
       children: _data.map<ExpansionPanel>((Item item) {
         return ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
-              title: Text(item.headerValue),
+              title: Text(item.headerValue,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18)),
             );
           },
           body: ListTile(title: item.expandedValue),
