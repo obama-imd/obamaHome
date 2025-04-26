@@ -112,7 +112,7 @@ class _SearchResultsState extends State<DisplaySearchResults> {
                 ),
                 Container(
                   constraints: BoxConstraints(minHeight: 370),
-                  height: (355 * rowNumbers),
+                  height: (365 * rowNumbers),
                   child: ResponsiveGridList(
                     physics: NeverScrollableScrollPhysics(),
                     scroll: false,
