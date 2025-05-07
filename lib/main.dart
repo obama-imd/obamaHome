@@ -10,6 +10,7 @@ import 'utils/app_theme.dart';
 void main() {
   usePathUrlStrategy();
   runApp(ProviderScope(child: MyApp()));
+  WidgetsFlutterBinding.ensureInitialized();
 }
 
 class MyApp extends ConsumerStatefulWidget {
