@@ -27,6 +27,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
       idAnoEnsino: 3,
       duracaoEmMinutos: 50,
       titulo: "Introdução à Cinemática",
+      autores: "SOUZA, José; MAIA, João",
       metodologia: "Aula expositiva com uso de vídeos e experimentos simples.",
       objetivosEspecificos: "Compreender conceitos de velocidade e aceleração.",
       objetivoGeral:
@@ -43,6 +44,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
       idAnoEnsino: 5,
       duracaoEmMinutos: 45,
       titulo: "Frações na Vida Real",
+      autores: "SOUZA, José; MAIA, João",
       metodologia:
           "Atividades em grupo e jogos educativos com materiais concretos.",
       objetivosEspecificos: "Resolver problemas simples com frações.",
@@ -58,6 +60,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
       idAnoEnsino: 5,
       duracaoEmMinutos: 45,
       titulo: "Frações na Vida Real",
+      autores: "JOÃO, Maria; SOUZA, José",
       metodologia:
           "Atividades em grupo e jogos educativos com materiais concretos.",
       objetivosEspecificos: "Resolver problemas simples com frações.",
@@ -73,6 +76,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
       idAnoEnsino: 5,
       duracaoEmMinutos: 45,
       titulo: "Frações na Vida Real",
+      autores: "DARC, Joana; MAIA, José",
       metodologia:
           "Atividades em grupo e jogos educativos com materiais concretos.",
       objetivosEspecificos: "Resolver problemas simples com frações.",
@@ -161,8 +165,8 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
                                 final lessonPlan = data[index];
                                 return _buildRow(
                                   lessonPlan.titulo,
+                                  lessonPlan.autores,
                                   lessonPlan.escola,
-                                  lessonPlan.metodologia,
                                   index,
                                 );
                               },
@@ -268,15 +272,15 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
             Expanded(
               flex: 1,
               child: Text(
-                'Autor',
+                'Autores',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
             Expanded(
-              flex: 2,
+              flex: 1,
               child: Text(
                 // 'Data de Publicação',
-                'Descrição',
+                'Instituição',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
@@ -293,7 +297,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
     );
   }
 
-  Widget _buildRow(String title, String author, String date, int Index) {
+  Widget _buildRow(String title, String author, String institution, int Index) {
     return Material(
       child: Container(
         padding: const EdgeInsets.all(8.0),
@@ -325,8 +329,8 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
                 child: Text(author),
               ),
               Expanded(
-                flex: 2,
-                child: Text(date),
+                flex: 1,
+                child: Text(institution),
               ),
               Expanded(
                 flex: 1,

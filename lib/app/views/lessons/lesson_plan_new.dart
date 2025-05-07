@@ -121,6 +121,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                             idAnoEnsino: 1,
                             duracaoEmMinutos: duracao,
                             titulo: titulo,
+                            autores: '',
                             metodologia: '',
                             objetivosEspecificos: '',
                             objetivoGeral: '',

@@ -18,6 +18,7 @@ class LessonPlanModel {
   int idAnoEnsino;
   int duracaoEmMinutos;
   String titulo;
+  String autores;
   String metodologia;
   String objetivosEspecificos;
   String objetivoGeral;
@@ -31,6 +32,7 @@ class LessonPlanModel {
       required this.idAnoEnsino,
       required this.duracaoEmMinutos,
       required this.titulo,
+      required this.autores,
       required this.metodologia,
       required this.objetivosEspecificos,
       required this.objetivoGeral,
@@ -45,6 +47,7 @@ class LessonPlanModel {
       "id_ano_ensino": idAnoEnsino,
       "duracao_em_minutos": duracaoEmMinutos,
       "titulo": titulo,
+      "autores": autores,
       "metodologia": metodologia,
       "objetivos_especificos": objetivosEspecificos,
       "objetivo_geral": objetivoGeral,
