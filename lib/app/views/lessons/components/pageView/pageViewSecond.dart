@@ -28,10 +28,12 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   final ScrollController controllerOne = ScrollController();
   String imageUrl = "";
   List<SearchModel?> searchData = [];
+  late Future<List<String>?> waitingPlaceholder;
+
+  //Adiciona no cache
   List<String> selectedOA = [];
   bool addedOrRemovedOA = false;
   List<String>? cachedObjects = [];
-  late Future<List<String>?> waitingPlaceholder;
 
   // void _initController(
   //     QuillController controller, List<String>? cachedObjects) {
@@ -49,6 +51,7 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   }
 
   Future<List<String>?> getObjects() async {
+    //Igor
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? items = prefs.getStringList('objects');
     setState(() {
@@ -302,7 +305,8 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                     color: background,
                                     boxShadow: [
                                       BoxShadow(
-                                        color: Colors.grey.withValues(alpha: 0.3),
+                                        color:
+                                            Colors.grey.withValues(alpha: 0.3),
                                         spreadRadius: 0.8,
                                         blurRadius: 5.0,
                                         offset: Offset(0.0, 3.0),
@@ -439,12 +443,10 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
                                     const EdgeInsets.symmetric(vertical: 20),
                                 child: ElevatedButton(
                                     style: ButtonStyle(
-                                        backgroundColor:
-                                            WidgetStatePropertyAll(
-                                                CoresPersonalizadas.azulObama),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                            CoresPersonalizadas.azulObama),
                                         foregroundColor:
-                                            WidgetStatePropertyAll(
-                                                background)),
+                                            WidgetStatePropertyAll(background)),
                                     onPressed: () {
                                       setState(() {
                                         addedOrRemovedOA = false;
