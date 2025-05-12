@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:obamahome/app/models/objeto_aprendizagem.dart';
 import 'package:obamahome/components/mainButton.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 
@@ -54,6 +55,7 @@ class OAFilterState extends State<OAFilters> {
   List<(int, String)>? temaConteudoData;
   List<(int, String)>? habilidadeData;
   List<(int, String)>? descritorData;
+  List<Descritor>? descritorTemporaryData;
 
   RadioTextField? curriculoRadioTextField;
   RadioTextField? nivelEnsinoRadioTextField;
@@ -81,13 +83,14 @@ class OAFilterState extends State<OAFilters> {
     };
 
     curriculoRadioTextField = RadioTextField(
-      array: [(1, 'PCN'), (2, 'BNCC')],
+      array: [(2, 'BNCC'), (1, 'PCN')],
       radioTextFieldID: 0,
       titleStyle: textTheme.bodySmall!,
       tileHeight: 35,
       initialValue: selectedValues,
       refreshData2: _refreshNivelEnsinoTemaConteudo,
       shoulAddOptionAll: false,
+      shouldToggle: false,
     );
 
     setState(() {
@@ -107,17 +110,17 @@ class OAFilterState extends State<OAFilters> {
     advancedSearchModal(RadioTextFieldsList);
   }
 
-  List<(int, String)>? removingRepeatedDescritors(data) {
-    Map<String, int> descricaoComPrimeiroId = {};
-    for (var item in data) {
-      int id = item.$1;
-      String descricao = item.$2;
-      if (!descricaoComPrimeiroId.containsKey(descricao)) {
-        descricaoComPrimeiroId[descricao] = id;
-      }
-    }
-    return descricaoComPrimeiroId.entries.map((e) => (e.value, e.key)).toList();
-  }
+  // List<(int, String)>? removingRepeatedDescritors(data) {
+  //   Map<String, int> descricaoComPrimeiroId = {};
+  //   for (var item in data) {
+  //     int id = item.$1;
+  //     String descricao = item.$2;
+  //     if (!descricaoComPrimeiroId.containsKey(descricao)) {
+  //       descricaoComPrimeiroId[descricao] = id;
+  //     }
+  //   }
+  //   return descricaoComPrimeiroId.entries.map((e) => (e.value, e.key)).toList();
+  // }
 
   void _removeSelectionFrom(int selectedId) {
     for (var key in selectedValues!.keys) {
@@ -125,65 +128,83 @@ class OAFilterState extends State<OAFilters> {
     }
   }
 
+  // void filterDescritoresPerNivelEnsinoAndTemaConteudo() {
+  //   // if (descritorTemporaryData != null) {
+  //   // debugPrint("temaConteudo => ${temaConteudoData![selectedValues![3]!].$2}");
+  //   // return descritorTemporaryData!
+  //       // .where((x) =>
+  //       //     selectedValues![1]! >= 0 &&
+  //       //     selectedValues![1]! < (nivelEnsinolData?.length ?? 0) &&
+  //       //     selectedValues![3]! >= 0 &&
+  //       //     selectedValues![3]! < (temaConteudoData?.length ?? 0))
+  //       // .where((x) =>
+  //           // x.formattedDescricao
+  //           //     .contains(nivelEnsinolData![selectedValues![1]!].$2) &&
+  //       //     x.formattedDescricao
+  //       //         .contains(temaConteudoData![selectedValues![3]!].$2))
+  //       // .toList();
+  //   // } else {
+  //     // return [];
+  //   // }
+  // }
+
   void _refreshNivelEnsinoTemaConteudo(String curriculo) async {
-    try {
-      final response = await fetchSearchData(curriculo);
-      setState(() {
-        nivelEnsinolData =
-            response.allNivelEnsino.map((x) => (x.id, x.nome)).toList();
-        temaConteudoData = response.allTemaConteudo
-            .map((x) => (x.id, x.getNomeWithCurriculo()))
-            .toList();
+    final response = await fetchSearchData(curriculo);
+    setState(() {
+      nivelEnsinolData =
+          response.allNivelEnsino.map((x) => (x.id, x.nome)).toList();
+      temaConteudoData = response.allTemaConteudo
+          .map((x) => (x.id, x.getNomeWithCurriculo()))
+          .toList();
 
-        descritorData = removingRepeatedDescritors(response.allDescricoes
-            .map((x) => (x.id, x.formattedDescricao))
-            .toList());
+      descritorTemporaryData = response.allDescricoes;
 
-        nivelEnsinoRadioTextField = RadioTextField(
-          array: nivelEnsinolData ?? [],
-          radioTextFieldID: 1,
-          titleStyle: textTheme.bodySmall!,
-          tileHeight: 40,
-          shoulAddOptionAll: false,
-          initialValue: selectedValues,
-          refreshData: curriculo == "BNCC"
-              ? _refreshAnoEnsino
-              : _refreshDescritorHabilidade,
-        );
-        tileTitle[1] = "Selecione o nível de ensino";
-        tileTitle[2] = curriculo == "BNCC" ? "Selecione o ano de ensino" : "";
-        tileTitle[3] = 'Selecione o Tema/Conteúdo';
+      nivelEnsinoRadioTextField = RadioTextField(
+        array: nivelEnsinolData ?? [],
+        radioTextFieldID: 1,
+        titleStyle: textTheme.bodySmall!,
+        tileHeight: 40,
+        shoulAddOptionAll: false,
+        initialValue: selectedValues,
+        shouldToggle: true,
+        refreshData: curriculo == "BNCC"
+            ? _refreshAnoEnsino
+            : _refreshDescritorHabilidade,
+      );
+      tileTitle[1] = "Selecione o nível de ensino";
+      tileTitle[2] = curriculo == "BNCC" ? "Selecione o ano de ensino" : "";
+      tileTitle[3] = 'Selecione o Tema/Conteúdo';
 
-        temaConteudoRadioTextField = RadioTextField(
-          array: temaConteudoData ?? [],
-          radioTextFieldID: 3,
-          titleStyle: textTheme.bodySmall!,
-          tileHeight: 45,
-          initialValue: selectedValues,
-          shoulAddOptionAll: false,
-          refreshData: _refreshDescritorHabilidade,
-        );
+      temaConteudoRadioTextField = RadioTextField(
+        array: temaConteudoData ?? [],
+        radioTextFieldID: 3,
+        titleStyle: textTheme.bodySmall!,
+        tileHeight: 45,
+        initialValue: selectedValues,
+        shoulAddOptionAll: false,
+        refreshData: _refreshDescritorHabilidade,
+        shouldToggle: true,
+      );
 
-        descritorRadioTextField = RadioTextField(
-          array: descritorData ?? [],
-          radioTextFieldID: 4,
-          tileHeight: 35,
-          initialValue: selectedValues,
-          shoulAddOptionAll: false,
-          titleStyle: textTheme.bodySmall!,
-        );
+      descritorRadioTextField = RadioTextField(
+        array: descritorData ?? [],
+        radioTextFieldID: 4,
+        tileHeight: 35,
+        initialValue: selectedValues,
+        shoulAddOptionAll: false,
+        titleStyle: textTheme.bodySmall!,
+        shouldToggle: true,
+      );
 
-        RadioTextFieldsList[1] = nivelEnsinoRadioTextField;
-        RadioTextFieldsList[2] =
-            curriculo == "PCN" ? null : RadioTextFieldsList[2];
-        RadioTextFieldsList[3] = temaConteudoRadioTextField;
+      RadioTextFieldsList[1] = nivelEnsinoRadioTextField;
+      RadioTextFieldsList[2] =
+          curriculo == "PCN" ? null : RadioTextFieldsList[2];
+      RadioTextFieldsList[3] = temaConteudoRadioTextField;
 
-        willExpand = false;
-        _removeSelectionFrom(1);
-      });
-    } finally {
-      reOpenModal();
-    }
+      willExpand = false;
+      _removeSelectionFrom(1);
+    });
+    reOpenModal();
   }
 
   void _refreshAnoEnsino() async {
@@ -222,6 +243,7 @@ class OAFilterState extends State<OAFilters> {
           initialValue: selectedValues,
           titleStyle: textTheme.bodySmall!,
           shoulAddOptionAll: false,
+          shouldToggle: true,
           refreshData: _refreshDescritorHabilidade,
         );
 
@@ -245,6 +267,30 @@ class OAFilterState extends State<OAFilters> {
     if (selectedValues![0]! == 1) {
       setState(() {
         anoEnsinoData = [];
+
+        // filterDescritoresPerNivelEnsinoAndTemaConteudo();
+
+        var newDescritor = descritorTemporaryData!
+            .where((x) =>
+                x.nivelEnsino == nivelEnsinolData![selectedValues![1]!].$2 &&
+                x.temaConteudo == temaConteudoData![selectedValues![3]!].$2)
+            .toList();
+
+        descritorData =
+            newDescritor.map((x) => (x.id, x.formattedDescricao)).toList();
+
+        debugPrint("descritores filtrados => ${newDescritor}");
+        debugPrint("descritores filtrados 2=> ${descritorData}");
+
+        descritorRadioTextField = RadioTextField(
+            array: descritorData ?? [],
+            radioTextFieldID: 4,
+            tileHeight: 35,
+            initialValue: selectedValues,
+            shoulAddOptionAll: false,
+            titleStyle: textTheme.bodySmall!,
+            shouldToggle: true);
+
         RadioTextFieldsList[4] = descritorRadioTextField;
         willExpand = true;
       });
@@ -252,27 +298,26 @@ class OAFilterState extends State<OAFilters> {
     } else if (selectedValues![0]! == 2 &&
         selectedValues![2]! > 0 &&
         selectedValues![3]! > 0) {
-      try {
-        final response = await fetchHabilidadeByAnoEnsinoTemaConteudo(
-            selectedValues![2]!, selectedValues![3]!);
+      final response = await fetchHabilidadeByAnoEnsinoTemaConteudo(
+          selectedValues![2]!, selectedValues![3]!);
 
-        setState(() {
-          habilidadeData =
-              response.map((x) => (x.id, x.formattedHabilidade)).toList();
-          habilidadeRadioTextField = RadioTextField(
-            array: habilidadeData ?? [],
-            radioTextFieldID: 5,
-            initialValue: selectedValues,
-            titleStyle: textTheme.bodySmall!,
-            shoulAddOptionAll: false,
-            refreshData: null,
-          );
+      setState(() {
+        habilidadeData =
+            response.map((x) => (x.id, x.formattedHabilidade)).toList();
+        habilidadeRadioTextField = RadioTextField(
+          array: habilidadeData ?? [],
+          radioTextFieldID: 5,
+          initialValue: selectedValues,
+          titleStyle: textTheme.bodySmall!,
+          shoulAddOptionAll: false,
+          refreshData: null,
+          shouldToggle: true,
+        );
 
-          RadioTextFieldsList[5] = habilidadeRadioTextField;
-          willExpand = true;
-        });
-        reOpenModal();
-      } finally {}
+        RadioTextFieldsList[5] = habilidadeRadioTextField;
+        willExpand = true;
+      });
+      reOpenModal();
     }
   }
 
@@ -282,6 +327,9 @@ class OAFilterState extends State<OAFilters> {
           selectedValues![1] != null && selectedValues![1]! > 0
               ? '${selectedValues![1]}'
               : '';
+      selectedAnoEnsino = selectedValues![2] != null && selectedValues![2]! > 0
+          ? '${selectedValues![2]}'
+          : '';
       selectedTemaConteudo =
           selectedValues![3] != null && selectedValues![3]! > 0
               ? '${selectedValues![3]}'
@@ -439,13 +487,15 @@ class OAFilterState extends State<OAFilters> {
   String _buildQueryString() {
     final params = [];
     if (selectedNivelEnsino.isNotEmpty)
-      params.add('nivelEnsino=$selectedNivelEnsino');
+      params.add('nivelEnsinoId=$selectedNivelEnsino');
+    if (selectedAnoEnsino.isNotEmpty)
+      params.add('anoEnsinoId=$selectedAnoEnsino');
     if (selectedTemaConteudo.isNotEmpty)
-      params.add('temaConteudo=$selectedTemaConteudo');
+      params.add('temaConteudoId=$selectedTemaConteudo');
     if (selectedDescritor.isNotEmpty)
-      params.add('descritor=$selectedDescritor');
+      params.add('descritorId=$selectedDescritor');
     if (selectedHabilidade.isNotEmpty)
-      params.add('habilidade=$selectedHabilidade');
+      params.add('habilidadeId=$selectedHabilidade');
     if (searchTerm.isNotEmpty) {
       params.add('nome=$searchTerm');
     } else {
@@ -520,8 +570,13 @@ class OAFilterState extends State<OAFilters> {
               _removeSelectionFrom(0);
             }),
             mainButton(context, 'Buscar', null, () {
-              mainSearch();
-              Navigator.of(context).pop();
+              final counterOfSelectedValues = selectedValues!.values
+                  .where((value) => value != null && value > 0);
+
+              if (counterOfSelectedValues.length > 1) {
+                mainSearch();
+                Navigator.of(context).pop();
+              }
             }),
           ],
         );
