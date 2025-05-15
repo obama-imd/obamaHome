@@ -37,6 +37,20 @@ class _SignInPageViewState extends State<SignInPageView> {
     });
   }
 
+  void signUpUser() {
+    newUser(nameController.text, emailController.text, passwordController.text)
+        .then((val) {
+      if (val) {
+        Navigator.pushNamed(context, "/validar-cadastro");
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content: Text("Erro ao cadastrar usuário. Verifique os dados.")),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TemplateColumn(children: [
@@ -49,7 +63,8 @@ class _SignInPageViewState extends State<SignInPageView> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
-                  child: Image.asset("assets/images/icons/icone.png", width: 150),
+                  child:
+                      Image.asset("assets/images/icons/icone.png", width: 150),
                 ),
                 formFieldNoHide(context, "Nome", nameController),
                 SizedBox(height: 10),
@@ -59,7 +74,9 @@ class _SignInPageViewState extends State<SignInPageView> {
                 //   formFieldHidden(context, passwordField, showPassword,
                 //       displayPassword, passwordController),
                 // },
-                SizedBox(height: 10),
+                SizedBox(height: 20),
+                Text("A senha precisa ter pelo menos uma letra maiúscula, um número e um caractere especial."),
+                SizedBox(height: 20),
                 formFieldHidden(context, passwordFields[0], showPassword,
                     displayPassword, passwordController),
                 SizedBox(height: 10),
@@ -71,15 +88,9 @@ class _SignInPageViewState extends State<SignInPageView> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       mainButton(context, "Cadastrar", null, () {
-                        setState(() {
-                          newUser(nameController.text, emailController.text,
-                                  passwordController.text)
-                              .whenComplete(() {
-                            Navigator.pushNamed(context, "/validar-cadastro");
-                          });
-                        });
+                        signUpUser();
                       }),
-                      GoogleSigninButton(),
+                      // GoogleSigninButton(),
                     ],
                   ),
                 ),
