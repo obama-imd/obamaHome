@@ -51,7 +51,6 @@ class _PageViewSecondState extends ConsumerState<PageViewSecond> {
   }
 
   Future<List<String>?> getObjects() async {
-    //Igor
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? items = prefs.getStringList('objects');
     setState(() {
