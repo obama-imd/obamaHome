@@ -114,7 +114,7 @@ Future<bool> newUser(String name, String email, String password) async {
       'Content-Type': 'application/json',
     };
     final response = await http.post(
-      Uri.parse(apiUrl), // Substitua pelo seu endpoint
+      Uri.parse(apiUrl),
       headers: headers,
       body: jsonEncode(body),
     );
@@ -122,9 +122,8 @@ Future<bool> newUser(String name, String email, String password) async {
     final responseData = jsonDecode(response.body);
 
     if (response.statusCode == 201) {
-      // Cadastro bem-sucedido
-      resultado = await fetchLogin(email, password);
-      // Navegar para a próxima tela ou salvar dados
+      // resultado = await fetchLogin(email, password);
+      resultado = true;
     } else {
       print(responseData['message'] ?? 'Erro desconhecido');
       resultado = false;

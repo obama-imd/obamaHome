@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:obamahome/auth/controller.dart';
+import 'package:bcrypt/bcrypt.dart';
 
 import '../components/mainButton.dart';
 import '../templates/template_basic_col.dart';
@@ -38,17 +39,32 @@ class _SignInPageViewState extends State<SignInPageView> {
   }
 
   void signUpUser() {
-    newUser(nameController.text, emailController.text, passwordController.text)
-        .then((val) {
-      if (val) {
-        Navigator.pushNamed(context, "/validar-cadastro");
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-              content: Text("Erro ao cadastrar usuário. Verifique os dados.")),
-        );
-      }
-    });
+    String hashedPassword =
+        BCrypt.hashpw(passwordController.text, BCrypt.gensalt());
+    bool senhaCorreta =
+        BCrypt.checkpw(passwordConfirmController.text, hashedPassword);
+
+    if (senhaCorreta) {
+      newUser(nameController.text, emailController.text,
+              passwordController.text)
+          .then((val) {
+        if (val) {
+          Navigator.pushNamed(context, "/validar-cadastro");
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+                content:
+                    Text("Erro ao cadastrar usuário. Verifique os dados.")),
+          );
+        }
+      });
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            content: Text(
+                "Erro ao cadastrar usuário. As senhas digitadas são diferentes.")),
+      );
+    }
   }
 
   @override
@@ -75,7 +91,8 @@ class _SignInPageViewState extends State<SignInPageView> {
                 //       displayPassword, passwordController),
                 // },
                 SizedBox(height: 20),
-                Text("A senha precisa ter pelo menos uma letra maiúscula, um número e um caractere especial."),
+                Text(
+                    "A senha precisa ter pelo menos uma letra maiúscula, um número e um caractere especial."),
                 SizedBox(height: 20),
                 formFieldHidden(context, passwordFields[0], showPassword,
                     displayPassword, passwordController),

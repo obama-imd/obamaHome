@@ -324,13 +324,13 @@ class OAFilterState extends State<OAFilters> {
                 style: TextStyle(color: background, fontSize: 12),
               ),
               backgroundColor: CoresPersonalizadas.azulObama,
-              deleteIcon: Icon(Icons.close, color: background),
-              onDeleted: () {
-                setState(() {
-                  selectedValues![index] = 0;
-                });
-                mainSearch();
-              },
+              // deleteIcon: Icon(Icons.close, color: background),
+              // onDeleted: () {
+              //   setState(() {
+              //     selectedValues![index] = 0;
+              //   });
+              //   mainSearch();
+              // },
             ),
           );
         }
@@ -344,14 +344,14 @@ class OAFilterState extends State<OAFilters> {
           label: Text('Busca: $searchTerm',
               style: TextStyle(color: background, fontSize: 12)),
           backgroundColor: CoresPersonalizadas.azulObama,
-          deleteIcon: Icon(Icons.close, color: background),
-          onDeleted: () {
-            setState(() {
-              searchTextController.clear();
-              searchTerm = '';
-            });
-            mainSearch();
-          },
+          // deleteIcon: Icon(Icons.close, color: background),
+          // onDeleted: () {
+          //   setState(() {
+          //     searchTextController.clear();
+          //     searchTerm = '';
+          //   });
+          //   mainSearch();
+          // },
         ),
       );
     }
