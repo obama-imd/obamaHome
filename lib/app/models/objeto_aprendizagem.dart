@@ -205,7 +205,8 @@ class Descritor {
     return jsonList.map((item) => Descritor.fromMap(item)).toList();
   }
 
-  String get formattedDescricao => '${nivelEnsino} - $codigo: $descricao';
+  String get formattedDescricao =>
+      '${nivelEnsino} - $codigo: $descricao - $temaConteudo';
   (int, String) get asTuple => (id, formattedDescricao);
 
   (int, String) tointString() => asTuple;
