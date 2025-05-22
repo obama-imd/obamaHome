@@ -205,7 +205,6 @@ class _OurProductItemState extends State<OurProductItem> {
   }
 
   Future<void> _dialogBuilder(ObjetoAprendizagem? oa) async {
-    print(oa);
     return oa == null
         ? showDialog<void>(
             context: context,
@@ -248,22 +247,24 @@ class _OurProductItemState extends State<OurProductItem> {
                       child: Text("Descritores PCN",
                           style: textTheme.headlineSmall),
                     ),
-                    kIsWeb
-                        ? FittedBox(
-                            fit: BoxFit.fitHeight,
-                            child: Text(oa.getDescritores()))
-                        : Text(oa.getDescritores()),
+                    // kIsWeb
+                    //     ? FittedBox(
+                    //         fit: BoxFit.fitHeight,
+                    //         child: Text(oa.getDescritores()))
+                    //     : 
+                        Text(oa.getDescritores()),
                     Padding(
                         padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
                         child: Text(
                           "Habilidades BNCC",
                           style: textTheme.headlineSmall,
                         )),
-                    kIsWeb
-                        ? FittedBox(
-                            fit: BoxFit.fitHeight,
-                            child: Text(oa.getHabilidades()))
-                        : Text(oa.getHabilidades())
+                    // kIsWeb
+                    //     ? FittedBox(
+                    //         fit: BoxFit.fitHeight,
+                    //         child: Text(oa.getHabilidades()))
+                    //     : 
+                        Text(oa.getHabilidades())
                   ],
                 ),
                 actions: <Widget>[
