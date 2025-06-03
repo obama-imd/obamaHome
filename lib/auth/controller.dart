@@ -122,8 +122,9 @@ Future<bool> newUser(String name, String email, String password) async {
     final responseData = jsonDecode(response.body);
 
     if (response.statusCode == 201) {
-      // resultado = await fetchLogin(email, password);
-      resultado = true;
+      // Cadastro bem-sucedido
+      resultado = await fetchLogin(email, password);
+      // Navegar para a próxima tela ou salvar dados
     } else {
       print(responseData['message'] ?? 'Erro desconhecido');
       resultado = false;
