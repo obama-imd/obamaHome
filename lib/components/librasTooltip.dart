@@ -44,15 +44,23 @@ class _LibrasTooltipState extends ConsumerState<LibrasTooltip> {
 
     if (gifPath == null) return;
 
-    final renderBox = _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
+    final renderBox =
+        _tooltipKey.currentContext?.findRenderObject() as RenderBox?;
     if (renderBox == null) return;
 
     final offset = renderBox.localToGlobal(Offset.zero);
     final size = renderBox.size;
 
+    double hasSubItems() {
+      if (widget.isHoverSubItems != null && widget.isHoverSubItems!.contains(true)) {
+        return size.width;
+      }
+      return 0;
+    }
+
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        left: offset.dx + size.width + 8,
+        left: offset.dx + hasSubItems() + 8,
         top: offset.dy + size.height,
         child: Material(
           color: Colors.transparent,
@@ -62,13 +70,12 @@ class _LibrasTooltipState extends ConsumerState<LibrasTooltip> {
               color: background,
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Text("")
-            // Image.asset(
-            //   gifPath,
-            //   width: 200,
-            //   height: 350,
-            //   fit: BoxFit.cover,
-            // ),
+            child: Image.asset(
+              gifPath,
+              width: 300,
+              height: 350,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
       ),
@@ -89,15 +96,16 @@ class _LibrasTooltipState extends ConsumerState<LibrasTooltip> {
 
     if (widget.isHover) {
       selectedGif = widget.imageGif.first;
-      if (widget.isHoverSubItems != null && widget.isHoverSubItems!.contains(true)) {
+      if (widget.isHoverSubItems != null &&
+          widget.isHoverSubItems!.contains(true)) {
         final hoveredIndex = widget.isHoverSubItems!.indexWhere((e) => e);
-        if (hoveredIndex >= 0 && hoveredIndex < (widget.subItemsImageGif?.length ?? 0)) {
+        if (hoveredIndex >= 0 &&
+            hoveredIndex < (widget.subItemsImageGif?.length ?? 0)) {
           selectedGif = widget.subItemsImageGif?[hoveredIndex];
         }
       }
     }
 
-    // Atualiza o overlay quando o GIF muda
     if (selectedGif != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         _createOverlay(context, selectedGif);

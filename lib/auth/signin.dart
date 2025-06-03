@@ -91,7 +91,8 @@ class _SignInPageViewState extends State<SignInPageView> {
                 //       displayPassword, passwordController),
                 // },
                 SizedBox(height: 20),
-                Text("A senha precisa ter pelo menos uma letra maiúscula, um número e um caractere especial."),
+                Text(
+                    "A senha precisa ter pelo menos uma letra maiúscula, um número e um caractere especial."),
                 SizedBox(height: 20),
                 formFieldHidden(context, passwordFields[0], showPassword,
                     displayPassword, passwordController),
@@ -100,11 +101,10 @@ class _SignInPageViewState extends State<SignInPageView> {
                     displayConfirmPassword, passwordConfirmController),
                 Padding(
                   padding: const EdgeInsets.only(top: 35),
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      // GoogleSigninButton(),
-                    ],
-                  ),
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  // children: [
+                  //   // GoogleSigninButton(),
+                  // ],
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 35),
