@@ -90,10 +90,7 @@ class _SignInPageViewState extends State<SignInPageView> {
                 //   formFieldHidden(context, passwordField, showPassword,
                 //       displayPassword, passwordController),
                 // },
-                SizedBox(height: 20),
-                Text(
-                    "A senha precisa ter pelo menos uma letra maiúscula, um número e um caractere especial."),
-                SizedBox(height: 20),
+                SizedBox(height: 10),
                 formFieldHidden(context, passwordFields[0], showPassword,
                     displayPassword, passwordController),
                 SizedBox(height: 10),
@@ -101,10 +98,21 @@ class _SignInPageViewState extends State<SignInPageView> {
                     displayConfirmPassword, passwordConfirmController),
                 Padding(
                   padding: const EdgeInsets.only(top: 35),
-                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  // children: [
-                  //   // GoogleSigninButton(),
-                  // ],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      mainButton(context, "Cadastrar", null, () {
+                        setState(() {
+                          newUser(nameController.text, emailController.text,
+                                  passwordController.text)
+                              .whenComplete(() {
+                            Navigator.pushNamed(context, "/validar-cadastro");
+                          });
+                        });
+                      }),
+                      GoogleSigninButton(),
+                    ],
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: 35),
