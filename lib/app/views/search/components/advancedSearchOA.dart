@@ -279,9 +279,6 @@ class OAFilterState extends State<OAFilters> {
         descritorData =
             newDescritor.map((x) => (x.id, x.formattedDescricao)).toList();
 
-        debugPrint("descritores filtrados => ${newDescritor}");
-        debugPrint("descritores filtrados 2=> ${descritorData}");
-
         descritorRadioTextField = RadioTextField(
             array: descritorData ?? [],
             radioTextFieldID: 4,
@@ -403,7 +400,6 @@ class OAFilterState extends State<OAFilters> {
         ),
       );
     }
-
     return chips;
   }
 
