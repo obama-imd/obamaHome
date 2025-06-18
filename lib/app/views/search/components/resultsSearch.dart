@@ -6,7 +6,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 import '../../../../utils/app_theme.dart';
 import '../../../controllers/search_controller.dart';
 import '../../../models/pagination_oa_model.dart';
-import '../../home/components/our_product_item.dart';
+import 'our_product_item.dart';
 
 double calcRowNumbers(double number, double factor) {
   double newValue = number / factor;
@@ -106,8 +106,11 @@ class _SearchResultsState extends State<DisplaySearchResults> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text("Busca obteve ${pagination.totalElements} resultados",
-                        style: textTheme.labelLarge),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 20),
+                      child: Text("Busca obteve ${pagination.totalElements} resultados",
+                          style: textTheme.labelLarge),
+                    ),
                   ],
                 ),
                 Container(

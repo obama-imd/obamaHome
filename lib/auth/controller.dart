@@ -85,11 +85,27 @@ Future<void> validateUser(String token) async {
 
 Future<bool> newUser(String name, String email, String password) async {
   var apiUrl = '${API_URL}usuario/cadastrar';
-  var resultado = false;
+  bool resultado = false;
+
+  bool isPasswordValid(String password) {
+    final hasUppercase = RegExp(r'[A-Z]');
+    final hasDigit = RegExp(r'[0-9]');
+    final hasSpecialChar = RegExp(r'[!@#\$&*~._-]'); // ajuste conforme desejado
+
+    return hasUppercase.hasMatch(password) &&
+        hasDigit.hasMatch(password) &&
+        hasSpecialChar.hasMatch(password);
+  }
+
+  if (!isPasswordValid(password)) {
+    print(
+        'Senha inválida: deve conter ao menos uma letra maiúscula, um número e um caractere especial.');
+    return false;
+  }
   try {
     final Map<String, dynamic> body = {
       "nome": name.split(' ').first,
-      "sobrenome": name,
+      "sobrenome": name.split(' ').last,
       "email": email,
       "senha": password,
     };
@@ -98,17 +114,16 @@ Future<bool> newUser(String name, String email, String password) async {
       'Content-Type': 'application/json',
     };
     final response = await http.post(
-      Uri.parse(apiUrl), // Substitua pelo seu endpoint
+      Uri.parse(apiUrl),
       headers: headers,
       body: jsonEncode(body),
     );
 
     final responseData = jsonDecode(response.body);
-    resultado = await fetchLogin(email, password);
 
     if (response.statusCode == 201) {
       // Cadastro bem-sucedido
-      resultado = true;
+      resultado = await fetchLogin(email, password);
       // Navegar para a próxima tela ou salvar dados
     } else {
       print(responseData['message'] ?? 'Erro desconhecido');

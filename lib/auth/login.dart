@@ -34,6 +34,20 @@ class _LoginPageViewState extends State<LoginPageView> {
     });
   }
 
+  void userLogin() {
+    fetchLogin(emailController.text, passwordController.text).then((val) {
+      if (val) {
+        Navigator.pushNamed(context, "/");
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+              content:
+                  Text("Erro ao tentar efetuar login. Verifique os dados")),
+        );
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TemplateColumn(children: [
@@ -46,7 +60,8 @@ class _LoginPageViewState extends State<LoginPageView> {
               child: Column(children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 30, bottom: 30),
-                  child: Image.asset("assets/images/icons/icone.png", width: 150),
+                  child:
+                      Image.asset("assets/images/icons/icone.png", width: 150),
                 ),
                 formFieldNoHide(context, "E-mail", emailController),
                 SizedBox(height: 10),
@@ -60,17 +75,9 @@ class _LoginPageViewState extends State<LoginPageView> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     mainButton(context, "Entrar", null, () {
-                      setState(() {
-                        fetchLogin(
-                                emailController.text, passwordController.text)
-                            .then((val) {
-                          Navigator.pushNamed(context, "/");
-                        }).onError((e, trace) {
-                          Navigator.pushNamed(context, "/login");
-                        });
-                      });
+                      userLogin();
                     }),
-                    GoogleSigninButton(),
+                    // GoogleSigninButton(),
                   ],
                 ),
                 Padding(
