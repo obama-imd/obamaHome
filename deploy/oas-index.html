@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inovatica | Objetos de Aprendizagem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        :root {
+            --primary: #007AFF;
+            --bg: #F5F7FA;
+            --card-bg: #FFFFFF;
+            --text: #1D1D1F;
+            --text-sub: #86868B;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            max-width: 1200px;
+            margin: 0 auto 40px;
+            text-align: center;
+        }
+
+        h1 { font-weight: 600; font-size: 2rem; margin-bottom: 8px; }
+        .subtitle { color: var(--text-sub); }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        /* Grid de Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            border: 1px solid #E5E5E7;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+            border-color: var(--primary);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .icon-box {
+            background: #EBF5FF;
+            color: var(--primary);
+            padding: 10px;
+            border-radius: 12px;
+            display: flex;
+        }
+
+        .folder-name {
+            font-weight: 600;
+            font-size: 1.1rem;
+            word-break: break-all;
+            line-height: 1.3;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            border-top: 1px solid #F2F2F7;
+            padding-top: 16px;
+        }
+
+        .btn-open {
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        @media (max-width: 600px) {
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Inovatica</h1>
+    <p class="subtitle">Repositório de Objetos de Aprendizagem (OAS)</p>
+</header>
+
+<div style="max-width: 1200px; margin: 0 auto;">
+    <a href="/inovatica/" class="back-link">
+        <i data-lucide="arrow-left"></i> Voltar ao Diretório Pai
+    </a>
+
+    <div class="grid">
+        <a href="JogoVelhaMatematicoLG/" class="card">
+            <div class="card-header">
+                <div class="icon-box"><i data-lucide="gamepad-2"></i></div>
+                <div class="folder-name">Jogo da Velha Matemático</div>
+            </div>
+            <div class="card-footer">
+                <span>Modificado: 09/03/2026</span>
+                <span class="btn-open">Abrir</span>
+            </div>
+        </a>
+
+        <a href="animaisMataAtlanticaM1/" class="card">
+            <div class="card-header">
+                <div class="icon-box"><i data-lucide="leaf"></i></div>
+                <div class="folder-name">Animais Mata Atlântica M1</div>
+            </div>
+            <div class="card-footer">
+                <span>Modificado: 09/09/2025</span>
+                <span class="btn-open">Abrir</span>
+            </div>
+        </a>
+
+        <a href="aprendendoFracoesPizzaM3/" class="card">
+            <div class="card-header">
+                <div class="icon-box"><i data-lucide="pie-chart"></i></div>
+                <div class="folder-name">Aprendendo Frações (Pizza)</div>
+            </div>
+            <div class="card-footer">
+                <span>Modificado: 09/09/2025</span>
+                <span class="btn-open">Abrir</span>
+            </div>
+        </a>
+
+        <a href="cavernaDoDragoN/" class="card">
+            <div class="card-header">
+                <div class="icon-box"><i data-lucide="swords"></i></div>
+                <div class="folder-name">Caverna do Dragão N</div>
+            </div>
+            <div class="card-footer">
+                <span>Modificado: 17/03/2026</span>
+                <span class="btn-open">Abrir</span>
+            </div>
+        </a>
+
+        <a href="roletaTabuadaCN/" class="card">
+            <div class="card-header">
+                <div class="icon-box"><i data-lucide="refresh-cw"></i></div>
+                <div class="folder-name">Roleta da Tabuada</div>
+            </div>
+            <div class="card-footer">
+                <span>Modificado: 13/03/2026</span>
+                <span class="btn-open">Abrir</span>
+            </div>
+        </a>
+    </div>
+</div>
+
+<script>
+    // Inicializa os ícones do Lucide
+    lucide.createIcons();
+</script>
+
+</body>
+</html>
