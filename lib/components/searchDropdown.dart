@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../utils/app_theme.dart';
 
 class DropdownField extends StatefulWidget {
@@ -66,6 +67,7 @@ class RadioTextField extends StatefulWidget {
       required this.array,
       required this.radioTextFieldID,
       required this.titleStyle,
+      required this.shouldToggle,
       this.tileHeight,
       this.initialValue,
       this.shoulAddOptionAll = true,
@@ -77,6 +79,7 @@ class RadioTextField extends StatefulWidget {
   final TextStyle titleStyle;
   final Map<int, int?>? initialValue;
   final double? tileHeight;
+  bool shouldToggle;
   bool shoulAddOptionAll;
   Function()? refreshData;
   Function(String)? refreshData2;
@@ -105,6 +108,7 @@ class _RadioTextFieldState extends State<RadioTextField> {
                   ),
                   leading: Radio<int>(
                     value: e.$1,
+                    toggleable: widget.shouldToggle,
                     splashRadius: 20,
                     groupValue: widget.initialValue![widget.radioTextFieldID],
                     onChanged: (int? value) {
