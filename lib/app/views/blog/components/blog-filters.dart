@@ -42,7 +42,7 @@ Widget blogFilters(
                 contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                 filled: true,
                 fillColor: const Color.fromARGB(255, 218, 216, 216),
-                suffixIcon: const Icon(Icons.search)))),
+                suffixIcon: const FaIcon(FontAwesomeIcons.magnifyingGlass)))),
     Container(
         alignment: Alignment.centerLeft,
         margin: const EdgeInsets.only(bottom: 20),
@@ -84,7 +84,7 @@ Widget blogFilters(
                           height: 20,
                           margin: const EdgeInsets.only(top: 10),
                           child: Row(children: [
-                            const Icon(FontAwesomeIcons.calendarDays,
+                            const FaIcon(FontAwesomeIcons.calendarDays,
                                 color: onPrimary, size: 15),
                             Padding(
                               padding:
@@ -127,7 +127,7 @@ Widget blogFilters(
                     alignment: Alignment.centerLeft,
                     padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Row(children: [
-                      Icon(Icons.arrow_right,
+                      FaIcon(FontAwesomeIcons.arrowRight,
                           color: isHover ? background : onPrimary),
                       Text(title,
                           style: TextStyle(

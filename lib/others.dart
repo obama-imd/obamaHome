@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'utils/app_theme.dart';
 
@@ -41,7 +42,7 @@ class ItemProduto extends StatelessWidget {
 class Grid1 extends StatelessWidget {
   String titulo;
   String descricao;
-  IconData icone;
+  FaIconData icone;
 
   Grid1(this.titulo, this.descricao, this.icone, {super.key});
 
@@ -57,7 +58,7 @@ class Grid1 extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(100)),
-                child: Icon(icone,
+                child: FaIcon(icone,
                     size: 39.0, color: background)),
           ),
           Expanded(

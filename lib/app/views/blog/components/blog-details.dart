@@ -154,11 +154,11 @@ Widget blogPageView(context, swidth, _pageController, datas) {
               margin: const EdgeInsets.only(bottom: 20),
               child: Text(item.title, style: textTheme.titleSmall)),
           Row(children: [
-            const Icon(Icons.person, color: Colors.blue, size: 16),
+            const FaIcon(FontAwesomeIcons.person, color: Colors.blue, size: 16),
             Container(width: 2),
             Text('Marketing', style: textTheme.labelSmall),
             Container(width: 13),
-            const Icon(FontAwesomeIcons.calendarDays,
+            const FaIcon(FontAwesomeIcons.calendarDays,
                 color: Colors.blue, size: 16),
             Container(width: 3),
             Text(item.publishedDate, style: textTheme.labelSmall),
@@ -185,13 +185,13 @@ Widget blogPageView(context, swidth, _pageController, datas) {
                                 crossAxisCount: 4),
                         itemBuilder: (BuildContext context, int mediaId) {
                           return InkWell(
-                              overlayColor: const MaterialStatePropertyAll(
+                              overlayColor: const WidgetStatePropertyAll(
                                   Colors.transparent),
                               onTap: () {},
                               child: SizedBox(
                                 width: 15,
                                 height: 15,
-                                child: Icon(shareMedia[mediaId],
+                                child: FaIcon(shareMedia[mediaId],
                                     size: 15, color: onPrimary),
                               ));
                         }),

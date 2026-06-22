@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../utils/app_padding.dart';
 import '../utils/app_theme.dart';
@@ -141,11 +142,11 @@ class Carousel extends StatelessWidget {
                                   width: swidth * 0.9 + 40,
                                   padding: EdgeInsets.symmetric(horizontal: 30),
                                   child: Row(children: [
-                                    const SizedBox(
+                                     SizedBox(
                                         width: 100,
                                         height: 100,
-                                        child: Icon(
-                                          Icons.phone,
+                                        child: FaIcon(
+                                          FontAwesomeIcons.phone,
                                           size: 70,
                                           color: background,
                                         )),
@@ -167,13 +168,13 @@ class Carousel extends StatelessWidget {
                                     Spacer(),
                                     TextButton(
                                         style: ButtonStyle(
-                                          fixedSize: MaterialStatePropertyAll(
+                                          fixedSize: WidgetStatePropertyAll(
                                               Size(150, 50)),
                                           backgroundColor:
-                                              MaterialStatePropertyAll(
+                                              WidgetStatePropertyAll(
                                                   onPrimary),
                                           overlayColor:
-                                              MaterialStatePropertyAll(
+                                              WidgetStatePropertyAll(
                                                   onPrimary),
                                         ),
                                         onPressed: () {},
@@ -298,8 +299,8 @@ class Carousel extends StatelessWidget {
                           const SizedBox(
                               width: 50,
                               height: 100,
-                              child: Icon(
-                                Icons.phone,
+                              child: FaIcon(
+                                FontAwesomeIcons.phone,
                                 size: 40,
                                 color: background,
                               )),
@@ -323,11 +324,11 @@ class Carousel extends StatelessWidget {
                         TextButton(
                             style: ButtonStyle(
                               fixedSize:
-                                  MaterialStatePropertyAll(Size(150, 50)),
+                                  WidgetStatePropertyAll(Size(150, 50)),
                               backgroundColor:
-                                  MaterialStatePropertyAll(onPrimary),
+                                  WidgetStatePropertyAll(onPrimary),
                               overlayColor:
-                                  MaterialStatePropertyAll(onPrimary),
+                                  WidgetStatePropertyAll(onPrimary),
                             ),
                             onPressed: () {},
                             child: Text('CONTACT US',

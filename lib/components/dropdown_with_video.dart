@@ -35,7 +35,7 @@ class _DropdownsState extends State<DropdownFormations> {
                 selected: isExpanded,
                 selectedTileColor: CoresPersonalizadas.azulObama,
                 selectedColor: background,
-                leading: Icon(FontAwesomeIcons.chartColumn, size: 20),
+                leading: FaIcon(FontAwesomeIcons.chartColumn, size: 20),
                 title: Text(item.accordionTitle, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               );
             },
@@ -151,7 +151,7 @@ class _DropdownManuaisState extends State<DropdownManuais> {
                 selected: isExpanded,
                 selectedTileColor: CoresPersonalizadas.azulObama,
                 selectedColor: background,
-                leading: Icon(FontAwesomeIcons.chartColumn, size: 20),
+                leading: FaIcon(FontAwesomeIcons.chartColumn, size: 20),
                 title: Text(item.accordionTitle, style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
               );
             },

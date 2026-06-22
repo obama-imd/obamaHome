@@ -12,7 +12,7 @@ import '../../controllers/blog_controller.dart';
 import '../../models/blog_models.dart';
 import 'components/blog-details.dart';
 
-List<IconData> shareMedia = [
+List<FaIconData> shareMedia = [
   FontAwesomeIcons.facebook,
   FontAwesomeIcons.twitter,
   FontAwesomeIcons.googlePlus,
@@ -115,11 +115,11 @@ Widget blogListView(BuildContext context, key, swidth, posts) {
                   margin: const EdgeInsets.only(bottom: 20),
                   child: Text(post[i].title, style: textTheme.titleSmall)),
               Row(children: [
-                const Icon(Icons.person, color: Colors.blue, size: 16),
+                const FaIcon(FontAwesomeIcons.person, color: Colors.blue, size: 16),
                 Container(width: 2),
                 Text('Marketing', style: textTheme.labelSmall),
                 Container(width: 13),
-                const Icon(FontAwesomeIcons.calendarDays,
+                const FaIcon(FontAwesomeIcons.calendarDays,
                     color: Colors.blue, size: 16),
                 Container(width: 3),
                 Text(post[i].publishedDate, style: textTheme.labelSmall),
@@ -140,7 +140,7 @@ Widget blogListView(BuildContext context, key, swidth, posts) {
                                 builder: (context) =>
                                     BlogDetails(initialPageIndex: i)));
                       },
-                      overlayColor: const MaterialStatePropertyAll(onPrimary),
+                      overlayColor: const WidgetStatePropertyAll(onPrimary),
                       child: SizedBox(
                         width: 170,
                         height: 50,
@@ -173,13 +173,13 @@ Widget blogListView(BuildContext context, key, swidth, posts) {
                                     crossAxisCount: shareMedia.length),
                             itemBuilder: (BuildContext context, int mediaId) {
                               return InkWell(
-                                  overlayColor: const MaterialStatePropertyAll(
+                                  overlayColor: const WidgetStatePropertyAll(
                                       Colors.transparent),
                                   onTap: () {},
                                   child: SizedBox(
                                     width: 15,
                                     height: 15,
-                                    child: Icon(shareMedia[mediaId],
+                                    child: FaIcon(shareMedia[mediaId],
                                         size: 15, color: onPrimary),
                                   ));
                             }),

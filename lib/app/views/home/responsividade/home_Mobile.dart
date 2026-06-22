@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/components/simpleRow.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:responsive_grid/responsive_grid.dart';
@@ -101,11 +102,11 @@ class _HomeMobileState extends State<HomeMobile> {
       //                             onPressed: () {},
       //                             style: const ButtonStyle(
       //                               backgroundColor:
-      //                                   MaterialStatePropertyAll(
+      //                                   WidgetStatePropertyAll(
       //                                       CoresPersonalizadas
       //                                           .azulObama),
       //                               overlayColor:
-      //                                   MaterialStatePropertyAll(
+      //                                   WidgetStatePropertyAll(
       //                                       Colors.lightBlue),
       //                             ),
       //                             child: const Text('READ MORE',
@@ -161,7 +162,7 @@ class _HomeMobileState extends State<HomeMobile> {
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           100)),
-                                              child: Icon(grid1Icon[i],
+                                              child: FaIcon(grid1Icon[i],
                                                   size: iconSize2[i],
                                                   color: background)),
                                           Container(
@@ -245,7 +246,7 @@ class _HomeMobileState extends State<HomeMobile> {
                                                   CoresPersonalizadas.azulObama,
                                               borderRadius:
                                                   BorderRadius.circular(100)),
-                                          child: Icon(grid2Icon[i],
+                                          child: FaIcon(grid2Icon[i],
                                               size: iconSize2[i],
                                               color: background)),
                                       Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/components/mainButton.dart';
 
 import '../../../../utils/app_theme.dart';
@@ -74,7 +75,7 @@ class OAFilterState extends State<OAFilters> {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                   filled: true,
                   fillColor: const Color.fromARGB(255, 218, 216, 216),
-                  suffixIcon: const Icon(Icons.search)))),
+                  suffixIcon: FaIcon(FontAwesomeIcons.magnifyingGlass, size: 16)))),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -138,7 +139,7 @@ class OAFilterState extends State<OAFilters> {
                 margin: EdgeInsets.only(bottom: 4),
                 child: DropdownButton<String>(
                     value: descritor.first,
-                    icon: const Icon(Icons.arrow_drop_down),
+                    icon: const FaIcon(FontAwesomeIcons.arrowDown),
                     elevation: 5,
                     style: textTheme.bodySmall,
                     onChanged: (String? value) {

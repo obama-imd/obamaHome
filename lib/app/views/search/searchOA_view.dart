@@ -179,7 +179,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                             return Container(
                                 alignment: Alignment(0, 0),
                                 child: OurProductItem(
-                                    title: post!.nome, image: post!.url));
+                                    title: post!.nome, image: post.url));
                           }).toList());
                     },
                   ),
@@ -199,7 +199,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                           ),
                         ),
                         child: InkWell(
-                          child: Icon(Icons.navigate_before),
+                          child: FaIcon(FontAwesomeIcons.backward),
                           onTap: currentPage! > 0
                               ? () {
                                   _pageController.previousPage(
@@ -266,7 +266,7 @@ class SearchDesktopState extends ConsumerState<SearchPageView> {
                           ),
                         ),
                         child: InkWell(
-                          child: Icon(Icons.navigate_next),
+                          child: FaIcon(FontAwesomeIcons.forward),
                           onTap: currentPage! < totalPages - 1
                               ? () {
                                   _pageController.nextPage(
@@ -322,7 +322,7 @@ void showMessage(context) {
                 height: 60,
                 child: Material(
                   child: InkWell(
-                      child: Icon(FontAwesomeIcons.xmark, size: 18),
+                      child: FaIcon(FontAwesomeIcons.xmark, size: 18),
                       onTap: () => Navigator.pop(context)),
                 )),
             AlertDialog(

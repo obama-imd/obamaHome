@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../utils/app_theme.dart';
 import 'modalSearch.dart';
@@ -9,7 +10,7 @@ menuMobile(context, scaffoldKey, swidth) {
       height: 125,
       child: Row(crossAxisAlignment: CrossAxisAlignment.center, mainAxisAlignment: MainAxisAlignment.center, children: [
         MenuItemButton(
-            child: const Icon(Icons.menu, color: onPrimary),
+            child: FaIcon(FontAwesomeIcons.bars, color: onPrimary),
             onPressed: () => scaffoldKey.currentState?.openDrawer()),
         Container(
             width: 190,

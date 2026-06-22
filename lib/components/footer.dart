@@ -182,7 +182,7 @@ class _FooterState extends State<Footer> {
                                       onPressed: () {
                                         launchUrl(emailLaunchUri);
                                       },
-                                      icon: const Icon(Icons.mail,
+                                      icon: const FaIcon(FontAwesomeIcons.envelope,
                                           color: background, size: 16.0)))
                             ])),
                   )
@@ -276,7 +276,7 @@ class _FooterState extends State<Footer> {
                           onPressed: () {
                             launchUrl(emailLaunchUri);
                           },
-                          icon: const Icon(Icons.mail,
+                          icon: const FaIcon(FontAwesomeIcons.envelope,
                               color: background, size: 16.0))),
                 ],
               ),
@@ -315,7 +315,7 @@ Widget flutterMapArea(BuildContext context) {
             point: LatLng(-5.832006, -35.205471),
             width: 50,
             height: 50,
-            child: const Icon(FontAwesomeIcons.locationDot,
+            child: const FaIcon(FontAwesomeIcons.locationDot,
                 size: 30, color: onPrimary),
           ),
         ],

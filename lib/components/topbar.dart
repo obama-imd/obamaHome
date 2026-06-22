@@ -31,7 +31,7 @@ class TopBar extends StatelessWidget {
                             child: Row(children: [
                           Container(
                               padding: const EdgeInsets.only(right: 10),
-                              child: const Icon(FontAwesomeIcons.house,
+                              child: const FaIcon(FontAwesomeIcons.house,
                                   color: background, size: 13)),
                           Text(
                               'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
@@ -42,7 +42,7 @@ class TopBar extends StatelessWidget {
                             margin: const EdgeInsets.only(left: 20),
                             child: TextButton(
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
+                                backgroundColor: WidgetStateProperty.all(
                                     CoresPersonalizadas.azulObama),
                               ),
                               onPressed: () {
@@ -51,7 +51,7 @@ class TopBar extends StatelessWidget {
                               child: Row(children: [
                                 Container(
                                     padding: const EdgeInsets.only(right: 10),
-                                    child: const Icon(FontAwesomeIcons.envelope,
+                                    child: const FaIcon(FontAwesomeIcons.envelope,
                                         color: background, size: 16)),
                                 Text('obama@imd.ufrn.br',
                                     style: GoogleFonts.raleway(
@@ -148,7 +148,7 @@ class TopBar extends StatelessWidget {
                 Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                   Container(
                       padding: const EdgeInsets.only(right: 10),
-                      child: const Icon(FontAwesomeIcons.house,
+                      child: const FaIcon(FontAwesomeIcons.house,
                           color: background, size: 13)),
                   Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
                       style:
@@ -157,7 +157,7 @@ class TopBar extends StatelessWidget {
                 Container(
                     child: TextButton(
                         style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
+                          backgroundColor: WidgetStateProperty.all(
                               CoresPersonalizadas.azulObama),
                         ),
                         onPressed: () {
@@ -168,7 +168,7 @@ class TopBar extends StatelessWidget {
                           child: Row(mainAxisAlignment: MainAxisAlignment.center, mainAxisSize: MainAxisSize.min, children: [
                             Container(
                                 padding: const EdgeInsets.only(right: 10),
-                                child: const Icon(FontAwesomeIcons.envelope,
+                                child: const FaIcon(FontAwesomeIcons.envelope,
                                     color: background, size: 16)),
                             Text('obama@imd.ufrn.br',
                                 style: GoogleFonts.raleway(

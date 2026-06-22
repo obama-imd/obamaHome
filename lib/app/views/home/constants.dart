@@ -33,10 +33,10 @@ List<String> grid1Title = [
   "Data Recovery",
 ];
 
-List<IconData> grid1Icon = [
+List<FaIconData> grid1Icon = [
   FontAwesomeIcons.wrench,
-  Icons.settings,
-  Icons.settings_backup_restore_rounded,
+  FontAwesomeIcons.gear,
+  FontAwesomeIcons.backward,
   FontAwesomeIcons.heart,
 ];
 
@@ -58,7 +58,7 @@ List<String> grid2Title = [
   "Trilhas",
 ];
 
-List<IconData> grid2Icon = [
+List<FaIconData> grid2Icon = [
   FontAwesomeIcons.faceSmile,
   FontAwesomeIcons.laptop,
   FontAwesomeIcons.desktop,

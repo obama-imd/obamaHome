@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:obamahome/app/models/blog_models.dart';
 import 'package:obamahome/app/models/search_models.dart';
 import 'package:obamahome/app/views/home/responsividade/home_desktop.dart';
@@ -212,7 +213,7 @@ class BlogHomeState extends ConsumerState<BlogHome> {
                                 padding: paddingValues("blogPostDate", context),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.access_time, size: 16),
+                                    FaIcon(FontAwesomeIcons.clock, size: 16),
                                     Text(item.publishedDate),
                                   ],
                                 ),

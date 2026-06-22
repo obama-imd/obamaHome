@@ -80,10 +80,10 @@ List<AccordionItem> accordionContent = [
     "Formações",
   ];
 
-  List<IconData> grid1Icon = [
+  List<FaIconData> grid1Icon = [
     FontAwesomeIcons.wrench,
-    Icons.settings,
-    Icons.settings_backup_restore_rounded,
+    FontAwesomeIcons.gear,
+    FontAwesomeIcons.backward,
     FontAwesomeIcons.heart,
   ];
 

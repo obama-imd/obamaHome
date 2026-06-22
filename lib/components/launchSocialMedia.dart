@@ -6,7 +6,7 @@ List<String> socialMediaLinks = [
   'https://www.instagram.com/obamaimd/',
   'https://www.youtube.com/channel/UCLsGoIRTGyiUrNW5JdVi9wg'
 ];
-List<IconData> socialMediaIcons = [
+List<FaIconData> socialMediaIcons = [
   FontAwesomeIcons.instagram,
   FontAwesomeIcons.youtube
 ];
@@ -36,7 +36,7 @@ class SocialMedia extends StatelessWidget {
                 onPressed: () {
                   _launchURL(socialMediaLinks[i]);
                 },
-                icon: Icon(socialMediaIcons[i],
+                icon: FaIcon(socialMediaIcons[i],
                     color: colorValue, size: 16.0))),
         Container(width: 5),
       }

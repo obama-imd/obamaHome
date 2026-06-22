@@ -3,6 +3,7 @@ import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:obamahome/templates/template_basic_col.dart';
 import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../components/bannerSuperior.dart';
 import '../../../../components/sectionTitle.dart';
@@ -119,7 +120,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             100)),
-                                                child: Icon(grid1Icon[i],
+                                                child: FaIcon(grid1Icon[i],
                                                     size: iconSize[i],
                                                     color: background)),
                                             Container(

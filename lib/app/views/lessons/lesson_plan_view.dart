@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:obamahome/app/controllers/lessons_controller.dart';
 import 'package:obamahome/app/models/lesson_plan_models.dart';
@@ -94,21 +93,21 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
                                   margin: EdgeInsets.all(0.0),
                                   child: TextButton(
                                     style: ButtonStyle(
-                                      padding: MaterialStateProperty.all<
+                                      padding: WidgetStateProperty.all<
                                           EdgeInsetsGeometry>(
                                         EdgeInsets.symmetric(
                                           horizontal: 0.0,
                                         ),
                                       ),
-                                      shape: MaterialStatePropertyAll(
+                                      shape: WidgetStatePropertyAll(
                                         RoundedRectangleBorder(
                                           side: BorderSide.none,
                                         ),
                                       ),
-                                      overlayColor: MaterialStatePropertyAll(
+                                      overlayColor: WidgetStatePropertyAll(
                                         Color(0x00000000),
                                       ),
-                                      backgroundColor: MaterialStatePropertyAll(
+                                      backgroundColor: WidgetStatePropertyAll(
                                         Color(0x00000000),
                                       ),
                                     ),

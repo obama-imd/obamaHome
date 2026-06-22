@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -48,9 +47,9 @@ class _SearchDialogState extends State<SearchDialog> {
           });
         },
         style: ButtonStyle(
-          fixedSize: MaterialStatePropertyAll(Size(36, 40)),
+          fixedSize: WidgetStatePropertyAll(Size(36, 40)),
         ),
-        child: Icon(CupertinoIcons.search,
+        child: FaIcon(FontAwesomeIcons.magnifyingGlass,
             size: 20, color: widget.isHovered ? primary : onPrimary),
         onPressed: () => showDialog(
             barrierColor: modalBackground,
@@ -69,7 +68,7 @@ class _SearchDialogState extends State<SearchDialog> {
                           width: 60,
                           height: 60,
                           child: Material(
-                            child: InkWell(child: Icon(FontAwesomeIcons.xmark, size: 18),
+                            child: InkWell(child: FaIcon(FontAwesomeIcons.xmark, size: 18),
                             onTap: () => Navigator.pop(context)),
                           )),
                     ],
@@ -116,7 +115,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                 child: IconButton(
                                   hoverColor: null,
                                   highlightColor: null,
-                                  icon: Icon(CupertinoIcons.search,
+                                  icon: FaIcon(FontAwesomeIcons.magnifyingGlass,
                                       color: background, size: iconSize),
                                   onPressed: () {
                                     searchObject(context, searchText);

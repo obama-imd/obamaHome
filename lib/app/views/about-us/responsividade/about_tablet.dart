@@ -3,6 +3,7 @@ import 'package:obamahome/app/views/about-us/constants.dart';
 import 'package:obamahome/components/navMenu.dart';
 import 'package:obamahome/utils/app_theme.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../components/bannerSuperior.dart';
 import '../../../../components/carousel.dart';
@@ -57,9 +58,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                               width: 250,
                               child: Image.asset('assets/images/logo.png',
                                   fit: BoxFit.fitHeight)),
-                          NavMenu(
-                              swidth: swidth,
-                              heightBtn: 50),
+                          FaIcon(FontAwesomeIcons.bars, color: onPrimary),
                         ])),
               ] else ...[
                menuMobile(context, scaffoldKey, swidth),
@@ -157,7 +156,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                                                                 BorderRadius
                                                                     .circular(
                                                                         100)),
-                                                        child: Icon(
+                                                        child: FaIcon(
                                                             grid1Icon[i],
                                                             size: iconSize[i],
                                                             color:
