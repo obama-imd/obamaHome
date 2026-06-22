@@ -150,7 +150,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                         onPressed: () => Navigator.of(context).pop(),
                         child: Row(
                           children: [
-                            Icon(Icons.arrow_back, size: 16),
+                           FaIcon(Icons.arrow_back, size: 16),
                             if (swidth > 800) ...{Text("Voltar")}
                           ],
                         )),
@@ -167,7 +167,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                           if (swidth > 800) ...{
                             Text("Salvar como PDF")
                           } else ...{
-                            Icon(Icons.save_as, size: 16),
+                           FaIcon(Icons.save_as, size: 16),
                             SizedBox(width: 3),
                             Text("PDF")
                           }
@@ -191,7 +191,7 @@ class _NewLessonPlanState extends State<NewLessonPlan> {
                 customButtons: [
                   QuillToolbarCustomButtonOptions(
                     tooltip: "Inserir imagem",
-                    icon: const Icon(Icons.image),
+                    icon: const FaIcon(Icons.image),
                     onPressed: () {
                       showDialog(
                           context: context,

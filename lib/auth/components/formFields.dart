@@ -38,8 +38,8 @@ Widget formFieldHidden(context, String formLabel, bool showPassword,
                 ButtonStyle(fixedSize: MaterialStatePropertyAll(Size(18, 18))),
             onPressed: () => displayPassword(),
             icon: showPassword
-                ? Icon(FontAwesomeIcons.eye)
-                : Icon(FontAwesomeIcons.eyeSlash),
+                ?FaIcon(FontAwesomeIcons.eye)
+                :FaIcon(FontAwesomeIcons.eyeSlash),
             iconSize: 18,
           ),
         )),

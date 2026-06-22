@@ -55,7 +55,7 @@ class iconspanel extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Container(
-                      child: Icon(item.icone![index],
+                      child:FaIcon(item.icone![index],
                           size: 60.0, color: CoresPersonalizadas.azulObama),
                     ),
                     Container(

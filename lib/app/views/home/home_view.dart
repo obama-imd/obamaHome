@@ -7,6 +7,7 @@ import 'package:obamahome/app/views/home/responsividade/home_tablet.dart';
 import 'package:obamahome/components/loadCircle.dart';
 import 'package:obamahome/utils/responsivo.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../components/sectionTitle.dart';
 import '../../../utils/app_padding.dart';
@@ -211,7 +212,7 @@ class BlogHomeState extends ConsumerState<BlogHome> {
                                 padding: paddingValues("blogPostDate", context),
                                 child: Row(
                                   children: [
-                                    const Icon(Icons.access_time, size: 16),
+                                    const FaIcon(FontAwesomeIcons.clock, size: 16),
                                     Text(item.publishedDate),
                                   ],
                                 ),

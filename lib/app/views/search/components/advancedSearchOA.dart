@@ -74,7 +74,7 @@ class OAFilterState extends State<OAFilters> {
                   contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                   filled: true,
                   fillColor: const Color.fromARGB(255, 218, 216, 216),
-                  suffixIcon: const Icon(Icons.search)))),
+                  suffixIcon: const FaIcon(Icons.search)))),
       Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -138,7 +138,7 @@ class OAFilterState extends State<OAFilters> {
                 margin: EdgeInsets.only(bottom: 4),
                 child: DropdownButton<String>(
                     value: descritor.first,
-                    icon: const Icon(Icons.arrow_drop_down),
+                    icon: const FaIcon(Icons.arrow_drop_down),
                     elevation: 5,
                     style: textTheme.bodySmall,
                     onChanged: (String? value) {

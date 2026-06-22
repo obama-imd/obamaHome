@@ -51,7 +51,7 @@ class _TopBarState extends State<TopBar> {
                             child: Row(children: [
                           Container(
                               padding: const EdgeInsets.only(right: 10),
-                              child: const Icon(FontAwesomeIcons.house,
+                              child: const FaIcon(FontAwesomeIcons.house,
                                   color: background, size: 13)),
                           Text(
                               'Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
@@ -71,7 +71,7 @@ class _TopBarState extends State<TopBar> {
                               child: Row(children: [
                                 Container(
                                     padding: const EdgeInsets.only(right: 10),
-                                    child: const Icon(FontAwesomeIcons.envelope,
+                                    child: const FaIcon(FontAwesomeIcons.envelope,
                                         color: background, size: 16)),
                                 Text('obama@imd.ufrn.br',
                                     style: GoogleFonts.raleway(
@@ -170,7 +170,7 @@ class _TopBarState extends State<TopBar> {
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                   padding: const EdgeInsets.only(right: 10),
-                  child: const Icon(FontAwesomeIcons.house,
+                  child: const FaIcon(FontAwesomeIcons.house,
                       color: background, size: 13)),
               Text('Av. Cap. Mor Gouveia, 3000 - Lagoa Nova, Natal - RN',
                   style: GoogleFonts.raleway(color: background, fontSize: 13)),
@@ -192,7 +192,7 @@ class _TopBarState extends State<TopBar> {
                           children: [
                             Container(
                                 padding: const EdgeInsets.only(right: 10),
-                                child: const Icon(FontAwesomeIcons.envelope,
+                                child: const FaIcon(FontAwesomeIcons.envelope,
                                     color: background, size: 16)),
                             Text('obama@imd.ufrn.br',
                                 style: GoogleFonts.raleway(

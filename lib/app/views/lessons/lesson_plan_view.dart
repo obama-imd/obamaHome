@@ -58,7 +58,7 @@ class _ListLessonPlanState extends ConsumerState<ListLessonPlan> {
                           hintText: "Busca",
                           hintStyle: textTheme.bodySmall,
                           border: InputBorder.none,
-                          suffixIcon: Icon(CupertinoIcons.search,
+                          suffixIcon:FaIcon(CupertinoIcons.search,
                               color: secondary, size: 16)),
                       onChanged: (value) {
                         setState(() {

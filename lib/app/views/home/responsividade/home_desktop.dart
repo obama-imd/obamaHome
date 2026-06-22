@@ -3,6 +3,7 @@ import 'package:obamahome/components/simpleRow.dart';
 import 'package:obamahome/templates/template_home.dart';
 import 'package:obamahome/utils/cores_personalizadas.dart';
 import 'package:responsive_grid/responsive_grid.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../components/sectionTitle.dart';
 import '../../../../utils/app_padding.dart';
@@ -116,7 +117,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(100)),
-                                                    child: Icon(grid1Icon[i],
+                                                    child:FaIcon(grid1Icon[i],
                                                         size: iconSize2[i],
                                                         color: background)),
                                                 Container(
@@ -200,7 +201,7 @@ class _HomeDesktopState extends State<HomeDesktop> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             100)),
-                                                child: Icon(grid2Icon[i],
+                                                child:FaIcon(grid2Icon[i],
                                                     size: iconSize2[i],
                                                     color: background)),
                                             Container(

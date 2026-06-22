@@ -36,7 +36,7 @@ class SocialMedia extends StatelessWidget {
                 onPressed: () {
                   _launchURL(socialMediaLinks[i]);
                 },
-                icon: Icon(socialMediaIcons[i],
+                icon:FaIcon(socialMediaIcons[i],
                     color: colorValue, size: 16.0))),
         Container(width: 5),
       }

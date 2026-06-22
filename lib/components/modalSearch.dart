@@ -50,7 +50,7 @@ class _SearchDialogState extends State<SearchDialog> {
         style: ButtonStyle(
           fixedSize: MaterialStatePropertyAll(Size(36, 40)),
         ),
-        child: Icon(CupertinoIcons.search,
+        child:FaIcon(CupertinoIcons.search,
             size: 20, color: widget.isHovered ? primary : onPrimary),
         onPressed: () => showDialog(
             barrierColor: modalBackground,
@@ -69,7 +69,7 @@ class _SearchDialogState extends State<SearchDialog> {
                           width: 60,
                           height: 60,
                           child: Material(
-                            child: InkWell(child: Icon(FontAwesomeIcons.xmark, size: 18),
+                            child: InkWell(child:FaIcon(FontAwesomeIcons.xmark, size: 18),
                             onTap: () => Navigator.pop(context)),
                           )),
                     ],
@@ -116,7 +116,7 @@ class _SearchDialogState extends State<SearchDialog> {
                                 child: IconButton(
                                   hoverColor: null,
                                   highlightColor: null,
-                                  icon: Icon(CupertinoIcons.search,
+                                  icon:FaIcon(CupertinoIcons.search,
                                       color: background, size: iconSize),
                                   onPressed: () {
                                     searchObject(context, searchText);

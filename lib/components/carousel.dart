@@ -146,8 +146,8 @@ class Carousel extends StatelessWidget {
                                           const SizedBox(
                                               width: 100,
                                               height: 100,
-                                              child: Icon(
-                                                Icons.phone,
+                                              child:FaIcon(
+                                               FontAwesomeIcons.phone,
                                                 size: 70,
                                                 color: background,
                                               )),
@@ -304,8 +304,8 @@ class Carousel extends StatelessWidget {
                           const SizedBox(
                               width: 50,
                               height: 100,
-                              child: Icon(
-                                Icons.phone,
+                              child:FaIcon(
+                               FontAwesomeIcons.phone,
                                 size: 40,
                                 color: background,
                               )),

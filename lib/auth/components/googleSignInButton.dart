@@ -40,7 +40,7 @@ class _GoogleSigninButtonState extends ConsumerState<GoogleSigninButton> {
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Text("Google", style: textTheme.headlineSmall),
             SizedBox(width: 5),
-            Icon(FontAwesomeIcons.google, color: Colors.red, size: 14)
+           FaIcon(FontAwesomeIcons.google, color: Colors.red, size: 14)
           ])),
     );
   }

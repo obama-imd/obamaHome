@@ -27,33 +27,33 @@ class _HomeMobile1State extends State<HomeMobile1> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> items = [
-      Icon(
-        Icons.home,
+     FaIcon(
+       FontAwesomeIcons.home,
         color: onPrimary,
         size: 30,
       ),
-      Icon(
+     FaIcon(
         FontAwesomeIcons.faceSmile,
         size: 30,
         color: onPrimary,
       ), //sobre nos
-      Icon(
+     FaIcon(
         FontAwesomeIcons.desktop,
         size: 30,
         color: onPrimary,
       ), //"Planos de Aula"
-      Icon(
+     FaIcon(
         FontAwesomeIcons.book,
         color: onPrimary,
         size: 30,
       ), //"Trilhas"
-      Icon(
+     FaIcon(
         FontAwesomeIcons.trophy,
         color: onPrimary,
         size: 30,
       ),
-      Icon(
-        Icons.menu,
+     FaIcon(
+       FontAwesomeIcons.bars,
         color: onPrimary,
         size: 30,
       ),

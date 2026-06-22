@@ -131,7 +131,7 @@ class AboutUsDesktopState extends State<AboutUsDesktop> {
       //                                               borderRadius:
       //                                                   BorderRadius.circular(
       //                                                       100)),
-      //                                           child: Icon(grid1Icon[i],
+      //                                           child:FaIcon(grid1Icon[i],
       //                                               size: iconSize[i],
       //                                               color: background)),
       //                                       Container(

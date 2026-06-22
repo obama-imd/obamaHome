@@ -155,7 +155,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               //                                                   BorderRadius
               //                                                       .circular(
               //                                                           100)),
-              //                                           child: Icon(
+              //                                           child:FaIcon(
               //                                               grid1Icon[i],
               //                                               size: iconSize[i],
               //                                               color: background)),

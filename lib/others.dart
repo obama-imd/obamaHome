@@ -57,7 +57,7 @@ class Grid1 extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.blue,
                     borderRadius: BorderRadius.circular(100)),
-                child: Icon(icone,
+                child:FaIcon(icone,
                     size: 39.0, color: background)),
           ),
           Expanded(
